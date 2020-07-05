@@ -79,4 +79,4 @@ ssh-be: ## ssh's into the be container
 	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} bash
 
 # code-style: ## Runs php-cs to fix code styling following Symfony rules
-	# U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} php-cs-fixer fix src --rules=@Symfony
+	U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} php-cs-fixer fix src --rules=@Symfony
