@@ -2,7 +2,7 @@
 # en mac devuelve Darwin (código de la terminal de mac), ubuntu en linux y para windows hay 2
 OS := $(shell uname)
 # docker backend, que coincide con el nombre en docker-compose.yml container_name
-DOCKER_BE = sf-tinymarket-be
+DOCKER_BE = sf-eduardoaf-be
 
 ifeq ($(OS),Darwin)
 	# id de usuario que se va a usar en el entorno
@@ -23,7 +23,7 @@ help: ## Show this help message
 
 run: ## Start the containers
 ifeq ($(OS),Darwin)
-	docker volume create --name=sf-tinymarket-be-sync
+	docker volume create --name=sf-eduardoaf-be-sync
 	# levantará: la bd, el backend y el servicio web
 	# servicios en cascada
 	U_ID=${UID} docker-compose -f docker-compose.macos.yml up -d
