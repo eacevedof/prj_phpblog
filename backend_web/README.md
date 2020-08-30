@@ -11,4 +11,5 @@
 - Me da `500 Server Error` en docker
     - He probado composer self-update. Nada
     - Faltaba archivo .env
-    
+- Class 'Reliese\Coders\CodersServiceProvider' not found
+    - Faltaba sincronizar, ejecutar composer update en el contenedor    
