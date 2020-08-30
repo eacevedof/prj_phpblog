@@ -15,3 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/', function () {return view('open/home');});
 Route::get('/', ['as' => 'open.home', 'uses' => 'Open\HomeController']);
+Route::get('/contact', ['as' => 'open.home.contact', 'uses' => 'Open\ContactController']);
+Route::get('/aboutme', ['as' => 'open.home.aboutme', 'uses' => 'Open\AboutmeController']);
+Route::get('/blog/{category}', ['as' => 'open.blog.category', 'uses' => 'Open\BlogController@category']);
+Route::get('/blog', ['as' => 'open.blog', 'uses' => 'Open\BlogController']);
+
