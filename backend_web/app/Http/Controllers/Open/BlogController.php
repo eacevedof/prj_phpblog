@@ -10,9 +10,12 @@ class BlogController extends Controller
      */
     public function __invoke()
     {
-        return view('open.blog', []);
+        return view('open.blog.index', []);
     }
 
     public function category($slug)
-    {}
+    {
+        //die($slug);
+        return view('open.blog.index', ["category"=>$slug]);
+    }
 }

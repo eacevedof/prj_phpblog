@@ -10,6 +10,6 @@ class AboutmeController extends Controller
      */
     public function __invoke()
     {
-        return view('open.home.contact', []);
+        return view('open.home.aboutme', []);
     }
 }
