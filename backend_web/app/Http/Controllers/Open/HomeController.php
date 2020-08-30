@@ -8,7 +8,7 @@ class HomeController extends Controller
     /**
      * @return View
      */
-    public function index()
+    public function __invoke()
     {
         return view('open.home', []);
     }
