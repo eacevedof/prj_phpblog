@@ -1,5 +1,5 @@
-@extends("open/open_layout")
-@section("title","Hola mundo")
+@extends("open.open_layout")
+@section("title","Eduardo A. F")
 @section("container")
     @parent
     <div class="row">
