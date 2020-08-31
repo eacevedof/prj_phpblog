@@ -15,15 +15,15 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 const arcomps = [
-    {name:"posts-component", path:"./components/post/PostsComponent.vue"},
-    {name:"postinsert-component", path:"./components/post/PostinsertComponent.vue"},
+    {name:"posts-component", path:"./components/post/Posts.vue"},
+    {name:"postinsert-component", path:"./components/post/PostInsert.vue"},
 ]
 
 //arcomps.forEach( comp => Vue.component(comp.name, require(comp.path)))
 
-import PostsComponent from "./components/post/PostsComponent.vue";
+import PostsComponent from "./components/post/Posts.vue";
 Vue.component('posts-component', PostsComponent);
-import PostinsertComponent from "./components/post/PostinsertComponent.vue";
+import PostinsertComponent from "./components/post/PostInsert.vue";
 Vue.component('postinsert-component', PostinsertComponent);
 
 const app = new Vue({
