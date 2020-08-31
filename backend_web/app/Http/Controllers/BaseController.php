@@ -8,10 +8,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as RoutingController;
 
 use App\Traits\Log;
+use App\Traits\EnvTrait as Env;
 
 class BaseController extends RoutingController
 {
-    use Log;
+    use Log, Env;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
 }

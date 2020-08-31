@@ -24,7 +24,7 @@
                         <a class="dropdown-item" href="/blog/python">python</a>
                     </ul>
                 </li>
-                @if (env('APP_ENV')!='production')
+                @if (env('APP_ENV')!='prod')
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="nav-admin" role="button" data-toggle="dropdown" aria-expanded="false">
                         Admin
