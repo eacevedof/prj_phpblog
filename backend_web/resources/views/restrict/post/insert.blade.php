@@ -86,6 +86,7 @@
             <label for="num-order_by">order_by</label>
             <input type="number" id="num-order_by" name="order_by">
         </div>
+        <button type="submit">Submit</button>
     </form>
 </div>
 @endsection
