@@ -20,6 +20,7 @@ Route::get('/blog/{slug}', ['as' => 'open.blog.category', 'uses' => 'Open\BlogCo
 Route::get('/blog', ['as' => 'open.blog', 'uses' => 'Open\BlogController']);
 
 
+//vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas
 Auth::routes();
 
 Route::get('/adm', 'Restrict\AdminController')->name('restrict.admin');
