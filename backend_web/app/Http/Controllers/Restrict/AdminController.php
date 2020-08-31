@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Restrict;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
-class HomeController extends BaseController
+class AdminController extends BaseController
 {
     /**
      * Create a new controller instance.

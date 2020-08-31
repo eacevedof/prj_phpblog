@@ -19,3 +19,5 @@
 composer require laravel/ui
 php artisan ui vue --auth
 ```
+- Rutas de --auth: 
+    - /vendor/laravel/ui/src/AuthRouteMethods.php
