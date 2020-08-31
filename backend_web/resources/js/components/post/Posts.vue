@@ -7,14 +7,14 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>#</th>
-                <th>2018</th>
-                <th>2017</th>
+                <th>id</th>
+                <th>Master</th>
+                <th>Detail</th>
             </tr>
             </thead>
             <tbody>
                 <tr v-for="(item, index) in rows" :key="index">
-                    <td v-for="(column, indexColumn) in columns" :key="indexColumn">{{item.$column}}</td>
+                    <td v-for="(column, indexColumn) in columns" :key="indexColumn">{{item[column]}}</td>
                 </tr>
             </tbody>
         </table>
@@ -26,15 +26,17 @@
 export default {
     data(){
         return {
-            columns: ["master","detail"],
+            columns: ["id","master","detail"],
             rows: [
                 {
-                    master: "Master",
-                    detail: "Detail"
+                    id:1,
+                    master: "Master 1",
+                    detail: "Detail 1"
                 },
                 {
-                    master: "Master",
-                    detail: "Detail"
+                    id:2,
+                    master: "Master 2",
+                    detail: "Detail 2"
                 },
             ],
         }

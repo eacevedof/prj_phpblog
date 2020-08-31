@@ -2056,12 +2056,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      columns: ["id", "master", "detail"],
       rows: [{
-        master: "Master",
-        detail: "Detail"
+        id: 1,
+        master: "Master 1",
+        detail: "Detail 1"
       }, {
-        master: "Master",
-        detail: "Detail"
+        id: 2,
+        master: "Master 2",
+        detail: "Detail 2"
       }]
     };
   },
@@ -38038,8 +38041,17 @@ var render = function() {
         _vm._v(" "),
         _c(
           "tbody",
-          _vm._l(_vm.rows, function(row, i) {
-            return _c("tr", [_c("td", [_vm._v(_vm._s(i))])])
+          _vm._l(_vm.rows, function(item, index) {
+            return _c(
+              "tr",
+              { key: index },
+              _vm._l(_vm.columns, function(column, indexColumn) {
+                return _c("td", { key: indexColumn }, [
+                  _vm._v(_vm._s(item[column]))
+                ])
+              }),
+              0
+            )
           }),
           0
         )
@@ -38062,11 +38074,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("#")]),
+        _c("th", [_vm._v("id")]),
         _vm._v(" "),
-        _c("th", [_vm._v("2018")]),
+        _c("th", [_vm._v("Master")]),
         _vm._v(" "),
-        _c("th", [_vm._v("2017")])
+        _c("th", [_vm._v("Detail")])
       ])
     ])
   }
