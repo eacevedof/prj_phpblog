@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {return view('open/home');});
 Route::get('/', ['as' => 'open.home', 'uses' => 'Open\HomeController']);
 Route::get('/contacto', ['as' => 'open.home.contact', 'uses' => 'Open\ContactController']);
 Route::get('/eduardo-acevedo-farje', ['as' => 'open.home.aboutme', 'uses' => 'Open\AboutmeController']);
@@ -23,4 +22,4 @@ Route::get('/blog', ['as' => 'open.blog', 'uses' => 'Open\BlogController']);
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'Restrict\HomeController')->name('restrict.home');
