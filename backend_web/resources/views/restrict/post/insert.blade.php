@@ -8,6 +8,7 @@
         </div>
         <div class="card-body">
             <form action="" method="post">
+                @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="txt-description">Hidden description</label>
@@ -17,9 +18,13 @@
                         <label for="txt-slug">Slug</label>
                         <input type="text" id="txt-slug" name="slug" maxlength="150" class="form-control"/>
                     </div>
-                    <div class="form-check col-md-6">
-                        <input type="checkbox" id="chk-is_page" name="is_page" value="1" class="form-check-input"/>
-                        <label for="chk-is_page" class="form-check-label">Is single page</label>
+                    <div class="form-group col-md-6">
+                        <label for="txt-url_final">Permalink</label>
+                        <input type="text" id="chk-url_final" name="url_final" maxlength="300" class="form-control"/>
+                    </div>
+                    <div class="form-check col-md-6" style="padding-top:35px">
+                        <input type="checkbox" id="chk-is_page" name="is_page" value="1" />
+                        <label for="chk-is_page" class="form-check-label"><b>Is single page</b></label>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="sel-id_type">Category</label>
@@ -31,10 +36,7 @@
                             <option value="blog-docker">Docker</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label for="txt-url_final">Permalink</label>
-                        <input type="text" id="chk-url_final" name="url_final" maxlength="300" class="form-control"/>
-                    </div>
+
                     <div class="form-group col-md-6">
                         <label for="txt-url_img1">Url img1</label>
                         <input type="text" id="chk-url_img1" name="url_img1" maxlength="300" class="form-control"/>
