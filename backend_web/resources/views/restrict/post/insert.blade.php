@@ -7,7 +7,7 @@
             <h1>New article</h1>
         </div>
         <div class="card-body">
-            <form action="">
+            <form action="" method="post">
                 <div class="form-group">
                     <label for="txt-description">description</label>
                     <input type="text" id="txt-description" name="description" maxlength="250" class="form-control"/>
