@@ -10,6 +10,7 @@ class HomeController extends BaseController
      */
     public function __invoke()
     {
+        $this->log("hola mundo");
         return view('open.home.index', []);
     }
 }
