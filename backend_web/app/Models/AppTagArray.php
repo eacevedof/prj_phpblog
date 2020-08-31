@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class AppTagArray
- * 
+ *
  * @property string|null $processflag
  * @property string|null $insert_platform
  * @property string|null $insert_user
@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class AppTagArray extends Model
+class AppTagArray extends BaseModel
 {
 	protected $table = 'app_tag_array';
 	public $timestamps = false;

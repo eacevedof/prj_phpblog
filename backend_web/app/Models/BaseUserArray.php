@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BaseUserArray
- * 
+ *
  * @property string|null $processflag
  * @property string|null $insert_platform
  * @property string|null $insert_user
@@ -36,7 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class BaseUserArray extends Model
+class BaseUserArray extends BaseModel
 {
 	protected $table = 'base_user_array';
 	public $timestamps = false;

@@ -11,14 +11,14 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class PasswordReset
- * 
+ *
  * @property string $email
  * @property string $token
  * @property Carbon|null $created_at
  *
  * @package App\Models
  */
-class PasswordReset extends Model
+class PasswordReset extends BaseModel
 {
 	protected $table = 'password_resets';
 	public $incrementing = false;
