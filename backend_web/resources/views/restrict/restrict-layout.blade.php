@@ -34,13 +34,12 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
-                            <a id="mod-blog" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Blog
+                            <a id="module-posts" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                Posts
                             </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="mod-blog">
-                                <a class="dropdown-item" href="/adm/blog">Articles</a>
-                                <a class="dropdown-item" href="/adm/blog/insert">New article</a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-posts">
+                                <a class="dropdown-item" href="/adm/posts">Articles</a>
+                                <a class="dropdown-item" href="/adm/post/insert">New article</a>
                             </div>
                         </li>
                     </ul>
