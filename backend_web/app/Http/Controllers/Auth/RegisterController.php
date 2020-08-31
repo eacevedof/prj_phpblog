@@ -38,6 +38,9 @@ class RegisterController extends BaseController
      */
     public function __construct()
     {
+        if($this->is_envprod())
+            return redirect()->route('login');
+
         $this->middleware('guest');
     }
 
