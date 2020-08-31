@@ -13,14 +13,22 @@ class PostController extends BaseController
     }
 
     public function __invoke()
-    {}
+    {
+        return view('restrict.post.index');
+    }
 
     public function insert()
-    {}
+    {
+        return view('restrict.post.insert');
+    }
 
     public function update($idpost)
-    {}
+    {
+        return view('restrict.post.update');
+    }
 
     public function delete($idpost)
-    {}
+    {
+        return view('restrict.post.delete');
+    }
 }
