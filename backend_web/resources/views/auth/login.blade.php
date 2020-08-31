@@ -1,4 +1,4 @@
-@extends('common.app-layout')
+@extends('restrict.restrict-layout')
 
 @section('content')
 <div class="container">
