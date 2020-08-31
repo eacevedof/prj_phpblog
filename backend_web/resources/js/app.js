@@ -21,13 +21,14 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 const arcomps = [
-    {name:"posts-component", path:"./components/post/Posts.vue"},
-    {name:"postinsert-component", path:"./components/post/PostInsert.vue"},
+    {name:"posts-component", path:"./components/post/PostsComponent.vue"},
+    {name:"postinsert-component", path:"./components/post/PostinsertComponent.vue"},
 ]
 
-arcomps.forEach( comp => Vue.component(comp.name, require(comp.path).default))
+//arcomps.forEach( comp => Vue.component(comp.name, require(comp.path)))
 
-//Vue.component('posts-component', require('./components/post/Posts.vue').default);
+Vue.component('posts-component', require('./components/post/PostsComponent.vue').default);
+Vue.component('postinsert-component', require('./components/post/PostinsertComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
