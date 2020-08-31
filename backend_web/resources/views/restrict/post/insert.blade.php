@@ -9,11 +9,11 @@
         <div class="card-body">
             <form action="" method="post">
                 <div class="form-group">
-                    <label for="txt-description">description</label>
+                    <label for="txt-description">Hidden description</label>
                     <input type="text" id="txt-description" name="description" maxlength="250" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="txt-slug">slug</label>
+                    <label for="txt-slug">Slug</label>
                     <input type="text" id="txt-slug" name="slug" maxlength="150" class="form-control"/>
                 </div>
                 <div class="form-check">
@@ -21,14 +21,18 @@
                     <label for="chk-is_page" class="form-check-label">Is single page</label>
                 </div>
                 <div class="form-group">
-                    <label for="txt-url_final">url_final</label>
-                    <input type="text" id="chk-url_final" name="url_final" maxlength="300" class="form-control"/>
+                    <label for="sel-id_type">Category</label>
+                    <select id="sel-id_type" name="id_type">
+                        <option value="">Choose one</option>
+                        <option value="single-page">Single page</option>
+                        <option value="blog-php">Php</option>
+                        <option value="blog-js">Js</option>
+                        <option value="blog-docker">Docker</option>
+                    </select>
                 </div>
                 <div class="form-group">
-                    <label for="sel-id_type">Type</label>
-                    <select id="sel-id_type" name="id_type">
-                        <option>...</option>
-                    </select>
+                    <label for="txt-url_final">Permalink</label>
+                    <input type="text" id="chk-url_final" name="url_final" maxlength="300" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label for="txt-url_img1">Url img1</label>
