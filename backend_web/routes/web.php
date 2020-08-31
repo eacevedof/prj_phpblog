@@ -20,3 +20,7 @@ Route::get('/eduardo-acevedo-farje', ['as' => 'open.home.aboutme', 'uses' => 'Op
 Route::get('/blog/{slug}', ['as' => 'open.blog.category', 'uses' => 'Open\BlogController@category']);
 Route::get('/blog', ['as' => 'open.blog', 'uses' => 'Open\BlogController']);
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
