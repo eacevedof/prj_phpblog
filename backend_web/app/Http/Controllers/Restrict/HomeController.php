@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Restrict;
 
+use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 
 class HomeController extends BaseController
 {
     /**
      * Create a new controller instance.
-     *
      * @return void
      */
     public function __construct()
@@ -18,10 +18,9 @@ class HomeController extends BaseController
 
     /**
      * Show the application dashboard.
-     *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function __invoke()
     {
         return view('home');
     }
