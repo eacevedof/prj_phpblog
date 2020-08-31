@@ -24,7 +24,7 @@
                         <a class="dropdown-item" href="/blog/python">python</a>
                     </ul>
                 </li>
-
+                @if (env('APP_ENV')!='production')
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="nav-admin" role="button" data-toggle="dropdown" aria-expanded="false">
                         Admin
@@ -34,7 +34,7 @@
                         <a class="dropdown-item" href="{{ route('register') }}">Register</a>
                     </ul>
                 </li>
-
+                @endif
             </ul>
             @include("open/forms/form-search")
         </div>
