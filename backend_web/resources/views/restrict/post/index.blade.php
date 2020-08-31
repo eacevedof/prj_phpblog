@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="container">
-    Listado posts
     <posts-component></posts-component>
 </div>
 @endsection
