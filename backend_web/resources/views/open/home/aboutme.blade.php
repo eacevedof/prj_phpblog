@@ -1,4 +1,4 @@
-@extends("open.open_layout")
+@extends("open.open-layout")
 @section("title","Acerca de mi")
 @section("container")
     @parent
