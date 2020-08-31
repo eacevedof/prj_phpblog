@@ -46,13 +46,14 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txa-content">content</label>
-                        <textarea id="txa-content" name="content" rows="10" cols="10" class="form-control"></textarea>
+                        <textarea id="txa-content" name="content" rows="15" cols="10" class="form-control"></textarea>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-12">
                         <label for="txa-excerpt">excerpt</label>
-                        <textarea id="txa-excerpt" name="excerpt" maxlength="1000" rows="4" cols="5" class="form-control"></textarea>
+                        <textarea id="txa-excerpt" name="excerpt" maxlength="1000" rows="3" cols="5" class="form-control"></textarea>
                     </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-md-12">
                         <label for="txt-url_img1">Url img1</label>
                         <input type="text" id="chk-url_img1" name="url_img1" maxlength="300" class="form-control"/>
                     </div>
@@ -64,6 +65,7 @@
                         <label for="txt-url_img3">Url img3</label>
                         <input type="text" id="chk-url_img3" name="url_img3" maxlength="300" class="form-control">
                     </div>
+
                     <div class="form-group col-md-3">
                         <label for="sel-id_user">User</label>
                         <select id="sel-id_user" name="id_user" class="form-control">
