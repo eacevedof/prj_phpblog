@@ -2040,7 +2040,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      rows: [{
+        master: "Master",
+        detail: "Detail"
+      }, {
+        master: "Master",
+        detail: "Detail"
+      }]
+    };
+  },
   mounted: function mounted() {
     console.log('Post List mounted.');
   }
@@ -38005,19 +38029,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("table", { staticClass: "table table-striped" }, [
+        _vm._m(1),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.rows, function(row, i) {
+            return _c("tr", [_c("td", [_vm._v(_vm._s(i))])])
+          }),
+          0
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card" }, [
-      _c("div", { staticClass: "card-header" }, [
-        _c("h1", [_vm._v("Articles")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "card-body" })
+    return _c("div", { staticClass: "card-header" }, [
+      _c("h1", [_vm._v("Articles")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("#")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("2018")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("2017")])
+      ])
     ])
   }
 ]
