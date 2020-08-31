@@ -25,8 +25,8 @@ Auth::routes();
 
 Route::get('/adm', 'Restrict\AdminController')->name('restrict.admin');
 //post
-Route::get('/adm/posts', 'Restrict\PostController')->name('restrict.post.index');
-Route::get('/adm/post/insert', 'Restrict\PostController@insert')->name('restrict.post.insert');
-Route::get('/adm/post/update/{idpost}', 'Restrict\PostController@update')->name('restrict.post.update');
-Route::get('/adm/post/detail/{idpost}', 'Restrict\PostController@detail')->name('restrict.post.detail');
-Route::get('/adm/post/delete/{idpost}', 'Restrict\PostController@delete')->name('restrict.post.delete');
+Route::match(["get","post"],'/adm/posts', 'Restrict\PostController')->name('restrict.post.index');
+Route::match(["get","post"],'/adm/post/insert', 'Restrict\PostController@insert')->name('restrict.post.insert');
+Route::match(["get","post"],'/adm/post/update/{idpost}', 'Restrict\PostController@update')->name('restrict.post.update');
+Route::match(["get","post"],'/adm/post/detail/{idpost}', 'Restrict\PostController@detail')->name('restrict.post.detail');
+Route::match(["get","post"],'/adm/post/delete/{idpost}', 'Restrict\PostController@delete')->name('restrict.post.delete');
