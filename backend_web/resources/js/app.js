@@ -22,10 +22,10 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 const arcomps = [
     {name:"posts-component", path:"./components/post/Posts.vue"},
-    {name:"post-insert", path:"./components/post/PostInsert.vue"},
+    {name:"postinsert-component", path:"./components/post/PostInsert.vue"},
 ]
 
-//arcomps.forEach( obj => Vue.component(obj.name, require(obj.path).default))
+arcomps.forEach( comp => Vue.component(comp.name, require(comp.path).default))
 
 //Vue.component('posts-component', require('./components/post/Posts.vue').default);
 
