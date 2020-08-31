@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class AppPostsTag
- * 
+ *
  * @property string|null $processflag
  * @property string|null $insert_platform
  * @property string|null $insert_user
@@ -35,7 +35,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class AppPostsTag extends Model
+class AppPostsTag extends BaseModel
 {
 	protected $table = 'app_posts_tags';
 	public $timestamps = false;

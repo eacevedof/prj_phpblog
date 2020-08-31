@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BaseUser
- * 
+ *
  * @property string|null $processflag
  * @property string|null $insert_platform
  * @property string|null $insert_user
@@ -51,7 +51,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class BaseUser extends Model
+class BaseUser extends BaseModel
 {
 	protected $table = 'base_user';
 	public $timestamps = false;

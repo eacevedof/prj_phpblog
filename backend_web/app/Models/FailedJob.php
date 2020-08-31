@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class FailedJob
- * 
+ *
  * @property int $id
  * @property string $connection
  * @property string $queue
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class FailedJob extends Model
+class FailedJob extends BaseModel
 {
 	protected $table = 'failed_jobs';
 	public $timestamps = false;
