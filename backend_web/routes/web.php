@@ -22,4 +22,4 @@ Route::get('/blog', ['as' => 'open.blog', 'uses' => 'Open\BlogController']);
 
 Auth::routes();
 
-Route::get('/home', 'Restrict\HomeController')->name('restrict.home');
+Route::get('/adm', 'Restrict\AdminController')->name('restrict.admin');
