@@ -21,3 +21,6 @@ php artisan ui vue --auth
 ```
 - Rutas de --auth: 
     - /vendor/laravel/ui/src/AuthRouteMethods.php
+
+### Videografía:
+- [App Laravel + Vue CRUD Completo](https://www.youtube.com/watch?v=UzegdHgNEF4&t=1785s)
