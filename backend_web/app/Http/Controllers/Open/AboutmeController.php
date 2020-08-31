@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Open;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class AboutmeController extends Controller
+class AboutmeController extends BaseController
 {
     /**
      * @return View

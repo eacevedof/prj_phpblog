@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Open;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class ContactController extends Controller
+class ContactController extends BaseController
 {
     /**
      * @return View

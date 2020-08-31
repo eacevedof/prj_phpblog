@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers\Open;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 
-class BlogController extends Controller
+class BlogController extends BaseController
 {
     /**
      * @return View

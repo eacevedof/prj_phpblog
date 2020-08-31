@@ -7,11 +7,10 @@
 namespace App\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class AppArray
- * 
+ *
  * @property string|null $processflag
  * @property string|null $insert_platform
  * @property string|null $insert_user
@@ -37,7 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Models
  */
-class AppArray extends Model
+class AppArray extends BaseModel
 {
 	protected $table = 'app_array';
 	public $timestamps = false;
