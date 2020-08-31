@@ -50205,9 +50205,9 @@ var arcomps = [{
 }]; //arcomps.forEach( comp => Vue.component(comp.name, require(comp.path)))
 
 
-Vue.component('posts-component', _components_post_Posts_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
-Vue.component('postinsert-component', _components_post_PostInsert_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
+Vue.component('posts', _components_post_Posts_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
+Vue.component('postinsert', _components_post_PostInsert_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 var app = new Vue({
   el: '#app'
 });
