@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
-    <Postinsert />
+    aaaa
+    <postinsert-component />
 </div>
 @endsection

@@ -1,9 +1,3 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
@@ -27,14 +21,10 @@ const arcomps = [
 
 //arcomps.forEach( comp => Vue.component(comp.name, require(comp.path)))
 
-Vue.component('posts-component', require('./components/post/PostsComponent.vue').default);
-Vue.component('postinsert-component', require('./components/post/PostinsertComponent.vue'));
-
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+import PostsComponent from "./components/post/PostsComponent.vue";
+Vue.component('posts-component', PostsComponent);
+import PostinsertComponent from "./components/post/PostinsertComponent.vue";
+Vue.component('postinsert-component', PostinsertComponent);
 
 const app = new Vue({
     el: '#app',
