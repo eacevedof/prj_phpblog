@@ -21,10 +21,11 @@ const arcomps = [
 
 //arcomps.forEach( comp => Vue.component(comp.name, require(comp.path)))
 
-import PostsComponent from "./components/post/Posts.vue";
-Vue.component('posts-component', PostsComponent);
-import PostinsertComponent from "./components/post/PostInsert.vue";
-Vue.component('postinsert-component', PostinsertComponent);
+import Posts from "./components/post/Posts.vue";
+import PostInsert from "./components/post/PostInsert.vue";
+
+Vue.component('posts', Posts);
+Vue.component('postinsert', PostInsert);
 
 const app = new Vue({
     el: '#app',
