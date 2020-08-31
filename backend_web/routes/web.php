@@ -24,3 +24,8 @@ Route::get('/blog', ['as' => 'open.blog', 'uses' => 'Open\BlogController']);
 Auth::routes();
 
 Route::get('/adm', 'Restrict\AdminController')->name('restrict.admin');
+//post
+Route::get('/adm/posts', 'Restrict\PostController')->name('restrict.post.index');
+Route::get('/adm/post/insert', 'Restrict\PostController@insert')->name('restrict.post.insert');
+Route::get('/adm/post/update/{idpost}', 'Restrict\PostController@update')->name('restrict.post.update');
+Route::get('/adm/post/delete/{idpost}', 'Restrict\PostController@delete')->name('restrict.post.delete');
