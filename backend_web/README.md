@@ -13,3 +13,9 @@
     - Faltaba archivo .env
 - Class 'Reliese\Coders\CodersServiceProvider' not found
     - Faltaba sincronizar, ejecutar composer update en el contenedor    
+
+### Comandos:
+```js
+composer require laravel/ui
+php artisan ui vue --auth
+```
