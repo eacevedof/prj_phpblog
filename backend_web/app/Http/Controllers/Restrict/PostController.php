@@ -27,6 +27,11 @@ class PostController extends BaseController
         return view('restrict.post.update');
     }
 
+    public function detail($idpost)
+    {
+        return view('restrict.post.detail');
+    }
+
     public function delete($idpost)
     {
         return view('restrict.post.delete');
