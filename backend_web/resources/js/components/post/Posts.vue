@@ -6,7 +6,6 @@
 
 <script>
 export default {
-    name: "posts",
     mounted() {
         console.log('Post List mounted.')
     }
