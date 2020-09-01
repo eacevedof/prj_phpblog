@@ -23,11 +23,13 @@ RUN apt-get update \
 RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 
 # node para laravel mix
+# https://github.com/nodesource/distributions
 RUN apt-get update \
+    && apt-get -y install sudo \
     && apt-get install curl \
-    && curl -sL https://deb.nodesource.com/setup | bash \
-    && apt-get install -yq nodejs build-essential \
-    && apt-get install -g npm
+    && curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \
+    && sudo apt-get install -y nodejs \
+    && yes | apt-get install npm
 
 # RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
 # RUN chmod a+x php-cs-fixer

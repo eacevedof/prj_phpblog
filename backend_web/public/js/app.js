@@ -2057,7 +2057,17 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       columns: ["id", "master", "detail"],
-      rows: [{
+      rows: []
+    };
+  },
+  mounted: function mounted() {
+    this.rows = this.get_posts();
+    console.log('Post List mounted.');
+    alert("posts.vue mounted");
+  },
+  methods: {
+    get_posts: function get_posts() {
+      return [{
         id: 1,
         master: "Master 1",
         detail: "Detail 1"
@@ -2065,11 +2075,8 @@ __webpack_require__.r(__webpack_exports__);
         id: 2,
         master: "Master 2",
         detail: "Detail 2"
-      }]
-    };
-  },
-  mounted: function mounted() {
-    console.log('Post List mounted.');
+      }];
+    }
   }
 });
 
