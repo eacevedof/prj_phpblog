@@ -24,3 +24,6 @@ php artisan ui vue --auth
 
 ### Videografía:
 - [App Laravel + Vue CRUD Completo](https://www.youtube.com/watch?v=UzegdHgNEF4&t=1785s)
+
+### Notas:
+- No logro hacer funcionar nodejs en el contenedor para lanzar npm run dev de laravel-mix :s
