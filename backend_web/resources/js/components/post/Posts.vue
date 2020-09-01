@@ -27,23 +27,31 @@ export default {
     data(){
         return {
             columns: ["id","master","detail"],
-            rows: [
-                {
-                    id:1,
-                    master: "Master 1",
-                    detail: "Detail 1"
-                },
-                {
-                    id:2,
-                    master: "Master 2",
-                    detail: "Detail 2"
-                },
-            ],
+            rows: [],
         }
     },
 
     mounted() {
+        this.rows = this.get_posts()
         console.log('Post List mounted.')
+        alert("posts.vue mounted")
+    },
+
+    methods: {
+      get_posts(){
+        return   [
+            {
+                id:1,
+                master: "Master 1",
+                detail: "Detail 1"
+            },
+            {
+                id:2,
+                master: "Master 2",
+                detail: "Detail 2"
+            },
+        ]
+      },
     }
 }
 </script>
