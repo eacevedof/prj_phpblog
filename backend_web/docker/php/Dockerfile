@@ -22,9 +22,16 @@ RUN apt-get update \
 
 RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer && chmod +x /usr/bin/composer
 
-RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
-RUN chmod a+x php-cs-fixer
-RUN mv php-cs-fixer /usr/local/bin/php-cs-fixer
+# node para laravel mix
+RUN apt-get update \
+    && apt-get install curl \
+    && curl -sL https://deb.nodesource.com/setup | bash \
+    && apt-get install -yq nodejs build-essential \
+    && apt-get install -g npm
+
+# RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
+# RUN chmod a+x php-cs-fixer
+# RUN mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 RUN mkdir -p /appdata/www
 
