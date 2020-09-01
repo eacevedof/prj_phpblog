@@ -2057,7 +2057,7 @@ var BTN_CONFIRM = "Confirmar";
       var url = "/adm/post/insert";
       var data = new FormData();
       data.append("_token", csrftoken);
-      data.append("action", "insert");
+      data.append("action", "post.insert");
       data.append("description", this.form.description);
       data.append("id_type", this.form.id_type);
       data.append("is_page", this.form.is_page);
@@ -2078,8 +2078,11 @@ var BTN_CONFIRM = "Confirmar";
       data.append("order_by", this.form.order_by);
       fetch(url, {
         method: 'post',
-        body: data
-      }).then(function (response) {
+        body: data //si voy a enviar un json
+        //headers:{'Content-Type': 'application/json'},
+
+      }) //.then(response => console.log(response,"RESPONSE"))
+      .then(function (response) {
         return response.json();
       }).then(function (response) {
         self.issending = false;

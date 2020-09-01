@@ -22,13 +22,16 @@ class PostController extends BaseController
     {
         //print_r($_POST);print_r($_GET);die;
         $rules = [];
-        if($request->input("action")=="insert")
-        {
-            $post = new AppPost();
-            $post->description = $request->input("description");
-            $post->save();
-            return response('Hello World', 200)
-                ->header('Content-Type', 'text/plain');
+        if($request->isMethod('post')){
+            if ($request->input("action") == "post.insert") {
+                $post = new AppPost();
+                $post->description = $request->input("description");
+                $post->save();
+                return response(json_encode(["title"=>'success']), 200)
+                    ->header('Content-Type', 'application/json');
+            }
+            return response(json_encode(["title"=>"error"]), 401)
+                ->header('Content-Type', 'application/json');
         }
 
         return view('restrict.post.insert');
