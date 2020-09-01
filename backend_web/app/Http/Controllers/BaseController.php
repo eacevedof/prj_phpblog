@@ -15,4 +15,5 @@ class BaseController extends RoutingController
     use Log, Env;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+
 }

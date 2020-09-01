@@ -2016,7 +2016,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var csrftoken = document.querySelector('#meta-csrf-token').getAttribute('content');
+var csrftoken = get_csrftoken();
 console.log(csrftoken, "csrftoken");
 var BTN_INISTATE = "Guardar";
 var BTN_IN_PROGRESS = "Procesando...";
@@ -50699,15 +50699,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
  */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-//Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
-var arcomps = [{
-  name: "posts-component",
-  path: "./components/post/Posts.vue"
-}, {
-  name: "postinsert-component",
-  path: "./components/post/PostInsert.vue"
-}]; //arcomps.forEach( comp => Vue.component(comp.name, require(comp.path)))
 
 
 

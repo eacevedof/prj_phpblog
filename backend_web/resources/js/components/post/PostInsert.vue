@@ -107,7 +107,8 @@
     </div>
 </template>
 <script>
-let csrftoken = document.querySelector('#meta-csrf-token').getAttribute('content');
+let csrftoken = get_csrftoken()
+
 console.log(csrftoken,"csrftoken")
 const BTN_INISTATE = "Guardar"
 const BTN_IN_PROGRESS = "Procesando..."
@@ -150,7 +151,7 @@ export default {
             const url = `/adm/post/insert`
             const data = new FormData();
             data.append("_token",csrftoken)
-            data.append("action","insert")
+            data.append("action","post.insert")
             data.append("description",this.form.description)
             data.append("id_type",this.form.id_type)
             data.append("is_page",this.form.is_page)
@@ -175,39 +176,39 @@ export default {
                 method: 'post',
                 body: data
             })
-                .then(response => response.json())
-                .then(response => {
-                    self.issending = false
-                    self.btnsend = BTN_INISTATE
+            .then(response => response.json())
+            .then(response => {
+                self.issending = false
+                self.btnsend = BTN_INISTATE
 
-                    console.log("reponse",response)
+                console.log("reponse",response)
 
-                    if(response.title == "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: `${self.description} <br/> Datos guardados`,
-                            html: ``,
-                        })
-                        self.showconfirm = true;
-                        self.btnsend = BTN_CONFIRM
-                    } else {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Esta acción no se ha podido completar',
-                            text: response.description,
-                        })
-                    }
-                })
-                .catch(error => {
-                    self.issending = false
-                    self.btnsend = BTN_INISTATE
-                    console.log("CATCH ERROR insert",error)
+                if(response.title == "success") {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Vaya! Ha ocurrido un error',
-                        text: error.toString(),
+                        icon: 'success',
+                        title: `${self.description} <br/> Datos guardados`,
+                        html: ``,
                     })
+                    self.showconfirm = true;
+                    self.btnsend = BTN_CONFIRM
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Esta acción no se ha podido completar',
+                        text: response.description,
+                    })
+                }
+            })
+            .catch(error => {
+                self.issending = false
+                self.btnsend = BTN_INISTATE
+                console.log("CATCH ERROR insert",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vaya! Ha ocurrido un error',
+                    text: error.toString(),
                 })
+            })
         },//insert
 
         handleSubmit: function(e) {
