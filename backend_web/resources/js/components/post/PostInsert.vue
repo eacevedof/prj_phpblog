@@ -174,8 +174,11 @@ export default {
 
             fetch(url, {
                 method: 'post',
-                body: data
+                body: data,
+                //si voy a enviar un json
+                //headers:{'Content-Type': 'application/json'},
             })
+            //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
             .then(response => {
                 self.issending = false
