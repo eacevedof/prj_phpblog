@@ -27,10 +27,10 @@ class PostController extends BaseController
                 $post = new AppPost();
                 $post->description = $request->input("description");
                 $post->save();
-                return response(json_encode(["title"=>'success']), 200)
+                return response(json_encode(["title"=>'success',"description"=>"Post creado"]), 200)
                     ->header('Content-Type', 'application/json');
             }
-            return response(json_encode(["title"=>"error"]), 401)
+            return response(json_encode(["title"=>"error","description"=>"Datos incorrectos enviados"]), 401)
                 ->header('Content-Type', 'application/json');
         }
 
