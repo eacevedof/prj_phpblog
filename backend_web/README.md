@@ -27,3 +27,14 @@ php artisan ui vue --auth
 
 ### Notas:
 - No logro hacer funcionar nodejs en el contenedor para lanzar npm run dev de laravel-mix :s
+- Despues de lanzar el siguiente comando para eliminar el tracking de **.idea**:
+    - `git filter-branch --force --index-filter 'git rm -r --cached --ignore-unmatch ./.idea/' --prune-empty --tag-name-filter cat -- --all`
+    - Me aparece lo siguiente:
+    ```
+    Rewrite afe6b210e5077b0c54c9013a2c83b533d961c83a (78/91) (5 seconds passed, remaining 0 predicted)    
+    WARNING: Ref 'refs/heads/master' is unchanged
+    WARNING: Ref 'refs/remotes/origin/master' is unchanged
+    WARNING: Ref 'refs/remotes/origin/master' is unchanged
+    WARNING: Ref 'refs/tags/v0.0.1' is unchanged
+    ```
+    - Parece que ha funcionado porque ya no veo la carpeta **.idea** en el último commit
