@@ -2092,8 +2092,8 @@ var BTN_CONFIRM = "Confirmar";
         if (response.title == "success") {
           Swal.fire({
             icon: 'success',
-            title: "".concat(self.description, " <br/> Datos guardados"),
-            html: ""
+            title: "Post: \"".concat(self.form.description, "\" <br/> creado"),
+            html: "<b>&#128578;</b>"
           });
           self.showconfirm = true;
           self.btnsend = BTN_CONFIRM;

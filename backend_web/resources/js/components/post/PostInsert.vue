@@ -150,6 +150,7 @@ export default {
             self.btnsend = BTN_IN_PROGRESS
             const url = `/adm/post/insert`
             const data = new FormData();
+
             data.append("_token",csrftoken)
             data.append("action","post.insert")
             data.append("description",this.form.description)
@@ -189,8 +190,8 @@ export default {
                 if(response.title == "success") {
                     Swal.fire({
                         icon: 'success',
-                        title: `${self.description} <br/> Datos guardados`,
-                        html: ``,
+                        title: `Post: "${self.form.description}" <br/> creado`,
+                        html: `<b>&#128578;</b>`,
                     })
                     self.showconfirm = true;
                     self.btnsend = BTN_CONFIRM
