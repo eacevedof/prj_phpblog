@@ -12,8 +12,8 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-import Posts from "./components/post/Posts.vue";
-import PostInsert from "./components/post/PostInsert.vue";
+import Posts from "./components/restrict/post/Posts.vue";
+import PostInsert from "./components/restrict/post/PostInsert.vue";
 
 Vue.component('posts', Posts);
 Vue.component('postinsert', PostInsert);
