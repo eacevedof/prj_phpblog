@@ -168,6 +168,7 @@ export default {
             data.append("url_img2",this.post.url_img2)
             data.append("url_img3",this.post.url_img3)
             data.append("id_user",this.post.id_user)
+            data.append("id_status",this.post.id_status)
             data.append("publish_date",this.post.publish_date)
             data.append("last_update",this.post.last_update)
             data.append("seo_title",this.post.seo_title)
