@@ -42,7 +42,14 @@ class PostController extends BaseController
     public function store(Request $request)
     {
         $iduser = Auth::id();
-        return (new PostInsertService($request, $iduser))->save();
+        try {
+            $r = (new PostInsertService($request, $iduser))->save();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
     }
 
     /**
