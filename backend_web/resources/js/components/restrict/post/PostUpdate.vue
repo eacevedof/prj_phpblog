@@ -219,7 +219,7 @@ export default {
             data.append("order_by",this.post.order_by)
 
             fetch(url, {
-                method: 'patch',
+                method: 'PATCH',
                 body: data,
             })
             .then(response => response.json())

@@ -2356,7 +2356,7 @@ var BTN_IN_PROGRESS = "Procesando...";
       data.append("seo_description", this.post.seo_description);
       data.append("order_by", this.post.order_by);
       fetch(url, {
-        method: 'patch',
+        method: 'PATCH',
         body: data
       }).then(function (response) {
         return response.json();
