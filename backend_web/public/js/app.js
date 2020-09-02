@@ -2017,6 +2017,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken(); //console.log(csrftoken,"csrftoken")
 
@@ -2031,7 +2033,7 @@ var BTN_CONFIRM = "Confirmar";
       post: {
         description: "",
         id_type: 0,
-        is_page: 0,
+        is_page: [],
         slug: "",
         url_final: "",
         title: "",
@@ -2062,7 +2064,7 @@ var BTN_CONFIRM = "Confirmar";
       data.append("action", "post.insert");
       data.append("description", this.post.description);
       data.append("id_type", this.post.id_type);
-      data.append("is_page", this.post.is_page);
+      data.append("is_page", this.post.is_page[0]);
       data.append("slug", this.post.slug);
       data.append("url_final", this.post.url_final);
       data.append("title", this.post.title);
@@ -37843,19 +37845,23 @@ var render = function() {
                 }
               },
               [
-                _c("option", { attrs: { value: "" } }, [_vm._v("Choose one")]),
+                _c("option", { attrs: { disabled: "", value: "" } }, [
+                  _vm._v("Choose one")
+                ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "single-page" } }, [
+                _c("option", { attrs: { value: "1" } }, [_vm._v("Generic")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [
                   _vm._v("Single page")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "blog-php" } }, [_vm._v("Php")]),
+                _c("option", { attrs: { value: "3" } }, [_vm._v("Blog Php")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "blog-js" } }, [_vm._v("Js")]),
+                _c("option", { attrs: { value: "4" } }, [_vm._v("Blog Js")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "blog-docker" } }, [
-                  _vm._v("Docker")
-                ])
+                _c("option", { attrs: { value: "5" } }, [_vm._v("Blog SQL")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "6" } }, [_vm._v("Blog Docker")])
               ]
             )
           ]),
