@@ -41,4 +41,7 @@ php artisan ui vue --auth
 - crear migracion de bd existente
     - composer require --dev "xethron/migrations-generator"
     - Error: no tira para laravel 7.26.1
-    - php artisan migrate:generate
+    - instalo: https://github.com/oscarafdev/migrations-generator
+    - salta excepcion de pdo por la bd. Tema de docker. cambio .env
+    - php artisan migrate:generate Va ok
+    
