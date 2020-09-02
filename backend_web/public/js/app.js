@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1908,6 +1908,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../custom */ "./resources/js/custom.js");
 //
 //
 //
@@ -2016,7 +2017,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var csrftoken = get_csrftoken();
+
+var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
+alert(csrftoken);
 console.log(csrftoken, "csrftoken");
 var BTN_INISTATE = "Guardar";
 var BTN_IN_PROGRESS = "Procesando...";
@@ -50896,26 +50899,32 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/***/ "./resources/js/custom.js":
+/*!********************************!*\
+  !*** ./resources/js/custom.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// removed by extract-text-webpack-plugin
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var custom = {
+  get_csrftoken: function get_csrftoken() {
+    return document.querySelector('#meta-csrf-token').getAttribute('content');
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (custom);
 
 /***/ }),
 
-/***/ 0:
-/*!*************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ***!
-  \*************************************************************/
+/***/ 1:
+/*!***********************************!*\
+  !*** multi ./resources/js/app.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/sass/app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

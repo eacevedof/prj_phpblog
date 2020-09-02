@@ -107,8 +107,8 @@
     </div>
 </template>
 <script>
-let csrftoken = get_csrftoken()
-
+import custom from "../../custom"
+let csrftoken = custom.get_csrftoken()
 console.log(csrftoken,"csrftoken")
 const BTN_INISTATE = "Guardar"
 const BTN_IN_PROGRESS = "Procesando..."
