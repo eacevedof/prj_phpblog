@@ -2,7 +2,6 @@
 namespace App\Services\Restrict\Post;
 use App\Models\AppPost;
 use App\Services\BaseService;
-use Illuminate\Http\Request;
 
 class PostDetailService extends BaseService
 {
