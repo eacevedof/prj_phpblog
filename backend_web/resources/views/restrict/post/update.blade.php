@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    Insert Post
+    {{dump($post)}}
 </div>
 @endsection

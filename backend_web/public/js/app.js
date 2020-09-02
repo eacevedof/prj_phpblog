@@ -2166,6 +2166,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 var BTN_INISTATE = "Buscar";
@@ -2230,17 +2240,16 @@ var BTN_IN_PROGRESS = "Procesando...";
         self.btnsend = BTN_INISTATE;
       });
     }),
-    //insert
-    get_posts: function get_posts() {
-      return [{
-        id: 1,
-        master: "Master 1",
-        detail: "Detail 1"
-      }, {
-        id: 2,
-        master: "Master 2",
-        detail: "Detail 2"
-      }];
+    //fetch
+    edit: function edit(id) {
+      //alert("edit")
+      var url = "/adm/post/update/" + id;
+      window.open(url, "_blank");
+    },
+    remove: function remove() {
+      if (confirm("Are you sure to commit this operation?")) {
+        alert("boorrando");
+      }
     }
   }
 });
@@ -38540,9 +38549,45 @@ var render = function() {
                   ])
                 }),
                 _vm._v(" "),
-                _c("td", [_vm._v("xx")]),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      on: {
+                        click: function($event) {
+                          return _vm.edit(item.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-pencil-square-o",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  )
+                ]),
                 _vm._v(" "),
-                _c("td", [_vm._v("yy")])
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      on: {
+                        click: function($event) {
+                          return _vm.remove(item.id)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-trash-o",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  )
+                ])
               ],
               2
             )
@@ -38572,7 +38617,11 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Title")])
+        _c("th", [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Edit")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Remove")])
       ])
     ])
   }
