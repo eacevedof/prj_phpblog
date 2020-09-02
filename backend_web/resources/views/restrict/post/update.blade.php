@@ -2,6 +2,6 @@
 
 @section('content')
 <div class="container">
-    {{dump($post)}}
+    <postupdate/>
 </div>
 @endsection

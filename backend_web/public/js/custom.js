@@ -98,6 +98,9 @@ __webpack_require__.r(__webpack_exports__);
 var custom = {
   get_csrftoken: function get_csrftoken() {
     return document.querySelector('#meta-csrf-token').getAttribute('content');
+  },
+  get_lastparam: function get_lastparam() {
+    return new URL(window.location).pathname.split("/").slice(-1)[0] || null;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (custom);
