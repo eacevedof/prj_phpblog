@@ -7,11 +7,11 @@
             <form @submit="handleSubmit">
                 <div class="form-row">
                     <div class="form-group col-md-2">
-                        <label for="txt-id">Id</label>
-                        <input type="text" id="txt-id" v-model="post.id" maxlength="11" class="form-control"/>
+                        <label>Id</label>
+                        <span class="form-control">{{ post.id }}</span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="txt-description">Hidden description</label>
+                        <label for="txt-description">Tooltip</label>
                         <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
                     </div>
                     <div class="form-group col-md-4">
@@ -115,6 +115,7 @@
 <script>
 import custom from "../../../custom"
 let csrftoken = custom.get_csrftoken()
+alert(csrftoken)
 //console.log(csrftoken,"csrftoken")
 const BTN_INISTATE = "Guardar"
 const BTN_IN_PROGRESS = "Procesando..."
@@ -191,7 +192,7 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
-            const url = `/api/post`
+            const url = `/api/post/${this.post.id}`
             const data = new FormData();
 
             data.append("_token",csrftoken)
@@ -218,7 +219,7 @@ export default {
             data.append("order_by",this.post.order_by)
 
             fetch(url, {
-                method: 'put',
+                method: 'patch',
                 body: data,
             })
             .then(response => response.json())

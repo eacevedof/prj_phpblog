@@ -2255,7 +2255,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken(); //console.log(csrftoken,"csrftoken")
+var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
+alert(csrftoken); //console.log(csrftoken,"csrftoken")
 
 var BTN_INISTATE = "Guardar";
 var BTN_IN_PROGRESS = "Procesando...";
@@ -2330,7 +2331,7 @@ var BTN_IN_PROGRESS = "Procesando...";
       var self = this;
       self.issending = true;
       self.btnsend = BTN_IN_PROGRESS;
-      var url = "/api/post";
+      var url = "/api/post/".concat(this.post.id);
       var data = new FormData();
       data.append("_token", csrftoken);
       data.append("action", "post.update");
@@ -2355,7 +2356,7 @@ var BTN_IN_PROGRESS = "Procesando...";
       data.append("seo_description", this.post.seo_description);
       data.append("order_by", this.post.order_by);
       fetch(url, {
-        method: 'put',
+        method: 'patch',
         body: data
       }).then(function (response) {
         return response.json();
@@ -38808,34 +38809,16 @@ var render = function() {
       _c("form", { on: { submit: _vm.handleSubmit } }, [
         _c("div", { staticClass: "form-row" }, [
           _c("div", { staticClass: "form-group col-md-2" }, [
-            _c("label", { attrs: { for: "txt-id" } }, [_vm._v("Id")]),
+            _c("label", [_vm._v("Id")]),
             _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.id,
-                  expression: "post.id"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-id", maxlength: "11" },
-              domProps: { value: _vm.post.id },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "id", $event.target.value)
-                }
-              }
-            })
+            _c("span", { staticClass: "form-control" }, [
+              _vm._v(_vm._s(_vm.post.id))
+            ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group col-md-4" }, [
             _c("label", { attrs: { for: "txt-description" } }, [
-              _vm._v("Hidden description")
+              _vm._v("Tooltip")
             ]),
             _vm._v(" "),
             _c("input", {
