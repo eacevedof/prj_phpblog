@@ -13,11 +13,13 @@
                     <div class="form-group col-md-4">
                         <label for="sel-id_type">Category</label>
                         <select id="sel-id_type" v-model="post.id_type" class="form-control">
-                            <option value="">Choose one</option>
-                            <option value="single-page">Single page</option>
-                            <option value="blog-php">Php</option>
-                            <option value="blog-js">Js</option>
-                            <option value="blog-docker">Docker</option>
+                            <option disabled value="">Choose one</option>
+                            <option value="1">Generic</option>
+                            <option value="2">Single page</option>
+                            <option value="3">Blog Php</option>
+                            <option value="4">Blog Js</option>
+                            <option value="5">Blog SQL</option>
+                            <option value="6">Blog Docker</option>
                         </select>
                     </div>
                     <div class="form-check col-md-4" style="padding-top:35px">
@@ -122,7 +124,7 @@ export default {
             post: {
                 description: "",
                 id_type: 0,
-                is_page: 0,
+                is_page: [],
                 slug: "",
                 url_final: "",
                 title: "",
@@ -155,7 +157,7 @@ export default {
             data.append("action","post.insert")
             data.append("description",this.post.description)
             data.append("id_type",this.post.id_type)
-            data.append("is_page",this.post.is_page)
+            data.append("is_page",this.post.is_page[0] || 0)
             data.append("slug",this.post.slug)
             data.append("url_final",this.post.url_final)
             data.append("title",this.post.title)
