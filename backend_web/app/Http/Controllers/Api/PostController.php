@@ -26,12 +26,14 @@ class PostController extends BaseController
     public function index()
     {
         $iduser = Auth::id();
-        //dump($iduser);
-        $r = (new PostListService($iduser))->get_list_by_user();
-        //dump($r);
-        //$this->showAll($r);
-        return $r;
-        //return Response()->json($r,200);
+        try {
+            $r = (new PostListService($iduser))->get_list_by_user();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
     }
 
     /**
