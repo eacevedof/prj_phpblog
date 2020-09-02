@@ -23,7 +23,7 @@ class PostListService extends BaseService
         //dump(AppPost::all());
         //return AppPost::all()->sortByDesc("id");;
         $r = DB::table("app_post")->orderBy("id","desc")->get();
-        $this->logd($r,"order by??");
+        //$this->logd($r,"order by??");
         return $r;
     }
 
