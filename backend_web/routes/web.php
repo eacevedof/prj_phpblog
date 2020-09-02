@@ -29,3 +29,5 @@ Route::match(["get","post"],'/adm/post/insert', 'Restrict\PostController@insert'
 Route::match(["get","post"],'/adm/post/update/{idpost}', 'Restrict\PostController@update')->name('restrict.post.update');
 Route::match(["get","post"],'/adm/post/detail/{idpost}', 'Restrict\PostController@detail')->name('restrict.post.detail');
 Route::match(["get","post"],'/adm/post/delete/{idpost}', 'Restrict\PostController@delete')->name('restrict.post.delete');
+
+Route::apiResource("post","PostController");
