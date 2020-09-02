@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+let ImageminPlugin = require( 'imagemin-webpack-plugin' ).default;
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,6 +11,19 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.webpackConfig({
+    plugins:[
+        new ImageminPlugin({
+            pngquant:{
+                quality: "95-100",
+            },
+            test: /\.(jpe?g|png|gif|svg)$/i,
+        })
+    ]
+})
+
 mix.js('resources/js/custom.js', 'public/js')
     .js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');
+
+mix.copy( 'resources/assets/images', 'public/assets/images', false );
