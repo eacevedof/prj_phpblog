@@ -47,4 +47,7 @@ php artisan ui vue --auth
 - Creo recursos para API
     - Route::apiResource("api/post","Api\PostController");
     - php artisan make:controller Api/PostController --api
+- Creo seeder    
+    - php artisan make:seeder UsersTableSeeder
+
     
