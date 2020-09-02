@@ -3,6 +3,7 @@ namespace App\Services\Restrict\Post;
 use App\Models\AppPost;
 use App\Services\BaseService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostListService extends BaseService
 {
@@ -19,7 +20,11 @@ class PostListService extends BaseService
         //$this->entity = new AppPost();
         //return AppPost::where("user_id",auth()->id())->get();
         //return AppPost::where("user_id",$this->iduser);
-        return AppPost::all()->sortByDesc("id");;
+        //dump(AppPost::all());
+        //return AppPost::all()->sortByDesc("id");;
+        $r = DB::table("app_post")->orderBy("id","desc")->get();
+        $this->logd($r,"order by??");
+        return $r;
     }
 
 
