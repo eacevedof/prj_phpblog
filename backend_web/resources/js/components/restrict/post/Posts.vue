@@ -8,8 +8,8 @@
             <thead>
             <tr>
                 <th>id</th>
-                <th>Master</th>
-                <th>Detail</th>
+                <th>Description</th>
+                <th>Title</th>
             </tr>
             </thead>
             <tbody>
@@ -23,21 +23,70 @@
 </template>
 
 <script>
+import custom from "../../../custom"
+let csrftoken = custom.get_csrftoken()
+const BTN_INISTATE = "Buscar"
+const BTN_IN_PROGRESS = "Procesando..."
+
 export default {
     data(){
         return {
-            columns: ["id","master","detail"],
+            columns: ["id","description","title"],
             rows: [],
         }
     },
 
     mounted() {
-        this.rows = this.get_posts()
-        console.log('Post List mounted.')
-        alert("posts.vue mounted")
+        this.fetch()
     },
 
     methods: {
+        fetch(){
+            console.log("fetching")
+            const self = this
+            self.issending = true
+            self.btnsend = BTN_IN_PROGRESS
+            const url = `/api/post`
+
+            //const data = new FormData();
+            //data.append("_token",csrftoken)
+            //data.append("action","post.index")
+
+            fetch(url, {
+                method: 'get',
+                //body: data,
+            })
+            //.then(response => console.log(response,"RESPONSE"))
+            .then(response => response.json())
+            .then(response => {
+
+                console.log("reponse",response)
+
+                if(typeof response.error !== "undefined") {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: 'Esta acción no se ha podido completar',
+                        text: response.error,
+                    })
+                }
+
+                self.rows = response.data
+
+            })
+            .catch(error => {
+                console.log("CATCH ERROR insert",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vaya! Ha ocurrido un error',
+                    text: error.toString(),
+                })
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend = BTN_INISTATE
+            })
+        },//insert
+
       get_posts(){
         return   [
             {

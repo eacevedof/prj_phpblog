@@ -2024,7 +2024,6 @@ var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 
 var BTN_INISTATE = "Guardar";
 var BTN_IN_PROGRESS = "Procesando...";
-var BTN_CONFIRM = "Confirmar";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2140,6 +2139,7 @@ var BTN_CONFIRM = "Confirmar";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../custom */ "./resources/js/custom.js");
 //
 //
 //
@@ -2164,19 +2164,71 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
+var BTN_INISTATE = "Buscar";
+var BTN_IN_PROGRESS = "Procesando...";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      columns: ["id", "master", "detail"],
+      columns: ["id", "description", "title"],
       rows: []
     };
   },
   mounted: function mounted() {
-    this.rows = this.get_posts();
-    console.log('Post List mounted.');
-    alert("posts.vue mounted");
+    this.fetch();
   },
   methods: {
+    fetch: function (_fetch) {
+      function fetch() {
+        return _fetch.apply(this, arguments);
+      }
+
+      fetch.toString = function () {
+        return _fetch.toString();
+      };
+
+      return fetch;
+    }(function () {
+      console.log("fetching");
+      var self = this;
+      self.issending = true;
+      self.btnsend = BTN_IN_PROGRESS;
+      var url = "/api/post"; //const data = new FormData();
+      //data.append("_token",csrftoken)
+      //data.append("action","post.index")
+
+      fetch(url, {
+        method: 'get' //body: data,
+
+      }) //.then(response => console.log(response,"RESPONSE"))
+      .then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        console.log("reponse", response);
+
+        if (typeof response.error !== "undefined") {
+          return Swal.fire({
+            icon: 'warning',
+            title: 'Esta acción no se ha podido completar',
+            text: response.error
+          });
+        }
+
+        self.rows = response.data;
+      })["catch"](function (error) {
+        console.log("CATCH ERROR insert", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Vaya! Ha ocurrido un error',
+          text: error.toString()
+        });
+      })["finally"](function () {
+        self.issending = false;
+        self.btnsend = BTN_INISTATE;
+      });
+    }),
+    //insert
     get_posts: function get_posts() {
       return [{
         id: 1,
