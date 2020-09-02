@@ -50,7 +50,11 @@ php artisan ui vue --auth
 - Creo seeder    
     - php artisan make:seeder UsersTableSeeder
     - configuro el seeder
-    - lo ejecuto: php artisan db:seed
+    - lo ejecuto: php artisan db:seed no ha hecho nada
+    - Error: Class 'UserTableSeeder' does not exist - Laravel 5.0 [php artisan db:seed]
+        - composer dumpautoload
+        - php artisan db:seed --class=UsersTableSeeder
+    
 
 
     
