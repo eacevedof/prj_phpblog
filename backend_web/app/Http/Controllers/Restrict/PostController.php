@@ -2,8 +2,6 @@
 namespace App\Http\Controllers\Restrict;
 
 use App\Http\Controllers\BaseController;
-use App\Services\Restrict\Post\PostDetailService;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends BaseController
 {
@@ -18,10 +16,5 @@ class PostController extends BaseController
 
     public function update(){return view('restrict.post.update');}
 
-    public function detail($idpost)
-    {
-        $iduser = Auth::id();
-        $post = (new PostDetailService($idpost, $iduser))->get();
-        return view('restrict.post.detail',["post"=>$post]);
-    }
+    public function detail(){return view('restrict.post.detail');}
 }
