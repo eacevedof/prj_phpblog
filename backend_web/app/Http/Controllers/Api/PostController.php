@@ -3,23 +3,30 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
+use App\Services\Restrict\Post\PostListService;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
+    private $service;
+
+    public function __construct()
+    {
+        $this->middleware("auth");
+    }
+
     /**
      * Display a listing of the resource.
-     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $iduser = auth()->id()->get();
+        return (new PostListService($iduser))->get_list_by_user();
     }
 
     /**
      * Store a newly created resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -41,7 +48,6 @@ class PostController extends BaseController
 
     /**
      * Update the specified resource in storage.
-     *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -53,7 +59,6 @@ class PostController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
