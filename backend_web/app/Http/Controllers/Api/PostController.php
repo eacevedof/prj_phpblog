@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 use App\Services\Restrict\Post\PostDeleteService;
 use App\Services\Restrict\Post\PostInsertService;
 use App\Services\Restrict\Post\PostListService;
 use App\Services\Restrict\Post\PostUpdateService;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends BaseController
 {
