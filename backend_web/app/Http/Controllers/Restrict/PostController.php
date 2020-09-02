@@ -15,36 +15,15 @@ class PostController extends BaseController
         $this->middleware('auth');
     }
 
-    public function __invoke()
-    {
-        return view('restrict.post.index');
-    }
+    public function __invoke(){return view('restrict.post.index');}
 
-    public function insert(Request $request)
-    {
-/*
-        //print_r($_POST);print_r($_GET);die;
-        $rules = [];
-        if($request->isMethod('post')){
-            if ($request->input("action") == "post.insert") {
-                $post = new AppPost();
-                $post->description = $request->input("description");
-                $post->save();
-                return response(json_encode(["title"=>'success',"description"=>"Post creado"]), 200)
-                    ->header('Content-Type', 'application/json');
-            }
-            return response(json_encode(["title"=>"error","description"=>"Datos incorrectos enviados"]), 401)
-                ->header('Content-Type', 'application/json');
-        }
-*/
-        return view('restrict.post.insert');
-    }
+    public function insert(){return view('restrict.post.insert');}
 
-    public function update($idpost)
+    public function update()
     {
-        $iduser = Auth::id();
-        $post = (new PostDetailService($idpost, $iduser))->get();
-        return view('restrict.post.update',["post"=>$post]);
+        //$iduser = Auth::id();
+        //$post = (new PostDetailService($idpost, $iduser))->get();
+        return view('restrict.post.update');
     }
 
     public function detail($idpost)
