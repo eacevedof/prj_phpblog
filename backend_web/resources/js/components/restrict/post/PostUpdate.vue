@@ -150,6 +150,43 @@ export default {
     },
 
     methods:{
+        get_row(id){
+            const self = this
+            self.issending = true
+            self.btnsend = BTN_IN_PROGRESS
+
+            const url = `/api/post/${id}`
+            fetch(url, {
+                method: 'get',
+            })
+            .then(response => response.json())
+            .then(response => {
+                console.log("reponse",response)
+
+                if(custom.is_error(response)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: 'This action could not be completed! &#58384;',
+                        text: response.error,
+                    })
+                }
+
+                this.post = response.data
+            })
+            .catch(error => {
+                console.log("CATCH ERROR get_row",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Opps! Some error occurred &#9785;',
+                    text: error.toString()//.concat("\n").concat(JSON.stringify(response)),
+                })
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend = BTN_INISTATE
+            })
+        },//get_row
+
         update(){
             const self = this
             self.issending = true
@@ -189,7 +226,7 @@ export default {
 
                 console.log("reponse",response)
 
-                if(typeof response.error !== "undefined") {
+                if(custom.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
                         title: 'This action could not be completed! &#58384;',
@@ -224,9 +261,11 @@ export default {
         }//handleSubmit(e)
     },
 
+
+
     mounted() {
         const id = custom.get_lastparam()
-        alert(id)
+        this.get_row(id)
     }
 }
 </script>

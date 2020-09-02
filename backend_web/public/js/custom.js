@@ -101,6 +101,14 @@ var custom = {
   },
   get_lastparam: function get_lastparam() {
     return new URL(window.location).pathname.split("/").slice(-1)[0] || null;
+  },
+  pr: function pr(any) {
+    var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    var json = JSON.stringify(any);
+    alert(title.concat(":\n").concat(json));
+  },
+  is_error: function is_error(response) {
+    return typeof response.error !== "undefined";
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (custom);
