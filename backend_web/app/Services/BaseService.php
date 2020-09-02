@@ -9,7 +9,7 @@ class BaseService
 {
     use Log, EnvTrait, UidTrait;
 
-    private $request;
+    protected $request;
 
     public function __construct(Request $request)
     {

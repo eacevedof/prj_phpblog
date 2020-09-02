@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
+use App\Services\Restrict\Post\PostInsertService;
 use App\Services\Restrict\Post\PostListService;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
-    private $service;
 
     public function __construct()
     {
@@ -32,7 +32,7 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        //
+        return (new PostInsertService($request))->save();
     }
 
     /**
