@@ -51,6 +51,8 @@ class CreateBaseUserTable extends Migration {
 			$table->string('date_validated', 14)->nullable()->comment('cuando valido su cuenta por email');
 			$table->boolean('is_notificable')->nullable()->default(0)->comment('para enviar notificaciones push');
 			$table->string('code_cache', 50)->nullable();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
 		});
 	}
 
