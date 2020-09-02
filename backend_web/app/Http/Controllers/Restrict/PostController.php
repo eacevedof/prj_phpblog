@@ -16,12 +16,7 @@ class PostController extends BaseController
 
     public function insert(){return view('restrict.post.insert');}
 
-    public function update()
-    {
-        //$iduser = Auth::id();
-        //$post = (new PostDetailService($idpost, $iduser))->get();
-        return view('restrict.post.update');
-    }
+    public function update(){return view('restrict.post.update');}
 
     public function detail($idpost)
     {

@@ -13,10 +13,12 @@ use App\Services\Restrict\Post\PostUpdateService;
 
 class PostController extends BaseController
 {
+    private $authid;
 
     public function __construct()
     {
-        //$this->middleware("auth");
+        $this->middleware("auth");
+        $this->authid = Auth::id();
     }
 
     /**
@@ -25,9 +27,8 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $iduser = Auth::id();
         try {
-            $r = (new PostListService($iduser))->get_list_by_user();
+            $r = (new PostListService($this->authid))->get_list_by_user();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -43,10 +44,8 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        $iduser = Auth::id();
-        $this->logd($request->all(),"request all");
         try {
-            $r = (new PostInsertService($request, $iduser))->save();
+            $r = (new PostInsertService($request, $this->authid))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -62,7 +61,14 @@ class PostController extends BaseController
      */
     public function show($id)
     {
-        //
+        try {
+            $r = (new PostDetailService($id, $this->authid))->get();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
     }
 
     /**
@@ -73,8 +79,14 @@ class PostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $iduser = Auth::id();
-        return (new PostUpdateService($request,$iduser))->save();
+        try {
+            $r = (new PostUpdateService($request,$this->authid))->save();;
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
     }
 
     /**
