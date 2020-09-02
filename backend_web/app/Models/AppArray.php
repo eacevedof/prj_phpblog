@@ -39,7 +39,7 @@ use Carbon\Carbon;
 class AppArray extends BaseModel
 {
 	protected $table = 'app_array';
-	public $timestamps = false;
+	//public $timestamps = false;
 
 	protected $casts = [
 		'i' => 'int',
