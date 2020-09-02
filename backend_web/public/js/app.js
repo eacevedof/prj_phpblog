@@ -38562,9 +38562,9 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("id")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Master")]),
+        _c("th", [_vm._v("Description")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Detail")])
+        _c("th", [_vm._v("Title")])
       ])
     ])
   }
