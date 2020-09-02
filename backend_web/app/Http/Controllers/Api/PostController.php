@@ -79,8 +79,9 @@ class PostController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $post)
     {
+        $this->logd($post,"update.postid");
         try {
             $r = (new PostUpdateService($request,$this->authid))->save();;
             return Response()->json(["data"=>$r],200);
@@ -106,6 +107,7 @@ class PostController extends BaseController
 /*
 | POST          | api/post                 | post.store           | App\Http\Controllers\Api\PostController@store                          | web        |
 | GET|HEAD      | api/post                 | post.index           | App\Http\Controllers\Api\PostController@index                          | web        |
-| DELETE        | api/post/{post}          | post.destroy         | App\Http\Controllers\Api\PostController@destroy                        | web       |PATCH     | api/post/{post}          | post.update          | App\Http\Controllers\Api\PostController@update                         | web        |
+| DELETE        | api/post/{post}          | post.destroy         | App\Http\Controllers\Api\PostController@destroy                        | web
+| PATCH         | api/post/{post}          | post.update          | App\Http\Controllers\Api\PostController@update                         | web        |
 | GET|HEAD      | api/post/{post}          | post.show            | App\Http\Controllers\Api\PostController@show
 */
