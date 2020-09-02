@@ -20,6 +20,7 @@ class PostController extends BaseController
 
     public function insert(Request $request)
     {
+/*
         //print_r($_POST);print_r($_GET);die;
         $rules = [];
         if($request->isMethod('post')){
@@ -33,7 +34,7 @@ class PostController extends BaseController
             return response(json_encode(["title"=>"error","description"=>"Datos incorrectos enviados"]), 401)
                 ->header('Content-Type', 'application/json');
         }
-
+*/
         return view('restrict.post.insert');
     }
 

@@ -2018,8 +2018,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
-var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
-console.log(csrftoken, "csrftoken");
+var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken(); //console.log(csrftoken,"csrftoken")
+
 var BTN_INISTATE = "Guardar";
 var BTN_IN_PROGRESS = "Procesando...";
 var BTN_CONFIRM = "Confirmar";
@@ -2028,7 +2028,7 @@ var BTN_CONFIRM = "Confirmar";
     return {
       btnsend: BTN_INISTATE,
       issending: false,
-      form: {
+      post: {
         description: "",
         id_type: 0,
         is_page: 0,
@@ -2056,28 +2056,28 @@ var BTN_CONFIRM = "Confirmar";
       var self = this;
       self.issending = true;
       self.btnsend = BTN_IN_PROGRESS;
-      var url = "/adm/post/insert";
+      var url = "/api/post";
       var data = new FormData();
       data.append("_token", csrftoken);
       data.append("action", "post.insert");
-      data.append("description", this.form.description);
-      data.append("id_type", this.form.id_type);
-      data.append("is_page", this.form.is_page);
-      data.append("slug", this.form.slug);
-      data.append("url_final", this.form.url_final);
-      data.append("title", this.form.title);
-      data.append("subtitle", this.form.subtitle);
-      data.append("content", this.form.content);
-      data.append("excerpt", this.form.excerpt);
-      data.append("url_img1", this.form.url_img1);
-      data.append("url_img2", this.form.url_img2);
-      data.append("url_img3", this.form.url_img3);
-      data.append("id_user", this.form.id_user);
-      data.append("publish_date", this.form.publish_date);
-      data.append("last_update", this.form.last_update);
-      data.append("seo_title", this.form.seo_title);
-      data.append("seo_description", this.form.seo_description);
-      data.append("order_by", this.form.order_by);
+      data.append("description", this.post.description);
+      data.append("id_type", this.post.id_type);
+      data.append("is_page", this.post.is_page);
+      data.append("slug", this.post.slug);
+      data.append("url_final", this.post.url_final);
+      data.append("title", this.post.title);
+      data.append("subtitle", this.post.subtitle);
+      data.append("content", this.post.content);
+      data.append("excerpt", this.post.excerpt);
+      data.append("url_img1", this.post.url_img1);
+      data.append("url_img2", this.post.url_img2);
+      data.append("url_img3", this.post.url_img3);
+      data.append("id_user", this.post.id_user);
+      data.append("publish_date", this.post.publish_date);
+      data.append("last_update", this.post.last_update);
+      data.append("seo_title", this.post.seo_title);
+      data.append("seo_description", this.post.seo_description);
+      data.append("order_by", this.post.order_by);
       fetch(url, {
         method: 'post',
         body: data //si voy a enviar un json
@@ -2094,7 +2094,7 @@ var BTN_CONFIRM = "Confirmar";
         if (response.title == "success") {
           Swal.fire({
             icon: 'success',
-            title: "Post: \"".concat(self.form.description, "\" <br/> creado"),
+            title: "Post: \"".concat(self.post.description, "\" <br/> creado"),
             html: "<b>&#128578;</b>"
           });
           self.showconfirm = true;
@@ -37791,19 +37791,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.description,
-                  expression: "form.description"
+                  value: _vm.post.description,
+                  expression: "post.description"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-description", maxlength: "250" },
-              domProps: { value: _vm.form.description },
+              domProps: { value: _vm.post.description },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "description", $event.target.value)
+                  _vm.$set(_vm.post, "description", $event.target.value)
                 }
               }
             })
@@ -37821,8 +37821,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.form.id_type,
-                    expression: "form.id_type"
+                    value: _vm.post.id_type,
+                    expression: "post.id_type"
                   }
                 ],
                 staticClass: "form-control",
@@ -37838,7 +37838,7 @@ var render = function() {
                         return val
                       })
                     _vm.$set(
-                      _vm.form,
+                      _vm.post,
                       "id_type",
                       $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                     )
@@ -37875,19 +37875,19 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.form.is_page,
-                    expression: "form.is_page"
+                    value: _vm.post.is_page,
+                    expression: "post.is_page"
                   }
                 ],
                 attrs: { type: "checkbox", id: "chk-is_page", value: "1" },
                 domProps: {
-                  checked: Array.isArray(_vm.form.is_page)
-                    ? _vm._i(_vm.form.is_page, "1") > -1
-                    : _vm.form.is_page
+                  checked: Array.isArray(_vm.post.is_page)
+                    ? _vm._i(_vm.post.is_page, "1") > -1
+                    : _vm.post.is_page
                 },
                 on: {
                   change: function($event) {
-                    var $$a = _vm.form.is_page,
+                    var $$a = _vm.post.is_page,
                       $$el = $event.target,
                       $$c = $$el.checked ? true : false
                     if (Array.isArray($$a)) {
@@ -37895,17 +37895,17 @@ var render = function() {
                         $$i = _vm._i($$a, $$v)
                       if ($$el.checked) {
                         $$i < 0 &&
-                          _vm.$set(_vm.form, "is_page", $$a.concat([$$v]))
+                          _vm.$set(_vm.post, "is_page", $$a.concat([$$v]))
                       } else {
                         $$i > -1 &&
                           _vm.$set(
-                            _vm.form,
+                            _vm.post,
                             "is_page",
                             $$a.slice(0, $$i).concat($$a.slice($$i + 1))
                           )
                       }
                     } else {
-                      _vm.$set(_vm.form, "is_page", $$c)
+                      _vm.$set(_vm.post, "is_page", $$c)
                     }
                   }
                 }
@@ -37923,19 +37923,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.slug,
-                  expression: "form.slug"
+                  value: _vm.post.slug,
+                  expression: "post.slug"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-slug", maxlength: "150" },
-              domProps: { value: _vm.form.slug },
+              domProps: { value: _vm.post.slug },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "slug", $event.target.value)
+                  _vm.$set(_vm.post, "slug", $event.target.value)
                 }
               }
             })
@@ -37951,19 +37951,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.url_final,
-                  expression: "form.url_final"
+                  value: _vm.post.url_final,
+                  expression: "post.url_final"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-url_final", maxlength: "300" },
-              domProps: { value: _vm.form.url_final },
+              domProps: { value: _vm.post.url_final },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "url_final", $event.target.value)
+                  _vm.$set(_vm.post, "url_final", $event.target.value)
                 }
               }
             })
@@ -37977,19 +37977,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.title,
-                  expression: "form.title"
+                  value: _vm.post.title,
+                  expression: "post.title"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-title", maxlength: "350" },
-              domProps: { value: _vm.form.title },
+              domProps: { value: _vm.post.title },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "title", $event.target.value)
+                  _vm.$set(_vm.post, "title", $event.target.value)
                 }
               }
             })
@@ -38005,19 +38005,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.subtitle,
-                  expression: "form.subtitle"
+                  value: _vm.post.subtitle,
+                  expression: "post.subtitle"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-subtitle", maxlength: "250" },
-              domProps: { value: _vm.form.subtitle },
+              domProps: { value: _vm.post.subtitle },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "subtitle", $event.target.value)
+                  _vm.$set(_vm.post, "subtitle", $event.target.value)
                 }
               }
             })
@@ -38031,19 +38031,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.content,
-                  expression: "form.content"
+                  value: _vm.post.content,
+                  expression: "post.content"
                 }
               ],
               staticClass: "form-control",
               attrs: { id: "txa-content", rows: "15", cols: "10" },
-              domProps: { value: _vm.form.content },
+              domProps: { value: _vm.post.content },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "content", $event.target.value)
+                  _vm.$set(_vm.post, "content", $event.target.value)
                 }
               }
             })
@@ -38057,8 +38057,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.excerpt,
-                  expression: "form.excerpt"
+                  value: _vm.post.excerpt,
+                  expression: "post.excerpt"
                 }
               ],
               staticClass: "form-control",
@@ -38068,13 +38068,13 @@ var render = function() {
                 rows: "3",
                 cols: "5"
               },
-              domProps: { value: _vm.form.excerpt },
+              domProps: { value: _vm.post.excerpt },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "excerpt", $event.target.value)
+                  _vm.$set(_vm.post, "excerpt", $event.target.value)
                 }
               }
             })
@@ -38090,19 +38090,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.url_img1,
-                  expression: "form.url_img1"
+                  value: _vm.post.url_img1,
+                  expression: "post.url_img1"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-url_img1", maxlength: "300" },
-              domProps: { value: _vm.form.url_img1 },
+              domProps: { value: _vm.post.url_img1 },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "url_img1", $event.target.value)
+                  _vm.$set(_vm.post, "url_img1", $event.target.value)
                 }
               }
             })
@@ -38118,19 +38118,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.url_img2,
-                  expression: "form.url_img2"
+                  value: _vm.post.url_img2,
+                  expression: "post.url_img2"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-url_img2", maxlength: "300" },
-              domProps: { value: _vm.form.url_img2 },
+              domProps: { value: _vm.post.url_img2 },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "url_img2", $event.target.value)
+                  _vm.$set(_vm.post, "url_img2", $event.target.value)
                 }
               }
             })
@@ -38146,19 +38146,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.url_img3,
-                  expression: "form.url_img3"
+                  value: _vm.post.url_img3,
+                  expression: "post.url_img3"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-url_img3", maxlength: "300" },
-              domProps: { value: _vm.form.url_img3 },
+              domProps: { value: _vm.post.url_img3 },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "url_img3", $event.target.value)
+                  _vm.$set(_vm.post, "url_img3", $event.target.value)
                 }
               }
             })
@@ -38174,8 +38174,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.form.id_user,
-                    expression: "form.id_user"
+                    value: _vm.post.id_user,
+                    expression: "post.id_user"
                   }
                 ],
                 staticClass: "form-control",
@@ -38191,7 +38191,7 @@ var render = function() {
                         return val
                       })
                     _vm.$set(
-                      _vm.form,
+                      _vm.post,
                       "id_user",
                       $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                     )
@@ -38214,8 +38214,8 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.form.id_status,
-                    expression: "form.id_status"
+                    value: _vm.post.id_status,
+                    expression: "post.id_status"
                   }
                 ],
                 staticClass: "form-control",
@@ -38231,7 +38231,7 @@ var render = function() {
                         return val
                       })
                     _vm.$set(
-                      _vm.form,
+                      _vm.post,
                       "id_status",
                       $event.target.multiple ? $$selectedVal : $$selectedVal[0]
                     )
@@ -38256,19 +38256,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.publish_date,
-                  expression: "form.publish_date"
+                  value: _vm.post.publish_date,
+                  expression: "post.publish_date"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "date", id: "dat-publish_date" },
-              domProps: { value: _vm.form.publish_date },
+              domProps: { value: _vm.post.publish_date },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "publish_date", $event.target.value)
+                  _vm.$set(_vm.post, "publish_date", $event.target.value)
                 }
               }
             })
@@ -38284,19 +38284,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.last_update,
-                  expression: "form.last_update"
+                  value: _vm.post.last_update,
+                  expression: "post.last_update"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "date", id: "dat-last_update" },
-              domProps: { value: _vm.form.last_update },
+              domProps: { value: _vm.post.last_update },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "last_update", $event.target.value)
+                  _vm.$set(_vm.post, "last_update", $event.target.value)
                 }
               }
             })
@@ -38312,19 +38312,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.seo_title,
-                  expression: "form.seo_title"
+                  value: _vm.post.seo_title,
+                  expression: "post.seo_title"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "text", id: "txt-seo_title", maxlength: "65" },
-              domProps: { value: _vm.form.seo_title },
+              domProps: { value: _vm.post.seo_title },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "seo_title", $event.target.value)
+                  _vm.$set(_vm.post, "seo_title", $event.target.value)
                 }
               }
             })
@@ -38340,8 +38340,8 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.seo_description,
-                  expression: "form.seo_description"
+                  value: _vm.post.seo_description,
+                  expression: "post.seo_description"
                 }
               ],
               staticClass: "form-control",
@@ -38350,13 +38350,13 @@ var render = function() {
                 id: "txt-seo_description",
                 maxlength: "160"
               },
-              domProps: { value: _vm.form.seo_description },
+              domProps: { value: _vm.post.seo_description },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "seo_description", $event.target.value)
+                  _vm.$set(_vm.post, "seo_description", $event.target.value)
                 }
               }
             })
@@ -38372,19 +38372,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.form.order_by,
-                  expression: "form.order_by"
+                  value: _vm.post.order_by,
+                  expression: "post.order_by"
                 }
               ],
               staticClass: "form-control",
               attrs: { type: "number", id: "num-order_by", value: "100" },
-              domProps: { value: _vm.form.order_by },
+              domProps: { value: _vm.post.order_by },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.$set(_vm.form, "order_by", $event.target.value)
+                  _vm.$set(_vm.post, "order_by", $event.target.value)
                 }
               }
             })

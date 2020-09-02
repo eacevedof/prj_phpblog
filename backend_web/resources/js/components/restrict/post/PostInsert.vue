@@ -149,7 +149,7 @@ export default {
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
             const url = `/api/post`
-            const data = new postData();
+            const data = new FormData();
 
             data.append("_token",csrftoken)
             data.append("action","post.insert")
@@ -179,40 +179,40 @@ export default {
                 //si voy a enviar un json
                 //headers:{'Content-Type': 'application/json'},
             })
-                //.then(response => console.log(response,"RESPONSE"))
-                .then(response => response.json())
-                .then(response => {
-                    self.issending = false
-                    self.btnsend = BTN_INISTATE
+            //.then(response => console.log(response,"RESPONSE"))
+            .then(response => response.json())
+            .then(response => {
+                self.issending = false
+                self.btnsend = BTN_INISTATE
 
-                    console.log("reponse",response)
+                console.log("reponse",response)
 
-                    if(response.title == "success") {
-                        Swal.fire({
-                            icon: 'success',
-                            title: `Post: "${self.post.description}" <br/> creado`,
-                            html: `<b>&#128578;</b>`,
-                        })
-                        self.showconfirm = true;
-                        self.btnsend = BTN_CONFIRM
-                    } else {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Esta acción no se ha podido completar',
-                            text: response.description,
-                        })
-                    }
-                })
-                .catch(error => {
-                    self.issending = false
-                    self.btnsend = BTN_INISTATE
-                    console.log("CATCH ERROR insert",error)
+                if(response.title == "success") {
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Vaya! Ha ocurrido un error',
-                        text: error.toString(),
+                        icon: 'success',
+                        title: `Post: "${self.post.description}" <br/> creado`,
+                        html: `<b>&#128578;</b>`,
                     })
+                    self.showconfirm = true;
+                    self.btnsend = BTN_CONFIRM
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Esta acción no se ha podido completar',
+                        text: response.description,
+                    })
+                }
+            })
+            .catch(error => {
+                self.issending = false
+                self.btnsend = BTN_INISTATE
+                console.log("CATCH ERROR insert",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vaya! Ha ocurrido un error',
+                    text: error.toString(),
                 })
+            })
         },//insert
 
         handleSubmit: function(e) {
