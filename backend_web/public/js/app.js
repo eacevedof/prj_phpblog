@@ -2087,34 +2087,31 @@ var BTN_CONFIRM = "Confirmar";
       .then(function (response) {
         return response.json();
       }).then(function (response) {
-        self.issending = false;
-        self.btnsend = BTN_INISTATE;
         console.log("reponse", response);
 
-        if (response.title == "success") {
-          Swal.fire({
-            icon: 'success',
-            title: "Post: \"".concat(self.post.description, "\" <br/> creado"),
-            html: "<b>&#128578;</b>"
-          });
-          self.showconfirm = true;
-          self.btnsend = BTN_CONFIRM;
-        } else {
-          Swal.fire({
+        if (typeof response.error !== "undefined") {
+          return Swal.fire({
             icon: 'warning',
             title: 'Esta acción no se ha podido completar',
-            text: response.description
+            text: response.error
           });
         }
+
+        Swal.fire({
+          icon: 'success',
+          title: "Post: \"".concat(self.post.description, "\" <br/> creado"),
+          html: "<b>&#128578;</b>"
+        });
       })["catch"](function (error) {
-        self.issending = false;
-        self.btnsend = BTN_INISTATE;
         console.log("CATCH ERROR insert", error);
         Swal.fire({
           icon: 'error',
           title: 'Vaya! Ha ocurrido un error',
           text: error.toString()
         });
+      })["finally"](function () {
+        self.issending = false;
+        self.btnsend = BTN_INISTATE;
       });
     },
     //insert

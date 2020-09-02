@@ -172,7 +172,6 @@ export default {
             data.append("seo_description",this.post.seo_description)
             data.append("order_by",this.post.order_by)
 
-
             fetch(url, {
                 method: 'post',
                 body: data,
@@ -182,36 +181,35 @@ export default {
             //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
             .then(response => {
-                self.issending = false
-                self.btnsend = BTN_INISTATE
 
                 console.log("reponse",response)
 
-                if(response.title == "success") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: `Post: "${self.post.description}" <br/> creado`,
-                        html: `<b>&#128578;</b>`,
-                    })
-                    self.showconfirm = true;
-                    self.btnsend = BTN_CONFIRM
-                } else {
-                    Swal.fire({
+                if(typeof response.error !== "undefined") {
+                    return Swal.fire({
                         icon: 'warning',
                         title: 'Esta acción no se ha podido completar',
-                        text: response.description,
+                        text: response.error,
                     })
                 }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: `Post: "${self.post.description}" <br/> creado`,
+                    html: `<b>&#128578;</b>`,
+                })
+
             })
             .catch(error => {
-                self.issending = false
-                self.btnsend = BTN_INISTATE
                 console.log("CATCH ERROR insert",error)
                 Swal.fire({
                     icon: 'error',
                     title: 'Vaya! Ha ocurrido un error',
                     text: error.toString(),
                 })
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend = BTN_INISTATE
             })
         },//insert
 
