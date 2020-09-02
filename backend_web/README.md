@@ -44,4 +44,6 @@ php artisan ui vue --auth
     - instalo: https://github.com/oscarafdev/migrations-generator
     - salta excepcion de pdo por la bd. Tema de docker. cambio .env
     - php artisan migrate:generate Va ok
-    
+- Creo recursos para API
+    - Route::apiResource("post","PostController");
+    - php artisan make:controller API/PostController --api    
