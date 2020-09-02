@@ -1,11 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Restrict;
 
 use App\Http\Controllers\BaseController;
-use App\Models\AppPost;
 use App\Services\Restrict\Post\PostDetailService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PostController extends BaseController
@@ -32,12 +29,4 @@ class PostController extends BaseController
         $post = (new PostDetailService($idpost, $iduser))->get();
         return view('restrict.post.detail',["post"=>$post]);
     }
-
-    //no procede esto se hace desde el listado
-    /*
-    private function delete($idpost)
-    {
-        return view('restrict.post.delete');
-    }
-    */
 }
