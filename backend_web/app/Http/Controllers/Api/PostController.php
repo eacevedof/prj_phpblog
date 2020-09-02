@@ -10,6 +10,7 @@ use App\Services\Restrict\Post\PostDeleteService;
 use App\Services\Restrict\Post\PostInsertService;
 use App\Services\Restrict\Post\PostListService;
 use App\Services\Restrict\Post\PostUpdateService;
+use App\Services\Restrict\Post\PostDetailService;
 
 class PostController extends BaseController
 {
@@ -61,6 +62,7 @@ class PostController extends BaseController
      */
     public function show($id)
     {
+        $this->logd("api.post.show",$id);
         try {
             $r = (new PostDetailService($id, $this->authid))->get();
             return Response()->json(["data"=>$r],200);

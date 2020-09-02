@@ -2289,6 +2289,43 @@ var BTN_IN_PROGRESS = "Procesando...";
     };
   },
   methods: {
+    get_row: function get_row(id) {
+      var _this = this;
+
+      var self = this;
+      self.issending = true;
+      self.btnsend = BTN_IN_PROGRESS;
+      var url = "/api/post/".concat(id);
+      fetch(url, {
+        method: 'get'
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        console.log("reponse", response);
+
+        if (_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+          return Swal.fire({
+            icon: 'warning',
+            title: 'This action could not be completed! &#58384;',
+            text: response.error
+          });
+        }
+
+        _this.post = response.data;
+      })["catch"](function (error) {
+        console.log("CATCH ERROR get_row", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Opps! Some error occurred &#9785;',
+          text: error.toString() //.concat("\n").concat(JSON.stringify(response)),
+
+        });
+      })["finally"](function () {
+        self.issending = false;
+        self.btnsend = BTN_INISTATE;
+      });
+    },
+    //get_row
     update: function update() {
       var self = this;
       self.issending = true;
@@ -2325,7 +2362,7 @@ var BTN_IN_PROGRESS = "Procesando...";
       }).then(function (response) {
         console.log("reponse", response);
 
-        if (typeof response.error !== "undefined") {
+        if (_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
             title: 'This action could not be completed! &#58384;',
@@ -2359,7 +2396,7 @@ var BTN_IN_PROGRESS = "Procesando...";
   },
   mounted: function mounted() {
     var id = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_lastparam();
-    alert(id);
+    this.get_row(id);
   }
 });
 
@@ -52050,6 +52087,14 @@ var custom = {
   },
   get_lastparam: function get_lastparam() {
     return new URL(window.location).pathname.split("/").slice(-1)[0] || null;
+  },
+  pr: function pr(any) {
+    var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    var json = JSON.stringify(any);
+    alert(title.concat(":\n").concat(json));
+  },
+  is_error: function is_error(response) {
+    return typeof response.error !== "undefined";
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (custom);
