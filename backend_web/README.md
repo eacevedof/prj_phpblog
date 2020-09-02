@@ -49,5 +49,8 @@ php artisan ui vue --auth
     - php artisan make:controller Api/PostController --api
 - Creo seeder    
     - php artisan make:seeder UsersTableSeeder
+    - configuro el seeder
+    - lo ejecuto: php artisan db:seed
+
 
     
