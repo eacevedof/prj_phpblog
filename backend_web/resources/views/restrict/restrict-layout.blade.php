@@ -42,8 +42,8 @@
                                 Posts
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-posts">
-                                <a class="dropdown-item" href="/adm/posts">Articles</a>
-                                <a class="dropdown-item" href="/adm/post/insert">New article</a>
+                                <a class="dropdown-item" href="/adm/posts">Posts</a>
+                                <a class="dropdown-item" href="/adm/post/insert">New post</a>
                             </div>
                         </li>
                     </ul>
