@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\BaseController;
 use App\Services\Restrict\Post\PostInsertService;
 use App\Services\Restrict\Post\PostListService;
+use App\Services\Restrict\Post\PostUpdateService;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
@@ -54,7 +55,7 @@ class PostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        //
+        return (new PostUpdateService($request))->save();
     }
 
     /**
