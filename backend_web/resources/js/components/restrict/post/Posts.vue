@@ -10,11 +10,19 @@
                 <th>id</th>
                 <th>Description</th>
                 <th>Title</th>
+                <th>Edit</th>
+                <th>Remove</th>
             </tr>
             </thead>
             <tbody>
                 <tr v-for="(item, index) in rows" :key="index">
                     <td v-for="(column, indexColumn) in columns" :key="indexColumn">{{item[column]}}</td>
+                    <td>
+                        xx
+                    </td>
+                    <td>
+                        yy
+                    </td>
                 </tr>
             </tbody>
         </table>
