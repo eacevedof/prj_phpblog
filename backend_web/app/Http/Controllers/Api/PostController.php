@@ -8,13 +8,15 @@ use App\Services\Restrict\Post\PostInsertService;
 use App\Services\Restrict\Post\PostListService;
 use App\Services\Restrict\Post\PostUpdateService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends BaseController
 {
 
     public function __construct()
     {
-        $this->middleware("auth");
+        //$this->middleware("auth");
     }
 
     /**
@@ -23,8 +25,13 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $iduser = auth()->id()->get();
-        return (new PostListService($iduser))->get_list_by_user();
+        $iduser = Auth::id();
+        //dump($iduser);
+        $r = (new PostListService($iduser))->get_list_by_user();
+        //dump($r);
+        //$this->showAll($r);
+        //return $r;
+        return Response()->json($r,200);
     }
 
     /**
@@ -34,7 +41,7 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        return (new PostInsertService($request))->save();
+        //return (new PostInsertService($request))->save();
     }
 
     /**
@@ -55,7 +62,7 @@ class PostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        $iduser = auth()->id()->get();
+        $iduser = Auth::id();
         return (new PostUpdateService($request,$iduser))->save();
     }
 
@@ -66,7 +73,7 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        $iduser = auth()->id()->get();
+        $iduser = Auth::id();
         return (new PostDeleteService($id, $iduser))->save();
     }
 }
