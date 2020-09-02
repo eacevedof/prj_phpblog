@@ -30,8 +30,8 @@ class PostController extends BaseController
         $r = (new PostListService($iduser))->get_list_by_user();
         //dump($r);
         //$this->showAll($r);
-        //return $r;
-        return Response()->json($r,200);
+        return $r;
+        //return Response()->json($r,200);
     }
 
     /**
