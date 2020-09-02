@@ -54,8 +54,11 @@ class PostController extends BaseController
         return view('restrict.post.detail',["post"=>$post]);
     }
 
-    public function delete($idpost)
+    //no procede esto se hace desde el listado
+    /*
+    private function delete($idpost)
     {
         return view('restrict.post.delete');
     }
+    */
 }
