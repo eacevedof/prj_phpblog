@@ -1,11 +1,15 @@
 <template>
     <div class="card">
         <div class="card-header">
-            <h1>New article</h1>
+            <h1>Update post</h1>
         </div>
         <div class="card-body">
             <form @submit="handleSubmit">
                 <div class="form-row">
+                    <div class="form-group col-md-2">
+                        <label for="txt-id">Id</label>
+                        <input type="text" id="txt-id" v-model="post.id" maxlength="11" class="form-control"/>
+                    </div>
                     <div class="form-group col-md-4">
                         <label for="txt-description">Hidden description</label>
                         <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
@@ -121,6 +125,7 @@ export default {
             btnsend: BTN_INISTATE,
             issending: false,
             post: {
+                id: -1,
                 description: "",
                 id_type: 0,
                 is_page: [],
@@ -145,7 +150,7 @@ export default {
     },
 
     methods:{
-        insert(){
+        update(){
             const self = this
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
@@ -153,7 +158,8 @@ export default {
             const data = new FormData();
 
             data.append("_token",csrftoken)
-            data.append("action","post.insert")
+            data.append("action","post.update")
+            data.append("id",this.post.id)
             data.append("description",this.post.description)
             data.append("id_type",this.post.id_type)
             data.append("is_page",this.post.is_page[0] || 0)
@@ -175,12 +181,9 @@ export default {
             data.append("order_by",this.post.order_by)
 
             fetch(url, {
-                method: 'post',
+                method: 'put',
                 body: data,
-                //si voy a enviar un json
-                //headers:{'Content-Type': 'application/json'},
             })
-            //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
             .then(response => {
 
@@ -189,23 +192,23 @@ export default {
                 if(typeof response.error !== "undefined") {
                     return Swal.fire({
                         icon: 'warning',
-                        title: 'Esta acción no se ha podido completar',
+                        title: 'This action could not be completed! &#58384;',
                         text: response.error,
                     })
                 }
 
                 Swal.fire({
                     icon: 'success',
-                    title: `Post: "${self.post.description}" <br/> creado`,
+                    title: `Post: "${self.post.description}" (${self.id}) <br/> changed`,
                     html: `<b>&#128578;</b>`,
                 })
 
             })
             .catch(error => {
-                console.log("CATCH ERROR insert",error)
+                console.log("CATCH ERROR update",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Vaya! Ha ocurrido un error',
+                    title: 'Opps! Some error occurred &#9785;',
                     text: error.toString(),
                 })
             })
@@ -213,16 +216,17 @@ export default {
                 self.issending = false;
                 self.btnsend = BTN_INISTATE
             })
-        },//insert
+        },//update
 
         handleSubmit: function(e) {
             e.preventDefault()
-            this.insert()
+            this.update()
         }//handleSubmit(e)
     },
 
     mounted() {
-        console.log('Post Insert mounted.')
+        const id = custom.get_lastparam()
+        alert(id)
     }
 }
 </script>
