@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
+use App\Services\Restrict\Post\PostDeleteService;
 use App\Services\Restrict\Post\PostInsertService;
 use App\Services\Restrict\Post\PostListService;
 use App\Services\Restrict\Post\PostUpdateService;
@@ -38,7 +39,6 @@ class PostController extends BaseController
 
     /**
      * Display the specified resource.
-     *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -55,7 +55,8 @@ class PostController extends BaseController
      */
     public function update(Request $request, $id)
     {
-        return (new PostUpdateService($request))->save();
+        $iduser = auth()->id()->get();
+        return (new PostUpdateService($request,$iduser))->save();
     }
 
     /**
@@ -65,7 +66,8 @@ class PostController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        $iduser = auth()->id()->get();
+        return (new PostDeleteService($id, $iduser))->save();
     }
 }
 
