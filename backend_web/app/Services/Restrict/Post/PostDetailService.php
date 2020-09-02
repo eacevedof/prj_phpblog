@@ -19,7 +19,7 @@ class PostDetailService extends BaseService
 
     }
 
-    public function save()
+    public function get()
     {
         $this->_check_data();
         return AppPost::find($this->id);
