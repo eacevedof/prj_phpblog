@@ -41,7 +41,8 @@ class PostController extends BaseController
      */
     public function store(Request $request)
     {
-        //return (new PostInsertService($request))->save();
+        $iduser = Auth::id();
+        return (new PostInsertService($request, $iduser))->save();
     }
 
     /**
