@@ -22,9 +22,7 @@
 </head>
 <body>
 <script>
-function get_csrftoken() {
-    return document.querySelector('#meta-csrf-token').getAttribute('content');
-}
+
 </script>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
