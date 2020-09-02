@@ -38,3 +38,7 @@ php artisan ui vue --auth
     WARNING: Ref 'refs/tags/v0.0.1' is unchanged
     ```
     - Parece que ha funcionado porque ya no veo la carpeta **.idea** en el último commit
+- crear migracion de bd existente
+    - composer require --dev "xethron/migrations-generator"
+    - Error: no tira para laravel 7.26.1
+    - php artisan migrate:generate
