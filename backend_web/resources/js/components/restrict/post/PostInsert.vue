@@ -114,7 +114,6 @@ let csrftoken = custom.get_csrftoken()
 //console.log(csrftoken,"csrftoken")
 const BTN_INISTATE = "Guardar"
 const BTN_IN_PROGRESS = "Procesando..."
-const BTN_CONFIRM = "Confirmar"
 
 export default {
     data(){

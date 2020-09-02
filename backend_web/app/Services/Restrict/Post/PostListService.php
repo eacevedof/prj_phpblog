@@ -19,7 +19,7 @@ class PostListService extends BaseService
         //$this->entity = new AppPost();
         //return AppPost::where("user_id",auth()->id())->get();
         //return AppPost::where("user_id",$this->iduser);
-        return AppPost::all();
+        return AppPost::all()->sortByDesc("id");;
     }
 
 
