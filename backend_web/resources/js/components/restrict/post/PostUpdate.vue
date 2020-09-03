@@ -115,8 +115,8 @@
 <script>
 import custom from "../../../custom"
 let csrftoken = custom.get_csrftoken()
-alert(csrftoken)
-//console.log(csrftoken,"csrftoken")
+console.log(csrftoken,"csrftoken")
+
 const BTN_INISTATE = "Guardar"
 const BTN_IN_PROGRESS = "Procesando..."
 
@@ -193,33 +193,9 @@ export default {
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
             const url = `/api/post/${this.post.id}`
-            const data = new FormData();
-
-            data.append("_method","PUT")
-            data.append("action","post.update")
-            data.append("id",this.post.id)
-            data.append("description",this.post.description)
-            data.append("id_type",this.post.id_type)
-            data.append("is_page",this.post.is_page[0] || 0)
-            data.append("slug",this.post.slug)
-            data.append("url_final",this.post.url_final)
-            data.append("title",this.post.title)
-            data.append("subtitle",this.post.subtitle)
-            data.append("content",this.post.content)
-            data.append("excerpt",this.post.excerpt)
-            data.append("url_img1",this.post.url_img1)
-            data.append("url_img2",this.post.url_img2)
-            data.append("url_img3",this.post.url_img3)
-            data.append("id_user",this.post.id_user)
-            data.append("id_status",this.post.id_status)
-            data.append("publish_date",this.post.publish_date)
-            data.append("last_update",this.post.last_update)
-            data.append("seo_title",this.post.seo_title)
-            data.append("seo_description",this.post.seo_description)
-            data.append("order_by",this.post.order_by)
 
             fetch(url, {
-                method: 'PUT',
+                method: 'put',
                 headers:{
                     'Content-Type': 'application/json'
                 },

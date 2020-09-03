@@ -2140,6 +2140,12 @@ var BTN_IN_PROGRESS = "Procesando...";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../custom */ "./resources/js/custom.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2256,8 +2262,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
-alert(csrftoken); //console.log(csrftoken,"csrftoken")
-
+console.log(csrftoken, "csrftoken");
 var BTN_INISTATE = "Guardar";
 var BTN_IN_PROGRESS = "Procesando...";
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2332,37 +2337,14 @@ var BTN_IN_PROGRESS = "Procesando...";
       self.issending = true;
       self.btnsend = BTN_IN_PROGRESS;
       var url = "/api/post/".concat(this.post.id);
-      var data = new FormData();
-      data.append("_method", "PUT");
-      data.append("action", "post.update");
-      data.append("id", this.post.id);
-      data.append("description", this.post.description);
-      data.append("id_type", this.post.id_type);
-      data.append("is_page", this.post.is_page[0] || 0);
-      data.append("slug", this.post.slug);
-      data.append("url_final", this.post.url_final);
-      data.append("title", this.post.title);
-      data.append("subtitle", this.post.subtitle);
-      data.append("content", this.post.content);
-      data.append("excerpt", this.post.excerpt);
-      data.append("url_img1", this.post.url_img1);
-      data.append("url_img2", this.post.url_img2);
-      data.append("url_img3", this.post.url_img3);
-      data.append("id_user", this.post.id_user);
-      data.append("id_status", this.post.id_status);
-      data.append("publish_date", this.post.publish_date);
-      data.append("last_update", this.post.last_update);
-      data.append("seo_title", this.post.seo_title);
-      data.append("seo_description", this.post.seo_description);
-      data.append("order_by", this.post.order_by);
       fetch(url, {
-        method: 'PUT',
+        method: 'put',
         headers: {
-          'X-CSRF-TOKEN': csrftoken,
           'Content-Type': 'application/json'
         },
-        //body: data,
-        body: JSON.stringify(this.post)
+        body: JSON.stringify(_objectSpread({
+          _token: csrftoken
+        }, this.post))
       }).then(function (response) {
         return response.json();
       }).then(function (response) {
@@ -2378,7 +2360,7 @@ var BTN_IN_PROGRESS = "Procesando...";
 
         Swal.fire({
           icon: 'success',
-          title: "Post: \"".concat(self.post.description, "\" (").concat(self.id, ") <br/> changed"),
+          title: "Post: \"".concat(self.post.description, "\" (").concat(self.post.id, ") <br/> changed"),
           html: "<b>&#128578;</b>"
         });
       })["catch"](function (error) {
