@@ -57,6 +57,6 @@ php artisan ui vue --auth
 - Problema con PUT y el token
     - Error 419 status unknown
     - No llegaban los datos con PUT porque los enviaba como formulario y deben ser como JSON    
-
+- No me cargaba el id de usuario en el constructor del controlador. Los middlewares de autenticación se ejecutan despues de los constructores
 
     

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
-//use Illuminate\Support\Facades\Auth;
+//use Auth;
 
 use App\Services\Restrict\Post\PostDeleteService;
 use App\Services\Restrict\Post\PostInsertService;
@@ -19,9 +19,9 @@ class PostController extends BaseController
     public function __construct()
     {
         $this->middleware("auth");
-        $this->authid = auth()->id();
-        $this->logd($this->authid,"AUTHID postcontroller");
     }
+
+    private function _load_authid(){$this->authid = auth()->id();}
 
     /**
      * Display a listing of the resource.
@@ -29,6 +29,7 @@ class PostController extends BaseController
      */
     public function index()
     {
+        $this->_load_authid();
         try {
             $r = (new PostListService($this->authid))->get_list_by_user();
             return Response()->json(["data"=>$r],200);
@@ -100,6 +101,7 @@ class PostController extends BaseController
      */
     public function destroy($post)
     {
+        $this->_load_authid();
         $this->logd($post,"delete.postid");
         try {
             $r = (new PostDeleteService($post, $this->authid))->save();
