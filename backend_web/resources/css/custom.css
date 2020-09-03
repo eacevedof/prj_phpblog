@@ -1,3 +1,17 @@
 .debug {
     border:1px solid red !important;
 }
+
+.app-formheader {
+    margin: 0;
+    padding:1px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.app-btnformheader {
+    margin-top: 8px;
+}
+
+.app-btncol {
+    margin-top:28px;
+}
