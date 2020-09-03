@@ -55,7 +55,8 @@ php artisan ui vue --auth
         - composer dumpautoload
         - php artisan db:seed --class=UsersTableSeeder
 - Problema con PUT y el token
-    - En put hay que pasar el token por cabecera ya que no vale como parte del form    
+    - Error 419 status unknown
+    - No llegaban los datos con PUT porque los enviaba como formulario y deben ser como JSON    
 
 
     
