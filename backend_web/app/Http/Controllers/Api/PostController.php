@@ -100,8 +100,14 @@ class PostController extends BaseController
     public function destroy($post)
     {
         $this->logd($post,"delete.postid");
-        $iduser = Auth::id();
-        return (new PostDeleteService($post, $iduser))->save();
+        try {
+            $r = (new PostDeleteService($post, $this->authid))->save();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
     }
 }
 
