@@ -19,9 +19,20 @@ class PostDeleteService extends BaseService
 
     }
 
+    private function _soft_delete()
+    {
+        $date = date("YmoHis");
+        return AppPost::where("id", "=", $this->id)->update(["delete_date"=>$date, "delete_user"=>$this->iduser]);
+    }
+
+    private function _hard_delete()
+    {
+        return AppPost::where("id", "=", $this->id)->delete();
+    }
+
     public function save()
     {
         $this->_check_data();
-        return AppPost::where("id", "=", $this->id)->delete();
+        return $this->_soft_delete();
     }
 }

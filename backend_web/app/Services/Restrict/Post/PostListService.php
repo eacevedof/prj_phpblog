@@ -22,7 +22,7 @@ class PostListService extends BaseService
         //return AppPost::where("user_id",$this->iduser);
         //dump(AppPost::all());
         //return AppPost::all()->sortByDesc("id");;
-        $r = DB::table("app_post")->orderBy("id","desc")->get();
+        $r = DB::table("app_post")->whereNull("delete_date")->orderBy("id","desc")->get();
         //$this->logd($r,"order by??");
         return $r;
     }
