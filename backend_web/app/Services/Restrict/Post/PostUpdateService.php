@@ -22,6 +22,9 @@ class PostUpdateService extends BaseService
     public function save()
     {
         $this->_check_data();
+        $this->logd($this->request->input("description"),"input.description");
+        $this->logd($this->request->all(),"updateservice.save.req-all");
+        $this->logd($this->request->getContent(),"updateservice.save.req-getcontent");
         return AppPost::where("id", "=", $this->request->name("id"))->update($this->request->all());
     }
 }

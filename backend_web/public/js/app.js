@@ -2333,7 +2333,7 @@ var BTN_IN_PROGRESS = "Procesando...";
       self.btnsend = BTN_IN_PROGRESS;
       var url = "/api/post/".concat(this.post.id);
       var data = new FormData();
-      data.append("_token", csrftoken);
+      data.append("_method", "PUT");
       data.append("action", "post.update");
       data.append("id", this.post.id);
       data.append("description", this.post.description);
@@ -2356,11 +2356,13 @@ var BTN_IN_PROGRESS = "Procesando...";
       data.append("seo_description", this.post.seo_description);
       data.append("order_by", this.post.order_by);
       fetch(url, {
-        method: 'PATCH',
+        method: 'PUT',
         headers: {
-          'X-CSRF-TOKEN': csrftoken
+          'X-CSRF-TOKEN': csrftoken,
+          'Content-Type': 'application/json'
         },
-        body: data
+        //body: data,
+        body: JSON.stringify(this.post)
       }).then(function (response) {
         return response.json();
       }).then(function (response) {
