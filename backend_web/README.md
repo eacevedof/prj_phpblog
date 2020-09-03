@@ -54,7 +54,8 @@ php artisan ui vue --auth
     - Error: Class 'UserTableSeeder' does not exist - Laravel 5.0 [php artisan db:seed]
         - composer dumpautoload
         - php artisan db:seed --class=UsersTableSeeder
-    
+- Problema con PUT y el token
+    - En put hay que pasar el token por cabecera ya que no vale como parte del form    
 
 
     
