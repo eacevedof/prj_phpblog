@@ -27,7 +27,7 @@ class PostInsertService extends BaseService
             $datetime = $data[$field];
             if(!is_string($datetime)) continue;
             $ardate = Formatter::get_datetime($datetime);
-            $data[$field] = $ardate["ymdhis"] ?? "";
+            $data[$field] = $ardate["ymdhis"] ?? null;
         }
     }
 
