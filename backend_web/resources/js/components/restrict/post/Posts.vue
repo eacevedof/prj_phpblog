@@ -1,9 +1,17 @@
 <template>
 <div class="card">
-    <div class="card-header">
-        <h1>Posts</h1>
-    </div>
     <div class="card-body">
+        <div class="row card-header app-formheader">
+            <div class="col-md-9">
+                <h1>Posts</h1>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary app-btnformheader" :disabled="issending" v-on:click="load()">
+                    {{btnsend}}
+                    <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                </button>
+            </div>
+        </div>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -37,23 +45,25 @@
 <script>
 import custom from "../../../custom"
 let csrftoken = custom.get_csrftoken()
-const BTN_INISTATE = "Buscar"
-const BTN_IN_PROGRESS = "Procesando..."
+const BTN_INISTATE = "Refresh"
+const BTN_IN_PROGRESS = "In progress..."
 
 export default {
     data(){
         return {
+            issending: false,
+            btnsend: BTN_INISTATE,
             columns: ["id","description","title"],
             rows: [],
         }
     },
 
     mounted() {
-        this.fetch()
+        this.load()
     },
 
     methods: {
-        fetch(){
+        load(){
             console.log("fetching")
             const self = this
             self.issending = true
@@ -71,7 +81,7 @@ export default {
                 if(typeof response.error !== "undefined") {
                     return Swal.fire({
                         icon: 'warning',
-                        title: 'Esta acción no se ha podido completar',
+                        title: 'This action could not be completed! &#58384;',
                         text: response.error,
                     })
                 }
@@ -83,7 +93,7 @@ export default {
                 console.log("CATCH ERROR insert",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Vaya! Ha ocurrido un error',
+                    title: 'Opps! Some error occurred &#9785;',
                     text: error.toString(),
                 })
             })

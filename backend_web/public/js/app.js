@@ -2256,11 +2256,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 console.log(csrftoken, "csrftoken");
-var BTN_INISTATE = "Guardar";
-var BTN_IN_PROGRESS = "Procesando...";
+var BTN_INISTATE = "Save changes";
+var BTN_IN_PROGRESS = "In progress...";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2437,32 +2445,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 var csrftoken = _custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
-var BTN_INISTATE = "Buscar";
-var BTN_IN_PROGRESS = "Procesando...";
+var BTN_INISTATE = "Refresh";
+var BTN_IN_PROGRESS = "In progress...";
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      issending: false,
+      btnsend: BTN_INISTATE,
       columns: ["id", "description", "title"],
       rows: []
     };
   },
   mounted: function mounted() {
-    this.fetch();
+    this.load();
   },
   methods: {
-    fetch: function (_fetch) {
-      function fetch() {
-        return _fetch.apply(this, arguments);
-      }
-
-      fetch.toString = function () {
-        return _fetch.toString();
-      };
-
-      return fetch;
-    }(function () {
+    load: function load() {
       console.log("fetching");
       var self = this;
       self.issending = true;
@@ -2479,7 +2487,7 @@ var BTN_IN_PROGRESS = "Procesando...";
         if (typeof response.error !== "undefined") {
           return Swal.fire({
             icon: 'warning',
-            title: 'Esta acción no se ha podido completar',
+            title: 'This action could not be completed! &#58384;',
             text: response.error
           });
         }
@@ -2489,14 +2497,14 @@ var BTN_IN_PROGRESS = "Procesando...";
         console.log("CATCH ERROR insert", error);
         Swal.fire({
           icon: 'error',
-          title: 'Vaya! Ha ocurrido un error',
+          title: 'Opps! Some error occurred &#9785;',
           text: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
         self.btnsend = BTN_INISTATE;
       });
-    }),
+    },
     //fetch
     edit: function edit(id) {
       //alert("edit")
@@ -38834,10 +38842,38 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _vm._m(0),
-    _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("form", { on: { submit: _vm.handleSubmit } }, [
+        _c("div", { staticClass: "row card-header app-formheader" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary app-btnformheader",
+                attrs: { disabled: _vm.issending }
+              },
+              [
+                _vm._v(
+                  "\n                        " +
+                    _vm._s(_vm.btnsend) +
+                    "\n                        "
+                ),
+                _vm.issending
+                  ? _c("img", {
+                      attrs: {
+                        src: "/assets/images/loading-bw.gif",
+                        width: "25",
+                        height: "25"
+                      }
+                    })
+                  : _vm._e()
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "form-row" }, [
           _c("div", { staticClass: "form-group col-md-2" }, [
             _c("label", [_vm._v("Id")]),
@@ -39464,8 +39500,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-primary",
-                staticStyle: { "margin-top": "28px" },
+                staticClass: "btn btn-primary app-btncol",
                 attrs: { disabled: _vm.issending }
               },
               [
@@ -39496,7 +39531,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
+    return _c("div", { staticClass: "col-md-9" }, [
       _c("h1", [_vm._v("Update post")])
     ])
   },
@@ -39533,9 +39568,42 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _vm._m(0),
-    _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "row card-header app-formheader" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary app-btnformheader",
+              attrs: { disabled: _vm.issending },
+              on: {
+                click: function($event) {
+                  return _vm.load()
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.btnsend) +
+                  "\n                    "
+              ),
+              _vm.issending
+                ? _c("img", {
+                    attrs: {
+                      src: "/assets/images/loading-bw.gif",
+                      width: "25",
+                      height: "25"
+                    }
+                  })
+                : _vm._e()
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _c("table", { staticClass: "table table-striped" }, [
         _vm._m(1),
         _vm._v(" "),
@@ -39606,9 +39674,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("h1", [_vm._v("Posts")])
-    ])
+    return _c("div", { staticClass: "col-md-9" }, [_c("h1", [_vm._v("Posts")])])
   },
   function() {
     var _vm = this
