@@ -2322,6 +2322,7 @@ var BTN_IN_PROGRESS = "In progress...";
         }
 
         _this.post = response.data;
+        _this.post.publish_date = new Date(_this.post.publish_date).toISOString().substr(0, 10);
       })["catch"](function (error) {
         console.log("CATCH ERROR get_row", error);
         Swal.fire({
