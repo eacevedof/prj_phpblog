@@ -5,8 +5,9 @@ namespace App\Component;
 class Formatter
 {
     public static function get_datetime($datetime){
-        $result = [];
+        if(!$datetime) return [];
 
+        $result = [];
         //2020-10-04T00:00:00.000000Z
         //dump($datetime);die;
         if(strstr($datetime,"-") && strstr($datetime,"T") && strstr($datetime,".")){

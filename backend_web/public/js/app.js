@@ -1909,6 +1909,12 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../custom */ "./resources/js/custom.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2058,33 +2064,15 @@ var BTN_IN_PROGRESS = "Procesando...";
       self.issending = true;
       self.btnsend = BTN_IN_PROGRESS;
       var url = "/api/post";
-      var data = new FormData();
-      data.append("_token", csrftoken);
-      data.append("action", "post.insert");
-      data.append("description", this.post.description);
-      data.append("id_type", this.post.id_type);
-      data.append("is_page", this.post.is_page[0] || 0);
-      data.append("slug", this.post.slug);
-      data.append("url_final", this.post.url_final);
-      data.append("title", this.post.title);
-      data.append("subtitle", this.post.subtitle);
-      data.append("content", this.post.content);
-      data.append("excerpt", this.post.excerpt);
-      data.append("url_img1", this.post.url_img1);
-      data.append("url_img2", this.post.url_img2);
-      data.append("url_img3", this.post.url_img3);
-      data.append("id_user", this.post.id_user);
-      data.append("id_status", this.post.id_status);
-      data.append("publish_date", this.post.publish_date);
-      data.append("last_update", this.post.last_update);
-      data.append("seo_title", this.post.seo_title);
-      data.append("seo_description", this.post.seo_description);
-      data.append("order_by", this.post.order_by);
       fetch(url, {
         method: 'post',
-        body: data //si voy a enviar un json
-        //headers:{'Content-Type': 'application/json'},
-
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(_objectSpread({
+          _token: csrftoken,
+          _action: "post.insert"
+        }, this.post))
       }) //.then(response => console.log(response,"RESPONSE"))
       .then(function (response) {
         return response.json();
@@ -2345,7 +2333,8 @@ var BTN_IN_PROGRESS = "Procesando...";
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(_objectSpread({
-          _token: csrftoken
+          _token: csrftoken,
+          _action: "post.update"
         }, this.post))
       }).then(function (response) {
         return response.json();
@@ -2470,13 +2459,9 @@ var BTN_IN_PROGRESS = "Procesando...";
       var self = this;
       self.issending = true;
       self.btnsend = BTN_IN_PROGRESS;
-      var url = "/api/post"; //const data = new FormData();
-      //data.append("_token",csrftoken)
-      //data.append("action","post.index")
-
+      var url = "/api/post";
       fetch(url, {
-        method: 'get' //body: data,
-
+        method: 'get'
       }) //.then(response => console.log(response,"RESPONSE"))
       .then(function (response) {
         return response.json();

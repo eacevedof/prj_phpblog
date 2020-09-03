@@ -199,7 +199,7 @@ export default {
                 headers:{
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({_token:csrftoken, ...this.post})
+                body: JSON.stringify({_token:csrftoken,_action:"post.update", ...this.post})
             })
             .then(response => response.json())
             .then(response => {

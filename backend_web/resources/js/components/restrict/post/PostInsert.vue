@@ -150,35 +150,13 @@ export default {
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
             const url = `/api/post`
-            const data = new FormData();
-
-            data.append("_token",csrftoken)
-            data.append("action","post.insert")
-            data.append("description",this.post.description)
-            data.append("id_type",this.post.id_type)
-            data.append("is_page",this.post.is_page[0] || 0)
-            data.append("slug",this.post.slug)
-            data.append("url_final",this.post.url_final)
-            data.append("title",this.post.title)
-            data.append("subtitle",this.post.subtitle)
-            data.append("content",this.post.content)
-            data.append("excerpt",this.post.excerpt)
-            data.append("url_img1",this.post.url_img1)
-            data.append("url_img2",this.post.url_img2)
-            data.append("url_img3",this.post.url_img3)
-            data.append("id_user",this.post.id_user)
-            data.append("id_status",this.post.id_status)
-            data.append("publish_date",this.post.publish_date)
-            data.append("last_update",this.post.last_update)
-            data.append("seo_title",this.post.seo_title)
-            data.append("seo_description",this.post.seo_description)
-            data.append("order_by",this.post.order_by)
 
             fetch(url, {
                 method: 'post',
-                body: data,
-                //si voy a enviar un json
-                //headers:{'Content-Type': 'application/json'},
+                headers:{
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({_token:csrftoken, _action:"post.insert",...this.post})
             })
             //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
