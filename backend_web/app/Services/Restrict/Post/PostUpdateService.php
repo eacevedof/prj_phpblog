@@ -26,7 +26,7 @@ class PostUpdateService extends BaseService
         foreach ($fields as $field){
             $datetime = $data[$field];
             $ardate = Formatter::get_datetime($datetime);
-            $data[$field] = $ardate["ymdhis"] ?? "";
+            $data[$field] = $ardate["ymdhis"] ?? null;
         }
     }
 
