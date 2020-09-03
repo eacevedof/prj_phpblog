@@ -13,7 +13,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="form-row">
+                <div v-if="!issending"  class="form-row">
                     <div class="form-group col-md-2">
                         <label>Id</label>
                         <span class="form-control">{{ post.id }}</span>

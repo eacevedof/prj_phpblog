@@ -2323,6 +2323,7 @@ var BTN_IN_PROGRESS = "In progress...";
 
         _this.post = response.data;
         _this.post.publish_date = new Date(_this.post.publish_date).toISOString().substr(0, 10);
+        _this.post.last_update = new Date(_this.post.last_update).toISOString().substr(0, 10);
       })["catch"](function (error) {
         console.log("CATCH ERROR get_row", error);
         Swal.fire({
@@ -38916,654 +38917,690 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "form-row" }, [
-          _c("div", { staticClass: "form-group col-md-2" }, [
-            _c("label", [_vm._v("Id")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "form-control" }, [
-              _vm._v(_vm._s(_vm.post.id))
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-4" }, [
-            _c("label", { attrs: { for: "txt-description" } }, [
-              _vm._v("Tooltip")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.description,
-                  expression: "post.description"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-description", maxlength: "250" },
-              domProps: { value: _vm.post.description },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "description", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-4" }, [
-            _c("label", { attrs: { for: "sel-id_type" } }, [
-              _vm._v("Category")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.id_type,
-                    expression: "post.id_type"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "sel-id_type" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "id_type",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { disabled: "", value: "" } }, [
-                  _vm._v("Choose one")
+        !_vm.issending
+          ? _c("div", { staticClass: "form-row" }, [
+              _c("div", { staticClass: "form-group col-md-2" }, [
+                _c("label", [_vm._v("Id")]),
+                _vm._v(" "),
+                _c("span", { staticClass: "form-control" }, [
+                  _vm._v(_vm._s(_vm.post.id))
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c("label", { attrs: { for: "txt-description" } }, [
+                  _vm._v("Tooltip")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Generic")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("Single page")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v("Blog Php")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [_vm._v("Blog Js")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [_vm._v("Blog SQL")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [_vm._v("Blog Docker")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "form-check col-md-4",
-              staticStyle: { "padding-top": "35px" }
-            },
-            [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.is_page,
-                    expression: "post.is_page"
-                  }
-                ],
-                attrs: { type: "checkbox", id: "chk-is_page", value: "1" },
-                domProps: {
-                  checked: Array.isArray(_vm.post.is_page)
-                    ? _vm._i(_vm.post.is_page, "1") > -1
-                    : _vm.post.is_page
-                },
-                on: {
-                  change: function($event) {
-                    var $$a = _vm.post.is_page,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = "1",
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 &&
-                          _vm.$set(_vm.post, "is_page", $$a.concat([$$v]))
-                      } else {
-                        $$i > -1 &&
-                          _vm.$set(
-                            _vm.post,
-                            "is_page",
-                            $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                          )
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.description,
+                      expression: "post.description"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "txt-description",
+                    maxlength: "250"
+                  },
+                  domProps: { value: _vm.post.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
                       }
-                    } else {
-                      _vm.$set(_vm.post, "is_page", $$c)
+                      _vm.$set(_vm.post, "description", $event.target.value)
                     }
                   }
-                }
-              }),
+                })
+              ]),
               _vm._v(" "),
-              _vm._m(1)
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "txt-slug" } }, [_vm._v("Slug")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.slug,
-                  expression: "post.slug"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-slug", maxlength: "150" },
-              domProps: { value: _vm.post.slug },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "slug", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "txt-url_final" } }, [
-              _vm._v("Permalink")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.url_final,
-                  expression: "post.url_final"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-url_final", maxlength: "300" },
-              domProps: { value: _vm.post.url_final },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "url_final", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "txt-title" } }, [_vm._v("title")]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.title,
-                  expression: "post.title"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-title", maxlength: "350" },
-              domProps: { value: _vm.post.title },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "title", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "txt-subtitle" } }, [
-              _vm._v("subtitle")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.subtitle,
-                  expression: "post.subtitle"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-subtitle", maxlength: "250" },
-              domProps: { value: _vm.post.subtitle },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "subtitle", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "txa-content" } }, [_vm._v("content")]),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.content,
-                  expression: "post.content"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { id: "txa-content", rows: "15", cols: "10" },
-              domProps: { value: _vm.post.content },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "content", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "txa-excerpt" } }, [_vm._v("excerpt")]),
-            _vm._v(" "),
-            _c("textarea", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.excerpt,
-                  expression: "post.excerpt"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                id: "txa-excerpt",
-                maxlength: "1000",
-                rows: "3",
-                cols: "5"
-              },
-              domProps: { value: _vm.post.excerpt },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "excerpt", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-12" }, [
-            _c("label", { attrs: { for: "txt-url_img1" } }, [
-              _vm._v("Url img1")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.url_img1,
-                  expression: "post.url_img1"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-url_img1", maxlength: "300" },
-              domProps: { value: _vm.post.url_img1 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "url_img1", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-6" }, [
-            _c("label", { attrs: { for: "txt-url_img2" } }, [
-              _vm._v("Url img2")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.url_img2,
-                  expression: "post.url_img2"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-url_img2", maxlength: "300" },
-              domProps: { value: _vm.post.url_img2 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "url_img2", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-6" }, [
-            _c("label", { attrs: { for: "txt-url_img3" } }, [
-              _vm._v("Url img3")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.url_img3,
-                  expression: "post.url_img3"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-url_img3", maxlength: "300" },
-              domProps: { value: _vm.post.url_img3 },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "url_img3", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-3" }, [
-            _c("label", { attrs: { for: "sel-id_user" } }, [_vm._v("User")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.id_user,
-                    expression: "post.id_user"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "sel-id_user" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "id_user",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [_c("option", { attrs: { value: "1" } }, [_vm._v("1")])]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-3" }, [
-            _c("label", { attrs: { for: "sel-id_status" } }, [
-              _vm._v("Status")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.post.id_status,
-                    expression: "post.id_status"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { id: "sel-id_status" },
-                on: {
-                  change: function($event) {
-                    var $$selectedVal = Array.prototype.filter
-                      .call($event.target.options, function(o) {
-                        return o.selected
-                      })
-                      .map(function(o) {
-                        var val = "_value" in o ? o._value : o.value
-                        return val
-                      })
-                    _vm.$set(
-                      _vm.post,
-                      "id_status",
-                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
-                    )
-                  }
-                }
-              },
-              [
-                _c("option", { attrs: { value: "0" } }, [_vm._v("Disabled")]),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c("label", { attrs: { for: "sel-id_type" } }, [
+                  _vm._v("Category")
+                ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Published")])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-3" }, [
-            _c("label", { attrs: { for: "dat-publish_date" } }, [
-              _vm._v("Published")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.publish_date,
-                  expression: "post.publish_date"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date", id: "dat-publish_date" },
-              domProps: { value: _vm.post.publish_date },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "publish_date", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-3" }, [
-            _c("label", { attrs: { for: "dat-last_update" } }, [
-              _vm._v("Last update")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.last_update,
-                  expression: "post.last_update"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "date", id: "dat-last_update" },
-              domProps: { value: _vm.post.last_update },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "last_update", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-6" }, [
-            _c("label", { attrs: { for: "txt-seo_title" } }, [
-              _vm._v("SEO Title")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.seo_title,
-                  expression: "post.seo_title"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "text", id: "txt-seo_title", maxlength: "65" },
-              domProps: { value: _vm.post.seo_title },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "seo_title", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-6" }, [
-            _c("label", { attrs: { for: "txt-seo_description" } }, [
-              _vm._v("SEO Description")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.seo_description,
-                  expression: "post.seo_description"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: {
-                type: "text",
-                id: "txt-seo_description",
-                maxlength: "160"
-              },
-              domProps: { value: _vm.post.seo_description },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "seo_description", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-2" }, [
-            _c("label", { attrs: { for: "num-order_by" } }, [
-              _vm._v("Position")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.post.order_by,
-                  expression: "post.order_by"
-                }
-              ],
-              staticClass: "form-control",
-              attrs: { type: "number", id: "num-order_by", value: "100" },
-              domProps: { value: _vm.post.order_by },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.post, "order_by", $event.target.value)
-                }
-              }
-            })
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group col-md-4" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary app-btncol",
-                attrs: { disabled: _vm.issending }
-              },
-              [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(_vm.btnsend) +
-                    "\n                        "
-                ),
-                _vm.issending
-                  ? _c("img", {
-                      attrs: {
-                        src: "/assets/images/loading-bw.gif",
-                        width: "25",
-                        height: "25"
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.id_type,
+                        expression: "post.id_type"
                       }
-                    })
-                  : _vm._e()
-              ]
-            )
-          ])
-        ])
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "sel-id_type" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.post,
+                          "id_type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Choose one")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("Generic")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("Single page")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "3" } }, [
+                      _vm._v("Blog Php")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "4" } }, [
+                      _vm._v("Blog Js")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "5" } }, [
+                      _vm._v("Blog SQL")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "6" } }, [
+                      _vm._v("Blog Docker")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "form-check col-md-4",
+                  staticStyle: { "padding-top": "35px" }
+                },
+                [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.is_page,
+                        expression: "post.is_page"
+                      }
+                    ],
+                    attrs: { type: "checkbox", id: "chk-is_page", value: "1" },
+                    domProps: {
+                      checked: Array.isArray(_vm.post.is_page)
+                        ? _vm._i(_vm.post.is_page, "1") > -1
+                        : _vm.post.is_page
+                    },
+                    on: {
+                      change: function($event) {
+                        var $$a = _vm.post.is_page,
+                          $$el = $event.target,
+                          $$c = $$el.checked ? true : false
+                        if (Array.isArray($$a)) {
+                          var $$v = "1",
+                            $$i = _vm._i($$a, $$v)
+                          if ($$el.checked) {
+                            $$i < 0 &&
+                              _vm.$set(_vm.post, "is_page", $$a.concat([$$v]))
+                          } else {
+                            $$i > -1 &&
+                              _vm.$set(
+                                _vm.post,
+                                "is_page",
+                                $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                              )
+                          }
+                        } else {
+                          _vm.$set(_vm.post, "is_page", $$c)
+                        }
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txt-slug" } }, [_vm._v("Slug")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.slug,
+                      expression: "post.slug"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "txt-slug", maxlength: "150" },
+                  domProps: { value: _vm.post.slug },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "slug", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txt-url_final" } }, [
+                  _vm._v("Permalink")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.url_final,
+                      expression: "post.url_final"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "txt-url_final",
+                    maxlength: "300"
+                  },
+                  domProps: { value: _vm.post.url_final },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "url_final", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txt-title" } }, [_vm._v("title")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.title,
+                      expression: "post.title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "txt-title", maxlength: "350" },
+                  domProps: { value: _vm.post.title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txt-subtitle" } }, [
+                  _vm._v("subtitle")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.subtitle,
+                      expression: "post.subtitle"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "txt-subtitle", maxlength: "250" },
+                  domProps: { value: _vm.post.subtitle },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "subtitle", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txa-content" } }, [
+                  _vm._v("content")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.content,
+                      expression: "post.content"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "txa-content", rows: "15", cols: "10" },
+                  domProps: { value: _vm.post.content },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "content", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txa-excerpt" } }, [
+                  _vm._v("excerpt")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.excerpt,
+                      expression: "post.excerpt"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "txa-excerpt",
+                    maxlength: "1000",
+                    rows: "3",
+                    cols: "5"
+                  },
+                  domProps: { value: _vm.post.excerpt },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "excerpt", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txt-url_img1" } }, [
+                  _vm._v("Url img1")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.url_img1,
+                      expression: "post.url_img1"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "txt-url_img1", maxlength: "300" },
+                  domProps: { value: _vm.post.url_img1 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "url_img1", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", { attrs: { for: "txt-url_img2" } }, [
+                  _vm._v("Url img2")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.url_img2,
+                      expression: "post.url_img2"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "txt-url_img2", maxlength: "300" },
+                  domProps: { value: _vm.post.url_img2 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "url_img2", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", { attrs: { for: "txt-url_img3" } }, [
+                  _vm._v("Url img3")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.url_img3,
+                      expression: "post.url_img3"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "txt-url_img3", maxlength: "300" },
+                  domProps: { value: _vm.post.url_img3 },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "url_img3", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "sel-id_user" } }, [
+                  _vm._v("User")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.id_user,
+                        expression: "post.id_user"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "sel-id_user" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.post,
+                          "id_user",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [_c("option", { attrs: { value: "1" } }, [_vm._v("1")])]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "sel-id_status" } }, [
+                  _vm._v("Status")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.id_status,
+                        expression: "post.id_status"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "sel-id_status" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.post,
+                          "id_status",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "0" } }, [
+                      _vm._v("Disabled")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("Published")
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "dat-publish_date" } }, [
+                  _vm._v("Published")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.publish_date,
+                      expression: "post.publish_date"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "date", id: "dat-publish_date" },
+                  domProps: { value: _vm.post.publish_date },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "publish_date", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "dat-last_update" } }, [
+                  _vm._v("Last update")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.last_update,
+                      expression: "post.last_update"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "date", id: "dat-last_update" },
+                  domProps: { value: _vm.post.last_update },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "last_update", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", { attrs: { for: "txt-seo_title" } }, [
+                  _vm._v("SEO Title")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.seo_title,
+                      expression: "post.seo_title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "txt-seo_title", maxlength: "65" },
+                  domProps: { value: _vm.post.seo_title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "seo_title", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-6" }, [
+                _c("label", { attrs: { for: "txt-seo_description" } }, [
+                  _vm._v("SEO Description")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.seo_description,
+                      expression: "post.seo_description"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    id: "txt-seo_description",
+                    maxlength: "160"
+                  },
+                  domProps: { value: _vm.post.seo_description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "seo_description", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-2" }, [
+                _c("label", { attrs: { for: "num-order_by" } }, [
+                  _vm._v("Position")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.post.order_by,
+                      expression: "post.order_by"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number", id: "num-order_by", value: "100" },
+                  domProps: { value: _vm.post.order_by },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.post, "order_by", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary app-btncol",
+                    attrs: { disabled: _vm.issending }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.btnsend) +
+                        "\n                        "
+                    ),
+                    _vm.issending
+                      ? _c("img", {
+                          attrs: {
+                            src: "/assets/images/loading-bw.gif",
+                            width: "25",
+                            height: "25"
+                          }
+                        })
+                      : _vm._e()
+                  ]
+                )
+              ])
+            ])
+          : _vm._e()
       ])
     ])
   ])
