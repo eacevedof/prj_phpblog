@@ -26,12 +26,12 @@
                 <tr v-for="(item, index) in rows" :key="index">
                     <td v-for="(column, indexColumn) in columns" :key="indexColumn">{{item[column]}}</td>
                     <td>
-                        <button class="btn btn-primary"  v-on:click="edit(item.id)">
+                        <button class="btn btn-primary" :disabled="issending"  v-on:click="edit(item.id)">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </button>
                     </td>
                     <td>
-                        <button class="btn btn-danger" v-on:click="remove(item.id)">
+                        <button class="btn btn-danger" :disabled="issending"  v-on:click="remove(item.id)">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
                     </td>
@@ -64,7 +64,7 @@ export default {
 
     methods: {
         load(){
-            console.log("fetching")
+            console.log("...loading")
             const self = this
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
@@ -72,13 +72,12 @@ export default {
             fetch(url, {
                 method: 'get',
             })
-            //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
             .then(response => {
 
-                console.log("reponse",response)
+                console.log("load.reponse",response)
 
-                if(typeof response.error !== "undefined") {
+                if(custom.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
                         title: 'This action could not be completed! &#58384;',
@@ -101,7 +100,7 @@ export default {
                 self.issending = false;
                 self.btnsend = BTN_INISTATE
             })
-        },//fetch
+        },//load
 
         edit(id){
             //alert("edit")
@@ -110,9 +109,47 @@ export default {
             //window.open(url, "_blank")
         },
 
-        remove(){
+        remove(id){
             if(confirm("Are you sure to commit this operation?")){
-                alert("boorrando")
+                console.log("fetching")
+                const self = this
+                self.issending = true
+                self.btnsend = BTN_IN_PROGRESS
+                const url = `/adm/api/post/${id}`
+                fetch(url, {
+                    method: 'delete',
+                })
+                .then(response => response.json())
+                .then(response => {
+                    console.log("remove.response",response)
+
+                    if(custom.is_error(response)) {
+                        return Swal.fire({
+                            icon: 'warning',
+                            title: 'This action could not be completed! &#58384;',
+                            text: response.error,
+                        })
+                    }
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Post: ${id} has been removed`,
+                        html: `<b>&#128578;</b>`,
+                    })
+
+                })
+                .catch(error => {
+                    console.log("CATCH ERROR remove",error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Opps! Some error occurred &#9785;',
+                        text: error.toString(),
+                    })
+                })
+                .finally(() => {
+                    self.issending = false;
+                    self.btnsend = BTN_INISTATE
+                })
             }
         },
     }
