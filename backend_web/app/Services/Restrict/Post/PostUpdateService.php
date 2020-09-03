@@ -15,7 +15,7 @@ class PostUpdateService extends BaseService
         $this->request = $request;
     }
 
-    private function _check_data()
+    private function _check_data($data)
     {
 
     }

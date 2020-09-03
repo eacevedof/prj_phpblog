@@ -59,14 +59,8 @@ export default {
             self.issending = true
             self.btnsend = BTN_IN_PROGRESS
             const url = `/api/post`
-
-            //const data = new FormData();
-            //data.append("_token",csrftoken)
-            //data.append("action","post.index")
-
             fetch(url, {
                 method: 'get',
-                //body: data,
             })
             //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
