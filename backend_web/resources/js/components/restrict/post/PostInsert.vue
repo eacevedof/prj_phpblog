@@ -2,7 +2,7 @@
     <div class="card">
         <div class="card-body">
             <form id="form-insert" @submit="handleSubmit">
-                <div class="row card-header app-btnformheader">
+                <div class="row card-header app-formheader">
                     <div class="col-md-9">
                         <h1>Insert post</h1>
                     </div>
