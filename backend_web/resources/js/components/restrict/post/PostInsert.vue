@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="card-header">
-            <h1>New Post</h1>
+            <h1>Insert post</h1>
         </div>
         <div class="card-body">
             <form @submit="handleSubmit">

@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    @section("pagetitle", "Posts")
     <posts />
 </div>
 @endsection
