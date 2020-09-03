@@ -221,10 +221,8 @@ export default {
             fetch(url, {
                 method: 'PUT',
                 headers:{
-                    //'X-CSRF-TOKEN': csrftoken,
                     'Content-Type': 'application/json'
                 },
-                //body: data,
                 body: JSON.stringify({_token:csrftoken, ...this.post})
             })
             .then(response => response.json())
