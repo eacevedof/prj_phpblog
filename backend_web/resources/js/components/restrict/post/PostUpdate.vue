@@ -220,6 +220,8 @@ export default {
                     html: `<b>&#128578;</b>`,
                 })
 
+                this.get_row(self.post.id)
+
             })
             .catch(error => {
                 console.log("CATCH ERROR update",error)
