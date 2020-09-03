@@ -2471,20 +2471,19 @@ var BTN_IN_PROGRESS = "In progress...";
   },
   methods: {
     load: function load() {
-      console.log("fetching");
+      console.log("...loading");
       var self = this;
       self.issending = true;
       self.btnsend = BTN_IN_PROGRESS;
       var url = "/api/post";
       fetch(url, {
         method: 'get'
-      }) //.then(response => console.log(response,"RESPONSE"))
-      .then(function (response) {
+      }).then(function (response) {
         return response.json();
       }).then(function (response) {
-        console.log("reponse", response);
+        console.log("load.reponse", response);
 
-        if (typeof response.error !== "undefined") {
+        if (_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
             title: 'This action could not be completed! &#58384;',
@@ -2505,15 +2504,57 @@ var BTN_IN_PROGRESS = "In progress...";
         self.btnsend = BTN_INISTATE;
       });
     },
-    //fetch
+    //load
     edit: function edit(id) {
       //alert("edit")
       var url = "/adm/post/update/" + id;
       document.location = url; //window.open(url, "_blank")
     },
-    remove: function remove() {
+    remove: function remove(id) {
       if (confirm("Are you sure to commit this operation?")) {
-        alert("boorrando");
+        console.log("fetching");
+        var self = this;
+        self.issending = true;
+        self.btnsend = BTN_IN_PROGRESS;
+        var url = "/api/post/".concat(id);
+        fetch(url, {
+          method: 'delete',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            _token: csrftoken,
+            _action: "post.delete"
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          console.log("remove.response", response);
+
+          if (_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+            return Swal.fire({
+              icon: 'warning',
+              title: 'This action could not be completed! &#58384;',
+              text: response.error
+            });
+          }
+
+          Swal.fire({
+            icon: 'success',
+            title: "Post: ".concat(id, " has been removed"),
+            html: "<b>&#128578;</b>"
+          });
+        })["catch"](function (error) {
+          console.log("CATCH ERROR remove", error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Opps! Some error occurred &#9785;',
+            text: error.toString()
+          });
+        })["finally"](function () {
+          self.issending = false;
+          self.btnsend = BTN_INISTATE;
+        });
       }
     }
   }
@@ -39625,6 +39666,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary",
+                      attrs: { disabled: _vm.issending },
                       on: {
                         click: function($event) {
                           return _vm.edit(item.id)
@@ -39645,6 +39687,7 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-danger",
+                      attrs: { disabled: _vm.issending },
                       on: {
                         click: function($event) {
                           return _vm.remove(item.id)

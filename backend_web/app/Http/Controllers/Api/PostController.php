@@ -94,13 +94,14 @@ class PostController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     * @param  int  $id
+     * @param  int  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($post)
     {
+        $this->logd($post,"delete.postid");
         $iduser = Auth::id();
-        return (new PostDeleteService($id, $iduser))->save();
+        return (new PostDeleteService($post, $iduser))->save();
     }
 }
 

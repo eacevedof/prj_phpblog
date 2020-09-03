@@ -115,9 +115,13 @@ export default {
                 const self = this
                 self.issending = true
                 self.btnsend = BTN_IN_PROGRESS
-                const url = `/adm/api/post/${id}`
+                const url = `/api/post/${id}`
                 fetch(url, {
                     method: 'delete',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({_token:csrftoken,_action:"post.delete"})
                 })
                 .then(response => response.json())
                 .then(response => {
