@@ -32,16 +32,17 @@ class PostUpdateService extends BaseService
 
     public function save()
     {
-        $this->_check_data();
+        $data = $this->request->all();
+        $this->logd($data,"post.update");
+        $this->_check_data($data);
         //$this->logd($this->request->input("description"),"input.description");
         //$this->logd($this->request->all(),"updateservice.save.req-all");
         //$this->logd($this->request->getContent(),"updateservice.save.req-getcontent");
-        $data = $this->request->all();
-        $this->logd($data,"update.data");
+
         $this->clean_sysfields($data);
         $this->_format_date($data);
 
-        $this->logd($data,"update.before update");
+        $this->logd($data,"post.update.update");
         $id = $this->request->input("id");
         return AppPost::where("id", "=", $id)->update($data);
     }

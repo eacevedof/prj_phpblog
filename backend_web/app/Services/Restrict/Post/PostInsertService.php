@@ -40,15 +40,12 @@ class PostInsertService extends BaseService
     public function save()
     {
         $data = $this->request->all();
-        $this->logd($data,"request.all");
+        $this->logd($data,"post.insert");
         $this->_check_data($data);
         $this->clean_sysfields($data);
         $this->_format_date($data);
-        $this->logd("insert.formatdaet",$data);
-        print_r($data);die("data");
         $this->_format_ispage($data);
-
-        $this->logd("insert.formatdaet.create",$data);
+        $this->logd($data,"post.insert.create");
         return AppPost::create($data);
     }
 }
