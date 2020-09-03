@@ -9,7 +9,15 @@ const custom = {
       alert(title.concat(":\n").concat(json))
     },
 
-    is_error: response => typeof response.error !== "undefined"
+    is_error: response => typeof response.error !== "undefined",
+
+    get_form: strobj => {
+        const form = new FormData()
+        Object.keys(strobj).forEach( k => {
+            form.append(k, strobj[k])
+        })
+        return form
+    }
 }
 
 export default custom

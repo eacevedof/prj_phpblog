@@ -109,6 +109,13 @@ var custom = {
   },
   is_error: function is_error(response) {
     return typeof response.error !== "undefined";
+  },
+  get_form: function get_form(strobj) {
+    var form = new FormData();
+    Object.keys(strobj).forEach(function (k) {
+      form.append(k, strobj[k]);
+    });
+    return form;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (custom);

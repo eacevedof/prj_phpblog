@@ -220,6 +220,9 @@ export default {
 
             fetch(url, {
                 method: 'PATCH',
+                headers:{
+                    'X-CSRF-TOKEN': csrftoken,
+                },
                 body: data,
             })
             .then(response => response.json())
