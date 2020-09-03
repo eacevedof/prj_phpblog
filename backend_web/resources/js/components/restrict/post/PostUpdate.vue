@@ -240,7 +240,7 @@ export default {
 
                 Swal.fire({
                     icon: 'success',
-                    title: `Post: "${self.post.description}" (${self.id}) <br/> changed`,
+                    title: `Post: "${self.post.description}" (${self.post.id}) <br/> changed`,
                     html: `<b>&#128578;</b>`,
                 })
 
