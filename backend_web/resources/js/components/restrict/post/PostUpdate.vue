@@ -1,10 +1,18 @@
 <template>
     <div class="card">
-        <div class="card-header">
-            <h1>Update post</h1>
-        </div>
         <div class="card-body">
             <form @submit="handleSubmit">
+                <div class="row card-header app-formheader">
+                    <div class="col-md-9">
+                        <h1>Update post</h1>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary app-btnformheader" :disabled="issending">
+                            {{btnsend}}
+                            <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                        </button>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-2">
                         <label>Id</label>
@@ -102,7 +110,7 @@
                         <input type="number" id="num-order_by" v-model="post.order_by" value="100" class="form-control"/>
                     </div>
                     <div class="form-group col-md-4">
-                        <button class="btn btn-primary" :disabled="issending" style="margin-top:28px;" >
+                        <button class="btn btn-primary app-btncol" :disabled="issending">
                             {{btnsend}}
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
@@ -117,8 +125,8 @@ import custom from "../../../custom"
 let csrftoken = custom.get_csrftoken()
 console.log(csrftoken,"csrftoken")
 
-const BTN_INISTATE = "Guardar"
-const BTN_IN_PROGRESS = "Procesando..."
+const BTN_INISTATE = "Save changes"
+const BTN_IN_PROGRESS = "In progress..."
 
 export default {
     data(){
