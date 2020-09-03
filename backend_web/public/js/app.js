@@ -38101,43 +38101,35 @@ var render = function() {
         "form",
         { attrs: { id: "form-insert" }, on: { submit: _vm.handleSubmit } },
         [
-          _c(
-            "div",
-            {
-              staticClass: "row card-header",
-              staticStyle: { margin: "0", padding: "1px" }
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-3" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    staticStyle: { "margin-top": "8px" },
-                    attrs: { disabled: _vm.issending }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.btnsend) +
-                        "\n                        "
-                    ),
-                    _vm.issending
-                      ? _c("img", {
-                          attrs: {
-                            src: "/assets/images/loading-bw.gif",
-                            width: "25",
-                            height: "25"
-                          }
-                        })
-                      : _vm._e()
-                  ]
-                )
-              ])
-            ]
-          ),
+          _c("div", { staticClass: "row card-header app-formheader" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-3" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary app-btnformheader",
+                  attrs: { disabled: _vm.issending }
+                },
+                [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.btnsend) +
+                      "\n                        "
+                  ),
+                  _vm.issending
+                    ? _c("img", {
+                        attrs: {
+                          src: "/assets/images/loading-bw.gif",
+                          width: "25",
+                          height: "25"
+                        }
+                      })
+                    : _vm._e()
+                ]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-row mt-1" }, [
             _c("div", { staticClass: "form-group col-md-4" }, [
@@ -38773,8 +38765,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary",
-                  staticStyle: { "margin-top": "28px" },
+                  staticClass: "btn btn-primary app-btncol",
                   attrs: { disabled: _vm.issending }
                 },
                 [
