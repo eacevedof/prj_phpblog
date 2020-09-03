@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Facades\Auth;
 
 use App\Services\Restrict\Post\PostDeleteService;
 use App\Services\Restrict\Post\PostInsertService;
@@ -19,7 +19,8 @@ class PostController extends BaseController
     public function __construct()
     {
         $this->middleware("auth");
-        $this->authid = Auth::id();
+        $this->authid = auth()->id();
+        $this->logd($this->authid,"AUTHID postcontroller");
     }
 
     /**
