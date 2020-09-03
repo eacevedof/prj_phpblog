@@ -36,6 +36,15 @@ class BaseService
 
     }
 
+    protected function clean_sysfields(&$data)
+    {
+        $sysfields = ["insert_date","delete_date","update_date"];
+        foreach ($data as $field => $value)
+            if(in_array($field, $sysfields))
+                unset($data[$field]);
+        return $sysfields;
+    }
+
     protected function get_platform()
     {
         //$this->logd($_SERVER['HTTP_USER_AGENT'],"agente ios");
