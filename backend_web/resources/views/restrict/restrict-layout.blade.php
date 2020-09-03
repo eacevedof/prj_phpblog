@@ -3,12 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta id="meta-csrf-token" name="csrf-token" content="{{ csrf_token() }}">
-
     <title>Admin - @yield('pagetitle')</title>
-
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -16,7 +13,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -41,7 +37,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-posts">
                                 <a class="dropdown-item" href="/adm/posts">Posts</a>
-                                <a class="dropdown-item" href="/adm/post/insert">New post</a>
+                                <a class="dropdown-item" href="/adm/post/insert">Insert post</a>
                             </div>
                         </li>
                     </ul>
