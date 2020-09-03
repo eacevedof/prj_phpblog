@@ -102,7 +102,8 @@ export default {
         edit(id){
             //alert("edit")
             const url = "/adm/post/update/"+id
-            window.open(url, "_blank")
+            document.location = url
+            //window.open(url, "_blank")
         },
 
         remove(){

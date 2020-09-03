@@ -2508,7 +2508,7 @@ var BTN_IN_PROGRESS = "Procesando...";
     edit: function edit(id) {
       //alert("edit")
       var url = "/adm/post/update/" + id;
-      window.open(url, "_blank");
+      document.location = url; //window.open(url, "_blank")
     },
     remove: function remove() {
       if (confirm("Are you sure to commit this operation?")) {
