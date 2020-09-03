@@ -2333,6 +2333,8 @@ var BTN_IN_PROGRESS = "Procesando...";
     },
     //get_row
     update: function update() {
+      var _this2 = this;
+
       var self = this;
       self.issending = true;
       self.btnsend = BTN_IN_PROGRESS;
@@ -2363,6 +2365,8 @@ var BTN_IN_PROGRESS = "Procesando...";
           title: "Post: \"".concat(self.post.description, "\" (").concat(self.post.id, ") <br/> changed"),
           html: "<b>&#128578;</b>"
         });
+
+        _this2.get_row(self.post.id);
       })["catch"](function (error) {
         console.log("CATCH ERROR update", error);
         Swal.fire({
