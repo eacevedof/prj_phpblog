@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     @section("pagetitle", "Insert post")
+    @include("restrict/elements/breadscrumb")
     <postinsert />
 </div>
 @endsection
