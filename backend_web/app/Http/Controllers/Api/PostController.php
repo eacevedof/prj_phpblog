@@ -14,14 +14,10 @@ use App\Services\Restrict\Post\PostDetailService;
 
 class PostController extends BaseController
 {
-    private $authid;
-
     public function __construct()
     {
         $this->middleware("auth");
     }
-
-    private function _load_authid(){$this->authid = auth()->id();}
 
     /**
      * Display a listing of the resource.
