@@ -64,4 +64,12 @@ php artisan ui vue --auth
     Illuminate\Contracts\Container\BindingResolutionException 
     ```
     - No estaba sincronizado bien con el contenedor. Cambiando la bd en host local tiraba. make restart lo soluciona
-    
+- **error deploy**
+    - me daba error 500 al navegar por rutas en test, puse logs ionoslog.php y no capturaba nada, descubrí que era el .htacces ya 
+    que puse die en index.php mientras navegaba y saltab el error. No llegaba ni a imprimir.
+    - En htacces hay que agregar **rewritebase**
+    ```
+    <IfModule mod_rewrite.c>
+      RewriteBase /
+      <IfModule mod_negotiation.c>
+    ```
