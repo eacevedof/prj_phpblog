@@ -17,7 +17,13 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="/">Inicio</a>
-
+            @guest
+                xxxxxxx
+            @endguest
+            @auth
+                yyyyyyyy
+                <a class="navbar-brand" href="/adm">Admin</a>
+            @endauth
         </div>
     </nav>
     <main class="py-4">
