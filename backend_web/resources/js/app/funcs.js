@@ -17,6 +17,11 @@ const funcs = {
             form.append(k, strobj[k])
         })
         return form
+    },
+
+    get_date: strdate => {
+        if(!strdate) return ""
+        return new Date(strdate).toISOString().substr(0,10)
     }
 }
 

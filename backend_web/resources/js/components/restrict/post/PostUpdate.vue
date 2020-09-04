@@ -178,8 +178,8 @@ export default {
                 }
 
                 this.post = response.data
-                this.post.publish_date = new Date(this.post.publish_date).toISOString().substr(0,10)
-                this.post.last_update = new Date(this.post.last_update).toISOString().substr(0,10)
+                this.post.publish_date = funcs.get_date(this.post.publish_date)
+                this.post.last_update = funcs.get_date(this.post.publish_date)
             })
             .catch(error => {
                 console.log("CATCH ERROR get_row",error)
