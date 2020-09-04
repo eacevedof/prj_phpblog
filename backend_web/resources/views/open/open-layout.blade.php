@@ -16,8 +16,9 @@
 <body>
 @include("open.elements.navbar")
 <main role="main">
-    @include("open.elements.jumbotron")
-
+    @isset($jumbotron)
+        @include("open.elements.jumbotron")
+    @endisset
     <div class="album py-5 bg-light">
         <div class="container">
         @yield("container")
