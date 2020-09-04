@@ -19,6 +19,6 @@ class BlogController extends BaseController
 
     public function detail($catslug,$postslug)
     {
-        return view('open.blog.detail', ["category"=>$catslug,"slug"=>$postslug, "seo"]);
+        return view('open.blog.detail', ["category"=>$catslug,"postslug"=>$postslug, "seo"]);
     }
 }
