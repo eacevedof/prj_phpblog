@@ -10,7 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class AppPost
+ * Class AppPostSeeder
  *
  * @property string|null $processflag
  * @property string|null $insert_platform

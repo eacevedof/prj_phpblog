@@ -17,11 +17,11 @@ class PostIndexService extends BaseService
 
     public function get_list_by_user()
     {
-        //$this->entity = new AppPost();
-        //return AppPost::where("user_id",auth()->id())->get();
-        //return AppPost::where("user_id",$this->iduser);
-        //dump(AppPost::all());
-        //return AppPost::all()->sortByDesc("id");;
+        //$this->entity = new AppPostSeeder();
+        //return AppPostSeeder::where("user_id",auth()->id())->get();
+        //return AppPostSeeder::where("user_id",$this->iduser);
+        //dump(AppPostSeeder::all());
+        //return AppPostSeeder::all()->sortByDesc("id");;
         $r = DB::table("app_post")->whereNull("delete_date")->orderBy("id","desc")->get();
         //$this->logd($r,"order by??");
         return $r;
