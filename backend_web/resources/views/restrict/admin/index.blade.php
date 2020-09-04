@@ -1,5 +1,6 @@
 @extends('restrict.restrict-layout')
 
+@section("pagetitle", "Home")
 @section('content')
 <div class="container">
     @include("restrict/elements/breadscrumb")
