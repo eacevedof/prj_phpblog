@@ -58,5 +58,10 @@ php artisan ui vue --auth
     - Error 419 status unknown
     - No llegaban los datos con PUT porque los enviaba como formulario y deben ser como JSON    
 - No me cargaba el id de usuario en el constructor del controlador. Los middlewares de autenticación se ejecutan despues de los constructores
-
+- **error**
+    ```
+    php artisan db:seed --class=AppPostSeeder
+    Illuminate\Contracts\Container\BindingResolutionException 
+    ```
+    - No estaba sincronizado bien con el contenedor. Cambiando la bd en host local tiraba. make restart lo soluciona
     
