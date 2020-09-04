@@ -15,5 +15,7 @@ class BaseController extends RoutingController
     use Log, Env;
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    protected $authid;
 
+    protected function _load_authid(){$this->authid = auth()->id();}
 }
