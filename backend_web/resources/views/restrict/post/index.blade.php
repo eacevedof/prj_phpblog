@@ -4,6 +4,6 @@
 <div class="container">
     @section("pagetitle", "Posts")
     @include("restrict/elements/breadscrumb")
-    <posts />
+    <postindex />
 </div>
 @endsection
