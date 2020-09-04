@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-row mt-1">
                     <div class="form-group col-md-4">
-                        <label for="txt-description">Hidden description</label>
+                        <label for="txt-description">Notes</label>
                         <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
                     </div>
                     <div class="form-group col-md-4">
@@ -117,16 +117,14 @@
     </div>
 </template>
 <script>
-import custom from "../../../app/custom"
-let csrftoken = custom.get_csrftoken()
-//console.log(csrftoken,"csrftoken")
-const BTN_INISTATE = "Save changes"
-const BTN_IN_PROGRESS = "In progress..."
+import funcs from "../../../app/funcs"
+import CONST from "../../../app/constants"
+const csrftoken = funcs.get_csrftoken()
 
 export default {
     data(){
         return {
-            btnsend: BTN_INISTATE,
+            btnsend: CONST.BTN_INISTATE,
             issending: false,
             post: {
                 description: "",
@@ -156,7 +154,7 @@ export default {
         insert(){
             const self = this
             self.issending = true
-            self.btnsend = BTN_IN_PROGRESS
+            self.btnsend = CONST.BTN_IN_PROGRESS
             const url = `/api/post`
 
             fetch(url, {
@@ -172,10 +170,10 @@ export default {
 
                 console.log("reponse",response)
 
-                if(typeof response.error !== "undefined") {
+                if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
-                        title: 'Esta acción no se ha podido completar',
+                        title: CONST.TITLE_ERROR,
                         text: response.error,
                     })
                 }
@@ -191,13 +189,13 @@ export default {
                 console.log("CATCH ERROR insert",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Vaya! Ha ocurrido un error',
+                    title: CONST.TITLE_SERVERROR,
                     text: error.toString(),
                 })
             })
             .finally(() => {
                 self.issending = false;
-                self.btnsend = BTN_INISTATE
+                self.btnsend = CONST.BTN_INISTATE
             })
         },//insert
 

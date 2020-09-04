@@ -99,12 +99,12 @@
 
 /***/ 0:
 /*!****************************************************************!*\
-  !*** multi ./resources/js/custom.js ./resources/sass/app.scss ***!
+  !*** multi ./resources/js/funcs.js ./resources/sass/app.scss ***!
   \****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-!(function webpackMissingModule() { var e = new Error("Cannot find module '/Users/ioedu/projects/prj_phpblog/backend_web/resources/js/custom.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/Users/ioedu/projects/prj_phpblog/backend_web/resources/js/funcs.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
