@@ -1,4 +1,5 @@
 <?php
+include("ionoslog.php");
 
 /**
  * Laravel - A PHP Framework For Web Artisans
