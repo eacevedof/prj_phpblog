@@ -2483,8 +2483,8 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         }
 
         _this.post = response.data;
-        _this.post.publish_date = new Date(_this.post.publish_date).toISOString().substr(0, 10);
-        _this.post.last_update = new Date(_this.post.last_update).toISOString().substr(0, 10);
+        _this.post.publish_date = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_date(_this.post.publish_date);
+        _this.post.last_update = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_date(_this.post.publish_date);
       })["catch"](function (error) {
         console.log("CATCH ERROR get_row", error);
         Swal.fire({
@@ -52029,6 +52029,10 @@ var funcs = {
       form.append(k, strobj[k]);
     });
     return form;
+  },
+  get_date: function get_date(strdate) {
+    if (!strdate) return "";
+    return new Date(strdate).toISOString().substr(0, 10);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (funcs);
