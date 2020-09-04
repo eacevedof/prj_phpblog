@@ -22,7 +22,7 @@ mix.webpackConfig({
     ]
 })
 
-mix.js('resources/js/custom.js', 'public/js')
+mix.js('resources/js/app/*.js', 'public/js/app')
     .js('resources/js/app.js', 'public/js')
     //.css('resources/css/custom.sss', 'public/css') no va!
     .sass('resources/sass/app.scss', 'public/css');

@@ -131,6 +131,8 @@ export default {
                         })
                     }
 
+                    self.load()
+
                     Swal.fire({
                         icon: 'success',
                         title: `Post: ${id} has been removed`,
