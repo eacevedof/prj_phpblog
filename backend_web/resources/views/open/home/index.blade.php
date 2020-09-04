@@ -17,9 +17,10 @@
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/blog/{{$post->url_final}}" type="button" class="btn btn-sm btn-outline-secondary">Read</a>
+                                <a href="/blog/{{$post->url_final}}" type="button" class="btn btn-md btn-primary">Read</a>
                                 @auth
-                                <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit</a>
                                 @endauth
                             </div>
                             <small class="text-muted">9 mins</small>
