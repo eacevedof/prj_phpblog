@@ -23,13 +23,16 @@ $factory->define(AppPost::class, function (Faker $faker) {
 
     return [
         'description' => $faker->text,
-        "title" => $faker->text,
+        "title" => $faker->realText(150),
         "slug" => $slug,
         "url_final"=>$url,
-        "content" => $faker->text,
+        //"content" => $faker->text,
+        "content" => $faker->realText(rand(1000,5000)),
         "url_img1" => $faker->randomElement($images),
         "id_status" => $faker->numberBetween(0,1),
         "excerpt" => $faker->text,
         "publish_date"=> $faker->dateTime(),
     ];
 });
+
+//php artisan db:seed --class=AppPostSeeder
