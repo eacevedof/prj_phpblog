@@ -25,14 +25,13 @@ class BlogController extends BaseController
 
     public function detail($catslug,$postslug)
     {
-        $post = (new PostDetailService())->get_by_slug($postslug);
-        $this->_error_404($post);
+        $r = (new PostDetailService())->get_by_slug($postslug);
+        $this->_error_404($r);
 
-        $post = $post->first();
-
+        $post = $r->first();
         $seo=[
-            "title" => $post->seo_title ?? "",
-            "description" => $post->seo_description ?? "",
+            "title" => $post->seo_title,
+            "description" => $post->seo_description,
             "keywords" => "",
         ];
         return view('open.blog.detail', ["post"=>$post, "seo"=>$seo]);
