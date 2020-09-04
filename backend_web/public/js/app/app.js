@@ -1908,7 +1908,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/custom */ "./resources/js/app/custom.js");
+/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/custom.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
 //
 //
@@ -2071,7 +2071,7 @@ var csrftoken = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoke
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/custom */ "./resources/js/app/custom.js");
+/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/custom.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2298,7 +2298,7 @@ var BTN_IN_PROGRESS = "In progress...";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/custom */ "./resources/js/app/custom.js");
+/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/custom.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -9040,7 +9040,7 @@ Expr = Sizzle.selectors = {
 
 			// pseudo-class names are case-insensitive
 			// http://www.w3.org/TR/selectors/#pseudo-classes
-			// Prioritize by case sensitivity in case custom pseudos are added with uppercase letters
+			// Prioritize by case sensitivity in case funcs pseudos are added with uppercase letters
 			// Remember that setFilters inherits from pseudos
 			var args,
 				fn = Expr.pseudos[ pseudo ] || Expr.setFilters[ pseudo.toLowerCase() ] ||
@@ -11520,7 +11520,7 @@ jQuery.fn.extend( {
 				}
 
 				// Attempt to "discover" the data in
-				// HTML5 custom data-* attrs
+				// HTML5 funcs data-* attrs
 				data = dataAttr( elem, key );
 				if ( data !== undefined ) {
 					return data;
@@ -12195,7 +12195,7 @@ jQuery.event = {
 			return;
 		}
 
-		// Caller can pass in an object of custom data in lieu of the handler
+		// Caller can pass in an object of funcs data in lieu of the handler
 		if ( handler.handler ) {
 			handleObjIn = handler;
 			handler = handleObjIn.handler;
@@ -13896,7 +13896,7 @@ jQuery.extend( {
 			style = elem.style;
 
 		// Make sure that we're working with the right name. We don't
-		// want to query the value if it is a CSS custom property
+		// want to query the value if it is a CSS funcs property
 		// since they are user-defined.
 		if ( !isCustomProp ) {
 			name = finalPropName( origName );
@@ -13965,7 +13965,7 @@ jQuery.extend( {
 			isCustomProp = rcustomProp.test( name );
 
 		// Make sure that we're working with the right name. We don't
-		// want to modify the value if it is a CSS custom property
+		// want to modify the value if it is a CSS funcs property
 		// since they are user-defined.
 		if ( !isCustomProp ) {
 			name = finalPropName( origName );
@@ -14864,7 +14864,7 @@ jQuery.each( [ "toggle", "show", "hide" ], function( _i, name ) {
 	};
 } );
 
-// Generate shortcuts for custom animations
+// Generate shortcuts for funcs animations
 jQuery.each( {
 	slideDown: genFx( "show" ),
 	slideUp: genFx( "hide" ),
@@ -16004,7 +16004,7 @@ var
 	rprotocol = /^\/\//,
 
 	/* Prefilters
-	 * 1) They are useful to introduce custom dataTypes (see ajax/jsonp.js for an example)
+	 * 1) They are useful to introduce funcs dataTypes (see ajax/jsonp.js for an example)
 	 * 2) These are called:
 	 *    - BEFORE asking for a transport
 	 *    - AFTER param serialization (s.data is a string if s.processData is true)
@@ -16334,7 +16334,7 @@ jQuery.extend( {
 		},
 
 		// For options that shouldn't be deep extended:
-		// you can add your own custom options here if
+		// you can add your own funcs options here if
 		// and when you create one that shouldn't be
 		// deep extended (see ajaxExtend)
 		flatOptions: {
@@ -16628,7 +16628,7 @@ jQuery.extend( {
 			jqXHR.setRequestHeader( i, s.headers[ i ] );
 		}
 
-		// Allow custom headers/mimetypes and early abort
+		// Allow funcs headers/mimetypes and early abort
 		if ( s.beforeSend &&
 			( s.beforeSend.call( callbackContext, jqXHR, s ) === false || completed ) ) {
 
@@ -16985,7 +16985,7 @@ jQuery.ajaxTransport( function( options ) {
 					options.password
 				);
 
-				// Apply custom fields if provided
+				// Apply funcs fields if provided
 				if ( options.xhrFields ) {
 					for ( i in options.xhrFields ) {
 						xhr[ i ] = options.xhrFields[ i ];
@@ -19427,7 +19427,7 @@ return jQuery;
      * one argument. The heuristic for whether a section qualifies for shortcut
      * fusion is subject to change.
      *
-     * Chaining is supported in custom builds as long as the `_#value` method is
+     * Chaining is supported in funcs builds as long as the `_#value` method is
      * directly or indirectly included in the build.
      *
      * In addition to lodash methods, wrappers have `Array` and `String` methods.
@@ -23810,7 +23810,7 @@ return jQuery;
 
     /**
      * Gets the appropriate "iteratee" function. If `_.iteratee` is customized,
-     * this function returns the custom method, otherwise it returns `baseIteratee`.
+     * this function returns the funcs method, otherwise it returns `baseIteratee`.
      * If arguments are provided, the chosen function is invoked with them and
      * its result is returned.
      *
@@ -31673,7 +31673,7 @@ return jQuery;
      * @category Object
      * @param {Object} object The object to iterate over.
      * @param {Function} [iteratee=_.identity] The function invoked per iteration.
-     * @param {*} [accumulator] The custom accumulator value.
+     * @param {*} [accumulator] The funcs accumulator value.
      * @returns {*} Returns the accumulated value.
      * @example
      *
@@ -32578,7 +32578,7 @@ return jQuery;
      * for easier debugging.
      *
      * For more information on precompiling templates see
-     * [lodash's custom builds documentation](https://lodash.com/custom-builds).
+     * [lodash's funcs builds documentation](https://lodash.com/custom-builds).
      *
      * For more information on Chrome extension sandboxes see
      * [Chrome's extensions documentation](https://developer.chrome.com/extensions/sandboxingEval).
@@ -32642,7 +32642,7 @@ return jQuery;
      * compiled({ 'users': ['fred', 'barney'] });
      * // => '<li>fred</li><li>barney</li>'
      *
-     * // Use the `sourceURL` option to specify a custom sourceURL for the template.
+     * // Use the `sourceURL` option to specify a funcs sourceURL for the template.
      * var compiled = _.template('hello <%= user %>!', { 'sourceURL': '/basic/greeting.jst' });
      * compiled(data);
      * // => Find the source of "greeting.jst" under the Sources tab or Resources panel of the web inspector.
@@ -32656,7 +32656,7 @@ return jQuery;
      * //   return __p;
      * // }
      *
-     * // Use custom template delimiters.
+     * // Use funcs template delimiters.
      * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
      * var compiled = _.template('hello {{ user }}!');
      * compiled({ 'user': 'mustache' });
@@ -33419,7 +33419,7 @@ return jQuery;
      * _.map(users, _.iteratee('user'));
      * // => ['barney', 'fred']
      *
-     * // Create custom iteratee shorthands.
+     * // Create funcs iteratee shorthands.
      * _.iteratee = _.wrap(_.iteratee, function(iteratee, func) {
      *   return !_.isRegExp(func) ? iteratee(func) : function(string) {
      *     return func.test(string);
@@ -36216,7 +36216,7 @@ function setAttributes(element, attributes) {
  */
 function applyStyle(data) {
   // any property present in `data.styles` will be applied to the popper,
-  // in this way we can make the 3rd party modifiers add custom styles to it
+  // in this way we can make the 3rd party modifiers add funcs styles to it
   // Be aware, modifiers could override the properties defined in the previous
   // lines of this modifier!
   setStyles(data.instance.popper, data.styles);
@@ -37334,7 +37334,7 @@ var modifiers = {
    *
    * Note that this modifier will not touch the DOM, it just prepares the styles
    * so that `applyStyle` modifier can apply it. This separation is useful
-   * in case you need to replace `applyStyle` with a custom implementation.
+   * in case you need to replace `applyStyle` with a funcs implementation.
    *
    * This modifier has `850` as `order` value to maintain backward compatibility
    * with previous versions of Popper.js. Expect the modifiers ordering method
@@ -37509,7 +37509,7 @@ var Popper = function () {
    * @class Popper
    * @param {Element|referenceObject} reference - The reference element used to position the popper
    * @param {Element} popper - The HTML / XML element used as the popper
-   * @param {Object} options - Your custom options to override the ones defined in [Defaults](#defaults)
+   * @param {Object} options - Your funcs options to override the ones defined in [Defaults](#defaults)
    * @return {Object} instance - The generated Popper.js instance
    */
   function Popper(reference, popper) {
@@ -37611,7 +37611,7 @@ var Popper = function () {
 
 
     /**
-     * Collection of utilities useful when writing custom modifiers.
+     * Collection of utilities useful when writing funcs modifiers.
      * Starting from version 1.7, this method is available only if you
      * include `popper-utils.js` before `popper.js`.
      *
@@ -40318,7 +40318,7 @@ var config = ({
   warnHandler: null,
 
   /**
-   * Ignore certain custom elements
+   * Ignore certain funcs elements
    */
   ignoredElements: [],
 
@@ -41313,7 +41313,7 @@ function validateComponentName (name) {
   if (!new RegExp(("^[a-zA-Z][\\-\\.0-9_" + (unicodeRegExp.source) + "]*$")).test(name)) {
     warn(
       'Invalid component name: "' + name + '". Component names ' +
-      'should conform to valid custom element name in html5 specification.'
+      'should conform to valid funcs element name in html5 specification.'
     );
   }
   if (isBuiltInTag(name) || config.isReservedTag(name)) {
@@ -41621,7 +41621,7 @@ function assertProp (
   if (validator) {
     if (!validator(value)) {
       warn(
-        'Invalid prop: custom validator check failed for prop "' + name + '".',
+        'Invalid prop: funcs validator check failed for prop "' + name + '".',
         vm
       );
     }
@@ -45831,7 +45831,7 @@ function createPatchFunction (backend) {
         }
         if (isUnknownElement$$1(vnode, creatingElmInVPre)) {
           warn(
-            'Unknown custom element: <' + tag + '> - did you ' +
+            'Unknown funcs element: <' + tag + '> - did you ' +
             'register the component correctly? For recursive components, ' +
             'make sure to provide the "name" option.',
             vnode.context
@@ -47250,7 +47250,7 @@ function model (
       "<" + (el.tag) + " v-model=\"" + value + "\">: " +
       "v-model is not supported on this element type. " +
       'If you are working with contenteditable, it\'s recommended to ' +
-      'wrap a library dedicated for that purpose inside a custom component.',
+      'wrap a library dedicated for that purpose inside a funcs component.',
       el.rawAttrsMap['v-model']
     );
   }
@@ -51687,12 +51687,12 @@ function createCompilerCreator (baseCompile) {
             (tip ? tips : errors).push(data);
           };
         }
-        // merge custom modules
+        // merge funcs modules
         if (options.modules) {
           finalOptions.modules =
             (baseOptions.modules || []).concat(options.modules);
         }
-        // merge custom directives
+        // merge funcs directives
         if (options.directives) {
           finalOptions.directives = extend(
             Object.create(baseOptions.directives || null),
@@ -52003,7 +52003,7 @@ var CONST = {
 
 /***/ "./resources/js/app/custom.js":
 /*!************************************!*\
-  !*** ./resources/js/app/custom.js ***!
+  !*** ./resources/js/app/funcs.js ***!
   \************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -52109,7 +52109,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -52129,7 +52129,7 @@ component.options.__file = "resources/js/components/restrict/post/PostIndex.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PostIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restrict/post/PostIndex.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -52178,7 +52178,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -52198,7 +52198,7 @@ component.options.__file = "resources/js/components/restrict/post/PostInsert.vue
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostInsert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PostInsert.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restrict/post/PostInsert.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostInsert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostInsert_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
@@ -52247,7 +52247,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -52267,7 +52267,7 @@ component.options.__file = "resources/js/components/restrict/post/PostUpdate.vue
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostUpdate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./PostUpdate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/restrict/post/PostUpdate.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostUpdate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostUpdate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 

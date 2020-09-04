@@ -1908,7 +1908,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/custom */ "./resources/js/app/custom.js");
+/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
 //
 //
@@ -1956,7 +1956,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-var csrftoken = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
+var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1983,7 +1983,7 @@ var csrftoken = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoke
       }).then(function (response) {
         console.log("load.reponse", response);
 
-        if (_app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
             title: TITLE_ERROR,
@@ -2030,7 +2030,7 @@ var csrftoken = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoke
         }).then(function (response) {
           console.log("remove.response", response);
 
-          if (_app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+          if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
             return Swal.fire({
               icon: 'warning',
               title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
@@ -2071,7 +2071,8 @@ var csrftoken = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoke
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/custom */ "./resources/js/app/custom.js");
+/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2197,14 +2198,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
-var csrftoken = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken(); //console.log(csrftoken,"csrftoken")
 
-var BTN_INISTATE = "Save changes";
-var BTN_IN_PROGRESS = "In progress...";
+var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      btnsend: BTN_INISTATE,
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE,
       issending: false,
       post: {
         description: "",
@@ -2233,7 +2232,7 @@ var BTN_IN_PROGRESS = "In progress...";
     insert: function insert() {
       var self = this;
       self.issending = true;
-      self.btnsend = BTN_IN_PROGRESS;
+      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
       var url = "/api/post";
       fetch(url, {
         method: 'post',
@@ -2250,10 +2249,10 @@ var BTN_IN_PROGRESS = "In progress...";
       }).then(function (response) {
         console.log("reponse", response);
 
-        if (typeof response.error !== "undefined") {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: 'Esta acción no se ha podido completar',
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
             text: response.error
           });
         }
@@ -2267,12 +2266,12 @@ var BTN_IN_PROGRESS = "In progress...";
         console.log("CATCH ERROR insert", error);
         Swal.fire({
           icon: 'error',
-          title: 'Vaya! Ha ocurrido un error',
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
           text: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = BTN_INISTATE;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE;
       });
     },
     //insert
@@ -2298,7 +2297,8 @@ var BTN_IN_PROGRESS = "In progress...";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_custom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/custom */ "./resources/js/app/custom.js");
+/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2428,14 +2428,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
-var csrftoken = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
-console.log(csrftoken, "csrftoken");
-var BTN_INISTATE = "Save changes";
-var BTN_IN_PROGRESS = "In progress...";
+
+var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      btnsend: BTN_INISTATE,
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE,
       issending: false,
       post: {
         id: -1,
@@ -2467,7 +2465,7 @@ var BTN_IN_PROGRESS = "In progress...";
 
       var self = this;
       self.issending = true;
-      self.btnsend = BTN_IN_PROGRESS;
+      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
       var url = "/api/post/".concat(id);
       fetch(url, {
         method: 'get'
@@ -2476,10 +2474,10 @@ var BTN_IN_PROGRESS = "In progress...";
       }).then(function (response) {
         console.log("reponse", response);
 
-        if (_app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: 'This action could not be completed! &#58384;',
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
             text: response.error
           });
         }
@@ -2491,13 +2489,12 @@ var BTN_IN_PROGRESS = "In progress...";
         console.log("CATCH ERROR get_row", error);
         Swal.fire({
           icon: 'error',
-          title: 'Opps! Some error occurred &#9785;',
-          text: error.toString() //.concat("\n").concat(JSON.stringify(response)),
-
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+          text: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = BTN_INISTATE;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE;
       });
     },
     //get_row
@@ -2506,7 +2503,7 @@ var BTN_IN_PROGRESS = "In progress...";
 
       var self = this;
       self.issending = true;
-      self.btnsend = BTN_IN_PROGRESS;
+      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
       var url = "/api/post/".concat(this.post.id);
       fetch(url, {
         method: 'put',
@@ -2522,10 +2519,10 @@ var BTN_IN_PROGRESS = "In progress...";
       }).then(function (response) {
         console.log("reponse", response);
 
-        if (_app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: 'This action could not be completed! &#58384;',
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
             text: response.error
           });
         }
@@ -2541,12 +2538,12 @@ var BTN_IN_PROGRESS = "In progress...";
         console.log("CATCH ERROR update", error);
         Swal.fire({
           icon: 'error',
-          title: 'Opps! Some error occurred &#9785;',
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
           text: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = BTN_INISTATE;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE;
       });
     },
     //update
@@ -2557,7 +2554,7 @@ var BTN_IN_PROGRESS = "In progress...";
 
   },
   mounted: function mounted() {
-    var id = _app_custom__WEBPACK_IMPORTED_MODULE_0__["default"].get_lastparam();
+    var id = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_lastparam();
     this.get_row(id);
   }
 });
@@ -38336,7 +38333,7 @@ var render = function() {
           _c("div", { staticClass: "form-row mt-1" }, [
             _c("div", { staticClass: "form-group col-md-4" }, [
               _c("label", { attrs: { for: "txt-description" } }, [
-                _vm._v("Hidden description")
+                _vm._v("Notes")
               ]),
               _vm._v(" "),
               _c("input", {
@@ -39080,7 +39077,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-4" }, [
                 _c("label", { attrs: { for: "txt-description" } }, [
-                  _vm._v("Tooltip")
+                  _vm._v("Notes")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -52001,16 +51998,16 @@ var CONST = {
 
 /***/ }),
 
-/***/ "./resources/js/app/custom.js":
-/*!************************************!*\
-  !*** ./resources/js/app/custom.js ***!
-  \************************************/
+/***/ "./resources/js/app/funcs.js":
+/*!***********************************!*\
+  !*** ./resources/js/app/funcs.js ***!
+  \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-var custom = {
+var funcs = {
   get_csrftoken: function get_csrftoken() {
     return document.querySelector('#meta-csrf-token').getAttribute('content');
   },
@@ -52033,7 +52030,7 @@ var custom = {
     return form;
   }
 };
-/* harmony default export */ __webpack_exports__["default"] = (custom);
+/* harmony default export */ __webpack_exports__["default"] = (funcs);
 
 /***/ }),
 

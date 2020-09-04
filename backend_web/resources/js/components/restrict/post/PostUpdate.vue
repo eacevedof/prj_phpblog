@@ -19,7 +19,7 @@
                         <span class="form-control">{{ post.id }}</span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="txt-description">Tooltip</label>
+                        <label for="txt-description">Notes</label>
                         <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
                     </div>
                     <div class="form-group col-md-4">
@@ -121,17 +121,14 @@
     </div>
 </template>
 <script>
-import custom from "../../../app/custom"
-let csrftoken = custom.get_csrftoken()
-console.log(csrftoken,"csrftoken")
-
-const BTN_INISTATE = "Save changes"
-const BTN_IN_PROGRESS = "In progress..."
+import funcs from "../../../app/funcs"
+import CONST from "../../../app/constants"
+const csrftoken = funcs.get_csrftoken()
 
 export default {
     data(){
         return {
-            btnsend: BTN_INISTATE,
+            btnsend: CONST.BTN_INISTATE,
             issending: false,
             post: {
                 id: -1,
@@ -162,7 +159,7 @@ export default {
         get_row(id){
             const self = this
             self.issending = true
-            self.btnsend = BTN_IN_PROGRESS
+            self.btnsend = CONST.BTN_IN_PROGRESS
 
             const url = `/api/post/${id}`
             fetch(url, {
@@ -172,10 +169,10 @@ export default {
             .then(response => {
                 console.log("reponse",response)
 
-                if(custom.is_error(response)) {
+                if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
-                        title: 'This action could not be completed! &#58384;',
+                        title: CONST.TITLE_ERROR,
                         text: response.error,
                     })
                 }
@@ -188,20 +185,20 @@ export default {
                 console.log("CATCH ERROR get_row",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Opps! Some error occurred &#9785;',
-                    text: error.toString()//.concat("\n").concat(JSON.stringify(response)),
+                    title: CONST.TITLE_SERVERROR,
+                    text: error.toString()
                 })
             })
             .finally(() => {
                 self.issending = false;
-                self.btnsend = BTN_INISTATE
+                self.btnsend = CONST.BTN_INISTATE
             })
         },//get_row
 
         update(){
             const self = this
             self.issending = true
-            self.btnsend = BTN_IN_PROGRESS
+            self.btnsend = CONST.BTN_IN_PROGRESS
             const url = `/api/post/${this.post.id}`
 
             fetch(url, {
@@ -216,10 +213,10 @@ export default {
 
                 console.log("reponse",response)
 
-                if(custom.is_error(response)) {
+                if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
-                        title: 'This action could not be completed! &#58384;',
+                        title: CONST.TITLE_ERROR,
                         text: response.error,
                     })
                 }
@@ -237,13 +234,13 @@ export default {
                 console.log("CATCH ERROR update",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Opps! Some error occurred &#9785;',
+                    title: CONST.TITLE_SERVERROR,
                     text: error.toString(),
                 })
             })
             .finally(() => {
                 self.issending = false;
-                self.btnsend = BTN_INISTATE
+                self.btnsend = CONST.BTN_INISTATE
             })
         },//update
 
@@ -256,7 +253,7 @@ export default {
 
 
     mounted() {
-        const id = custom.get_lastparam()
+        const id = funcs.get_lastparam()
         this.get_row(id)
     }
 }

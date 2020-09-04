@@ -1,4 +1,4 @@
-const custom = {
+const funcs = {
 
     get_csrftoken: () => document.querySelector('#meta-csrf-token').getAttribute('content'),
 
@@ -20,4 +20,4 @@ const custom = {
     }
 }
 
-export default custom
+export default funcs

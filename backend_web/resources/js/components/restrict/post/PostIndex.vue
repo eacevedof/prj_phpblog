@@ -43,10 +43,10 @@
 </template>
 
 <script>
-import custom from "../../../app/custom"
+import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 
-let csrftoken = custom.get_csrftoken()
+const csrftoken = funcs.get_csrftoken()
 
 export default {
     data(){
@@ -76,7 +76,7 @@ export default {
             .then(response => {
                 console.log("load.reponse",response)
 
-                if(custom.is_error(response)) {
+                if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
                         title: TITLE_ERROR,
@@ -123,7 +123,7 @@ export default {
                 .then(response => {
                     console.log("remove.response",response)
 
-                    if(custom.is_error(response)) {
+                    if(funcs.is_error(response)) {
                         return Swal.fire({
                             icon: 'warning',
                             title: CONST.TITLE_ERROR,
