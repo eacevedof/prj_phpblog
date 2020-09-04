@@ -1961,7 +1961,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
   data: function data() {
     return {
       issending: false,
-      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE,
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
       columns: ["id", "description", "title"],
       rows: []
     };
@@ -2001,7 +2001,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
       });
     },
     //load
@@ -2053,7 +2053,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           });
         })["finally"](function () {
           self.issending = false;
-          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE;
+          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
         });
       }
     }
@@ -51988,7 +51988,8 @@ var app = new Vue({
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONST = {
-  BTN_INISTATE: "Refresh",
+  BTN_INISTATE: "Save changes",
+  BTN_INISTATE_REFRESH: "Refresh",
   BTN_IN_PROGRESS: "In progress...",
   TITLE_ERROR: "This action could not be completed! &#58384;",
   TITLE_SERVERROR: "Opps! Some error occurred &#9785;",

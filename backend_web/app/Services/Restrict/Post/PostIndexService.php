@@ -5,7 +5,7 @@ use App\Services\BaseService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class PostListService extends BaseService
+class PostIndexService extends BaseService
 {
     private $entity;
     private $iduser;

@@ -96,7 +96,8 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var CONST = {
-  BTN_INISTATE: "Refresh",
+  BTN_INISTATE: "Save changes",
+  BTN_INISTATE_REFRESH: "Refresh",
   BTN_IN_PROGRESS: "In progress...",
   TITLE_ERROR: "This action could not be completed! &#58384;",
   TITLE_SERVERROR: "Opps! Some error occurred &#9785;",
