@@ -9,7 +9,7 @@
     <div class="row">
         @foreach ($result as $post)
             <div class="col-md-4">
-                <div class="card mb-4 box-shadow">
+                <div class="card mb-4 box-shadow" postid="{{$post->id}}">
                     <img class="card-img-top img-responsive img-thumbnail" src="{{$post->url_img1}}" alt="{{$post->title}}">
                     <div class="card-body">
                         <p class="card-text">
