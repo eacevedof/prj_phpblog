@@ -12,7 +12,7 @@ class HomeController extends BaseController
      */
     public function __invoke()
     {
-        $r = (new PostIndexService())->get_top10();
+        $r = (new PostIndexService())->get_top09();
         $seo = SeoComponent::get_meta("home");
         return view('open.home.index',["result"=>$r,"seo"=>$seo]);
     }

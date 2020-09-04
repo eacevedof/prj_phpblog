@@ -26,14 +26,15 @@ class PostIndexService extends BaseService
         return $r;
     }
 
-    public function get_top10()
+    public function get_top09()
     {
         $r = $this->qb->whereNull("delete_date")
             ->where("is_enabled","=","1")
+            ->where("id_status","=","1")
             ->orderBy("id","desc")
-            ->limit(10)
+            ->limit(9)
             ->get();
-        $this->logd($r,"get_top10");
+        $this->logd($r,"get_top09");
         return $r;
     }
 
