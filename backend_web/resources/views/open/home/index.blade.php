@@ -20,10 +20,10 @@
                                 <a href="/blog/{{$post->url_final}}" type="button" class="btn btn-md btn-primary">Read</a>
                                 @auth
                                     <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                    <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit ({{$post->id}})</a>
                                 @endauth
                             </div>
-                            <small class="text-muted">{{$post->publish_date}}</small>
+                            <small class="text-muted">{{ date("d-m-Y H:i", strtotime($post->publish_date)) }}</small>
                         </div>
                     </div>
                 </div>
