@@ -16,18 +16,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', ['as' => 'open.home', 'uses' => 'Open\HomeController']);
 Route::get('/contacto', ['as' => 'open.home.contact', 'uses' => 'Open\ContactController']);
 Route::get('/eduardo-acevedo-farje', ['as' => 'open.home.aboutme', 'uses' => 'Open\AboutmeController']);
-Route::get('/blog/{slug}', ['as' => 'open.blog.category', 'uses' => 'Open\BlogController@category']);
-Route::get('/blog', ['as' => 'open.blog', 'uses' => 'Open\BlogController']);
+
+//blog
+Route::get('/blog/search/{search}','Open\BlogController')->name("open.blog.index");
+Route::get('/blog/{catslug}/{postslug}','Open\BlogController@detail')->name("open.blog.detail");
+Route::get('/blog/{catslug}','Open\BlogController@category')->name("open.blog.category");
+Route::get('/blog/','Open\BlogController')->name("open.blog.index");
 
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas
 Auth::routes();
 
 Route::get('/adm', 'Restrict\AdminController')->name('restrict.admin');
 //post
-Route::match(["get","post"],'/adm/posts', 'Restrict\PostController')->name('restrict.post.index');
-Route::match(["get","post"],'/adm/post/insert', 'Restrict\PostController@insert')->name('restrict.post.insert');
-Route::match(["get","post"],'/adm/post/update/{idpost}', 'Restrict\PostController@update')->name('restrict.post.update');
-Route::match(["get","post"],'/adm/post/detail/{idpost}', 'Restrict\PostController@detail')->name('restrict.post.detail');
-//Route::match(["get","post"],'/adm/post/delete/{idpost}', 'Restrict\PostController@delete')->name('restrict.post.delete');
+Route::get('/adm/posts', 'Restrict\PostController')->name('restrict.post.index');
+Route::get('/adm/post/insert', 'Restrict\PostController@insert')->name('restrict.post.insert');
+Route::get('/adm/post/update/{idpost}', 'Restrict\PostController@update')->name('restrict.post.update');
+Route::get('/adm/post/detail/{idpost}', 'Restrict\PostController@detail')->name('restrict.post.detail');
+//Route::get('/adm/post/delete/{idpost}', 'Restrict\PostController@delete')->name('restrict.post.delete');
 
 Route::apiResource("api/post","Api\PostController");
