@@ -17,7 +17,7 @@
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/blog/{{$post->url_final}}" type="button" class="btn btn-md btn-primary">Read</a>
+                                <a href="/blog{{$post->url_final}}" type="button" class="btn btn-md btn-primary">Read</a>
                                 @auth
                                     <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
                                     <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit ({{$post->id}})</a>
