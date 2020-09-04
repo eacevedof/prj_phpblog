@@ -6,6 +6,7 @@
 
 @section("container")
     @parent
+    {{ get_date_short("xxx") }}
     <div class="card lg-12">
         <div class="row g-0">
             <div class="col-md-4">
