@@ -18,10 +18,11 @@
         <div class="container">
             <a class="navbar-brand" href="/">Inicio</a>
             @guest
-                xxxxxxx
+                Is guest :S
             @endguest
+            ||
             @auth
-                yyyyyyyy
+                Is auth OOOOOOO
                 <a class="navbar-brand" href="/adm">Admin</a>
             @endauth
         </div>
