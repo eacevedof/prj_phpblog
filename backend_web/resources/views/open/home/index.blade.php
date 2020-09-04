@@ -19,11 +19,11 @@
                             <div class="btn-group">
                                 <a href="/blog/{{$post->url_final}}" type="button" class="btn btn-md btn-primary">Read</a>
                                 @auth
-                                <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit</a>
+                                    <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+                                    <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit</a>
                                 @endauth
                             </div>
-                            <small class="text-muted">9 mins</small>
+                            <small class="text-muted">{{$post->publish_date}}</small>
                         </div>
                     </div>
                 </div>
