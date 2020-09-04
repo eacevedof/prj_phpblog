@@ -14,12 +14,19 @@ $factory->define(AppPost::class, function (Faker $faker) {
         "https://resources.theframework.es/eduardoaf.com/20200904/185731-post-4.jpg",
     ];
 
+    $categories = [
+        "sql","php","js","docker","mongodb","python"
+    ];
+
+    $slug = $faker->slug;
+    $url = "/".$faker->randomElement($categories)."/$slug";
+
     return [
         'description' => $faker->text,
         "title" => $faker->text,
-        "url_final"=>$faker->slug,
+        "slug" => $slug,
+        "url_final"=>$url,
         "content" => $faker->text,
-        //"excerpt" => $faker->words(500).join(" "),
         "url_img1" => $faker->randomElement($images),
         "id_status" => $faker->numberBetween(0,1),
         "excerpt" => $faker->text,
