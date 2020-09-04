@@ -43,16 +43,16 @@
 </template>
 
 <script>
-import custom from "../../../custom"
+import custom from "../../../app/custom"
+import CONST from "../../../app/constants"
+
 let csrftoken = custom.get_csrftoken()
-const BTN_INISTATE = "Refresh"
-const BTN_IN_PROGRESS = "In progress..."
 
 export default {
     data(){
         return {
             issending: false,
-            btnsend: BTN_INISTATE,
+            btnsend: CONST.BTN_INISTATE,
             columns: ["id","description","title"],
             rows: [],
         }
@@ -67,54 +67,50 @@ export default {
             console.log("...loading")
             const self = this
             self.issending = true
-            self.btnsend = BTN_IN_PROGRESS
+            self.btnsend = CONST.BTN_IN_PROGRESS
             const url = `/api/post`
             fetch(url, {
                 method: 'get',
             })
             .then(response => response.json())
             .then(response => {
-
                 console.log("load.reponse",response)
 
                 if(custom.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
-                        title: 'This action could not be completed! &#58384;',
+                        title: TITLE_ERROR,
                         text: response.error,
                     })
                 }
-
                 self.rows = response.data
-
             })
             .catch(error => {
                 console.log("CATCH ERROR insert",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Opps! Some error occurred &#9785;',
+                    title: CONST.TITLE_SERVERROR,
                     text: error.toString(),
                 })
             })
             .finally(() => {
                 self.issending = false;
-                self.btnsend = BTN_INISTATE
+                self.btnsend = CONST.BTN_INISTATE
             })
         },//load
 
         edit(id){
-            //alert("edit")
             const url = "/adm/post/update/"+id
             document.location = url
             //window.open(url, "_blank")
         },
 
         remove(id){
-            if(confirm("Are you sure to commit this operation?")){
+            if(confirm(CONST.CONFIRM)){
                 console.log("fetching")
                 const self = this
                 self.issending = true
-                self.btnsend = BTN_IN_PROGRESS
+                self.btnsend = CONST.BTN_IN_PROGRESS
                 const url = `/api/post/${id}`
                 fetch(url, {
                     method: 'delete',
@@ -130,7 +126,7 @@ export default {
                     if(custom.is_error(response)) {
                         return Swal.fire({
                             icon: 'warning',
-                            title: 'This action could not be completed! &#58384;',
+                            title: CONST.TITLE_ERROR,
                             text: response.error,
                         })
                     }
@@ -146,13 +142,13 @@ export default {
                     console.log("CATCH ERROR remove",error)
                     Swal.fire({
                         icon: 'error',
-                        title: 'Opps! Some error occurred &#9785;',
+                        title: CONST.TITLE_SERVERROR,
                         text: error.toString(),
                     })
                 })
                 .finally(() => {
                     self.issending = false;
-                    self.btnsend = BTN_INISTATE
+                    self.btnsend = CONST.BTN_INISTATE
                 })
             }
         },

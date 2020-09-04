@@ -86,42 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/custom.js":
-/*!********************************!*\
-  !*** ./resources/js/custom.js ***!
-  \********************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-var custom = {
-  get_csrftoken: function get_csrftoken() {
-    return document.querySelector('#meta-csrf-token').getAttribute('content');
-  },
-  get_lastparam: function get_lastparam() {
-    return new URL(window.location).pathname.split("/").slice(-1)[0] || null;
-  },
-  pr: function pr(any) {
-    var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
-    var json = JSON.stringify(any);
-    alert(title.concat(":\n").concat(json));
-  },
-  is_error: function is_error(response) {
-    return typeof response.error !== "undefined";
-  },
-  get_form: function get_form(strobj) {
-    var form = new FormData();
-    Object.keys(strobj).forEach(function (k) {
-      form.append(k, strobj[k]);
-    });
-    return form;
-  }
-};
-/* harmony default export */ __webpack_exports__["default"] = (custom);
-
-/***/ }),
-
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -140,7 +104,7 @@ var custom = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/custom.js */"./resources/js/custom.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/Users/ioedu/projects/prj_phpblog/backend_web/resources/js/custom.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/sass/app.scss */"./resources/sass/app.scss");
 
 

@@ -121,7 +121,7 @@
     </div>
 </template>
 <script>
-import custom from "../../../custom"
+import custom from "../../../app/custom"
 let csrftoken = custom.get_csrftoken()
 console.log(csrftoken,"csrftoken")
 

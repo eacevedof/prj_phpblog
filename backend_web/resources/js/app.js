@@ -12,11 +12,11 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-import Posts from "./components/restrict/post/Posts.vue";
+import PostIndex from "./components/restrict/post/PostIndex.vue";
 import PostInsert from "./components/restrict/post/PostInsert.vue";
 import PostUpdate from "./components/restrict/post/PostUpdate.vue";
 
-Vue.component('posts', Posts);
+Vue.component('postindex', PostIndex);
 Vue.component('postinsert', PostInsert);
 Vue.component('postupdate', PostUpdate);
 
