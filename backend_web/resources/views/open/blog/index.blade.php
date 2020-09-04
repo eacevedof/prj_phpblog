@@ -1,5 +1,9 @@
 @extends("open.open-layout")
-@section("title","Eduardo A. F | Blog")
+
+@section("pagetitle",$seo["title"])
+@section("pagedescription",$seo["description"])
+@section("pagekeywords",$seo["keywords"])
+
 @section("container")
     @parent
     {{$category}}
