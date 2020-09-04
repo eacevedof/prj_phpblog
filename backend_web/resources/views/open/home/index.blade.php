@@ -13,7 +13,7 @@
                     <img class="card-img-top img-responsive img-thumbnail" src="{{$post->url_img1}}" alt="{{$post->title}}">
                     <div class="card-body">
                         <p class="card-text">
-                            {{$post->content}}
+                            {{$post->excerpt}}
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
