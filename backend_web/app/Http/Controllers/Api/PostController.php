@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Services\Restrict\Post\PostDeleteService;
 use App\Services\Restrict\Post\PostInsertService;
-use App\Services\Restrict\Post\PostListService;
+use App\Services\Restrict\Post\PostIndexService;
 use App\Services\Restrict\Post\PostUpdateService;
 use App\Services\Restrict\Post\PostDetailService;
 
@@ -27,7 +27,7 @@ class PostController extends BaseController
     {
         $this->_load_authid();
         try {
-            $r = (new PostListService($this->authid))->get_list_by_user();
+            $r = (new PostIndexService($this->authid))->get_list_by_user();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)

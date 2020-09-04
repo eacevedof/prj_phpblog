@@ -52,7 +52,7 @@ export default {
     data(){
         return {
             issending: false,
-            btnsend: CONST.BTN_INISTATE,
+            btnsend: CONST.BTN_INISTATE_REFRESH,
             columns: ["id","description","title"],
             rows: [],
         }
@@ -95,7 +95,7 @@ export default {
             })
             .finally(() => {
                 self.issending = false;
-                self.btnsend = CONST.BTN_INISTATE
+                self.btnsend = CONST.BTN_INISTATE_REFRESH
             })
         },//load
 
@@ -150,7 +150,7 @@ export default {
                 })
                 .finally(() => {
                     self.issending = false;
-                    self.btnsend = CONST.BTN_INISTATE
+                    self.btnsend = CONST.BTN_INISTATE_REFRESH
                 })
             }
         },
