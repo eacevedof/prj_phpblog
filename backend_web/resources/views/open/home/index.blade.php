@@ -12,6 +12,7 @@
                 <div class="card mb-4 box-shadow" postid="{{$post->id}}">
                     <img class="card-img-top img-responsive img-thumbnail" src="{{$post->url_img1}}" alt="{{$post->title}}">
                     <div class="card-body">
+                        <h5 class="card-title">{{$post->title}}</h5>
                         <p class="card-text">
                             {{$post->excerpt}}
                         </p>
