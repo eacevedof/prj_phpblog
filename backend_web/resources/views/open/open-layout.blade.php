@@ -14,9 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-@include("open/elements/navbar")
+@include("open.elements.navbar")
 <main role="main">
-    @include("open/elements/jumbotron")
+    @include("open.elements.jumbotron")
 
     <div class="album py-5 bg-light">
         <div class="container">

@@ -24,7 +24,7 @@
                         <a class="dropdown-item" href="/blog/python">python</a>
                     </ul>
                 </li>
-                @if (env('APP_ENV')!='prod')
+                @auth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="nav-admin" role="button" data-toggle="dropdown" aria-expanded="false">
                         Admin
@@ -32,9 +32,10 @@
                     <ul class="dropdown-menu" aria-labelledby="nav-admin">
                         <a class="dropdown-item" href="{{ route('login') }}">Login</a>
                         <a class="dropdown-item" href="{{ route('register') }}">Register</a>
+                        <a class="dropdown-item" href="/adm">Admin</a>
                     </ul>
                 </li>
-                @endif
+                @endauth
             </ul>
             @include("open/forms/form-search")
         </div>
