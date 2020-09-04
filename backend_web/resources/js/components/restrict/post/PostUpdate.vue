@@ -6,9 +6,15 @@
                     <div class="col-md-9">
                         <h1>Update post</h1>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <button class="btn btn-primary app-btnformheader" :disabled="issending">
                             {{btnsend}}
+                            <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                        </button>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-danger app-btnformheader" :disabled="issending" v-on:click="remove(post.id)">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
                     </div>
@@ -243,6 +249,54 @@ export default {
                 self.btnsend = CONST.BTN_INISTATE
             })
         },//update
+
+        remove(id){
+            if(confirm(CONST.CONFIRM)){
+                const self = this
+                self.issending = true
+                self.btnsend = CONST.BTN_IN_PROGRESS
+                const url = `/api/post/${id}`
+                fetch(url, {
+                    method: 'delete',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({_token:csrftoken,_action:"post.delete"})
+                })
+                .then(response => response.json())
+                .then(response => {
+                    console.log("remove.response",response)
+
+                    if(funcs.is_error(response)) {
+                        return Swal.fire({
+                            icon: 'warning',
+                            title: CONST.TITLE_ERROR,
+                            text: response.error,
+                        })
+                    }
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Post: ${id} has been removed`,
+                        html: `<b>&#128578;</b>`,
+                    })
+
+                    document.location = "/adm/posts"
+                })
+                .catch(error => {
+                    console.log("CATCH ERROR remove",error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: CONST.TITLE_SERVERROR,
+                        text: error.toString(),
+                    })
+                })
+                .finally(() => {
+                    self.issending = false;
+                    self.btnsend = CONST.BTN_INISTATE_REFRESH
+                })
+            }
+        },
 
         handleSubmit: function(e) {
             e.preventDefault()

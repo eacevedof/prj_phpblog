@@ -2427,6 +2427,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -2547,6 +2553,53 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       });
     },
     //update
+    remove: function remove(id) {
+      if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].CONFIRM)) {
+        var self = this;
+        self.issending = true;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
+        var url = "/api/post/".concat(id);
+        fetch(url, {
+          method: 'delete',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            _token: csrftoken,
+            _action: "post.delete"
+          })
+        }).then(function (response) {
+          return response.json();
+        }).then(function (response) {
+          console.log("remove.response", response);
+
+          if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+            return Swal.fire({
+              icon: 'warning',
+              title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+              text: response.error
+            });
+          }
+
+          Swal.fire({
+            icon: 'success',
+            title: "Post: ".concat(id, " has been removed"),
+            html: "<b>&#128578;</b>"
+          });
+          document.location = "/adm/posts";
+        })["catch"](function (error) {
+          console.log("CATCH ERROR remove", error);
+          Swal.fire({
+            icon: 'error',
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+            text: error.toString()
+          });
+        })["finally"](function () {
+          self.issending = false;
+          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
+        });
+      }
+    },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
       this.update();
@@ -39038,7 +39091,7 @@ var render = function() {
         _c("div", { staticClass: "row card-header app-formheader" }, [
           _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "col-md-2" }, [
             _c(
               "button",
               {
@@ -39051,6 +39104,37 @@ var render = function() {
                     _vm._s(_vm.btnsend) +
                     "\n                        "
                 ),
+                _vm.issending
+                  ? _c("img", {
+                      attrs: {
+                        src: "/assets/images/loading-bw.gif",
+                        width: "25",
+                        height: "25"
+                      }
+                    })
+                  : _vm._e()
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-1" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger app-btnformheader",
+                attrs: { type: "button", disabled: _vm.issending },
+                on: {
+                  click: function($event) {
+                    return _vm.remove(_vm.post.id)
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-trash-o",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" "),
                 _vm.issending
                   ? _c("img", {
                       attrs: {
