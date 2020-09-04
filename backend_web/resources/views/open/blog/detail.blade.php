@@ -6,7 +6,6 @@
 
 @section("container")
     @parent
-    {{ get_date_short("xxx") }}
     <div class="card lg-12">
         <div class="row g-0">
             <div class="col-md-4">
@@ -17,9 +16,9 @@
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="card-text">{{$post->content}}</p>
                     <p class="card-text">
-                        <small class="text-muted">Published:{{$post->publish_date}}</small>
+                        <small class="text-muted">Published at: {{ get_ymd_hi($post->publish_date) }}</small>
                         @if( !empty($post->last_update) && ($post->last_update != $post->publish_date)){
-                            <small class="text-muted">Updated at:{{$post->last_update}}</small>
+                            <small class="text-muted">Updated at: {{ get_ymd_hi($post->last_update) }}</small>
                         @endif
                     </p>
                 </div>
