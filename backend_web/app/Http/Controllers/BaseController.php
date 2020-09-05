@@ -21,6 +21,6 @@ class BaseController extends RoutingController
     protected function _load_authid(){$this->authid = auth()->id();}
 
     protected function _get_scrumb($route, $replace=[]){
-        return  (new BreadComponent())->get_items("open.home.index")->replace($replace)->get();
+        return  (new BreadComponent())->get_items($route)->replace($replace)->get();
     }
 }

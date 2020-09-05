@@ -34,6 +34,8 @@ class BlogController extends BaseController
             "description" => $post->seo_description,
             "keywords" => "",
         ];
-        return view('open.blog.detail', ["post"=>$post, "seo"=>$seo]);
+
+        $breadscrumb = $this->_get_scrumb("open.blog.detail");
+        return view('open.blog.detail', ["post"=>$post, "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
     }
 }
