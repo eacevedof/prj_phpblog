@@ -2,8 +2,9 @@
 
 namespace Tests\Unit;
 
-use Illuminate\Support\Facades\Mail;
+//use Test\TestCase;
 use PHPUnit\Framework\TestCase;
+use Illuminate\Support\Facades\Mail;
 
 class ExampleTest extends TestCase
 {
@@ -12,7 +13,7 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function testBasicTest()
+    public function tesBasicTest()
     {
         $this->assertTrue(true);
     }
@@ -20,11 +21,13 @@ class ExampleTest extends TestCase
     public function test_mail()
     {
         $to_name = "Para Mi mismo";
-        $to_email = "";
+        $to_email = "xxx@yyy.es";
+
         $data = array("name"=>"Ogbonna Vitalis(sender_name)", "body" => "A test mail");
-        Mail::send("emails.mail", $data, function($message) use ($to_name, $to_email) {
+
+        Mail::send("emails.test", $data, function($message) use ($to_name, $to_email) {
             $message->to($to_email, $to_name)->subject("Laravel Test Mail");
-            $message->from("SENDER_EMAIL_ADDRESS","Test Mail");
+            $message->from("noreply@x.com","Test Mail");
         });
     }
 }
