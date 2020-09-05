@@ -5,6 +5,21 @@
 @section("pagekeywords",$seo["keywords"])
 
 @section("container")
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Eduardo Acevedo - Desarrollador fullstack</h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text">Blog de tecnología</p>
+        <a href="/blog" class="btn app-btnblue app-btnshadow">Blog</a>
+    </div>
+    <div class="card-footer text-muted">
+        Last update: {{$lastupdate ?? ""}}
+    </div>
+</div>
+
+<hr/>
+
 <div class="row">
 @foreach ($result as $post)
     <div class="col-md-4">
