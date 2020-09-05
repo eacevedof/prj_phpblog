@@ -15,7 +15,7 @@
         <a href="/blog" class="btn app-btnblue app-btnshadow">Blog</a>
     </div>
     <div class="card-footer text-muted text-right" style="background:#343A40; color:white !important;">
-        Última actualización: {{$updatedat ?? ""}}
+        Última actualización: {{get_dmy_hi($updatedat)}}
     </div>
 </div>
 <br/>

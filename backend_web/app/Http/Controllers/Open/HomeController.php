@@ -12,11 +12,10 @@ class HomeController extends BaseController
      */
     public function __invoke()
     {
-        $r = (new PostIndexService())->get_top09();
+        $serv = new PostIndexService();
+        $r = $serv->get_top09();
         $seo = SeoComponent::get_meta("home");
-        //$breadscrumb = (new BreadComponent())->get_items("open.home.index")->get();
         $breadscrumb = $this->_get_scrumb("open.home.index");
-        //dd($breadscrumb);
-        return view('open.home.index',["result"=>$r,"seo"=>$seo,"breadscrumb"=>$breadscrumb]);
+        return view('open.home.index',["result"=>$r,"seo"=>$seo,"breadscrumb"=>$breadscrumb,"updatedat"=>$serv->get_maxdate()]);
     }
 }
