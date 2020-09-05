@@ -6,21 +6,21 @@
 
 @section("container")
 <div class="card">
-    <div class="card-header">
-        <h5 class="card-title">Eduardo Acevedo - Desarrollador fullstack</h5>
+    <div class="card-header" style="background:#343A40;">
+        <h5 class="card-title" style="color:white">Blog de Eduardo Acevedo - Desarrollador fullstack</h5>
     </div>
     <div class="card-body">
-        <img src="https://resources.theframework.es/eduardoaf.com/20200905/160818-logo-eduardoafcom.png" />
-        <p class="card-text">Blog de tecnología</p>
+        <img class="img-fluid rounded" src="https://resources.theframework.es/eduardoaf.com/20200905/160818-logo-eduardoafcom.png" />
+        <p class="card-text">Artículos de tecnología en general</p>
         <a href="/blog" class="btn app-btnblue app-btnshadow">Blog</a>
     </div>
-    <div class="card-footer text-muted">
-        Last update: {{$lastupdate ?? ""}}
+    <div class="card-footer text-muted text-right" style="background:#343A40; color:white !important;">
+        Última actualización: {{$updatedat ?? ""}}
     </div>
 </div>
-
-<hr/>
-
+<br/>
+<h1 class="display-6">Últimos artículos:</h1>
+<br/>
 <div class="row">
 @foreach ($result as $post)
     <div class="col-md-4">
