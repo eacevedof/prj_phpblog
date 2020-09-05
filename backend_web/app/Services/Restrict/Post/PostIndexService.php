@@ -38,4 +38,11 @@ class PostIndexService extends BaseService
         return $r;
     }
 
+    public function get_maxdate()
+    {
+        $r = $this->qb->max("update_date");
+        $this->logd($r,"get_maxdate");
+        return $r;
+    }
+
 }
