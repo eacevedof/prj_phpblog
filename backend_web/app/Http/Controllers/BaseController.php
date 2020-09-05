@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Component\BreadComponent;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -18,4 +19,8 @@ class BaseController extends RoutingController
     protected $authid;
 
     protected function _load_authid(){$this->authid = auth()->id();}
+
+    protected function _get_scrumb($route, $replace=[]){
+        return  (new BreadComponent())->get_items("open.home.index")->replace($replace)->get();
+    }
 }
