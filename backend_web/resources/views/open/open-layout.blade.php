@@ -19,11 +19,11 @@
     @isset($jumbotron)
         @include("open.elements.jumbotron")
     @endisset
-    @isset($breadscrumb)
-        @include("open.elements.breadscrumb")
-    @endisset
     <div class="album py-5 bg-light">
         <div class="container">
+            @isset($breadscrumb)
+                @include("open.elements.breadscrumb")
+            @endisset
             @yield("container")
         </div>
     </div>
