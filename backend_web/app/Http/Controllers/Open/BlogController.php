@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Open;
 
+use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
 use App\Services\Common\Category\CategoryService;
 use App\Services\Restrict\Post\PostDetailService;
@@ -16,7 +17,11 @@ class BlogController extends BaseController
     }
     public function category($catslug)
     {
-        return view('open.blog.index', ["category"=>$catslug]);
+        $category = $this->_get_category($catslug);
+        $repconfig = ["category"=>$catslug,"categorytext"=>$category->description];
+        $breadscrumb = $this->_get_scrumb("open.blog.category", $repconfig);
+        $seo = SeoComponent::get_meta("open.blog.category");
+        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
     }
 
     private function _error_404($collection)
