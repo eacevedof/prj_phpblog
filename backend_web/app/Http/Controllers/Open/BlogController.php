@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Open;
 
 use App\Http\Controllers\BaseController;
+use App\Services\Common\Category\CategoryService;
 use App\Services\Restrict\Post\PostDetailService;
 
 class BlogController extends BaseController
@@ -23,6 +24,14 @@ class BlogController extends BaseController
         if($collection->isEmpty()) abort(404);
     }
 
+    private function _get_category($slug)
+    {
+        $r = (new CategoryService())->get($slug);
+        if(!$r->isEmpty())
+            return $r->first();
+        return null;
+    }
+
     public function detail($catslug,$postslug)
     {
         $r = (new PostDetailService())->get_by_slug($postslug);
@@ -35,7 +44,9 @@ class BlogController extends BaseController
             "keywords" => "",
         ];
 
-        $breadscrumb = $this->_get_scrumb("open.blog.detail");
+        $category = $this->_get_category($catslug);
+        $repconfig = ["category"=>$catslug,"categorytext"=>$category->description,"slug"=>$postslug,"slugtext"=>$post->title];
+        $breadscrumb = $this->_get_scrumb("open.blog.detail", $repconfig);
         return view('open.blog.detail', ["post"=>$post, "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
     }
 }
