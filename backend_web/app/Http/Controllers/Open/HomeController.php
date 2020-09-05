@@ -14,6 +14,7 @@ class HomeController extends BaseController
     {
         $r = (new PostIndexService())->get_top09();
         $seo = SeoComponent::get_meta("home");
-        return view('open.home.index',["result"=>$r,"seo"=>$seo]);
+        $breadscrumb = [];
+        return view('open.home.index',["result"=>$r,"seo"=>$seo,"breadscrumb"=>$breadscrumb]);
     }
 }
