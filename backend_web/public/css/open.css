@@ -7,3 +7,26 @@
 .app-btnshadow {
     box-shadow: 2px 2px 5px #888888;
 }
+
+.app-breadscrumb {
+    background: #00B7FF;
+}
+
+.app-breadscrumb-item > a {
+    text-decoration: none;
+    color: white;
+
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji !important;
+}
+
+.app-breadscrumb-item > a:hover {
+    color: black;
+    font-weight: bold;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .5rem;
+    color: black;
+    content: "/";
+}
