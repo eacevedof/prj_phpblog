@@ -21,7 +21,7 @@
     @endisset
     <div class="album py-5 bg-light">
         <div class="container">
-        @yield("container")
+            @yield("container")
         </div>
     </div>
 </main>
