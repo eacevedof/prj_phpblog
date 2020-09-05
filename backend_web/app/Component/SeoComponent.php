@@ -11,8 +11,15 @@ class SeoComponent
             "h1" => ""
         ],
 
+        "open.blog.index"=>[
+            "title"=>"Eduardo A.F. Blog sobre desarrollo de software",
+            "description"=>"Artículos sobre informatica. Temas de tecnología en general y software en particular",
+            "keywords" => "PHP, Python, Javascript, Docker, Figma, Bash, PHP Storm, Visual studio Code",
+            "h1" => ""
+        ],
+
         "open.blog.category.php"=>[
-            "title"=>"Eduardo A. F.. Blog sobre PHP",
+            "title"=>"Eduardo A.F. Blog sobre PHP",
             "description"=>"Todo sobre el desarrollo en PHP. Php frameworks, snippets, Laravel, Yii, Symfony, herramientas, patrones de diseño",
             "keywords" => "PHP, Laravel, Symfony, Github, Composer",
             "h1" => ""
