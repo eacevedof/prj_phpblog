@@ -16,12 +16,12 @@
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
                         Blog
                     </a>
-
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/blog/php/">php</a>
-                        <a class="dropdown-item" href="/blog/js">js</a>
-                        <a class="dropdown-item" href="/blog/sql">sql</a>
-                        <a class="dropdown-item" href="/blog/python">python</a>
+                        <a class="dropdown-item" href="/blog/php/">PHP</a>
+                        <a class="dropdown-item" href="/blog/javascript">Js</a>
+                        <a class="dropdown-item" href="/blog/sql">SQL</a>
+                        <a class="dropdown-item" href="/blog/python">Python</a>
+                        <a class="dropdown-item" href="/blog/docker">Docker</a>
                     </ul>
                 </li>
                 @auth
