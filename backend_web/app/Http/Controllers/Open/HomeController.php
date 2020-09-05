@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers\Open;
 
-use App\Component\BreadComponent;
 use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
 use App\Services\Restrict\Post\PostIndexService;
