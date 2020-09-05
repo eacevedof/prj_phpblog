@@ -73,3 +73,18 @@ php artisan ui vue --auth
       RewriteBase /
       <IfModule mod_negotiation.c>
     ```
+- **error email**
+```
+Swift_TransportException
+Failed to authenticate on SMTP server with username "<some-mail>@gmail.com" using 3 possible authenticators. 
+
+Authenticator LOGIN returned Expected response code 235 but got code "535", with message "535-5.7.8 Username and Password not accepted. 
+Learn more at 535 5.7.8 https://support.google.com/mail/?p=BadCredentials b1sm19295328wru.54 - gsmtp". 
+
+Authenticator PLAIN returned Expected response code 235 but got code "535", with message "535-5.7.8 Username and Password not accepted. 
+Learn more at535 5.7.8 https://support.google.com/mail/?p=BadCredentials b1sm19295328wru.54 - gsmtp". 
+
+Authenticator XOAUTH2 returned Expected response code 250 but got code "535", with message "535-5.7.8 Username and Password not accepted. 
+Learn more at 535 5.7.8 https://support.google.com/mail/?p=BadCredentials b1sm19295328wru.54 - gsmtp".
+```
+- faltaba habilitar https://myaccount.google.com/u/0/lesssecureapps?pli=1
