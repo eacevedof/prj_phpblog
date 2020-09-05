@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('open.home') }}">Eduardo A. F.</a>
+        <a class="navbar-brand" href="{{ route('open.home') }}">Inicio</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,14 +30,14 @@
                         Admin
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="nav-admin">
+                        <a class="dropdown-item" href="/adm">Admin</a>
                         <a class="dropdown-item" href="{{ route('login') }}">Login</a>
                         <a class="dropdown-item" href="{{ route('register') }}">Register</a>
-                        <a class="dropdown-item" href="/adm">Admin</a>
                     </ul>
                 </li>
                 @endauth
             </ul>
-            @include("open/forms/form-search")
+            @include("open.forms.form-search")
         </div>
     </div>
 </nav>
