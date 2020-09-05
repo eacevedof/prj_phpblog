@@ -26,19 +26,6 @@ class BlogController extends BaseController
         return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
     }
 
-    private function _error_404($collection)
-    {
-        if($collection->isEmpty()) abort(404);
-    }
-
-    private function _get_category($slug)
-    {
-        $r = (new CategoryService())->get($slug);
-        if(!$r->isEmpty())
-            return $r->first();
-        return null;
-    }
-
     public function detail($catslug,$postslug)
     {
         $r = (new PostDetailService())->get_by_slug($postslug);
@@ -55,5 +42,18 @@ class BlogController extends BaseController
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description,"slug"=>$postslug,"slugtext"=>$post->title];
         $breadscrumb = $this->_get_scrumb("open.blog.detail", $repconfig);
         return view('open.blog.detail', ["post"=>$post, "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
+    }
+
+    private function _error_404($collection)
+    {
+        if($collection->isEmpty()) abort(404);
+    }
+
+    private function _get_category($slug)
+    {
+        $r = (new CategoryService())->get($slug);
+        if(!$r->isEmpty())
+            return $r->first();
+        return null;
     }
 }
