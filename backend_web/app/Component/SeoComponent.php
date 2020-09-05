@@ -32,7 +32,7 @@ class SeoComponent
             "h1" => ""
         ],
 
-        "open.blog.category.js"=>[
+        "open.blog.category.javascript"=>[
             "title"=>"Eduardo A. F. Blog sobre Javascript",
             "description"=>"Todo sobre el desarrollo en Javascript. Javascript frameworks, snippets, Vue, React, Svelte, programación funcional",
             "keywords" => "Programación funcional, Vue.js, React, Svelte, Vanilla Js",
