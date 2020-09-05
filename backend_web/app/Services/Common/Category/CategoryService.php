@@ -1,22 +1,22 @@
 <?php
-namespace App\Services\Restrict\Post;
+namespace App\Services\Common\Category;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
 
-class Category extends BaseService
+class CategoryService extends BaseService
 {
     private $qb;
 
     public function __construct()
     {
-        $this->qb = DB::table("app_");
+        $this->qb = DB::table("app_array");
     }
 
-    public function get_by_slug($slug)
+    public function get($slug)
     {
         $r = $this->qb->whereNull("delete_date")
             ->where("is_enabled","=","1")
-            ->where("id_status","=","1")
+            ->where("type","=","post")
             ->where("slug","=",$slug)
             ->limit(1)
             ->get();
