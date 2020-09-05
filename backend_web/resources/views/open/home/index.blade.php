@@ -4,6 +4,9 @@
 @section("pagedescription",$seo["description"])
 @section("pagekeywords",$seo["keywords"])
 
+
+
+
 @section("container")
     @parent
     <div class="row">
@@ -18,10 +21,10 @@
                         </p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <a href="/blog{{$post->url_final}}" type="button" class="btn btn-md btn-primary">Read</a>
+                                <a href="/blog{{$post->url_final}}" type="button" class="btn btn-md app-btnblue">Read</a>
                                 @auth
                                     <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-                                    <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm app-btnblue">Edit ({{$post->id}})</a>
+                                    <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit ({{$post->id}})</a>
                                 @endauth
                             </div>
                             <small class="text-muted">{{ get_ymd_hi($post->publish_date) }}</small>
@@ -31,6 +34,5 @@
             </div>
 
         @endforeach
-
     </div>
 @endsection
