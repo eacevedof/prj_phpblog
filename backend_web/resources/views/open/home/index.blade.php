@@ -10,6 +10,7 @@
         <h5 class="card-title">Eduardo Acevedo - Desarrollador fullstack</h5>
     </div>
     <div class="card-body">
+        <img src="https://resources.theframework.es/eduardoaf.com/20200905/160818-logo-eduardoafcom.png" />
         <p class="card-text">Blog de tecnología</p>
         <a href="/blog" class="btn app-btnblue app-btnshadow">Blog</a>
     </div>
