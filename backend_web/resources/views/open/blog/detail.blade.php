@@ -15,11 +15,11 @@
                 <h5 class="card-title">{{$post->title}}</h5>
                 <p class="card-text">{{$post->content}}</p>
                 <p class="card-text text-right">
-                    <small class="text-muted">Author: Eduardo A. F.</small><br/>
-                    <small class="text-muted">Published at: {{ get_ymd_hi($post->publish_date) }}</small>
+                    <small class="text-muted">Autor: Eduardo A. F.</small><br/>
+                    <small class="text-muted">Publicado: {{ get_ymd_hi($post->publish_date) }}</small>
                     @if( !empty($post->last_update) && ($post->last_update != $post->publish_date)){
                         <br/>
-                        <small class="text-muted">Updated at: {{ get_ymd_hi($post->last_update) }}</small>
+                        <small class="text-muted">Actualizado: {{ get_ymd_hi($post->last_update) }}</small>
                     @endif
                 </p>
             </div>
