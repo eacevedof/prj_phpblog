@@ -8,15 +8,13 @@ use App\Services\Restrict\Post\PostDetailService;
 
 class BlogController extends BaseController
 {
-    /**
-     * @return View
-     */
     public function __invoke()
     {
         $breadscrumb = $this->_get_scrumb("open.blog.index");
         $seo = SeoComponent::get_meta("open.blog.index");
         return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
     }
+
     public function category($catslug)
     {
         $category = $this->_get_category($catslug);
