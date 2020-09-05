@@ -13,14 +13,16 @@ class BlogController extends BaseController
      */
     public function __invoke()
     {
-        return view('open.blog.index', ["category"=>""]);
+        $breadscrumb = $this->_get_scrumb("open.blog.index");
+        $seo = SeoComponent::get_meta("open.blog.index");
+        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
     }
     public function category($catslug)
     {
         $category = $this->_get_category($catslug);
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description];
         $breadscrumb = $this->_get_scrumb("open.blog.category", $repconfig);
-        $seo = SeoComponent::get_meta("open.blog.category");
+        $seo = SeoComponent::get_meta("open.blog.category.{$catslug}");
         return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
     }
 
