@@ -50,8 +50,7 @@ class BlogController extends BaseController
     private function _get_category($slug)
     {
         $r = (new CategoryService())->get($slug);
-        if(!$r->isEmpty())
-            return $r->first();
-        return null;
+        if($r->isEmpty())  abort(404);
+        return $r->first();
     }
 }
