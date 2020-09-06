@@ -9,6 +9,7 @@ class EmailContactService extends BaseemailService
 {
     public function __construct($post)
     {
+        $this->logd($post,"emailcontactservice.construct");
         $this->data = $post;
     }
 

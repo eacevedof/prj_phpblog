@@ -8,7 +8,7 @@
 <!-- formulario de contacto -->
 <div class="form-contact_container">
     @verbatim
-    <form action="/mail" @submit="checkform" method="post" id="form-contact" class="contact_form">
+    <form @submit="checkform" id="form-contact" class="contact_form">
         <div>
             <div class="row">
                 <div class="col-lg-6">
@@ -35,6 +35,7 @@ const app = new Vue({
     el: "#form-contact",
     data: {
         errors:[],
+        csrf: "{{ csrf_token() }}",
         issending: false,
         btnsend: "Enviar",
         name: "",
@@ -56,46 +57,49 @@ const app = new Vue({
             this.issending = true
             this.btnsend = "Enviando..."
             const data = new FormData();
-            data.append("action","contact")
+            data.append("action","contact.email")
+            data.append("_token",this.csrf)
             data.append("name",this.name)
             data.append("email",this.email)
             data.append("subject",this.subject)
             data.append("message",this.message)
             console.log("data pre fetch",data)
-            fetch('/mail', {
-                method: 'post',
+            fetch('/email/contact', {
+                method: "post",
                 body: data
             })
-                .then(response => {
-                    this.issending = false
-                    this.btnsend = "Enviar"
-                    console.log("reponse ok",response)
-                    if(response.ok) {
-                        //console.log("e.target",e.target)
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Gracias por contactar con nosotros!',
-                            html: 'En breves momentos recibirás una copia del mensaje en tu email.',
-                        })
-                        self.reset()
-                    } else {
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Proceso incompleto',
-                            text: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde o prueba por teléfono (34 91 455 74 43).  Disculpa las molestias.',
-                        })
-                    }
-                })
-                .catch(error => {
-                    console.log("catch.error",error)
-                    this.issending = false
-                    this.btnsend = "Enviar"
+            .then(response => {
+                this.issending = false
+                this.btnsend = "Enviar"
+                console.log("reponse ok",response)
+                if(response.ok) {
+                    //console.log("e.target",e.target)
                     Swal.fire({
-                        icon: 'error',
-                        title: 'Vaya! Algo ha ido mal',
-                        text: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde o prueba por teléfono (34 91 455 74 43).  Disculpa las molestias.'+error.toString(),
+                        icon: 'success',
+                        title: 'Gracias por contactar con nosotros!',
+                        html: 'En breves momentos recibirás una copia del mensaje en tu email.',
                     })
+                    self.reset()
+                } else {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Proceso incompleto',
+                        text: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde o prueba por teléfono (34 91 455 74 43).  Disculpa las molestias.',
+                    })
+                }
+            })
+            .catch(error => {
+                console.log("catch.error",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Vaya! Algo ha ido mal',
+                    text: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde o prueba por teléfono (34 91 455 74 43).  Disculpa las molestias.'+error.toString(),
                 })
+            })
+            .finally(()=>{
+                this.issending = false
+                this.btnsend = "Enviar"
+            })
         }
     },//methods
     mounted(){
