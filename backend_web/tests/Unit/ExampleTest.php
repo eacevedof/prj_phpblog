@@ -2,9 +2,9 @@
 
 namespace Tests\Unit;
 
-//use Test\TestCase;
+
 use PHPUnit\Framework\TestCase;
-use Illuminate\Support\Facades\Mail;
+use \Mail;
 
 class ExampleTest extends TestCase
 {

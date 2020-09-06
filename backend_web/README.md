@@ -75,6 +75,11 @@ php artisan ui vue --auth
     ```
 - **error email**
 ```
+Connection could not be established with host smtp.googlemail.com :stream_socket_client(): 
+SSL operation failed with code 1. OpenSSL Error messages: error:1408F10B:SSL routines:ssl3_get_record:wrong version number
+```
+- No estaba pasando MAIL_USERNAME correctamente. Debía ser el corre completo MAIL_USERNAME=<username>@gmail.com
+```
 Swift_TransportException
 Failed to authenticate on SMTP server with username "<some-mail>@gmail.com" using 3 possible authenticators. 
 
@@ -88,3 +93,4 @@ Authenticator XOAUTH2 returned Expected response code 250 but got code "535", wi
 Learn more at 535 5.7.8 https://support.google.com/mail/?p=BadCredentials b1sm19295328wru.54 - gsmtp".
 ```
 - faltaba habilitar https://myaccount.google.com/u/0/lesssecureapps?pli=1
+- Es obligatorio: MAIL_FROM_ADDRESS=noreply@eduardoaf.com
