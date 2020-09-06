@@ -1,19 +1,12 @@
 <?php
 namespace App\Services\Common\Email;
-use App\Services\BaseService;
+
 use Illuminate\Support\Facades\Mail;
 use \Exception;
 use \App\Emails\ContactEmail;
 
-class EmailService extends BaseService
+class EmailService extends BaseemailService
 {
-    private $data;
-
-    private $to;
-    private $cc = [];
-    private $bcc = [];
-    private $attachments = [];
-
     public function __construct($post)
     {
         $this->data = $post;
@@ -28,16 +21,7 @@ class EmailService extends BaseService
         ];
     }
 
-    private function _get_mailobj(){
-        $mail = Mail::to(array_unique($this->to));
-        $mail->locale("es");
-        $mail->cc(array_unique($this->cc));
-        $mail->bcc(array_unique($this->bcc));
-
-        return $mail;
-    }
-
-    private function _get_mailable()
+    protected function _get_mailable()
     {
         $data = $this->_get_content();
         //from, subject y attachments van aqui
@@ -47,20 +31,9 @@ class EmailService extends BaseService
                 ->set_attachments($this->attachments);
     }
 
-    private function _check_post()
+    protected function _check_post()
     {
         if(!$this->to) throw new \Exception("EmailService: No recipients supplied");
-    }
-
-    private function add_to(string $email){$this->to[] = $email; return $this;}
-    private function add_cc(string $email){$this->cc[] = $email; return $this;}
-    private function add_bcc(string $email){$this->bcc[] = $email; return $this;}
-    private function add_attachments(string $path){$this->attachments[] = $path; return $this;}
-
-    public function reset()
-    {
-        $this->to = []; $this->cc = []; $this->bcc = []; $this->attachments = [];
-        return $this;
     }
 
     public function send_contact()
@@ -68,6 +41,7 @@ class EmailService extends BaseService
         $this->_check_post();
 
         $mailable = $this->_get_mailable();
+        //fachada que necesita un mailable
         $this->_get_mailobj()->send($mailable);
 
         if(Mail::failures())
