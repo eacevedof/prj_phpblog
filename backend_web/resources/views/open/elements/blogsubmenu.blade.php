@@ -1,4 +1,4 @@
-@if(isset($blogsubmenu) && !$blogsubmenu->isEmpty())
+@isset($blogsubmenu)
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="blog-submenu" role="button" data-toggle="dropdown" aria-expanded="false">
         Blog
@@ -9,4 +9,4 @@
     @endforeach
     </ul>
 </li>
-@endif
+@endisset
