@@ -18,7 +18,7 @@ abstract class BaseemailService extends BaseService
     protected function add_bcc(string $email){$this->bcc[] = $email; return $this;}
     protected function add_attachments(string $path){$this->attachments[] = $path; return $this;}
 
-    abstract protected function _check_post();
+    abstract protected function _exceptions();
     abstract protected function _get_mailable();
 
     protected function _get_mailobj()
@@ -27,7 +27,6 @@ abstract class BaseemailService extends BaseService
         $mail->locale("es");
         $mail->cc(array_unique($this->cc));
         $mail->bcc(array_unique($this->bcc));
-
         return $mail;
     }
 

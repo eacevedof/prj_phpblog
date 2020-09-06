@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Mail;
 use \Exception;
 use \App\Emails\ContactEmail;
 
-class EmailService extends BaseemailService
+class EmailContactService extends BaseemailService
 {
     public function __construct($post)
     {
@@ -31,14 +31,15 @@ class EmailService extends BaseemailService
                 ->set_attachments($this->attachments);
     }
 
-    protected function _check_post()
+    protected function _exceptions()
     {
-        if(!$this->to) throw new \Exception("EmailService: No recipients supplied");
+        if(!$this->data) throw new \Exception("EmailContactService: No data provided");
+        if(!$this->to) throw new \Exception("EmailContactService: No recipients supplied");
     }
 
-    public function send_contact()
+    public function send()
     {
-        $this->_check_post();
+        $this->_exceptions();
 
         $mailable = $this->_get_mailable();
         //fachada que necesita un mailable

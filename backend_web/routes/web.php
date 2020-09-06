@@ -23,19 +23,6 @@ Route::get('/blog/{catslug}','Open\BlogController@category')->name("open.blog.ca
 Route::get('/blog/','Open\BlogController')->name("open.blog.index");
 
 Route::get('/email/contact', "Common\Email\EmailController@contact")->name("common.email.contact");
-
-Route::get('/email/send', function () {
-
-    $details = [
-        'title' => 'Mail from ItSolutionStuff.com',
-        'body' => 'This is for testing email using smtp'
-    ];
-
-    \Mail::to('eacevedof@gmail.com')->send(new \App\Emails\MyTestMail($details));
-
-    dd("Email is Sent.");
-});
-
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas
 Auth::routes();
 
