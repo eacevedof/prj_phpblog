@@ -1,6 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{ route('open.home.index') }}"><i class="fa fa-home" aria-hidden="true"></i> / </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-opentop" aria-controls="nav-opentop" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
