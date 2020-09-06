@@ -16,7 +16,7 @@ class ContactEmail extends Mailable
         $this->details = $details;
     }
 
-    public function xx()
+    public function build()
     {
         return $this->subject('Mail de ContactEmail')
             ->view("emails.contact",["details"=>$this->details]);
