@@ -28,6 +28,7 @@ class ContactEmail extends Mailable
             ->view("emails.contact",[
                 "data"  =>  $this->data
             ])
+            //es obligatorio pasar al menos una ruta
             //->attach($this->attachs)
             ;
     }

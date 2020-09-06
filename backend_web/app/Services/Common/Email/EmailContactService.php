@@ -16,10 +16,11 @@ class EmailContactService extends BaseemailService
     private function _get_data()
     {
         return [
-            "subject" => $this->data["subject"] ?? "  ".get_date(),
-            "message" => $this->data["message"] ?? " some message ",
+            "subject" => $this->data["subject"] ?? "",
+            "message" => $this->data["message"] ?? "",
             "email"   => $this->data["email"] ?? "",
             "phone"   => $this->data["phone"] ?? "",
+            "name"    => $this->data["name"] ?? "",
         ];
     }
 
