@@ -11,9 +11,9 @@ class ContactEmail extends Mailable
 
     private $data;
 
-    private $from = ["email"=>"","name"=>""];
-    private $subject = "";
-    private $attachments = [];
+    private $arfrom = ["email"=>"","name"=>""];
+    private $subj = "";
+    private $attachs = [];
 
     public function __construct($data)
     {
@@ -23,17 +23,17 @@ class ContactEmail extends Mailable
     public function build()
     {
         return $this
-            ->from($this->from["email"],$this->from["name"])
-            ->subject($this->subject)
+            ->from($this->arfrom["email"], $this->arfrom["name"])
+            ->subject($this->subj)
             ->view("emails.contact",[
                 "data"  =>  $this->data
             ])
-            ->attach($this->attachments)
+            ->attach($this->attachs)
             ;
     }
 
-    public function set_from(string $email, string $name){$this->from = ["from"=>$email, "name"=>$name]; return $this;}
-    public function set_subject(string $subject){$this->subject = $subject; return $this;}
-    public function set_attachments(array $paths){$this->attachments = $paths; return $this;}
-    public function add_attachments(string $path){$this->attachments[] = $path; return $this;}
+    public function set_from(string $email, string $name){$this->arfrom = ["from"=>$email, "name"=>$name]; return $this;}
+    public function set_subject(string $subject){$this->subj = $subject; return $this;}
+    public function set_attachments(array $paths){$this->attachs = $paths; return $this;}
+    public function add_attachments(string $path){$this->attachs[] = $path; return $this;}
 }
