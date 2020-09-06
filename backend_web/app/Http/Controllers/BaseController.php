@@ -25,7 +25,7 @@ class BaseController extends RoutingController
         return  (new BreadComponent())->get_items($route)->replace($replace)->get();
     }
 
-    protected function _get_blogsubmenu(){
-        return (new CategoryService())->get_blogsubmenu();
+    protected function _get_submenu_blog(){
+        return (new CategoryService())->get_submenu_blog();
     }
 }

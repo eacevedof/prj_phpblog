@@ -9,6 +9,7 @@ class CategoryService extends BaseService
 
     public function __construct()
     {
+        //DB::enableQueryLog();
         $this->qb = DB::table("app_array");
     }
 
@@ -24,14 +25,17 @@ class CategoryService extends BaseService
         return $r;
     }
 
-    public function get_blogsubmenu()
+    public function get_submenu_blog()
     {
         $r = $this->qb->whereNull("delete_date")
             ->where("is_enabled","=","1")
-            ->where("type","=","blog-submenu")
+            ->where("type","=","submenu-blog")
             ->orderBy("order_by")
             ->orderBy("description")
             ->get();
+
+        $this->log($this->qb->toSql(),"get_submenu_blog");
+        $this->log($this->qb->getBindings(), "get_blogsmenu.bindings");
         return $r;
     }
 }

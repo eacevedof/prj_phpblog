@@ -16,12 +16,12 @@ class HomeController extends BaseController
         $r = $serv->get_top09();
         $seo = SeoComponent::get_meta("home");
         $breadscrumb = $this->_get_scrumb("open.home.index");
-        $blogsubmenu = $this->_get_blogsubmenu();
+        $blogsubmenu = $this->_get_submenu_blog();
 
         return view('open.home.index',[
             "result"=>$r,"seo"=>$seo,"breadscrumb"=>$breadscrumb,
-            "updatedat"=>$serv->get_maxdate(),
-            "blogsubmenu"=>$blogsubmenu
+            "updatedat"   => $serv->get_maxdate(),
+            "blogsubmenu" => $blogsubmenu
         ]);
     }
 }
