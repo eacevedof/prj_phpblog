@@ -12,18 +12,19 @@ class EmailContactService extends BaseemailService
         $this->data = $post;
     }
 
-    private function _get_content()
+    private function _get_data()
     {
         return [
-            "title" => "Eduardo A.F | Email",
-            "subject" => $this->data["subject"] ?? " subject xxx ".get_date(),
+            "subject" => $this->data["subject"] ?? "  ".get_date(),
             "message" => $this->data["message"] ?? " some message ",
+            "email"   => $this->data["email"] ?? "",
+            "phone"   => $this->data["phone"] ?? "",
         ];
     }
 
     protected function _get_mailable()
     {
-        $data = $this->_get_content();
+        $data = $this->_get_data();
         //from, subject y attachments van aqui
         return (new ContactEmail($data))
                 ->set_from($this->get_env("MAIL_FROM_ADDRESS"),$this->get_env("MAIL_FROM_NAME"))
@@ -34,6 +35,7 @@ class EmailContactService extends BaseemailService
     protected function _exceptions()
     {
         if(!$this->data) throw new \Exception("EmailContactService: No data provided");
+        if(!$this->data["email"]) throw new \Exception("EmailContactService: No email provided");
         if(!$this->to) throw new \Exception("EmailContactService: No recipients supplied");
     }
 
@@ -41,8 +43,12 @@ class EmailContactService extends BaseemailService
     {
         $this->_exceptions();
 
+        //viewdata, from, subject, attachments
         $mailable = $this->_get_mailable();
+
         //fachada que necesita un mailable
+        //locale, to, cc, bcc
+        $this->add_to($this->data["email"])->add_bcc($this->get_env("MAIL_TO"));
         $this->_get_mailobj()->send($mailable);
 
         if(Mail::failures())
