@@ -10,18 +10,27 @@ class BlogController extends BaseController
 {
     public function __invoke()
     {
-        $breadscrumb = $this->_get_scrumb("open.blog.index");
-        $seo = SeoComponent::get_meta("open.blog.index");
-        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb, "catslug"=>"blog"]);
+        return view('open.blog.index', [
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.blog.index"),
+            "breadscrumb" => $this->_get_scrumb("open.blog.index"),
+            "submenublog" => $this->_get_submenu_blog(),
+            "catslug"     => "blog",
+        ]);
     }
 
     public function category($catslug)
     {
         $category = $this->_get_category($catslug);
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description];
-        $breadscrumb = $this->_get_scrumb("open.blog.category", $repconfig);
-        $seo = SeoComponent::get_meta("open.blog.category.{$catslug}");
-        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb, "catslug"=>$catslug]);
+
+        return view('open.blog.index', [
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.blog.category.{$catslug}"),
+            "breadscrumb" => $this->_get_scrumb("open.blog.category", $repconfig),
+            "submenublog" => $this->_get_submenu_blog(),
+            "catslug"     => "blog",
+        ]);
     }
 
     public function detail($catslug,$postslug)
@@ -38,8 +47,15 @@ class BlogController extends BaseController
 
         $category = $this->_get_category($catslug);
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description,"slug"=>$postslug,"slugtext"=>$post->title];
-        $breadscrumb = $this->_get_scrumb("open.blog.detail", $repconfig);
-        return view('open.blog.detail', ["post"=>$post, "seo"=>$seo, "breadscrumb"=>$breadscrumb, "catslug"=>$catslug]);
+
+        return view('open.blog.index', [
+            "result"      => [],
+            "post"        => $post,
+            "seo"         => $seo,
+            "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
+            "submenublog" => $this->_get_submenu_blog(),
+            "catslug"     => "blog",
+        ]);
     }
 
     private function _error_404($collection)

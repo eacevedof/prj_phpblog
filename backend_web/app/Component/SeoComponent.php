@@ -4,15 +4,20 @@ namespace App\Component;
 class SeoComponent
 {
     private static $seo = [
-        "home"=>[
-            "title"=>"Blog de Eduardo",
-            "description"=>"Contenido sobre informática. Desarrollo de software, hardware y diseño gráfico ",
-            "keywords" => "Programación, desarrollo de software, diseño, css, js, php, java, docker, python",
+        "open.home.index"=>[
+            "title"=>"Eduardo Acevedo F. | Fullstack developer",
+            "description"=>"Blog con contenido sobre informática. Desarrollo de software, hardware y artículos relacionados con tecnología",
+            "keywords" => "Programación, desarrollo de software, arquitectura, patrones de diseño, diseño gráfico, css, js, php, java, docker, python",
             "h1" => ""
         ],
-
+        "open.home.contact"=>[
+            "title"=>"Eduardo A. F. | Contacto",
+            "description"=>"Formulario de contacto. Consultas, sugerencias, propuestas.",
+            "keywords" => "contacto, consultas, dudas, sugerencias, propuestas",
+            "h1" => ""
+        ],
         "open.blog.index"=>[
-            "title"=>"Eduardo A.F. Blog sobre desarrollo de software",
+            "title"=>"Eduardo A.F. | Blog ",
             "description"=>"Artículos sobre informatica. Temas de tecnología en general y software en particular",
             "keywords" => "PHP, Python, Javascript, Docker, Figma, Bash, PHP Storm, Visual studio Code",
             "h1" => ""

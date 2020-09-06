@@ -1,6 +1,9 @@
 @extends("open.open-layout")
-@section("title","Contact")
+
+@section("pagetitle",$seo["title"])
+@section("pagedescription",$seo["description"])
+@section("pagekeywords",$seo["keywords"])
+
 @section("container")
-    @parent
     formulario de contacto
 @endsection

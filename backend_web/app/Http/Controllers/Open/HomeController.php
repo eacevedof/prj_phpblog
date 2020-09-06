@@ -13,15 +13,12 @@ class HomeController extends BaseController
     public function __invoke()
     {
         $serv = new PostIndexService();
-        $r = $serv->get_top09();
-        $seo = SeoComponent::get_meta("home");
-        $breadscrumb = $this->_get_scrumb("open.home.index");
-        $submenublog = $this->_get_submenu_blog();
-
         return view('open.home.index',[
-            "result"=>$r,"seo"=>$seo,"breadscrumb"=>$breadscrumb,
+            "result"      => $serv->get_top09(),
+            "seo"         => SeoComponent::get_meta("open.home.index"),
+            "breadscrumb" => $this->_get_scrumb("open.home.index"),
             "updatedat"   => $serv->get_maxdate(),
-            "submenublog" => $submenublog
+            "submenublog" => $this->_get_submenu_blog()
         ]);
     }
 }
