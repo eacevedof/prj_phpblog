@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Component\BreadComponent;
+use App\Services\Common\Category\CategoryService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -22,5 +23,9 @@ class BaseController extends RoutingController
 
     protected function _get_scrumb($route, $replace=[]){
         return  (new BreadComponent())->get_items($route)->replace($replace)->get();
+    }
+
+    protected function _get_blogsubmenu(){
+        return (new CategoryService())->get_blogsubmenu();
     }
 }

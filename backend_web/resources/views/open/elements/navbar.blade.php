@@ -11,7 +11,7 @@
                     <a class="nav-link" href="{{ route('open.home.aboutme') }}">Sobre mí</a>
                 </li>
                 -->
-@include("open.elements.blogsubmenu")
+                @include("open.elements.blogsubmenu")
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('open.home.contact') }}">Contacto</a>
                 </li>
