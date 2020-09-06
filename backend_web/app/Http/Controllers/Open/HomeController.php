@@ -19,7 +19,7 @@ class HomeController extends BaseController
             "breadscrumb" => $this->_get_scrumb("open.home.index"),
             "updatedat"   => $serv->get_maxdate(),
             "submenublog" => $this->_get_submenu_blog(),
-            "catslug"     => "",
+            "catslug"     => "home",
         ]);
     }
 }

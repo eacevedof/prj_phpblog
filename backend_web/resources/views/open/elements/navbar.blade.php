@@ -6,6 +6,11 @@
         </button>
         <div class="collapse navbar-collapse" id="nav-opentop">
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link {{ $catslug=="home" ? "active" : "" }}" href="{{ route('open.home.index') }}">
+                        <i class="fa fa-home" aria-hidden="true"></i> /
+                    </a>
+                </li>
                 <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('open.home.aboutme') }}">Sobre mí</a>
