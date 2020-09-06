@@ -22,7 +22,7 @@ Route::get('/blog/{catslug}/{postslug}','Open\BlogController@detail')->name("ope
 Route::get('/blog/{catslug}','Open\BlogController@category')->name("open.blog.category");
 Route::get('/blog/','Open\BlogController')->name("open.blog.index");
 
-Route::get('/email/contact', "Common\Email\EmailController@contact")->name("common.email.contact");
+Route::post('/email/contact', "Common\Email\EmailController@contact")->name("common.email.contact");
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas
 Auth::routes();
 

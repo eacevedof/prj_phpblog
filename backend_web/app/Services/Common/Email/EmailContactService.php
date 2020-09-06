@@ -37,7 +37,7 @@ class EmailContactService extends BaseemailService
     {
         if(!$this->data) throw new \Exception("EmailContactService: No data provided");
         if(!$this->data["email"]) throw new \Exception("EmailContactService: No email provided");
-        if(!$this->to) throw new \Exception("EmailContactService: No recipients supplied");
+        if(!$this->data["message"]) throw new \Exception("EmailContactService: Message is empty");
     }
 
     public function send()
