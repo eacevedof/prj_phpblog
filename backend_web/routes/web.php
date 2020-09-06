@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,14 +22,16 @@ Route::get('/blog/{catslug}/{postslug}','Open\BlogController@detail')->name("ope
 Route::get('/blog/{catslug}','Open\BlogController@category')->name("open.blog.category");
 Route::get('/blog/','Open\BlogController')->name("open.blog.index");
 
-Route::get('/sendmail', function () {
+Route::post('/email/contact', "Common\EmailController@contact")-name("common.email.contact");
+
+Route::get('/email/send', function () {
 
     $details = [
         'title' => 'Mail from ItSolutionStuff.com',
         'body' => 'This is for testing email using smtp'
     ];
 
-    \Mail::to('eacevedof@gmail.com')->send(new \App\Mail\MyTestMail($details));
+    \Mail::to('eacevedof@gmail.com')->send(new \App\Emails\MyTestMail($details));
 
     dd("Email is Sent.");
 });
