@@ -12,7 +12,7 @@ class BlogController extends BaseController
     {
         $breadscrumb = $this->_get_scrumb("open.blog.index");
         $seo = SeoComponent::get_meta("open.blog.index");
-        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
+        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb, "catslug"=>"blog"]);
     }
 
     public function category($catslug)
@@ -21,7 +21,7 @@ class BlogController extends BaseController
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description];
         $breadscrumb = $this->_get_scrumb("open.blog.category", $repconfig);
         $seo = SeoComponent::get_meta("open.blog.category.{$catslug}");
-        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
+        return view('open.blog.index', ["result"=>[], "seo"=>$seo, "breadscrumb"=>$breadscrumb, "catslug"=>$catslug]);
     }
 
     public function detail($catslug,$postslug)
@@ -39,7 +39,7 @@ class BlogController extends BaseController
         $category = $this->_get_category($catslug);
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description,"slug"=>$postslug,"slugtext"=>$post->title];
         $breadscrumb = $this->_get_scrumb("open.blog.detail", $repconfig);
-        return view('open.blog.detail', ["post"=>$post, "seo"=>$seo, "breadscrumb"=>$breadscrumb]);
+        return view('open.blog.detail', ["post"=>$post, "seo"=>$seo, "breadscrumb"=>$breadscrumb, "catslug"=>$catslug]);
     }
 
     private function _error_404($collection)

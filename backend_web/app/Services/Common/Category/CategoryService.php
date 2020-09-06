@@ -23,4 +23,15 @@ class CategoryService extends BaseService
 
         return $r;
     }
+
+    public function get_blogsubmenu()
+    {
+        $r = $this->qb->whereNull("delete_date")
+            ->where("is_enabled","=","1")
+            ->where("type","=","blog-submenu")
+            ->orderBy("order_by")
+            ->orderBy("description")
+            ->get();
+        return $r;
+    }
 }

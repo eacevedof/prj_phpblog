@@ -6,16 +6,18 @@
 
 @section("container")
 <div class="card">
-    <div class="card-header" style="background:#343A40;">
-        <h5 class="card-title" style="color:white">Blog de Eduardo Acevedo - Desarrollador fullstack</h5>
+    <div class="card-header">
+        <h5 class="card-title">Blog de Eduardo Acevedo - Desarrollador fullstack</h5>
     </div>
     <div class="card-body">
-        <img class="img-fluid rounded" src="https://resources.theframework.es/eduardoaf.com/20200905/160818-logo-eduardoafcom.png" />
-        <p class="card-text">Artículos de tecnología en general</p>
+        <p class="card-text">
+            <img class="img-fluid pull-left" src="https://resources.theframework.es/eduardoaf.com/20200906/095050-logo-eduardoafcom_500.png" />
+            Artículos de tecnología en general
+        </p>
         <a href="/blog" class="btn app-btnblue app-btnshadow">Blog</a>
     </div>
-    <div class="card-footer text-muted text-right" style="background:#343A40; color:white !important;">
-        Última actualización: {{get_dmy_hi($updatedat)}}
+    <div class="card-footer text-muted text-right">
+        <b>Última actualización:</b> {{get_dmy_hi($updatedat)}}
     </div>
 </div>
 <br/>
