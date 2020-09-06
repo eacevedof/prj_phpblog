@@ -12,9 +12,11 @@
                 </li>
                 -->
                 @include("open.elements.submenublog")
+
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('open.home.contact') }}">Contacto</a>
+                    <a class="nav-link {{ $catslug=="contact" ? "active" : "" }}" href="{{ route('open.home.contact') }}">Contacto</a>
                 </li>
+
                 @auth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="nav-admin" role="button" data-toggle="dropdown" aria-expanded="false">

@@ -18,7 +18,8 @@ class HomeController extends BaseController
             "seo"         => SeoComponent::get_meta("open.home.index"),
             "breadscrumb" => $this->_get_scrumb("open.home.index"),
             "updatedat"   => $serv->get_maxdate(),
-            "submenublog" => $this->_get_submenu_blog()
+            "submenublog" => $this->_get_submenu_blog(),
+            "catslug"     => "",
         ]);
     }
 }
