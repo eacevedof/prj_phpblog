@@ -1,10 +1,10 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="{{ route('open.home.index') }}"><i class="fa fa-home" aria-hidden="true"></i> / </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-opentop" aria-controls="nav-opentop" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarsExample09">
+        <div class="collapse navbar-collapse" id="nav-opentop">
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <!--
                 <li class="nav-item">
@@ -12,10 +12,10 @@
                 </li>
                 -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="blog-submenu" role="button" data-toggle="dropdown" aria-expanded="false">
                         Blog
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="blog-submenu">
                         <a class="dropdown-item" href="/blog/php/">PHP</a>
                         <a class="dropdown-item" href="/blog/javascript">Js</a>
                         <a class="dropdown-item" href="/blog/sql">SQL</a>
