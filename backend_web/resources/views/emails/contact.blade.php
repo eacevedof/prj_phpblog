@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Contact Email</title>
+    <title>{{ $data["title"] }}</title>
 </head>
 <body>
-<h1>{{ $details['title'] }}</h1>
-<p>{{ $details['body'] }}</p>
-
-<p>Thank you for contacting me</p>
+<h1>{{ $data["subject"] }}</h1>
+<p>{{ $data["message"] }}</p>
+<p>
+    Thank you for contacting me. <br/>
+    <b>Eduardo A.F.</b> <br/>
+    <small><b>Fullstack Developer - Madrid</b></small>
+</p>
 </body>
 </html>

@@ -9,16 +9,16 @@ class ContactEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    private $details;
+    private $data;
 
-    public function __construct($details)
+    public function __construct($data)
     {
-        $this->details = $details;
+        $this->data = $data;
     }
 
     public function build()
     {
-        return $this->subject('Mail de ContactEmail')
-            ->view("emails.contact",["details"=>$this->details]);
+        return $this->subject($this->data["subject"])
+            ->view("emails.contact",["data"=>$this->data]);
     }
 }

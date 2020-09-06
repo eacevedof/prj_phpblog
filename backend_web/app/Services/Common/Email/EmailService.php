@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\Common\Email;
 use App\Services\BaseService;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use \Exception;
 
@@ -14,15 +13,22 @@ class EmailService extends BaseService
         $this->data = $data;
     }
 
+    private function _get_content()
+    {
+        return [
+            "title" => "eduardoaf.com | Contacto",
+            "subject" => $this->data["subjet"] || " subject xxx",
+            "message" => $this->data["message"] || " some message ",
+        ];
+    }
+
     public function send_contact()
     {
-        $details = [
-            'title' => 'Mail from ItSolutionStuff.com',
-            'body' => 'This is for testing email using smtp'
-        ];
+        $content = $this->_get_content();
 
-        //Mail::to('eacevedof@gmail.com')->send(new \App\Emails\MyTestMail($details));
+        //Mail::to("eacevedof@gmail.com")->send(new \App\Emails\MyTestMail($details));
         $emailto = $this->get_env("MAIL_TO");
+
 
         if(Mail::failures())
             throw new Exception(Mail::failures());
