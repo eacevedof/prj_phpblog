@@ -2,6 +2,7 @@
 namespace App\Services\Common\Email;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
+use \Mail;
 
 class EmailService extends BaseService
 {
@@ -18,6 +19,7 @@ class EmailService extends BaseService
             'body' => 'This is for testing email using smtp'
         ];
 
-        \Mail::to('eacevedof@gmail.com')->send(new \App\Emails\MyTestMail($details));
+        //Mail::to('eacevedof@gmail.com')->send(new \App\Emails\MyTestMail($details));
+        Mail::to('eacevedof@gmail.com')->send(new \App\Emails\ContactEmail($details));
     }
 }
