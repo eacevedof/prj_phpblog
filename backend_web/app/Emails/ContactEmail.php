@@ -28,11 +28,11 @@ class ContactEmail extends Mailable
             ->view("emails.contact",[
                 "data"  =>  $this->data
             ])
-            ->attach($this->attachs)
+            //->attach($this->attachs)
             ;
     }
 
-    public function set_from(string $email, string $name){$this->arfrom = ["from"=>$email, "name"=>$name]; return $this;}
+    public function set_from(string $email, string $name){$this->arfrom = ["email"=>$email, "name"=>$name]; return $this;}
     public function set_subject(string $subject){$this->subj = $subject; return $this;}
     public function set_attachments(array $paths){$this->attachs = $paths; return $this;}
     public function add_attachments(string $path){$this->attachs[] = $path; return $this;}
