@@ -2,7 +2,8 @@
 namespace App\Services\Common\Email;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
-use \Mail;
+use Illuminate\Support\Facades\Mail;
+use \Exception;
 
 class EmailService extends BaseService
 {
@@ -22,6 +23,8 @@ class EmailService extends BaseService
 
         //Mail::to('eacevedof@gmail.com')->send(new \App\Emails\MyTestMail($details));
         $emailto = $this->get_env("MAIL_TO");
-        Mail::to($emailto)->send(new \App\Emails\ContactEmail($details));
+
+        if(Mail::failures())
+            throw new Exception(Mail::failures());
     }
 }
