@@ -1,11 +1,8 @@
 <?php
 namespace App\Http\Controllers\Common\Email;
 
-use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
 use App\Services\Common\Email\EmailService;
-use App\Services\Restrict\Post\PostIndexService;
-
 
 class EmailController extends BaseController
 {
@@ -24,7 +21,9 @@ class EmailController extends BaseController
 
         $this->_load_authid();
         try {
-            $r = (new EmailService())->send_contact();
+            $data = request()->all();
+            //dd($data);
+            $r = (new EmailService($data))->send_contact();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)

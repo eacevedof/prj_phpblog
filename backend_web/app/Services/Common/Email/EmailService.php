@@ -6,10 +6,11 @@ use \Mail;
 
 class EmailService extends BaseService
 {
+    private $data;
 
-    public function __construct()
+    public function __construct($data)
     {
-
+        $this->data = $data;
     }
 
     public function send_contact()
@@ -20,6 +21,7 @@ class EmailService extends BaseService
         ];
 
         //Mail::to('eacevedof@gmail.com')->send(new \App\Emails\MyTestMail($details));
-        Mail::to('eacevedof@gmail.com')->send(new \App\Emails\ContactEmail($details));
+        $emailto = $this->get_env("MAIL_TO");
+        Mail::to($emailto)->send(new \App\Emails\ContactEmail($details));
     }
 }
