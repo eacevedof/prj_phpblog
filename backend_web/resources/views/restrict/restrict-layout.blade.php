@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/enlighter/enlighterjs.min.css') }}" rel="stylesheet" />
 </head>
 <body>
 <script>
@@ -84,5 +85,6 @@
             @yield('content')
         </main>
     </div>
+@include("common.elements.enlighter")
 </body>
 </html>
