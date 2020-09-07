@@ -41,3 +41,10 @@
 .app-card {
     border: 1px solid #8eddf9;
 }
+
+.app-card-bb {
+    border-bottom: 1px solid #8eddf9;
+}
+.app-card-bt {
+    border-top: 1px solid #8eddf9;
+}

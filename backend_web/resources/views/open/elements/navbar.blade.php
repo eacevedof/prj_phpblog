@@ -10,13 +10,17 @@
                         <i class="fa fa-home" aria-hidden="true"></i>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ $catslug=="blog" ? "active" : "" }}" href="{{ route('open.blog.index') }}">
+                        Blog
+                    </a>
+                </li>
                 <!--
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('open.home.aboutme') }}">Sobre mí</a>
                 </li>
                 -->
                 @include("open.elements.submenublog")
-
                 <li class="nav-item">
                     <a class="nav-link {{ $catslug=="contact" ? "active" : "" }}" href="{{ route('open.home.contact') }}">Contacto</a>
                 </li>
