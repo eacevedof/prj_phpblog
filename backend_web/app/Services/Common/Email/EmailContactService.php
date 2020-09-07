@@ -54,5 +54,7 @@ class EmailContactService extends BaseemailService
             ->to($this->data["email"])
             ->bcc($this->get_env("MAIL_TO"))
             ->send($mailable);
+
+        return true;
     }
 }

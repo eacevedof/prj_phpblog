@@ -9,8 +9,7 @@ class EmailController extends BaseController
 
     public function contact()
     {
-
-        $this->_load_authid();
+        //$this->_load_authid();
         try {
             $data = request()->all();
             //dd($data);
