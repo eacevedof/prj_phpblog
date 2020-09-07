@@ -15,7 +15,7 @@ $factory->define(AppPost::class, function (Faker $faker) {
     ];
 
     $categories = [
-        "sql","php","js","docker","mongodb","python"
+        "sql","php","javascript","docker","python"
     ];
 
     $slug = $faker->slug;
@@ -27,6 +27,7 @@ $factory->define(AppPost::class, function (Faker $faker) {
         "slug" => $slug,
         "url_final"=>$url,
         //"content" => $faker->text,
+        "id_type" => $faker->numberBetween(3,7),
         "content" => $faker->realText(rand(1000,5000)),
         "url_img1" => $faker->randomElement($images),
         "id_status" => $faker->numberBetween(0,1),

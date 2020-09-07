@@ -26,7 +26,7 @@ class BlogController extends BaseController
         $category = $this->_get_category($catslug);
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description];
 
-        $r = (new PostIndexService())->get_list_by_user();
+        $r = (new PostIndexService())->get_list_by_category($category->id);
         return view('open.blog.category', [
             "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.blog.category.{$catslug}"),

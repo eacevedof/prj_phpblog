@@ -26,6 +26,18 @@ class PostIndexService extends BaseService
         return $r;
     }
 
+    public function get_list_by_category($idcategory)
+    {
+        $r = $this->qb->whereNull("delete_date")
+            ->where("is_enabled","=","1")
+            ->where("id_type","=",$idcategory)
+            ->orderBy("id","desc")
+            ->get()
+        ;
+        $this->logd($r,"order by??");
+        return $r;
+    }
+
     public function get_top09()
     {
         $r = $this->qb->whereNull("delete_date")
