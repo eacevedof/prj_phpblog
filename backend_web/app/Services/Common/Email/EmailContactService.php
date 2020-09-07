@@ -35,7 +35,8 @@ class EmailContactService extends BaseemailService
 
     protected function _exceptions()
     {
-        if(!$this->data) throw new \Exception("EmailContactService: No data provided");
+        //if(!$this->data) throw new \Exception("EmailContactService: No data provided");
+        if(!$this->data["name"]) throw new \Exception("EmailContactService: No name provided");
         if(!$this->data["email"]) throw new \Exception("EmailContactService: No email provided");
         if(!$this->data["message"]) throw new \Exception("EmailContactService: Message is empty");
     }
