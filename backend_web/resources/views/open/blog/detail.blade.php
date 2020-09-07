@@ -8,7 +8,7 @@
 
 @include("open.elements.hashlinks")
 
-<div class="card lg-12 app-card">
+<div class="card lg-12 app-card mb-2">
     <div class="row g-0">
         <div class="col-md-12">
             <div class="card-body">
@@ -27,4 +27,6 @@
         </div>
     </div>
 </div>
+
+@include("open.elements.hashlinks")
 @endsection
