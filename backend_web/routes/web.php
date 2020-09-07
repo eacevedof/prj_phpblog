@@ -36,3 +36,4 @@ Route::get('/adm/post/update/{idpost}', 'Restrict\PostController@update')->name(
 Route::get('/adm/post/detail/{idpost}', 'Restrict\PostController@detail')->name('restrict.post.detail');
 
 Route::apiResource("api/post","Api\PostController");
+Route::apiResource("api/post/category","Api\CategoryController");
