@@ -5,7 +5,7 @@ class EnlighterjsComponent
 {
     private $data;
     private $codes;
-    private $pattern = "#<code[\s]+data-enlighter-language=\"[a-z]+\">(.*?)</code>#s";
+    private const PATTERN = "#<code[\s]+data-enlighter-language=\"[a-z]+\">(.*?)</code>#s";
     private $replaced;
 
     public function __construct(string $data)
@@ -18,7 +18,7 @@ class EnlighterjsComponent
     {
         //data-enlighter-language="less"
         $result = [];
-        preg_match_all($this->pattern,$this->data,$result);
+        preg_match_all(self::PATTERN, $this->data,$result);
         return [
             "elements" => $result[0] ?? [],
             "innerhtml" => $result[1] ?? [],
