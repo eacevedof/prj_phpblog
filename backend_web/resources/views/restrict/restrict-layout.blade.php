@@ -85,6 +85,6 @@
             @yield('content')
         </main>
     </div>
-@include("common.elements.enlighter")
+@include("common.elements.enlighterjs")
 </body>
 </html>
