@@ -6,30 +6,39 @@
 
 @section("container")
 <!-- formulario de contacto -->
-<div class="form-contact_container">
+<div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Formulario de contacto</h5>
+    </div>
     @verbatim
-    <form @submit="checkform" id="form-contact" class="contact_form">
-        <div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <label for="name">Nombre</label>
-                    <input type="text" id="name" v-model="name" placeholder="...tu nombre" class="contact_input" required="required">
-                </div>
-                <div class="col-lg-6">
-                    <label for="email">Email</label>
-                    <input id="email" type="email" v-model="email" placeholder="tu-email@dominio.com" class="contact_input" required="required">
-                </div>
+    <div class="card-body">
+        <form @submit="checkform" id="form-contact" class="row g-3">
+            <div class="col-6">
+                <label for="name">Nombre *</label>
+                <input type="text" id="name" v-model="name" placeholder="...tu nombre" class="form-control" required="required">
             </div>
-        </div>
-        <div><input type="text" v-model="subject" placeholder="Asunto" class="contact_input" style="margin-top:15px"></div>
-        <div><textarea v-model="message" class="contact_input contact_textarea" placeholder="Mensaje" required="required" style="margin-top:15px;"></textarea></div>
-        <button id="btn-contact" class="contact_form_button" :disabled="issending" >
-            {{btnsend}}
-            <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
-        </button>
-    </form>
-    @endverbatim
+            <div class="col-6">
+                <label for="email">Email *</label>
+                <input id="email" type="email" v-model="email" placeholder="tu-email@dominio.com" class="form-control" required="required">
+            </div>
+            <div class="col-6">
+                <label for="subject" class="form-label">Asunto *</label>
+                <input type="text" id="subject" v-model="subject" placeholder="Asunto" class="form-control">
+            </div>
+            <div class="col-12">
+                <label for="message" class="form-label">Mensaje *</label>
+                <textarea id="message" v-model="message" class="form-control"  placeholder="Mensaje" required="required"></textarea>
+            </div>
+            <div class="col-12">
+                <button id="btn-contact" class="btn btn-dark" :disabled="issending" >
+                    {{btnsend}}
+                    <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
+@endverbatim
 <script>
 const app = new Vue({
     el: "#form-contact",
@@ -50,10 +59,12 @@ const app = new Vue({
             this.subject = ""
             this.message = ""
         },
+
+
         checkform: function(e) {
-            const self = this
-            console.log("checkform")
             e.preventDefault()
+            const self = this
+
             this.issending = true
             this.btnsend = "Enviando..."
             const data = new FormData();
@@ -63,37 +74,46 @@ const app = new Vue({
             data.append("email",this.email)
             data.append("subject",this.subject)
             data.append("message",this.message)
-            console.log("data pre fetch",data)
+            //console.log("data pre fetch",data)
             fetch('/email/contact', {
                 method: "post",
                 body: data
             })
+            .then(response => response.json())
             .then(response => {
                 this.issending = false
                 this.btnsend = "Enviar"
                 console.log("reponse ok",response)
-                if(response.ok) {
-                    //console.log("e.target",e.target)
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Gracias por contactar con nosotros!',
-                        html: 'En breves momentos recibirás una copia del mensaje en tu email.',
-                    })
-                    self.reset()
-                } else {
-                    Swal.fire({
+
+                if(typeof response.error != "undefined"){
+                    return Swal.fire({
                         icon: 'warning',
-                        title: 'Proceso incompleto',
-                        text: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde o prueba por teléfono (34 91 455 74 43).  Disculpa las molestias.',
+                        title: 'Proceso incompleto (1)',
+                        html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias. <br/>'+response.error,
                     })
                 }
+
+                if(!response.ok){
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: 'Proceso incompleto (2)',
+                        html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias.<br/>'+response.statusText,
+                    })
+                }
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Gracias por contactar conmigo!',
+                    html: 'En breves momentos recibirás una copia del mensaje en tu email.',
+                })
+                self.reset()
             })
             .catch(error => {
                 console.log("catch.error",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Vaya! Algo ha ido mal',
-                    text: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde o prueba por teléfono (34 91 455 74 43).  Disculpa las molestias.'+error.toString(),
+                    title: 'Vaya! Algo ha ido mal (c)',
+                    html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias. \n'+error,
                 })
             })
             .finally(()=>{
@@ -102,8 +122,8 @@ const app = new Vue({
             })
         }
     },//methods
+
     mounted(){
-        console.log("form-contact.html.twig mounted")
         document.getElementById("form-contact").reset()
     }
 })

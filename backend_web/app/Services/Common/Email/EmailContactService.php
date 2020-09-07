@@ -1,7 +1,6 @@
 <?php
 namespace App\Services\Common\Email;
 
-use Illuminate\Support\Facades\Mail;
 use \Exception;
 use \App\Emails\ContactEmail;
 
@@ -13,14 +12,19 @@ class EmailContactService extends BaseemailService
         $this->data = $this->_get_data($post);
     }
 
+    private function _get_trimmed($key,$post)
+    {
+        return trim($post[$key] ?? "");
+    }
+
     private function _get_data($post)
     {
         return [
-            "subject" => $post["subject"] ?? "",
-            "message" => $post["message"] ?? "",
-            "email"   => $post["email"] ?? "",
-            "phone"   => $post["phone"] ?? "",
-            "name"    => $post["name"] ?? "",
+            "subject" => $this->_get_trimmed("subject",$post),
+            "message" => $this->_get_trimmed("message",$post),
+            "email"   => $this->_get_trimmed("email",$post),
+            "phone"   => $this->_get_trimmed("phone",$post),
+            "name"    => $this->_get_trimmed("name",$post),
         ];
     }
 
@@ -36,9 +40,10 @@ class EmailContactService extends BaseemailService
     protected function _exceptions()
     {
         //if(!$this->data) throw new \Exception("EmailContactService: No data provided");
-        if(!$this->data["name"]) throw new \Exception("EmailContactService: No name provided");
-        if(!$this->data["email"]) throw new \Exception("EmailContactService: No email provided");
-        if(!$this->data["message"]) throw new \Exception("EmailContactService: Message is empty");
+        if(!$this->data["name"]) throw new Exception("EmailContactService: No name provided");
+        if(!$this->data["email"]) throw new Exception("EmailContactService: No email provided");
+        if(!$this->data["subject"]) throw new Exception("EmailContactService: No subject provided");
+        if(!$this->data["message"]) throw new Exception("EmailContactService: Message is empty");
     }
 
     public function send()

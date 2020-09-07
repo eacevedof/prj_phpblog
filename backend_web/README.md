@@ -117,3 +117,20 @@ public function render($request, Throwable $exception)
     return parent::render($request, $exception);
 }
 ```
+**error el json devolvia un error 500 y no mostraba la excepcion del servidor**
+```js
+...
+.then(response => {
+    this.issending = false
+    this.btnsend = "Enviar"
+    console.log("reponse ok",response)
+
+    if(typeof response.error != "undefined"){
+        return Swal.fire({
+            icon: 'warning',
+            title: 'Proceso incompleto (1)',
+            html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias. <br/>'+response.error,
+        })
+    }
+```
+- Faltaba aplicar `.then(response => response.json())` en primera linea ya que la primera respuesta es una promesa de estado
