@@ -15,8 +15,7 @@
 .app-breadscrumb-item > a {
     text-decoration: none;
     color: white;
-
-    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji !important;
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji" !important;
 }
 
 .app-breadscrumb-item > a:hover {
@@ -29,4 +28,12 @@
     padding-right: .5rem;
     color: black;
     content: "/";
+}
+
+.app-footer {
+    background: #425466 !important;
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+.app-footer a {
+    text-decoration: none;
 }
