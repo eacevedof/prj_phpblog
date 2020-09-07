@@ -7,8 +7,8 @@
 <p>
     Hello <b>{{$data["name"] ?? ""}}!</b> This is an automatic response. <br/>
     Thank you for contacting me. <br/>
-    I send you a copy of the contact message. I will respond ASAP. <br/>
-    Cheers.
+    I send you a copy of your message. I will respond ASAP. <br/>
+    Cheers!.
 </p>
 <div style="border: 1px solid #ccc; padding:3px;">
     <h4>Subject:<br/> "{{ $data["subject"] ?? "" }}" </h4>
