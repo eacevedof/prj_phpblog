@@ -94,3 +94,26 @@ Learn more at 535 5.7.8 https://support.google.com/mail/?p=BadCredentials b1sm19
 ```
 - faltaba habilitar https://myaccount.google.com/u/0/lesssecureapps?pli=1
 - Es obligatorio: MAIL_FROM_ADDRESS=noreply@eduardoaf.com
+****
+**error**
+```
+Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException
+The GET method is not supported for this route. Supported methods: POST.
+```
+- hay que tratarloe en app/Exceptions/Handler.php
+```php
+///app/Exceptions/Handler.php
+public function render($request, Throwable $exception)
+{
+    if($exception instanceof MethodNotAllowedHttpException)
+    {
+        //no me vale abort pq lanza HttpException(..)
+        //abort(501,"Method is not allowed for the requested route");
+        return response()->json([
+            "error" => 'Method is not allowed for the requested route',
+        ], 405 );
+    }
+
+    return parent::render($request, $exception);
+}
+```
