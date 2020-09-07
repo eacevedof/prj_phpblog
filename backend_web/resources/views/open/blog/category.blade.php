@@ -5,7 +5,7 @@
 @section("pagekeywords",$seo["keywords"] ?? "")
 
 @section("container")
-<h1 class="display-6 mt-4 mb-3"> Blog - Todos los artículos:</h1>
+<h1 class="display-6 mt-4 mb-3"> Artículos de {{$category}}:</h1>
 <p>
     <small>Total: {{$result->count()}}</small>
 </p>

@@ -5,13 +5,15 @@ use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
 use App\Services\Common\Category\CategoryService;
 use App\Services\Restrict\Post\PostDetailService;
+use App\Services\Restrict\Post\PostIndexService;
 
 class BlogController extends BaseController
 {
     public function __invoke()
     {
+        $r = (new PostIndexService())->get_list_by_user();
         return view('open.blog.index', [
-            "result"      => [],
+            "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.blog.index"),
             "breadscrumb" => $this->_get_scrumb("open.blog.index"),
             "submenublog" => $this->_get_submenu_blog(),
@@ -24,17 +26,21 @@ class BlogController extends BaseController
         $category = $this->_get_category($catslug);
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description];
 
-        return view('open.blog.index', [
-            "result"      => [],
+        $r = (new PostIndexService())->get_list_by_user();
+        return view('open.blog.category', [
+            "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.blog.category.{$catslug}"),
             "breadscrumb" => $this->_get_scrumb("open.blog.category", $repconfig),
             "submenublog" => $this->_get_submenu_blog(),
             "catslug"     => "blog",
+            "category"    => $category->description,
         ]);
     }
 
-    public function detail($catslug,$postslug)
+    public function detail($catslug, $postslug)
     {
+        //dd($postslug);
+        $category = $this->_get_category($catslug);
         $r = (new PostDetailService())->get_by_slug($postslug);
         $this->_error_404($r);
 
@@ -45,12 +51,11 @@ class BlogController extends BaseController
             "keywords" => "",
         ];
 
-        $category = $this->_get_category($catslug);
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description,"slug"=>$postslug,"slugtext"=>$post->title];
 
-        return view('open.blog.index', [
-            "result"      => [],
-            "post"        => $post,
+        return view('open.blog.detail', [
+            "result"      => $post,
+            //"post"        => ,
             "seo"         => $seo,
             "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
             "submenublog" => $this->_get_submenu_blog(),
