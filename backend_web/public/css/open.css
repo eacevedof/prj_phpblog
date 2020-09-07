@@ -48,3 +48,9 @@
 .app-card-bt {
     border-top: 1px solid #8eddf9;
 }
+
+.app-hashlink {
+    color: #01acea;
+    font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    text-decoration: none;
+}
