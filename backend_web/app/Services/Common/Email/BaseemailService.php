@@ -8,7 +8,7 @@ abstract class BaseemailService extends BaseService
 {
     protected $data;
 
-    protected $to;
+    protected $to = [];
     protected $cc = [];
     protected $bcc = [];
     protected $attachments = [];
@@ -21,12 +21,12 @@ abstract class BaseemailService extends BaseService
     abstract protected function _exceptions();
     abstract protected function _get_mailable();
 
-    protected function _get_mailobj()
+    protected function _get_mailobj($locale="es")
     {
         $mail = Mail::to(array_unique($this->to));
-        $mail->locale("es");
-        $mail->cc(array_unique($this->cc));
-        $mail->bcc(array_unique($this->bcc));
+        $mail->locale($locale);
+        //$mail->cc(array_unique($this->cc));
+        //$mail->bcc(array_unique($this->bcc));
         return $mail;
     }
 

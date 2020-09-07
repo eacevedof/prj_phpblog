@@ -55,6 +55,7 @@ class Handler extends ExceptionHandler
         {
             //no me vale abort pq lanza HttpException(..)
             //abort(501,"Method is not allowed for the requested route");
+            //return response()->view('errors.custom', [], 500);
             return response()->json([
                 "error" => 'Method is not allowed for the requested route',
             ], 405 );

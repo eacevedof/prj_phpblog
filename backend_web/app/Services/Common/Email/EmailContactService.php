@@ -10,27 +10,26 @@ class EmailContactService extends BaseemailService
     public function __construct($post)
     {
         $this->logd($post,"emailcontactservice.construct");
-        $this->data = $post;
+        $this->data = $this->_get_data($post);
     }
 
-    private function _get_data()
+    private function _get_data($post)
     {
         return [
-            "subject" => $this->data["subject"] ?? "",
-            "message" => $this->data["message"] ?? "",
-            "email"   => $this->data["email"] ?? "",
-            "phone"   => $this->data["phone"] ?? "",
-            "name"    => $this->data["name"] ?? "",
+            "subject" => $post["subject"] ?? "",
+            "message" => $post["message"] ?? "",
+            "email"   => $post["email"] ?? "",
+            "phone"   => $post["phone"] ?? "",
+            "name"    => $post["name"] ?? "",
         ];
     }
 
     protected function _get_mailable()
     {
-        $data = $this->_get_data();
         //from, subject y attachments van aqui
-        return (new ContactEmail($data))
+        return (new ContactEmail($this->data))
                 ->set_from($this->get_env("MAIL_FROM_ADDRESS"),$this->get_env("MAIL_FROM_NAME"))
-                ->set_subject($data["subject"])
+                ->set_subject($this->data["subject"])
                 ->set_attachments($this->attachments);
     }
 
@@ -50,10 +49,9 @@ class EmailContactService extends BaseemailService
 
         //fachada que necesita un mailable
         //locale, to, cc, bcc
-        $this->add_to($this->data["email"])->add_bcc($this->get_env("MAIL_TO"));
-        $this->_get_mailobj()->send($mailable);
-
-        if(Mail::failures())
-            throw new Exception(Mail::failures());
+        $this->_get_mailobj("es")
+            ->to($this->data["email"])
+            ->bcc($this->get_env("MAIL_TO"))
+            ->send($mailable);
     }
 }
