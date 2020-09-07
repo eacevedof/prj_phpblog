@@ -9,6 +9,9 @@
 <p>
     <small>Total: {{$result->count()}}</small>
 </p>
+<p>
+    <a href="/blog/javascript"
+</p>
 <div class="row">
     @foreach ($result as $post)
         <div class="col-md-4">

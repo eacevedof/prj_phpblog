@@ -5,14 +5,12 @@
 @section("pagekeywords",$seo["keywords"] ?? "")
 
 @section("container")
-<div class="card lg-12">
+<div class="card lg-12 app-card">
     <div class="row g-0">
-        <div class="col-md-4">
-            <img src="{{$result->url_img1}}" alt="{{$result->title}}" width="350">
-        </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card-body">
-                <h5 class="card-title">{{$result->title}}</h5>
+                <h1 class="card-title display-6">{{$result->title}}</h1>
+                <img src="{{$result->url_img1}}" alt="{{$result->title}}" width="350" class="pull-left mr-3">
                 <p class="card-text">{{$result->content}}</p>
                 <p class="card-text text-right">
                     <small class="text-muted">Autor: Eduardo A. F.</small><br/>
