@@ -88,19 +88,10 @@ const app = new Vue({
                 if(typeof response.error != "undefined"){
                     return Swal.fire({
                         icon: 'warning',
-                        title: 'Proceso incompleto (1)',
+                        title: 'Proceso incompleto',
                         html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias. <br/>'+response.error,
                     })
                 }
-
-                if(!response.ok){
-                    return Swal.fire({
-                        icon: 'warning',
-                        title: 'Proceso incompleto (2)',
-                        html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias.<br/>'+response.statusText,
-                    })
-                }
-
                 Swal.fire({
                     icon: 'success',
                     title: 'Gracias por contactar conmigo!',
