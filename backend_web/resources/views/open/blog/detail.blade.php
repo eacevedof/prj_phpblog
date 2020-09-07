@@ -5,6 +5,9 @@
 @section("pagekeywords",$seo["keywords"] ?? "")
 
 @section("container")
+
+@include("open.elements.hashlinks")
+
 <div class="card lg-12 app-card">
     <div class="row g-0">
         <div class="col-md-12">
