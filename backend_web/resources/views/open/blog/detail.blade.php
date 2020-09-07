@@ -14,7 +14,7 @@
             <div class="card-body">
                 <h1 class="card-title display-6">{{$result->title}}</h1>
                 <img src="{{$result->url_img1}}" alt="{{$result->title}}" width="350" class="pull-left mr-3">
-                <p class="card-text">{{$result->content}}</p>
+                <p class="card-text">{!!$result->content!!}</p>
                 <p class="card-text text-right">
                     <small class="text-muted">Autor: Eduardo A. F.</small><br/>
                     <small class="text-muted">Publicado: {{ get_ymd_hi($result->publish_date) }}</small>

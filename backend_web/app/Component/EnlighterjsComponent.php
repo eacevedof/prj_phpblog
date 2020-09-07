@@ -3,9 +3,9 @@ namespace App\Component;
 
 class EnlighterjsComponent
 {
+    private const PATTERN = "#<code[\s]+data-enlighter-language=\"[a-z]+\">(.*?)</code>#s";
     private $data;
     private $codes;
-    private const PATTERN = "#<code[\s]+data-enlighter-language=\"[a-z]+\">(.*?)</code>#s";
     private $replaced;
 
     public function __construct(string $data)

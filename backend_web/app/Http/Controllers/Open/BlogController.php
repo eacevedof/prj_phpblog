@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers\Open;
 
+use App\Component\EnlighterjsComponent;
 use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
 use App\Services\Common\Category\CategoryService;
@@ -45,6 +46,7 @@ class BlogController extends BaseController
         $this->_error_404($r);
 
         $post = $r->first();
+        $post->content = (new EnlighterjsComponent($post->content))->get_cleaned();
         $seo=[
             "title" => $post->seo_title,
             "description" => $post->seo_description,
