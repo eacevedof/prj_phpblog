@@ -98,11 +98,11 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="dat-publish_date">Published</label>
-                        <input type="date" id="dat-publish_date" v-model="post.publish_date" class="form-control" />
+                        <input type="date" id="dat-publish_date" v-model="post.publish_date" class="form-control" readonly />
                     </div>
                     <div class="form-group col-md-3">
                         <label for="dat-last_update">Last update</label>
-                        <input type="date" id="dat-last_update" v-model="post.last_update" class="form-control" />
+                        <input type="date" id="dat-last_update" v-model="post.last_update" class="form-control" readonly />
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txt-seo_title">SEO Title</label>
