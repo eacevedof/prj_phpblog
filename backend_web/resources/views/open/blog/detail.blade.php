@@ -25,7 +25,7 @@
     <div class="row g-0">
         <div class="col-md-12">
             <div class="card-body">
-                <h1 class="card-title display-6">{{$result->title}}</h1>
+                <h1 class="card-title mb-3">{{$result->title}}</h1>
                 @if($result->url_img2)
                     <img src="{{$result->url_img2}}" alt="{{$result->title}}" width="450" class="pull-left mr-3 img-fluid">
                 @endif

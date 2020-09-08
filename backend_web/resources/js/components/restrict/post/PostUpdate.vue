@@ -36,7 +36,7 @@
                         <span class="form-control">{{ post.id }}</span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="sel-id_type">Category</label>
+                        <label for="sel-id_type">Category *</label>
                         <select id="sel-id_type" v-model="post.id_type" class="form-control" required>
                             <option disabled value="">Choose one</option>
                             <option v-for="category in categories" :value="category.id">{{category.description}}</option>
@@ -47,36 +47,35 @@
                         <label for="chk-is_page" class="form-check-label"><b>Is single page</b></label>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="txt-title">title</label>
+                        <label for="txt-title">Title *</label>
                         <input type="text" id="txt-title" v-model="post.title" @change="onchange_title()" maxlength="350" class="form-control" required>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="txt-slug">Slug</label>
-                        <input type="text" id="txt-slug" v-model="post.slug" maxlength="150" class="form-control"/>
+                        <label for="txa-content">content</label>
+                        <textarea id="txa-content" v-model="post.content" rows="20" cols="10" class="form-control"></textarea>
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="txt-url_final">Permalink</label>
-                        <input type="text" id="txt-url_final" v-model="post.url_final" maxlength="300" class="form-control"/>
+                        <label for="txa-excerpt">excerpt</label>
+                        <textarea id="txa-excerpt" v-model="post.excerpt" maxlength="1000" rows="3" cols="5" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="txt-slug">Slug *</label>
+                        <input type="text" id="txt-slug" v-model="post.slug" maxlength="150" class="form-control" required/>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label for="txt-url_final">Permalink *</label>
+                        <input type="text" id="txt-url_final" v-model="post.url_final" maxlength="300" class="form-control" required/>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-subtitle">subtitle</label>
                         <input type="text" id="txt-subtitle" v-model="post.subtitle" maxlength="250" class="form-control">
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="txa-content">content</label>
-                        <textarea id="txa-content" v-model="post.content" rows="15" cols="10" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="txa-excerpt">excerpt</label>
-                        <textarea id="txa-excerpt" v-model="post.excerpt" maxlength="1000" rows="3" cols="5" class="form-control"></textarea>
-                    </div>
-
-                    <div class="form-group col-md-12">
-                        <label for="txt-url_img1">Url img1</label>
-                        <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control"/>
+                        <label for="txt-url_img1">Url img1 (list)*</label>
+                        <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control" required/>
                     </div>
                     <div class="form-group col-md-6">
-                        <label for="txt-url_img2">Url img2</label>
+                        <label for="txt-url_img2">Url img2 (detail)</label>
                         <input type="text" id="txt-url_img2" v-model="post.url_img2" maxlength="300" class="form-control"/>
                     </div>
                     <div class="form-group col-md-6">
@@ -245,7 +244,7 @@ export default {
 
                 Swal.fire({
                     icon: 'success',
-                    title: `Post: "${self.post.description}" (${self.post.id}) <br/> changed`,
+                    title: `Post: "${self.post.slug}" (${self.post.id}) <br/> changed`,
                     html: `<b>&#128578;</b>`,
                 })
 
