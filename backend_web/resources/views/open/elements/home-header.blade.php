@@ -3,7 +3,7 @@
         <h5 class="card-title">Blog de Eduardo Acevedo</h5>
     </div>
     <div class="card-body">
-        <img src="https://resources.theframework.es/eduardoaf.com/20200906/095050-logo-eduardoafcom_500.png" width="400" class="pull-left mr-3">
+        <img src="https://resources.theframework.es/eduardoaf.com/20200906/095050-logo-eduardoafcom_500.png" width="300" class="pull-left mr-3 debug">
         <p class="card-text">
             Soy desarrollador Fullstack especializado en lenguajes backend <b>PHP</b> y <b>Python</b>. <br/><br/>
             Llevo más de 15 años como informático lo que ha permitido involucrarme en distintas áreas. Desde hacer cableados de red
