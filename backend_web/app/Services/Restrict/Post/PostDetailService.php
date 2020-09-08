@@ -39,4 +39,12 @@ class PostDetailService extends BaseService
 
         return $r;
     }
+
+    public function get_by_id($id)
+    {
+        $r = $this->qb->whereNull("delete_date")
+            ->where("id","=",$id)
+            ->get();
+        return $r;
+    }
 }

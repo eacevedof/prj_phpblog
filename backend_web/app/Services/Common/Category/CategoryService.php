@@ -52,4 +52,18 @@ class CategoryService extends BaseService
         $this->log($this->qb->getBindings(), "get_blogsmenu.bindings");
         return $r;
     }
+
+    public function get_by_id($id)
+    {
+        $r = $this->qb->whereNull("delete_date")
+            ->where("is_enabled","=","1")
+            ->where("id","=",$id)
+            //->orderBy("order_by")
+            //->orderBy("description")
+            ->get();
+
+        $this->log($this->qb->toSql(),"get_by_id");
+        $this->log($this->qb->getBindings(), "get_by_id.bindings");
+        return $r;
+    }
 }

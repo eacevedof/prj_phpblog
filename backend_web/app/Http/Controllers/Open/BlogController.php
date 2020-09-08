@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseController;
 use App\Services\Common\Category\CategoryService;
 use App\Services\Restrict\Post\PostDetailService;
 use App\Services\Restrict\Post\PostIndexService;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends BaseController
 {
@@ -58,6 +59,34 @@ class BlogController extends BaseController
         return view('open.blog.detail', [
             "result"      => $post,
             //"post"        => ,
+            "seo"         => $seo,
+            "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
+            "submenublog" => $this->_get_submenu_blog(),
+            "catslug"     => "blog",
+        ]);
+    }
+
+    //blog/draft/{id}
+    public function detail_draft($id)
+    {
+        if(!Auth::id())
+            abort(403,"Not authorized");
+        //dd($postslug);
+        $r = (new PostDetailService())->get_by_id($id);
+        $this->_error_404($r);
+
+        $post = $r->first();
+        $post->content = (new EnlighterjsComponent($post->content))->get_cleaned();
+        $seo=[
+            "title" => $post->seo_title,
+            "description" => $post->seo_description,
+            "keywords" => "",
+        ];
+
+        $repconfig = ["category"=>"draft","categorytext"=>"draft","slug"=>$post->slug,"slugtext"=>$post->title];
+
+        return view('open.blog.detail', [
+            "result"      => $post,
             "seo"         => $seo,
             "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
             "submenublog" => $this->_get_submenu_blog(),

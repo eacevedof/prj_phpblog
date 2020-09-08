@@ -17,6 +17,7 @@ Route::get('/contacto', 'Open\ContactController')->name("open.home.contact");
 Route::get('/eduardo-acevedo-farje', 'Open\AboutmeController')->name("open.home.aboutme");
 
 //blog
+Route::get('/blog/draft/{id}','Open\BlogController@detail_draft')->name("open.blog.detaildraft");
 Route::get('/blog/search/{search}','Open\BlogController')->name("open.blog.search");
 Route::get('/blog/{catslug}/{postslug}','Open\BlogController@detail')->name("open.blog.detail");
 Route::get('/blog/{catslug}','Open\BlogController@category')->name("open.blog.category");
