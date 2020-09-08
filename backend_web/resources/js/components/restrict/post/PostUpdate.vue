@@ -3,8 +3,13 @@
         <div class="card-body">
             <form @submit="handleSubmit">
                 <div class="row card-header app-formheader">
-                    <div class="col-md-9">
+                    <div class="col-md-8 col-sm-6 pt-2">
                         <h1>Update post</h1>
+                    </div>
+                    <div class="col-md-1">
+                        <a v-if="post.id_status==0" class="btn btn-dark app-btnformheader" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary app-btnformheader" :disabled="issending">
@@ -120,6 +125,11 @@
                             {{btnsend}}
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
+                        &nbsp; &nbsp;
+                        <a v-if="post.id_status==0" class="btn btn-dark mt-4" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
+                            Draft &nbsp;
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </form>

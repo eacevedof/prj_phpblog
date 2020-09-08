@@ -91,6 +91,7 @@ class BlogController extends BaseController
             "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
             "submenublog" => $this->_get_submenu_blog(),
             "catslug"     => "blog",
+            "isdraft"     => true,
         ]);
     }
 

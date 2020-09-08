@@ -2440,6 +2440,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -38261,11 +38271,11 @@ var render = function() {
                     ? _c(
                         "a",
                         {
-                          staticClass: "btn btn-primary",
+                          staticClass: "btn btn-dark",
                           attrs: {
                             disabled: _vm.issending,
                             target: "_blank",
-                            href: "/adm/blog/draft/" + item.id
+                            href: "/blog/draft/" + item.id
                           }
                         },
                         [
@@ -39124,6 +39134,28 @@ var render = function() {
         _c("div", { staticClass: "row card-header app-formheader" }, [
           _vm._m(0),
           _vm._v(" "),
+          _c("div", { staticClass: "col-md-1" }, [
+            _vm.post.id_status == 0
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-dark app-btnformheader",
+                    attrs: {
+                      disabled: _vm.issending,
+                      target: "_blank",
+                      href: "/blog/draft/" + _vm.post.id
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-window-maximize",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
+                )
+              : _vm._e()
+          ]),
+          _vm._v(" "),
           _c("div", { staticClass: "col-md-2" }, [
             _c(
               "button",
@@ -39862,7 +39894,30 @@ var render = function() {
                         })
                       : _vm._e()
                   ]
-                )
+                ),
+                _vm._v("\n                       \n                    "),
+                _vm.post.id_status == 0
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-dark mt-4",
+                        attrs: {
+                          disabled: _vm.issending,
+                          target: "_blank",
+                          href: "/blog/draft/" + _vm.post.id
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        Draft  \n                        "
+                        ),
+                        _c("i", {
+                          staticClass: "fa fa-window-maximize",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  : _vm._e()
               ])
             ])
           : _vm._e()
@@ -39875,7 +39930,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [
+    return _c("div", { staticClass: "col-md-8 col-sm-6 pt-2" }, [
       _c("h1", [_vm._v("Update post")])
     ])
   },

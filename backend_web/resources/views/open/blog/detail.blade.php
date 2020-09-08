@@ -9,12 +9,15 @@
 @include("open.elements.hashlinks")
 
 @auth
+@if(!isset($isdraft))
 <div class="row">
     <div class="col-12 mb-3">
         <a href="/adm/post/update/{{$result->id}}" target="_blank" class="btn btn-sm btn-primary pull-right">Edit ({{$result->id}})</a>
     </div>
 </div>
+@endif
 @endauth
+
 <div class="card lg-12 app-card mb-2">
     <div class="row g-0">
         <div class="col-md-12">
@@ -34,12 +37,16 @@
         </div>
     </div>
 </div>
+
 @auth
-    <div class="row">
-        <div class="col-12 mb-3">
-            <a href="/adm/post/update/{{$result->id}}" target="_blank" class="btn btn-sm btn-primary pull-right">Edit ({{$result->id}})</a>
-        </div>
+@if(!isset($isdraft))
+<div class="row">
+    <div class="col-12 mb-3">
+        <a href="/adm/post/update/{{$result->id}}" target="_blank" class="btn btn-sm btn-primary pull-right">Edit ({{$result->id}})</a>
     </div>
+</div>
+@endif
 @endauth
+
 @include("open.elements.hashlinks")
 @endsection
