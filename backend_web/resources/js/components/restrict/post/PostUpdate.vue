@@ -10,6 +10,10 @@
                         <a v-if="post.id_status==0" class="btn btn-dark res-btnformheader" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
                             Draft &nbsp;<i class="fa fa-window-maximize" aria-hidden="true"></i>
                         </a>
+                        <a v-if="post.id_status!=0" class="btn btn-info res-btnformheader" :disabled="issending" target="_blank" :href="post.url_final">
+                            View &nbsp;
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
                     </div>
                     <div class="col-md-2">
                         <button class="btn btn-primary res-btnformheader" :disabled="issending">
@@ -128,6 +132,10 @@
                         &nbsp; &nbsp;
                         <a v-if="post.id_status==0" class="btn btn-dark mt-4" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
                             Draft &nbsp;
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
+                        <a v-if="post.id_status!=0" class="btn btn-info mt-4" :disabled="issending" target="_blank" :href="post.url_final">
+                            View &nbsp;
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
                         </a>
                     </div>

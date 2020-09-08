@@ -30,7 +30,10 @@
                         v-bind:class="{ 'res-tddel': item.delete_date }"
                     >{{item[column]}}</td>
                     <td>
-                        <a v-if="item.id_status==0" class="btn btn-dark" :disabled="issending" target="_blank" :href="'/blog/draft/'+item.id">
+                        <a v-if="item.id_status==0" class="btn btn-dark" target="_blank" :href="'/blog/draft/'+item.id">
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
+                        <a v-if="item.id_status!=0" class="btn btn-info" target="_blank" :href="item.url_final">
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
                         </a>
                     </td>

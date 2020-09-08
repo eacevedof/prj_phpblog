@@ -1963,6 +1963,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -2315,6 +2318,14 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -38278,10 +38289,25 @@ var render = function() {
                         {
                           staticClass: "btn btn-dark",
                           attrs: {
-                            disabled: _vm.issending,
                             target: "_blank",
                             href: "/blog/draft/" + item.id
                           }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fa fa-window-maximize",
+                            attrs: { "aria-hidden": "true" }
+                          })
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  item.id_status != 0
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "btn btn-info",
+                          attrs: { target: "_blank", href: item.url_final }
                         },
                         [
                           _c("i", {
@@ -39157,6 +39183,29 @@ var render = function() {
                     })
                   ]
                 )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.post.id_status != 0
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-info res-btnformheader",
+                    attrs: {
+                      disabled: _vm.issending,
+                      target: "_blank",
+                      href: _vm.post.url_final
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        View  \n                        "
+                    ),
+                    _c("i", {
+                      staticClass: "fa fa-window-maximize",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
+                )
               : _vm._e()
           ]),
           _vm._v(" "),
@@ -39914,6 +39963,29 @@ var render = function() {
                       [
                         _vm._v(
                           "\n                        Draft  \n                        "
+                        ),
+                        _c("i", {
+                          staticClass: "fa fa-window-maximize",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.post.id_status != 0
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-info mt-4",
+                        attrs: {
+                          disabled: _vm.issending,
+                          target: "_blank",
+                          href: _vm.post.url_final
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        View  \n                        "
                         ),
                         _c("i", {
                           staticClass: "fa fa-window-maximize",
