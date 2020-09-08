@@ -2292,7 +2292,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
 
         Swal.fire({
           icon: 'success',
-          title: "Post: \"".concat(self.post.slug, "\" <br/> creado"),
+          title: "Post: \"".concat(self.post.url_final, "\" <br/> creado"),
           html: "<b>&#128578;</b>"
         });
         window.location = "/adm/post/update/" + response.data.id;
@@ -2626,7 +2626,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
 
         Swal.fire({
           icon: 'success',
-          title: "Post: \"".concat(self.post.slug, "\" (").concat(self.post.id, ") <br/> changed"),
+          title: "Post: \"".concat(self.post.url_final, "\" (").concat(self.post.id, ") <br/> changed"),
           html: "<b>&#128578;</b>"
         });
 
@@ -40592,7 +40592,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "date", id: "dat-publish_date" },
+                  attrs: { type: "date", id: "dat-publish_date", readonly: "" },
                   domProps: { value: _vm.post.publish_date },
                   on: {
                     input: function($event) {
@@ -40620,7 +40620,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "date", id: "dat-last_update" },
+                  attrs: { type: "date", id: "dat-last_update", readonly: "" },
                   domProps: { value: _vm.post.last_update },
                   on: {
                     input: function($event) {

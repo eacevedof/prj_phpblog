@@ -183,7 +183,7 @@ export default {
 
                 Swal.fire({
                     icon: 'success',
-                    title: `Post: "${self.post.slug}" <br/> creado`,
+                    title: `Post: "${self.post.url_final}" <br/> creado`,
                     html: `<b>&#128578;</b>`,
                 })
 
