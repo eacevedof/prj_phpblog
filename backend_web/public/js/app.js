@@ -2683,12 +2683,10 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       });
       return category;
     },
-    onchange_idtype: function onchange_idtype() {//this.post.url_final = "/blog/"+category
-    },
     onchange_title: function onchange_title() {
       this.post.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.post.title);
-      var category = this.get_idtype_slug();
-      this.post.url_final = "/blog/".concat(category).concat("/").concat(this.post.slug);
+      var catslug = this.get_idtype_slug();
+      this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug);
     },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
@@ -40128,28 +40126,23 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "sel-id_type" },
                     on: {
-                      change: [
-                        function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.post,
-                            "id_type",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        },
-                        function($event) {
-                          return _vm.onchange_idtype()
-                        }
-                      ]
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.post,
+                          "id_type",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
                     }
                   },
                   [
