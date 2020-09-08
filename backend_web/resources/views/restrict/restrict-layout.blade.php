@@ -25,7 +25,11 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="/" target="_blank">Home</a>
-                <a class="navbar-brand" href="/adm">Admin</a>
+                @auth
+                    <a class="navbar-brand" href="/adm">Admin</a>
+                @endauth
+
+                <!-- hamburguesa -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbartop" aria-controls="navbartop" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>

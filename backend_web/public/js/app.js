@@ -1960,6 +1960,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -38260,10 +38263,12 @@ var render = function() {
               "tr",
               { key: index },
               [
-                _vm._l(_vm.columns, function(column, indexColumn) {
-                  return _c("td", { key: indexColumn }, [
-                    _vm._v(_vm._s(item[column]))
-                  ])
+                _vm._l(_vm.columns, function(column, idx) {
+                  return _c(
+                    "td",
+                    { key: idx, class: { "res-tddel": item.delete_date } },
+                    [_vm._v(_vm._s(item[column]))]
+                  )
                 }),
                 _vm._v(" "),
                 _c("td", [
