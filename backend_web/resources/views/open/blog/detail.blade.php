@@ -26,7 +26,9 @@
         <div class="col-md-12">
             <div class="card-body">
                 <h1 class="card-title display-6">{{$result->title}}</h1>
-                <img src="{{$result->url_img1}}" alt="{{$result->title}}" width="450" class="pull-left mr-3 img-fluid">
+                @if($result->url_img2)
+                    <img src="{{$result->url_img2}}" alt="{{$result->title}}" width="450" class="pull-left mr-3 img-fluid">
+                @endif
                 <p class="card-text">{!!$result->content!!}</p>
                 <p class="card-text text-right">
                     <small class="text-muted">Autor: Eduardo A. F.</small><br/>
