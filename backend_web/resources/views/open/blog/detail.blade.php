@@ -8,12 +8,19 @@
 
 @include("open.elements.hashlinks")
 
+@auth
+<div class="row">
+    <div class="col-12 mb-3">
+        <a href="/adm/post/update/{{$result->id}}" target="_blank" class="btn btn-sm btn-primary pull-right">Edit ({{$result->id}})</a>
+    </div>
+</div>
+@endauth
 <div class="card lg-12 app-card mb-2">
     <div class="row g-0">
         <div class="col-md-12">
             <div class="card-body">
                 <h1 class="card-title display-6">{{$result->title}}</h1>
-                <img src="{{$result->url_img1}}" alt="{{$result->title}}" width="350" class="pull-left mr-3">
+                <img src="{{$result->url_img1}}" alt="{{$result->title}}" width="450" class="pull-left mr-3 img-fluid">
                 <p class="card-text">{!!$result->content!!}</p>
                 <p class="card-text text-right">
                     <small class="text-muted">Autor: Eduardo A. F.</small><br/>
@@ -27,6 +34,12 @@
         </div>
     </div>
 </div>
-
+@auth
+    <div class="row">
+        <div class="col-12 mb-3">
+            <a href="/adm/post/update/{{$result->id}}" target="_blank" class="btn btn-sm btn-primary pull-right">Edit ({{$result->id}})</a>
+        </div>
+    </div>
+@endauth
 @include("open.elements.hashlinks")
 @endsection
