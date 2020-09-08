@@ -22,12 +22,7 @@
                         <label for="sel-id_type">Category</label>
                         <select id="sel-id_type" v-model="post.id_type" class="form-control">
                             <option disabled value="">Choose one</option>
-                            <option value="1">Generic</option>
-                            <option value="2">Single page</option>
-                            <option value="3">Blog Php</option>
-                            <option value="4">Blog Js</option>
-                            <option value="5">Blog SQL</option>
-                            <option value="6">Blog Docker</option>
+                            <option v-for="category in categories" :value="category.id">{{category.description}}</option>
                         </select>
                     </div>
                     <div class="form-check col-md-4" style="padding-top:35px">
@@ -203,16 +198,15 @@ export default {
             })
         },//insert
 
-
         handleSubmit: function(e) {
             e.preventDefault()
             this.insert()
         }//handleSubmit(e)
     },
 
-    mounted() {
-        this.categories = apifetch.get_categories()
-        console.log("categorias:",this.categories)
+    async mounted() {
+        this.categories = await apifetch.get_categories()
+        //funcs.pr(this.categories)
     }
 }
 </script>

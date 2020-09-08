@@ -2095,9 +2095,17 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
-/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
-/* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/apifetch */ "./resources/js/app/apifetch.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
+/* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apifetch */ "./resources/js/app/apifetch.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -2217,19 +2225,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
-var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
+var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE,
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE,
       issending: false,
       categories: [],
       post: {
@@ -2259,7 +2262,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     insert: function insert() {
       var self = this;
       self.issending = true;
-      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
+      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
       var url = "/api/post";
       fetch(url, {
         method: 'post',
@@ -2276,10 +2279,10 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       }).then(function (response) {
         console.log("reponse", response);
 
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
             text: response.error
           });
         }
@@ -2294,12 +2297,12 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         console.log("CATCH ERROR insert", error);
         Swal.fire({
           icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
           text: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE;
       });
     },
     //insert
@@ -2310,8 +2313,27 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
 
   },
   mounted: function mounted() {
-    this.categories = _app_apifetch__WEBPACK_IMPORTED_MODULE_2__["default"].get_categories();
-    console.log("categorias:", this.categories);
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_categories();
+
+            case 2:
+              _this.categories = _context.sent;
+              _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr(_this.categories);
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -39306,22 +39328,13 @@ var render = function() {
                     _vm._v("Choose one")
                   ]),
                   _vm._v(" "),
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Generic")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "2" } }, [
-                    _vm._v("Single page")
-                  ]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "3" } }, [_vm._v("Blog Php")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "4" } }, [_vm._v("Blog Js")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "5" } }, [_vm._v("Blog SQL")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "6" } }, [
-                    _vm._v("Blog Docker")
-                  ])
-                ]
+                  _vm._l(_vm.categories, function(category) {
+                    return _c("option", { domProps: { value: category.id } }, [
+                      _vm._v(_vm._s(category.description))
+                    ])
+                  })
+                ],
+                2
               )
             ]),
             _vm._v(" "),
@@ -53012,13 +53025,14 @@ var app = new Vue({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./funcs */ "./resources/js/app/funcs.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//import funcs from "./funcs";
+
 var apifetch = {
   get_categories: function () {
     var _get_categories = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -53029,19 +53043,38 @@ var apifetch = {
             case 0:
               //const _token = funcs.get_csrftoken()
               url = "/api/post/category";
-              _context.next = 3;
+              r = null;
+              _context.prev = 2;
+              _context.next = 5;
               return fetch(url);
 
-            case 3:
-              r = _context.sent.json();
-              return _context.abrupt("return", r);
-
             case 5:
+              _context.next = 7;
+              return _context.sent.json();
+
+            case 7:
+              r = _context.sent;
+              return _context.abrupt("return", r.data);
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](2);
+              r = _context.t0;
+              return _context.abrupt("return", {
+                error: _context.t0
+              });
+
+            case 15:
+              _context.prev = 15;
+              console.log("get_categories.r", r);
+              return _context.finish(15);
+
+            case 18:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, null, [[2, 11, 15, 18]]);
     }));
 
     function get_categories() {

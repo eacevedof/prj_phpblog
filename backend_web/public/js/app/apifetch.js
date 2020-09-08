@@ -868,13 +868,14 @@ try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./funcs */ "./resources/js/app/funcs.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//import funcs from "./funcs";
+
 var apifetch = {
   get_categories: function () {
     var _get_categories = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
@@ -885,19 +886,38 @@ var apifetch = {
             case 0:
               //const _token = funcs.get_csrftoken()
               url = "/api/post/category";
-              _context.next = 3;
+              r = null;
+              _context.prev = 2;
+              _context.next = 5;
               return fetch(url);
 
-            case 3:
-              r = _context.sent.json();
-              return _context.abrupt("return", r);
-
             case 5:
+              _context.next = 7;
+              return _context.sent.json();
+
+            case 7:
+              r = _context.sent;
+              return _context.abrupt("return", r.data);
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](2);
+              r = _context.t0;
+              return _context.abrupt("return", {
+                error: _context.t0
+              });
+
+            case 15:
+              _context.prev = 15;
+              console.log("get_categories.r", r);
+              return _context.finish(15);
+
+            case 18:
             case "end":
               return _context.stop();
           }
         }
-      }, _callee);
+      }, _callee, null, [[2, 11, 15, 18]]);
     }));
 
     function get_categories() {
