@@ -18,6 +18,8 @@
                 <th>id</th>
                 <th>Description</th>
                 <th>Title</th>
+                <th>Status</th>
+                <th>Draft</th>
                 <th>Edit</th>
                 <th>Remove</th>
             </tr>
@@ -25,6 +27,11 @@
             <tbody>
                 <tr v-for="(item, index) in rows" :key="index">
                     <td v-for="(column, indexColumn) in columns" :key="indexColumn">{{item[column]}}</td>
+                    <td>
+                        <a v-if="item.id_status==0" class="btn btn-primary" :disabled="issending" target="_blank" :href="'/adm/blog/draft/'+item.id">
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
+                    </td>
                     <td>
                         <button class="btn btn-primary" :disabled="issending"  v-on:click="edit(item.id)">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -53,7 +60,7 @@ export default {
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            columns: ["id","description","title"],
+            columns: ["id","description","title","id_status"],
             rows: [],
         }
     },
