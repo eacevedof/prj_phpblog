@@ -119,6 +119,7 @@
 <script>
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
+import apifetch from "../../../app/apifetch"
 const csrftoken = funcs.get_csrftoken()
 
 export default {
@@ -126,6 +127,8 @@ export default {
         return {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
+            categories: [],
+
             post: {
                 description: "",
                 id_type: 0,
@@ -200,6 +203,7 @@ export default {
             })
         },//insert
 
+
         handleSubmit: function(e) {
             e.preventDefault()
             this.insert()
@@ -207,7 +211,8 @@ export default {
     },
 
     mounted() {
-        console.log('Post Insert mounted.')
+        this.categories = apifetch.get_categories()
+        console.log("categorias:",this.categories)
     }
 }
 </script>

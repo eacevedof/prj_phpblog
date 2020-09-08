@@ -1,5 +1,5 @@
 {
     "/js/app.js": "/js/app.js",
-    "/js/app/constants.js": "/js/app/constants.js",
+    "/js/app/apifetch.js": "/js/app/apifetch.js",
     "/css/app.css": "/css/app.css"
 }
