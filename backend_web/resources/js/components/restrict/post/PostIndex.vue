@@ -25,7 +25,10 @@
             </thead>
             <tbody>
                 <tr v-for="(item, index) in rows" :key="index">
-                    <td v-for="(column, indexColumn) in columns" :key="indexColumn">{{item[column]}}</td>
+                    <td
+                        v-for="(column, idx) in columns" :key="idx"
+                        v-bind:class="{ 'res-tddel': item.delete_date }"
+                    >{{item[column]}}</td>
                     <td>
                         <a v-if="item.id_status==0" class="btn btn-dark" :disabled="issending" target="_blank" :href="'/blog/draft/'+item.id">
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
