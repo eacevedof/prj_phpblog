@@ -41,12 +41,7 @@
                         <label for="sel-id_type">Category</label>
                         <select id="sel-id_type" v-model="post.id_type" class="form-control">
                             <option disabled value="">Choose one</option>
-                            <option value="1">Generic</option>
-                            <option value="2">Single page</option>
-                            <option value="3">Blog Php</option>
-                            <option value="4">Blog Js</option>
-                            <option value="5">Blog SQL</option>
-                            <option value="6">Blog Docker</option>
+                            <option v-for="category in categories" :value="category.id">{{category.description}}</option>
                         </select>
                     </div>
                     <div class="form-check col-md-4" style="padding-top:35px">
@@ -147,6 +142,7 @@
 <script>
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
+import apifetch from "../../../app/apifetch"
 const csrftoken = funcs.get_csrftoken()
 
 export default {
@@ -154,6 +150,7 @@ export default {
         return {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
+            categories: [],
             post: {
                 id: -1,
                 description: "",
@@ -322,11 +319,10 @@ export default {
         }//handleSubmit(e)
     },
 
-
-
-    mounted() {
+    async mounted() {
         const id = funcs.get_lastparam()
         this.get_row(id)
+        this.categories = await apifetch.get_categories()
     }
 }
 </script>
