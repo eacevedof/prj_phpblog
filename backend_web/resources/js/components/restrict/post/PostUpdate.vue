@@ -34,10 +34,6 @@
                         <span class="form-control">{{ post.id }}</span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label for="txt-description">Notes</label>
-                        <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
-                    </div>
-                    <div class="form-group col-md-4">
                         <label for="sel-id_type">Category</label>
                         <select id="sel-id_type" v-model="post.id_type" class="form-control">
                             <option disabled value="">Choose one</option>
@@ -49,16 +45,16 @@
                         <label for="chk-is_page" class="form-check-label"><b>Is single page</b></label>
                     </div>
                     <div class="form-group col-md-12">
+                        <label for="txt-title">title</label>
+                        <input type="text" id="txt-title" v-model="post.title" maxlength="350" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
                         <label for="txt-slug">Slug</label>
                         <input type="text" id="txt-slug" v-model="post.slug" maxlength="150" class="form-control"/>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-url_final">Permalink</label>
                         <input type="text" id="txt-url_final" v-model="post.url_final" maxlength="300" class="form-control"/>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="txt-title">title</label>
-                        <input type="text" id="txt-title" v-model="post.title" maxlength="350" class="form-control">
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-subtitle">subtitle</label>
@@ -115,6 +111,10 @@
                         <label for="txt-seo_description">SEO Description</label>
                         <input type="text" id="txt-seo_description" v-model="post.seo_description" maxlength="160" class="form-control"/>
                     </div>
+                    <div class="form-group col-md-4">
+                        <label for="txt-description">Notes</label>
+                        <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
+                    </div>
                     <div class="form-group col-md-2">
                         <label for="num-order_by">Position</label>
                         <input type="number" id="num-order_by" v-model="post.order_by" value="100" class="form-control"/>
@@ -124,7 +124,6 @@
                             {{btnsend}}
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
-                        &nbsp; &nbsp;
                         <a v-if="post.id_status==0" class="btn btn-dark mt-4" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
                             Draft &nbsp;
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>

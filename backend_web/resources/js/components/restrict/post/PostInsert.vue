@@ -15,10 +15,6 @@
                 </div>
                 <div class="form-row mt-1">
                     <div class="form-group col-md-4">
-                        <label for="txt-description">Notes</label>
-                        <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
-                    </div>
-                    <div class="form-group col-md-4">
                         <label for="sel-id_type">Category</label>
                         <select id="sel-id_type" v-model="post.id_type" class="form-control">
                             <option disabled value="">Choose one</option>
@@ -30,16 +26,16 @@
                         <label for="chk-is_page" class="form-check-label"><b>Is single page</b></label>
                     </div>
                     <div class="form-group col-md-12">
+                        <label for="txt-title">title</label>
+                        <input type="text" id="txt-title" v-model="post.title" maxlength="350" class="form-control">
+                    </div>
+                    <div class="form-group col-md-12">
                         <label for="txt-slug">Slug</label>
                         <input type="text" id="txt-slug" v-model="post.slug" maxlength="150" class="form-control"/>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-url_final">Permalink</label>
                         <input type="text" id="txt-url_final" v-model="post.url_final" maxlength="300" class="form-control"/>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label for="txt-title">title</label>
-                        <input type="text" id="txt-title" v-model="post.title" maxlength="350" class="form-control">
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-subtitle">subtitle</label>
@@ -95,6 +91,10 @@
                     <div class="form-group col-md-6">
                         <label for="txt-seo_description">SEO Description</label>
                         <input type="text" id="txt-seo_description" v-model="post.seo_description" maxlength="160" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="txt-description">Notes</label>
+                        <input type="text" id="txt-description" v-model="post.description" maxlength="250" class="form-control"/>
                     </div>
                     <div class="form-group col-md-2">
                         <label for="num-order_by">Position</label>
