@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-title">title</label>
-                        <input type="text" id="txt-title" v-model="post.title" maxlength="350" class="form-control">
+                        <input type="text" id="txt-title" v-model="post.title" @change="onchange_title()" maxlength="350" class="form-control">
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-slug">Slug</label>
@@ -310,6 +310,18 @@ export default {
                     self.btnsend = CONST.BTN_INISTATE_REFRESH
                 })
             }
+        },
+
+        get_idtype_slug(){
+            const idtype = this.post.id_type
+            const category = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.slug)
+            return category
+        },
+
+        onchange_title(){
+            this.post.slug = funcs.get_slug(this.post.title)
+            const catslug = this.get_idtype_slug()
+            this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug)
         },
 
         handleSubmit: function(e) {

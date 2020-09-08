@@ -2259,6 +2259,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
     };
   },
   methods: {
+    set_slug: function set_slug() {},
     insert: function insert() {
       var self = this;
       self.issending = true;
@@ -2672,6 +2673,22 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
           self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
         });
       }
+    },
+    get_idtype_slug: function get_idtype_slug() {
+      var idtype = this.post.id_type;
+      var category = this.categories.filter(function (obj) {
+        return obj.id == idtype;
+      }).map(function (obj) {
+        return obj.slug;
+      });
+      return category;
+    },
+    onchange_idtype: function onchange_idtype() {//this.post.url_final = "/blog/"+category
+    },
+    onchange_title: function onchange_title() {
+      this.post.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.post.title);
+      var category = this.get_idtype_slug();
+      this.post.url_final = "/blog/".concat(category).concat("/").concat(this.post.slug);
     },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
@@ -40111,23 +40128,28 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: { id: "sel-id_type" },
                     on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.post,
-                          "id_type",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
+                      change: [
+                        function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.post,
+                            "id_type",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        },
+                        function($event) {
+                          return _vm.onchange_idtype()
+                        }
+                      ]
                     }
                   },
                   [
@@ -40215,6 +40237,9 @@ var render = function() {
                   attrs: { type: "text", id: "txt-title", maxlength: "350" },
                   domProps: { value: _vm.post.title },
                   on: {
+                    change: function($event) {
+                      return _vm.onchange_title()
+                    },
                     input: function($event) {
                       if ($event.target.composing) {
                         return
@@ -53155,6 +53180,25 @@ var funcs = {
   get_date: function get_date(strdate) {
     if (!strdate) return "";
     return new Date(strdate).toISOString().substr(0, 10);
+  },
+  get_slug: function get_slug(str) {
+    if (!str) return "";
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
+
+    str = str.toLowerCase(); // remove accents, swap ñ for n, etc
+
+    var from = "àáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    var to = "aaaaaeeeeiiiioooouuuunc------";
+
+    for (var i = 0, l = from.length; i < l; i++) {
+      str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    .replace(/\s+/g, '-') // collapse whitespace and replace by -
+    .replace(/-+/g, '-'); // collapse dashes
+
+    return str;
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (funcs);

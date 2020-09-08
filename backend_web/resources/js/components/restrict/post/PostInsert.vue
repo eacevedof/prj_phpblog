@@ -149,6 +149,10 @@ export default {
     },
 
     methods:{
+        set_slug(){
+
+        },
+
         insert(){
             const self = this
             self.issending = true
