@@ -16,8 +16,9 @@
             <thead>
             <tr>
                 <th>id</th>
-                <th>Description</th>
                 <th>Title</th>
+                <th>Permalink</th>
+                <th>Description</th>
                 <th>Draft</th>
                 <th>Edit</th>
                 <th>Remove</th>
@@ -65,7 +66,7 @@ export default {
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            columns: ["id","description","title"],
+            columns: ["id","title","url_final","description"],
             rows: [],
         }
     },

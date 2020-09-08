@@ -16,7 +16,7 @@
                 <div class="form-row mt-1">
                     <div class="form-group col-md-4">
                         <label for="sel-id_type">Category</label>
-                        <select id="sel-id_type" v-model="post.id_type" class="form-control">
+                        <select id="sel-id_type" v-model="post.id_type" class="form-control" required>
                             <option disabled value="">Choose one</option>
                             <option v-for="category in categories" :value="category.id">{{category.description}}</option>
                         </select>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-title">title</label>
-                        <input type="text" id="txt-title" v-model="post.title" maxlength="350" class="form-control">
+                        <input type="text" id="txt-title" v-model="post.title" @change="onchange_title()" maxlength="350" class="form-control" required>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-slug">Slug</label>
@@ -201,6 +201,18 @@ export default {
                 self.btnsend = CONST.BTN_INISTATE
             })
         },//insert
+
+        get_idtype_slug(){
+            const idtype = this.post.id_type
+            const category = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.slug)
+            return category
+        },
+
+        onchange_title(){
+            this.post.slug = funcs.get_slug(this.post.title)
+            const catslug = this.get_idtype_slug()
+            this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug)
+        },
 
         handleSubmit: function(e) {
             e.preventDefault()

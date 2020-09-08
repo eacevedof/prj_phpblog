@@ -2,7 +2,9 @@
     <div class="card">
         <div class="card-body">
             <form @submit="handleSubmit">
-                <div class="row card-header res-formheader">
+                <div class="row card-header res-formheader"
+                   v-bind:class="{ 'res-cardtitle': post.id_status == 1 }"
+                >
                     <div class="col-md-7 col-sm-6 pt-2">
                         <h1>Update post</h1>
                     </div>
@@ -35,7 +37,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label for="sel-id_type">Category</label>
-                        <select id="sel-id_type" v-model="post.id_type" class="form-control">
+                        <select id="sel-id_type" v-model="post.id_type" class="form-control" required>
                             <option disabled value="">Choose one</option>
                             <option v-for="category in categories" :value="category.id">{{category.description}}</option>
                         </select>
@@ -46,7 +48,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-title">title</label>
-                        <input type="text" id="txt-title" v-model="post.title" @change="onchange_title()" maxlength="350" class="form-control">
+                        <input type="text" id="txt-title" v-model="post.title" @change="onchange_title()" maxlength="350" class="form-control" required>
                     </div>
                     <div class="form-group col-md-12">
                         <label for="txt-slug">Slug</label>

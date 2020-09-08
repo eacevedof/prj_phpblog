@@ -1978,6 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -1986,7 +1987,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      columns: ["id", "description", "title"],
+      columns: ["id", "title", "url_final", "description"],
       rows: []
     };
   },
@@ -2307,6 +2308,20 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       });
     },
     //insert
+    get_idtype_slug: function get_idtype_slug() {
+      var idtype = this.post.id_type;
+      var category = this.categories.filter(function (obj) {
+        return obj.id == idtype;
+      }).map(function (obj) {
+        return obj.slug;
+      });
+      return category;
+    },
+    onchange_title: function onchange_title() {
+      this.post.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.post.title);
+      var catslug = this.get_idtype_slug();
+      this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug);
+    },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
       this.insert();
@@ -2365,6 +2380,8 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
 //
 //
 //
@@ -39224,9 +39241,11 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("id")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Title")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Permalink")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Description")]),
         _vm._v(" "),
         _c("th", [_vm._v("Draft")]),
         _vm._v(" "),
@@ -39312,7 +39331,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { id: "sel-id_type" },
+                  attrs: { id: "sel-id_type", required: "" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
@@ -39413,9 +39432,17 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", id: "txt-title", maxlength: "350" },
+                attrs: {
+                  type: "text",
+                  id: "txt-title",
+                  maxlength: "350",
+                  required: ""
+                },
                 domProps: { value: _vm.post.title },
                 on: {
+                  change: function($event) {
+                    return _vm.onchange_title()
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -39990,112 +40017,119 @@ var render = function() {
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-body" }, [
       _c("form", { on: { submit: _vm.handleSubmit } }, [
-        _c("div", { staticClass: "row card-header res-formheader" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-2" }, [
-            _vm.post.id_status == 0
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-dark res-btnformheader",
-                    attrs: {
-                      disabled: _vm.issending,
-                      target: "_blank",
-                      href: "/blog/draft/" + _vm.post.id
-                    }
-                  },
-                  [
-                    _vm._v("\n                        Draft  "),
-                    _c("i", {
-                      staticClass: "fa fa-window-maximize",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                )
-              : _vm._e(),
+        _c(
+          "div",
+          {
+            staticClass: "row card-header res-formheader",
+            class: { "res-cardtitle": _vm.post.id_status == 1 }
+          },
+          [
+            _vm._m(0),
             _vm._v(" "),
-            _vm.post.id_status != 0
-              ? _c(
-                  "a",
-                  {
-                    staticClass: "btn btn-info res-btnformheader",
-                    attrs: {
-                      disabled: _vm.issending,
-                      target: "_blank",
-                      href: _vm.post.url_final
+            _c("div", { staticClass: "col-md-2" }, [
+              _vm.post.id_status == 0
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-dark res-btnformheader",
+                      attrs: {
+                        disabled: _vm.issending,
+                        target: "_blank",
+                        href: "/blog/draft/" + _vm.post.id
+                      }
+                    },
+                    [
+                      _vm._v("\n                        Draft  "),
+                      _c("i", {
+                        staticClass: "fa fa-window-maximize",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              _vm.post.id_status != 0
+                ? _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-info res-btnformheader",
+                      attrs: {
+                        disabled: _vm.issending,
+                        target: "_blank",
+                        href: _vm.post.url_final
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        View  \n                        "
+                      ),
+                      _c("i", {
+                        staticClass: "fa fa-window-maximize",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  )
+                : _vm._e()
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-2" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary res-btnformheader",
+                  attrs: { disabled: _vm.issending }
+                },
+                [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.btnsend) +
+                      "\n                        "
+                  ),
+                  _vm.issending
+                    ? _c("img", {
+                        attrs: {
+                          src: "/assets/images/loading-bw.gif",
+                          width: "25",
+                          height: "25"
+                        }
+                      })
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-1" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger res-btnformheader",
+                  attrs: { type: "button", disabled: _vm.issending },
+                  on: {
+                    click: function($event) {
+                      return _vm.remove(_vm.post.id)
                     }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        View  \n                        "
-                    ),
-                    _c("i", {
-                      staticClass: "fa fa-window-maximize",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                )
-              : _vm._e()
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-2" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary res-btnformheader",
-                attrs: { disabled: _vm.issending }
-              },
-              [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(_vm.btnsend) +
-                    "\n                        "
-                ),
-                _vm.issending
-                  ? _c("img", {
-                      attrs: {
-                        src: "/assets/images/loading-bw.gif",
-                        width: "25",
-                        height: "25"
-                      }
-                    })
-                  : _vm._e()
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-1" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-danger res-btnformheader",
-                attrs: { type: "button", disabled: _vm.issending },
-                on: {
-                  click: function($event) {
-                    return _vm.remove(_vm.post.id)
                   }
-                }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-trash-o",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" "),
-                _vm.issending
-                  ? _c("img", {
-                      attrs: {
-                        src: "/assets/images/loading-bw.gif",
-                        width: "25",
-                        height: "25"
-                      }
-                    })
-                  : _vm._e()
-              ]
-            )
-          ])
-        ]),
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-trash-o",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" "),
+                  _vm.issending
+                    ? _c("img", {
+                        attrs: {
+                          src: "/assets/images/loading-bw.gif",
+                          width: "25",
+                          height: "25"
+                        }
+                      })
+                    : _vm._e()
+                ]
+              )
+            ])
+          ]
+        ),
         _vm._v(" "),
         !_vm.issending
           ? _c("div", { staticClass: "form-row" }, [
@@ -40124,7 +40158,7 @@ var render = function() {
                       }
                     ],
                     staticClass: "form-control",
-                    attrs: { id: "sel-id_type" },
+                    attrs: { id: "sel-id_type", required: "" },
                     on: {
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -40227,7 +40261,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { type: "text", id: "txt-title", maxlength: "350" },
+                  attrs: {
+                    type: "text",
+                    id: "txt-title",
+                    maxlength: "350",
+                    required: ""
+                  },
                   domProps: { value: _vm.post.title },
                   on: {
                     change: function($event) {

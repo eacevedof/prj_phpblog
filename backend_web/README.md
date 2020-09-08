@@ -6,6 +6,7 @@
 
 ### To-Do:
 - Cambiar make be-logs ya que no exist var/log/dev.log
+- crear gestor de imagenes, permitir subida por url
 
 ### Errores:
 - Me da `500 Server Error` en docker
