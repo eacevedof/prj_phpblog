@@ -38215,14 +38215,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "row card-header app-formheader" }, [
+      _c("div", { staticClass: "row card-header res-formheader" }, [
         _vm._m(0),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [
           _c(
             "button",
             {
-              staticClass: "btn btn-primary app-btnformheader",
+              staticClass: "btn btn-primary res-btnformheader",
               attrs: { disabled: _vm.issending },
               on: {
                 click: function($event) {
@@ -38394,14 +38394,14 @@ var render = function() {
         "form",
         { attrs: { id: "form-insert" }, on: { submit: _vm.handleSubmit } },
         [
-          _c("div", { staticClass: "row card-header app-formheader" }, [
+          _c("div", { staticClass: "row card-header res-formheader" }, [
             _vm._m(0),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary app-btnformheader",
+                  staticClass: "btn btn-primary res-btnformheader",
                   attrs: { disabled: _vm.issending }
                 },
                 [
@@ -39058,7 +39058,7 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-primary app-btncol",
+                  staticClass: "btn btn-primary res-btncol",
                   attrs: { disabled: _vm.issending }
                 },
                 [
@@ -39129,7 +39129,7 @@ var render = function() {
   return _c("div", { staticClass: "card" }, [
     _c("div", { staticClass: "card-body" }, [
       _c("form", { on: { submit: _vm.handleSubmit } }, [
-        _c("div", { staticClass: "row card-header app-formheader" }, [
+        _c("div", { staticClass: "row card-header res-formheader" }, [
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-2" }, [
@@ -39137,7 +39137,7 @@ var render = function() {
               ? _c(
                   "a",
                   {
-                    staticClass: "btn btn-dark app-btnformheader",
+                    staticClass: "btn btn-dark res-btnformheader",
                     attrs: {
                       disabled: _vm.issending,
                       target: "_blank",
@@ -39159,7 +39159,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-primary app-btnformheader",
+                staticClass: "btn btn-primary res-btnformheader",
                 attrs: { disabled: _vm.issending }
               },
               [
@@ -39185,7 +39185,7 @@ var render = function() {
             _c(
               "button",
               {
-                staticClass: "btn btn-danger app-btnformheader",
+                staticClass: "btn btn-danger res-btnformheader",
                 attrs: { type: "button", disabled: _vm.issending },
                 on: {
                   click: function($event) {
@@ -39874,7 +39874,7 @@ var render = function() {
                 _c(
                   "button",
                   {
-                    staticClass: "btn btn-primary app-btncol",
+                    staticClass: "btn btn-primary res-btncol",
                     attrs: { disabled: _vm.issending }
                   },
                   [

@@ -2,12 +2,12 @@
     <div class="card">
         <div class="card-body">
             <form id="form-insert" @submit="handleSubmit">
-                <div class="row card-header app-formheader">
+                <div class="row card-header res-formheader">
                     <div class="col-md-9">
                         <h1>Insert post</h1>
                     </div>
                     <div class="col-md-3">
-                        <button class="btn btn-primary app-btnformheader" :disabled="issending">
+                        <button class="btn btn-primary res-btnformheader" :disabled="issending">
                             {{btnsend}}
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
@@ -106,7 +106,7 @@
                         <input type="number" id="num-order_by" v-model="post.order_by" value="100" class="form-control"/>
                     </div>
                     <div class="form-group col-md-4">
-                        <button class="btn btn-primary app-btncol" :disabled="issending">
+                        <button class="btn btn-primary res-btncol" :disabled="issending">
                             {{btnsend}}
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>

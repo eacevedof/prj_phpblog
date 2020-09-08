@@ -2,23 +2,23 @@
     <div class="card">
         <div class="card-body">
             <form @submit="handleSubmit">
-                <div class="row card-header app-formheader">
+                <div class="row card-header res-formheader">
                     <div class="col-md-7 col-sm-6 pt-2">
                         <h1>Update post</h1>
                     </div>
                     <div class="col-md-2">
-                        <a v-if="post.id_status==0" class="btn btn-dark app-btnformheader" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
+                        <a v-if="post.id_status==0" class="btn btn-dark res-btnformheader" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
                             Draft &nbsp;<i class="fa fa-window-maximize" aria-hidden="true"></i>
                         </a>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn btn-primary app-btnformheader" :disabled="issending">
+                        <button class="btn btn-primary res-btnformheader" :disabled="issending">
                             {{btnsend}}
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
                     </div>
                     <div class="col-md-1">
-                        <button type="button" class="btn btn-danger app-btnformheader" :disabled="issending" v-on:click="remove(post.id)">
+                        <button type="button" class="btn btn-danger res-btnformheader" :disabled="issending" v-on:click="remove(post.id)">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
@@ -121,7 +121,7 @@
                         <input type="number" id="num-order_by" v-model="post.order_by" value="100" class="form-control"/>
                     </div>
                     <div class="form-group col-md-4">
-                        <button class="btn btn-primary app-btncol" :disabled="issending">
+                        <button class="btn btn-primary res-btncol" :disabled="issending">
                             {{btnsend}}
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>

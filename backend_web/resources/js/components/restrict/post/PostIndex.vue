@@ -1,12 +1,12 @@
 <template>
 <div class="card">
     <div class="card-body">
-        <div class="row card-header app-formheader">
+        <div class="row card-header res-formheader">
             <div class="col-md-9">
                 <h1>Posts</h1>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-primary app-btnformheader" :disabled="issending" v-on:click="load()">
+                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="load()">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
