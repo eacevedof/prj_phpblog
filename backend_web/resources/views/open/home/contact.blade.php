@@ -13,23 +13,23 @@
     @verbatim
     <div class="card-body">
         <form @submit="checkform" id="form-contact" class="row g-3">
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                 <label for="name">Nombre *</label>
                 <input type="text" id="name" v-model="name" placeholder="...tu nombre" class="form-control" required="required">
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                 <label for="email">Email *</label>
                 <input id="email" type="email" v-model="email" placeholder="tu-email@dominio.com" class="form-control" required="required">
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-sm-12">
                 <label for="subject" class="form-label">Asunto *</label>
                 <input type="text" id="subject" v-model="subject" placeholder="Asunto" class="form-control">
             </div>
-            <div class="col-12">
+            <div class="col-lg-12">
                 <label for="message" class="form-label">Mensaje *</label>
-                <textarea id="message" v-model="message" class="form-control"  placeholder="Mensaje" required="required"></textarea>
+                <textarea id="message" v-model="message" class="form-control"  placeholder="Mensaje" required="required" rows="5"></textarea>
             </div>
-            <div class="col-12">
+            <div class="col-lg-12">
                 <button id="btn-contact" class="btn btn-dark" :disabled="issending" >
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
