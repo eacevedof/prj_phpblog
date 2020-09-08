@@ -1,5 +1,8 @@
 @extends("open.open-layout")
 
+@isset($isdraft)
+    @section("pagetitle","Draft: ".$result->id)
+@endisset
 @section("pagetitle",$seo["title"] ?? "")
 @section("pagedescription",$seo["description"] ?? "")
 @section("pagekeywords",$seo["keywords"] ?? "")
@@ -8,7 +11,6 @@
 
 @include("open.elements.hashlinks")
 
-@auth
 @if(!isset($isdraft))
 <div class="row">
     <div class="col-12 mb-3">
@@ -16,7 +18,6 @@
     </div>
 </div>
 @endif
-@endauth
 
 <div class="card lg-12 app-card mb-2">
     <div class="row g-0">
@@ -38,7 +39,6 @@
     </div>
 </div>
 
-@auth
 @if(!isset($isdraft))
 <div class="row">
     <div class="col-12 mb-3">
@@ -46,7 +46,6 @@
     </div>
 </div>
 @endif
-@endauth
 
 @include("open.elements.hashlinks")
 @endsection

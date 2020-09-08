@@ -1960,7 +1960,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -1969,7 +1968,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      columns: ["id", "description", "title", "id_status"],
+      columns: ["id", "description", "title"],
       rows: []
     };
   },
@@ -2269,6 +2268,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           title: "Post: \"".concat(self.post.description, "\" <br/> creado"),
           html: "<b>&#128578;</b>"
         });
+        window.location = "/adm/post/update/" + response.data.id;
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -38358,8 +38358,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Title")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Status")]),
-        _vm._v(" "),
         _c("th", [_vm._v("Draft")]),
         _vm._v(" "),
         _c("th", [_vm._v("Edit")]),
@@ -39134,7 +39132,7 @@ var render = function() {
         _c("div", { staticClass: "row card-header app-formheader" }, [
           _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-1" }, [
+          _c("div", { staticClass: "col-md-2" }, [
             _vm.post.id_status == 0
               ? _c(
                   "a",
@@ -39147,6 +39145,7 @@ var render = function() {
                     }
                   },
                   [
+                    _vm._v("\n                        Draft  "),
                     _c("i", {
                       staticClass: "fa fa-window-maximize",
                       attrs: { "aria-hidden": "true" }
@@ -39930,7 +39929,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-8 col-sm-6 pt-2" }, [
+    return _c("div", { staticClass: "col-md-7 col-sm-6 pt-2" }, [
       _c("h1", [_vm._v("Update post")])
     ])
   },

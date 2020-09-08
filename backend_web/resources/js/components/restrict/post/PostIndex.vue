@@ -18,7 +18,6 @@
                 <th>id</th>
                 <th>Description</th>
                 <th>Title</th>
-                <th>Status</th>
                 <th>Draft</th>
                 <th>Edit</th>
                 <th>Remove</th>
@@ -60,7 +59,7 @@ export default {
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            columns: ["id","description","title","id_status"],
+            columns: ["id","description","title"],
             rows: [],
         }
     },

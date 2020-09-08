@@ -184,6 +184,7 @@ export default {
                     html: `<b>&#128578;</b>`,
                 })
 
+                window.location = "/adm/post/update/"+response.data.id
             })
             .catch(error => {
                 console.log("CATCH ERROR insert",error)

@@ -3,12 +3,12 @@
         <div class="card-body">
             <form @submit="handleSubmit">
                 <div class="row card-header app-formheader">
-                    <div class="col-md-8 col-sm-6 pt-2">
+                    <div class="col-md-7 col-sm-6 pt-2">
                         <h1>Update post</h1>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <a v-if="post.id_status==0" class="btn btn-dark app-btnformheader" :disabled="issending" target="_blank" :href="'/blog/draft/'+post.id">
-                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                            Draft &nbsp;<i class="fa fa-window-maximize" aria-hidden="true"></i>
                         </a>
                     </div>
                     <div class="col-md-2">

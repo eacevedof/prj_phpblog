@@ -47,7 +47,7 @@ class BlogController extends BaseController
         $this->_error_404($r);
 
         $post = $r->first();
-        $post->content = (new EnlighterjsComponent($post->content))->get_cleaned();
+        $post->content = (new EnlighterjsComponent($post->content ?? ""))->get_cleaned();
         $seo=[
             "title" => $post->seo_title,
             "description" => $post->seo_description,
@@ -76,7 +76,8 @@ class BlogController extends BaseController
         $this->_error_404($r);
 
         $post = $r->first();
-        $post->content = (new EnlighterjsComponent($post->content))->get_cleaned();
+        //dd($post);
+        $post->content = (new EnlighterjsComponent($post->content ?? ""))->get_cleaned();
         $seo=[
             "title" => $post->seo_title,
             "description" => $post->seo_description,
