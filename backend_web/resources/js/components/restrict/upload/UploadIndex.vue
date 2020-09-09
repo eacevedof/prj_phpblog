@@ -185,7 +185,10 @@ export default {
         upload_byurl(){
             const self = this
 
-            if(!self.upload.urlupload.trim()) return
+            if(!self.upload.urlupload.trim()){
+                self.$refs.urlupload.focus()
+                return
+            }
 
             self.issending = true
             self.btnsend2 = CONST.BTN_IN_PROGRESS
