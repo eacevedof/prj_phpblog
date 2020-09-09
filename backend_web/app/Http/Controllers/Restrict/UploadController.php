@@ -3,25 +3,28 @@
 namespace App\Http\Controllers\Restrict;
 
 use App\Http\Controllers\BaseController;
+use App\Services\Common\UploadService;
 use Illuminate\Http\Request;
 
 class UploadController extends BaseController
 {
-    /**
-     * Create a new controller instance.
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
     public function __invoke()
     {
-        return view('restrict.upload.index');
+        //post: resource-usertoken
+        $token = (new UploadService())->get_token();
+        return view('restrict.upload.index',["token"=>$token]);
     }
+
+    public function insert()
+    {
+        //post: resource-usertoken
+        $token = (new UploadService())->get_token();
+        return view('restrict.upload.insert',["token"=>$token]);
+    }
+
 }
