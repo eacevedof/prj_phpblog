@@ -10,11 +10,11 @@ class PostController extends BaseController
         $this->middleware('auth');
     }
 
-    public function __invoke(){return view('restrict.post.index');}
+    public function __invoke(){return view('restrict.post.index',["module"=>"post"]);}
 
-    public function insert(){return view('restrict.post.insert');}
+    public function insert(){return view('restrict.post.insert',["module"=>"post"]);}
 
-    public function update(){return view('restrict.post.update');}
+    public function update(){return view('restrict.post.update',["module"=>"post"]);}
 
-    public function detail(){return view('restrict.post.detail');}
+    public function detail(){return view('restrict.post.detail',["module"=>"post"]);}
 }

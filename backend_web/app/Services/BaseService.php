@@ -22,10 +22,7 @@ class BaseService
 
     protected function get_get($key){return $this->request->query->get($key) ?? null;}
 
-    protected function get_userid($codCache="")
-    {
-
-    }
+    protected function get_userid($codCache=""){}
 
     protected function clean_sysfields(&$data)
     {

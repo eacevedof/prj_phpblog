@@ -6,6 +6,8 @@ use App\Services\BaseService;
 
 class UploadService extends BaseService
 {
+    public function __construct(){;}
+
     private function _get_header($key=null)
     {
         $all = getallheaders();
@@ -24,10 +26,10 @@ class UploadService extends BaseService
 
     public function get_token()
     {
-        $url = $this->_get_env("API_UPLOAD_URL");
+        $url = $this->get_env("API_UPLOAD_URL");
         $curl = new Curl($url);
-        $curl->add_post("user",$this->_get_env("API_UPLOAD_USERNAME"));
-        $curl->add_post("password",$this->_get_env("API_UPLOAD_PASSWORD"));
+        $curl->add_post("user",$this->get_env("API_UPLOAD_USERNAME"));
+        $curl->add_post("password",$this->get_env("API_UPLOAD_PASSWORD"));
         $curl->add_post("remoteip",$_SERVER["REMOTE_ADDR"]);
         $curl->add_post("remotehost",$this->_get_origin());
         $curl->request_post();

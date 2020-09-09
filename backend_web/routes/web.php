@@ -29,7 +29,10 @@ Auth::routes();
 
 //rutas ADM
 Route::get('/adm', 'Restrict\AdminController')->name('restrict.admin');
-Route::get('/adm/upload', 'Restrict\UploadController')->name('restrict.upload');
+
+//upload
+Route::get('/adm/upload', 'Restrict\UploadController')->name('restrict.upload.index');
+Route::get('/adm/upload/insert', 'Restrict\UploadController@insert')->name('restrict.upload.insert');
 
 //post
 Route::get('/adm/posts', 'Restrict\PostController')->name('restrict.post.index');

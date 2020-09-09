@@ -22,6 +22,6 @@ class AdminController extends BaseController
      */
     public function __invoke()
     {
-        return view('restrict.admin.index');
+        return view('restrict.admin.index',["module"=>"admin"]);
     }
 }
