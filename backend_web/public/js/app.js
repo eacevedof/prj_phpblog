@@ -2801,6 +2801,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3005,6 +3007,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       alert("X");
     },
     insert: function insert() {
+      var _this = this;
+
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
@@ -3029,11 +3033,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
         }
 
-        Swal.fire({
-          icon: 'success',
-          title: "Resource uploaded",
-          html: "<a href=\"".concat(response.data.url[0], "\" class=\"link-danger\" target=\"_blank\">\n                                 <small>").concat(response.data.url[0], "</small>\n                               </a>")
-        });
+        _this.$toast.success("link \"".concat(url, "\" copied to clipboard"));
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -42483,10 +42483,12 @@ var render = function() {
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-body" }, [
                   _c("p", { staticClass: "card-text" }, [
-                    _c("img", {
-                      staticClass: "container-fluid",
-                      attrs: { src: url }
-                    }),
+                    _c("a", { attrs: { href: url, target: "_blank" } }, [
+                      _c("img", {
+                        staticClass: "container-fluid",
+                        attrs: { src: url }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c("small", { attrs: { id: "rawlink-" + i } }, [
                       _vm._v(_vm._s(url))
@@ -42657,7 +42659,7 @@ var render = function() {
                     id: "txa-content",
                     rows: "5",
                     cols: "10",
-                    placeholder: "<urlimg>=<name>;<urlimg1>=<name1>..."
+                    placeholder: "<urlimg>:<name>;<urlimg1>:<name1>..."
                   },
                   domProps: { value: _vm.upload.content },
                   on: {

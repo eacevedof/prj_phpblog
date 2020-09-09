@@ -18,7 +18,7 @@
                     <label for="txa-content">By urls</label>
                     <textarea id="txa-content"
                               v-model="upload.content" rows="5" cols="10" class="form-control"
-                              placeholder="<urlimg>=<name>;<urlimg1>=<name1>..."
+                              placeholder="<urlimg>:<name>;<urlimg1>:<name1>..."
                     ></textarea>
                 </div>
                 <div class="form-group col-md-12">
@@ -103,13 +103,7 @@ export default {
                     })
                 }
 
-                Swal.fire({
-                    icon: 'success',
-                    title: `Resource uploaded`,
-                    html: `<a href="${response.data.url[0]}" class="link-danger" target="_blank">
-                                 <small>${response.data.url[0]}</small>
-                               </a>`,
-                })
+                this.$toast.success(`link "${url}" copied to clipboard`)
             })
             .catch(error => {
                 console.log("CATCH ERROR insert",error)
