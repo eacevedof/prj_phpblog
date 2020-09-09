@@ -1,10 +1,10 @@
 <?php
 namespace App\Services\Common;
 
-
 use App\Component\Curl;
+use App\Services\BaseService;
 
-class UploadService
+class UploadService extends BaseService
 {
     private function _get_header($key=null)
     {
