@@ -186,7 +186,9 @@ export default {
             const self = this
 
             if(!self.upload.urlupload.trim()){
-                self.$refs.urlupload.focus()
+                self.upload.urlupload = ""
+                self.$toast.warning("You must fill input with a valid url")
+                self.$refs.urlupload.focus();
                 return
             }
 
