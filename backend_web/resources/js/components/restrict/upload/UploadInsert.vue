@@ -103,7 +103,7 @@ export default {
                     })
                 }
 
-                this.$toast.success(`link "${url}" copied to clipboard`)
+                this.$toast.success(`Files "${url}" uploaded`)
             })
             .catch(error => {
                 console.log("CATCH ERROR insert",error)

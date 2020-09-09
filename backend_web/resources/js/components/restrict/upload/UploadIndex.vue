@@ -8,7 +8,7 @@
             />
         </div>
         <div class="form-group col-md-2 mb-0">
-            <button class="btn btn-dark" :disabled="issending">
+            <button type="button" class="btn btn-dark" :disabled="issending" v-on:click="upload_byurl()">
                 {{btnsend2}}
                 <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
             </button>
@@ -182,9 +182,57 @@ export default {
             if(el) {
                 const url = el.innerText
                 funcs.to_clipboard(url)
-                this.$toast.success(`link "${url}" copied to clipboard`)
+                this.$toast.success(`link in clipboard!!`)
             }
-        }
+        },
+
+        upload_byurl(){
+            const self = this
+
+            if(!self.upload.content) return
+
+            self.issending = true
+            self.btnsend2 = CONST.BTN_IN_PROGRESS
+
+            const url = funcs.get_uploadomain().concat("/upload/by-url")
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain","eduardoaf.com")
+            form.append("files",self.upload.content)
+
+            fetch(url, {
+                method: 'post',
+                body: form
+            })
+            .then(response => response.json())
+            .then(response => {
+
+                console.log("reponse",response)
+
+                if(funcs.is_error(response)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        html: response.error,
+                    })
+                }
+
+                self.load()
+                this.$toast.success(`Files "${url}" uploaded`)
+            })
+            .catch(error => {
+                console.log("CATCH ERROR upload",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    html: error.toString(),
+                })
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend2 = CONST.BTN_INISTATE_UPLOAD
+            })
+        },//upload_byurl
     }
 }
 </script>

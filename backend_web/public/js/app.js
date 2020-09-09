@@ -2822,6 +2822,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
+      btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_UPLOAD,
       rows: [],
       upload: {
         content: ""
@@ -2921,9 +2922,53 @@ __webpack_require__.r(__webpack_exports__);
       if (el) {
         var url = el.innerText;
         _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].to_clipboard(url);
-        this.$toast.success("link \"".concat(url, "\" copied to clipboard"));
+        this.$toast.success("link in clipboard!!");
       }
-    }
+    },
+    upload_byurl: function upload_byurl() {
+      var _this = this;
+
+      var self = this;
+      if (!self.upload.content) return;
+      self.issending = true;
+      self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
+      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/upload/by-url");
+      var form = new FormData();
+      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadtoken());
+      form.append("folderdomain", "eduardoaf.com");
+      form.append("files", self.upload.content);
+      fetch(url, {
+        method: 'post',
+        body: form
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        console.log("reponse", response);
+
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+          return Swal.fire({
+            icon: 'warning',
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+            html: response.error
+          });
+        }
+
+        self.load();
+
+        _this.$toast.success("Files \"".concat(url, "\" uploaded"));
+      })["catch"](function (error) {
+        console.log("CATCH ERROR upload", error);
+        Swal.fire({
+          icon: 'error',
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+          html: error.toString()
+        });
+      })["finally"](function () {
+        self.issending = false;
+        self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_UPLOAD;
+      });
+    } //upload_byurl
+
   }
 });
 
@@ -3048,7 +3093,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
         }
 
-        _this.$toast.success("link \"".concat(url, "\" copied to clipboard"));
+        _this.$toast.success("Files \"".concat(url, "\" uploaded"));
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -42486,11 +42531,19 @@ var render = function() {
         _c("div", { staticClass: "form-group col-md-2 mb-0" }, [
           _c(
             "button",
-            { staticClass: "btn btn-dark", attrs: { disabled: _vm.issending } },
+            {
+              staticClass: "btn btn-dark",
+              attrs: { type: "button", disabled: _vm.issending },
+              on: {
+                click: function($event) {
+                  return _vm.upload_byurl()
+                }
+              }
+            },
             [
               _vm._v(
                 "\n                " +
-                  _vm._s(_vm.btnsend) +
+                  _vm._s(_vm.btnsend2) +
                   "\n                "
               ),
               _vm.issending
