@@ -1,0 +1,38 @@
+<?php
+namespace App\Services\Common;
+
+
+use App\Component\Curl;
+
+class UploadService
+{
+    private function _get_header($key=null)
+    {
+        $all = getallheaders();
+        $this->logd($all,"get_header.all");
+        if(!$key) return $all;
+        foreach ($all as $k=>$v)
+            if(strtolower($k)===strtolower($key))
+                return $v;
+        return null;
+    }
+
+    private function _get_origin(){
+        $domain = $this->_get_header("origin");
+        return str_replace(["https://","http://"],"",$domain);
+    }
+
+    public function get_token()
+    {
+        $url = $this->_get_env("API_UPLOAD_URL");
+        $curl = new Curl($url);
+        $curl->add_post("user",$this->_get_env("API_UPLOAD_USERNAME"));
+        $curl->add_post("password",$this->_get_env("API_UPLOAD_PASSWORD"));
+        $curl->add_post("remoteip",$_SERVER["REMOTE_ADDR"]);
+        $curl->add_post("remotehost",$this->_get_origin());
+        $curl->request_post();
+        $r = $curl->get_response();
+        $r = \json_decode($r,1);
+        $this->logd($r,"curl.upload.r");
+    }
+}
