@@ -2789,27 +2789,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -2847,17 +2826,17 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           return Swal.fire({
             icon: 'warning',
             title: TITLE_ERROR,
-            text: response.error
+            html: response.error
           });
         }
 
-        self.rows = response.data;
+        self.rows = response.data.files;
       })["catch"](function (error) {
-        console.log("CATCH ERROR insert", error);
+        console.log("CATCH ERROR list", error);
         Swal.fire({
           icon: 'error',
           title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
-          text: error.toString()
+          html: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
@@ -41264,109 +41243,60 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.rows, function(item, index) {
-            return _c(
-              "tr",
-              { key: index },
-              [
-                _vm._l(_vm.columns, function(column, idx) {
-                  return _c(
-                    "td",
-                    { key: idx, class: { "res-tddel": item.delete_date } },
-                    [_vm._v(_vm._s(item[column]))]
-                  )
-                }),
-                _vm._v(" "),
-                _c("td", [
-                  item.id_status == 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-dark",
-                          attrs: {
-                            target: "_blank",
-                            href: "/blog/draft/" + item.id
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.rows, function(url, i) {
+          return _c("div", { key: _vm.index, staticClass: "col-sm-3" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("p", { staticClass: "card-text" }, [
+                  _c("img", {
+                    staticClass: "container-fluid",
+                    attrs: { src: url }
+                  }),
                   _vm._v(" "),
-                  item.id_status != 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-info",
-                          attrs: { target: "_blank", href: item.url_final }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("td", [
+                  _c("small", [_vm._v(_vm._s(url))]),
+                  _vm._v(" "),
                   _c(
-                    "button",
+                    "a",
                     {
-                      staticClass: "btn btn-primary",
-                      attrs: { disabled: _vm.issending },
-                      on: {
-                        click: function($event) {
-                          return _vm.edit(item.id)
-                        }
-                      }
+                      staticClass: "btn btn-info",
+                      attrs: { target: "_blank", href: url }
                     },
                     [
                       _c("i", {
-                        staticClass: "fa fa-pencil-square-o",
+                        staticClass: "fa fa-window-maximize",
                         attrs: { "aria-hidden": "true" }
                       })
                     ]
                   )
                 ]),
                 _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { disabled: _vm.issending },
-                      on: {
-                        click: function($event) {
-                          return _vm.remove(item.id)
-                        }
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-danger",
+                    attrs: { disabled: _vm.issending },
+                    on: {
+                      click: function($event) {
+                        return _vm.remove(url)
                       }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash-o",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  )
-                ])
-              ],
-              2
-            )
-          }),
-          0
-        )
-      ])
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-trash-o",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
+                )
+              ])
+            ])
+          ])
+        }),
+        0
+      )
     ])
   ])
 }
@@ -41376,28 +41306,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-9" }, [_c("h1", [_vm._v("Posts")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("id")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Title")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Permalink")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Draft")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Edit")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Remove")])
-      ])
-    ])
   }
 ]
 render._withStripped = true

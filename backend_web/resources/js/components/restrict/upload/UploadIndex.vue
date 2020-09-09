@@ -3,7 +3,7 @@
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
-                <h1>Posts</h1>
+                <h1>Upload</h1>
             </div>
             <div class="col-md-3">
                 <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="load()">
@@ -12,45 +12,26 @@
                 </button>
             </div>
         </div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>id</th>
-                <th>Title</th>
-                <th>Permalink</th>
-                <th>Description</th>
-                <th>Draft</th>
-                <th>Edit</th>
-                <th>Remove</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, index) in rows" :key="index">
-                    <td
-                        v-for="(column, idx) in columns" :key="idx"
-                        v-bind:class="{ 'res-tddel': item.delete_date }"
-                    >{{item[column]}}</td>
-                    <td>
-                        <a v-if="item.id_status==0" class="btn btn-dark" target="_blank" :href="'/blog/draft/'+item.id">
+        <div class="row">
+            <div class="col-sm-3" v-for="(url, i) in rows" :key="index">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">
+                            <img :src="url" class="container-fluid"/>
+                            <small>{{url}}</small>
+                        </p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <a class="btn btn-info" target="_blank" :href="url">
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
                         </a>
-                        <a v-if="item.id_status!=0" class="btn btn-info" target="_blank" :href="item.url_final">
-                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <button class="btn btn-primary" :disabled="issending"  v-on:click="edit(item.id)">
-                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        </button>
-                    </td>
-                    <td>
-                        <button class="btn btn-danger" :disabled="issending"  v-on:click="remove(item.id)">
+                        <button class="btn btn-danger" :disabled="issending"  v-on:click="remove(url)">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </template>
@@ -97,17 +78,17 @@ export default {
                     return Swal.fire({
                         icon: 'warning',
                         title: TITLE_ERROR,
-                        text: response.error,
+                        html: response.error,
                     })
                 }
-                self.rows = response.data
+                self.rows = response.data.files
             })
             .catch(error => {
-                console.log("CATCH ERROR insert",error)
+                console.log("CATCH ERROR list",error)
                 Swal.fire({
                     icon: 'error',
                     title: CONST.TITLE_SERVERROR,
-                    text: error.toString(),
+                    html: error.toString(),
                 })
             })
             .finally(() => {
