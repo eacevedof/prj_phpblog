@@ -2846,18 +2846,16 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       });
     },
     //load
-    remove: function remove(url) {
+    remove: function remove(resurl) {
       if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].CONFIRM)) {
         var self = this;
         self.issending = true;
         self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-
-        var _url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/remove");
-
+        var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/remove");
         var form = new FormData();
         form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadtoken());
-        form.append("urls[]", _url);
-        fetch(_url, {
+        form.append("urls[]", resurl);
+        fetch(url, {
           method: 'post',
           body: form
         }).then(function (response) {
@@ -2876,7 +2874,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           self.load();
           Swal.fire({
             icon: 'success',
-            title: "Resource: ".concat(_url, " has been removed"),
+            title: "Resource: ".concat(url, " has been removed"),
             html: "<b>&#128578;</b>"
           });
         })["catch"](function (error) {
@@ -41243,7 +41241,7 @@ var render = function() {
         "div",
         { staticClass: "row" },
         _vm._l(_vm.rows, function(url, i) {
-          return _c("div", { key: _vm.index, staticClass: "col-sm-3" }, [
+          return _c("div", { key: i, staticClass: "col-sm-3" }, [
             _c("div", { staticClass: "card" }, [
               _c("div", { staticClass: "card-body" }, [
                 _c("p", { staticClass: "card-text" }, [

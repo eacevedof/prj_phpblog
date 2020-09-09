@@ -99,7 +99,7 @@ export default {
             })
         },//load
 
-        remove(url){
+        remove(resurl){
             if(confirm(CONST.CONFIRM)){
                 const self = this
                 self.issending = true
@@ -108,7 +108,7 @@ export default {
                 const url = funcs.get_uploadomain().concat("/remove")
                 const form = new FormData()
                 form.append("resource-usertoken",funcs.get_uploadtoken())
-                form.append("urls[]",url)
+                form.append("urls[]",resurl)
 
                 fetch(url, {
                     method: 'post',
@@ -122,7 +122,7 @@ export default {
                         return Swal.fire({
                             icon: 'warning',
                             title: CONST.TITLE_ERROR,
-                            text: response.error,
+                            html: response.error,
                         })
                     }
 
@@ -130,8 +130,8 @@ export default {
 
                     Swal.fire({
                         icon: 'success',
-                        title: `Resource: ${url} has been removed`,
-                        html: `<b>&#128578;</b>`,
+                        title: `Resource removed`,
+                        html: `<small>${resurl}</small><br/>&#128578;`,
                     })
 
                 })
@@ -140,7 +140,7 @@ export default {
                     Swal.fire({
                         icon: 'error',
                         title: CONST.TITLE_SERVERROR,
-                        text: error.toString(),
+                        html: error.toString(),
                     })
                 })
                 .finally(() => {
