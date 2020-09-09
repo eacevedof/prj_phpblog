@@ -2902,8 +2902,9 @@ __webpack_require__.r(__webpack_exports__);
       var el = document.getElementById("rawlink-" + i);
 
       if (el) {
-        _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].to_clipboard(el.innerText);
-        this.$toast.success("link copied to clipboard");
+        var url = el.innerText;
+        _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].to_clipboard(url);
+        this.$toast.success("link \"".concat(url, "\" copied to clipboard"));
       }
     }
   }
