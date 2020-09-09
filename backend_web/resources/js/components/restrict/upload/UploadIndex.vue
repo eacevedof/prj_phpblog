@@ -62,10 +62,12 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
+
             const url = funcs.get_uploadomain().concat("/files")
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
             form.append("folderdomain","eduardoaf.com")
+
             fetch(url, {
                 method: 'post',
                 body: form,
@@ -77,7 +79,7 @@ export default {
                 if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
-                        title: TITLE_ERROR,
+                        title: CONST.TITLE_ERROR,
                         html: response.error,
                     })
                 }
@@ -97,25 +99,20 @@ export default {
             })
         },//load
 
-        edit(id){
-            const url = "/adm/post/update/"+id
-            document.location = url
-            //window.open(url, "_blank")
-        },
-
-        remove(id){
+        remove(url){
             if(confirm(CONST.CONFIRM)){
-                console.log("fetching")
                 const self = this
                 self.issending = true
                 self.btnsend = CONST.BTN_IN_PROGRESS
-                const url = `/api/post/${id}`
+
+                const url = funcs.get_uploadomain().concat("/remove")
+                const form = new FormData()
+                form.append("resource-usertoken",funcs.get_uploadtoken())
+                form.append("urls[]",url)
+
                 fetch(url, {
-                    method: 'delete',
-                    headers:{
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({_token:csrftoken,_action:"post.delete"})
+                    method: 'post',
+                    body: form
                 })
                 .then(response => response.json())
                 .then(response => {
@@ -133,7 +130,7 @@ export default {
 
                     Swal.fire({
                         icon: 'success',
-                        title: `Post: ${id} has been removed`,
+                        title: `Resource: ${url} has been removed`,
                         html: `<b>&#128578;</b>`,
                     })
 

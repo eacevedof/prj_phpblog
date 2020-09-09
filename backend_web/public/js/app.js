@@ -2789,6 +2789,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
@@ -41256,22 +41258,24 @@ var render = function() {
                     attrs: { src: url }
                   }),
                   _vm._v(" "),
-                  _c("small", [_vm._v(_vm._s(url))]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-info",
-                      attrs: { target: "_blank", href: url }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-window-maximize",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  )
-                ]),
+                  _c("small", [_vm._v(_vm._s(url))])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer text-muted" }, [
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-info",
+                    attrs: { target: "_blank", href: url }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-window-maximize",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
+                ),
                 _vm._v(" "),
                 _c(
                   "button",
@@ -41305,7 +41309,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [_c("h1", [_vm._v("Posts")])])
+    return _c("div", { staticClass: "col-md-9" }, [
+      _c("h1", [_vm._v("Upload")])
+    ])
   }
 ]
 render._withStripped = true

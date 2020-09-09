@@ -92,8 +92,8 @@ export default {
                 if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
-                        title: TITLE_ERROR,
-                        text: response.error,
+                        title: CONST.TITLE_ERROR,
+                        html: response.error,
                     })
                 }
                 self.rows = response.data
@@ -103,7 +103,7 @@ export default {
                 Swal.fire({
                     icon: 'error',
                     title: CONST.TITLE_SERVERROR,
-                    text: error.toString(),
+                    html: error.toString(),
                 })
             })
             .finally(() => {
@@ -140,7 +140,7 @@ export default {
                         return Swal.fire({
                             icon: 'warning',
                             title: CONST.TITLE_ERROR,
-                            text: response.error,
+                            html: response.error,
                         })
                     }
 
@@ -158,7 +158,7 @@ export default {
                     Swal.fire({
                         icon: 'error',
                         title: CONST.TITLE_SERVERROR,
-                        text: error.toString(),
+                        html: error.toString(),
                     })
                 })
                 .finally(() => {
