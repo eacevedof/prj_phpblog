@@ -21,6 +21,7 @@ class UploadService extends BaseService
 
     private function _get_origin(){
         $domain = $this->_get_header("origin");
+        if(!$domain) $domain = $this->_get_header("host");
         return str_replace(["https://","http://"],"",$domain);
     }
 
@@ -34,7 +35,9 @@ class UploadService extends BaseService
         $curl->add_post("remotehost",$this->_get_origin());
         $curl->request_post();
         $r = $curl->get_response();
+        //$this->logd($r,"get_token raw response");
         $r = \json_decode($r,1);
         $this->logd($r,"curl.upload.r");
+        return $r["data"]["token"] ?? "";
     }
 }
