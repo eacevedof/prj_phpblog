@@ -3005,13 +3005,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-      var url = "/api/post";
+      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/by-url");
       var form = new FormData();
+      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+      form.append("folderdomain", "eduardoaf.com");
+      form.append("files", self.upload.content);
       fetch(url, {
         method: 'post',
         body: form
-      }) //.then(response => console.log(response,"RESPONSE"))
-      .then(function (response) {
+      }).then(function (response) {
         return response.json();
       }).then(function (response) {
         console.log("reponse", response);
@@ -3026,10 +3028,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         Swal.fire({
           icon: 'success',
-          title: "Post: \"".concat(self.upload.url_final, "\" <br/> creado"),
-          html: "<b>&#128578;</b>"
+          title: "Resource uploaded",
+          html: "<a href=\"".concat(response.data.files[0], "\" class=\"link-danger\" target=\"_blank\">\n                                 <small>").concat(response.data.files[0], "</small>\n                               </a>")
         });
-        window.location = "/adm/post/update/" + response.data.id;
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -3043,20 +3044,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     //insert
-    get_idtype_slug: function get_idtype_slug() {
-      var idtype = this.upload.id_type;
-      var category = this.categories.filter(function (obj) {
-        return obj.id == idtype;
-      }).map(function (obj) {
-        return obj.slug;
-      });
-      return category;
-    },
-    onchange_title: function onchange_title() {
-      this.upload.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.upload.title);
-      var catslug = this.get_idtype_slug();
-      this.upload.url_final = "/blog/".concat(catslug).concat("/").concat(this.upload.slug);
-    },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
       this.insert();
@@ -3064,20 +3051,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
   },
   mounted: function mounted() {
-    var _this = this;
-
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
-              return apifetch.get_categories();
+              ;
 
-            case 2:
-              _this.categories = _context.sent;
-
-            case 3:
+            case 1:
             case "end":
               return _context.stop();
           }
@@ -42669,7 +42650,7 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { id: "txa-content", rows: "25", cols: "10" },
+                  attrs: { id: "txa-content", rows: "5", cols: "10" },
                   domProps: { value: _vm.upload.content },
                   on: {
                     input: function($event) {

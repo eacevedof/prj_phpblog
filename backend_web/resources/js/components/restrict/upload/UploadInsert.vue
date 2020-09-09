@@ -16,7 +16,7 @@
             <div class="form-row mt-1">
                 <div class="form-group col-md-12">
                     <label for="txa-content">By urls</label>
-                    <textarea id="txa-content" v-model="upload.content" rows="25" cols="10" class="form-control"></textarea>
+                    <textarea id="txa-content" v-model="upload.content" rows="5" cols="10" class="form-control"></textarea>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="fil-url_img1">Url img1</label>
@@ -76,14 +76,17 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
-            const url = `/api/post`
+
+            const url = funcs.get_uploadomain().concat("/upload/by-url")
             const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain","eduardoaf.com")
+            form.append("files",self.upload.content)
 
             fetch(url, {
                 method: 'post',
                 body: form
             })
-            //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
             .then(response => {
 
@@ -99,11 +102,11 @@ export default {
 
                 Swal.fire({
                     icon: 'success',
-                    title: `Post: "${self.upload.url_final}" <br/> creado`,
-                    html: `<b>&#128578;</b>`,
+                    title: `Resource uploaded`,
+                    html: `<a href="${response.data.files[0]}" class="link-danger" target="_blank">
+                                 <small>${response.data.files[0]}</small>
+                               </a>`,
                 })
-
-                window.location = "/adm/post/update/"+response.data.id
             })
             .catch(error => {
                 console.log("CATCH ERROR insert",error)
@@ -119,18 +122,6 @@ export default {
             })
         },//insert
 
-        get_idtype_slug(){
-            const idtype = this.upload.id_type
-            const category = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.slug)
-            return category
-        },
-
-        onchange_title(){
-            this.upload.slug = funcs.get_slug(this.upload.title)
-            const catslug = this.get_idtype_slug()
-            this.upload.url_final = "/blog/".concat(catslug).concat("/").concat(this.upload.slug)
-        },
-
         handleSubmit: function(e) {
             e.preventDefault()
             this.insert()
@@ -138,8 +129,7 @@ export default {
     },
 
     async mounted() {
-        this.categories = await apifetch.get_categories()
-        //funcs.pr(this.categories)
+        ;
     }
 }
 </script>
