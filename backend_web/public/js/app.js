@@ -2926,7 +2926,14 @@ __webpack_require__.r(__webpack_exports__);
     },
     upload_byurl: function upload_byurl() {
       var self = this;
-      if (!self.upload.urlupload.trim()) return;
+
+      if (!self.upload.urlupload.trim()) {
+        self.upload.urlupload = "";
+        self.$toast.warning("You must fill input with a valid url");
+        self.$refs.urlupload.focus();
+        return;
+      }
+
       self.issending = true;
       self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
       var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/upload/by-url");
