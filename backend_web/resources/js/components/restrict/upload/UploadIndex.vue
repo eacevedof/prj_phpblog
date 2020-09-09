@@ -17,7 +17,9 @@
                 <div class="card">
                     <div class="card-body">
                         <p class="card-text">
-                            <img :src="url" class="container-fluid"/>
+                            <a :href="src" target="_blank">
+                                <img :src="url" class="container-fluid"/>
+                            </a>
                             <small :id="'rawlink-'+i">{{url}}</small>
                         </p>
                     </div>

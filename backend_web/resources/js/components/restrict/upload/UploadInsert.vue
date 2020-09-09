@@ -16,7 +16,10 @@
             <div class="form-row mt-1">
                 <div class="form-group col-md-12">
                     <label for="txa-content">By urls</label>
-                    <textarea id="txa-content" v-model="upload.content" rows="5" cols="10" class="form-control"></textarea>
+                    <textarea id="txa-content"
+                              v-model="upload.content" rows="5" cols="10" class="form-control"
+                              placeholder="<urlimg>=<name>;<urlimg1>=<name1>..."
+                    ></textarea>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="fil-url_img1">Url img1</label>
@@ -56,7 +59,7 @@ import CONST from "../../../app/constants"
 export default {
     data(){
         return {
-            btnsend: CONST.BTN_INISTATE,
+            btnsend: CONST.BTN_INISTATE_UPLOAD,
             issending: false,
 
             upload: {
@@ -103,8 +106,8 @@ export default {
                 Swal.fire({
                     icon: 'success',
                     title: `Resource uploaded`,
-                    html: `<a href="${response.data.files[0]}" class="link-danger" target="_blank">
-                                 <small>${response.data.files[0]}</small>
+                    html: `<a href="${response.data.url[0]}" class="link-danger" target="_blank">
+                                 <small>${response.data.url[0]}</small>
                                </a>`,
                 })
             })
@@ -118,7 +121,7 @@ export default {
             })
             .finally(() => {
                 self.issending = false;
-                self.btnsend = CONST.BTN_INISTATE
+                self.btnsend = CONST.BTN_INISTATE_UPLOAD
             })
         },//insert
 

@@ -2982,12 +2982,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE,
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
       issending: false,
       upload: {
         content: "",
@@ -3029,7 +3032,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         Swal.fire({
           icon: 'success',
           title: "Resource uploaded",
-          html: "<a href=\"".concat(response.data.files[0], "\" class=\"link-danger\" target=\"_blank\">\n                                 <small>").concat(response.data.files[0], "</small>\n                               </a>")
+          html: "<a href=\"".concat(response.data.url[0], "\" class=\"link-danger\" target=\"_blank\">\n                                 <small>").concat(response.data.url[0], "</small>\n                               </a>")
         });
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
@@ -3040,7 +3043,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
       });
     },
     //insert
@@ -42650,7 +42653,12 @@ var render = function() {
                     }
                   ],
                   staticClass: "form-control",
-                  attrs: { id: "txa-content", rows: "5", cols: "10" },
+                  attrs: {
+                    id: "txa-content",
+                    rows: "5",
+                    cols: "10",
+                    placeholder: "<urlimg>=<name>;<urlimg1>=<name1>..."
+                  },
                   domProps: { value: _vm.upload.content },
                   on: {
                     input: function($event) {
@@ -55064,6 +55072,7 @@ __webpack_require__.r(__webpack_exports__);
 var CONST = {
   BTN_INISTATE: "Save changes",
   BTN_INISTATE_REFRESH: "Refresh",
+  BTN_INISTATE_UPLOAD: "Upload",
   BTN_IN_PROGRESS: "In progress...",
   TITLE_ERROR: "This action could not be completed! &#58384;",
   TITLE_SERVERROR: "Opps! Some error occurred &#9785;",
