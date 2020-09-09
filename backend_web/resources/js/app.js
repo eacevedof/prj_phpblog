@@ -19,6 +19,10 @@ import PostUpdate from "./components/restrict/post/PostUpdate.vue";
 import UploadIndex from "./components/restrict/upload/UploadIndex";
 import UploadInsert from "./components/restrict/upload/UploadInsert";
 
+import VueBootstrapToasts from "vue-bootstrap-toasts";
+
+Vue.use(VueBootstrapToasts);
+
 Vue.component('postindex', PostIndex);
 Vue.component('postinsert', PostInsert);
 Vue.component('postupdate', PostUpdate);

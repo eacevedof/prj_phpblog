@@ -36,6 +36,13 @@
             </div>
         </div>
     </div>
+    <Toasts
+        :show-progress="true"
+        :rtl="false"
+        :max-messages="5"
+        :time-out="1000"
+        :closeable="true"
+    ></Toasts>
 </div>
 </template>
 
@@ -155,15 +162,9 @@ export default {
         copycb(i){
             const el = document.getElementById("rawlink-"+i)
             if(el) {
-                funcs.to_clipboard(el.innerText)
-                /*
-                this.$bvToast.toast('Toast body content', {
-                    title: `Variant ${variant || 'default'}`,
-                    variant: variant,
-                    solid: true
-                })
-
-                 */
+                const url = el.innerText
+                funcs.to_clipboard(url)
+                this.$toast.success(`link "${url}" copied to clipboard`)
             }
         }
     }

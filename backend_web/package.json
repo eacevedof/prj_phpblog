@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "imagemin-webpack-plugin": "^2.4.2"
+        "imagemin-webpack-plugin": "^2.4.2",
+        "vue-bootstrap-toasts": "^1.0.7"
     }
 }
