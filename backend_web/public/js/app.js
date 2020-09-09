@@ -2833,6 +2833,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.load();
+    this.$refs.urlupload.focus();
   },
   methods: {
     load: function load() {
