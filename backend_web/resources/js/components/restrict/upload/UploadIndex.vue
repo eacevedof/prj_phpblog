@@ -191,7 +191,7 @@ export default {
         upload_byurl(){
             const self = this
 
-            if(!self.upload.content) return
+            if(!self.upload.content.trim()) return
 
             self.issending = true
             self.btnsend2 = CONST.BTN_IN_PROGRESS
