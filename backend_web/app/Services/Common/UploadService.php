@@ -40,4 +40,12 @@ class UploadService extends BaseService
         $this->logd($r,"curl.upload.r");
         return $r["data"]["token"] ?? "";
     }
+
+    public function get_rootendpoint()
+    {
+        return "http://localhost:4000";
+        $url = $this->get_env("API_UPLOAD_URL");
+        $urlinfo = parse_url($url);
+        return $urlinfo['scheme']."://".$urlinfo['host'].(isset($urlinfo["port"]) ? ":{$urlinfo["port"]}":"");
+    }
 }

@@ -16,15 +16,25 @@ class UploadController extends BaseController
     public function __invoke()
     {
         //post: resource-usertoken
-        $token = (new UploadService())->get_token();
-        return view('restrict.upload.index',["module"=>"upload","token"=>$token]);
+        $serv = new UploadService();
+
+        return view('restrict.upload.index',[
+            "module"        => "upload",
+            "token"         => $serv->get_token(),
+            "uploaddomain"  => $serv->get_rootendpoint(),
+        ]);
     }
 
     public function insert()
     {
         //post: resource-usertoken
-        $token = (new UploadService())->get_token();
-        return view('restrict.upload.insert',["module"=>"upload","token"=>$token]);
+        $serv = new UploadService();
+
+        return view('restrict.upload.index',[
+            "module"        => "upload",
+            "token"         => $serv->get_token(),
+            "uploaddomain"  => $serv->get_rootendpoint(),
+        ]);
     }
 
 }

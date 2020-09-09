@@ -42,8 +42,19 @@ const funcs = {
             .replace(/-+/g, '-'); // collapse dashes
 
         return str;
-    }
+    },
 
+    get_uploadtoken: () => {
+        const input = document.getElementById("upload-token");
+        if(input) return input.value
+        return ""
+    },
+
+    get_uploadomain: () => {
+        const input = document.getElementById("upload-domain");
+        if(input) return input.value
+        return ""
+    }
 }
 
 export default funcs

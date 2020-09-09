@@ -1005,6 +1005,16 @@ var funcs = {
     .replace(/-+/g, '-'); // collapse dashes
 
     return str;
+  },
+  get_uploadtoken: function get_uploadtoken() {
+    var input = document.getElementById("upload-token");
+    if (input) return input.value;
+    return "";
+  },
+  get_uploadomain: function get_uploadomain() {
+    var input = document.getElementById("upload-domain");
+    if (input) return input.value;
+    return "";
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (funcs);

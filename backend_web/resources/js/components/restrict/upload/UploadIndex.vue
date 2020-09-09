@@ -81,9 +81,13 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
-            const url = `/api/post`
+            const url = funcs.get_uploadomain().concat("/files")
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain","eduardoaf.com")
             fetch(url, {
-                method: 'get',
+                method: 'post',
+                body: form,
             })
             .then(response => response.json())
             .then(response => {
