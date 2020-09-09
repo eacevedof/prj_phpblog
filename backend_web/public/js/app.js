@@ -2921,14 +2921,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
-/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
-//
-//
-//
-//
-//
-//
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2982,107 +2984,106 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 
-var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE,
       issending: false,
-      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      columns: ["id", "title", "url_final", "description"],
-      rows: []
+      upload: {
+        content: "",
+        url_img1: "",
+        url_img2: "",
+        url_img3: ""
+      }
     };
   },
-  mounted: function mounted() {
-    this.load();
-  },
   methods: {
-    load: function load() {
-      console.log("...loading");
+    on_change: function on_change() {
+      alert("X");
+    },
+    insert: function insert() {
       var self = this;
       self.issending = true;
-      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
+      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
       var url = "/api/post";
+      var form = new FormData();
       fetch(url, {
-        method: 'get'
-      }).then(function (response) {
+        method: 'post',
+        body: form
+      }) //.then(response => console.log(response,"RESPONSE"))
+      .then(function (response) {
         return response.json();
       }).then(function (response) {
-        console.log("load.reponse", response);
+        console.log("reponse", response);
 
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: TITLE_ERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
             text: response.error
           });
         }
 
-        self.rows = response.data;
+        Swal.fire({
+          icon: 'success',
+          title: "Post: \"".concat(self.upload.url_final, "\" <br/> creado"),
+          html: "<b>&#128578;</b>"
+        });
+        window.location = "/adm/post/update/" + response.data.id;
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
           icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
           text: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE;
       });
     },
-    //load
-    edit: function edit(id) {
-      var url = "/adm/post/update/" + id;
-      document.location = url; //window.open(url, "_blank")
+    //insert
+    get_idtype_slug: function get_idtype_slug() {
+      var idtype = this.upload.id_type;
+      var category = this.categories.filter(function (obj) {
+        return obj.id == idtype;
+      }).map(function (obj) {
+        return obj.slug;
+      });
+      return category;
     },
-    remove: function remove(id) {
-      if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].CONFIRM)) {
-        console.log("fetching");
-        var self = this;
-        self.issending = true;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-        var url = "/api/post/".concat(id);
-        fetch(url, {
-          method: 'delete',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            _token: csrftoken,
-            _action: "post.delete"
-          })
-        }).then(function (response) {
-          return response.json();
-        }).then(function (response) {
-          console.log("remove.response", response);
+    onchange_title: function onchange_title() {
+      this.upload.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.upload.title);
+      var catslug = this.get_idtype_slug();
+      this.upload.url_final = "/blog/".concat(catslug).concat("/").concat(this.upload.slug);
+    },
+    handleSubmit: function handleSubmit(e) {
+      e.preventDefault();
+      this.insert();
+    } //handleSubmit(e)
 
-          if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
-            return Swal.fire({
-              icon: 'warning',
-              title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
-              text: response.error
-            });
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return apifetch.get_categories();
+
+            case 2:
+              _this.categories = _context.sent;
+
+            case 3:
+            case "end":
+              return _context.stop();
           }
-
-          self.load();
-          Swal.fire({
-            icon: 'success',
-            title: "Post: ".concat(id, " has been removed"),
-            html: "<b>&#128578;</b>"
-          });
-        })["catch"](function (error) {
-          console.log("CATCH ERROR remove", error);
-          Swal.fire({
-            icon: 'error',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
-            text: error.toString()
-          });
-        })["finally"](function () {
-          self.issending = false;
-          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
-        });
-      }
-    }
+        }
+      }, _callee);
+    }))();
   }
 });
 
@@ -42613,176 +42614,172 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "row card-header res-formheader" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary res-btnformheader",
-              attrs: { disabled: _vm.issending },
-              on: {
-                click: function($event) {
-                  return _vm.load()
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.btnsend) +
-                  "\n                    "
-              ),
-              _vm.issending
-                ? _c("img", {
-                    attrs: {
-                      src: "/assets/images/loading-bw.gif",
-                      width: "25",
-                      height: "25"
+  return _c(
+    "div",
+    { staticClass: "card" },
+    [
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "form",
+          { attrs: { id: "form-insert" }, on: { submit: _vm.handleSubmit } },
+          [
+            _c("div", { staticClass: "row card-header res-formheader" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-3" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary res-btnformheader",
+                    attrs: { disabled: _vm.issending }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.btnsend) +
+                        "\n                        "
+                    ),
+                    _vm.issending
+                      ? _c("img", {
+                          attrs: {
+                            src: "/assets/images/loading-bw.gif",
+                            width: "25",
+                            height: "25"
+                          }
+                        })
+                      : _vm._e()
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-row mt-1" }, [
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txa-content" } }, [
+                  _vm._v("By urls")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.upload.content,
+                      expression: "upload.content"
                     }
-                  })
-                : _vm._e()
-            ]
-          )
-        ])
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "txa-content", rows: "25", cols: "10" },
+                  domProps: { value: _vm.upload.content },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.upload, "content", $event.target.value)
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "fil-url_img1" } }, [
+                  _vm._v("Url img1")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "file", id: "fil-url_img1", maxlength: "300" },
+                  on: {
+                    change: function($event) {
+                      return _vm.on_change()
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "fil-url_img2" } }, [
+                  _vm._v("Url img2")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "file", id: "fil-url_img2", maxlength: "300" },
+                  on: {
+                    change: function($event) {
+                      return _vm.on_change()
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "fil-url_img3" } }, [
+                  _vm._v("Url img3")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: { type: "file", id: "fil-url_img3", maxlength: "300" },
+                  on: {
+                    change: function($event) {
+                      return _vm.on_change()
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary res-btncol",
+                    attrs: { disabled: _vm.issending }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        " +
+                        _vm._s(_vm.btnsend) +
+                        "\n                        "
+                    ),
+                    _vm.issending
+                      ? _c("img", {
+                          attrs: {
+                            src: "/assets/images/loading-bw.gif",
+                            width: "25",
+                            height: "25"
+                          }
+                        })
+                      : _vm._e()
+                  ]
+                )
+              ])
+            ])
+          ]
+        )
       ]),
       _vm._v(" "),
-      _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(1),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.rows, function(item, index) {
-            return _c(
-              "tr",
-              { key: index },
-              [
-                _vm._l(_vm.columns, function(column, idx) {
-                  return _c(
-                    "td",
-                    { key: idx, class: { "res-tddel": item.delete_date } },
-                    [_vm._v(_vm._s(item[column]))]
-                  )
-                }),
-                _vm._v(" "),
-                _c("td", [
-                  item.id_status == 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-dark",
-                          attrs: {
-                            target: "_blank",
-                            href: "/blog/draft/" + item.id
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  item.id_status != 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-info",
-                          attrs: { target: "_blank", href: item.url_final }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e()
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { disabled: _vm.issending },
-                      on: {
-                        click: function($event) {
-                          return _vm.edit(item.id)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-pencil-square-o",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("td", [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { disabled: _vm.issending },
-                      on: {
-                        click: function($event) {
-                          return _vm.remove(item.id)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash-o",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  )
-                ])
-              ],
-              2
-            )
-          }),
-          0
-        )
-      ])
-    ])
-  ])
+      _c("Toasts", {
+        attrs: {
+          "show-progress": true,
+          rtl: false,
+          "max-messages": 5,
+          "time-out": 1000,
+          closeable: true
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [_c("h1", [_vm._v("Posts")])])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("id")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Title")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Permalink")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Draft")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Edit")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Remove")])
-      ])
+    return _c("div", { staticClass: "col-md-9" }, [
+      _c("h1", [_vm._v("Insert upload")])
     ])
   }
 ]

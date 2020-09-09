@@ -20,15 +20,15 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label for="fil-url_img1">Url img1</label>
-                    <input type="file" id="fil-url_img1" v-model="upload.url_img1" maxlength="300" class="form-control"/>
+                    <input type="file" id="fil-url_img1" @change="on_change()" maxlength="300" class="form-control"/>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="fil-url_img2">Url img2</label>
-                    <input type="file" id="fil-url_img2" v-model="upload.url_img2" maxlength="300" class="form-control"/>
+                    <input type="file" id="fil-url_img2" @change="on_change()" maxlength="300" class="form-control"/>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="fil-url_img3">Url img3</label>
-                    <input type="file" id="fil-url_img3" v-model="upload.url_img3" maxlength="300" class="form-control">
+                    <input type="file" id="fil-url_img3" @change="on_change()" maxlength="300" class="form-control">
                 </div>
 
                 <div class="form-group col-md-4">
@@ -69,7 +69,9 @@ export default {
     },
 
     methods:{
-
+        on_change(){
+            alert("X")
+        },
         insert(){
             const self = this
             self.issending = true

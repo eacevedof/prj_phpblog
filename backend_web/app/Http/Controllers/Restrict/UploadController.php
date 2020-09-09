@@ -30,7 +30,7 @@ class UploadController extends BaseController
         //post: resource-usertoken
         $serv = new UploadService();
 
-        return view('restrict.upload.index',[
+        return view('restrict.upload.insert',[
             "module"        => "upload",
             "token"         => $serv->get_token(),
             "uploaddomain"  => $serv->get_rootendpoint(),
