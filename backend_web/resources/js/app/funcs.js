@@ -54,6 +54,16 @@ const funcs = {
         const input = document.getElementById("upload-domain");
         if(input) return input.value
         return ""
+    },
+
+    to_clipboard: str => {
+        const txa = document.createElement('textarea');
+        txa.value = str;
+        document.body.appendChild(txa);
+        txa.select()
+        txa.setSelectionRange(0, 99999)
+        document.execCommand("copy")
+        document.body.removeChild(txa);
     }
 }
 

@@ -2791,15 +2791,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
-var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      columns: ["id", "title", "url_final", "description"],
       rows: []
     };
   },
@@ -2888,6 +2889,13 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           self.issending = false;
           self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
         });
+      }
+    },
+    copycb: function copycb(i) {
+      var el = document.getElementById("rawlink-" + i);
+
+      if (el) {
+        _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].to_clipboard(el.innerText);
       }
     }
   }
@@ -41250,7 +41258,9 @@ var render = function() {
                     attrs: { src: url }
                   }),
                   _vm._v(" "),
-                  _c("small", [_vm._v(_vm._s(url))])
+                  _c("small", { attrs: { id: "rawlink-" + i } }, [
+                    _vm._v(_vm._s(url))
+                  ])
                 ])
               ]),
               _vm._v(" "),
@@ -41264,6 +41274,25 @@ var render = function() {
                   [
                     _c("i", {
                       staticClass: "fa fa-window-maximize",
+                      attrs: { "aria-hidden": "true" }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-info",
+                    attrs: { disabled: _vm.issending },
+                    on: {
+                      click: function($event) {
+                        return _vm.copycb(i)
+                      }
+                    }
+                  },
+                  [
+                    _c("i", {
+                      staticClass: "fa fa-clipboard",
                       attrs: { "aria-hidden": "true" }
                     })
                   ]
@@ -53869,6 +53898,15 @@ var funcs = {
     var input = document.getElementById("upload-domain");
     if (input) return input.value;
     return "";
+  },
+  to_clipboard: function to_clipboard(str) {
+    var txa = document.createElement('textarea');
+    txa.value = str;
+    document.body.appendChild(txa);
+    txa.select();
+    txa.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    document.body.removeChild(txa);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (funcs);

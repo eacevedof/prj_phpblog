@@ -1015,6 +1015,15 @@ var funcs = {
     var input = document.getElementById("upload-domain");
     if (input) return input.value;
     return "";
+  },
+  to_clipboard: function to_clipboard(str) {
+    var txa = document.createElement('textarea');
+    txa.value = str;
+    document.body.appendChild(txa);
+    txa.select();
+    txa.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    document.body.removeChild(txa);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (funcs);

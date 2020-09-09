@@ -18,13 +18,16 @@
                     <div class="card-body">
                         <p class="card-text">
                             <img :src="url" class="container-fluid"/>
-                            <small>{{url}}</small>
+                            <small :id="'rawlink-'+i">{{url}}</small>
                         </p>
                     </div>
                     <div class="card-footer text-muted">
                         <a class="btn btn-info" target="_blank" :href="url">
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
                         </a>
+                        <button class="btn btn-info" :disabled="issending"  v-on:click="copycb(i)">
+                            <i class="fa fa-clipboard" aria-hidden="true"></i>
+                        </button>
                         <button class="btn btn-danger" :disabled="issending"  v-on:click="remove(url)">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
@@ -40,14 +43,11 @@
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 
-const csrftoken = funcs.get_csrftoken()
-
 export default {
     data(){
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            columns: ["id","title","url_final","description"],
             rows: [],
         }
     },
@@ -151,6 +151,13 @@ export default {
                 })
             }
         },
+
+        copycb(i){
+            const el = document.getElementById("rawlink-"+i)
+            if(el) {
+                funcs.to_clipboard(el.innerText)
+            }
+        }
     }
 }
 </script>
