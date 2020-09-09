@@ -156,6 +156,14 @@ export default {
             const el = document.getElementById("rawlink-"+i)
             if(el) {
                 funcs.to_clipboard(el.innerText)
+                /*
+                this.$bvToast.toast('Toast body content', {
+                    title: `Variant ${variant || 'default'}`,
+                    variant: variant,
+                    solid: true
+                })
+
+                 */
             }
         }
     }
