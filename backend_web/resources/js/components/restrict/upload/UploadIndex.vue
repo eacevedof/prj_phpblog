@@ -1,5 +1,20 @@
 <template>
 <div class="card">
+    <div class="row m-0 p-0 mt-4">
+        <div class="form-group col-md-10 mb-2">
+            <input type="text" id="txt-content"
+                      v-model="upload.content" class="form-control"
+                      placeholder="url to upload::name"
+            />
+        </div>
+        <div class="form-group col-md-2 mb-0">
+            <button class="btn btn-dark" :disabled="issending">
+                {{btnsend}}
+                <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+            </button>
+        </div>
+    </div>
+
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
@@ -24,9 +39,6 @@
                         </p>
                     </div>
                     <div class="card-footer text-muted">
-                        <a class="btn btn-info" target="_blank" :href="url">
-                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
-                        </a>
                         <button class="btn btn-info" :disabled="issending"  v-on:click="copycb(i)">
                             <i class="fa fa-clipboard" aria-hidden="true"></i>
                         </button>
@@ -58,6 +70,9 @@ export default {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
             rows: [],
+            upload:{
+                content: ""
+            }
         }
     },
 

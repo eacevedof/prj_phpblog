@@ -2803,6 +2803,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2810,7 +2822,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      rows: []
+      rows: [],
+      upload: {
+        content: ""
+      }
     };
   },
   mounted: function mounted() {
@@ -42439,6 +42454,59 @@ var render = function() {
     "div",
     { staticClass: "card" },
     [
+      _c("div", { staticClass: "row m-0 p-0 mt-4" }, [
+        _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.upload.content,
+                expression: "upload.content"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              id: "txt-content",
+              placeholder: "url to upload::name"
+            },
+            domProps: { value: _vm.upload.content },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.upload, "content", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-2 mb-0" }, [
+          _c(
+            "button",
+            { staticClass: "btn btn-dark", attrs: { disabled: _vm.issending } },
+            [
+              _vm._v(
+                "\n                " +
+                  _vm._s(_vm.btnsend) +
+                  "\n                "
+              ),
+              _vm.issending
+                ? _c("img", {
+                    attrs: {
+                      src: "/assets/images/loading-bw.gif",
+                      width: "25",
+                      height: "25"
+                    }
+                  })
+                : _vm._e()
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row card-header res-formheader" }, [
           _vm._m(0),
@@ -42497,20 +42565,6 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "card-footer text-muted" }, [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-info",
-                      attrs: { target: "_blank", href: url }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-window-maximize",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
                   _c(
                     "button",
                     {
