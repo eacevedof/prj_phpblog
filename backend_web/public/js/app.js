@@ -2816,6 +2816,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2826,7 +2827,7 @@ __webpack_require__.r(__webpack_exports__);
       btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_UPLOAD,
       rows: [],
       upload: {
-        content: ""
+        urlupload: ""
       }
     };
   },
@@ -2899,11 +2900,7 @@ __webpack_require__.r(__webpack_exports__);
           }
 
           self.load();
-          Swal.fire({
-            icon: 'success',
-            title: "Resource removed",
-            html: "<a href=\"".concat(response.data.urls[0], "\" class=\"link-danger\" target=\"_blank\">\n                                 <small>").concat(response.data.urls[0], "</small>\n                               </a>")
-          });
+          self.$toast.info("Resource removed: ".concat(response.data.urls[0]));
         })["catch"](function (error) {
           console.log("CATCH ERROR remove", error);
           Swal.fire({
@@ -2927,17 +2924,15 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     upload_byurl: function upload_byurl() {
-      var _this = this;
-
       var self = this;
-      if (!self.upload.content.trim()) return;
+      if (!self.upload.urlupload.trim()) return;
       self.issending = true;
       self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
       var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/upload/by-url");
       var form = new FormData();
       form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadtoken());
       form.append("folderdomain", "eduardoaf.com");
-      form.append("files", self.upload.content);
+      form.append("files", self.upload.urlupload);
       fetch(url, {
         method: 'post',
         body: form
@@ -2955,8 +2950,9 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         self.load();
-
-        _this.$toast.success("Files \"".concat(url, "\" uploaded"));
+        self.upload.urlupload = "";
+        self.$toast.success("Files \"".concat(url, "\" uploaded"));
+        self.$refs.urlupload.focus();
       })["catch"](function (error) {
         console.log("CATCH ERROR upload", error);
         Swal.fire({
@@ -42507,13 +42503,14 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.upload.content,
-                expression: "upload.content"
+                value: _vm.upload.urlupload,
+                expression: "upload.urlupload"
               }
             ],
+            ref: "urlupload",
             staticClass: "form-control",
             attrs: { type: "text", placeholder: "url to upload::name" },
-            domProps: { value: _vm.upload.content },
+            domProps: { value: _vm.upload.urlupload },
             on: {
               focus: function($event) {
                 return $event.target.select()
@@ -42531,7 +42528,7 @@ var render = function() {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.upload, "content", $event.target.value)
+                _vm.$set(_vm.upload, "urlupload", $event.target.value)
               }
             }
           })
@@ -42677,7 +42674,7 @@ var render = function() {
           "show-progress": true,
           rtl: false,
           "max-messages": 5,
-          "time-out": 1000,
+          "time-out": 5000,
           closeable: true
         }
       })

@@ -3,8 +3,9 @@
     <div class="row m-0 p-0 mt-4">
         <div class="form-group col-md-10 mb-2">
             <input type="text" class="form-control" placeholder="url to upload::name"
+               ref="urlupload"
                @focus="$event.target.select()"
-               v-model="upload.content"
+               v-model="upload.urlupload"
                v-on:keyup.enter="upload_byurl()"
             />
         </div>
@@ -55,7 +56,7 @@
         :show-progress="true"
         :rtl="false"
         :max-messages="5"
-        :time-out="1000"
+        :time-out="5000"
         :closeable="true"
     ></Toasts>
 </div>
@@ -73,7 +74,7 @@ export default {
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
             rows: [],
             upload:{
-                content: ""
+                urlupload: ""
             }
         }
     },
@@ -154,14 +155,7 @@ export default {
 
                     self.load()
 
-                    Swal.fire({
-                        icon: 'success',
-                        title: `Resource removed`,
-                        html: `<a href="${response.data.urls[0]}" class="link-danger" target="_blank">
-                                 <small>${response.data.urls[0]}</small>
-                               </a>`,
-                    })
-
+                    self.$toast.info(`Resource removed: ${response.data.urls[0]}`)
                 })
                 .catch(error => {
                     console.log("CATCH ERROR remove",error)
@@ -190,7 +184,7 @@ export default {
         upload_byurl(){
             const self = this
 
-            if(!self.upload.content.trim()) return
+            if(!self.upload.urlupload.trim()) return
 
             self.issending = true
             self.btnsend2 = CONST.BTN_IN_PROGRESS
@@ -199,7 +193,7 @@ export default {
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
             form.append("folderdomain","eduardoaf.com")
-            form.append("files",self.upload.content)
+            form.append("files",self.upload.urlupload)
 
             fetch(url, {
                 method: 'post',
@@ -219,7 +213,9 @@ export default {
                 }
 
                 self.load()
-                this.$toast.success(`Files "${url}" uploaded`)
+                self.upload.urlupload = ""
+                self.$toast.success(`Files "${url}" uploaded`)
+                self.$refs.urlupload.focus();
             })
             .catch(error => {
                 console.log("CATCH ERROR upload",error)
