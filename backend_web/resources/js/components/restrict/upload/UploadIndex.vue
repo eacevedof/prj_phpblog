@@ -131,7 +131,9 @@ export default {
                     Swal.fire({
                         icon: 'success',
                         title: `Resource removed`,
-                        html: `<small>${resurl}</small><br/>&#128578;`,
+                        html: `<a href="${response.data.urls[0]}" class="link-danger" target="_blank">
+                                 <small>${response.data.urls[0]}</small>
+                               </a>`,
                     })
 
                 })

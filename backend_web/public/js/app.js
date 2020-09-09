@@ -2867,22 +2867,22 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
             return Swal.fire({
               icon: 'warning',
               title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
-              text: response.error
+              html: response.error
             });
           }
 
           self.load();
           Swal.fire({
             icon: 'success',
-            title: "Resource: ".concat(url, " has been removed"),
-            html: "<b>&#128578;</b>"
+            title: "Resource removed",
+            html: "<a href=\"".concat(response.data.urls[0], "\" class=\"link-danger\" target=\"_blank\">\n                                 <small>").concat(response.data.urls[0], "</small>\n                               </a>")
           });
         })["catch"](function (error) {
           console.log("CATCH ERROR remove", error);
           Swal.fire({
             icon: 'error',
             title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
-            text: error.toString()
+            html: error.toString()
           });
         })["finally"](function () {
           self.issending = false;
