@@ -9,7 +9,7 @@
         </div>
         <div class="form-group col-md-2 mb-0">
             <button class="btn btn-dark" :disabled="issending">
-                {{btnsend}}
+                {{btnsend2}}
                 <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
             </button>
         </div>
@@ -69,6 +69,7 @@ export default {
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
+            btnsend2: CONST.BTN_INISTATE_UPLOAD,
             rows: [],
             upload:{
                 content: ""
