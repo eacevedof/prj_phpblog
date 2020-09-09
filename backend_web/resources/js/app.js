@@ -16,9 +16,15 @@ import PostIndex from "./components/restrict/post/PostIndex.vue";
 import PostInsert from "./components/restrict/post/PostInsert.vue";
 import PostUpdate from "./components/restrict/post/PostUpdate.vue";
 
+import UploadIndex from "./components/restrict/upload/UploadIndex";
+import UploadInsert from "./components/restrict/upload/UploadInsert";
+
 Vue.component('postindex', PostIndex);
 Vue.component('postinsert', PostInsert);
 Vue.component('postupdate', PostUpdate);
+
+Vue.component('uploadindex', UploadIndex);
+Vue.component('uploadinsert', UploadInsert);
 
 const app = new Vue({
     el: '#app',
