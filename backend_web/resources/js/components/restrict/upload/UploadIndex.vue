@@ -81,6 +81,7 @@ export default {
 
     mounted() {
         this.load()
+        this.$refs.urlupload.focus();
     },
 
     methods: {
