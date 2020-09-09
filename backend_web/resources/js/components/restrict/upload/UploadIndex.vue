@@ -2,11 +2,10 @@
 <div class="card">
     <div class="row m-0 p-0 mt-4">
         <div class="form-group col-md-10 mb-2">
-            <input type="text"
-                   @focus="$event.target.select()"
-                   v-model="upload.content" class="form-control"
-                   v-on:keyup.enter="upload_byurl()"
-                   placeholder="url to upload::name"
+            <input type="text" class="form-control" placeholder="url to upload::name"
+               @focus="$event.target.select()"
+               v-model="upload.content"
+               v-on:keyup.enter="upload_byurl()"
             />
         </div>
         <div class="form-group col-md-2 mb-0">

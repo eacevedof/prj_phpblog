@@ -2815,6 +2815,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2929,7 +2930,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var self = this;
-      if (!self.upload.content) return;
+      if (!self.upload.content.trim()) return;
       self.issending = true;
       self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
       var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/upload/by-url");
@@ -42511,13 +42512,21 @@ var render = function() {
               }
             ],
             staticClass: "form-control",
-            attrs: {
-              type: "text",
-              id: "txt-content",
-              placeholder: "url to upload::name"
-            },
+            attrs: { type: "text", placeholder: "url to upload::name" },
             domProps: { value: _vm.upload.content },
             on: {
+              focus: function($event) {
+                return $event.target.select()
+              },
+              keyup: function($event) {
+                if (
+                  !$event.type.indexOf("key") &&
+                  _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                ) {
+                  return null
+                }
+                return _vm.upload_byurl()
+              },
               input: function($event) {
                 if ($event.target.composing) {
                   return
