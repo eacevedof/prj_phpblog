@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3" v-for="(url, i) in rows" :key="index">
+            <div class="col-sm-3" v-for="(url, i) in rows" :key="i">
                 <div class="card">
                     <div class="card-body">
                         <p class="card-text">

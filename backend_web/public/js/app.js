@@ -2011,8 +2011,8 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: TITLE_ERROR,
-            text: response.error
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+            html: response.error
           });
         }
 
@@ -2022,7 +2022,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         Swal.fire({
           icon: 'error',
           title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
-          text: error.toString()
+          html: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
@@ -2059,7 +2059,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
             return Swal.fire({
               icon: 'warning',
               title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
-              text: response.error
+              html: response.error
             });
           }
 
@@ -2074,7 +2074,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           Swal.fire({
             icon: 'error',
             title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
-            text: error.toString()
+            html: error.toString()
           });
         })["finally"](function () {
           self.issending = false;
@@ -2827,7 +2827,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: TITLE_ERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
             html: response.error
           });
         }
@@ -2846,26 +2846,20 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       });
     },
     //load
-    edit: function edit(id) {
-      var url = "/adm/post/update/" + id;
-      document.location = url; //window.open(url, "_blank")
-    },
-    remove: function remove(id) {
+    remove: function remove(url) {
       if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].CONFIRM)) {
-        console.log("fetching");
         var self = this;
         self.issending = true;
         self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-        var url = "/api/post/".concat(id);
-        fetch(url, {
-          method: 'delete',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            _token: csrftoken,
-            _action: "post.delete"
-          })
+
+        var _url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/remove");
+
+        var form = new FormData();
+        form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadtoken());
+        form.append("urls[]", _url);
+        fetch(_url, {
+          method: 'post',
+          body: form
         }).then(function (response) {
           return response.json();
         }).then(function (response) {
@@ -2882,7 +2876,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           self.load();
           Swal.fire({
             icon: 'success',
-            title: "Post: ".concat(id, " has been removed"),
+            title: "Resource: ".concat(_url, " has been removed"),
             html: "<b>&#128578;</b>"
           });
         })["catch"](function (error) {
