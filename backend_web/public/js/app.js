@@ -2836,6 +2836,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2845,34 +2846,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
       btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
-      folders: ["xxx", "yyyy"],
       rows: [],
+      xxx: ["xxx", "yyyy"],
       upload: {
         urlupload: ""
       }
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    console.log("upload.async mounted()"); //await this.load_folders()
 
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              console.log("upload.async mounted()"); //await this.load_folders()
-
-              console.log("FOLDERS", _this.folders); //this.load()
-
-              _this.$refs.urlupload.focus();
-
-            case 3:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
+    this.xxx = ["mmm", "uuuu"];
+    console.log("FOLDERS", this.xxx);
+    this.load();
+    this.$refs.urlupload.focus();
   },
   methods: {
     load: function load() {
@@ -3013,31 +3000,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     },
     //upload_byurl
     load_folders: function () {
-      var _load_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var _load_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
         var r;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
                 console.log("async load_folders()"); //await this.$nextTick()
 
-                _context2.next = 3;
+                _context.next = 3;
                 return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
 
               case 3:
-                r = _context2.sent;
+                r = _context.sent;
                 console.log("async load_folders().r", r); //this.folders =  JSON.parse(JSON.stringify(r))
 
-                this.folders = r;
-                this.folders = ["xxx", "yyy"];
-                console.log("async load_folders() this.folders", this.folders, "this.folders type", _typeof(this.folders));
+                this.xxx = r;
+                this.xxx = ["xxx", "yyy"];
+                console.log("async load_folders() this.folders", this.xxx, "this.folders type", _typeof(this.xxx));
 
               case 8:
               case "end":
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee, this);
       }));
 
       function load_folders() {
@@ -42648,9 +42635,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
         _vm._v(
-          "\n        folders:" +
-            _vm._s(JSON.stringify(_vm.folders)) +
-            "\n        "
+          "\n        folders:" + _vm._s(JSON.stringify(_vm.xxx)) + "\n        "
         ),
         _c(
           "select",
@@ -42659,8 +42644,8 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.folders,
-                expression: "folders"
+                value: _vm.xxx,
+                expression: "xxx"
               }
             ],
             staticClass: "form-control",
@@ -42675,7 +42660,7 @@ var render = function() {
                     var val = "_value" in o ? o._value : o.value
                     return val
                   })
-                _vm.folders = $event.target.multiple
+                _vm.xxx = $event.target.multiple
                   ? $$selectedVal
                   : $$selectedVal[0]
               }
@@ -42686,7 +42671,7 @@ var render = function() {
               _vm._v("Choose folder")
             ]),
             _vm._v(" "),
-            _vm._l(_vm.folders, function(folder, i) {
+            _vm._l(_vm.xxx, function(folder, i) {
               return _c("option", { key: i, domProps: { value: folder } }, [
                 _vm._v(_vm._s(folder))
               ])
@@ -42735,67 +42720,74 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row" },
-          _vm._l(_vm.rows, function(url, i) {
-            return _c("div", { key: i, staticClass: "col-sm-3" }, [
-              _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("p", { staticClass: "card-text" }, [
-                    _c("a", { attrs: { href: url, target: "_blank" } }, [
-                      _c("img", {
-                        staticClass: "container-fluid",
-                        attrs: { src: url }
-                      })
-                    ]),
-                    _vm._v(" "),
-                    _c("small", { attrs: { id: "rawlink-" + i } }, [
-                      _vm._v(_vm._s(url))
+          [
+            _vm._v(
+              "\n            rows:" +
+                _vm._s(JSON.stringify(_vm.rows)) +
+                "\n            "
+            ),
+            _vm._l(_vm.rows, function(url, i) {
+              return _c("div", { key: i, staticClass: "col-sm-3" }, [
+                _c("div", { staticClass: "card" }, [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("p", { staticClass: "card-text" }, [
+                      _c("a", { attrs: { href: url, target: "_blank" } }, [
+                        _c("img", {
+                          staticClass: "container-fluid",
+                          attrs: { src: url }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("small", { attrs: { id: "rawlink-" + i } }, [
+                        _vm._v(_vm._s(url))
+                      ])
                     ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer text-muted" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-info",
-                      attrs: { disabled: _vm.issending },
-                      on: {
-                        click: function($event) {
-                          return _vm.copycb(i)
-                        }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-clipboard",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  ),
+                  ]),
                   _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger",
-                      attrs: { disabled: _vm.issending },
-                      on: {
-                        click: function($event) {
-                          return _vm.remove(url)
+                  _c("div", { staticClass: "card-footer text-muted" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-info",
+                        attrs: { disabled: _vm.issending },
+                        on: {
+                          click: function($event) {
+                            return _vm.copycb(i)
+                          }
                         }
-                      }
-                    },
-                    [
-                      _c("i", {
-                        staticClass: "fa fa-trash-o",
-                        attrs: { "aria-hidden": "true" }
-                      })
-                    ]
-                  )
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fa fa-clipboard",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger",
+                        attrs: { disabled: _vm.issending },
+                        on: {
+                          click: function($event) {
+                            return _vm.remove(url)
+                          }
+                        }
+                      },
+                      [
+                        _c("i", {
+                          staticClass: "fa fa-trash-o",
+                          attrs: { "aria-hidden": "true" }
+                        })
+                      ]
+                    )
+                  ])
                 ])
               ])
-            ])
-          }),
-          0
+            })
+          ],
+          2
         )
       ]),
       _vm._v(" "),

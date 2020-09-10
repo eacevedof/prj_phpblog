@@ -18,10 +18,10 @@
     </div>
 
     <div class="form-group col-md-10 mb-2">
-        folders:{{ JSON.stringify(folders) }}
-        <select id="sel-folders" v-model="folders" class="form-control" required>
+        folders:{{ JSON.stringify(xxx) }}
+        <select id="sel-folders" v-model="xxx" class="form-control" required>
             <option disabled value="">Choose folder</option>
-            <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
+            <option v-for="(folder, i) in xxx" :value="folder" :key="i">{{folder}}</option>
         </select>
     </div>
 
@@ -38,6 +38,7 @@
             </div>
         </div>
         <div class="row">
+            rows:{{ JSON.stringify(rows) }}
             <div class="col-sm-3" v-for="(url, i) in rows" :key="i">
                 <div class="card">
                     <div class="card-body">
@@ -81,20 +82,20 @@ export default {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
-            folders: ["xxx","yyyy"],
             rows: [],
+            xxx: ["xxx","yyyy"],
             upload:{
                 urlupload: ""
             }
         }
     },
 
-    async mounted() {
+    mounted() {
         console.log("upload.async mounted()")
         //await this.load_folders()
-        this.folders = ["mmm","uuuu"]
-        console.log("FOLDERS",this.folders)
-        //this.load()
+        this.xxx = ["mmm","uuuu"]
+        console.log("XXX",this.xxx)
+        this.load()
         this.$refs.urlupload.focus();
     },
 
@@ -255,9 +256,9 @@ export default {
             const r = await apifetch.get_folders()
             console.log("async load_folders().r",r)
             //this.folders =  JSON.parse(JSON.stringify(r))
-            this.folders = r
-            this.folders = ["xxx","yyy"]
-            console.log("async load_folders() this.folders",this.folders,"this.folders type",typeof this.folders)
+            this.xxx = r
+            this.xxx = ["xxx","yyy"]
+            console.log("async load_folders() this.folders",this.xxx,"this.folders type",typeof this.xxx)
         }
     }
 }
