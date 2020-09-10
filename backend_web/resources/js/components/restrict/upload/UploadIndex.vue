@@ -17,19 +17,20 @@
         </div>
     </div>
 
-    <div class="form-group col-md-10 mb-2">
-        <select id="sel-folders" v-model="selfolder" class="form-control" required>
-            <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
-        </select>
-    </div>
-
     <div class="card-body">
         <div class="row card-header res-formheader">
-            <div class="col-md-9">
+            <div class="col-md-6 mt-2">
                 <h1>Upload</h1>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="load()">
+                <div class="form-group mt-3">
+                    <select id="sel-folders" v-model="selfolder" class="form-control" required>
+                        <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 mt-3">
+                <button class="btn btn-primary" :disabled="issending" v-on:click="load()">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>

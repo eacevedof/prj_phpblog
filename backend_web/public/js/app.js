@@ -2832,6 +2832,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -42636,54 +42637,56 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.selfolder,
-                expression: "selfolder"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { id: "sel-folders", required: "" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.selfolder = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
-          },
-          _vm._l(_vm.folders, function(folder, i) {
-            return _c("option", { key: i, domProps: { value: folder } }, [
-              _vm._v(_vm._s(folder))
-            ])
-          }),
-          0
-        )
-      ]),
-      _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row card-header res-formheader" }, [
           _vm._m(0),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-3" }, [
+            _c("div", { staticClass: "form-group mt-3" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.selfolder,
+                      expression: "selfolder"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "sel-folders", required: "" },
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.selfolder = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                _vm._l(_vm.folders, function(folder, i) {
+                  return _c("option", { key: i, domProps: { value: folder } }, [
+                    _vm._v(_vm._s(folder))
+                  ])
+                }),
+                0
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-md-3 mt-3" }, [
             _c(
               "button",
               {
-                staticClass: "btn btn-primary res-btnformheader",
+                staticClass: "btn btn-primary",
                 attrs: { disabled: _vm.issending },
                 on: {
                   click: function($event) {
@@ -42796,7 +42799,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [
+    return _c("div", { staticClass: "col-md-6 mt-2" }, [
       _c("h1", [_vm._v("Upload")])
     ])
   }
