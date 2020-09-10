@@ -2853,12 +2853,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }
     };
   },
+  created: function created() {
+    this.xxx = ["ccc", "rrr"];
+    console.log("XXX created", this.xxx);
+  },
   mounted: function mounted() {
+    //const self = this
     console.log("upload.async mounted()"); //await this.load_folders()
 
-    this.xxx = ["mmm", "uuuu"];
-    console.log("FOLDERS", this.xxx);
-    this.load();
+    this.$set(this, "xxx", ["mmm", "uuuu"]);
+    console.log("XXX", this.xxx); //this.load()
+
+    this.rows = ["rr1", "rrr2", "rrr3"];
     this.$refs.urlupload.focus();
   },
   methods: {

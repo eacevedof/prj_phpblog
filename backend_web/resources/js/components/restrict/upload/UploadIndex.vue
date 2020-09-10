@@ -77,6 +77,7 @@ import CONST from "../../../app/constants"
 import apifetch from "../../../app/apifetch";
 
 export default {
+
     data(){
         return {
             issending: false,
@@ -90,12 +91,19 @@ export default {
         }
     },
 
+    created() {
+        this.xxx = ["ccc","rrr"]
+        console.log("XXX created",this.xxx)
+    },
+
     mounted() {
+        //const self = this
         console.log("upload.async mounted()")
         //await this.load_folders()
-        this.xxx = ["mmm","uuuu"]
-        console.log("XXX",this.xxx)
-        this.load()
+        //this.$set(this, "xxx", ["mmm","uuuu"])
+        //console.log("XXX",this.xxx)
+        //this.load()
+        this.rows = ["rr1","rrr2","rrr3"]
         this.$refs.urlupload.focus();
     },
 
