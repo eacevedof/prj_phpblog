@@ -2751,8 +2751,17 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
-/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
+/* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apifetch */ "./resources/js/app/apifetch.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2817,14 +2826,23 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       issending: false,
-      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_UPLOAD,
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
+      btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
+      folders: [],
       rows: [],
       upload: {
         urlupload: ""
@@ -2832,18 +2850,39 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.load();
-    this.$refs.urlupload.focus();
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _this.load_folders();
+
+            case 2:
+              //console.log(this.folders,"FOLDERS")
+              _this.load();
+
+              _this.$refs.urlupload.focus();
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     load: function load() {
       console.log("...loading");
       var self = this;
       self.issending = true;
-      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/files");
+      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/files");
       var form = new FormData();
-      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadtoken());
+      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
       form.append("folderdomain", "eduardoaf.com");
       fetch(url, {
         method: 'post',
@@ -2853,10 +2892,10 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log("load.reponse", response);
 
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
             html: response.error
           });
         }
@@ -2866,23 +2905,23 @@ __webpack_require__.r(__webpack_exports__);
         console.log("CATCH ERROR list", error);
         Swal.fire({
           icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
           html: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
       });
     },
     //load
     remove: function remove(resurl) {
-      if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].CONFIRM)) {
+      if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].CONFIRM)) {
         var self = this;
         self.issending = true;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-        var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/remove");
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+        var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/remove");
         var form = new FormData();
-        form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadtoken());
+        form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
         form.append("urls[]", resurl);
         fetch(url, {
           method: 'post',
@@ -2892,10 +2931,10 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           console.log("remove.response", response);
 
-          if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+          if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
             return Swal.fire({
               icon: 'warning',
-              title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+              title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
               html: response.error
             });
           }
@@ -2906,12 +2945,12 @@ __webpack_require__.r(__webpack_exports__);
           console.log("CATCH ERROR remove", error);
           Swal.fire({
             icon: 'error',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
             html: error.toString()
           });
         })["finally"](function () {
           self.issending = false;
-          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
+          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
         });
       }
     },
@@ -2920,7 +2959,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (el) {
         var url = el.innerText;
-        _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].to_clipboard(url);
+        _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].to_clipboard(url);
         this.$toast.success("link in clipboard!!");
       }
     },
@@ -2935,10 +2974,10 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       self.issending = true;
-      self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadomain().concat("/upload/by-url");
+      self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/by-url");
       var form = new FormData();
-      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_uploadtoken());
+      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
       form.append("folderdomain", "eduardoaf.com");
       form.append("files", self.upload.urlupload);
       fetch(url, {
@@ -2949,10 +2988,10 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         console.log("reponse", response);
 
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
             html: response.error
           });
         }
@@ -2965,15 +3004,40 @@ __webpack_require__.r(__webpack_exports__);
         console.log("CATCH ERROR upload", error);
         Swal.fire({
           icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
           html: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_UPLOAD;
+        self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
       });
-    } //upload_byurl
+    },
+    //upload_byurl
+    load_folders: function load_folders() {
+      var _this2 = this;
 
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var r;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
+
+              case 2:
+                r = _context2.sent;
+                _this2.folders = r;
+                console.log("FOLDERS", _this2.folders);
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    }
   }
 });
 
@@ -42574,6 +42638,51 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.folders,
+                expression: "folders"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: { id: "sel-folders", required: "" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.folders = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          [
+            _c("option", { attrs: { disabled: "", value: "" } }, [
+              _vm._v("Choose folder")
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.folders, function(folder, i) {
+              return _c("option", { key: i, domProps: { value: folder } }, [
+                _vm._v(_vm._s(folder))
+              ])
+            })
+          ],
+          2
+        )
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row card-header res-formheader" }, [
           _vm._m(0),
@@ -55177,6 +55286,62 @@ var apifetch = {
     }
 
     return get_categories;
+  }(),
+  get_folders: function () {
+    var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var r, url, form;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              r = null;
+              _context2.prev = 1;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              _context2.next = 7;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 7:
+              _context2.next = 9;
+              return _context2.sent.json();
+
+            case 9:
+              r = _context2.sent;
+              console.log("get_folders.response.data.folders", r.data.folders); //r = JSON.parse(JSON.stringify(r.data.folders))
+
+              r = r.data.folders;
+              return _context2.abrupt("return", r);
+
+            case 15:
+              _context2.prev = 15;
+              _context2.t0 = _context2["catch"](1);
+              r = _context2.t0;
+              return _context2.abrupt("return", {
+                error: _context2.t0
+              });
+
+            case 19:
+              _context2.prev = 19;
+              console.log("finally get_folders.r", r);
+              return _context2.abrupt("return", r);
+
+            case 23:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 15, 19, 23]]);
+    }));
+
+    function get_folders() {
+      return _get_folders.apply(this, arguments);
+    }
+
+    return get_folders;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apifetch);

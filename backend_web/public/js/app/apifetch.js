@@ -925,6 +925,62 @@ var apifetch = {
     }
 
     return get_categories;
+  }(),
+  get_folders: function () {
+    var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var r, url, form;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              r = null;
+              _context2.prev = 1;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              _context2.next = 7;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 7:
+              _context2.next = 9;
+              return _context2.sent.json();
+
+            case 9:
+              r = _context2.sent;
+              console.log("get_folders.response.data.folders", r.data.folders); //r = JSON.parse(JSON.stringify(r.data.folders))
+
+              r = r.data.folders;
+              return _context2.abrupt("return", r);
+
+            case 15:
+              _context2.prev = 15;
+              _context2.t0 = _context2["catch"](1);
+              r = _context2.t0;
+              return _context2.abrupt("return", {
+                error: _context2.t0
+              });
+
+            case 19:
+              _context2.prev = 19;
+              console.log("finally get_folders.r", r);
+              return _context2.abrupt("return", r);
+
+            case 23:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[1, 15, 19, 23]]);
+    }));
+
+    function get_folders() {
+      return _get_folders.apply(this, arguments);
+    }
+
+    return get_folders;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apifetch);

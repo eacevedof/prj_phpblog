@@ -17,6 +17,13 @@
         </div>
     </div>
 
+    <div class="form-group col-md-10 mb-2">
+        <select id="sel-folders" v-model="folders" class="form-control" required>
+            <option disabled value="">Choose folder</option>
+            <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
+        </select>
+    </div>
+
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
@@ -65,6 +72,7 @@
 <script>
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
+import apifetch from "../../../app/apifetch";
 
 export default {
     data(){
@@ -72,6 +80,7 @@ export default {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
+            folders:[],
             rows: [],
             upload:{
                 urlupload: ""
@@ -79,7 +88,9 @@ export default {
         }
     },
 
-    mounted() {
+    async mounted() {
+        await this.load_folders()
+        //console.log(this.folders,"FOLDERS")
         this.load()
         this.$refs.urlupload.focus();
     },
@@ -207,9 +218,7 @@ export default {
             })
             .then(response => response.json())
             .then(response => {
-
                 console.log("reponse",response)
-
                 if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
@@ -236,6 +245,12 @@ export default {
                 self.btnsend2 = CONST.BTN_INISTATE_UPLOAD
             })
         },//upload_byurl
+
+        async load_folders(){
+            const r = await apifetch.get_folders()
+            this.folders = r
+            console.log("FOLDERS",this.folders)
+        }
     }
 }
 </script>
