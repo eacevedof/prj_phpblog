@@ -136,6 +136,10 @@ public function render($request, Throwable $exception)
 ```
 - Faltaba aplicar `.then(response => response.json())` en primera linea ya que la primera respuesta es una promesa de estado
 **error obtengo undefined despues de setear la variable en vue**
+- Pensaba que era el objeto _Observer de vue y que habia que resolverlo como promesa
+- Que el fetch no lo hacia correctamente con await
+- que necesitaba self en lugar del this
+- que data solo admitía un array
 ```vue
 //error esto hacía que folders siempre fuera undefined
 <select id="sel-folders" v-model="folders" class="form-control" required>
@@ -148,5 +152,4 @@ public function render($request, Throwable $exception)
     <option disabled value="">Choose folder</option>
     <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
 </select>
-
 ```

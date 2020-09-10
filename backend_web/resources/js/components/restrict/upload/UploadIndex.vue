@@ -18,8 +18,7 @@
     </div>
 
     <div class="form-group col-md-10 mb-2">
-        <select id="sel-folders" v-model="folder" class="form-control" required>
-            <option disabled value="">Choose folder</option>
+        <select id="sel-folders" v-model="selfolder" class="form-control" required>
             <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
         </select>
     </div>
@@ -81,8 +80,8 @@ export default {
             btnsend: CONST.BTN_INISTATE_REFRESH,
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
             rows: [],
-            folder: "",
-            folders: [], //aqui hay un bug de vue, no me deja crear otra variable que no sea rows de tipo array, si la seteo en algun lado la guarda como undefined
+            selfolder: "eduardoaf.com",
+            folders: [],
             upload:{
                 urlupload: ""
             }
@@ -106,7 +105,7 @@ export default {
             const url = funcs.get_uploadomain().concat("/files")
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
-            form.append("folderdomain","eduardoaf.com")
+            form.append("folderdomain",self.selfolder)
 
             fetch(url, {
                 method: 'post',
@@ -210,7 +209,7 @@ export default {
             const url = funcs.get_uploadomain().concat("/upload/by-url")
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
-            form.append("folderdomain","eduardoaf.com")
+            form.append("folderdomain",this.selfolder)
             form.append("files",self.upload.urlupload)
 
             fetch(url, {
