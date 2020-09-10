@@ -274,19 +274,16 @@ export default {
 
             if(self.upload.files.length==0)return
 
-            const url = funcs.get_uploadomain().concat("/upload")
+            const url = funcs.get_uploadomain().concat("/upload/multiple")
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
             form.append("folderdomain",this.selfolder)
-            //form.append("files",self.upload.files.map(obj => obj.file))
 
-            for (const file of self.upload.files) {
+            for(const file of self.upload.files)
                 form.append("files[]", file, file.name);
-            }
 
             fetch(url, {
                 method: 'post',
-                //headers:{'Content-Type': 'multipart/form-data'},
                 body: form
             })
             .then(response => response.json())
