@@ -7,7 +7,9 @@
         @endif
         @if($module=="upload")
             <li class="breadcrumb-item"><a href="/adm/upload">Upload</a></li>
+         <!--
             <li class="breadcrumb-item"><a href="/adm/upload/insert">Insert upload</a></li>
+         -->
         @endif
     </ol>
 </nav>
