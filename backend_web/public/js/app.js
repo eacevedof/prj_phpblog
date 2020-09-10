@@ -2758,14 +2758,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apifetch */ "./resources/js/app/apifetch.js");
 
 
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
 //
 //
 //
@@ -2847,25 +2843,37 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
       btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
       rows: [],
-      xxx: ["xxx", "yyyy"],
+      xxx: [],
+      //aqui hay un bug de vue, no me deja crear otra variable que no sea rows de tipo array, si la seteo en algun lado la guarda como undefined
       upload: {
         urlupload: ""
       }
     };
   },
-  created: function created() {
-    this.xxx = ["ccc", "rrr"];
-    console.log("XXX created", this.xxx);
-  },
   mounted: function mounted() {
-    //const self = this
-    console.log("upload.async mounted()"); //await this.load_folders()
+    var _this = this;
 
-    this.$set(this, "xxx", ["mmm", "uuuu"]);
-    console.log("XXX", this.xxx); //this.load()
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              console.log("upload.async mounted()");
+              _context.next = 3;
+              return _this.load_folders();
 
-    this.rows = ["rr1", "rrr2", "rrr3"];
-    this.$refs.urlupload.focus();
+            case 3:
+              _this.load();
+
+              _this.$refs.urlupload.focus();
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     load: function load() {
@@ -3005,40 +3013,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     //upload_byurl
-    load_folders: function () {
-      var _load_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var r;
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                console.log("async load_folders()"); //await this.$nextTick()
+    load_folders: function load_folders() {
+      var _this2 = this;
 
-                _context.next = 3;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                console.log("async load_folders()");
+                _context2.next = 3;
                 return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
 
               case 3:
-                r = _context.sent;
-                console.log("async load_folders().r", r); //this.folders =  JSON.parse(JSON.stringify(r))
+                _this2.$data.xxx = _context2.sent;
+                console.log("load_folders:", _this2.$data.xxx);
 
-                this.xxx = r;
-                this.xxx = ["xxx", "yyy"];
-                console.log("async load_folders() this.folders", this.xxx, "this.folders type", _typeof(this.xxx));
-
-              case 8:
+              case 5:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, this);
-      }));
-
-      function load_folders() {
-        return _load_folders.apply(this, arguments);
-      }
-
-      return load_folders;
-    }()
+        }, _callee2);
+      }))();
+    }
   }
 });
 
@@ -42640,37 +42638,11 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
-        _vm._v(
-          "\n        folders:" + _vm._s(JSON.stringify(_vm.xxx)) + "\n        "
-        ),
         _c(
           "select",
           {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.xxx,
-                expression: "xxx"
-              }
-            ],
             staticClass: "form-control",
-            attrs: { id: "sel-folders", required: "" },
-            on: {
-              change: function($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function(o) {
-                    return o.selected
-                  })
-                  .map(function(o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.xxx = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              }
-            }
+            attrs: { id: "sel-folders", required: "" }
           },
           [
             _c("option", { attrs: { disabled: "", value: "" } }, [
@@ -42726,74 +42698,67 @@ var render = function() {
         _c(
           "div",
           { staticClass: "row" },
-          [
-            _vm._v(
-              "\n            rows:" +
-                _vm._s(JSON.stringify(_vm.rows)) +
-                "\n            "
-            ),
-            _vm._l(_vm.rows, function(url, i) {
-              return _c("div", { key: i, staticClass: "col-sm-3" }, [
-                _c("div", { staticClass: "card" }, [
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("p", { staticClass: "card-text" }, [
-                      _c("a", { attrs: { href: url, target: "_blank" } }, [
-                        _c("img", {
-                          staticClass: "container-fluid",
-                          attrs: { src: url }
-                        })
-                      ]),
-                      _vm._v(" "),
-                      _c("small", { attrs: { id: "rawlink-" + i } }, [
-                        _vm._v(_vm._s(url))
-                      ])
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-footer text-muted" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-info",
-                        attrs: { disabled: _vm.issending },
-                        on: {
-                          click: function($event) {
-                            return _vm.copycb(i)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fa fa-clipboard",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    ),
+          _vm._l(_vm.rows, function(url, i) {
+            return _c("div", { key: i, staticClass: "col-sm-3" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-body" }, [
+                  _c("p", { staticClass: "card-text" }, [
+                    _c("a", { attrs: { href: url, target: "_blank" } }, [
+                      _c("img", {
+                        staticClass: "container-fluid",
+                        attrs: { src: url }
+                      })
+                    ]),
                     _vm._v(" "),
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger",
-                        attrs: { disabled: _vm.issending },
-                        on: {
-                          click: function($event) {
-                            return _vm.remove(url)
-                          }
-                        }
-                      },
-                      [
-                        _c("i", {
-                          staticClass: "fa fa-trash-o",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    )
+                    _c("small", { attrs: { id: "rawlink-" + i } }, [
+                      _vm._v(_vm._s(url))
+                    ])
                   ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer text-muted" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-info",
+                      attrs: { disabled: _vm.issending },
+                      on: {
+                        click: function($event) {
+                          return _vm.copycb(i)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-clipboard",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { disabled: _vm.issending },
+                      on: {
+                        click: function($event) {
+                          return _vm.remove(url)
+                        }
+                      }
+                    },
+                    [
+                      _c("i", {
+                        staticClass: "fa fa-trash-o",
+                        attrs: { "aria-hidden": "true" }
+                      })
+                    ]
+                  )
                 ])
               ])
-            })
-          ],
-          2
+            ])
+          }),
+          0
         )
       ]),
       _vm._v(" "),

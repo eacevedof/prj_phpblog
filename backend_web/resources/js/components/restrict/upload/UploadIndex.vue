@@ -18,10 +18,9 @@
     </div>
 
     <div class="form-group col-md-10 mb-2">
-        folders:{{ JSON.stringify(xxx) }}
-        <select id="sel-folders" v-model="xxx" class="form-control" required>
+        <select id="sel-folders" v-model="folder" class="form-control" required>
             <option disabled value="">Choose folder</option>
-            <option v-for="(folder, i) in xxx" :value="folder" :key="i">{{folder}}</option>
+            <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
         </select>
     </div>
 
@@ -38,7 +37,6 @@
             </div>
         </div>
         <div class="row">
-            rows:{{ JSON.stringify(rows) }}
             <div class="col-sm-3" v-for="(url, i) in rows" :key="i">
                 <div class="card">
                     <div class="card-body">
@@ -77,33 +75,24 @@ import CONST from "../../../app/constants"
 import apifetch from "../../../app/apifetch";
 
 export default {
-
     data(){
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
             rows: [],
-            xxx: ["xxx","yyyy"],
+            folder: "",
+            folders: [], //aqui hay un bug de vue, no me deja crear otra variable que no sea rows de tipo array, si la seteo en algun lado la guarda como undefined
             upload:{
                 urlupload: ""
             }
         }
     },
 
-    created() {
-        this.xxx = ["ccc","rrr"]
-        console.log("XXX created",this.xxx)
-    },
-
-    mounted() {
-        //const self = this
+    async mounted() {
         console.log("upload.async mounted()")
-        //await this.load_folders()
-        //this.$set(this, "xxx", ["mmm","uuuu"])
-        //console.log("XXX",this.xxx)
-        //this.load()
-        this.rows = ["rr1","rrr2","rrr3"]
+        await this.load_folders()
+        this.load()
         this.$refs.urlupload.focus();
     },
 
@@ -258,15 +247,10 @@ export default {
             })
         },//upload_byurl
 
-        load_folders: async function () {
+        async load_folders() {
             console.log("async load_folders()")
-            //await this.$nextTick()
-            const r = await apifetch.get_folders()
-            console.log("async load_folders().r",r)
-            //this.folders =  JSON.parse(JSON.stringify(r))
-            this.xxx = r
-            this.xxx = ["xxx","yyy"]
-            console.log("async load_folders() this.folders",this.xxx,"this.folders type",typeof this.xxx)
+            this.$data.folders = await apifetch.get_folders()
+            console.log("load_folders:",this.$data.folders)
         }
     }
 }
