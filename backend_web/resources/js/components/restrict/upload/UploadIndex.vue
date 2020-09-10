@@ -18,6 +18,7 @@
     </div>
 
     <div class="form-group col-md-10 mb-2">
+        folders:{{ JSON.stringify(folders) }}
         <select id="sel-folders" v-model="folders" class="form-control" required>
             <option disabled value="">Choose folder</option>
             <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
@@ -80,7 +81,7 @@ export default {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
-            folders:[],
+            folders: ["xxx","yyyy"],
             rows: [],
             upload:{
                 urlupload: ""
@@ -90,8 +91,8 @@ export default {
 
     async mounted() {
         console.log("upload.async mounted()")
-        await this.load_folders()
-        //console.log(this.folders,"FOLDERS")
+        //await this.load_folders()
+        console.log("FOLDERS",this.folders)
         //this.load()
         this.$refs.urlupload.focus();
     },
@@ -247,10 +248,14 @@ export default {
             })
         },//upload_byurl
 
-        async load_folders(){
+        load_folders: async function () {
             console.log("async load_folders()")
+            //await this.$nextTick()
             const r = await apifetch.get_folders()
-            this.folders =  JSON.parse(JSON.stringify(r))
+            console.log("async load_folders().r",r)
+            //this.folders =  JSON.parse(JSON.stringify(r))
+            this.folders = r
+            this.folders = ["xxx","yyy"]
             console.log("async load_folders() this.folders",this.folders,"this.folders type",typeof this.folders)
         }
     }

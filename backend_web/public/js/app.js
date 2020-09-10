@@ -2835,6 +2835,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -2844,7 +2845,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
       btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
-      folders: [],
+      folders: ["xxx", "yyyy"],
       rows: [],
       upload: {
         urlupload: ""
@@ -2859,16 +2860,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              console.log("upload.async mounted()");
-              _context.next = 3;
-              return _this.load_folders();
+              console.log("upload.async mounted()"); //await this.load_folders()
 
-            case 3:
-              //console.log(this.folders,"FOLDERS")
-              //this.load()
+              console.log("FOLDERS", _this.folders); //this.load()
+
               _this.$refs.urlupload.focus();
 
-            case 4:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -3014,32 +3012,40 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     //upload_byurl
-    load_folders: function load_folders() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    load_folders: function () {
+      var _load_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
         var r;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log("async load_folders()");
+                console.log("async load_folders()"); //await this.$nextTick()
+
                 _context2.next = 3;
                 return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
 
               case 3:
                 r = _context2.sent;
-                _this2.folders = JSON.parse(JSON.stringify(r));
-                console.log("async load_folders() this.folders", _this2.folders, "this.folders type", _typeof(_this2.folders));
+                console.log("async load_folders().r", r); //this.folders =  JSON.parse(JSON.stringify(r))
 
-              case 6:
+                this.folders = r;
+                this.folders = ["xxx", "yyy"];
+                console.log("async load_folders() this.folders", this.folders, "this.folders type", _typeof(this.folders));
+
+              case 8:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2);
-      }))();
-    }
+        }, _callee2, this);
+      }));
+
+      function load_folders() {
+        return _load_folders.apply(this, arguments);
+      }
+
+      return load_folders;
+    }()
   }
 });
 
@@ -42641,6 +42647,11 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
+        _vm._v(
+          "\n        folders:" +
+            _vm._s(JSON.stringify(_vm.folders)) +
+            "\n        "
+        ),
         _c(
           "select",
           {
