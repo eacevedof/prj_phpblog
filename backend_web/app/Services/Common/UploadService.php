@@ -43,7 +43,8 @@ class UploadService extends BaseService
 
     public function get_rootendpoint()
     {
-        //return "http://localhost:4000";
+        if($this->is_envlocal())  return "http://localhost:4000";
+
         $url = $this->get_env("API_UPLOAD_URL");
         $urlinfo = parse_url($url);
         return $urlinfo['scheme']."://".$urlinfo['host'].(isset($urlinfo["port"]) ? ":{$urlinfo["port"]}":"");
