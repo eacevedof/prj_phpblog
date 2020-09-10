@@ -2839,6 +2839,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3046,7 +3049,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //upload_byurl
     upload_files: function upload_files() {
       this.upload.files = this.$refs.filesupload.files || [];
-      _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr(this.upload.files, "upload_files");
+      console.log(this.upload.files, "upload_files");
     },
     on_upload: function on_upload() {
       _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr("onupload");
@@ -42661,7 +42664,21 @@ var render = function() {
                 : _vm._e()
             ]
           )
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "d-flex m-0 mt-1 pl-3",
+            staticStyle: { "flex-wrap": "wrap" }
+          },
+          _vm._l(_vm.upload.files, function(e, i) {
+            return _c("small", { key: i }, [
+              _vm._v(_vm._s(i + 1) + " - " + _vm._s(e.name) + "  ")
+            ])
+          }),
+          0
+        )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [

@@ -12,7 +12,7 @@
         <div class="form-group col-md-10 mb-2">
             <input type="file" class="form-control" multiple
                 ref="filesupload"
-                @change="upload_files()"
+                @change="on_fileschange()"
             />
         </div>
         <div class="form-group col-md-2 mb-0">
@@ -20,6 +20,9 @@
                 {{btnsend2}}
                 <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
             </button>
+        </div>
+        <div class="d-flex m-0 mt-1 pl-3" style="flex-wrap: wrap;">
+            <small v-for="(e, i) in upload.files" :key="i">{{i+1}} - {{e.name}}&nbsp;&nbsp;</small>
         </div>
     </div>
 <!-- end inputs -->
@@ -262,14 +265,55 @@ export default {
             })
         },//upload_byurl
 
-        upload_files(){
+        on_fileschange(){
             this.upload.files = this.$refs.filesupload.files || []
-            funcs.pr(this.upload.files,"upload_files")
+        },
+
+        upload_files(){
+            const self = this
+
+            if(self.upload.filesupload.length==0)return
+
+            const url = funcs.get_uploadomain().concat("/upload/by-url")
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain",this.selfolder)
+            form.append("files",self.upload.filesupload)
+
+            fetch(url, {
+                method: 'post',
+                body: form
+            })
+            .then(response => response.json())
+            .then(response => {
+                console.log("reponse",response)
+                if(funcs.is_error(response)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        html: response.error,
+                    })
+                }
+
+                self.load_rows()
+                self.upload.urlupload = ""
+                self.$toast.success(`Files "${self.upload.filesupload.map(obj=>obj.name.concat(", "))}" uploaded`)
+            })
+            .catch(error => {
+                console.log("CATCH ERROR uploadfiles",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    html: error.toString(),
+                })
+            })
         },
 
         on_upload(){
-            funcs.pr("onupload")
-        }
+            this.upload_byurl()
+            this.upload_files()
+        },//on_upload
+
     }
 }
 </script>
