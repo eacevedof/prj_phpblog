@@ -92,6 +92,7 @@ export default {
     async mounted() {
         console.log("upload.async mounted()")
         //await this.load_folders()
+        this.folders = ["mmm","uuuu"]
         console.log("FOLDERS",this.folders)
         //this.load()
         this.$refs.urlupload.focus();
