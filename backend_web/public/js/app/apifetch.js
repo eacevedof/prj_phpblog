@@ -992,7 +992,7 @@ var CONST = {
   BTN_INISTATE_REFRESH: "Refresh",
   BTN_INISTATE_UPLOAD: "Upload",
   BTN_IN_PROGRESS: "In progress...",
-  TITLE_ERROR: "This action could not be completed! &#58384;",
+  TITLE_ERROR: "This action could not be completed! &#9785;",
   TITLE_SERVERROR: "Opps! Some error occurred &#9785;",
   CONFIRM: "Are you sure to commit this operation?"
 };
@@ -1023,9 +1023,8 @@ var funcs = {
     console.log(title, any);
   },
   is_error: function is_error(response) {
-    return typeof response.error !== "undefined";
+    return typeof response.error !== "undefined" || typeof response.errors !== "undefined" && response.errors.length > 0;
   },
-  //|| typeof response.errors !== "undefined",
   get_form: function get_form(strobj) {
     var form = new FormData();
     Object.keys(strobj).forEach(function (k) {

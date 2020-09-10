@@ -29,7 +29,7 @@
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-6 mt-2">
-                <h1>Upload</h1>
+                <h1>Uploaded files: <small>({{rows.length}})</small></h1>
             </div>
             <div class="col-md-3">
                 <div class="form-group mt-3">
@@ -296,7 +296,9 @@ export default {
                         html: response.error,
                     })
                 }
-                self.$toast.success(`Files "${self.upload.files.map(obj=>obj.name.concat(", "))}" uploaded`)
+                self.$toast.success(`Files uploaded (${response.data.url.length}): ${response.data.url.join(", ")}`)
+                if(response.data.warning.length>0)
+                    self.$toast.warning(`Files not uploaded (${response.data.warning.length}): ${response.data.warning.join(", ")}`)
             })
             .catch(error => {
                 console.log("CATCH ERROR upload_files",error)
@@ -309,7 +311,7 @@ export default {
         },
 
         on_upload(){
-            //this.upload_byurl()
+            this.upload_byurl()
             this.upload_files()
         },//on_upload
 

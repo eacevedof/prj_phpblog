@@ -3059,10 +3059,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     upload_files: function upload_files() {
       var self = this;
       if (self.upload.files.length == 0) return;
-      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload");
+      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/multiple");
       var form = new FormData();
       form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-      form.append("folderdomain", this.selfolder); //form.append("files",self.upload.files.map(obj => obj.file))
+      form.append("folderdomain", this.selfolder);
 
       var _iterator = _createForOfIteratorHelper(self.upload.files),
           _step;
@@ -3080,7 +3080,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       fetch(url, {
         method: 'post',
-        //headers:{'Content-Type': 'multipart/form-data'},
         body: form
       }).then(function (response) {
         return response.json();
@@ -3095,9 +3094,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
         }
 
-        self.$toast.success("Files \"".concat(self.upload.files.map(function (obj) {
-          return obj.name.concat(", ");
-        }), "\" uploaded"));
+        self.$toast.success("Files uploaded (".concat(response.data.url.length, "): ").concat(response.data.url.join(", ")));
+        if (response.data.warning.length > 0) self.$toast.warning("Files not uploaded (".concat(response.data.warning.length, "): ").concat(response.data.warning.join(", ")));
       })["catch"](function (error) {
         console.log("CATCH ERROR upload_files", error);
         Swal.fire({
@@ -3108,7 +3106,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     on_upload: function on_upload() {
-      //this.upload_byurl()
+      this.upload_byurl();
       this.upload_files();
     } //on_upload
 
@@ -42741,7 +42739,12 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row card-header res-formheader" }, [
-          _vm._m(0),
+          _c("div", { staticClass: "col-md-6 mt-2" }, [
+            _c("h1", [
+              _vm._v("Uploaded files: "),
+              _c("small", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-3" }, [
             _c("div", { staticClass: "form-group mt-3" }, [
@@ -42896,16 +42899,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 mt-2" }, [
-      _c("h1", [_vm._v("Upload")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -55450,7 +55444,7 @@ var CONST = {
   BTN_INISTATE_REFRESH: "Refresh",
   BTN_INISTATE_UPLOAD: "Upload",
   BTN_IN_PROGRESS: "In progress...",
-  TITLE_ERROR: "This action could not be completed! &#58384;",
+  TITLE_ERROR: "This action could not be completed! &#9785;",
   TITLE_SERVERROR: "Opps! Some error occurred &#9785;",
   CONFIRM: "Are you sure to commit this operation?"
 };
@@ -55481,9 +55475,8 @@ var funcs = {
     console.log(title, any);
   },
   is_error: function is_error(response) {
-    return typeof response.error !== "undefined";
+    return typeof response.error !== "undefined" || typeof response.errors !== "undefined" && response.errors.length > 0;
   },
-  //|| typeof response.errors !== "undefined",
   get_form: function get_form(strobj) {
     var form = new FormData();
     Object.keys(strobj).forEach(function (k) {
