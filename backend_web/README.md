@@ -140,6 +140,7 @@ public function render($request, Throwable $exception)
 - Que el fetch no lo hacia correctamente con await
 - que necesitaba self en lugar del this
 - que data solo admitía un array
+- que habia que usar this.$set(..) o this.$data.folders
 ```vue
 //error esto hacía que folders siempre fuera undefined
 <select id="sel-folders" v-model="folders" class="form-control" required>

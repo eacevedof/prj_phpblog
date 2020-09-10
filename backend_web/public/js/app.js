@@ -2832,7 +2832,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -2843,8 +2842,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
       btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
       rows: [],
-      xxx: [],
-      //aqui hay un bug de vue, no me deja crear otra variable que no sea rows de tipo array, si la seteo en algun lado la guarda como undefined
+      selfolder: "eduardoaf.com",
+      folders: [],
       upload: {
         urlupload: ""
       }
@@ -2884,7 +2883,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/files");
       var form = new FormData();
       form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-      form.append("folderdomain", "eduardoaf.com");
+      form.append("folderdomain", self.selfolder);
       fetch(url, {
         method: 'post',
         body: form
@@ -2978,7 +2977,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/by-url");
       var form = new FormData();
       form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-      form.append("folderdomain", "eduardoaf.com");
+      form.append("folderdomain", this.selfolder);
       form.append("files", self.upload.urlupload);
       fetch(url, {
         method: 'post',
@@ -3026,8 +3025,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
 
               case 3:
-                _this2.$data.xxx = _context2.sent;
-                console.log("load_folders:", _this2.$data.xxx);
+                _this2.folders = _context2.sent;
+                console.log("load_folders:", _this2.$data.folders);
 
               case 5:
               case "end":
@@ -42641,21 +42640,38 @@ var render = function() {
         _c(
           "select",
           {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.selfolder,
+                expression: "selfolder"
+              }
+            ],
             staticClass: "form-control",
-            attrs: { id: "sel-folders", required: "" }
+            attrs: { id: "sel-folders", required: "" },
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.selfolder = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
           },
-          [
-            _c("option", { attrs: { disabled: "", value: "" } }, [
-              _vm._v("Choose folder")
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.xxx, function(folder, i) {
-              return _c("option", { key: i, domProps: { value: folder } }, [
-                _vm._v(_vm._s(folder))
-              ])
-            })
-          ],
-          2
+          _vm._l(_vm.folders, function(folder, i) {
+            return _c("option", { key: i, domProps: { value: folder } }, [
+              _vm._v(_vm._s(folder))
+            ])
+          }),
+          0
         )
       ]),
       _vm._v(" "),
@@ -55265,52 +55281,43 @@ var apifetch = {
   }(),
   get_folders: function () {
     var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var r, url, form;
+      var url, form, prom, r;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              r = null;
-              _context2.prev = 1;
+              _context2.prev = 0;
               url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-              _context2.next = 7;
+              _context2.next = 6;
               return fetch(url, {
                 method: 'post',
-                body: form,
-                headers: {
-                  "Accept": "application/json"
-                }
+                body: form
               });
 
-            case 7:
-              r = _context2.sent;
-              console.log("apifetch.get_folders.response.r 1", r);
-              _context2.next = 11;
-              return r.json();
+            case 6:
+              prom = _context2.sent;
+              _context2.next = 9;
+              return prom.json();
 
-            case 11:
-              r = _context2.sent;
-              console.log("apifetch.get_folders.response.r 2", r); //r = JSON.parse(JSON.stringify(r.data.folders))
-
-              r = r.data.folders;
-              console.log("apifetch.get_folders.response.r 3", r);
+            case 9:
+              r = _context2.sent.data.folders;
               return _context2.abrupt("return", r);
 
-            case 18:
-              _context2.prev = 18;
-              _context2.t0 = _context2["catch"](1);
+            case 13:
+              _context2.prev = 13;
+              _context2.t0 = _context2["catch"](0);
               return _context2.abrupt("return", {
                 error: _context2.t0
               });
 
-            case 21:
+            case 16:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 18]]);
+      }, _callee2, null, [[0, 13]]);
     }));
 
     function get_folders() {

@@ -248,7 +248,7 @@ export default {
 
         async load_folders() {
             console.log("async load_folders()")
-            this.$data.folders = await apifetch.get_folders()
+            this.folders = await apifetch.get_folders()
             console.log("load_folders:",this.$data.folders)
         }
     }

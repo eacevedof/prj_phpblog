@@ -928,52 +928,43 @@ var apifetch = {
   }(),
   get_folders: function () {
     var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-      var r, url, form;
+      var url, form, prom, r;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              r = null;
-              _context2.prev = 1;
+              _context2.prev = 0;
               url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-              _context2.next = 7;
+              _context2.next = 6;
               return fetch(url, {
                 method: 'post',
-                body: form,
-                headers: {
-                  "Accept": "application/json"
-                }
+                body: form
               });
 
-            case 7:
-              r = _context2.sent;
-              console.log("apifetch.get_folders.response.r 1", r);
-              _context2.next = 11;
-              return r.json();
+            case 6:
+              prom = _context2.sent;
+              _context2.next = 9;
+              return prom.json();
 
-            case 11:
-              r = _context2.sent;
-              console.log("apifetch.get_folders.response.r 2", r); //r = JSON.parse(JSON.stringify(r.data.folders))
-
-              r = r.data.folders;
-              console.log("apifetch.get_folders.response.r 3", r);
+            case 9:
+              r = _context2.sent.data.folders;
               return _context2.abrupt("return", r);
 
-            case 18:
-              _context2.prev = 18;
-              _context2.t0 = _context2["catch"](1);
+            case 13:
+              _context2.prev = 13;
+              _context2.t0 = _context2["catch"](0);
               return _context2.abrupt("return", {
                 error: _context2.t0
               });
 
-            case 21:
+            case 16:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 18]]);
+      }, _callee2, null, [[0, 13]]);
     }));
 
     function get_folders() {

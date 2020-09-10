@@ -19,18 +19,12 @@ const apifetch = {
     },
 
     get_folders: async () => {
-        let r = null
         try {
             const url = funcs.get_uploadomain().concat("/folders")
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
-            r = await fetch(url,{method: 'post', body: form, headers:{"Accept":"application/json"}})
-            console.log("apifetch.get_folders.response.r 1",r)
-            r = await r.json()
-            console.log("apifetch.get_folders.response.r 2",r)
-            //r = JSON.parse(JSON.stringify(r.data.folders))
-            r = r.data.folders
-            console.log("apifetch.get_folders.response.r 3",r)
+            const prom = await fetch(url,{method: 'post', body: form})//json() error
+            const r = (await prom.json()).data.folders
             return r
         }
         catch (e) {
