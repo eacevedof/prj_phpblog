@@ -10,7 +10,7 @@ const funcs = {
       console.log(title,any)
     },
 
-    is_error: response => typeof response.error !== "undefined",
+    is_error: response => typeof response.error !== "undefined", //|| typeof response.errors !== "undefined",
 
     get_form: strobj => {
         const form = new FormData()

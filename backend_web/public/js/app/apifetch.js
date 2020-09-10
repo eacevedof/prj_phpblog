@@ -1025,6 +1025,7 @@ var funcs = {
   is_error: function is_error(response) {
     return typeof response.error !== "undefined";
   },
+  //|| typeof response.errors !== "undefined",
   get_form: function get_form(strobj) {
     var form = new FormData();
     Object.keys(strobj).forEach(function (k) {

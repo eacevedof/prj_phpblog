@@ -2758,6 +2758,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apifetch */ "./resources/js/app/apifetch.js");
 
 
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -3047,13 +3053,65 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     //upload_byurl
-    upload_files: function upload_files() {
+    on_fileschange: function on_fileschange() {
       this.upload.files = this.$refs.filesupload.files || [];
-      console.log(this.upload.files, "upload_files");
+    },
+    upload_files: function upload_files() {
+      var self = this;
+      if (self.upload.files.length == 0) return;
+      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload");
+      var form = new FormData();
+      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+      form.append("folderdomain", this.selfolder); //form.append("files",self.upload.files.map(obj => obj.file))
+
+      var _iterator = _createForOfIteratorHelper(self.upload.files),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var file = _step.value;
+          form.append("files[]", file, file.name);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      fetch(url, {
+        method: 'post',
+        //headers:{'Content-Type': 'multipart/form-data'},
+        body: form
+      }).then(function (response) {
+        return response.json();
+      }).then(function (response) {
+        console.log("reponse", response);
+
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
+          return Swal.fire({
+            icon: 'warning',
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
+            html: response.error
+          });
+        }
+
+        self.$toast.success("Files \"".concat(self.upload.files.map(function (obj) {
+          return obj.name.concat(", ");
+        }), "\" uploaded"));
+      })["catch"](function (error) {
+        console.log("CATCH ERROR upload_files", error);
+        Swal.fire({
+          icon: 'error',
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
+          html: error.toString()
+        });
+      });
     },
     on_upload: function on_upload() {
-      _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr("onupload");
-    }
+      //this.upload_byurl()
+      this.upload_files();
+    } //on_upload
+
   }
 });
 
@@ -42629,7 +42687,7 @@ var render = function() {
             attrs: { type: "file", multiple: "" },
             on: {
               change: function($event) {
-                return _vm.upload_files()
+                return _vm.on_fileschange()
               }
             }
           })
@@ -55425,6 +55483,7 @@ var funcs = {
   is_error: function is_error(response) {
     return typeof response.error !== "undefined";
   },
+  //|| typeof response.errors !== "undefined",
   get_form: function get_form(strobj) {
     var form = new FormData();
     Object.keys(strobj).forEach(function (k) {
