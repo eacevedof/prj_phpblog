@@ -9,14 +9,20 @@
                v-on:keyup.enter="upload_byurl()"
             />
         </div>
+        <div class="form-group col-md-10 mb-2">
+            <input type="file" class="form-control" multiple
+                ref="filesupload"
+                @change="upload_files()"
+            />
+        </div>
         <div class="form-group col-md-2 mb-0">
-            <button type="button" class="btn btn-dark" :disabled="issending" v-on:click="upload_byurl()">
+            <button type="button" class="btn btn-dark" :disabled="issending" v-on:click="on_upload()">
                 {{btnsend2}}
                 <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
             </button>
         </div>
     </div>
-
+<!-- end inputs -->
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-6 mt-2">
@@ -30,7 +36,7 @@
                 </div>
             </div>
             <div class="col-md-3 mt-3">
-                <button class="btn btn-primary" :disabled="issending" v-on:click="load()">
+                <button class="btn btn-primary" :disabled="issending" v-on:click="load_rows()">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
@@ -80,11 +86,14 @@ export default {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
-            rows: [],
+
             selfolder: "eduardoaf.com",
             folders: [],
+            rows: [],
+
             upload:{
-                urlupload: ""
+                urlupload: "",
+                files: [],
             }
         }
     },
@@ -92,12 +101,18 @@ export default {
     async mounted() {
         console.log("upload.async mounted()")
         await this.load_folders()
-        this.load()
+        this.load_rows()
         this.$refs.urlupload.focus();
     },
 
     methods: {
-        load(){
+        async load_folders() {
+            console.log("async load_folders()")
+            this.folders = await apifetch.get_folders()
+            console.log("load_folders:",this.$data.folders)
+        },
+
+        load_rows(){
             console.log("...loading")
             const self = this
             self.issending = true
@@ -166,7 +181,7 @@ export default {
                         })
                     }
 
-                    self.load()
+                    self.load_rows()
 
                     self.$toast.info(`Resource removed: ${response.data.urls[0]}`)
                 })
@@ -228,7 +243,7 @@ export default {
                     })
                 }
 
-                self.load()
+                self.load_rows()
                 self.upload.urlupload = ""
                 self.$toast.success(`Files "${url}" uploaded`)
                 self.$refs.urlupload.focus();
@@ -247,10 +262,13 @@ export default {
             })
         },//upload_byurl
 
-        async load_folders() {
-            console.log("async load_folders()")
-            this.folders = await apifetch.get_folders()
-            console.log("load_folders:",this.$data.folders)
+        upload_files(){
+            this.upload.files = this.$refs.filesupload.files || []
+            funcs.pr(this.upload.files,"upload_files")
+        },
+
+        on_upload(){
+            funcs.pr("onupload")
         }
     }
 }

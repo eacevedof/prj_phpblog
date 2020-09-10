@@ -2833,6 +2833,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2842,11 +2848,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
       btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
-      rows: [],
       selfolder: "eduardoaf.com",
       folders: [],
+      rows: [],
       upload: {
-        urlupload: ""
+        urlupload: "",
+        files: []
       }
     };
   },
@@ -2863,7 +2870,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.load_folders();
 
             case 3:
-              _this.load();
+              _this.load_rows();
 
               _this.$refs.urlupload.focus();
 
@@ -2876,7 +2883,31 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
-    load: function load() {
+    load_folders: function load_folders() {
+      var _this2 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                console.log("async load_folders()");
+                _context2.next = 3;
+                return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
+
+              case 3:
+                _this2.folders = _context2.sent;
+                console.log("load_folders:", _this2.$data.folders);
+
+              case 5:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
+    load_rows: function load_rows() {
       console.log("...loading");
       var self = this;
       self.issending = true;
@@ -2939,7 +2970,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             });
           }
 
-          self.load();
+          self.load_rows();
           self.$toast.info("Resource removed: ".concat(response.data.urls[0]));
         })["catch"](function (error) {
           console.log("CATCH ERROR remove", error);
@@ -2996,7 +3027,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           });
         }
 
-        self.load();
+        self.load_rows();
         self.upload.urlupload = "";
         self.$toast.success("Files \"".concat(url, "\" uploaded"));
         self.$refs.urlupload.focus();
@@ -3013,29 +3044,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       });
     },
     //upload_byurl
-    load_folders: function load_folders() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                console.log("async load_folders()");
-                _context2.next = 3;
-                return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
-
-              case 3:
-                _this2.folders = _context2.sent;
-                console.log("load_folders:", _this2.$data.folders);
-
-              case 5:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
-      }))();
+    upload_files: function upload_files() {
+      this.upload.files = this.$refs.filesupload.files || [];
+      _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr(this.upload.files, "upload_files");
+    },
+    on_upload: function on_upload() {
+      _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr("onupload");
     }
   }
 });
@@ -42605,6 +42619,19 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
+        _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
+          _c("input", {
+            ref: "filesupload",
+            staticClass: "form-control",
+            attrs: { type: "file", multiple: "" },
+            on: {
+              change: function($event) {
+                return _vm.upload_files()
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-2 mb-0" }, [
           _c(
             "button",
@@ -42613,7 +42640,7 @@ var render = function() {
               attrs: { type: "button", disabled: _vm.issending },
               on: {
                 click: function($event) {
-                  return _vm.upload_byurl()
+                  return _vm.on_upload()
                 }
               }
             },
@@ -42690,7 +42717,7 @@ var render = function() {
                 attrs: { disabled: _vm.issending },
                 on: {
                   click: function($event) {
-                    return _vm.load()
+                    return _vm.load_rows()
                   }
                 }
               },
@@ -55373,9 +55400,10 @@ var funcs = {
     return new URL(window.location).pathname.split("/").slice(-1)[0] || null;
   },
   pr: function pr(any) {
-    var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "";
+    var title = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "pr";
     var json = JSON.stringify(any);
     alert(title.concat(":\n").concat(json));
+    console.log(title, any);
   },
   is_error: function is_error(response) {
     return typeof response.error !== "undefined";

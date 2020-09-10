@@ -4,9 +4,10 @@ const funcs = {
 
     get_lastparam: () => (new URL(window.location)).pathname.split("/").slice(-1)[0] || null,
 
-    pr: (any, title="") => {
+    pr: (any, title="pr") => {
       const json = JSON.stringify(any)
       alert(title.concat(":\n").concat(json))
+      console.log(title,any)
     },
 
     is_error: response => typeof response.error !== "undefined",
