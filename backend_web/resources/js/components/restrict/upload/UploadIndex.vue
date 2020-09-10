@@ -92,7 +92,7 @@ export default {
         console.log("upload.async mounted()")
         await this.load_folders()
         //console.log(this.folders,"FOLDERS")
-        this.load()
+        //this.load()
         this.$refs.urlupload.focus();
     },
 
@@ -114,7 +114,7 @@ export default {
             })
             .then(response => response.json())
             .then(response => {
-                console.log("load.reponse",response)
+                //console.log("load.reponse",response)
 
                 if(funcs.is_error(response)) {
                     return Swal.fire({
@@ -250,8 +250,8 @@ export default {
         async load_folders(){
             console.log("async load_folders()")
             const r = await apifetch.get_folders()
-            this.folders = JSON.parse(r)
-            console.log("async load_folders() this.folders",this.folders)
+            this.folders =  JSON.parse(JSON.stringify(r))
+            console.log("async load_folders() this.folders",this.folders,"this.folders type",typeof this.folders)
         }
     }
 }

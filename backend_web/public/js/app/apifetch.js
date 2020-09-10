@@ -941,31 +941,39 @@ var apifetch = {
               _context2.next = 7;
               return fetch(url, {
                 method: 'post',
-                body: form
-              }).then(function (response) {
-                return response.json();
+                body: form,
+                headers: {
+                  "Accept": "application/json"
+                }
               });
 
             case 7:
               r = _context2.sent;
-              console.log("get_folders.response.data.folders", r.data.folders); //r = JSON.parse(JSON.stringify(r.data.folders))
+              console.log("apifetch.get_folders.response.r 1", r);
+              _context2.next = 11;
+              return r.json();
+
+            case 11:
+              r = _context2.sent;
+              console.log("apifetch.get_folders.response.r 2", r); //r = JSON.parse(JSON.stringify(r.data.folders))
 
               r = r.data.folders;
+              console.log("apifetch.get_folders.response.r 3", r);
               return _context2.abrupt("return", r);
 
-            case 13:
-              _context2.prev = 13;
+            case 18:
+              _context2.prev = 18;
               _context2.t0 = _context2["catch"](1);
               return _context2.abrupt("return", {
                 error: _context2.t0
               });
 
-            case 16:
+            case 21:
             case "end":
               return _context2.stop();
           }
         }
-      }, _callee2, null, [[1, 13]]);
+      }, _callee2, null, [[1, 18]]);
     }));
 
     function get_folders() {
