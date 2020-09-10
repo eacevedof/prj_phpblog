@@ -89,6 +89,7 @@ export default {
     },
 
     async mounted() {
+        console.log("upload.async mounted()")
         await this.load_folders()
         //console.log(this.folders,"FOLDERS")
         this.load()
@@ -247,9 +248,10 @@ export default {
         },//upload_byurl
 
         async load_folders(){
+            console.log("async load_folders()")
             const r = await apifetch.get_folders()
-            this.folders = r
-            console.log("FOLDERS",this.folders)
+            this.folders = JSON.parse(r)
+            console.log("async load_folders() this.folders",this.folders)
         }
     }
 }
