@@ -121,7 +121,7 @@ export default {
         this.maxuploadsize = await apifetch.get_maxsize()
         this.maxuploadsize = parseInt(this.maxuploadsize)
         await this.load_folders()
-        this.load_rows()
+        await this.load_rows()
         this.$refs.urlupload.focus();
     },
 
@@ -159,7 +159,7 @@ export default {
                 self.issending = false;
                 self.btnsend = CONST.BTN_INISTATE_REFRESH
             }
-        },//load
+        },//load_rows
 
         remove(resurl){
             if(confirm(CONST.CONFIRM)){
