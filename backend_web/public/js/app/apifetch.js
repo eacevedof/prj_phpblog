@@ -1285,6 +1285,54 @@ var CONST = {
 
 /***/ }),
 
+/***/ "./resources/js/app/db.js":
+/*!********************************!*\
+  !*** ./resources/js/app/db.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var db = {
+  is_string: function is_string(v) {
+    return typeof v === "string";
+  },
+  to_string: function to_string(obj) {
+    return JSON.stringify(obj);
+  },
+  select: function select(k) {
+    var v = localStorage.getItem(k);
+    if (this.is_json(v)) return JSON.parse(v);
+    return v;
+  },
+  save: function save(k, v) {
+    var val = v;
+    if (!this.is_string(val)) val = this.to_string(val);
+    localStorage.setItem(k, val);
+    var test = this.select(k);
+    console.log("after save:", test);
+  },
+  "delete": function _delete(k) {
+    localStorage.removeItem(k);
+  },
+  dropdb: function dropdb() {
+    localStorage.clear();
+  },
+  is_json: function is_json(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+
+    return true;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (db);
+
+/***/ }),
+
 /***/ "./resources/js/app/funcs.js":
 /*!***********************************!*\
   !*** ./resources/js/app/funcs.js ***!
@@ -1376,15 +1424,16 @@ var funcs = {
 /***/ }),
 
 /***/ 0:
-/*!******************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app/apifetch.js ./resources/js/app/apiupload.js ./resources/js/app/constants.js ./resources/js/app/funcs.js ./resources/sass/app.scss ***!
-  \******************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app/apifetch.js ./resources/js/app/apiupload.js ./resources/js/app/constants.js ./resources/js/app/db.js ./resources/js/app/funcs.js ./resources/sass/app.scss ***!
+  \*******************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/apifetch.js */"./resources/js/app/apifetch.js");
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/apiupload.js */"./resources/js/app/apiupload.js");
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/constants.js */"./resources/js/app/constants.js");
+__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/db.js */"./resources/js/app/db.js");
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/funcs.js */"./resources/js/app/funcs.js");
 module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/sass/app.scss */"./resources/sass/app.scss");
 

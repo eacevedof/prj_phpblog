@@ -12,6 +12,8 @@ const funcs = {
 
     is_error: response => typeof response.error !== "undefined" || (typeof response.errors !== "undefined" && response.errors.length>0),
 
+    is_undefined: any => typeof any === "undefined",
+
     get_form: strobj => {
         const form = new FormData()
         Object.keys(strobj).forEach( k => {

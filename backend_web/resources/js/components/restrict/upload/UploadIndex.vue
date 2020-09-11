@@ -91,6 +91,8 @@
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 import apiupload from "../../../app/apiupload";
+import db from "../../../app/db";
+
 
 export default {
 
@@ -123,10 +125,19 @@ export default {
         this.maxuploadsize = parseInt(this.maxuploadsize)
         await this.load_folders()
         await this.load_rows()
+        this.load_lastslug()
         this.$refs.urlupload.focus();
     },
 
     methods: {
+        load_lastslug(){
+          const slug = db.select("last-slug")
+          if(slug){
+              this.upload.urlupload = `xxx::${slug};`
+              db.delete("last-slug")
+          }
+        },
+
         async load_folders() {this.folders = await apiupload.get_folders() },
 
         async load_rows() {
@@ -217,9 +228,9 @@ export default {
                         html: r.error,
                     })
                 }
-
-                self.upload.urlupload = ""
+                self.savelast(r.slice(-1)[0])
                 self.$toast.success(`Files "${r}" uploaded`)
+                self.upload.urlupload = ""
                 self.$refs.urlupload.focus();
             }
             catch (error) {
@@ -231,7 +242,7 @@ export default {
             }
             finally {
                 self.issending = false;
-                self.btnupload = CONST.BTN_INISTATE_REFRESH
+                self.btnupload = CONST.BTN_INISTATE_UPLOAD
             }
         }, //upload by url
 
@@ -252,6 +263,7 @@ export default {
                     })
                 }
 
+                self.savelast(r.url.slice(-1)[0])
                 self.$toast.success(`Files uploaded (${r.url.length}): ${r.url.join(", ")}`)
                 if(r.warning.length>0)
                     self.$toast.warning(`Files not uploaded (${r.warning.length}): ${r.warning.join(", ")}`)
@@ -266,7 +278,7 @@ export default {
             }
             finally {
                 self.issending = false;
-                self.btnupload = CONST.BTN_INISTATE_REFRESH
+                self.btnupload = CONST.BTN_INISTATE_UPLOAD
             }
         },
 
@@ -304,6 +316,11 @@ export default {
             this.isoversized = false
             this.overbytes = 0
         },
+
+        savelast(url){
+            if(!funcs.is_undefined(url))
+                db.save("last-upload",url)
+        }
     }
 }
 </script>

@@ -2756,6 +2756,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
 /* harmony import */ var _app_apiupload__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apiupload */ "./resources/js/app/apiupload.js");
+/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../app/db */ "./resources/js/app/db.js");
 
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -2860,12 +2861,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
-      btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
+      btnupload: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
       selfolder: "eduardoaf.com",
       maxuploadsize: 0,
       isoversized: false,
@@ -3086,7 +3088,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 6:
                 _context5.prev = 6;
                 self.issending = true;
-                self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+                self.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
                 _context5.next = 11;
                 return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_url(self.selfolder, self.upload.urlupload);
 
@@ -3105,14 +3107,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }));
 
               case 14:
-                self.upload.urlupload = "";
+                _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr(r, "R");
                 self.$toast.success("Files \"".concat(r, "\" uploaded"));
+                self.upload.urlupload = "";
                 self.$refs.urlupload.focus();
-                _context5.next = 22;
+                _context5.next = 23;
                 break;
 
-              case 19:
-                _context5.prev = 19;
+              case 20:
+                _context5.prev = 20;
                 _context5.t0 = _context5["catch"](6);
                 Swal.fire({
                   icon: 'error',
@@ -3120,18 +3123,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: _context5.t0.toString()
                 });
 
-              case 22:
-                _context5.prev = 22;
+              case 23:
+                _context5.prev = 23;
                 self.issending = false;
-                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
-                return _context5.finish(22);
+                self.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
+                return _context5.finish(23);
 
-              case 26:
+              case 27:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[6, 19, 22, 26]]);
+        }, _callee5, null, [[6, 20, 23, 27]]);
       }))();
     },
     //upload by url
@@ -3156,7 +3159,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 3:
                 _context6.prev = 3;
                 self.issending = true;
-                self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+                self.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
                 _context6.next = 8;
                 return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_files(self.selfolder, self.upload.files);
 
@@ -3176,13 +3179,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 11:
                 self.$toast.success("Files uploaded (".concat(r.url.length, "): ").concat(r.url.join(", ")));
+                self.savelast(r.url[0]);
                 if (r.warning.length > 0) self.$toast.warning("Files not uploaded (".concat(r.warning.length, "): ").concat(r.warning.join(", ")));
                 self.reset_filesupload();
-                _context6.next = 19;
+                _context6.next = 20;
                 break;
 
-              case 16:
-                _context6.prev = 16;
+              case 17:
+                _context6.prev = 17;
                 _context6.t0 = _context6["catch"](3);
                 Swal.fire({
                   icon: 'error',
@@ -3190,18 +3194,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: _context6.t0.toString()
                 });
 
-              case 19:
-                _context6.prev = 19;
+              case 20:
+                _context6.prev = 20;
                 self.issending = false;
-                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
-                return _context6.finish(19);
+                self.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
+                return _context6.finish(20);
 
-              case 23:
+              case 24:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[3, 16, 19, 23]]);
+        }, _callee6, null, [[3, 17, 20, 24]]);
       }))();
     },
     on_upload: function on_upload() {
@@ -3269,6 +3273,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.filessize = 0;
       this.isoversized = false;
       this.overbytes = 0;
+    },
+    savelast: function savelast(url) {
+      _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("lastupload", url);
     }
   }
 });
@@ -42869,7 +42876,7 @@ var render = function() {
             [
               _vm._v(
                 "\n                " +
-                  _vm._s(_vm.btnsend2) +
+                  _vm._s(_vm.btnupload) +
                   "\n                "
               ),
               _vm.issending
@@ -55926,6 +55933,54 @@ var CONST = {
   CONFIRM: "Are you sure to commit this operation?"
 };
 /* harmony default export */ __webpack_exports__["default"] = (CONST);
+
+/***/ }),
+
+/***/ "./resources/js/app/db.js":
+/*!********************************!*\
+  !*** ./resources/js/app/db.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var db = {
+  is_string: function is_string(v) {
+    return typeof v === "string";
+  },
+  to_string: function to_string(obj) {
+    return JSON.stringify(obj);
+  },
+  select: function select(k) {
+    var v = localStorage.getItem(k);
+    if (this.is_json(v)) return JSON.parse(v);
+    return v;
+  },
+  save: function save(k, v) {
+    var val = v;
+    if (!this.is_string(val)) val = this.to_string(val);
+    localStorage.setItem(k, val);
+    var test = this.select(k);
+    console.log("after save:", test);
+  },
+  "delete": function _delete(k) {
+    localStorage.removeItem(k);
+  },
+  dropdb: function dropdb() {
+    localStorage.clear();
+  },
+  is_json: function is_json(str) {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+
+    return true;
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (db);
 
 /***/ }),
 
