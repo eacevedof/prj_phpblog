@@ -61,6 +61,24 @@ const apiupload = {
         }
     },
 
+    post_files: async (folder,files) => {
+        try {
+            const url = funcs.get_uploadomain().concat("/upload/multiple")
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain",folder)
+
+            for(const file of files)
+                form.append("files[]", file, file.name);
+
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json()).data
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
+    },
 
 }
 

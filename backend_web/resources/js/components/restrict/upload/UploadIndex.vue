@@ -194,44 +194,34 @@ export default {
 
         async upload_files(){
             const self = this
+            if(self.upload.files.length===0) return
 
-            if(self.upload.files.length==0)return
-
-            const url = funcs.get_uploadomain().concat("/upload/multiple")
-            const form = new FormData()
-            form.append("resource-usertoken",funcs.get_uploadtoken())
-            form.append("folderdomain",this.selfolder)
-
-            for(const file of self.upload.files)
-                form.append("files[]", file, file.name);
-
-            fetch(url, {
-                method: 'post',
-                body: form
-            })
-                .then(response => response.json())
-                .then(response => {
-                    console.log("reponse",response)
-                    if(funcs.is_error(response)) {
-                        return Swal.fire({
-                            icon: 'warning',
-                            title: CONST.TITLE_ERROR,
-                            html: response.error,
-                        })
-                    }
-                    self.$toast.success(`Files uploaded (${response.data.url.length}): ${response.data.url.join(", ")}`)
-                    if(response.data.warning.length>0)
-                        self.$toast.warning(`Files not uploaded (${response.data.warning.length}): ${response.data.warning.join(", ")}`)
-                    self.reset_filesupload()
-                })
-                .catch(error => {
-                    console.log("CATCH ERROR upload_files",error)
-                    Swal.fire({
-                        icon: 'error',
-                        title: CONST.TITLE_SERVERROR,
-                        html: error.toString(),
+            try {
+                const r = await apiupload.post_files(self.selfolder, self.upload.files)
+                if (funcs.is_error(r)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        html: r.error,
                     })
+                }
+
+                self.$toast.success(`Files uploaded (${r.url.length}): ${r.url.join(", ")}`)
+                if(r.warning.length>0)
+                    self.$toast.warning(`Files not uploaded (${r.warning.length}): ${r.warning.join(", ")}`)
+                self.reset_filesupload()
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    html: error.toString(),
                 })
+            }
+            finally {
+                self.issending = false;
+                self.btnsend = CONST.BTN_INISTATE_REFRESH
+            }
         },
 
         async on_upload(){
@@ -299,7 +289,7 @@ export default {
                 self.issending = false;
                 self.btnsend2 = CONST.BTN_INISTATE_UPLOAD
             })
-        },//upload_byurl
+        },
 
         on_fileschange(){
             this.upload.files = this.$refs.filesupload.files || []
