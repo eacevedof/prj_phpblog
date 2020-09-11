@@ -16,20 +16,26 @@
             />
         </div>
         <div class="form-group col-md-2 mb-0">
-            <button type="button" class="btn btn-dark" :disabled="issending" v-on:click="on_upload()">
+            <button type="button" class="btn btn-dark"
+                :disabled="issending || isoversized" v-on:click="on_upload()"
+            >
                 {{btnsend2}}
                 <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
             </button>
         </div>
         <div class="d-flex m-0 mt-1 pl-3" style="flex-wrap: wrap;">
-            <small v-for="(e, i) in upload.files" :key="i">{{i+1}} - {{e.name}}&nbsp;&nbsp;</small>
+            <small class="badge bg-info text-white">max upload: {{maxuploadsize.toLocaleString("en")}}</small>
+            <small v-if="filessize>0" class="badge bg-warning">selected: {{filessize.toLocaleString("en")}}</small>
+            <small v-if="isoversized" class="badge bg-danger text-white">oversized: {{overbytes.toLocaleString("en")}}</small>
+            <small v-for="(file, i) in upload.files" :key="i">{{i+1}} - {{file.name}} ({{ file.size.toLocaleString("en") }})&nbsp;&nbsp;</small>
         </div>
     </div>
-<!-- end inputs -->
+
+<!-- card start -->
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-6 mt-2">
-                <h1>Uploaded files: <small>({{rows.length}})</small></h1>
+                <h1>Uploaded files:</h1><small>({{rows.length}})</small>
             </div>
             <div class="col-md-3">
                 <div class="form-group mt-3">
@@ -45,6 +51,8 @@
                 </button>
             </div>
         </div>
+
+<!-- cards -->
         <div class="row">
             <div class="col-sm-3" v-for="(url, i) in rows" :key="i">
                 <div class="card">
@@ -56,6 +64,7 @@
                             <small :id="'rawlink-'+i">{{url}}</small>
                         </p>
                     </div>
+
                     <div class="card-footer text-muted">
                         <button class="btn btn-info" :disabled="issending"  v-on:click="copycb(i)">
                             <i class="fa fa-clipboard" aria-hidden="true"></i>
@@ -91,6 +100,12 @@ export default {
             btnsend2: CONST.BTN_INISTATE_UPLOAD,
 
             selfolder: "eduardoaf.com",
+
+            maxuploadsize: 0,
+            isoversized: false,
+            overbytes: 0,
+            filessize: 0,
+
             folders: [],
             rows: [],
 
@@ -103,6 +118,8 @@ export default {
 
     async mounted() {
         console.log("upload.async mounted()")
+        this.maxuploadsize = await apifetch.get_maxsize()
+        this.maxuploadsize = parseInt(this.maxuploadsize)
         await this.load_folders()
         this.load_rows()
         this.$refs.urlupload.focus();
@@ -267,6 +284,22 @@ export default {
 
         on_fileschange(){
             this.upload.files = this.$refs.filesupload.files || []
+
+            let size = 0
+            for(const file of this.upload.files)
+                size += file.size
+
+            this.filessize = size
+            this.isoversized = (size>=this.maxuploadsize)
+            this.overbytes = (size - this.maxuploadsize)
+        },
+
+        reset_filesupload(){
+            this.$refs.filesupload.value = ""
+            this.upload.files = []
+            this.filessize = 0
+            this.isoversized = false
+            this.overbytes = 0
         },
 
         upload_files(){
@@ -299,6 +332,7 @@ export default {
                 self.$toast.success(`Files uploaded (${response.data.url.length}): ${response.data.url.join(", ")}`)
                 if(response.data.warning.length>0)
                     self.$toast.warning(`Files not uploaded (${response.data.warning.length}): ${response.data.warning.join(", ")}`)
+                self.reset_filesupload()
             })
             .catch(error => {
                 console.log("CATCH ERROR upload_files",error)

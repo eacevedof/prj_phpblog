@@ -2848,6 +2848,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2858,6 +2867,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
       btnsend2: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
       selfolder: "eduardoaf.com",
+      maxuploadsize: 0,
+      isoversized: false,
+      overbytes: 0,
+      filessize: 0,
       folders: [],
       rows: [],
       upload: {
@@ -2876,14 +2889,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               console.log("upload.async mounted()");
               _context.next = 3;
-              return _this.load_folders();
+              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_maxsize();
 
             case 3:
+              _this.maxuploadsize = _context.sent;
+              _this.maxuploadsize = parseInt(_this.maxuploadsize);
+              _context.next = 7;
+              return _this.load_folders();
+
+            case 7:
               _this.load_rows();
 
               _this.$refs.urlupload.focus();
 
-            case 5:
+            case 9:
             case "end":
               return _context.stop();
           }
@@ -3055,6 +3074,32 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     //upload_byurl
     on_fileschange: function on_fileschange() {
       this.upload.files = this.$refs.filesupload.files || [];
+      var size = 0;
+
+      var _iterator = _createForOfIteratorHelper(this.upload.files),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var file = _step.value;
+          size += file.size;
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      this.filessize = size;
+      this.isoversized = size >= this.maxuploadsize;
+      this.overbytes = size - this.maxuploadsize;
+    },
+    reset_filesupload: function reset_filesupload() {
+      this.$refs.filesupload.value = "";
+      this.upload.files = [];
+      this.filessize = 0;
+      this.isoversized = false;
+      this.overbytes = 0;
     },
     upload_files: function upload_files() {
       var self = this;
@@ -3064,18 +3109,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
       form.append("folderdomain", this.selfolder);
 
-      var _iterator = _createForOfIteratorHelper(self.upload.files),
-          _step;
+      var _iterator2 = _createForOfIteratorHelper(self.upload.files),
+          _step2;
 
       try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var file = _step.value;
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var file = _step2.value;
           form.append("files[]", file, file.name);
         }
       } catch (err) {
-        _iterator.e(err);
+        _iterator2.e(err);
       } finally {
-        _iterator.f();
+        _iterator2.f();
       }
 
       fetch(url, {
@@ -3096,6 +3141,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         self.$toast.success("Files uploaded (".concat(response.data.url.length, "): ").concat(response.data.url.join(", ")));
         if (response.data.warning.length > 0) self.$toast.warning("Files not uploaded (".concat(response.data.warning.length, "): ").concat(response.data.warning.join(", ")));
+        self.reset_filesupload();
       })["catch"](function (error) {
         console.log("CATCH ERROR upload_files", error);
         Swal.fire({
@@ -42696,7 +42742,10 @@ var render = function() {
             "button",
             {
               staticClass: "btn btn-dark",
-              attrs: { type: "button", disabled: _vm.issending },
+              attrs: {
+                type: "button",
+                disabled: _vm.issending || _vm.isoversized
+              },
               on: {
                 click: function($event) {
                   return _vm.on_upload()
@@ -42728,22 +42777,51 @@ var render = function() {
             staticClass: "d-flex m-0 mt-1 pl-3",
             staticStyle: { "flex-wrap": "wrap" }
           },
-          _vm._l(_vm.upload.files, function(e, i) {
-            return _c("small", { key: i }, [
-              _vm._v(_vm._s(i + 1) + " - " + _vm._s(e.name) + "  ")
-            ])
-          }),
-          0
+          [
+            _c("small", { staticClass: "badge bg-info text-white" }, [
+              _vm._v(
+                "max upload: " + _vm._s(_vm.maxuploadsize.toLocaleString("en"))
+              )
+            ]),
+            _vm._v(" "),
+            _vm.filessize > 0
+              ? _c("small", { staticClass: "badge bg-warning" }, [
+                  _vm._v(
+                    "selected: " + _vm._s(_vm.filessize.toLocaleString("en"))
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.isoversized
+              ? _c("small", { staticClass: "badge bg-danger text-white" }, [
+                  _vm._v(
+                    "oversized: " + _vm._s(_vm.overbytes.toLocaleString("en"))
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm._l(_vm.upload.files, function(file, i) {
+              return _c("small", { key: i }, [
+                _vm._v(
+                  _vm._s(i + 1) +
+                    " - " +
+                    _vm._s(file.name) +
+                    " (" +
+                    _vm._s(file.size.toLocaleString("en")) +
+                    ")  "
+                )
+              ])
+            })
+          ],
+          2
         )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row card-header res-formheader" }, [
           _c("div", { staticClass: "col-md-6 mt-2" }, [
-            _c("h1", [
-              _vm._v("Uploaded files: "),
-              _c("small", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
-            ])
+            _c("h1", [_vm._v("Uploaded files:")]),
+            _c("small", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-3" }, [
@@ -55424,6 +55502,53 @@ var apifetch = {
     }
 
     return get_folders;
+  }(),
+  get_maxsize: function () {
+    var _get_maxsize = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/get-max-upload-size");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              _context3.next = 6;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 6:
+              prom = _context3.sent;
+              _context3.next = 9;
+              return prom.json();
+
+            case 9:
+              r = _context3.sent.data.maxuploadsize;
+              return _context3.abrupt("return", r);
+
+            case 13:
+              _context3.prev = 13;
+              _context3.t0 = _context3["catch"](0);
+              return _context3.abrupt("return", {
+                error: _context3.t0
+              });
+
+            case 16:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 13]]);
+    }));
+
+    function get_maxsize() {
+      return _get_maxsize.apply(this, arguments);
+    }
+
+    return get_maxsize;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apifetch);

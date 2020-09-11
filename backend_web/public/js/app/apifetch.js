@@ -972,6 +972,53 @@ var apifetch = {
     }
 
     return get_folders;
+  }(),
+  get_maxsize: function () {
+    var _get_maxsize = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/get-max-upload-size");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              _context3.next = 6;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 6:
+              prom = _context3.sent;
+              _context3.next = 9;
+              return prom.json();
+
+            case 9:
+              r = _context3.sent.data.maxuploadsize;
+              return _context3.abrupt("return", r);
+
+            case 13:
+              _context3.prev = 13;
+              _context3.t0 = _context3["catch"](0);
+              return _context3.abrupt("return", {
+                error: _context3.t0
+              });
+
+            case 16:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 13]]);
+    }));
+
+    function get_maxsize() {
+      return _get_maxsize.apply(this, arguments);
+    }
+
+    return get_maxsize;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apifetch);
