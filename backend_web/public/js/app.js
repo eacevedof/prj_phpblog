@@ -3062,6 +3062,176 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     //remove_file
+    upload_byurl: function upload_byurl() {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var self, r;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                self = _this5;
+
+                if (self.upload.urlupload.trim()) {
+                  _context5.next = 6;
+                  break;
+                }
+
+                self.upload.urlupload = "";
+                if (self.upload.files.length === 0) self.$toast.warning("You must fill input with a valid url");
+                self.$refs.urlupload.focus();
+                return _context5.abrupt("return");
+
+              case 6:
+                _context5.prev = 6;
+                self.issending = true;
+                self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+                _context5.next = 11;
+                return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_url(self.selfolder, self.upload.urlupload);
+
+              case 11:
+                r = _context5.sent;
+
+                if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
+                  _context5.next = 14;
+                  break;
+                }
+
+                return _context5.abrupt("return", Swal.fire({
+                  icon: 'warning',
+                  title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
+                  html: r.error
+                }));
+
+              case 14:
+                self.upload.urlupload = "";
+                self.$toast.success("Files \"".concat(r, "\" uploaded"));
+                self.$refs.urlupload.focus();
+                _context5.next = 22;
+                break;
+
+              case 19:
+                _context5.prev = 19;
+                _context5.t0 = _context5["catch"](6);
+                Swal.fire({
+                  icon: 'error',
+                  title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
+                  html: _context5.t0.toString()
+                });
+
+              case 22:
+                _context5.prev = 22;
+                self.issending = false;
+                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
+                return _context5.finish(22);
+
+              case 26:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[6, 19, 22, 26]]);
+      }))();
+    },
+    //upload by url
+    upload_files: function upload_files() {
+      var _this6 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6() {
+        var self, r;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                self = _this6;
+
+                if (!(self.upload.files.length === 0)) {
+                  _context6.next = 3;
+                  break;
+                }
+
+                return _context6.abrupt("return");
+
+              case 3:
+                _context6.prev = 3;
+                self.issending = true;
+                self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+                _context6.next = 8;
+                return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_files(self.selfolder, self.upload.files);
+
+              case 8:
+                r = _context6.sent;
+
+                if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
+                  _context6.next = 11;
+                  break;
+                }
+
+                return _context6.abrupt("return", Swal.fire({
+                  icon: 'warning',
+                  title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
+                  html: r.error
+                }));
+
+              case 11:
+                self.$toast.success("Files uploaded (".concat(r.url.length, "): ").concat(r.url.join(", ")));
+                if (r.warning.length > 0) self.$toast.warning("Files not uploaded (".concat(r.warning.length, "): ").concat(r.warning.join(", ")));
+                self.reset_filesupload();
+                _context6.next = 19;
+                break;
+
+              case 16:
+                _context6.prev = 16;
+                _context6.t0 = _context6["catch"](3);
+                Swal.fire({
+                  icon: 'error',
+                  title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
+                  html: _context6.t0.toString()
+                });
+
+              case 19:
+                _context6.prev = 19;
+                self.issending = false;
+                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
+                return _context6.finish(19);
+
+              case 23:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[3, 16, 19, 23]]);
+      }))();
+    },
+    on_upload: function on_upload() {
+      var _this7 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.next = 2;
+                return _this7.upload_byurl();
+
+              case 2:
+                _context7.next = 4;
+                return _this7.upload_files();
+
+              case 4:
+                _context7.next = 6;
+                return _this7.load_rows();
+
+              case 6:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7);
+      }))();
+    },
+    //on_upload
     copycb: function copycb(i) {
       var el = document.getElementById("rawlink-" + i);
 
@@ -3071,56 +3241,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         this.$toast.success("link in clipboard!!");
       }
     },
-    upload_byurl: function upload_byurl() {
-      var self = this;
-
-      if (!self.upload.urlupload.trim()) {
-        self.upload.urlupload = "";
-        self.$toast.warning("You must fill input with a valid url");
-        self.$refs.urlupload.focus();
-        return;
-      }
-
-      self.issending = true;
-      self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/by-url");
-      var form = new FormData();
-      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-      form.append("folderdomain", this.selfolder);
-      form.append("files", self.upload.urlupload);
-      fetch(url, {
-        method: 'post',
-        body: form
-      }).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        console.log("reponse", response);
-
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
-          return Swal.fire({
-            icon: 'warning',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
-            html: response.error
-          });
-        }
-
-        self.load_rows();
-        self.upload.urlupload = "";
-        self.$toast.success("Files \"".concat(url, "\" uploaded"));
-        self.$refs.urlupload.focus();
-      })["catch"](function (error) {
-        console.log("CATCH ERROR upload", error);
-        Swal.fire({
-          icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
-          html: error.toString()
-        });
-      })["finally"](function () {
-        self.issending = false;
-        self.btnsend2 = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-      });
-    },
-    //upload_byurl
     on_fileschange: function on_fileschange() {
       this.upload.files = this.$refs.filesupload.files || [];
       var size = 0;
@@ -3149,62 +3269,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.filessize = 0;
       this.isoversized = false;
       this.overbytes = 0;
-    },
-    upload_files: function upload_files() {
-      var self = this;
-      if (self.upload.files.length == 0) return;
-      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/multiple");
-      var form = new FormData();
-      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-      form.append("folderdomain", this.selfolder);
-
-      var _iterator2 = _createForOfIteratorHelper(self.upload.files),
-          _step2;
-
-      try {
-        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-          var file = _step2.value;
-          form.append("files[]", file, file.name);
-        }
-      } catch (err) {
-        _iterator2.e(err);
-      } finally {
-        _iterator2.f();
-      }
-
-      fetch(url, {
-        method: 'post',
-        body: form
-      }).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        console.log("reponse", response);
-
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
-          return Swal.fire({
-            icon: 'warning',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
-            html: response.error
-          });
-        }
-
-        self.$toast.success("Files uploaded (".concat(response.data.url.length, "): ").concat(response.data.url.join(", ")));
-        if (response.data.warning.length > 0) self.$toast.warning("Files not uploaded (".concat(response.data.warning.length, "): ").concat(response.data.warning.join(", ")));
-        self.reset_filesupload();
-      })["catch"](function (error) {
-        console.log("CATCH ERROR upload_files", error);
-        Swal.fire({
-          icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
-          html: error.toString()
-        });
-      });
-    },
-    on_upload: function on_upload() {
-      this.upload_byurl();
-      this.upload_files();
-    } //on_upload
-
+    }
   }
 });
 
@@ -55524,6 +55589,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./funcs */ "./resources/js/app/funcs.js");
 
 
+var _this = undefined;
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -55719,6 +55792,117 @@ var apiupload = {
     }
 
     return remove_file;
+  }(),
+  post_files: function () {
+    var _post_files = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(folder, files) {
+      var url, form, _iterator, _step, file, prom, r;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/multiple");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              form.append("folderdomain", folder);
+              _iterator = _createForOfIteratorHelper(files);
+
+              try {
+                for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                  file = _step.value;
+                  form.append("files[]", file, file.name);
+                }
+              } catch (err) {
+                _iterator.e(err);
+              } finally {
+                _iterator.f();
+              }
+
+              _context5.next = 9;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 9:
+              prom = _context5.sent;
+              _context5.next = 12;
+              return prom.json();
+
+            case 12:
+              r = _context5.sent.data;
+              return _context5.abrupt("return", r);
+
+            case 16:
+              _context5.prev = 16;
+              _context5.t0 = _context5["catch"](0);
+              return _context5.abrupt("return", {
+                error: _context5.t0
+              });
+
+            case 19:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5, null, [[0, 16]]);
+    }));
+
+    function post_files(_x3, _x4) {
+      return _post_files.apply(this, arguments);
+    }
+
+    return post_files;
+  }(),
+  post_url: function () {
+    var _post_url = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee6(folder, urlpath) {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee6$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              _context6.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/by-url");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              form.append("folderdomain", _this.selfolder);
+              form.append("files", urlpath);
+              _context6.next = 8;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 8:
+              prom = _context6.sent;
+              _context6.next = 11;
+              return prom.json();
+
+            case 11:
+              r = _context6.sent.data.url;
+              return _context6.abrupt("return", r);
+
+            case 15:
+              _context6.prev = 15;
+              _context6.t0 = _context6["catch"](0);
+              return _context6.abrupt("return", {
+                error: _context6.t0
+              });
+
+            case 18:
+            case "end":
+              return _context6.stop();
+          }
+        }
+      }, _callee6, null, [[0, 15]]);
+    }));
+
+    function post_url(_x5, _x6) {
+      return _post_url.apply(this, arguments);
+    }
+
+    return post_url;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apiupload);

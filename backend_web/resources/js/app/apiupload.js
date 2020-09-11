@@ -80,6 +80,24 @@ const apiupload = {
         }
     },
 
+    post_url: async (folder, urlpath) => {
+        try {
+            const url = funcs.get_uploadomain().concat("/upload/by-url")
+
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain",this.selfolder)
+            form.append("files",urlpath)
+
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json()).data.url
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
+    },
+
 }
 
 export  default apiupload

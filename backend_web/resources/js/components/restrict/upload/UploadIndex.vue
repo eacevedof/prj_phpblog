@@ -192,11 +192,57 @@ export default {
             }
         },//remove_file
 
+        async upload_byurl(){
+            const self = this
+
+            if(!self.upload.urlupload.trim()){
+                self.upload.urlupload = ""
+
+                if(self.upload.files.length===0)
+                    self.$toast.warning("You must fill input with a valid url")
+                self.$refs.urlupload.focus();
+                return
+            }
+
+            try {
+                self.issending = true
+                self.btnsend2 = CONST.BTN_IN_PROGRESS
+
+                const r = await apiupload.post_url(self.selfolder, self.upload.urlupload)
+
+                if(funcs.is_error(r)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        html: r.error,
+                    })
+                }
+
+                self.upload.urlupload = ""
+                self.$toast.success(`Files "${r}" uploaded`)
+                self.$refs.urlupload.focus();
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    html: error.toString(),
+                })
+            }
+            finally {
+                self.issending = false;
+                self.btnsend = CONST.BTN_INISTATE_REFRESH
+            }
+        }, //upload by url
+
         async upload_files(){
             const self = this
             if(self.upload.files.length===0) return
 
             try {
+                self.issending = true
+                self.btnsend2 = CONST.BTN_IN_PROGRESS
+
                 const r = await apiupload.post_files(self.selfolder, self.upload.files)
                 if (funcs.is_error(r)) {
                     return Swal.fire({
@@ -225,8 +271,9 @@ export default {
         },
 
         async on_upload(){
-            this.upload_byurl()
-            this.upload_files()
+            await this.upload_byurl()
+            await this.upload_files()
+            await this.load_rows()
         },//on_upload
 
         copycb(i){
@@ -236,59 +283,6 @@ export default {
                 funcs.to_clipboard(url)
                 this.$toast.success(`link in clipboard!!`)
             }
-        },
-
-        upload_byurl(){
-            const self = this
-
-            if(!self.upload.urlupload.trim()){
-                self.upload.urlupload = ""
-                self.$toast.warning("You must fill input with a valid url")
-                self.$refs.urlupload.focus();
-                return
-            }
-
-            self.issending = true
-            self.btnsend2 = CONST.BTN_IN_PROGRESS
-
-            const url = funcs.get_uploadomain().concat("/upload/by-url")
-            const form = new FormData()
-            form.append("resource-usertoken",funcs.get_uploadtoken())
-            form.append("folderdomain",this.selfolder)
-            form.append("files",self.upload.urlupload)
-
-            fetch(url, {
-                method: 'post',
-                body: form
-            })
-            .then(response => response.json())
-            .then(response => {
-                console.log("reponse",response)
-                if(funcs.is_error(response)) {
-                    return Swal.fire({
-                        icon: 'warning',
-                        title: CONST.TITLE_ERROR,
-                        html: response.error,
-                    })
-                }
-
-                self.load_rows()
-                self.upload.urlupload = ""
-                self.$toast.success(`Files "${url}" uploaded`)
-                self.$refs.urlupload.focus();
-            })
-            .catch(error => {
-                console.log("CATCH ERROR upload",error)
-                Swal.fire({
-                    icon: 'error',
-                    title: CONST.TITLE_SERVERROR,
-                    html: error.toString(),
-                })
-            })
-            .finally(() => {
-                self.issending = false;
-                self.btnsend2 = CONST.BTN_INISTATE_UPLOAD
-            })
         },
 
         on_fileschange(){
