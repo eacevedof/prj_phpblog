@@ -138,7 +138,7 @@ export default {
             self.btnsend = CONST.BTN_IN_PROGRESS
 
             try{
-                const r = apifetch.get_uploadrows()
+                const r = apifetch.get_uploadrows(self.selfolder)
                 if(funcs.is_error(r)) {
                     return Swal.fire({
                         icon: 'warning',

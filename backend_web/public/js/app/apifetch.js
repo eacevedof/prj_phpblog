@@ -1019,6 +1019,54 @@ var apifetch = {
     }
 
     return get_maxsize;
+  }(),
+  get_uploadrows: function () {
+    var _get_uploadrows = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(folder) {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/files");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              form.append("folderdomain", folder);
+              _context4.next = 7;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 7:
+              prom = _context4.sent;
+              _context4.next = 10;
+              return prom.json();
+
+            case 10:
+              r = _context4.sent.data.files;
+              return _context4.abrupt("return", r);
+
+            case 14:
+              _context4.prev = 14;
+              _context4.t0 = _context4["catch"](0);
+              return _context4.abrupt("return", {
+                error: _context4.t0
+              });
+
+            case 17:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[0, 14]]);
+    }));
+
+    function get_uploadrows(_x) {
+      return _get_uploadrows.apply(this, arguments);
+    }
+
+    return get_uploadrows;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apifetch);
