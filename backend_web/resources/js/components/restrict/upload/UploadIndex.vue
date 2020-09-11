@@ -139,6 +139,7 @@ export default {
 
             try{
                 const r = await apifetch.get_uploadrows(self.selfolder)
+                funcs.pr(r,"load_rows")
                 if(funcs.is_error(r)) {
                     return Swal.fire({
                         icon: 'warning',
