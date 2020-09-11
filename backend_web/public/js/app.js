@@ -2955,10 +2955,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 6:
                 r = _context3.sent;
-                _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr(r, "load_rows");
 
                 if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
-                  _context3.next = 10;
+                  _context3.next = 9;
                   break;
                 }
 
@@ -2968,13 +2967,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: r.error
                 }));
 
-              case 10:
+              case 9:
                 self.rows = r;
-                _context3.next = 16;
+                _context3.next = 15;
                 break;
 
-              case 13:
-                _context3.prev = 13;
+              case 12:
+                _context3.prev = 12;
                 _context3.t0 = _context3["catch"](3);
                 Swal.fire({
                   icon: 'error',
@@ -2982,18 +2981,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: _context3.t0.toString()
                 });
 
-              case 16:
-                _context3.prev = 16;
+              case 15:
+                _context3.prev = 15;
                 self.issending = false;
                 self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
-                return _context3.finish(16);
+                return _context3.finish(15);
 
-              case 20:
+              case 19:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[3, 13, 16, 20]]);
+        }, _callee3, null, [[3, 12, 15, 19]]);
       }))();
     },
     //load_rows

@@ -90,7 +90,7 @@
 <script>
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
-import apifetch from "../../../app/apifetch";
+import apiupload from "../../../app/apiupload";
 
 export default {
     data(){
@@ -118,7 +118,7 @@ export default {
 
     async mounted() {
         console.log("upload.async mounted()")
-        this.maxuploadsize = await apifetch.get_maxsize()
+        this.maxuploadsize = await apiupload.get_maxsize()
         this.maxuploadsize = parseInt(this.maxuploadsize)
         await this.load_folders()
         await this.load_rows()
@@ -128,7 +128,7 @@ export default {
     methods: {
         async load_folders() {
             console.log("async load_folders()")
-            this.folders = await apifetch.get_folders()
+            this.folders = await apiupload.get_folders()
             console.log("load_folders:",this.$data.folders)
         },
 
@@ -138,7 +138,7 @@ export default {
             self.btnsend = CONST.BTN_IN_PROGRESS
 
             try{
-                const r = await apifetch.get_uploadrows(self.selfolder)
+                const r = await apiupload.get_files(self.selfolder)
                 //funcs.pr(r,"load_rows")
                 if(funcs.is_error(r)) {
                     return Swal.fire({
