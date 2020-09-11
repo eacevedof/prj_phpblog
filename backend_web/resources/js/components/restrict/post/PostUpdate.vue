@@ -70,9 +70,18 @@
                         <label for="txt-subtitle">subtitle</label>
                         <input type="text" id="txt-subtitle" v-model="post.subtitle" maxlength="250" class="form-control">
                     </div>
-                    <div class="form-group col-md-12">
+                    <div class="form-group col-md-10">
                         <label for="txt-url_img1">Url img1 (list)*</label>
                         <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control" required/>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <button type="button" class="btn btn-warning res-btncol"
+                            :disabled="issending"
+                            v-on:click="load_lastupload()"
+                        >
+                            Load uploaded url
+                            <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                        </button>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txt-url_img2">Url img2 (detail)</label>
@@ -143,6 +152,7 @@
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 import apifetch from "../../../app/apifetch"
+import db from "../../../app/db"
 const csrftoken = funcs.get_csrftoken()
 
 export default {
@@ -176,8 +186,22 @@ export default {
         }
     },
 
+    async mounted() {
+        const id = funcs.get_lastparam()
+        this.categories = await apifetch.get_categories()
+        this.load_register(id)
+    },
+
     methods:{
-        get_row(id){
+        load_lastupload(){
+            const lastupload = db.select("last-upload")
+            if(lastupload) {
+                this.post.url_img1 = lastupload
+                this.post.url_img2 = lastupload
+            }
+        },
+
+        load_register(id){
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
@@ -248,7 +272,7 @@ export default {
                     html: `<b>&#128578;</b>`,
                 })
 
-                this.get_row(self.post.id)
+                this.load_register(self.post.id)
 
             })
             .catch(error => {
@@ -331,10 +355,5 @@ export default {
         }//handleSubmit(e)
     },
 
-    async mounted() {
-        const id = funcs.get_lastparam()
-        this.get_row(id)
-        this.categories = await apifetch.get_categories()
-    }
 }
 </script>

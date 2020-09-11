@@ -2369,11 +2369,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
 /* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apifetch */ "./resources/js/app/apifetch.js");
+/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../app/db */ "./resources/js/app/db.js");
 
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
@@ -2381,6 +2378,10 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2522,6 +2523,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2556,9 +2567,43 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       }
     };
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var id;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              id = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_lastparam();
+              _context.next = 3;
+              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_categories();
+
+            case 3:
+              _this.categories = _context.sent;
+
+              _this.load_register(id);
+
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
+  },
   methods: {
-    get_row: function get_row(id) {
-      var _this = this;
+    load_lastupload: function load_lastupload() {
+      var lastupload = _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].select("last-upload");
+
+      if (lastupload) {
+        this.post.url_img1 = lastupload;
+        this.post.url_img2 = lastupload;
+      }
+    },
+    load_register: function load_register(id) {
+      var _this2 = this;
 
       var self = this;
       self.issending = true;
@@ -2579,9 +2624,9 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
           });
         }
 
-        _this.post = response.data;
-        _this.post.publish_date = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_date(_this.post.publish_date);
-        _this.post.last_update = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_date(_this.post.publish_date);
+        _this2.post = response.data;
+        _this2.post.publish_date = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_date(_this2.post.publish_date);
+        _this2.post.last_update = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_date(_this2.post.publish_date);
       })["catch"](function (error) {
         console.log("CATCH ERROR get_row", error);
         Swal.fire({
@@ -2596,7 +2641,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
     },
     //get_row
     update: function update() {
-      var _this2 = this;
+      var _this3 = this;
 
       var self = this;
       self.issending = true;
@@ -2630,7 +2675,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
           html: "<b>&#128578;</b>"
         });
 
-        _this2.get_row(self.post.id);
+        _this3.load_register(self.post.id);
       })["catch"](function (error) {
         console.log("CATCH ERROR update", error);
         Swal.fire({
@@ -2710,33 +2755,6 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       this.update();
     } //handleSubmit(e)
 
-  },
-  mounted: function mounted() {
-    var _this3 = this;
-
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var id;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              id = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_lastparam();
-
-              _this3.get_row(id);
-
-              _context.next = 4;
-              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_categories();
-
-            case 4:
-              _this3.categories = _context.sent;
-
-            case 5:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
   }
 });
 
@@ -2904,9 +2922,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return _this.load_rows();
 
             case 9:
+              _this.load_lastslug();
+
               _this.$refs.urlupload.focus();
 
-            case 10:
+            case 11:
             case "end":
               return _context.stop();
           }
@@ -2915,6 +2935,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    load_lastslug: function load_lastslug() {
+      var slug = _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].select("last-slug");
+
+      if (slug) {
+        this.upload.urlupload = "xxx::".concat(slug, ";");
+        _app_db__WEBPACK_IMPORTED_MODULE_4__["default"]["delete"]("last-slug");
+      }
+    },
     load_folders: function load_folders() {
       var _this2 = this;
 
@@ -3107,7 +3135,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }));
 
               case 14:
-                _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr(r, "R");
+                self.savelast(r.slice(-1)[0]);
                 self.$toast.success("Files \"".concat(r, "\" uploaded"));
                 self.upload.urlupload = "";
                 self.$refs.urlupload.focus();
@@ -3178,8 +3206,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }));
 
               case 11:
+                self.savelast(r.url.slice(-1)[0]);
                 self.$toast.success("Files uploaded (".concat(r.url.length, "): ").concat(r.url.join(", ")));
-                self.savelast(r.url[0]);
                 if (r.warning.length > 0) self.$toast.warning("Files not uploaded (".concat(r.warning.length, "): ").concat(r.warning.join(", ")));
                 self.reset_filesupload();
                 _context6.next = 20;
@@ -3275,7 +3303,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.overbytes = 0;
     },
     savelast: function savelast(url) {
-      _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("lastupload", url);
+      if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_undefined(url)) _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("last-upload", url);
     }
   }
 });
@@ -42328,7 +42356,7 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-12" }, [
+              _c("div", { staticClass: "form-group col-md-10" }, [
                 _c("label", { attrs: { for: "txt-url_img1" } }, [
                   _vm._v("Url img1 (list)*")
                 ]),
@@ -42359,6 +42387,35 @@ var render = function() {
                     }
                   }
                 })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-2" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-warning res-btncol",
+                    attrs: { type: "button", disabled: _vm.issending },
+                    on: {
+                      click: function($event) {
+                        return _vm.load_lastupload()
+                      }
+                    }
+                  },
+                  [
+                    _vm._v(
+                      "\n                        Load uploaded url\n                        "
+                    ),
+                    _vm.issending
+                      ? _c("img", {
+                          attrs: {
+                            src: "/assets/images/loading-bw.gif",
+                            width: "25",
+                            height: "25"
+                          }
+                        })
+                      : _vm._e()
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-6" }, [
@@ -56008,6 +56065,9 @@ var funcs = {
   },
   is_error: function is_error(response) {
     return typeof response.error !== "undefined" || typeof response.errors !== "undefined" && response.errors.length > 0;
+  },
+  is_undefined: function is_undefined(any) {
+    return typeof any === "undefined";
   },
   get_form: function get_form(strobj) {
     var form = new FormData();
