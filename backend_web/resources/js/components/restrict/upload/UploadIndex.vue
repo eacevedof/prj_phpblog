@@ -19,7 +19,7 @@
             <button type="button" class="btn btn-dark"
                 :disabled="issending || isoversized" v-on:click="on_upload()"
             >
-                {{btnsend2}}
+                {{btnupload}}
                 <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
             </button>
         </div>
@@ -98,7 +98,7 @@ export default {
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            btnsend2: CONST.BTN_INISTATE_UPLOAD,
+            btnupload: CONST.BTN_INISTATE_UPLOAD,
 
             selfolder: "eduardoaf.com",
 
@@ -206,7 +206,7 @@ export default {
 
             try {
                 self.issending = true
-                self.btnsend2 = CONST.BTN_IN_PROGRESS
+                self.btnupload = CONST.BTN_IN_PROGRESS
 
                 const r = await apiupload.post_url(self.selfolder, self.upload.urlupload)
 
@@ -231,7 +231,7 @@ export default {
             }
             finally {
                 self.issending = false;
-                self.btnsend = CONST.BTN_INISTATE_REFRESH
+                self.btnupload = CONST.BTN_INISTATE_REFRESH
             }
         }, //upload by url
 
@@ -241,7 +241,7 @@ export default {
 
             try {
                 self.issending = true
-                self.btnsend2 = CONST.BTN_IN_PROGRESS
+                self.btnupload = CONST.BTN_IN_PROGRESS
 
                 const r = await apiupload.post_files(self.selfolder, self.upload.files)
                 if (funcs.is_error(r)) {
@@ -266,7 +266,7 @@ export default {
             }
             finally {
                 self.issending = false;
-                self.btnsend = CONST.BTN_INISTATE_REFRESH
+                self.btnupload = CONST.BTN_INISTATE_REFRESH
             }
         },
 
