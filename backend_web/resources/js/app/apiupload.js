@@ -86,7 +86,7 @@ const apiupload = {
 
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
-            form.append("folderdomain",this.selfolder)
+            form.append("folderdomain",folder)
             form.append("files",urlpath)
 
             const prom = await fetch(url,{method: 'post', body: form})
