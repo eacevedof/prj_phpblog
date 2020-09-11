@@ -45,6 +45,22 @@ const apifetch = {
             return {error:e}
         }
     },
+
+    get_uploadrows: async () => {
+        try {
+            const url = funcs.get_uploadomain().concat("/files")
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain",self.selfolder)
+
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json()).data.files
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
+    },
 }
 
 export  default apifetch

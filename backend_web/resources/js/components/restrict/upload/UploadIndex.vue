@@ -132,46 +132,33 @@ export default {
             console.log("load_folders:",this.$data.folders)
         },
 
-        load_rows(){
-            console.log("...loading")
+        async load_rows(){
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
 
-            const url = funcs.get_uploadomain().concat("/files")
-            const form = new FormData()
-            form.append("resource-usertoken",funcs.get_uploadtoken())
-            form.append("folderdomain",self.selfolder)
-
-            fetch(url, {
-                method: 'post',
-                body: form,
-            })
-            .then(response => response.json())
-            .then(response => {
-                //console.log("load.reponse",response)
-
-                if(funcs.is_error(response)) {
+            try{
+                const r = apifetch.get_uploadrows()
+                if(funcs.is_error(r)) {
                     return Swal.fire({
                         icon: 'warning',
                         title: CONST.TITLE_ERROR,
-                        html: response.error,
+                        html: r.error,
                     })
                 }
-                self.rows = response.data.files
-            })
-            .catch(error => {
-                console.log("CATCH ERROR list",error)
+                self.rows = r
+            }
+            catch (error) {
                 Swal.fire({
                     icon: 'error',
                     title: CONST.TITLE_SERVERROR,
                     html: error.toString(),
                 })
-            })
-            .finally(() => {
+            }
+            finally {
                 self.issending = false;
                 self.btnsend = CONST.BTN_INISTATE_REFRESH
-            })
+            }
         },//load
 
         remove(resurl){
