@@ -2950,10 +2950,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self.issending = true;
                 self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
                 _context3.prev = 3;
-                r = _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_uploadrows(self.selfolder);
+                _context3.next = 6;
+                return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_uploadrows(self.selfolder);
+
+              case 6:
+                r = _context3.sent;
+                _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].pr(r, "load_rows");
 
                 if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
-                  _context3.next = 7;
+                  _context3.next = 10;
                   break;
                 }
 
@@ -2963,13 +2968,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: r.error
                 }));
 
-              case 7:
+              case 10:
                 self.rows = r;
-                _context3.next = 13;
+                _context3.next = 16;
                 break;
 
-              case 10:
-                _context3.prev = 10;
+              case 13:
+                _context3.prev = 13;
                 _context3.t0 = _context3["catch"](3);
                 Swal.fire({
                   icon: 'error',
@@ -2977,18 +2982,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: _context3.t0.toString()
                 });
 
-              case 13:
-                _context3.prev = 13;
+              case 16:
+                _context3.prev = 16;
                 self.issending = false;
                 self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
-                return _context3.finish(13);
+                return _context3.finish(16);
 
-              case 17:
+              case 20:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[3, 10, 13, 17]]);
+        }, _callee3, null, [[3, 13, 16, 20]]);
       }))();
     },
     //load_rows
