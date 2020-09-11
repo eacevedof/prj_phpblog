@@ -192,6 +192,53 @@ export default {
             }
         },//remove_file
 
+        async upload_files(){
+            const self = this
+
+            if(self.upload.files.length==0)return
+
+            const url = funcs.get_uploadomain().concat("/upload/multiple")
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("folderdomain",this.selfolder)
+
+            for(const file of self.upload.files)
+                form.append("files[]", file, file.name);
+
+            fetch(url, {
+                method: 'post',
+                body: form
+            })
+                .then(response => response.json())
+                .then(response => {
+                    console.log("reponse",response)
+                    if(funcs.is_error(response)) {
+                        return Swal.fire({
+                            icon: 'warning',
+                            title: CONST.TITLE_ERROR,
+                            html: response.error,
+                        })
+                    }
+                    self.$toast.success(`Files uploaded (${response.data.url.length}): ${response.data.url.join(", ")}`)
+                    if(response.data.warning.length>0)
+                        self.$toast.warning(`Files not uploaded (${response.data.warning.length}): ${response.data.warning.join(", ")}`)
+                    self.reset_filesupload()
+                })
+                .catch(error => {
+                    console.log("CATCH ERROR upload_files",error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: CONST.TITLE_SERVERROR,
+                        html: error.toString(),
+                    })
+                })
+        },
+
+        async on_upload(){
+            this.upload_byurl()
+            this.upload_files()
+        },//on_upload
+
         copycb(i){
             const el = document.getElementById("rawlink-"+i)
             if(el) {
@@ -273,54 +320,6 @@ export default {
             this.isoversized = false
             this.overbytes = 0
         },
-
-        upload_files(){
-            const self = this
-
-            if(self.upload.files.length==0)return
-
-            const url = funcs.get_uploadomain().concat("/upload/multiple")
-            const form = new FormData()
-            form.append("resource-usertoken",funcs.get_uploadtoken())
-            form.append("folderdomain",this.selfolder)
-
-            for(const file of self.upload.files)
-                form.append("files[]", file, file.name);
-
-            fetch(url, {
-                method: 'post',
-                body: form
-            })
-            .then(response => response.json())
-            .then(response => {
-                console.log("reponse",response)
-                if(funcs.is_error(response)) {
-                    return Swal.fire({
-                        icon: 'warning',
-                        title: CONST.TITLE_ERROR,
-                        html: response.error,
-                    })
-                }
-                self.$toast.success(`Files uploaded (${response.data.url.length}): ${response.data.url.join(", ")}`)
-                if(response.data.warning.length>0)
-                    self.$toast.warning(`Files not uploaded (${response.data.warning.length}): ${response.data.warning.join(", ")}`)
-                self.reset_filesupload()
-            })
-            .catch(error => {
-                console.log("CATCH ERROR upload_files",error)
-                Swal.fire({
-                    icon: 'error',
-                    title: CONST.TITLE_SERVERROR,
-                    html: error.toString(),
-                })
-            })
-        },
-
-        on_upload(){
-            this.upload_byurl()
-            this.upload_files()
-        },//on_upload
-
     }
 }
 </script>
