@@ -44,6 +44,24 @@ const apiupload = {
             return {error:e}
         }
     },
+
+    remove_file: async (urlfile) => {
+        try {
+            const url = funcs.get_uploadomain().concat("/remove")
+            const form = new FormData()
+            form.append("resource-usertoken",funcs.get_uploadtoken())
+            form.append("urls[]",urlfile)
+
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json()).data.urls
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
+    },
+
+
 }
 
 export  default apiupload

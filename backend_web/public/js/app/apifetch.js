@@ -925,16 +925,88 @@ var apifetch = {
     }
 
     return get_categories;
-  }(),
+  }()
+};
+/* harmony default export */ __webpack_exports__["default"] = (apifetch);
+
+/***/ }),
+
+/***/ "./resources/js/app/apiupload.js":
+/*!***************************************!*\
+  !*** ./resources/js/app/apiupload.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./funcs */ "./resources/js/app/funcs.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var apiupload = {
   get_folders: function () {
-    var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              _context.next = 6;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 6:
+              prom = _context.sent;
+              _context.next = 9;
+              return prom.json();
+
+            case 9:
+              r = _context.sent.data.folders;
+              return _context.abrupt("return", r);
+
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context["catch"](0);
+              return _context.abrupt("return", {
+                error: _context.t0
+              });
+
+            case 16:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 13]]);
+    }));
+
+    function get_folders() {
+      return _get_folders.apply(this, arguments);
+    }
+
+    return get_folders;
+  }(),
+  get_maxsize: function () {
+    var _get_maxsize = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
       var url, form, prom, r;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/get-max-upload-size");
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
               _context2.next = 6;
@@ -949,7 +1021,7 @@ var apifetch = {
               return prom.json();
 
             case 9:
-              r = _context2.sent.data.folders;
+              r = _context2.sent.data.maxuploadsize;
               return _context2.abrupt("return", r);
 
             case 13:
@@ -967,71 +1039,72 @@ var apifetch = {
       }, _callee2, null, [[0, 13]]);
     }));
 
-    function get_folders() {
-      return _get_folders.apply(this, arguments);
-    }
-
-    return get_folders;
-  }(),
-  get_maxsize: function () {
-    var _get_maxsize = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      var url, form, prom, r;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.prev = 0;
-              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/get-max-upload-size");
-              form = new FormData();
-              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-              _context3.next = 6;
-              return fetch(url, {
-                method: 'post',
-                body: form
-              });
-
-            case 6:
-              prom = _context3.sent;
-              _context3.next = 9;
-              return prom.json();
-
-            case 9:
-              r = _context3.sent.data.maxuploadsize;
-              return _context3.abrupt("return", r);
-
-            case 13:
-              _context3.prev = 13;
-              _context3.t0 = _context3["catch"](0);
-              return _context3.abrupt("return", {
-                error: _context3.t0
-              });
-
-            case 16:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, null, [[0, 13]]);
-    }));
-
     function get_maxsize() {
       return _get_maxsize.apply(this, arguments);
     }
 
     return get_maxsize;
   }(),
-  get_uploadrows: function () {
-    var _get_uploadrows = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(folder) {
+  get_files: function () {
+    var _get_files = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(folder) {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/files");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              form.append("folderdomain", folder);
+              _context3.next = 7;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 7:
+              prom = _context3.sent;
+              _context3.next = 10;
+              return prom.json();
+
+            case 10:
+              r = _context3.sent.data.files;
+              return _context3.abrupt("return", r);
+
+            case 14:
+              _context3.prev = 14;
+              _context3.t0 = _context3["catch"](0);
+              return _context3.abrupt("return", {
+                error: _context3.t0
+              });
+
+            case 17:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 14]]);
+    }));
+
+    function get_files(_x) {
+      return _get_files.apply(this, arguments);
+    }
+
+    return get_files;
+  }(),
+  remove_file: function () {
+    var _remove_file = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(urlfile) {
       var url, form, prom, r;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.prev = 0;
-              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/files");
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/remove");
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-              form.append("folderdomain", folder);
+              form.append("urls[]", urlfile);
               _context4.next = 7;
               return fetch(url, {
                 method: 'post',
@@ -1044,7 +1117,7 @@ var apifetch = {
               return prom.json();
 
             case 10:
-              r = _context4.sent.data.files;
+              r = _context4.sent.data.urls;
               return _context4.abrupt("return", r);
 
             case 14:
@@ -1062,14 +1135,14 @@ var apifetch = {
       }, _callee4, null, [[0, 14]]);
     }));
 
-    function get_uploadrows(_x) {
-      return _get_uploadrows.apply(this, arguments);
+    function remove_file(_x2) {
+      return _remove_file.apply(this, arguments);
     }
 
-    return get_uploadrows;
+    return remove_file;
   }()
 };
-/* harmony default export */ __webpack_exports__["default"] = (apifetch);
+/* harmony default export */ __webpack_exports__["default"] = (apiupload);
 
 /***/ }),
 
@@ -1186,13 +1259,14 @@ var funcs = {
 /***/ }),
 
 /***/ 0:
-/*!**********************************************************************************************************************************!*\
-  !*** multi ./resources/js/app/apifetch.js ./resources/js/app/constants.js ./resources/js/app/funcs.js ./resources/sass/app.scss ***!
-  \**********************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app/apifetch.js ./resources/js/app/apiupload.js ./resources/js/app/constants.js ./resources/js/app/funcs.js ./resources/sass/app.scss ***!
+  \******************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/apifetch.js */"./resources/js/app/apifetch.js");
+__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/apiupload.js */"./resources/js/app/apiupload.js");
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/constants.js */"./resources/js/app/constants.js");
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/funcs.js */"./resources/js/app/funcs.js");
 module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/sass/app.scss */"./resources/sass/app.scss");

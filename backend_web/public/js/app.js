@@ -2755,7 +2755,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
-/* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apifetch */ "./resources/js/app/apifetch.js");
+/* harmony import */ var _app_apiupload__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../app/apiupload */ "./resources/js/app/apiupload.js");
 
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -2889,7 +2889,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 0:
               console.log("upload.async mounted()");
               _context.next = 3;
-              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_maxsize();
+              return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].get_maxsize();
 
             case 3:
               _this.maxuploadsize = _context.sent;
@@ -2921,15 +2921,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                console.log("async load_folders()");
-                _context2.next = 3;
-                return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
+                _context2.next = 2;
+                return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].get_folders();
+
+              case 2:
+                _this2.folders = _context2.sent;
 
               case 3:
-                _this2.folders = _context2.sent;
-                console.log("load_folders:", _this2.$data.folders);
-
-              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -2951,7 +2949,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
                 _context3.prev = 3;
                 _context3.next = 6;
-                return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_uploadrows(self.selfolder);
+                return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].get_files(self.selfolder);
 
               case 6:
                 r = _context3.sent;
@@ -2996,46 +2994,74 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     //load_rows
-    remove: function remove(resurl) {
-      if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].CONFIRM)) {
-        var self = this;
-        self.issending = true;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-        var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/remove");
-        var form = new FormData();
-        form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-        form.append("urls[]", resurl);
-        fetch(url, {
-          method: 'post',
-          body: form
-        }).then(function (response) {
-          return response.json();
-        }).then(function (response) {
-          console.log("remove.response", response);
+    remove_file: function remove_file(urlfile) {
+      var _this4 = this;
 
-          if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
-            return Swal.fire({
-              icon: 'warning',
-              title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
-              html: response.error
-            });
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+        var self, r;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                if (!confirm(_app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].CONFIRM)) {
+                  _context4.next = 22;
+                  break;
+                }
+
+                self = _this4;
+                self.issending = true;
+                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+                _context4.prev = 4;
+                _context4.next = 7;
+                return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].remove_file(urlfile);
+
+              case 7:
+                r = _context4.sent;
+
+                if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
+                  _context4.next = 10;
+                  break;
+                }
+
+                return _context4.abrupt("return", Swal.fire({
+                  icon: 'warning',
+                  title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
+                  html: r.error
+                }));
+
+              case 10:
+                self.$toast.info("Resource removed: ".concat(r[0]));
+                _context4.next = 13;
+                return self.load_rows();
+
+              case 13:
+                _context4.next = 18;
+                break;
+
+              case 15:
+                _context4.prev = 15;
+                _context4.t0 = _context4["catch"](4);
+                Swal.fire({
+                  icon: 'error',
+                  title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
+                  html: _context4.t0.toString()
+                });
+
+              case 18:
+                _context4.prev = 18;
+                self.issending = false;
+                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
+                return _context4.finish(18);
+
+              case 22:
+              case "end":
+                return _context4.stop();
+            }
           }
-
-          self.load_rows();
-          self.$toast.info("Resource removed: ".concat(response.data.urls[0]));
-        })["catch"](function (error) {
-          console.log("CATCH ERROR remove", error);
-          Swal.fire({
-            icon: 'error',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
-            html: error.toString()
-          });
-        })["finally"](function () {
-          self.issending = false;
-          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
-        });
-      }
+        }, _callee4, null, [[4, 15, 18, 22]]);
+      }))();
     },
+    //remove_file
     copycb: function copycb(i) {
       var el = document.getElementById("rawlink-" + i);
 
@@ -42968,7 +42994,7 @@ var render = function() {
                       attrs: { disabled: _vm.issending },
                       on: {
                         click: function($event) {
-                          return _vm.remove(url)
+                          return _vm.remove_file(url)
                         }
                       }
                     },
@@ -55478,16 +55504,88 @@ var apifetch = {
     }
 
     return get_categories;
-  }(),
+  }()
+};
+/* harmony default export */ __webpack_exports__["default"] = (apifetch);
+
+/***/ }),
+
+/***/ "./resources/js/app/apiupload.js":
+/*!***************************************!*\
+  !*** ./resources/js/app/apiupload.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./funcs */ "./resources/js/app/funcs.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var apiupload = {
   get_folders: function () {
-    var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+    var _get_folders = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              _context.next = 6;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 6:
+              prom = _context.sent;
+              _context.next = 9;
+              return prom.json();
+
+            case 9:
+              r = _context.sent.data.folders;
+              return _context.abrupt("return", r);
+
+            case 13:
+              _context.prev = 13;
+              _context.t0 = _context["catch"](0);
+              return _context.abrupt("return", {
+                error: _context.t0
+              });
+
+            case 16:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[0, 13]]);
+    }));
+
+    function get_folders() {
+      return _get_folders.apply(this, arguments);
+    }
+
+    return get_folders;
+  }(),
+  get_maxsize: function () {
+    var _get_maxsize = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
       var url, form, prom, r;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
               _context2.prev = 0;
-              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/folders");
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/get-max-upload-size");
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
               _context2.next = 6;
@@ -55502,7 +55600,7 @@ var apifetch = {
               return prom.json();
 
             case 9:
-              r = _context2.sent.data.folders;
+              r = _context2.sent.data.maxuploadsize;
               return _context2.abrupt("return", r);
 
             case 13:
@@ -55520,71 +55618,72 @@ var apifetch = {
       }, _callee2, null, [[0, 13]]);
     }));
 
-    function get_folders() {
-      return _get_folders.apply(this, arguments);
-    }
-
-    return get_folders;
-  }(),
-  get_maxsize: function () {
-    var _get_maxsize = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
-      var url, form, prom, r;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
-        while (1) {
-          switch (_context3.prev = _context3.next) {
-            case 0:
-              _context3.prev = 0;
-              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/get-max-upload-size");
-              form = new FormData();
-              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-              _context3.next = 6;
-              return fetch(url, {
-                method: 'post',
-                body: form
-              });
-
-            case 6:
-              prom = _context3.sent;
-              _context3.next = 9;
-              return prom.json();
-
-            case 9:
-              r = _context3.sent.data.maxuploadsize;
-              return _context3.abrupt("return", r);
-
-            case 13:
-              _context3.prev = 13;
-              _context3.t0 = _context3["catch"](0);
-              return _context3.abrupt("return", {
-                error: _context3.t0
-              });
-
-            case 16:
-            case "end":
-              return _context3.stop();
-          }
-        }
-      }, _callee3, null, [[0, 13]]);
-    }));
-
     function get_maxsize() {
       return _get_maxsize.apply(this, arguments);
     }
 
     return get_maxsize;
   }(),
-  get_uploadrows: function () {
-    var _get_uploadrows = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(folder) {
+  get_files: function () {
+    var _get_files = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3(folder) {
+      var url, form, prom, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              _context3.prev = 0;
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/files");
+              form = new FormData();
+              form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
+              form.append("folderdomain", folder);
+              _context3.next = 7;
+              return fetch(url, {
+                method: 'post',
+                body: form
+              });
+
+            case 7:
+              prom = _context3.sent;
+              _context3.next = 10;
+              return prom.json();
+
+            case 10:
+              r = _context3.sent.data.files;
+              return _context3.abrupt("return", r);
+
+            case 14:
+              _context3.prev = 14;
+              _context3.t0 = _context3["catch"](0);
+              return _context3.abrupt("return", {
+                error: _context3.t0
+              });
+
+            case 17:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[0, 14]]);
+    }));
+
+    function get_files(_x) {
+      return _get_files.apply(this, arguments);
+    }
+
+    return get_files;
+  }(),
+  remove_file: function () {
+    var _remove_file = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4(urlfile) {
       var url, form, prom, r;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.prev = 0;
-              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/files");
+              url = _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/remove");
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-              form.append("folderdomain", folder);
+              form.append("urls[]", urlfile);
               _context4.next = 7;
               return fetch(url, {
                 method: 'post',
@@ -55597,7 +55696,7 @@ var apifetch = {
               return prom.json();
 
             case 10:
-              r = _context4.sent.data.files;
+              r = _context4.sent.data.urls;
               return _context4.abrupt("return", r);
 
             case 14:
@@ -55615,14 +55714,14 @@ var apifetch = {
       }, _callee4, null, [[0, 14]]);
     }));
 
-    function get_uploadrows(_x) {
-      return _get_uploadrows.apply(this, arguments);
+    function remove_file(_x2) {
+      return _remove_file.apply(this, arguments);
     }
 
-    return get_uploadrows;
+    return remove_file;
   }()
 };
-/* harmony default export */ __webpack_exports__["default"] = (apifetch);
+/* harmony default export */ __webpack_exports__["default"] = (apiupload);
 
 /***/ }),
 

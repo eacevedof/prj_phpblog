@@ -69,7 +69,7 @@
                         <button class="btn btn-info" :disabled="issending"  v-on:click="copycb(i)">
                             <i class="fa fa-clipboard" aria-hidden="true"></i>
                         </button>
-                        <button class="btn btn-danger" :disabled="issending"  v-on:click="remove(url)">
+                        <button class="btn btn-danger" :disabled="issending"  v-on:click="remove_file(url)">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
                     </div>
@@ -93,6 +93,7 @@ import CONST from "../../../app/constants"
 import apiupload from "../../../app/apiupload";
 
 export default {
+
     data(){
         return {
             issending: false,
@@ -126,13 +127,9 @@ export default {
     },
 
     methods: {
-        async load_folders() {
-            console.log("async load_folders()")
-            this.folders = await apiupload.get_folders()
-            console.log("load_folders:",this.$data.folders)
-        },
+        async load_folders() {this.folders = await apiupload.get_folders() },
 
-        async load_rows(){
+        async load_rows() {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
@@ -162,51 +159,38 @@ export default {
             }
         },//load_rows
 
-        remove(resurl){
-            if(confirm(CONST.CONFIRM)){
+        async remove_file(urlfile){
+            if(confirm(CONST.CONFIRM)) {
                 const self = this
                 self.issending = true
                 self.btnsend = CONST.BTN_IN_PROGRESS
 
-                const url = funcs.get_uploadomain().concat("/remove")
-                const form = new FormData()
-                form.append("resource-usertoken",funcs.get_uploadtoken())
-                form.append("urls[]",resurl)
-
-                fetch(url, {
-                    method: 'post',
-                    body: form
-                })
-                .then(response => response.json())
-                .then(response => {
-                    console.log("remove.response",response)
-
-                    if(funcs.is_error(response)) {
+                try {
+                    const r = await apiupload.remove_file(urlfile)
+                    if (funcs.is_error(r)) {
                         return Swal.fire({
                             icon: 'warning',
                             title: CONST.TITLE_ERROR,
-                            html: response.error,
+                            html: r.error,
                         })
                     }
 
-                    self.load_rows()
-
-                    self.$toast.info(`Resource removed: ${response.data.urls[0]}`)
-                })
-                .catch(error => {
-                    console.log("CATCH ERROR remove",error)
+                    self.$toast.info(`Resource removed: ${r[0]}`)
+                    await self.load_rows()
+                }
+                catch (error) {
                     Swal.fire({
                         icon: 'error',
                         title: CONST.TITLE_SERVERROR,
                         html: error.toString(),
                     })
-                })
-                .finally(() => {
+                }
+                finally {
                     self.issending = false;
                     self.btnsend = CONST.BTN_INISTATE_REFRESH
-                })
+                }
             }
-        },
+        },//remove_file
 
         copycb(i){
             const el = document.getElementById("rawlink-"+i)
