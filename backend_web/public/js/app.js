@@ -2749,6 +2749,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       this.post.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.post.title);
       var catslug = this.get_idtype_slug();
       this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug);
+      _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("last-slug", this.post.slug);
     },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();

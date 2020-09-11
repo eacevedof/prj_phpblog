@@ -347,6 +347,7 @@ export default {
             this.post.slug = funcs.get_slug(this.post.title)
             const catslug = this.get_idtype_slug()
             this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug)
+            db.save("last-slug",this.post.slug)
         },
 
         handleSubmit: function(e) {

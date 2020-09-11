@@ -13,7 +13,7 @@ class BlogController extends BaseController
 {
     public function __invoke()
     {
-        $r = (new PostIndexService())->get_list_by_user();
+        $r = (new PostIndexService())->get_all();
         return view('open.blog.index', [
             "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.blog.index"),
