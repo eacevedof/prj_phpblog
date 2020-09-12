@@ -27,6 +27,11 @@ class PdftojpgService extends BaseService
         $this->downloadfile = "";
     }
 
+    private function _mkdir_download()
+    {
+        if(!is_dir($this->pathdown)) mkdir($this->pathdown);
+    }
+
     private function _gen_downloadname()
     {
         $now = date("YmdHis");
@@ -74,6 +79,7 @@ class PdftojpgService extends BaseService
 
     public function get()
     {
+        $this->_mkdir_download();
         $this->_gen_pdfname();
         $this->_move_uppdf();
         $this->_gen_downloadname();
