@@ -243,6 +243,7 @@ export default {
             finally {
                 self.issending = false;
                 self.btnupload = CONST.BTN_INISTATE_UPLOAD
+                return "end"
             }
         }, //upload by url
 
@@ -279,13 +280,16 @@ export default {
             finally {
                 self.issending = false;
                 self.btnupload = CONST.BTN_INISTATE_UPLOAD
+                return "end"
             }
-        },
+        },//upload files
 
         async on_upload(){
-            await this.upload_byurl()
-            await this.upload_files()
-            await this.load_rows()
+
+            const r1 = await this.upload_byurl()
+            const r2 = await this.upload_files()
+            //if(r1 === "end" || r2 === "end")
+                await this.load_rows()
         },//on_upload
 
         copycb(i){

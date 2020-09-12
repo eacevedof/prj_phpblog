@@ -19,6 +19,9 @@ class PdftojpgService
 
     public function __construct($file)
     {
+        //convierte pdf a jpg
+        //~/www/dom_theframework.es/resources.theframework.es/public/theframework.es/20200912$ gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o x.jpg x.pdf
+
         //instalación en ionos: https://www.ionos.es/ayuda/servidores-cloud/servidores-dedicados-gestionados/instalar-imagemagick-mediante-ssh/
         if(!extension_loaded("imagick")) throw new \Exception("imagick extension not found!");
     }
