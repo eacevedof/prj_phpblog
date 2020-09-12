@@ -19,6 +19,7 @@ class PdftojpgService
 
     public function __construct($file)
     {
+        //instalación en ionos: https://www.ionos.es/ayuda/servidores-cloud/servidores-dedicados-gestionados/instalar-imagemagick-mediante-ssh/
         if(!extension_loaded("imagick")) throw new \Exception("imagick extension not found!");
     }
 
