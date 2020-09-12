@@ -6,7 +6,7 @@
                ref="urlupload"
                @focus="$event.target.select()"
                v-model="upload.urlupload"
-               v-on:keyup.enter="upload_byurl()"
+               v-on:keyup.enter="on_upload()"
             />
         </div>
         <div class="form-group col-md-10 mb-2">
@@ -243,7 +243,6 @@ export default {
             finally {
                 self.issending = false;
                 self.btnupload = CONST.BTN_INISTATE_UPLOAD
-                return "end"
             }
         }, //upload by url
 
@@ -280,16 +279,13 @@ export default {
             finally {
                 self.issending = false;
                 self.btnupload = CONST.BTN_INISTATE_UPLOAD
-                return "end"
             }
         },//upload files
 
         async on_upload(){
-
-            const r1 = await this.upload_byurl()
-            const r2 = await this.upload_files()
-            //if(r1 === "end" || r2 === "end")
-                await this.load_rows()
+            await this.upload_byurl()
+            await this.upload_files()
+            await this.load_rows()
         },//on_upload
 
         copycb(i){

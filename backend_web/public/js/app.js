@@ -3257,16 +3257,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 5:
                 r2 = _context7.sent;
-
-                if (!(r1 === "end" || r2 === "end")) {
-                  _context7.next = 9;
-                  break;
-                }
-
-                _context7.next = 9;
+                _context7.next = 8;
                 return _this7.load_rows();
 
-              case 9:
+              case 8:
               case "end":
                 return _context7.stop();
             }
