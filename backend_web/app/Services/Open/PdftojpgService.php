@@ -29,16 +29,17 @@ class PdftojpgService extends BaseService
 
     private function _gen_downloadname()
     {
-        //$uuid = printf("uniqid('img_'): %s\r\n", uniqid("img_"));
-        $uuid = uniqid("img_");
-        $imgname = "$uuid.jpg";
+        $now = date("YmdHis");
+        $uuid = uniqid();
+        $imgname = "$now-img-$uuid.jpg";
         $this->downloadfile = $imgname;
     }
 
     private function _gen_pdfname()
     {
+        $now = date("YmdHis");
         $uuid = uniqid();
-        $pdfname = "$uuid.pdf";
+        $pdfname = "$now-upload-$uuid.pdf";
         $this->pdfname = $pdfname;
     }
 
