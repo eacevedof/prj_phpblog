@@ -54,7 +54,7 @@ class PdftojpgService extends BaseService
     {
         $pathpdf = $this->pathdown."/".$this->pdfname;
         $r = move_uploaded_file($this->file["tmp_name"],$pathpdf);
-        sleep(2);
+        //sleep(2);
         return $r;
     }
 
