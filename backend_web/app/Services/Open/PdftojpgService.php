@@ -10,33 +10,76 @@
  */
 namespace App\Services\Open;
 
-use \Imagick;
+use App\Services\BaseService;
 
-class PdftojpgService
+class PdftojpgService extends BaseService
 {
-    private $pdf;
-    private $jpgs;
+    private $file;
+    private $pdfname;
+    private $downloadfile;
+    private $pathdown;
 
     public function __construct($file)
     {
-        //convierte pdf a jpg
-        //~/www/dom_theframework.es/resources.theframework.es/public/theframework.es/20200912$ gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o x.jpg x.pdf
+        $this->file = $file;
+        $this->pathdown = public_path()."/downloads";
+        $this->pdfname = "";
+        $this->downloadfile = "";
+    }
 
-        //instalación en ionos: https://www.ionos.es/ayuda/servidores-cloud/servidores-dedicados-gestionados/instalar-imagemagick-mediante-ssh/
-        if(!extension_loaded("imagick")) throw new \Exception("imagick extension not found!");
+    private function _gen_downloadname()
+    {
+        $uuid = printf("uniqid('img_'): %s\r\n", uniqid("img_"));
+        $imgname = "$uuid.jpg";
+        $this->downloadfile = $imgname;
+    }
+
+    private function _gen_pdfname()
+    {
+        $uuid = uniqid();
+        $pdfname = "$uuid.pdf";
+        $this->pdfname = $pdfname;
+    }
+
+    private function _move_uppdf()
+    {
+        $pathpdf = $this->pathdown."/".$this->pdfname;
+        $r = move_uploaded_file($this->file["tmp_name"],$pathpdf);
+        return $r;
+    }
+
+    private function _remove_pdf()
+    {
+        $pathpdf = $this->pathdown."/".$this->pdfname;
+        unlink($pathpdf);
+    }
+
+    private function _exec_gs()
+    {
+        $pdfname = $this->pdfname;
+        $pathimg = $this->pathdown."/".$this->downloadfile;
+
+        $this->logd("pdfname:$pdfname, pathimg:$pathimg");
+
+        //convierte de pdf a imagen
+        $cmd = "gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o $pathimg $pdfname";
+
+        $output = []; $status = 0;
+        exec($cmd, $output, $status);
+        $this->logd($output, "pdfjpg exec status $status:");
+        return $status;
     }
 
     public function get()
     {
-        $pathpdf = $this->pdf;
-        $pathimg = $this->jpgs;
-        $imagick = new Imagick();
-
-        //esta linea lanza la excepción: Fatal error: Uncaught ImagickException: PDFDelegateFailed `[ghostscript library 9.52]
-        // Read image from PDF
-        $imagick->readImage($pathpdf);
-        // Writes an image
-        $imagick->writeImages($pathimg,false);
+        $this->_gen_pdfname();
+        $this->_move_uppdf();
+        $this->_gen_downloadname();
+        $r = $this->_exec_gs();
+        //$this->_move_uppdf();
+        if(!$r)
+            return $this->downloadfile;
+        return "";
     }
 
 }
