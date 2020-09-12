@@ -4,36 +4,33 @@
 @section("pagedescription",$seo["description"])
 @section("pagekeywords",$seo["keywords"])
 
+
+
 @section("container")
-<!-- formulario de contacto -->
 <div class="card app-card">
     <div class="card-header">
-        <h5 class="card-title mt-2">Formulario de contacto</h5>
+        <h5 class="card-title mt-2">Conversor PDF a JPG</h5>
     </div>
     @verbatim
     <div class="card-body">
-        <form @submit="checkform" id="form-contact" class="row g-3">
-            <div class="col-lg-6 col-sm-12">
-                <label for="name">Nombre *</label>
-                <input type="text" id="name" v-model="name" placeholder="...tu nombre" class="form-control" required="required">
+        <form @submit="on_submit" id="form-convert" class="row g-3">
+            <div class="col-sm-9">
+                <label for="name">PDF *</label>
+                <input type="file" class="form-control" required="required"
+                       accept="application/pdf,application/vnd.ms-excel"
+                       ref="inputfile"
+                       @change="on_change"
+                >
             </div>
-            <div class="col-lg-6 col-sm-12">
-                <label for="email">Email *</label>
-                <input id="email" type="email" v-model="email" placeholder="tu-email@dominio.com" class="form-control" required="required">
-            </div>
-            <div class="col-lg-6 col-sm-12">
-                <label for="subject" class="form-label">Asunto *</label>
-                <input type="text" id="subject" v-model="subject" placeholder="Asunto" class="form-control">
-            </div>
-            <div class="col-lg-12">
-                <label for="message" class="form-label">Mensaje *</label>
-                <textarea id="message" v-model="message" class="form-control"  placeholder="Mensaje" required="required" rows="5"></textarea>
-            </div>
-            <div class="col-lg-12">
-                <button id="btn-contact" class="btn btn-dark" :disabled="issending" >
+            <div class="col-sm-3 m-0 p-0 pt-4">
+                <button id="btn-contact" class="btn btn-dark m-0 mt-3" :disabled="issending" >
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
+            </div>
+            <div v-if="link!=''" class="col-sm-12">
+                <span>Tus imágenes:</span>
+                <a :href="link" target="_blank">Descargar</a>
             </div>
         </form>
     </div>
@@ -41,48 +38,46 @@
 @endverbatim
 <script>
 const app = new Vue({
-    el: "#form-contact",
+    el: "#form-convert",
     data: {
         errors:[],
         csrf: "{{ csrf_token() }}",
         issending: false,
-        btnsend: "Enviar",
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
+        btnsend: "Convertir",
+        inputfile: null,
+        link: "",
     },
     methods:{
         reset(){
-            this.name = ""
-            this.email = ""
-            this.subject = ""
-            this.message = ""
+            this.pdfulpoad = ""
         },
 
+        on_change(){
+            this.link = "",
+            this.inputfile = this.$refs.inputfile || null
+            console.log("files[0]",this.inputfile.files[0])
+        },
 
-        checkform: function(e) {
+        on_submit: function(e) {
             e.preventDefault()
             const self = this
+            if(!this.inputfile.files[0]) return;
 
             this.issending = true
             this.btnsend = "Enviando..."
-            const data = new FormData();
-            data.append("action","contact.email")
-            data.append("_token",this.csrf)
-            data.append("name",this.name)
-            data.append("email",this.email)
-            data.append("subject",this.subject)
-            data.append("message",this.message)
-            //console.log("data pre fetch",data)
-            fetch('/email/contact', {
+            const form = new FormData();
+            form.append("action","pathtojpg.convert")
+            form.append("_token",this.csrf)
+            form.append("pdf",this.inputfile.files[0]);
+
+            fetch('/servicios/pdf-a-jpg/convert', {
                 method: "post",
-                body: data
+                body: form
             })
             .then(response => response.json())
             .then(response => {
                 this.issending = false
-                this.btnsend = "Enviar"
+                this.btnsend = "Enviando ..."
                 console.log("reponse ok",response)
 
                 if(typeof response.error != "undefined"){
@@ -97,6 +92,7 @@ const app = new Vue({
                     title: 'Gracias por contactar conmigo!',
                     html: 'En breves momentos recibirás una copia del mensaje en tu email.',
                 })
+                this.link = response.download
                 self.reset()
             })
             .catch(error => {
@@ -109,13 +105,13 @@ const app = new Vue({
             })
             .finally(()=>{
                 this.issending = false
-                this.btnsend = "Enviar"
+                this.btnsend = "Convertir"
             })
         }
     },//methods
 
     mounted(){
-        document.getElementById("form-contact").reset()
+        document.getElementById("form-convert").reset()
     }
 })
 </script>
