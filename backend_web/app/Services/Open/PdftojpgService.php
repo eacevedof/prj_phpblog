@@ -52,6 +52,7 @@ class PdftojpgService extends BaseService
     {
         $pathpdf = $this->pathdown."/".$this->pdfname;
         $r = move_uploaded_file($this->file["tmp_name"],$pathpdf);
+        sleep(2);
         return $r;
     }
 
@@ -66,7 +67,7 @@ class PdftojpgService extends BaseService
         $pdfname = $this->pdfname;
         $pathimg = $this->pathdown."/".$this->downloadfile;
 
-        $this->logd("pdfname:$pdfname, pathimg:$pathimg");
+        $this->logd("pdfname:$pdfname, pathimg:$pathimg","antes de exec_gs");
 
         //convierte de pdf a imagen
         $cmd = "gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o $pathimg $pdfname";
