@@ -92,9 +92,10 @@ const app = new Vue({
                     icon: 'success',
                     html: `
                     Descarga tus imágenes aqui:
-                    <a class="link-success" target="_blank" href="${this.link}">Descargar</a>
+                    <a class="link-success" target="_blank" href="${response.download}">Descargar</a>
                     `,
                 })
+
                 this.link = response.download
                 this.$refs.inputfile.value = ""
             })

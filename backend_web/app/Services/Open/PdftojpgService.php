@@ -88,7 +88,7 @@ class PdftojpgService extends BaseService
         $this->_gen_downloadname();
         $r = $this->_exec_gs();
         //$this->_move_uppdf();
-        if(!$r) return self::FOLDER_DOWNLOAD."/".$this->downloadfile;
+        if(!$r) return "/".self::FOLDER_DOWNLOAD."/".$this->downloadfile;
         return "";
     }
 
