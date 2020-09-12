@@ -64,13 +64,13 @@ class PdftojpgService extends BaseService
 
     private function _exec_gs()
     {
-        $pdfname = $this->pdfname;
+        $pathpdf = $this->pathdown."/".$this->pdfname;
         $pathimg = $this->pathdown."/".$this->downloadfile;
 
-        $this->logd("pdfname:$pdfname, pathimg:$pathimg","antes de exec_gs");
+        $this->logd("pdfname:$pathpdf, pathimg:$pathimg","antes de exec_gs\n");
 
         //convierte de pdf a imagen
-        $cmd = "gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o $pathimg $pdfname";
+        $cmd = "gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o $pathimg $pathpdf";
 
         $output = []; $status = 0;
         exec($cmd, $output, $status);
