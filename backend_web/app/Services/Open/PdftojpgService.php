@@ -22,14 +22,15 @@ class PdftojpgService extends BaseService
     public function __construct($file)
     {
         $this->file = $file;
-        $this->pathdown = public_path()."/downloads";
+        $this->pathdown = public_path()."/download";
         $this->pdfname = "";
         $this->downloadfile = "";
     }
 
     private function _gen_downloadname()
     {
-        $uuid = printf("uniqid('img_'): %s\r\n", uniqid("img_"));
+        //$uuid = printf("uniqid('img_'): %s\r\n", uniqid("img_"));
+        $uuid = uniqid("img_");
         $imgname = "$uuid.jpg";
         $this->downloadfile = $imgname;
     }

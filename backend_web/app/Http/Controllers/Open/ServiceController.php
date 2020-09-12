@@ -12,7 +12,7 @@ class ServiceController extends BaseController
     //servicios/pdf-a-jpg
     public function pdftojpg()
     {
-        $serv = new PdftojpgService(null);
+        //vista vue
         return view('open.service.pdftojpg',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.pdftojpg"),
@@ -24,7 +24,9 @@ class ServiceController extends BaseController
     //servicios/pdf-a-jpg/convert
     public function pdftojpg_convert(Request $request)
     {
-        $file = $request->file("pdf");
+        $file = [
+            "tmp_name" => $request->file("pdf")->getPathname()
+        ];
         $serv = new PdftojpgService($file);
         return Response()->json(["download"=>$serv->get()]);
     }
