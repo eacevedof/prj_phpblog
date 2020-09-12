@@ -66,8 +66,15 @@ class SeoComponent
         ],
     ];
 
+    private const EMPTY = [
+        "title"=>"",
+        "description"=>"",
+        "keywords" => "",
+        "h1" => ""
+    ];
+
     public static function get_meta($route)
     {
-        return self::$seo[$route] ?? [];
+        return self::$seo[$route] ?? self::EMPTY;
     }
 }

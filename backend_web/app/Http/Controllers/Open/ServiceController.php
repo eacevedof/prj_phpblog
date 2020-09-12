@@ -10,12 +10,12 @@ class ServiceController extends BaseController
     //servicios/pdf-a-jpg
     public function pdf_to_jpg()
     {
-        $serv = new PdftojpgService();
+        //$serv = new PdftojpgService(null);
         return view('open.service.pdftojpg',[
-            "result"      => $serv->get_top09(),
+            "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.pdftojpg"),
             "breadscrumb" => $this->_get_scrumb("open.service.pdftojpg"),
-            "updatedat"   => $serv->get_maxdate(),
+            "catslug"     => "serviios"
         ]);
     }
 }

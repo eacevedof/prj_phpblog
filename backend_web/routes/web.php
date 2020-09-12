@@ -24,7 +24,7 @@ Route::get('/blog/{catslug}','Open\BlogController@category')->name("open.blog.ca
 Route::get('/blog/','Open\BlogController')->name("open.blog.index");
 
 Route::post('/email/contact', "Common\Email\EmailController@contact")->name("common.email.contact");
-Route::post("/servicios/pdf-a-jpg","Open\ServiceControlle@pdf_to_jpg")->name("open.blog.service");
+Route::get("/servicios/pdf-a-jpg","Open\ServiceController@pdf_to_jpg")->name("open.blog.service");
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas
 Auth::routes();
 
