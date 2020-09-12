@@ -14,6 +14,8 @@ use App\Services\BaseService;
 
 class PdftojpgService extends BaseService
 {
+
+    private const FOLDER_DOWNLOAD = "download";
     private $file;
     private $pdfname;
     private $downloadfile;
@@ -22,7 +24,7 @@ class PdftojpgService extends BaseService
     public function __construct($file)
     {
         $this->file = $file;
-        $this->pathdown = public_path()."/download";
+        $this->pathdown = public_path()."/".self::FOLDER_DOWNLOAD;
         $this->pdfname = "";
         $this->downloadfile = "";
     }
@@ -86,8 +88,7 @@ class PdftojpgService extends BaseService
         $this->_gen_downloadname();
         $r = $this->_exec_gs();
         //$this->_move_uppdf();
-        if(!$r)
-            return $this->downloadfile;
+        if(!$r) return self::FOLDER_DOWNLOAD."/".$this->downloadfile;
         return "";
     }
 

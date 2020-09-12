@@ -30,7 +30,9 @@
             </div>
             <div v-if="link!=''" class="col-sm-12">
                 <span>Tus imágenes:</span>
-                <a :href="link" target="_blank">Descargar</a>
+                <a class="link-success" target="_blank"
+                   :href="link"
+                >Descargar</a>
             </div>
         </form>
     </div>
@@ -60,7 +62,6 @@ const app = new Vue({
 
         on_submit: function(e) {
             e.preventDefault()
-            const self = this
             if(!this.inputfile.files[0]) return;
 
             this.issending = true
@@ -84,23 +85,25 @@ const app = new Vue({
                     return Swal.fire({
                         icon: 'warning',
                         title: 'Proceso incompleto',
-                        html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias. <br/>'+response.error,
+                        html: 'No se ha podido procesar esta operación. Por favor inténtalo más tarde. Disculpa las molestias. <br/>'+response.error,
                     })
                 }
                 Swal.fire({
                     icon: 'success',
-                    title: 'Gracias por contactar conmigo!',
-                    html: 'En breves momentos recibirás una copia del mensaje en tu email.',
+                    html: `
+                    Descarga tus imágenes aqui:
+                    <a class="link-success" target="_blank" href="${this.link}">Descargar</a>
+                    `,
                 })
                 this.link = response.download
-                self.reset()
+                this.$refs.inputfile.value = ""
             })
             .catch(error => {
                 console.log("catch.error",error)
                 Swal.fire({
                     icon: 'error',
-                    title: 'Vaya! Algo ha ido mal (c)',
-                    html: 'No se ha podido procesar tu mensaje. Por favor inténtalo más tarde. Disculpa las molestias. \n'+error,
+                    title: 'Vaya! Algo ha ido mal',
+                    html: 'No se ha podido procesar esta operación. Por favor inténtalo más tarde. Disculpa las molestias. \n'+error,
                 })
             })
             .finally(()=>{
