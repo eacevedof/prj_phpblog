@@ -3156,14 +3156,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context5.prev = 23;
                 self.issending = false;
                 self.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-                return _context5.abrupt("return", "end");
+                return _context5.finish(23);
 
-              case 28:
+              case 27:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[6, 20, 23, 28]]);
+        }, _callee5, null, [[6, 20, 23, 27]]);
       }))();
     },
     //upload by url
@@ -3227,14 +3227,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context6.prev = 20;
                 self.issending = false;
                 self.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-                return _context6.abrupt("return", "end");
+                return _context6.finish(20);
 
-              case 25:
+              case 24:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[3, 17, 20, 25]]);
+        }, _callee6, null, [[3, 17, 20, 24]]);
       }))();
     },
     //upload files
@@ -3242,7 +3242,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this7 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee7() {
-        var r1, r2;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee7$(_context7) {
           while (1) {
             switch (_context7.prev = _context7.next) {
@@ -3251,16 +3250,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this7.upload_byurl();
 
               case 2:
-                r1 = _context7.sent;
-                _context7.next = 5;
+                _context7.next = 4;
                 return _this7.upload_files();
 
-              case 5:
-                r2 = _context7.sent;
-                _context7.next = 8;
+              case 4:
+                _context7.next = 6;
                 return _this7.load_rows();
 
-              case 8:
+              case 6:
               case "end":
                 return _context7.stop();
             }
@@ -42895,7 +42892,7 @@ var render = function() {
                 ) {
                   return null
                 }
-                return _vm.upload_byurl()
+                return _vm.on_upload()
               },
               input: function($event) {
                 if ($event.target.composing) {
