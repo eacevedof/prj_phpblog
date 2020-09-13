@@ -25,7 +25,7 @@ Route::get('/blog/','Open\BlogController')->name("open.blog.index");
 
 Route::post('/email/contact', "Common\Email\EmailController@contact")->name("common.email.contact");
 Route::post("/servicios/pdf-a-jpg/convert","Open\ServiceController@pdftojpg_convert")->name("open.blog.service.pdftojpgconvert");
-Route::get("/servicios/pdf-a-jpg","Open\ServiceController@pdftojpg")->name("open.blog.service.pdftojpg");
+Route::get("/servicios/convertir-pdf-a-jpg","Open\ServiceController@pdftojpg")->name("open.blog.service.pdftojpg");
 
 
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas

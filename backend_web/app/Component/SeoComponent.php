@@ -58,6 +58,13 @@ class SeoComponent
             "h1" => ""
         ],
 
+        "open.service.pdftojpg" => [
+            "title"=>"Servicio online para convertir pdf a jpg",
+            "description"=>"Convierte un documento PDF y sus páginas en imágenes",
+            "keywords" => "conversor, pdf, jpg",
+            "h1" => "Servicio online. Convierte pdf a jpg"
+        ],
+
         "xxxx"=>[
             "title"=>"",
             "description"=>"",

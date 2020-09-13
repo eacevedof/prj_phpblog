@@ -4,12 +4,10 @@
 @section("pagedescription",$seo["description"])
 @section("pagekeywords",$seo["keywords"])
 
-
-
 @section("container")
 <div class="card app-card">
     <div class="card-header">
-        <h5 class="card-title mt-2">Conversor PDF a JPG</h5>
+        <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
     </div>
     @verbatim
     <div class="card-body">

@@ -80,6 +80,20 @@ class PdftojpgService extends BaseService
         return $status;
     }
 
+    private function _exec_gsmulti()
+    {
+        /*
+        gs -dBATCH ^
+            -dNOPAUSE ^
+            -dSAFER ^
+            -sDEVICE=jpeg ^
+            -dJPEGQ=95 ^
+            -r600x600 ^
+            -sOutputFile=c:/path/to/jpeg-dir/pdffile-%03d.jpeg ^
+            c:/path/to/pdffile.pdf
+        */
+    }
+
     public function get()
     {
         $this->_mkdir_download();
