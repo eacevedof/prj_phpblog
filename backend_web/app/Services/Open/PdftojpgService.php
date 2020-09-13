@@ -20,6 +20,7 @@ class PdftojpgService extends BaseService
     private $imgpattern = "";
     private $foldername = "";
     private $pathdown = "";
+    private $url = "";
 
     public function __construct($file)
     {
@@ -87,8 +88,8 @@ class PdftojpgService extends BaseService
 
     private function _remove_pdf()
     {
-        $pathpdf = $this->pathdown."/".$this->pdfname;
-        unlink($pathpdf);
+        $pathpdf = "$this->pathdown/$this->pdfname";
+        if(is_file($pathpdf)) unlink($pathpdf);
     }
 
     private function _get_gs_multipage($pathpdf, $pathjpg)
@@ -115,6 +116,13 @@ class PdftojpgService extends BaseService
         return $r["status"];
     }
 
+    private function _get_files()
+    {
+        $pathdir = "$this->pathdown/$this->foldername";
+        $files = scandir($pathdir);
+        return array_diff($files, [".", ".."]);
+    }
+
     private function _exec_gs()
     {
         $pathpdf = $this->pathdown."/".$this->pdfname;
@@ -134,7 +142,7 @@ class PdftojpgService extends BaseService
         return $r["status"];
     }
 
-    public function get()
+    private function _get_url()
     {
         $this->_mkdir_download();
         $this->_gen_foldername();
@@ -146,14 +154,23 @@ class PdftojpgService extends BaseService
         $this->_move_uppdf();
 
         //genera las imagenes y el zip
-        $r = $this->_exec_gs();
+        $this->_exec_gs();
+        $files = $this->_get_files();
+        $this->logd($files,"files in folder");
+        if($files) return "";
+
+        sleep(2);
         $this->_remove_pdf();
         //esto puede borrar antes de que el zip este totalmente formado
-        sleep(2);
         $this->_remove_zipfolder();
 
-        if(!$r) return "/".self::FOLDER_DOWNLOAD."/".$this->foldername.".zip";
-        return "";
+        return "/".self::FOLDER_DOWNLOAD."/".$this->foldername.".zip";
+    }// _get_url
+
+    public function get()
+    {
+        $url = $this->_get_url();
+        return $url;
     }
 
 }
