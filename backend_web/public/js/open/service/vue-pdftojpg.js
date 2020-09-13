@@ -80,7 +80,14 @@ const app = new Vue({
                 })
 
                 this.link = response.download
+
+                //reset
                 this.$refs.inputfile.value = ""
+                this.inputfile = null
+                this.filessize = 0
+                this.isoversized = false
+                this.overbytes = 0
+
             })
             .catch(error => {
                 console.log("catch.error",error)
