@@ -10,7 +10,7 @@ class InfrastructureController extends BaseController
     {
         try {
             $r = InfrastructureService::get_maxsize_bytes();
-            return Response()->json(["data"=>$r],200);
+            return Response()->json(["data"=>["maxuploadsize"=>$r]],200);
         }
         catch (\Exception $e)
         {

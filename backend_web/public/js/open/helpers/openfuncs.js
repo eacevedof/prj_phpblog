@@ -1,3 +1,4 @@
+//openfuncs
 const funcs = {
 
     get_csrftoken: () => document.querySelector('#meta-csrf-token').getAttribute('content'),
@@ -47,18 +48,6 @@ const funcs = {
         return str;
     },
 
-    get_uploadtoken: () => {
-        const input = document.getElementById("upload-token");
-        if(input) return input.value
-        return ""
-    },
-
-    get_uploadomain: () => {
-        const input = document.getElementById("upload-domain");
-        if(input) return input.value
-        return ""
-    },
-
     to_clipboard: str => {
         const txa = document.createElement('textarea');
         txa.value = str;
@@ -71,3 +60,4 @@ const funcs = {
 }
 
 export default funcs
+//openfuncs
