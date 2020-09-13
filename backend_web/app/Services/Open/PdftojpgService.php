@@ -80,7 +80,7 @@ class PdftojpgService extends BaseService
         return $status;
     }
 
-    private function _exec_gsmulti()
+    private function _exec_gs_multipage()
     {
         /*
         gs -dBATCH ^
@@ -89,8 +89,8 @@ class PdftojpgService extends BaseService
             -sDEVICE=jpeg ^
             -dJPEGQ=95 ^
             -r600x600 ^
-            -sOutputFile=c:/path/to/jpeg-dir/pdffile-%03d.jpeg ^
-            c:/path/to/pdffile.pdf
+            -sOutputFile=./pdffile-%03d.jpeg ^
+            ./cv.pdf
         */
     }
 
