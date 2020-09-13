@@ -27,6 +27,7 @@ class ServiceController extends BaseController
             "tmp_name" => $request->file("pdf")->getPathname()
         ];
         $urldownload = (new PdftojpgService($file))->get();
+        //$urldownload = "";
         $r["download"] = $urldownload;
         if(!$urldownload) $r["error"] = "El archivo no se ha podido convertir";
         return Response()->json($r);

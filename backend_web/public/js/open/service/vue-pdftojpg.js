@@ -68,9 +68,11 @@ const app = new Vue({
                     return Swal.fire({
                         icon: 'warning',
                         title: 'Proceso incompleto',
-                        html: 'No se ha podido procesar esta operación. Por favor inténtalo más tarde. Disculpa las molestias. <br/>'+response.error,
+                        html: `Ha ocurrido un error en el proceso.<br/> Motivo: <br/>
+                               <b>${response.error}</b>`
                     })
                 }
+
                 Swal.fire({
                     icon: 'success',
                     html: `
@@ -94,7 +96,10 @@ const app = new Vue({
                 Swal.fire({
                     icon: 'error',
                     title: 'Vaya! Algo ha ido mal',
-                    html: 'No se ha podido procesar esta operación. Por favor inténtalo más tarde. Disculpa las molestias. \n'+error,
+                    html: `
+                    No se ha podido ejecutar esta operación.<br/>
+                    Error: <b>${error}</b>
+                    `,
                 })
             })
             .finally(()=>{
