@@ -24,9 +24,9 @@ Route::get('/blog/{catslug}','Open\BlogController@category')->name("open.blog.ca
 Route::get('/blog/','Open\BlogController')->name("open.blog.index");
 
 Route::post('/email/contact', "Common\Email\EmailController@contact")->name("common.email.contact");
-Route::post("/services/conversion/pdf-to-jpg","Open\ServiceController@pdftojpg_convert")->name("open.blog.service.pdftojpgconvert");
-Route::get("/servicios/convertir-pdf-a-jpg","Open\ServiceController@pdftojpg")->name("open.blog.service.pdftojpg");
-Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.blog.service.getmaxuploadsize");
+Route::post("/services/conversion/pdf-to-jpg","Open\ServiceController@pdftojpg_convert")->name("open.service.pdftojpgconvert");
+Route::get("/servicios/convertir-pdf-a-jpg","Open\ServiceController@pdftojpg")->name("open.service.pdftojpg");
+Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");
 
 
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas

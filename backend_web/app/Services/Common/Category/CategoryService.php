@@ -33,9 +33,17 @@ class CategoryService extends BaseService
             ->orderBy("order_by")
             ->orderBy("description")
             ->get();
+        return $r;
+    }
 
-        $this->log($this->qb->toSql(),"get_submenu_blog");
-        $this->log($this->qb->getBindings(), "get_blogsmenu.bindings");
+    public function get_submenu_service()
+    {
+        $r = $this->qb->whereNull("delete_date")
+            ->where("is_enabled","=","1")
+            ->where("type","=","submenu-service")
+            ->orderBy("order_by")
+            ->orderBy("description")
+            ->get();
         return $r;
     }
 
@@ -47,9 +55,6 @@ class CategoryService extends BaseService
             ->orderBy("order_by")
             ->orderBy("description")
             ->get();
-
-        $this->log($this->qb->toSql(),"get_submenu_blog");
-        $this->log($this->qb->getBindings(), "get_blogsmenu.bindings");
         return $r;
     }
 
@@ -62,8 +67,8 @@ class CategoryService extends BaseService
             //->orderBy("description")
             ->get();
 
-        $this->log($this->qb->toSql(),"get_by_id");
-        $this->log($this->qb->getBindings(), "get_by_id.bindings");
+        //$this->log($this->qb->toSql(),"get_by_id");
+        //$this->log($this->qb->getBindings(), "get_by_id.bindings");
         return $r;
     }
 }

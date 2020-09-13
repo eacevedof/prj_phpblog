@@ -21,6 +21,7 @@
                 </li>
                 -->
                 @include("open.elements.submenublog")
+                @include("open.elements.submenuservice")
                 <li class="nav-item">
                     <a class="nav-link {{ $catslug=="contact" ? "active" : "" }}" href="{{ route('open.home.contact') }}">Contacto</a>
                 </li>
