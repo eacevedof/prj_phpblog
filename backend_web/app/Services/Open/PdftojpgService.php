@@ -110,7 +110,7 @@ class PdftojpgService extends BaseService
 
     private function _exec_zip($pathfolder, $pathzip)
     {
-        $cmd = "zip -r {$pathzip} {$pathfolder}";
+        $cmd = "zip -r {$pathzip} {$pathfolder}/*";
         $r = $this->_exec($cmd);
         return $r["status"];
     }
