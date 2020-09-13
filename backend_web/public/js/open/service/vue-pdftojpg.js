@@ -50,7 +50,7 @@ const app = new Vue({
             if(!this.inputfile.files[0]) return
 
             this.issending = true
-            this.btnsend = "Enviando..."
+            this.btnsend = "Procesando..."
             const form = new FormData();
             form.append("action","pathtojpg.convert")
             form.append("_token",this.csrf)
@@ -62,8 +62,6 @@ const app = new Vue({
             })
             .then(response => response.json())
             .then(response => {
-                this.issending = false
-                this.btnsend = "Enviando ..."
                 console.log("reponse ok",response)
 
                 if(typeof response.error != "undefined"){
