@@ -64,9 +64,9 @@ const app = new Vue({
                 Swal.fire({
                     icon: 'success',
                     html: `
-                Descarga tus imágenes aqui:
-                <a class="link-success" target="_blank" href="${response.download}">Descargar</a>
-                `,
+                    Descarga tus imágenes aqui:
+                    <a class="link-success" target="_blank" href="${response.download}">Descargar</a>
+                    `,
                 })
 
                 this.link = response.download
