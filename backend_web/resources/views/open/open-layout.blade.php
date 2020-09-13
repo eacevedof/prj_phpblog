@@ -4,6 +4,7 @@
     <title>@yield("pagetitle")</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta id="meta-csrf-token" name="csrf-token" content="{{ csrf_token() }}">
     <meta name="description" content="@yield("pagedescription")">
     <meta name="keywords" content="@yield("pagekeywords")">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -46,7 +47,6 @@
     <link href="{{ asset('assets/enlighter/enlighterjs.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/open.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="{{ asset('js/open/open.js') }}" type="module"></script>
 </head>
 <body>
 @include("open.elements.navbar")
