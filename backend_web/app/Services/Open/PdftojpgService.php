@@ -34,6 +34,16 @@ class PdftojpgService extends BaseService
         if(!is_dir($this->pathdown)) mkdir($this->pathdown);
     }
 
+    private function _exec($cmd)
+    {
+        $output = []; $status = 0;
+        exec($cmd, $output, $status);
+        return [
+          "status" => $status,
+          "output" => $output,
+        ];
+    }
+
     private function _gen_downloadname()
     {
         $now = date("YmdHis");
@@ -73,25 +83,38 @@ class PdftojpgService extends BaseService
 
         //convierte de pdf a imagen
         $cmd = "gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o $pathimg $pathpdf";
-
-        $output = []; $status = 0;
-        exec($cmd, $output, $status);
-        $this->logd($output, "pdfjpg exec status $status:");
-        return $status;
+        $r = $this->_exec($cmd);
+        $this->logd($r, "cmd: $cmd");
+        return $r["status"];
     }
 
-    private function _exec_gs_multipage()
+    private function _get_gs_multipage($pathpdf, $pathjpg)
     {
-        /*
+        ///pdffile-%03d.jpeg patrón con páginas
+        $cmd = "
         gs -dBATCH \
             -dNOPAUSE \
             -dSAFER \
             -sDEVICE=jpeg \
             -dJPEGQ=95 \
             -r600x600 \
-            -sOutputFile=./pdffile-%03d.jpeg \
-            ./cv.pdf
-        */
+            -sOutputFile=$pathjpg \
+            $pathpdf
+        ";
+    }
+
+    private function _exec_zip($pathfolder, $pathzip)
+    {
+        $cmd = "zip -r {$pathzip} {$pathfolder}";
+        $r = $this->_exec($cmd);
+        return $r["status"];
+    }
+
+    private function _exec_gs_multipage()
+    {
+        $cmd = $this->_get_gs_multipage();
+        $r = $this->_exec($cmd);
+        return $r["status"];
     }
 
     public function get()
