@@ -157,7 +157,7 @@ class PdftojpgService extends BaseService
         $this->_exec_gs();
         $files = $this->_get_files();
         $this->logd($files,"files in folder");
-        if($files) return "";
+        if(!$files) return "";
 
         sleep(2);
         $this->_remove_pdf();
