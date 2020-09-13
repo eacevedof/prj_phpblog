@@ -60,7 +60,7 @@ class SeoComponent
 
         "open.service.pdftojpg" => [
             "title"=>"Servicio online para convertir pdf a jpg",
-            "description"=>"Convierte un documento PDF y sus páginas en imágenes",
+            "description"=>"Convierte las páginas de un documento PDF en imágenes separadas .jpg",
             "keywords" => "conversor, pdf, jpg",
             "h1" => "Servicio online. Convierte pdf a jpg"
         ],
