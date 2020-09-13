@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Open;
 use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
 use App\Services\Open\PdftojpgService;
-use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
 class ServiceController extends BaseController

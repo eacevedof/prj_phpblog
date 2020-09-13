@@ -15,7 +15,7 @@
             <div class="col-sm-9">
                 <label for="name">PDF *</label>
                 <input type="file" class="form-control" required="required"
-                       accept="application/pdf,application/vnd.ms-excel"
+                       accept="application/pdf"
                        ref="inputfile"
                        @change="on_change"
                 >
@@ -25,6 +25,11 @@
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
+            </div>
+            <div class="row">
+                <small class="badge bg-info text-white">max upload: {{maxuploadsize.toLocaleString("en")}}</small>
+                <small v-if="filessize>0" class="badge bg-warning">selected: {{filessize.toLocaleString("en")}}</small>
+                <small v-if="isoversized" class="badge bg-danger text-white">oversized: {{overbytes.toLocaleString("en")}}</small>
             </div>
             <div v-if="link!=''" class="col-sm-12">
                 <span>Tus imágenes:</span>
@@ -36,16 +41,23 @@
     </div>
 </div>
 @endverbatim
-<script>
+<script type="module">
+import open from "/js/open/open.js"
+
+
 const app = new Vue({
     el: "#form-convert",
     data: {
-        errors:[],
         csrf: "{{ csrf_token() }}",
         issending: false,
         btnsend: "Convertir",
         inputfile: null,
         link: "",
+
+        maxuploadsize: 0,
+        isoversized: false,
+        overbytes: 0,
+        filessize: 0,
     },
     methods:{
         reset(){
@@ -69,7 +81,7 @@ const app = new Vue({
             form.append("_token",this.csrf)
             form.append("pdf",this.inputfile.files[0]);
 
-            fetch('/servicios/pdf-a-jpg/convert', {
+            fetch('/services/conversion/pdf-to-jpg', {
                 method: "post",
                 body: form
             })
@@ -109,11 +121,12 @@ const app = new Vue({
                 this.issending = false
                 this.btnsend = "Convertir"
             })
-        }
+        }//on_submit
     },//methods
 
     mounted(){
         document.getElementById("form-convert").reset()
+        //get maxsize
     }
 })
 </script>

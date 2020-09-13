@@ -46,6 +46,7 @@
     <link href="{{ asset('assets/enlighter/enlighterjs.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/open.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="{{ asset('js/open/open.js') }}" type="module"></script>
 </head>
 <body>
 @include("open.elements.navbar")
