@@ -45,7 +45,8 @@
             "database/factories"
         ],
         "files": [
-            "app/functions/date.php"
+            "app/functions/date.php",
+            "app/functions/infrastructure.php"
         ]
     },
     "autoload-dev": {

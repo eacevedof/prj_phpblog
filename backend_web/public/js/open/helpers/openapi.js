@@ -7,6 +7,7 @@ const openapi = {
             const url = "/infrastructure/get-max-upload-size"
             const prom = await fetch(url)
             const r = (await prom.json()).data.maxuploadsize
+            //console.log("r",r)
             return r
         }
         catch (e) {

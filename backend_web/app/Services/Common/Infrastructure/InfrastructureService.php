@@ -20,6 +20,6 @@ class InfrastructureService extends BaseService
 
     public static function get_maxsize_bytes(){
         $size = self::get_maxsize()."MB";
-        return get_in_bytes($size);
+        return \get_in_bytes($size);
     }
 }
