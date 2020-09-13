@@ -21,15 +21,15 @@
                 >
             </div>
             <div class="col-sm-3 m-0 p-0 pt-4">
-                <button id="btn-contact" class="btn btn-dark m-0 mt-3" :disabled="issending" >
+                <button id="btn-contact" class="btn btn-dark m-0 mt-3" :disabled="issending || isoversized" >
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
-            <div class="row">
-                <small class="badge bg-info text-white">max upload: {{maxuploadsize.toLocaleString("en")}}</small>
-                <small v-if="filessize>0" class="badge bg-warning">selected: {{filessize.toLocaleString("en")}}</small>
-                <small v-if="isoversized" class="badge bg-danger text-white">oversized: {{overbytes.toLocaleString("en")}}</small>
+            <div class="d-flex m-0 mt-1 pl-3" style="flex-wrap: wrap;">
+                <small class="badge bg-info text-white">Tamaño máximo: {{maxuploadsize.toLocaleString("en")}}</small>
+                <small v-if="filessize>0" class="badge bg-warning">Tamaño archivo: {{filessize.toLocaleString("en")}}</small>
+                <small v-if="isoversized" class="badge bg-danger text-white">Exceso: {{overbytes.toLocaleString("en")}}</small>
             </div>
             <div v-if="link!=''" class="col-sm-12">
                 <span>Tus imágenes:</span>

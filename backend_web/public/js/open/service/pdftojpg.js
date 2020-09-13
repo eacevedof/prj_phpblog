@@ -10,10 +10,11 @@ const app = new Vue({
         inputfile: null,
         link: "",
 
+        filessize: 0,
         maxuploadsize: 0,
         isoversized: false,
         overbytes: 0,
-        filessize: 0,
+
     },
 
     async mounted(){
@@ -30,6 +31,12 @@ const app = new Vue({
         on_change(){
             this.link = ""
             this.inputfile = this.$refs.inputfile || null
+            this.filessize = this.inputfile.files[0].size || 0
+            const overbytes = this.filessize - this.maxuploadsize
+            if(overbytes>0){
+                this.isoversized = true
+                this.overbytes = overbytes
+            }
             console.log("files[0]",this.inputfile.files[0])
         },
 
