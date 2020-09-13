@@ -5,7 +5,7 @@ options:
   compose-file-path: "docker-compose.macos.yml"
 
 syncs:
-  sf-eduardoaf-be-sync:
+  lv-eduardoaf-be-sync:
     notify_terminal: true
     src: "."
     sync_strategy: "native_osx"

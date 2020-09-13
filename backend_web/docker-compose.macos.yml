@@ -1,8 +1,8 @@
 version: '3.5'
 
 services:
-  sf-eduardoaf-web:
-    container_name: sf-eduardoaf-web
+  lv-eduardoaf-web:
+    container_name: lv-eduardoaf-web
     build:
       # apunta al Dockerfile
       context: ./docker/nginx
@@ -13,12 +13,12 @@ services:
     volumes:
       - ./public:/appdata/www/public
     depends_on:
-      - sf-eduardoaf-be
+      - lv-eduardoaf-be
     networks:
-      - sf-eduardoaf-net
+      - lv-eduardoaf-net
 
-  sf-eduardoaf-be:
-    container_name: sf-eduardoaf-be
+  lv-eduardoaf-be:
+    container_name: lv-eduardoaf-be
     build:
       context: docker/php
       args:
@@ -30,19 +30,19 @@ services:
       XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9005
     volumes:
       # nocopy evita hacer la copia del contenedor al host (nuestra maquina)
-      - sf-eduardoaf-be-sync:/appdata/www:nocopy
+      - lv-eduardoaf-be-sync:/appdata/www:nocopy
       - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ~/.ssh/id_rsa:/home/appuser/.ssh/id_rsa
 
     networks:
-      - sf-eduardoaf-net
+      - lv-eduardoaf-net
       - mariadb-univ_net
 volumes:
-  sf-eduardoaf-be-sync:
+  lv-eduardoaf-be-sync:
     external: true
 
 networks:
-  sf-eduardoaf-net:
+  lv-eduardoaf-net:
   mariadb-univ_net:
     external: true
 

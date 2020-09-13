@@ -2,7 +2,7 @@
 - En este punto ya se ejecuta laravel en docker:
     - [http://localhost:400/](http://localhost:400/)
 - Logs:
-    - docker logs sf-eduardoaf-be --tail 10
+    - docker logs lv-eduardoaf-be --tail 10
 
 ### To-Do:
 - Cambiar make be-logs ya que no exist var/log/dev.log

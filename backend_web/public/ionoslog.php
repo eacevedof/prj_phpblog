@@ -21,7 +21,7 @@ function ionos_errorhandler ($errno, $errmsg, $filename, $linenum,  $vars)
     $errlevel = $errortype[$errno];
 
     //Write error to log file (CSV format)
-    $errfile = fopen("ionoslog.csv","a");
+    $errfile = fopen("../logs/ionoslog.csv","a");
     fputs($errfile,"$time,$filename: $linenum,($errlevel) $errmsg\r\n");
     fclose($errfile);
 
