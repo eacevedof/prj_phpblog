@@ -18,7 +18,8 @@ class PdftojpgService extends BaseService
     private const FOLDER_DOWNLOAD = "download";
     private $file;
     private $pdfname;
-    private $downloadfile;
+    private $imgpattern;
+    private $foldername;
     private $pathdown;
 
     public function __construct($file)
@@ -26,12 +27,19 @@ class PdftojpgService extends BaseService
         $this->file = $file;
         $this->pathdown = public_path()."/".self::FOLDER_DOWNLOAD;
         $this->pdfname = "";
-        $this->downloadfile = "";
+        $this->imgpattern = "";
+        $this->foldername = "";
     }
 
     private function _mkdir_download()
     {
         if(!is_dir($this->pathdown)) mkdir($this->pathdown);
+    }
+
+    private function _mkdir_zipfolder()
+    {
+        $pathfolder = $this->pathdown."/$this->foldername";
+        mkdir($pathfolder);
     }
 
     private function _exec($cmd)
@@ -44,12 +52,17 @@ class PdftojpgService extends BaseService
         ];
     }
 
-    private function _gen_downloadname()
+    private function _gen_foldername()
     {
         $now = date("YmdHis");
         $uuid = uniqid();
-        $imgname = "$now-img-$uuid.jpg";
-        $this->downloadfile = $imgname;
+        $this->foldername = "$now-$uuid";
+    }
+
+    private function _gen_imgpattern()
+    {
+        $uuid = uniqid();
+        $this->imgpattern = "img-$uuid-%03d.jpg";
     }
 
     private function _gen_pdfname()
@@ -64,7 +77,6 @@ class PdftojpgService extends BaseService
     {
         $pathpdf = $this->pathdown."/".$this->pdfname;
         $r = move_uploaded_file($this->file["tmp_name"],$pathpdf);
-        //sleep(2);
         return $r;
     }
 
@@ -77,12 +89,11 @@ class PdftojpgService extends BaseService
     private function _exec_gs()
     {
         $pathpdf = $this->pathdown."/".$this->pdfname;
-        $pathimg = $this->pathdown."/".$this->downloadfile;
+        $pathimg = $this->pathdown."/$this->foldername/".$this->imgpattern;
 
         $this->logd("pdfname:$pathpdf, pathimg:$pathimg","antes de exec_gs\n");
 
-        //convierte de pdf a imagen
-        $cmd = "gs -sDEVICE=png16m -dTextAlphaBits=4 -r300 -o $pathimg $pathpdf";
+        $cmd = $this->_get_gs_multipage($pathpdf, $pathimg);
         $r = $this->_exec($cmd);
         $this->logd($r, "cmd: $cmd");
         return $r["status"];
@@ -120,12 +131,17 @@ class PdftojpgService extends BaseService
     public function get()
     {
         $this->_mkdir_download();
+        $this->_gen_foldername();
+        $this->_mkdir_zipfolder();
         $this->_gen_pdfname();
+        $this->_gen_imgpattern();
+
+        //se guarda el pdf con uuid en downloads
         $this->_move_uppdf();
-        $this->_gen_downloadname();
+
         $r = $this->_exec_gs();
         $this->_remove_pdf();
-        if(!$r) return "/".self::FOLDER_DOWNLOAD."/".$this->downloadfile;
+        if(!$r) return "/".self::FOLDER_DOWNLOAD."/".$this->imgpattern;
         return "";
     }
 
