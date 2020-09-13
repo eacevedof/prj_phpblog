@@ -47,6 +47,7 @@ const app = new Vue({
 
         on_submit: function(e) {
             e.preventDefault()
+            if(!this.inputfile) return
             if(!this.inputfile.files[0]) return
 
             this.issending = true

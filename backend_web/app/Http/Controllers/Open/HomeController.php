@@ -7,9 +7,6 @@ use App\Services\Restrict\Post\PostIndexService;
 
 class HomeController extends BaseController
 {
-    /**
-     * @return View
-     */
     public function __invoke()
     {
         $serv = new PostIndexService();
@@ -19,6 +16,7 @@ class HomeController extends BaseController
             "breadscrumb" => $this->_get_scrumb("open.home.index"),
             "updatedat"   => $serv->get_maxdate(),
             "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "home",
         ]);
     }

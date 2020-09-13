@@ -19,6 +19,7 @@ class BlogController extends BaseController
             "seo"         => SeoComponent::get_meta("open.blog.index"),
             "breadscrumb" => $this->_get_scrumb("open.blog.index"),
             "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "blog",
         ]);
     }
@@ -34,6 +35,7 @@ class BlogController extends BaseController
             "seo"         => SeoComponent::get_meta("open.blog.category.{$catslug}"),
             "breadscrumb" => $this->_get_scrumb("open.blog.category", $repconfig),
             "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "blog",
             "category"    => $category->description,
         ]);
@@ -62,6 +64,7 @@ class BlogController extends BaseController
             "seo"         => $seo,
             "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
             "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "blog",
         ]);
     }
@@ -91,6 +94,7 @@ class BlogController extends BaseController
             "seo"         => $seo,
             "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
             "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "blog",
             "isdraft"     => true,
         ]);

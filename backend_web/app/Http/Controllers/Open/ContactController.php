@@ -17,6 +17,7 @@ class ContactController extends BaseController
             "seo"         => SeoComponent::get_meta("open.home.contact"),
             "breadscrumb" => $this->_get_scrumb("open.home.contact"),
             "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "contact",
         ]);
     }
