@@ -67,8 +67,7 @@ class PdftojpgService extends BaseService
 
     private function _gen_imgpattern()
     {
-        $uuid = uniqid();
-        $this->imgpattern = "img-$uuid-%03d.jpg";
+        $this->imgpattern = "img-%03d.jpg";
     }
 
     private function _gen_pdfname()
@@ -108,7 +107,7 @@ class PdftojpgService extends BaseService
         return $cmd;
     }
 
-    private function _exec_zip($pathfolder, $pathzip)
+    private function _exec_zip()
     {
         //$cmd = "zip -r {$pathzip} {$pathfolder}/*";
         $cmd = "cd $this->pathdown; zip -r {$this->foldername}.zip {$this->foldername}";
@@ -127,7 +126,7 @@ class PdftojpgService extends BaseService
         $r = $this->_exec($cmd);
         if(!$r["status"]) {
             $pathfolder = "$this->pathdown/$this->foldername";
-            $rz = $this->_exec_zip($pathfolder,"$pathfolder.zip");
+            $rz = $this->_exec_zip();
             $this->logd($rz, "exec_zip: $pathfolder to $pathfolder.zip");
         }
 
