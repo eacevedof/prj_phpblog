@@ -34,13 +34,13 @@ class PdftojpgService extends BaseService
 
     private function _mkdir_zipfolder()
     {
-        $pathfolder = $this->pathdown."/$this->foldername";
+        $pathfolder = "$this->pathdown/$this->foldername";
         mkdir($pathfolder);
     }
 
     private function _remove_zipfolder()
     {
-        $pathfolder = $this->pathdown."/$this->foldername";
+        $pathfolder = "$this->pathdown/$this->foldername";
         if(is_dir($pathfolder)) rmdir($pathfolder);
     }
 
@@ -77,7 +77,7 @@ class PdftojpgService extends BaseService
 
     private function _move_uppdf()
     {
-        $pathpdf = $this->pathdown."/".$this->pdfname;
+        $pathpdf = "$this->pathdown/$this->pdfname";
         $r = move_uploaded_file($this->file["tmp_name"],$pathpdf);
         return $r;
     }
