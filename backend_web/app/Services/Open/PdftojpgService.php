@@ -14,21 +14,17 @@ use App\Services\BaseService;
 
 class PdftojpgService extends BaseService
 {
-
     private const FOLDER_DOWNLOAD = "download";
     private $file;
-    private $pdfname;
-    private $imgpattern;
-    private $foldername;
-    private $pathdown;
+    private $pdfname = "";
+    private $imgpattern = "";
+    private $foldername = "";
+    private $pathdown = "";
 
     public function __construct($file)
     {
         $this->file = $file;
         $this->pathdown = public_path()."/".self::FOLDER_DOWNLOAD;
-        $this->pdfname = "";
-        $this->imgpattern = "";
-        $this->foldername = "";
     }
 
     private function _mkdir_download()
@@ -40,6 +36,12 @@ class PdftojpgService extends BaseService
     {
         $pathfolder = $this->pathdown."/$this->foldername";
         mkdir($pathfolder);
+    }
+
+    private function _remove_zipfolder()
+    {
+        $pathfolder = $this->pathdown."/$this->foldername";
+        rmdir($pathfolder);
     }
 
     private function _exec($cmd)
@@ -86,19 +88,6 @@ class PdftojpgService extends BaseService
         unlink($pathpdf);
     }
 
-    private function _exec_gs()
-    {
-        $pathpdf = $this->pathdown."/".$this->pdfname;
-        $pathimg = $this->pathdown."/$this->foldername/".$this->imgpattern;
-
-        $this->logd("pdfname:$pathpdf, pathimg:$pathimg","antes de exec_gs\n");
-
-        $cmd = $this->_get_gs_multipage($pathpdf, $pathimg);
-        $r = $this->_exec($cmd);
-        $this->logd($r, "cmd: $cmd");
-        return $r["status"];
-    }
-
     private function _get_gs_multipage($pathpdf, $pathjpg)
     {
         ///pdffile-%03d.jpeg patrón con páginas
@@ -121,10 +110,22 @@ class PdftojpgService extends BaseService
         return $r["status"];
     }
 
-    private function _exec_gs_multipage()
+    private function _exec_gs()
     {
-        $cmd = $this->_get_gs_multipage();
+        $pathpdf = $this->pathdown."/".$this->pdfname;
+        $pathimg = $this->pathdown."/$this->foldername/".$this->imgpattern;
+
+        $this->logd("pdfname:$pathpdf, pathimg:$pathimg","antes de exec_gs\n");
+
+        $cmd = $this->_get_gs_multipage($pathpdf, $pathimg);
         $r = $this->_exec($cmd);
+        if(!$r["status"]) {
+            $pathfolder = "$this->pathdown/$this->foldername";
+            $rz = $this->_exec_zip($pathfolder,"$pathfolder.zip");
+            $this->logd($rz, "exec_zip: $pathfolder to $pathfolder.zip");
+        }
+
+        $this->logd($r, "cmd: $cmd");
         return $r["status"];
     }
 
@@ -139,9 +140,11 @@ class PdftojpgService extends BaseService
         //se guarda el pdf con uuid en downloads
         $this->_move_uppdf();
 
+        //genera las imagenes y el zip
         $r = $this->_exec_gs();
         $this->_remove_pdf();
-        if(!$r) return "/".self::FOLDER_DOWNLOAD."/".$this->imgpattern;
+        $this->_remove_zipfolder();
+        if(!$r) return "/".self::FOLDER_DOWNLOAD."/".$this->foldername.".zip";
         return "";
     }
 
