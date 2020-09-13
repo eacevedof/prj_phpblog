@@ -83,13 +83,13 @@ class PdftojpgService extends BaseService
     private function _exec_gs_multipage()
     {
         /*
-        gs -dBATCH ^
-            -dNOPAUSE ^
-            -dSAFER ^
-            -sDEVICE=jpeg ^
-            -dJPEGQ=95 ^
-            -r600x600 ^
-            -sOutputFile=./pdffile-%03d.jpeg ^
+        gs -dBATCH \
+            -dNOPAUSE \
+            -dSAFER \
+            -sDEVICE=jpeg \
+            -dJPEGQ=95 \
+            -r600x600 \
+            -sOutputFile=./pdffile-%03d.jpeg \
             ./cv.pdf
         */
     }
