@@ -148,7 +148,10 @@ class PdftojpgService extends BaseService
         //genera las imagenes y el zip
         $r = $this->_exec_gs();
         $this->_remove_pdf();
-        //$this->_remove_zipfolder();
+        //esto puede borrar antes de que el zip este totalmente formado
+        sleep(2);
+        $this->_remove_zipfolder();
+
         if(!$r) return "/".self::FOLDER_DOWNLOAD."/".$this->foldername.".zip";
         return "";
     }
