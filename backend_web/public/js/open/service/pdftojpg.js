@@ -29,15 +29,20 @@ const app = new Vue({
         },
 
         on_change(){
+            //alert(1)
             this.link = ""
             this.inputfile = this.$refs.inputfile || null
-            this.filessize = this.inputfile.files[0].size || 0
+            this.filessize = this.inputfile.files.length ? this.inputfile.files[0].size : 0
+            this.overbytes = 0
+            this.isoversized = false
+
             const overbytes = this.filessize - this.maxuploadsize
             if(overbytes>0){
                 this.isoversized = true
                 this.overbytes = overbytes
             }
-            console.log("files[0]",this.inputfile.files[0])
+
+            //console.log("files",this.inputfile.files)
         },
 
         on_submit: function(e) {
