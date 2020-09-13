@@ -41,7 +41,11 @@ class PdftojpgService extends BaseService
     private function _remove_zipfolder()
     {
         $pathfolder = "$this->pathdown/$this->foldername";
-        if(is_dir($pathfolder)) rmdir($pathfolder);
+        if(is_dir($pathfolder)) {
+            $cmd = "rm -fr $pathfolder";
+            $r = $this->_exec($cmd);
+            $this->logd($r,"_remove_zipfolder");
+        }
     }
 
     private function _exec($cmd)
