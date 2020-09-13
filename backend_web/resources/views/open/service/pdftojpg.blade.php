@@ -41,5 +41,5 @@
     </div>
 </div>
 @endverbatim
-<script type="module" src="/js/open/pdftojpg.js"></script>
+<script type="module" src="/js/open/service/pdftojpg.js"></script>
 @endsection

@@ -1,5 +1,5 @@
-import funcs from "/js/open/funcs.js"
-import open from "/js/open/open.js"
+import funcs from "/js/open/helpers/openfuncs.js"
+import openapi from "/js/open/helpers/openapi.js"
 
 const app = new Vue({
     el: "#form-convert",
@@ -18,6 +18,7 @@ const app = new Vue({
     methods:{
         reset(){
             this.pdfulpoad = ""
+            this.$refs.inputfile.value = ""
         },
 
         on_change(){

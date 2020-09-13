@@ -109,7 +109,7 @@ var CONST = {
 
 /***/ "./resources/js/app/funcs.js":
 /*!***********************************!*\
-  !*** ./resources/js/app/funcs.js ***!
+  !*** ./resources/js/app/openfuncs.js ***!
   \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -160,13 +160,13 @@ var funcs = {
 
 /***/ 0:
 /*!***************************************************************************************************!*\
-  !*** multi ./resources/js/app/constants.js ./resources/js/app/funcs.js ./resources/sass/app.scss ***!
+  !*** multi ./resources/js/app/constants.js ./resources/js/app/openfuncs.js ./resources/sass/app.scss ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/constants.js */"./resources/js/app/constants.js");
-__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/funcs.js */"./resources/js/app/funcs.js");
+__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/openfuncs.js */"./resources/js/app/funcs.js");
 module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/sass/app.scss */"./resources/sass/app.scss");
 
 

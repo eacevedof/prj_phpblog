@@ -53,7 +53,7 @@
 </div>
 </template>
 <script>
-import funcs from "../../../app/funcs"
+import openfuncs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 
 export default {

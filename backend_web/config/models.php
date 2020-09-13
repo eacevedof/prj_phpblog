@@ -46,9 +46,9 @@ return [
         |--------------------------------------------------------------------------
         |
         | All Eloquent models should inherit from Eloquent Model class. However,
-        | you can define a funcs Eloquent model that suits your needs.
-        | As an example one funcs model has been added for you which
-        | will allow you to create funcs database castings.
+        | you can define a openfuncs Eloquent model that suits your needs.
+        | As an example one openfuncs model has been added for you which
+        | will allow you to create openfuncs database castings.
         |
         */
 

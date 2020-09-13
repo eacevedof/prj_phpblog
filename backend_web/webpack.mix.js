@@ -24,7 +24,7 @@ mix.webpackConfig({
 
 mix.js('resources/js/app/*.js', 'public/js/app')
     .js('resources/js/app.js', 'public/js')
-    //.css('resources/css/funcs.sss', 'public/css') no va!
+    //.css('resources/css/openfuncs.sss', 'public/css') no va!
     .sass('resources/sass/app.scss', 'public/css');
 
 mix.copy( 'resources/assets/images', 'public/assets/images', false );

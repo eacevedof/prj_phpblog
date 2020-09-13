@@ -30,7 +30,7 @@ return [
     |
     | Available Drivers: "single", "daily", "slack", "syslog",
     |                    "errorlog", "monolog",
-    |                    "funcs", "stack"
+    |                    "openfuncs", "stack"
     |
     */
 
