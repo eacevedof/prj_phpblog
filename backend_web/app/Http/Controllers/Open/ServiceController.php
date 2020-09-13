@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ServiceController extends BaseController
 {
-    //servicios/pdf-a-jpg
+    //servicios/convertir-pdf-a-jpg
     public function pdftojpg()
     {
         //vista vue
