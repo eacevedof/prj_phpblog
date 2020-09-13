@@ -101,6 +101,7 @@ class PdftojpgService extends BaseService
             -sOutputFile=$pathjpg \
             $pathpdf
         ";
+        return $cmd;
     }
 
     private function _exec_zip($pathfolder, $pathzip)
