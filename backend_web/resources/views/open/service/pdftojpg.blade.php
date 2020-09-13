@@ -15,6 +15,7 @@
             <div class="col-sm-9">
                 <label for="name">PDF *</label>
                 <input type="file" class="form-control" required="required"
+                       :disabled="issending"
                        accept="application/pdf"
                        ref="inputfile"
                        @change="on_change"
