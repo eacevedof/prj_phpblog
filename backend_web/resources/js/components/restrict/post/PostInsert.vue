@@ -52,6 +52,7 @@
                     <div class="form-group col-md-12">
                         <label for="txt-url_img1">Url img1 *</label>
                         <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control" required/>
+                        <a href="/adm/upload" class="btn btn-dark" ><i class="fa fa-window-maximize" aria-hidden="true"></i> Upload</a>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txt-url_img2">Url img2</label>
