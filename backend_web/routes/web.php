@@ -30,7 +30,7 @@ Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureControlle
 
 
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas
-Auth::routes(["register"=>false]);
+Auth::routes();
 
 //rutas ADM
 Route::get('/adm', 'Restrict\AdminController')->name('restrict.admin');
