@@ -28,8 +28,7 @@
                             Upload
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-upload">
-                            <a class="dropdown-item" href="/adm/upload">Upload</a>
-                            <a class="dropdown-item" href="/adm/upload/insert">Insert upload</a>
+                            <a class="dropdown-item" href="/adm/upload">Uploads</a>
                         </div>
                     </li>
                 </ul>

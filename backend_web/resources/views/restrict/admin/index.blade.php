@@ -21,7 +21,6 @@
                     <h5 class="card-title">Upload</h5>
                     <p class="card-text">Manage images repository in upload.theframework.es</p>
                     <a href="/adm/upload" class="btn btn-primary">List</a>
-                    <a href="/adm/upload/insert" class="btn btn-dark">Create</a>
                 </div>
             </div>
         </div>
