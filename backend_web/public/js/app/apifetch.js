@@ -868,7 +868,7 @@ try {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./openfuncs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./funcs */ "./resources/js/app/funcs.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -884,7 +884,7 @@ var apifetch = {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              //const _token = openfuncs.get_csrftoken()
+              //const _token = funcs.get_csrftoken()
               url = "/api/post/category";
               r = null;
               _context.prev = 2;
@@ -942,7 +942,7 @@ var apifetch = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./openfuncs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./funcs */ "./resources/js/app/funcs.js");
 
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
@@ -1335,7 +1335,7 @@ var db = {
 
 /***/ "./resources/js/app/funcs.js":
 /*!***********************************!*\
-  !*** ./resources/js/app/openfuncs.js ***!
+  !*** ./resources/js/app/funcs.js ***!
   \***********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -1428,7 +1428,7 @@ var funcs = {
 
 /***/ 0:
 /*!*******************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app/apifetch.js ./resources/js/app/apiupload.js ./resources/js/app/constants.js ./resources/js/app/db.js ./resources/js/app/openfuncs.js ./resources/sass/app.scss ***!
+  !*** multi ./resources/js/app/apifetch.js ./resources/js/app/apiupload.js ./resources/js/app/constants.js ./resources/js/app/db.js ./resources/js/app/funcs.js ./resources/sass/app.scss ***!
   \*******************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -1437,7 +1437,7 @@ __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/apiupload.js */"./resources/js/app/apiupload.js");
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/constants.js */"./resources/js/app/constants.js");
 __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/db.js */"./resources/js/app/db.js");
-__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/openfuncs.js */"./resources/js/app/funcs.js");
+__webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/js/app/funcs.js */"./resources/js/app/funcs.js");
 module.exports = __webpack_require__(/*! /Users/ioedu/projects/prj_phpblog/backend_web/resources/sass/app.scss */"./resources/sass/app.scss");
 
 

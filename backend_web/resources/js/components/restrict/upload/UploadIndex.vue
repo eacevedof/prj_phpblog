@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import openfuncs from "../../../app/funcs"
+import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 import apiupload from "../../../app/apiupload";
 import db from "../../../app/db";
@@ -147,7 +147,7 @@ export default {
 
             try{
                 const r = await apiupload.get_files(self.selfolder)
-                //openfuncs.pr(r,"load_rows")
+                //funcs.pr(r,"load_rows")
                 if(funcs.is_error(r)) {
                     return Swal.fire({
                         icon: 'warning',

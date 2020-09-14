@@ -2,7 +2,7 @@ import funcs from "./funcs";
 
 const apifetch = {
     get_categories: async ()=>{
-        //const _token = openfuncs.get_csrftoken()
+        //const _token = funcs.get_csrftoken()
         const url = "/api/post/category"
         let r = null
         try {

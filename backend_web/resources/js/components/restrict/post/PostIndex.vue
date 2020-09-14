@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import openfuncs from "../../../app/funcs"
+import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 
 const csrftoken = funcs.get_csrftoken()

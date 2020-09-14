@@ -113,7 +113,7 @@
     </div>
 </template>
 <script>
-import openfuncs from "../../../app/funcs"
+import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 import apifetch from "../../../app/apifetch"
 const csrftoken = funcs.get_csrftoken()
@@ -223,7 +223,7 @@ export default {
 
     async mounted() {
         this.categories = await apifetch.get_categories()
-        //openfuncs.pr(this.categories)
+        //funcs.pr(this.categories)
     }
 }
 </script>

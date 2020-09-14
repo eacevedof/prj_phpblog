@@ -13,25 +13,26 @@
         <div class="collapse navbar-collapse" id="navbartop">
             <!-- Left Side Of Navbar -->
             @auth
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a id="module-posts" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Posts
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-posts">
-                            <a class="dropdown-item" href="/adm/posts">Posts</a>
-                            <a class="dropdown-item" href="/adm/post/insert">Insert post</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a id="module-upload" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Upload
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-upload">
-                            <a class="dropdown-item" href="/adm/upload">Uploads</a>
-                        </div>
-                    </li>
-                </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a id="module-posts" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Posts
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-posts">
+                        <a class="dropdown-item" href="/adm/posts">Posts</a>
+                        <a class="dropdown-item" href="/adm/post/insert">Insert post</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a id="module-upload" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Upload
+                    </a>
+
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-upload">
+                        <a class="dropdown-item" href="/adm/upload">Uploads</a>
+                    </div>
+                </li>
+            </ul>
             @endauth
 
             <!-- Right Side Of Navbar -->
