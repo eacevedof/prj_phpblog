@@ -19,6 +19,9 @@
 ```js
 composer require laravel/ui
 php artisan ui vue --auth
+
+//crear usuario
+php artisan db:seed --class=UsersTableSeeder
 ```
 - Rutas de --auth: 
     - /vendor/laravel/ui/src/AuthRouteMethods.php
