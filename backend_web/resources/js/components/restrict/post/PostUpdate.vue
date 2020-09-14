@@ -77,7 +77,9 @@
                 <div class="form-group col-md-12">
                     <label for="txt-url_img1">Url img1 (list)*</label>
                     <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control" required/>
-                    <a href="/adm/upload" class="btn btn-dark" ><i class="fa fa-picture-o" aria-hidden="true"></i> Album</a>
+                    <button type="button" class="btn btn-dark"
+                        v-on:click="on_btnalbum"
+                    ><i class="fa fa-picture-o" aria-hidden="true"></i> Album</button>
                     <button type="button" class="btn btn-warning"
                             :disabled="issending"
                             v-on:click="load_lastupload()"
@@ -359,7 +361,11 @@ export default {
             this.post.slug = funcs.get_slug(this.post.title)
             const catslug = this.get_idtype_slug()
             this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug)
+        },
+
+        on_btnalbum(){
             db.save("last-slug",this.post.slug)
+            window.location = "/adm/upload"
         },
 
         handleSubmit: function(e) {

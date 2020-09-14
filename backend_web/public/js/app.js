@@ -2243,6 +2243,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -2407,6 +2408,8 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
+//
+//
 //
 //
 //
@@ -2788,7 +2791,10 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       this.post.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.post.title);
       var catslug = this.get_idtype_slug();
       this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug);
+    },
+    on_btnalbum: function on_btnalbum() {
       _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("last-slug", this.post.slug);
+      window.location = "/adm/upload";
     },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
@@ -41620,121 +41626,6 @@ var render = function() {
                 })
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-12" }, [
-                _c("label", { attrs: { for: "txt-url_img1" } }, [
-                  _vm._v("Url img1")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.post.url_img1,
-                      expression: "post.url_img1"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "txt-url_img1", maxlength: "300" },
-                  domProps: { value: _vm.post.url_img1 },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.post, "url_img1", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-warning",
-                    attrs: { type: "button", disabled: _vm.issending },
-                    on: {
-                      click: function($event) {
-                        return _vm.load_lastupload()
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-clipboard",
-                      attrs: { "aria-hidden": "true" }
-                    }),
-                    _vm._v(" Get img\n                        "),
-                    _vm.issending
-                      ? _c("img", {
-                          attrs: {
-                            src: "/assets/images/loading-bw.gif",
-                            width: "25",
-                            height: "25"
-                          }
-                        })
-                      : _vm._e()
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "txt-url_img2" } }, [
-                  _vm._v("Url img2")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.post.url_img2,
-                      expression: "post.url_img2"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "txt-url_img2", maxlength: "300" },
-                  domProps: { value: _vm.post.url_img2 },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.post, "url_img2", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-6" }, [
-                _c("label", { attrs: { for: "txt-url_img3" } }, [
-                  _vm._v("Url img3")
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.post.url_img3,
-                      expression: "post.url_img3"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { type: "text", id: "txt-url_img3", maxlength: "300" },
-                  domProps: { value: _vm.post.url_img3 },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.post, "url_img3", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-3" }, [
                 _c("label", { attrs: { for: "sel-id_user" } }, [
                   _vm._v("User")
@@ -42007,22 +41898,6 @@ var staticRenderFns = [
       "label",
       { staticClass: "form-check-label", attrs: { for: "chk-is_page" } },
       [_c("b", [_vm._v("Is single page")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-dark", attrs: { href: "/adm/upload" } },
-      [
-        _c("i", {
-          staticClass: "fa fa-picture-o",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" Album")
-      ]
     )
   }
 ]
@@ -42511,7 +42386,21 @@ var render = function() {
                 }
               }),
               _vm._v(" "),
-              _vm._m(2),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-dark",
+                  attrs: { type: "button" },
+                  on: { click: _vm.on_btnalbum }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-picture-o",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" Album")
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "button",
@@ -43003,22 +42892,6 @@ var staticRenderFns = [
       "label",
       { staticClass: "form-check-label", attrs: { for: "chk-is_page" } },
       [_c("b", [_vm._v("Is single page")])]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      { staticClass: "btn btn-dark", attrs: { href: "/adm/upload" } },
-      [
-        _c("i", {
-          staticClass: "fa fa-picture-o",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" Album")
-      ]
     )
   }
 ]
