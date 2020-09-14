@@ -49,6 +49,7 @@
                     <label for="txt-subtitle">subtitle</label>
                     <input type="text" id="txt-subtitle" v-model="post.subtitle" maxlength="250" class="form-control">
                 </div>
+<!--
                 <div class="form-group col-md-12">
                     <label for="txt-url_img1">Url img1</label>
                     <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control"/>
@@ -69,7 +70,7 @@
                     <label for="txt-url_img3">Url img3</label>
                     <input type="text" id="txt-url_img3" v-model="post.url_img3" maxlength="300" class="form-control">
                 </div>
-
+-->
                 <div class="form-group col-md-3">
                     <label for="sel-id_user">User</label>
                     <select id="sel-id_user" v-model="post.id_user" class="form-control">
