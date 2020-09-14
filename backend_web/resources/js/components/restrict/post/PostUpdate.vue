@@ -30,7 +30,7 @@
                         </button>
                     </div>
                 </div>
-                <div v-if="!issending"  class="form-row">
+                <div class="form-row">
                     <div class="form-group col-md-2">
                         <label>Id</label>
                         <span class="form-control">{{ post.id }}</span>
@@ -70,18 +70,22 @@
                         <label for="txt-subtitle">subtitle</label>
                         <input type="text" id="txt-subtitle" v-model="post.subtitle" maxlength="250" class="form-control">
                     </div>
-                    <div class="form-group col-md-10">
+                    <div class="form-group col-md-12">
                         <label for="txt-url_img1">Url img1 (list)*</label>
                         <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control" required/>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <button type="button" class="btn btn-warning res-btncol"
-                            :disabled="issending"
-                            v-on:click="load_lastupload()"
+                        <a href="/adm/upload" class="btn btn-dark" ><i class="fa fa-clipboard" aria-hidden="true"></i> Upload</a>
+                        <button type="button" class="btn btn-warning"
+                                :disabled="issending"
+                                v-on:click="load_lastupload()"
                         >
-                            Load uploaded url
+                            <i class="fa fa-clipboard" aria-hidden="true"></i> Get img
                             <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                         </button>
+                    </div>
+                    <div v-if="post.url_img1" class="col-6">
+                        <a :href="post.url_img1" target="_blank">
+                            <img :src="post.url_img1" width="100" height="100"/>
+                        </a>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txt-url_img2">Url img2 (detail)</label>

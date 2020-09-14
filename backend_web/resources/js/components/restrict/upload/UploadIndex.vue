@@ -293,7 +293,8 @@ export default {
             if(el) {
                 const url = el.innerText
                 funcs.to_clipboard(url)
-                this.$toast.success(`link in clipboard!!`)
+                self.savelast(url)
+                this.$toast.success(`in clipboard and last uri`)
             }
         },
 

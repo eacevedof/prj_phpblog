@@ -76,6 +76,7 @@ export default {
     },
 
     methods: {
+
         load(){
             console.log("...loading")
             const self = this

@@ -52,7 +52,14 @@
                     <div class="form-group col-md-12">
                         <label for="txt-url_img1">Url img1 *</label>
                         <input type="text" id="txt-url_img1" v-model="post.url_img1" maxlength="300" class="form-control" required/>
-                        <a href="/adm/upload" class="btn btn-dark" ><i class="fa fa-window-maximize" aria-hidden="true"></i> Upload</a>
+                        <a href="/adm/upload" class="btn btn-dark" ><i class="fa fa-clipboard" aria-hidden="true"></i> Upload</a>
+                        <button type="button" class="btn btn-warning"
+                                :disabled="issending"
+                                v-on:click="load_lastupload()"
+                        >
+                            <i class="fa fa-clipboard" aria-hidden="true"></i> Get img
+                            <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                        </button>
                     </div>
                     <div class="form-group col-md-6">
                         <label for="txt-url_img2">Url img2</label>
@@ -117,6 +124,8 @@
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 import apifetch from "../../../app/apifetch"
+import db from "../../../app/db"
+
 const csrftoken = funcs.get_csrftoken()
 
 export default {
@@ -153,6 +162,14 @@ export default {
     methods:{
         set_slug(){
 
+        },
+
+        load_lastupload(){
+            const lastupload = db.select("last-upload")
+            if(lastupload) {
+                this.post.url_img1 = lastupload
+                this.post.url_img2 = lastupload
+            }
         },
 
         insert(){
