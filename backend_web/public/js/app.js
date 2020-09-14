@@ -3051,7 +3051,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this4 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
-        var self, r;
+        var _self, r;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
@@ -3061,9 +3062,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   break;
                 }
 
-                self = _this4;
-                self.issending = true;
-                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+                _self = _this4;
+                _self.issending = true;
+                _self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
                 _context4.prev = 4;
                 _context4.next = 7;
                 return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].remove_file(urlfile);
@@ -3083,9 +3084,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 }));
 
               case 10:
-                self.$toast.info("Resource removed: ".concat(r[0]));
+                _self.$toast.info("Resource removed: ".concat(r[0]));
+
                 _context4.next = 13;
-                return self.load_rows();
+                return _self.load_rows();
 
               case 13:
                 _context4.next = 18;
@@ -3102,8 +3104,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
               case 18:
                 _context4.prev = 18;
-                self.issending = false;
-                self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
+                _self.issending = false;
+                _self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
                 return _context4.finish(18);
 
               case 22:
@@ -3294,7 +3296,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (el) {
         var url = el.innerText;
         _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].to_clipboard(url);
-        this.$toast.success("link in clipboard!!");
+        self.savelast(url);
+        this.$toast.success("in clipboard and last uri");
       }
     },
     on_fileschange: function on_fileschange() {
