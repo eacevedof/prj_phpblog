@@ -8,16 +8,45 @@ use Illuminate\Http\Request;
 class PostUpdateService extends BaseService
 {
     private $iduser;
+    private $dbentity;
+    private $data;
 
     public function __construct(Request $request, $iduser)
     {
         $this->iduser = $iduser;
         $this->request = $request;
+        $this->data = $this->request->all();
+        $this->dbentity = AppPost::find($this->request->input("id"));
+        //$this->logd($this->dbentity,"DBENTITY");
     }
 
     private function _check_data($data)
     {
 
+    }
+
+    private function _set_publishdate(&$data)
+    {
+        $this->logd("db.pubdate:{$this->dbentity->publish_date}, db.id_status:{$this->dbentity->id_status},  dat.idstatus:{$this->data["id_status"]}","_set_publishdate");
+        if(!$this->dbentity->publish_date && !$this->dbentity->id_status && $this->data["id_status"]){
+            $this->logd("gen publishdate");
+            $data["publish_date"] = date("Y-m-d H:i:s");
+        }
+    }
+
+    private function _set_lastupdate(&$data)
+    {
+        if($this->dbentity->publish_date && $this->data["id_status"]){
+            $data["last_update"] = date("Y-m-d H:i:s");
+        }
+    }
+
+    private function _set_seo(&$data){
+        if(!$this->dbentity->seo_title & !$this->data["seo_title"])
+            $data["seo_title"] = substr($this->data["title"],0,64);
+
+        if(!$this->dbentity->seo_description & !$this->data["seo_description"])
+            $data["seo_description"] = substr($this->data["content"],0,159);
     }
 
     private function _format_date(&$data)
@@ -32,15 +61,17 @@ class PostUpdateService extends BaseService
 
     public function save()
     {
-        $data = $this->request->all();
+        $data = $this->data;
         $this->logd($data,"post.update");
         $this->_check_data($data);
         //$this->logd($this->request->input("description"),"input.description");
         //$this->logd($this->request->all(),"updateservice.save.req-all");
         //$this->logd($this->request->getContent(),"updateservice.save.req-getcontent");
-
         $this->clean_sysfields($data);
         $this->_format_date($data);
+        $this->_set_publishdate($data);
+        $this->_set_lastupdate($data);
+        $this->_set_seo($data);
 
         $this->logd($data,"post.update.update");
         $id = $this->request->input("id");

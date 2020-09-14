@@ -2672,7 +2672,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
 
         _this2.post = response.data;
         _this2.post.publish_date = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_date(_this2.post.publish_date);
-        _this2.post.last_update = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_date(_this2.post.publish_date);
+        _this2.post.last_update = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_date(_this2.post.last_update);
       })["catch"](function (error) {
         console.log("CATCH ERROR get_row", error);
         Swal.fire({
