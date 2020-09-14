@@ -2921,7 +2921,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -2970,9 +2969,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             case 9:
               _this.load_lastslug();
 
-              _this.$refs.urlupload.focus();
+              _this.$refs.urlupload.focus(); //this.$refs.urlupload.setSelectionRange(0, 3);
 
-            case 11:
+
+              setTimeout(function () {
+                return _this.$refs.urlupload.setSelectionRange(0, 3);
+              });
+
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -42936,9 +42940,6 @@ var render = function() {
             attrs: { type: "text", placeholder: "url to upload::name" },
             domProps: { value: _vm.upload.urlupload },
             on: {
-              focus: function($event) {
-                return $event.target.select()
-              },
               keyup: function($event) {
                 if (
                   !$event.type.indexOf("key") &&

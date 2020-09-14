@@ -16,7 +16,9 @@
     @foreach ($result as $post)
         <div class="col-md-4">
             <div class="card mb-4 box-shadow" postid="{{$post->id}}">
-                <img class="card-img-top img-responsive img-thumbnail" src="{{$post->url_img1}}" alt="{{$post->title}}">
+                <a href="{{$post->url_final}}">
+                    <img class="card-img-top img-responsive img-thumbnail" src="{{$post->url_img1}}" alt="{{$post->title}}">
+                </a>
                 <div class="card-body">
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="card-text">

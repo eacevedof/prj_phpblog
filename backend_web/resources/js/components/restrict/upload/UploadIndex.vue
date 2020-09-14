@@ -4,7 +4,6 @@
         <div class="form-group col-md-10 mb-2">
             <input type="text" class="form-control" placeholder="url to upload::name"
                ref="urlupload"
-               @focus="$event.target.select()"
                v-model="upload.urlupload"
                v-on:keyup.enter="on_upload()"
             />
@@ -127,6 +126,8 @@ export default {
         await this.load_rows()
         this.load_lastslug()
         this.$refs.urlupload.focus();
+        //this.$refs.urlupload.setSelectionRange(0, 3);
+        setTimeout(() => this.$refs.urlupload.setSelectionRange(0, 3))
     },
 
     methods: {
