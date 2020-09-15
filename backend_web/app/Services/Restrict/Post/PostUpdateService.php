@@ -8,11 +8,10 @@ class PostUpdateService extends BaseService
     private $dbentity;
     private $data;
 
-    public function __construct( $data)
+    public function __construct($data)
     {
         $this->data = $data;
         $this->dbentity = AppPost::find($data["id"]);
-        //$this->logd($this->dbentity,"DBENTITY");
     }
 
     private function _check_data($data)
@@ -22,7 +21,6 @@ class PostUpdateService extends BaseService
 
     private function _set_publishdate(&$data)
     {
-        $this->logd("db.pubdate:{$this->dbentity->publish_date}, db.id_status:{$this->dbentity->id_status},  dat.idstatus:{$this->data["id_status"]}","_set_publishdate");
         if(!$this->dbentity->publish_date && !$this->dbentity->id_status && $this->data["id_status"]){
             $data["publish_date"] = date("YmdHis");
         }
