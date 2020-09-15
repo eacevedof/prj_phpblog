@@ -130,13 +130,15 @@ export default {
 
         on_search(){
             if(!this.filter.search){
+                db.delete("post-search")
                 this.rows = [...this.filter.original]
                 return
             }
             const fields = Object.keys(this.filter.original[0])
             if(!fields) return
 
-            const search = this.filter.search
+            const search = this.filter.search.trim()
+            db.save("post-search",search)
             const rows = this.filter.original.filter(obj => {
                 const exist = fields.some(field => {
                     if(obj[field]===null) return false

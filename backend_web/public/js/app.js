@@ -2018,26 +2018,6 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     this.load();
   },
   methods: {
-    on_search: function on_search() {
-      if (!this.filter.search) {
-        this.rows = _toConsumableArray(this.filter.original);
-        return;
-      }
-
-      var fields = Object.keys(this.filter.original[0]);
-      if (!fields) return;
-      var search = this.filter.search;
-      var rows = this.filter.original.filter(function (obj) {
-        var exist = fields.some(function (field) {
-          var str = obj[field] === null ? "" : obj[field].toString();
-          return str.indexOf(search) !== -1;
-        });
-        return exist;
-      });
-      this.rows = _toConsumableArray(rows);
-      console.log("rows filtered");
-      console.table(this.rows);
-    },
     load: function load() {
       console.log("...loading");
       var self = this;
@@ -2075,6 +2055,25 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       });
     },
     //load
+    on_search: function on_search() {
+      if (!this.filter.search) {
+        this.rows = _toConsumableArray(this.filter.original);
+        return;
+      }
+
+      var fields = Object.keys(this.filter.original[0]);
+      if (!fields) return;
+      var search = this.filter.search;
+      var rows = this.filter.original.filter(function (obj) {
+        var exist = fields.some(function (field) {
+          if (obj[field] === null) return false;
+          var str = obj[field].toString();
+          return str.indexOf(search) !== -1;
+        });
+        return exist;
+      });
+      this.rows = _toConsumableArray(rows); //console.log("rows filtered"); console.table(this.rows)
+    },
     edit: function edit(id) {
       var url = "/adm/post/update/" + id;
       document.location = url; //window.open(url, "_blank")
