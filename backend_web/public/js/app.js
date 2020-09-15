@@ -2064,7 +2064,8 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     },
     //load
     on_search: function on_search() {
-      //console.log("on_search: this.filter.search",this.filter.search)
+      if (this.filter.original.length === 0) return; //console.log("on_search: this.filter.search",this.filter.search)
+
       if (!this.filter.search) {
         _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("post-search");
         this.rows = _toConsumableArray(this.filter.original);
