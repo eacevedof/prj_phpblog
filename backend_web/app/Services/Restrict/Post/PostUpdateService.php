@@ -1,6 +1,5 @@
 <?php
 namespace App\Services\Restrict\Post;
-use App\Component\Formatter;
 use App\Models\AppPost;
 use App\Services\BaseService;
 
@@ -54,7 +53,6 @@ class PostUpdateService extends BaseService
         //$this->logd($this->request->all(),"updateservice.save.req-all");
         //$this->logd($this->request->getContent(),"updateservice.save.req-getcontent");
         $this->_handle_sysfields($data,"u");
-        $this->_format_date($data);
         $this->_set_publishdate($data);
         $this->_set_lastupdate($data);
         $this->_set_seo($data);

@@ -86,15 +86,19 @@ trait SysfieldsTrait
             $this->_unset_operations($data, ["update","delete"]);
             $this->_set_userplat($data);
             if(isset($data["code_cache"]) && !$data["code_cache"]) $data["code_cache"] = \uniqid();
+            unset($data["insert_date"]);
         }
         elseif ($op==="u") {
             $this->_unset_operations($data, ["insert","delete"]);
             $this->_set_userplat($data,"update");
             if(isset($data["code_cache"]) && !$data["code_cache"]) $data["code_cache"] = \uniqid();
+            unset($data["update_date"]);
         }
         else{
             $data = [];
             $this->_set_userplat($data,"delete");
+            //mantengo la fecha de modificacion
+            $data["update_date"] = date("YmdHis",strtotime($data["update_date"]));
             $data["delete_date"] = date("YmdHis");
         }
     }
