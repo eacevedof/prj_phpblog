@@ -95,10 +95,11 @@ trait SysfieldsTrait
             unset($data["update_date"]);
         }
         else{
+            $updatedate = $data["update_date"] ?? null;
             $data = [];
             $this->_set_userplat($data,"delete");
             //mantengo la fecha de modificacion
-            $data["update_date"] = date("YmdHis",strtotime($data["update_date"]));
+            if($updatedate) $data["update_date"] = date("YmdHis",strtotime($updatedate));
             $data["delete_date"] = date("YmdHis");
         }
     }
