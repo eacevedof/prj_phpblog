@@ -32,10 +32,10 @@
                 <p class="card-text">{!!$result->content!!}</p>
                 <p class="card-text text-right">
                     <small class="text-muted">Autor: Eduardo A. F.</small><br/>
-                    <small class="text-muted">Publicado: {{ get_ymd_hi($result->publish_date) }}</small>
-                    @if( !empty($result->last_update) && ($result->last_update != $result->publish_date)){
+                    <small class="text-muted">Publicado: {{ get_dmy_hi($result->publish_date) }}</small>
+                    @if($result->last_update > $result->publish_date)
                         <br/>
-                        <small class="text-muted">Actualizado: {{ get_ymd_hi($result->last_update) }}</small>
+                        <small class="text-muted">Actualizado: {{ get_dmy_hi($result->last_update) }}</small>
                     @endif
                 </p>
             </div>
