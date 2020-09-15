@@ -1,13 +1,11 @@
 <template>
 <div class="card">
-    <div class="form-group col-md-10 mb-2">
+    <div class="form-group col-md-9 mb-2 debug">
         <input type="text" class="form-control" placeholder="...search"
                ref="search"
                v-model="filter.search"
                v-on:keyup.enter="on_search()"
         />
-    </div>
-    <div class="form-group col-md-2 mb-0">
         <button type="button" class="btn btn-dark"
                 :disabled="issending" v-on:click="on_search()"
         ><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -138,6 +136,7 @@ export default {
         },//load
 
         on_search(){
+            //console.log("on_search: this.filter.search",this.filter.search)
             if(!this.filter.search){
                 db.delete("post-search")
                 this.rows = [...this.filter.original]
@@ -146,7 +145,7 @@ export default {
             const fields = Object.keys(this.filter.original[0])
             if(!fields) return
 
-            const search = this.filter.search.trim()
+            const search = this.filter.search.toString().trim()
             db.save("post-search",search)
             const rows = this.filter.original.filter(obj => {
                 const exist = fields.some(field => {

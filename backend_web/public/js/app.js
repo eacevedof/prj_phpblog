@@ -1999,6 +1999,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -2060,6 +2065,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     },
     //load
     on_search: function on_search() {
+      //console.log("on_search: this.filter.search",this.filter.search)
       if (!this.filter.search) {
         _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("post-search");
         this.rows = _toConsumableArray(this.filter.original);
@@ -2068,7 +2074,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
 
       var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
-      var search = this.filter.search.trim();
+      var search = this.filter.search.toString().trim();
       _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].save("post-search", search);
       var rows = this.filter.original.filter(function (obj) {
         var exist = fields.some(function (field) {
@@ -41151,7 +41157,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
+    _c("div", { staticClass: "form-group col-md-9 mb-2 debug" }, [
       _c("input", {
         directives: [
           {
@@ -41183,6 +41189,27 @@ var render = function() {
           }
         }
       })
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "form-group col-md-2 mb-0 debug" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-dark",
+          attrs: { type: "button", disabled: _vm.issending },
+          on: {
+            click: function($event) {
+              return _vm.on_search()
+            }
+          }
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-search",
+            attrs: { "aria-hidden": "true" }
+          })
+        ]
+      )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
