@@ -138,13 +138,12 @@ export default {
         },//load
 
         on_search(){
-            if(this.filter.original.length === 0) return
-            //console.log("on_search: this.filter.search",this.filter.search)
             if(!this.filter.search){
                 db.delete("post-search")
                 this.rows = [...this.filter.original]
                 return
             }
+            if(this.filter.original.length === 0) return
             const fields = Object.keys(this.filter.original[0])
             if(!fields) return
 
