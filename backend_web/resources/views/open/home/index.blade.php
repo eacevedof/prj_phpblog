@@ -7,8 +7,7 @@
 @section("container")
 @include("open.elements.home-header")
 <br/>
-<h1 class="display-6">Últimos artículos:</h1>
-<br/>
+<h1 class="display-6 mb-3">Últimos artículos:</h1>
 <div class="row">
 @foreach ($result as $post)
     <div class="col-md-4">
