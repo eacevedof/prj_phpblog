@@ -65,6 +65,7 @@
 <script>
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
+import db from "../../../app/db"
 
 const csrftoken = funcs.get_csrftoken()
 

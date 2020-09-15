@@ -1922,6 +1922,7 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
+/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/db */ "./resources/js/app/db.js");
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2000,6 +2001,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 
 
+
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2041,6 +2043,8 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
 
         self.rows = response.data;
         self.filter.original = response.data;
+        var search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("post-search");
+        self.filter.search = search;
         self.on_search();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
@@ -2057,13 +2061,15 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     //load
     on_search: function on_search() {
       if (!this.filter.search) {
+        _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("post-search");
         this.rows = _toConsumableArray(this.filter.original);
         return;
       }
 
       var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
-      var search = this.filter.search;
+      var search = this.filter.search.trim();
+      _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].save("post-search", search);
       var rows = this.filter.original.filter(function (obj) {
         var exist = fields.some(function (field) {
           if (obj[field] === null) return false;
