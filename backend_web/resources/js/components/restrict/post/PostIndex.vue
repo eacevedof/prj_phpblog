@@ -7,6 +7,11 @@
                v-on:keyup.enter="on_search()"
         />
     </div>
+    <div class="form-group col-md-2 mb-0">
+        <button type="button" class="btn btn-dark"
+                :disabled="issending" v-on:click="on_search()"
+        ><i class="fa fa-search" aria-hidden="true"></i></button>
+    </div>
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
