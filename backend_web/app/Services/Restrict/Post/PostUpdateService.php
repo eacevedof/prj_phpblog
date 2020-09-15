@@ -24,24 +24,23 @@ class PostUpdateService extends BaseService
     {
         $this->logd("db.pubdate:{$this->dbentity->publish_date}, db.id_status:{$this->dbentity->id_status},  dat.idstatus:{$this->data["id_status"]}","_set_publishdate");
         if(!$this->dbentity->publish_date && !$this->dbentity->id_status && $this->data["id_status"]){
-            $this->logd("gen publishdate");
-            $data["publish_date"] = date("Y-m-d H:i:s");
+            $data["publish_date"] = date("YmdHis");
         }
     }
 
     private function _set_lastupdate(&$data)
     {
         if($this->dbentity->publish_date && $this->data["id_status"]){
-            $data["last_update"] = date("Y-m-d H:i:s");
+            $data["last_update"] = date("YmdHis");
         }
     }
 
     private function _set_seo(&$data){
         if(!$this->dbentity->seo_title & !$this->data["seo_title"])
-            $data["seo_title"] = substr($this->data["title"],0,64);
+            $data["seo_title"] = substr(strip_tags($this->data["title"]),0,64);
 
         if(!$this->dbentity->seo_description & !$this->data["seo_description"])
-            $data["seo_description"] = substr($this->data["content"],0,159);
+            $data["seo_description"] = substr(strip_tags($this->data["content"]),0,159);
     }
 
     public function save()
