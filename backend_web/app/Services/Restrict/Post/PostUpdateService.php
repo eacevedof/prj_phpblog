@@ -30,7 +30,10 @@ class PostUpdateService extends BaseService
 
     private function _set_lastupdate(&$data)
     {
-        if($this->dbentity->publish_date && $this->data["id_status"]){
+        if($this->dbentity->publish_date &&
+            $this->data["id_status"] &&
+            $this->dbentity->content != $this->data["content"]){
+
             $data["last_update"] = date("YmdHis");
         }
     }
