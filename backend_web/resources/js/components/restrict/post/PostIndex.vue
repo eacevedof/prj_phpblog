@@ -111,7 +111,8 @@ export default {
                 }
                 self.rows = response.data
                 self.filter.original = response.data
-
+                const search = db.select("post-search")
+                self.filter.search = search
                 self.on_search()
             })
             .catch(error => {
