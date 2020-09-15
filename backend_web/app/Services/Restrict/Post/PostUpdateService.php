@@ -3,20 +3,16 @@ namespace App\Services\Restrict\Post;
 use App\Component\Formatter;
 use App\Models\AppPost;
 use App\Services\BaseService;
-use Illuminate\Http\Request;
 
 class PostUpdateService extends BaseService
 {
-    private $iduser;
     private $dbentity;
     private $data;
 
-    public function __construct(Request $request, $iduser)
+    public function __construct( $data)
     {
-        $this->iduser = $iduser;
-        $this->request = $request;
-        $this->data = $this->request->all();
-        $this->dbentity = AppPost::find($this->request->input("id"));
+        $this->data = $data;
+        $this->dbentity = AppPost::find($data["id"]);
         //$this->logd($this->dbentity,"DBENTITY");
     }
 
@@ -74,7 +70,7 @@ class PostUpdateService extends BaseService
         $this->_set_seo($data);
 
         $this->logd($data,"post.update.update");
-        $id = $this->request->input("id");
+        $id = $this->data["id"];
         return AppPost::where("id", "=", $id)->update($data);
     }
 }

@@ -4,6 +4,11 @@ namespace App\Component;
 
 class Formatter
 {
+    public static function get_ymdhis($datetime)
+    {
+        return date("YmdHis",strtotime($datetime));
+    }
+
     public static function get_datetime($datetime){
         if(!$datetime) return [];
 

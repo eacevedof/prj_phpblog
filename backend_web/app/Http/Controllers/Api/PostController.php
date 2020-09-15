@@ -44,7 +44,8 @@ class PostController extends BaseController
     public function store(Request $request)
     {
         try {
-            $r = (new PostInsertService($request, $this->authid))->save();
+            $data = $request->all();
+            $r = (new PostInsertService($data, $this->authid))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -81,7 +82,8 @@ class PostController extends BaseController
     {
         $this->logd($post,"update.postid");
         try {
-            $r = (new PostUpdateService($request,$this->authid))->save();;
+            $data = $request->all();
+            $r = (new PostUpdateService($data))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)

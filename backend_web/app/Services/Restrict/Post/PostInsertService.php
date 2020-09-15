@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 class PostInsertService extends BaseService
 {
     private $iduser;
+    private $data;
 
-    public function __construct(Request $request, $iduser)
+    public function __construct($data, $iduser=null)
     {
         $this->iduser = $iduser;
-        $this->request = $request;
+        $this->data = $data;
     }
 
     private function _check_data($data)
@@ -20,15 +21,11 @@ class PostInsertService extends BaseService
 
     }
 
-    private function _format_date(&$data)
+    private function _remove_dates(&$data)
     {
-        $fields = ["publish_date","last_update"];
-        foreach ($fields as $field){
-            $datetime = $data[$field];
-            if(!is_string($datetime)) continue;
-            $ardate = Formatter::get_datetime($datetime);
-            $data[$field] = $ardate["ymdhis"] ?? null;
-        }
+        $fields = ["publish_date", "last_update"];
+        foreach ($fields as $field)
+            unset($data[$field]);
     }
 
     private function _format_ispage(&$data)
@@ -39,11 +36,11 @@ class PostInsertService extends BaseService
 
     public function save()
     {
-        $data = $this->request->all();
+        $data = $this->data;
         $this->logd($data,"post.insert");
         $this->_check_data($data);
         $this->clean_sysfields($data);
-        $this->_format_date($data);
+        $this->_remove_dates($data);
         $this->_format_ispage($data);
         $this->logd($data,"post.insert.create");
         return AppPost::create($data);
