@@ -365,7 +365,7 @@ export default {
 
         on_btnalbum(){
             db.save("last-slug",this.post.slug)
-            window.location = "/adm/upload"
+            window.open("/adm/upload", "_blank").focus()
         },
 
         handleSubmit: function(e) {

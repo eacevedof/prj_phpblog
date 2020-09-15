@@ -2794,7 +2794,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
     },
     on_btnalbum: function on_btnalbum() {
       _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("last-slug", this.post.slug);
-      window.location = "/adm/upload";
+      window.open("/adm/upload", "_blank").focus();
     },
     handleSubmit: function handleSubmit(e) {
       e.preventDefault();
