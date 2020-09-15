@@ -32,4 +32,5 @@ class BaseController extends RoutingController
     protected function _get_submenu_service(){
         return (new CategoryService())->get_submenu_service();
     }
+
 }
