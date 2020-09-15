@@ -2010,8 +2010,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       rows: [],
       filter: {
         original: [],
-        search: "",
-        result: []
+        search: ""
       }
     };
   },
@@ -2021,25 +2020,23 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
   methods: {
     on_search: function on_search() {
       if (!this.filter.search) {
-        this.result = [];
         this.rows = _toConsumableArray(this.filter.original);
-        this.filter.original = [];
         return;
       }
 
-      this.filter.original = _toConsumableArray(this.rows);
-      var search = this.filter.search;
-      var fields = Object.keys(this.rows[0]);
+      var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
-      this.rows = this.rows.filter(function (obj) {
-        console.log("filter.obj", obj);
+      var search = this.filter.search;
+      var rows = this.filter.original.filter(function (obj) {
         var exist = fields.some(function (field) {
-          console.log("some.field", field);
-          if (obj[field] === null) return false;
-          return obj[field].toString().indexOf(search) !== -1;
+          var str = obj[field] === null ? "" : obj[field].toString();
+          return str.indexOf(search) !== -1;
         });
-        return exist.length > 0;
+        return exist;
       });
+      this.rows = _toConsumableArray(rows);
+      console.log("rows filtered");
+      console.table(this.rows);
     },
     load: function load() {
       console.log("...loading");
@@ -2063,6 +2060,8 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         }
 
         self.rows = response.data;
+        self.filter.original = response.data;
+        self.on_search();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -41183,7 +41182,10 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("div", { staticClass: "row card-header res-formheader" }, [
-        _vm._m(0),
+        _c("div", { staticClass: "col-md-9" }, [
+          _c("h1", [_vm._v("Posts")]),
+          _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [
           _c(
@@ -41218,7 +41220,7 @@ var render = function() {
       ]),
       _vm._v(" "),
       _c("table", { staticClass: "table table-striped" }, [
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "tbody",
@@ -41324,12 +41326,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [_c("h1", [_vm._v("Posts")])])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

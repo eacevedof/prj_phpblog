@@ -10,7 +10,7 @@
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
-                <h1>Posts</h1>
+                <h1>Posts</h1><sub>({{rows.length}})</sub>
             </div>
             <div class="col-md-3">
                 <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="load()">
@@ -74,13 +74,12 @@ export default {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
             columns: ["id","title","url_final","description"],
-            rows: [],
 
+            rows: [],
 
             filter:{
                 original: [],
                 search: "",
-                result: [],
             }
         }
     },
@@ -90,29 +89,6 @@ export default {
     },
 
     methods: {
-        on_search(){
-            if(!this.filter.search){
-                this.result = []
-                this.rows = [...this.filter.original]
-                this.filter.original = []
-                return
-            }
-            this.filter.original = [...this.rows]
-
-            const search = this.filter.search
-            const fields = Object.keys(this.rows[0])
-            if(!fields) return
-
-            this.rows = this.rows.filter(obj => {
-                const exist = fields.some(field => {
-                    return obj[field].toString().indexOf(search) !== -1
-                })
-                console.log("exist",exist)
-                return exist.length>0
-            })
-
-        },
-
         load(){
             console.log("...loading")
             const self = this
@@ -134,6 +110,9 @@ export default {
                     })
                 }
                 self.rows = response.data
+                self.filter.original = response.data
+
+                self.on_search()
             })
             .catch(error => {
                 console.log("CATCH ERROR insert",error)
@@ -148,6 +127,28 @@ export default {
                 self.btnsend = CONST.BTN_INISTATE_REFRESH
             })
         },//load
+
+        on_search(){
+            if(!this.filter.search){
+                this.rows = [...this.filter.original]
+                return
+            }
+            const fields = Object.keys(this.filter.original[0])
+            if(!fields) return
+
+            const search = this.filter.search
+            const rows = this.filter.original.filter(obj => {
+                const exist = fields.some(field => {
+                    const str = obj[field]===null ? "" : obj[field].toString()
+                    return str.indexOf(search) !== -1
+                })
+                return exist
+            })
+
+            this.rows = [...rows]
+            console.log("rows filtered")
+            console.table(this.rows)
+        },
 
         edit(id){
             const url = "/adm/post/update/"+id
