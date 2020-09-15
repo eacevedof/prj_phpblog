@@ -45,16 +45,6 @@ class PostUpdateService extends BaseService
             $data["seo_description"] = substr($this->data["content"],0,159);
     }
 
-    private function _format_date(&$data)
-    {
-        $fields = ["publish_date","last_update"];
-        foreach ($fields as $field){
-            $datetime = $data[$field];
-            $ardate = Formatter::get_datetime($datetime);
-            $data[$field] = $ardate["ymdhis"] ?? null;
-        }
-    }
-
     public function save()
     {
         $data = $this->data;
@@ -63,7 +53,7 @@ class PostUpdateService extends BaseService
         //$this->logd($this->request->input("description"),"input.description");
         //$this->logd($this->request->all(),"updateservice.save.req-all");
         //$this->logd($this->request->getContent(),"updateservice.save.req-getcontent");
-        $this->clean_sysfields($data);
+        $this->_handle_sysfields($data,"u");
         $this->_format_date($data);
         $this->_set_publishdate($data);
         $this->_set_lastupdate($data);

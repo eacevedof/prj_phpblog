@@ -32,7 +32,31 @@ trait SysfieldsTrait
 
     private function _get_platform()
     {
-        return 3;
+        //$this->logd($_SERVER["HTTP_USER_AGENT"],"agente ios");
+        //Detect special conditions devices
+        $iPod    = stripos($_SERVER["HTTP_USER_AGENT"],"iPod");
+        $iPhone  = stripos($_SERVER["HTTP_USER_AGENT"],"iPhone");
+        $iPad    = stripos($_SERVER["HTTP_USER_AGENT"],"iPad");
+        $Android = stripos($_SERVER["HTTP_USER_AGENT"],"Android");
+        $webOS   = stripos($_SERVER["HTTP_USER_AGENT"],"webOS");
+        $macos = stripos($_SERVER["HTTP_USER_AGENT"],"Macintosh");
+
+        //0: etl, 1: unknownk, 2: web desktop, 3:android, 4:iphone, 5:ipad, 6:macos
+
+        //do something with this information
+        if( $iPod || $iPhone ){
+            return 4;
+        }else if($iPad){
+            return 5;
+        }else if($Android){
+            return 3;
+        }else if($macos){
+            return 6;
+        }else if($webOS)
+        {
+            return 2;
+        }
+        return 1;
     }
 
     private function _unset_operations(&$data,$operations = [])
@@ -57,6 +81,7 @@ trait SysfieldsTrait
         $auto = ["cru_csvnote, code_cache"];
         */
 
+        unset($data["_action"],$data["_token"]);
         if($op==="i"){
             $this->_unset_operations($data, ["update","delete"]);
             $this->_set_userplat($data);
@@ -68,7 +93,7 @@ trait SysfieldsTrait
             if(isset($data["code_cache"]) && !$data["code_cache"]) $data["code_cache"] = \uniqid();
         }
         else{
-            $this->_unset_operations($data, ["insert","update"]);
+            $data = [];
             $this->_set_userplat($data,"delete");
             $data["delete_date"] = date("YmdHis");
         }

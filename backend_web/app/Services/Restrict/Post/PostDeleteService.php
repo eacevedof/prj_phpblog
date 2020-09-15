@@ -7,12 +7,11 @@ use Illuminate\Http\Request;
 class PostDeleteService extends BaseService
 {
     private $id;
-    private $iduser;
 
-    public function __construct($id, $iduser)
+    public function __construct($id, $iduser=-1)
     {
         $this->id = $id;
-        $this->iduser = $iduser;
+        $this->sysuser = $iduser;
     }
 
     private function _check_data()
@@ -22,10 +21,9 @@ class PostDeleteService extends BaseService
 
     private function _soft_delete()
     {
-        //$this->logd("soft delete");
-        //$date = date("YmoHis");
-        $datetime = date("Y-m-d H:i:s");
-        return AppPost::where("id", "=", $this->id)->update(["delete_date"=>$datetime, "delete_user"=>$this->iduser]);
+        $update = [];
+        $this->_handle_sysfields($update,"d");
+        return AppPost::where("id", "=", $this->id)->update($update);
     }
 
     private function _hard_delete()

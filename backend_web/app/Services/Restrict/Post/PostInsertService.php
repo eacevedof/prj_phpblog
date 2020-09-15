@@ -39,7 +39,7 @@ class PostInsertService extends BaseService
         $data = $this->data;
         $this->logd($data,"post.insert");
         $this->_check_data($data);
-        $this->clean_sysfields($data);
+        $this->_handle_sysfields($data);
         $this->_remove_dates($data);
         $this->_format_ispage($data);
         $this->logd($data,"post.insert.create");
