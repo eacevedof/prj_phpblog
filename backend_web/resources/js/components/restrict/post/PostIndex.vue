@@ -139,15 +139,15 @@ export default {
             const search = this.filter.search
             const rows = this.filter.original.filter(obj => {
                 const exist = fields.some(field => {
-                    const str = obj[field]===null ? "" : obj[field].toString()
+                    if(obj[field]===null) return false
+                    const str = obj[field].toString()
                     return str.indexOf(search) !== -1
                 })
                 return exist
             })
 
             this.rows = [...rows]
-            console.log("rows filtered")
-            console.table(this.rows)
+            //console.log("rows filtered"); console.table(this.rows)
         },
 
         edit(id){
