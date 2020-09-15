@@ -13,7 +13,7 @@
                 <h1>Posts</h1><sub>({{rows.length}})</sub>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="load()">
+                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load()">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
@@ -86,12 +86,12 @@ export default {
     },
 
     mounted() {
-        this.load()
+        this.rows_load()
     },
 
     methods: {
-        load(){
-            console.log("...loading")
+        rows_load(){
+            console.log("rows_load")
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
@@ -101,7 +101,7 @@ export default {
             })
             .then(response => response.json())
             .then(response => {
-                console.log("load.reponse",response)
+                //console.log("load.reponse",response)
 
                 if(funcs.is_error(response)) {
                     return Swal.fire({
@@ -110,11 +110,13 @@ export default {
                         html: response.error,
                     })
                 }
+
                 self.rows = response.data
+                console.log("rows_load.rows"); console.table(self.rows)
                 self.filter.original = response.data
-                const search = db.select("post-search")
-                self.filter.search = search
+                self.filter.search = db.select("post-search")
                 self.on_search()
+
             })
             .catch(error => {
                 console.log("CATCH ERROR insert",error)
@@ -186,7 +188,7 @@ export default {
                         })
                     }
 
-                    self.load()
+                    self.rows_load()
 
                     Swal.fire({
                         icon: 'success',

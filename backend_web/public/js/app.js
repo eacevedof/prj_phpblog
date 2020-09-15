@@ -2017,11 +2017,11 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     };
   },
   mounted: function mounted() {
-    this.load();
+    this.rows_load();
   },
   methods: {
-    load: function load() {
-      console.log("...loading");
+    rows_load: function rows_load() {
+      console.log("rows_load");
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
@@ -2031,8 +2031,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       }).then(function (response) {
         return response.json();
       }).then(function (response) {
-        console.log("load.reponse", response);
-
+        //console.log("load.reponse",response)
         if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
@@ -2042,9 +2041,10 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         }
 
         self.rows = response.data;
+        console.log("rows_load.rows");
+        console.table(self.rows);
         self.filter.original = response.data;
-        var search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("post-search");
-        self.filter.search = search;
+        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("post-search");
         self.on_search();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
@@ -2113,7 +2113,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
             });
           }
 
-          self.load();
+          self.rows_load();
           Swal.fire({
             icon: 'success',
             title: "Post: ".concat(id, " has been removed"),
@@ -41200,7 +41200,7 @@ var render = function() {
               attrs: { disabled: _vm.issending },
               on: {
                 click: function($event) {
-                  return _vm.load()
+                  return _vm.rows_load()
                 }
               }
             },
