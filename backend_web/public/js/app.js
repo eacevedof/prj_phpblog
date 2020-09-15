@@ -1922,6 +1922,25 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1988,13 +2007,40 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
       columns: ["id", "title", "url_final", "description"],
-      rows: []
+      rows: [],
+      filter: {
+        original: [],
+        search: "",
+        result: []
+      }
     };
   },
   mounted: function mounted() {
     this.load();
   },
   methods: {
+    on_search: function on_search() {
+      if (!this.filter.search) {
+        this.result = [];
+        this.rows = _toConsumableArray(this.filter.original);
+        this.filter.original = [];
+        return;
+      }
+
+      this.filter.original = _toConsumableArray(this.rows);
+      var search = this.filter.search;
+      var fields = Object.keys(this.rows[0]);
+      if (!fields) return;
+      this.rows = this.rows.filter(function (obj) {
+        console.log("filter.obj", obj);
+        var exist = fields.some(function (field) {
+          console.log("some.field", field);
+          if (obj[field] === null) return false;
+          return obj[field].toString().indexOf(search) !== -1;
+        });
+        return exist.length > 0;
+      });
+    },
     load: function load() {
       console.log("...loading");
       var self = this;
@@ -41101,6 +41147,40 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "form-group col-md-10 mb-2" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.filter.search,
+            expression: "filter.search"
+          }
+        ],
+        ref: "search",
+        staticClass: "form-control",
+        attrs: { type: "text", placeholder: "...search" },
+        domProps: { value: _vm.filter.search },
+        on: {
+          keyup: function($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.on_search()
+          },
+          input: function($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.$set(_vm.filter, "search", $event.target.value)
+          }
+        }
+      })
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
       _c("div", { staticClass: "row card-header res-formheader" }, [
         _vm._m(0),

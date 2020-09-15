@@ -1,5 +1,12 @@
 <template>
 <div class="card">
+    <div class="form-group col-md-10 mb-2">
+        <input type="text" class="form-control" placeholder="...search"
+               ref="search"
+               v-model="filter.search"
+               v-on:keyup.enter="on_search()"
+        />
+    </div>
     <div class="card-body">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
@@ -68,6 +75,13 @@ export default {
             btnsend: CONST.BTN_INISTATE_REFRESH,
             columns: ["id","title","url_final","description"],
             rows: [],
+
+
+            filter:{
+                original: [],
+                search: "",
+                result: [],
+            }
         }
     },
 
@@ -76,6 +90,28 @@ export default {
     },
 
     methods: {
+        on_search(){
+            if(!this.filter.search){
+                this.result = []
+                this.rows = [...this.filter.original]
+                this.filter.original = []
+                return
+            }
+            this.filter.original = [...this.rows]
+
+            const search = this.filter.search
+            const fields = Object.keys(this.rows[0])
+            if(!fields) return
+
+            this.rows = this.rows.filter(obj => {
+                const exist = fields.some(field => {
+                    return obj[field].toString().indexOf(search) !== -1
+                })
+                console.log("exist",exist)
+                return exist.length>0
+            })
+
+        },
 
         load(){
             console.log("...loading")
