@@ -157,3 +157,10 @@ public function render($request, Throwable $exception)
     <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
 </select>
 ```
+- **error isset()**
+```php
+isset($data["code_cache"]); //me devuelve false cuando existe
+
+//este metodo devuelve true con key code_cache
+private function _has_key(array $data, $key){ return in_array($key,array_keys($data));}
+```

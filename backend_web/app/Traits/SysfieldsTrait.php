@@ -72,6 +72,8 @@ trait SysfieldsTrait
         $data["{$operation}_platform"] = $this->_get_platform();
     }
 
+    private function _has_key(array $data, $key){ return in_array($key,array_keys($data));}
+
     protected function _handle_sysfields(array &$data, $op="i")
     {
         /*
@@ -85,13 +87,13 @@ trait SysfieldsTrait
         if($op==="i"){
             $this->_unset_operations($data, ["update","delete"]);
             $this->_set_userplat($data);
-            if(isset($data["code_cache"]) && !$data["code_cache"]) $data["code_cache"] = \uniqid();
+            if($this->_has_key($data,"code_cache") && $data["code_cache"]===null) $data["code_cache"] = \uniqid();
             unset($data["insert_date"]);
         }
         elseif ($op==="u") {
             $this->_unset_operations($data, ["insert","delete"]);
             $this->_set_userplat($data,"update");
-            if(isset($data["code_cache"]) && !$data["code_cache"]) $data["code_cache"] = \uniqid();
+            if($this->_has_key($data,"code_cache") && $data["code_cache"]===null) $data["code_cache"] = \uniqid();
             unset($data["update_date"]);
         }
         else{
