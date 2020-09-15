@@ -11,7 +11,7 @@ namespace App\Traits;
 
 trait SysfieldsTrait
 {
-    protected $sysuser;
+    protected $sysuser = -1;
     /**
      * string|null $processflag
      * string|null $insert_platform
@@ -29,34 +29,17 @@ trait SysfieldsTrait
      * int|null $i
      * string|null $code_cache
      */
-    protected function _handle_sysfields(array &$data, $op="i"){
-
-        $date = ["insert_date","update_date","delete_date"];
-        $user = ["insert_user","insert_date","insert_user"];
-        $flags = ["is_erpsent","is_enabled","processflag"];
-        $auto = ["cru_csvnote,code_cache"];
-        if($op==="i"){
-            $this->_set_userplat($data);
-        }
-        elseif ($op==="u") {
-            $this->_set_userplat($data,"update");
-        }
-        else{
-            $this->_set_userplat($data,"delete");
-        }
-
-    }
 
     private function _get_platform()
     {
         return 3;
     }
 
-    private function _on_insert(&$data)
+    private function _unset_operations(&$data,$operations = [])
     {
-        //las fechas las gestiona la bd
-        $data["insert_user"] = $this->sysuser;
-        $data["insert_platform"] = $this->_get_platform();
+        foreach ($operations as $operation) {
+            unset($data["{$operation}_user"], $data["{$operation}_date"], $data["{$operation}_platform"]);
+        }
     }
 
     private function _set_userplat(&$data,$operation="insert")
@@ -65,4 +48,29 @@ trait SysfieldsTrait
         $data["{$operation}_platform"] = $this->_get_platform();
     }
 
+    protected function _handle_sysfields(array &$data, $op="i")
+    {
+        /*
+        $date = ["insert_date","update_date","delete_date"];
+        $user = ["insert_user","insert_date","insert_user"];
+        $flags = ["is_erpsent","is_enabled","processflag"];
+        $auto = ["cru_csvnote, code_cache"];
+        */
+
+        if($op==="i"){
+            $this->_unset_operations($data, ["update","delete"]);
+            $this->_set_userplat($data);
+            if(isset($data["code_cache"]) && !$data["code_cache"]) $data["code_cache"] = \uniqid();
+        }
+        elseif ($op==="u") {
+            $this->_unset_operations($data, ["insert","delete"]);
+            $this->_set_userplat($data,"update");
+            if(isset($data["code_cache"]) && !$data["code_cache"]) $data["code_cache"] = \uniqid();
+        }
+        else{
+            $this->_unset_operations($data, ["insert","update"]);
+            $this->_set_userplat($data,"delete");
+            $data["delete_date"] = date("YmdHis");
+        }
+    }
 }//SysfieldsTrait
