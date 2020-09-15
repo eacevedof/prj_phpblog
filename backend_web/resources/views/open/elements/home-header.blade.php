@@ -19,7 +19,7 @@
             C# era muy parecido a Java con lo cual a nivel formativo pude crear un proyecto básico con los <b>Java Beans, Tomcat</b> y <b>JSP</b>.
             <br/><br/>
             En esta época era muy común encontrar webs con <b>Macromedia Flash</b>, <b>Actionscript</b> y <b>PHP</b>. Trabajando en una gencia de publicidad me enfrenté
-            al desarrollo en este <strong>stack</strong>. Hacía trabajos muy básicos como enviar emails, gestionar algún bug en <b>Joomla</b> y <b>Wordpress</b>.
+            al desarrollo en este <strong>stack</strong>. Hacía trabajos muy básicos: animación en flash, programación en AS 3.0, automatización de emails, gestionar algún bug en <b>Joomla</b> y <b>Wordpress</b>.
             Entonces mi forma de desarrollar era el típico "código espagueti". No obstante intenté replicar el MVC pero sin clases, todo con funciones, un poco al estilo wordpress.
             Esto me sirvió para entender mejor PHP desde cero.  El uso de include, require, php.ini, variables globales, conexión con mysql y la interactividad con js.
             <br/><br/>

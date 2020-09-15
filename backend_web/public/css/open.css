@@ -24,7 +24,6 @@
 
 .app-breadscrumb-item > a:hover {
     color: #425566;
-    font-weight: bold;
 }
 
 .breadcrumb-item+.breadcrumb-item::before {
