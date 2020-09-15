@@ -29,7 +29,7 @@
                             <a href="/adm/post/update/{{$post->id}}" target="_blank" class="btn btn-sm btn-primary">Edit ({{$post->id}})</a>
                         @endauth
                     </div>
-                    <small class="text-muted">{{ get_ymd_hi($post->publish_date) }}</small>
+                    <small class="text-muted">{{ get_dmy_hi($post->publish_date) }}</small>
                 </div>
             </div>
         </div>
