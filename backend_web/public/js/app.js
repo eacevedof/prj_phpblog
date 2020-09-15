@@ -2045,9 +2045,8 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
           });
         }
 
-        self.rows = response.data;
-        console.log("rows_load.rows");
-        console.table(self.rows);
+        self.rows = response.data; //console.log("rows_load.rows"); console.table(self.rows)
+
         self.filter.original = response.data;
         self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("post-search");
         self.on_search();
@@ -41157,66 +41156,74 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "form-group col-md-9 mb-2 debug" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.filter.search,
-            expression: "filter.search"
-          }
-        ],
-        ref: "search",
-        staticClass: "form-control",
-        attrs: { type: "text", placeholder: "...search" },
-        domProps: { value: _vm.filter.search },
-        on: {
-          keyup: function($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
+    _c(
+      "div",
+      { staticClass: "d-flex pt-2", staticStyle: { "flex-wrap": "wrap" } },
+      [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.filter.search,
+              expression: "filter.search"
             }
-            return _vm.on_search()
-          },
-          input: function($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.$set(_vm.filter, "search", $event.target.value)
-          }
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "form-group col-md-2 mb-0 debug" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-dark",
-          attrs: { type: "button", disabled: _vm.issending },
+          ],
+          ref: "search",
+          staticClass: "form-control col-9 ml-4 mb-2",
+          attrs: { type: "text", placeholder: "...search" },
+          domProps: { value: _vm.filter.search },
           on: {
-            click: function($event) {
+            focus: function($event) {
+              return $event.target.select()
+            },
+            keyup: function($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
               return _vm.on_search()
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.$set(_vm.filter, "search", $event.target.value)
             }
           }
-        },
-        [
-          _c("i", {
-            staticClass: "fa fa-search",
-            attrs: { "aria-hidden": "true" }
-          })
-        ]
-      )
-    ]),
+        }),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-dark ml-4",
+            attrs: { type: "button", disabled: _vm.issending },
+            on: {
+              click: function($event) {
+                return _vm.on_search()
+              }
+            }
+          },
+          [
+            _c("i", {
+              staticClass: "fa fa-search",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(" Search")
+          ]
+        )
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
+    _c("div", { staticClass: "card-body mt-0" }, [
       _c("div", { staticClass: "row card-header res-formheader" }, [
         _c("div", { staticClass: "col-md-9" }, [
-          _c("h1", [_vm._v("Posts")]),
-          _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
+          _c("h1", [
+            _vm._v("Posts "),
+            _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [

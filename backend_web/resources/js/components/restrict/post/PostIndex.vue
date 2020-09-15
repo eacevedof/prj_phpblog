@@ -1,19 +1,21 @@
 <template>
 <div class="card">
-    <div class="form-group col-md-9 mb-2 debug">
-        <input type="text" class="form-control" placeholder="...search"
+
+    <div class="d-flex pt-2" style="flex-wrap: wrap;">
+        <input type="text" class="form-control col-9 ml-4 mb-2" placeholder="...search"
                ref="search"
                v-model="filter.search"
+               @focus="$event.target.select()"
                v-on:keyup.enter="on_search()"
         />
-        <button type="button" class="btn btn-dark"
+        <button type="button" class="btn btn-dark ml-4"
                 :disabled="issending" v-on:click="on_search()"
-        ><i class="fa fa-search" aria-hidden="true"></i></button>
+        ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
     </div>
-    <div class="card-body">
+    <div class="card-body mt-0">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
-                <h1>Posts</h1><sub>({{rows.length}})</sub>
+                <h1>Posts <sub>({{rows.length}})</sub></h1>
             </div>
             <div class="col-md-3">
                 <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load()">
@@ -115,7 +117,7 @@ export default {
                 }
 
                 self.rows = response.data
-                console.log("rows_load.rows"); console.table(self.rows)
+                //console.log("rows_load.rows"); console.table(self.rows)
                 self.filter.original = response.data
                 self.filter.search = db.select("post-search")
                 self.on_search()
