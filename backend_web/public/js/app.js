@@ -2064,14 +2064,13 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
     },
     //load
     on_search: function on_search() {
-      if (this.filter.original.length === 0) return; //console.log("on_search: this.filter.search",this.filter.search)
-
       if (!this.filter.search) {
         _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("post-search");
         this.rows = _toConsumableArray(this.filter.original);
         return;
       }
 
+      if (this.filter.original.length === 0) return;
       var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
       var search = this.filter.search.toString().trim();

@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <h5 class="card-title">{{$post->title}}</h5>
                     <p class="card-text">
-                        {{$post->excerpt}}
+                        {!! $post->excerpt !!}
                     </p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
