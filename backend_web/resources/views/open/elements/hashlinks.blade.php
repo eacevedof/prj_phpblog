@@ -1,3 +1,4 @@
+<!-- hashlinks -->
 <div class="row mb-2">
     <div class="col-12">
         @foreach($submenublog as $item)
@@ -5,3 +6,4 @@
         @endforeach
     </div>
 </div>
+<!--/ hashlinks -->
