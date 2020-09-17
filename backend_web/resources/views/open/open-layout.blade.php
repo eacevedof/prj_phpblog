@@ -19,7 +19,7 @@
     <meta http-equiv="Cache-Control" content="s-maxage = 3600, max-age = 60, private" />
 
 
-    <link rel="icon" type="image/png" href="https://resources.theframework.es/eduardoaf.com/20200905/160818-favicon.png"/>
+    <link rel="icon" type="image/png" href="https://resources.theframework.es/eduardoaf.com/20200917/161342-favicon.ico"/>
 <!--
     open graph protocol
     <meta property="og:title" content=" same as title" />
