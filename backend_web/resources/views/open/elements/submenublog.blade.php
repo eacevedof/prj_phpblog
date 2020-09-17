@@ -5,7 +5,7 @@
     </a>
     <ul class="dropdown-menu" aria-labelledby="submenu-blog">
     @foreach($submenublog as $item)
-        <a class="dropdown-item" href="{{$item->slug}}">{{$item->description}}</a>
+        <a class="dropdown-item" href="{{$item->url_final}}">{{$item->description}}</a>
     @endforeach
     </ul>
 </li>

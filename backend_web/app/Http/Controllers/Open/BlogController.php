@@ -107,6 +107,7 @@ class BlogController extends BaseController
 
     private function _get_category($slug)
     {
+        //dd("catslug:$slug");
         $r = (new CategoryService())->get($slug);
         if($r->isEmpty())  abort(404);
         return $r->first();
