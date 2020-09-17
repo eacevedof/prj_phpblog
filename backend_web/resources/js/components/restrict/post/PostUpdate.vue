@@ -357,10 +357,16 @@ export default {
             return category
         },
 
+        get_idtype_urlfinal(){
+            const idtype = this.post.id_type
+            const url = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.urlfinal)
+            return url
+        },
+
         onchange_title(){
-            this.post.slug = funcs.get_slug(this.post.title)
-            const catslug = this.get_idtype_slug()
-            this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug)
+            this.post.slug = funcs.get_slug(this.post.title).concat(`-${this.post.id}`)
+            const urlfinal = this.get_idtype_urlfinal()
+            this.post.url_final = urlfinal.concat("/").concat(this.post.slug)
         },
 
         on_btnalbum(){

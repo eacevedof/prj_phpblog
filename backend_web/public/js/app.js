@@ -2842,10 +2842,19 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       });
       return category;
     },
+    get_idtype_urlfinal: function get_idtype_urlfinal() {
+      var idtype = this.post.id_type;
+      var url = this.categories.filter(function (obj) {
+        return obj.id == idtype;
+      }).map(function (obj) {
+        return obj.urlfinal;
+      });
+      return url;
+    },
     onchange_title: function onchange_title() {
-      this.post.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.post.title);
-      var catslug = this.get_idtype_slug();
-      this.post.url_final = "/blog/".concat(catslug).concat("/").concat(this.post.slug);
+      this.post.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.post.title).concat("-".concat(this.post.id));
+      var urlfinal = this.get_idtype_urlfinal();
+      this.post.url_final = urlfinal.concat("/").concat(this.post.slug);
     },
     on_btnalbum: function on_btnalbum() {
       _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("last-slug", this.post.slug);
