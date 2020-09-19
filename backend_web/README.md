@@ -170,7 +170,7 @@ private function _has_key(array $data, $key){ return in_array($key,array_keys($d
 <micomponente /> en blade. No se  "compila igual" a <micomponente></micomponente>
 con la segunda opcion se renderiza el scrumb en el pie con la primera no
 ```
-- **error vue template o render function not defined**
+- **error vue template o render function not defined focus() of undefined**
 ```js
 Porbé varias cosas, pensaba que era rsync, comente todo el componente
 puse un componente básico
