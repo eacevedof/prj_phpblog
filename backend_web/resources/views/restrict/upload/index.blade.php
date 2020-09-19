@@ -7,6 +7,7 @@
     <input type="hidden" id="upload-domain" value="{{$uploaddomain}}"/>
     <span id="span-top"></span>
     @include("restrict/elements/breadscrumb")
-    <uploadindex />
+
+    @include("restrict/elements/breadscrumb")
 </div>
 @endsection
