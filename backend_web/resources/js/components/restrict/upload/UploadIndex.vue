@@ -66,7 +66,4 @@
     </div>
 </div>
 </template>
-
-<script>
-
-</script>
+<script type="module" src="./aaa.js"></script>
