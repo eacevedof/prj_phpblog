@@ -6,6 +6,5 @@
     @include("restrict/elements/breadscrumb")
     <postindex></postindex>
     @include("restrict/elements/breadscrumb")
-    @include("common/elements/totop")
 </div>
 @endsection

@@ -6,6 +6,5 @@
     @include("restrict/elements/breadscrumb")
     <postupdate></postupdate>
     @include("restrict/elements/breadscrumb")
-
 </div>
 @endsection
