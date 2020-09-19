@@ -1,4 +1,4 @@
-<div id="div-totop" style="position: fixed; bottom: 45px; right: 15px;">
+<div id="div-totop" style="">
     <a href="#span-top" class="btn btn-primary btn-circle">
         <i class="fa fa-arrow-up"></i>
     </a>
