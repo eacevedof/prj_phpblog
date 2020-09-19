@@ -22,9 +22,11 @@
 <div id="app">
 @include("restrict.elements.navbar")
     <main class="py-4">
+        <span id="span-top"></span>
         @yield('content')
     </main>
 </div>
+@include("common/elements/totop")
 @include("common.elements.enlighterjs")
 </body>
 </html>

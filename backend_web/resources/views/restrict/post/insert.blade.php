@@ -4,6 +4,8 @@
 <div class="container">
     @section("pagetitle", "Insert post")
     @include("restrict/elements/breadscrumb")
-    <postinsert />
+    <postinsert></postinsert>
+    @include("restrict/elements/breadscrumb")
+    @include("common/elements/totop")
 </div>
 @endsection
