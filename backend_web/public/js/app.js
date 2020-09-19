@@ -2574,10 +2574,10 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
 
 /***/ }),
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/restrict/upload/aaa.js?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/restrict/upload/aaa.js?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/restrict/upload/updateindexx.js?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./resources/js/components/restrict/upload/updateindexx.js?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -55828,7 +55828,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _UploadIndex_vue_vue_type_template_id_36cbf05b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UploadIndex.vue?vue&type=template&id=36cbf05b& */ "./resources/js/components/restrict/upload/UploadIndex.vue?vue&type=template&id=36cbf05b&");
-/* harmony import */ var _aaa_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./aaa.js?vue&type=script&lang=js& */ "./resources/js/components/restrict/upload/aaa.js?vue&type=script&lang=js&");
+/* harmony import */ var _updateindexx_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./updateindexx.js?vue&type=script&lang=js& */ "./resources/js/components/restrict/upload/updateindexx.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55838,7 +55838,7 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _aaa_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _updateindexx_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
   _UploadIndex_vue_vue_type_template_id_36cbf05b___WEBPACK_IMPORTED_MODULE_0__["render"],
   _UploadIndex_vue_vue_type_template_id_36cbf05b___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
@@ -55873,17 +55873,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/restrict/upload/aaa.js?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/restrict/upload/aaa.js?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/restrict/upload/updateindexx.js?vue&type=script&lang=js&":
+/*!******************************************************************************************!*\
+  !*** ./resources/js/components/restrict/upload/updateindexx.js?vue&type=script&lang=js& ***!
+  \******************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_aaa_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./aaa.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/restrict/upload/aaa.js?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_aaa_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_updateindexx_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./updateindexx.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/restrict/upload/updateindexx.js?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_updateindexx_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 

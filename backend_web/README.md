@@ -177,5 +177,5 @@ puse un componente básico
 compilaba sin error pero saltaba el error
 finalmente copié un componente que funcionaba PostIndex.vue 
 fui separandolo y cuando use el archivo uploadindex.js en <script src=... saltó el error
-es muy raro que no compile con ese nombre pero al cambiarlo a aaa.js volvio a funcioanr
+es muy raro que no compile con ese nombre pero al cambiarlo a updateindexx.js volvio a funcioanr
 ```
