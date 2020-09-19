@@ -5,7 +5,7 @@
 </div>
 <script type="application/javascript">
 (function() {
-    console.log(`document.documentElement.scrollTop:${document.documentElement.scrollTop}, window.innerHeight:${window.innerHeight}`);
+    //console.log(`document.documentElement.scrollTop:${document.documentElement.scrollTop}, window.innerHeight:${window.innerHeight}`);
     window.addEventListener("scroll", function() {
         const $divtop = document.getElementById("div-totop")
         if(document.documentElement.scrollTop > window.innerHeight) {
