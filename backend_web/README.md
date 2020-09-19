@@ -170,3 +170,12 @@ private function _has_key(array $data, $key){ return in_array($key,array_keys($d
 <micomponente /> en blade. No se  "compila igual" a <micomponente></micomponente>
 con la segunda opcion se renderiza el scrumb en el pie con la primera no
 ```
+- **error vue template o render function not defined**
+```js
+Porbé varias cosas, pensaba que era rsync, comente todo el componente
+puse un componente básico
+compilaba sin error pero saltaba el error
+finalmente copié un componente que funcionaba PostIndex.vue 
+fui separandolo y cuando use el archivo uploadindex.js en <script src=... saltó el error
+es muy raro que no compile con ese nombre pero al cambiarlo a aaa.js volvio a funcioanr
+```
