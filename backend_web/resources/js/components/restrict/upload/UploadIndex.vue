@@ -1,321 +1,222 @@
 <template>
 <div class="card">
-    <div class="row m-0 p-0 mt-4">
-        <div class="form-group col-md-10 mb-2">
-            <input type="text" class="form-control" placeholder="url to upload::name"
-               ref="urlupload"
-               v-model="upload.urlupload"
-               v-on:keyup.enter="on_upload()"
-            />
-        </div>
-        <div class="form-group col-md-10 mb-2">
-            <input type="file" class="form-control" multiple
-                ref="filesupload"
-                @change="on_fileschange()"
-            />
-        </div>
-        <div class="form-group col-md-2 mb-0">
-            <button type="button" class="btn btn-dark"
-                :disabled="issending || isoversized" v-on:click="on_upload()"
-            >
-                {{btnupload}}
-                <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
-            </button>
-        </div>
-        <div class="d-flex m-0 mt-1 pl-3" style="flex-wrap: wrap;">
-            <small class="badge bg-info text-white">max upload: {{maxuploadsize.toLocaleString("en")}}</small>
-            <small v-if="filessize>0" class="badge bg-warning">selected: {{filessize.toLocaleString("en")}}</small>
-            <small v-if="isoversized" class="badge bg-danger text-white">oversized: {{overbytes.toLocaleString("en")}}</small>
-            <small v-for="(file, i) in upload.files" :key="i">{{i+1}} - {{file.name}} ({{ file.size.toLocaleString("en") }})&nbsp;&nbsp;</small>
-        </div>
-    </div>
 
-<!-- card start -->
-    <div class="card-body">
+    <div class="d-flex pt-2" style="flex-wrap: wrap;">
+        <input type="text" class="form-control col-9 ml-4 mb-2" placeholder="...search"
+               ref="search"
+               v-model="filter.search"
+               @focus="$event.target.select()"
+               v-on:keyup.enter="on_search()"
+        />
+        <button type="button" class="btn btn-dark ml-4"
+                :disabled="issending" v-on:click="on_search()"
+        ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+    </div>
+    <div class="card-body mt-0">
         <div class="row card-header res-formheader">
-            <div class="col-md-6 mt-2">
-                <h1>Uploaded files:</h1><small>({{rows.length}})</small>
+            <div class="col-md-9">
+                <h1>Posts <sub>({{rows.length}})</sub></h1>
             </div>
             <div class="col-md-3">
-                <div class="form-group mt-3">
-                    <select id="sel-folders" v-model="selfolder" class="form-control" required>
-                        <option v-for="(folder, i) in folders" :value="folder" :key="i">{{folder}}</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3 mt-3">
-                <button class="btn btn-primary" :disabled="issending" v-on:click="load_rows()">
+                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load()">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
         </div>
-
-<!-- cards -->
-        <div class="row">
-            <div class="col-sm-3" v-for="(url, i) in rows" :key="i">
-                <div class="card">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <a :href="url" target="_blank">
-                                <img :src="url" class="container-fluid"/>
-                            </a>
-                            <small :id="'rawlink-'+i">{{url}}</small>
-                        </p>
-                    </div>
-
-                    <div class="card-footer text-muted">
-                        <button class="btn btn-info" :disabled="issending"  v-on:click="copycb(i)">
-                            <i class="fa fa-clipboard" aria-hidden="true"></i>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Title</th>
+                <th>Permalink</th>
+                <th>Description</th>
+                <th>Draft</th>
+                <th>Edit</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item, index) in rows" :key="index">
+                    <td
+                        v-for="(column, idx) in columns" :key="idx"
+                        v-bind:class="{ 'res-tddel': item.delete_date }"
+                    >{{item[column]}}</td>
+                    <td>
+                        <a v-if="item.id_status==0" class="btn btn-dark" target="_blank" :href="'/blog/draft/'+item.id">
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
+                        <a v-if="item.id_status!=0" class="btn btn-info" target="_blank" :href="item.url_final">
+                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary" :disabled="issending"  v-on:click="edit(item.id)">
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </button>
-                        <button class="btn btn-danger" :disabled="issending"  v-on:click="remove_file(url)">
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" :disabled="issending"  v-on:click="remove(item.id)">
                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                         </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-    <Toasts
-        :show-progress="true"
-        :rtl="false"
-        :max-messages="5"
-        :time-out="5000"
-        :closeable="true"
-    ></Toasts>
 </div>
 </template>
+
 <script>
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
-import apiupload from "../../../app/apiupload";
-import db from "../../../app/db";
+import db from "../../../app/db"
+
+const csrftoken = funcs.get_csrftoken()
 
 export default {
-
     data(){
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            btnupload: CONST.BTN_INISTATE_UPLOAD,
+            columns: ["id","title","url_final","description"],
 
-            selfolder: "eduardoaf.com",
-
-            maxuploadsize: 0,
-            isoversized: false,
-            overbytes: 0,
-            filessize: 0,
-
-            folders: [],
             rows: [],
 
-            upload:{
-                urlupload: "",
-                files: [],
+            filter:{
+                original: [],
+                search: "",
             }
         }
     },
 
-    async mounted() {
-        console.log("upload.async mounted()")
-        this.maxuploadsize = await apiupload.get_maxsize()
-        this.maxuploadsize = parseInt(this.maxuploadsize)
-        await this.load_folders()
-        await this.load_rows()
-        this.load_lastslug()
-        this.$refs.urlupload.focus();
-        //this.$refs.urlupload.setSelectionRange(0, 3);
-        setTimeout(() => this.$refs.urlupload.setSelectionRange(0, 3))
+    mounted() {
+        this.rows_load()
     },
 
     methods: {
-        load_lastslug(){
-            const slug = db.select("last-slug")
-            if(slug){
-                this.upload.urlupload = `xxx::${slug};`
-                db.delete("last-slug")
-            }
-        },
+        rows_load(){
+            console.log("rows_load")
+            const self = this
+            self.issending = true
+            self.btnsend = CONST.BTN_IN_PROGRESS
+            const url = `/api/post`
+            fetch(url, {
+                method: 'get',
+            })
+            .then(response => response.json())
+            .then(response => {
+                //console.log("load.reponse",response)
 
-        async load_folders() {this.folders = await apiupload.get_folders() },
-
-        async load_rows() {
-            this.issending = true
-            this.btnsend = CONST.BTN_IN_PROGRESS
-
-            try{
-                const r = await apiupload.get_files(this.selfolder)
-                //funcs.pr(r,"load_rows")
-                if(funcs.is_error(r)) {
+                if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
                         title: CONST.TITLE_ERROR,
-                        html: r.error,
+                        html: response.error,
                     })
                 }
-                this.rows = r
-            }
-            catch (error) {
+
+                self.rows = response.data
+                //console.log("rows_load.rows"); console.table(self.rows)
+                self.filter.original = response.data
+                self.filter.search = db.select("post-search")
+                self.on_search()
+
+            })
+            .catch(error => {
+                console.log("CATCH ERROR insert",error)
                 Swal.fire({
                     icon: 'error',
                     title: CONST.TITLE_SERVERROR,
                     html: error.toString(),
                 })
-            }
-            finally {
-                this.issending = false;
-                this.btnsend = CONST.BTN_INISTATE_REFRESH
-            }
-        },//load_rows
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend = CONST.BTN_INISTATE_REFRESH
+            })
+        },//load
 
-        async remove_file(urlfile){
-            if(confirm(CONST.CONFIRM)) {
-                this.issending = true
-                this.btnsend = CONST.BTN_IN_PROGRESS
+        on_search(){
+            if(!this.filter.search){
+                db.delete("post-search")
+                this.rows = [...this.filter.original]
+                return
+            }
+            if(this.filter.original.length === 0) return
+            const fields = Object.keys(this.filter.original[0])
+            if(!fields) return
 
-                try {
-                    const r = await apiupload.remove_file(urlfile)
-                    if (funcs.is_error(r)) {
+            const search = this.filter.search.toString().trim()
+            db.save("post-search",search)
+            const rows = this.filter.original.filter(obj => {
+                const exist = fields.some(field => {
+                    if(obj[field]===null) return false
+                    const str = obj[field].toString()
+                    return str.indexOf(search) !== -1
+                })
+                return exist
+            })
+
+            this.rows = [...rows]
+            //console.log("rows filtered"); console.table(this.rows)
+        },
+
+        edit(id){
+            const url = "/adm/post/update/"+id
+            document.location = url
+            //window.open(url, "_blank")
+        },
+
+        remove(id){
+            if(confirm(CONST.CONFIRM)){
+                console.log("fetching")
+                const self = this
+                self.issending = true
+                self.btnsend = CONST.BTN_IN_PROGRESS
+                const url = `/api/post/${id}`
+                fetch(url, {
+                    method: 'delete',
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({_token:csrftoken,_action:"post.delete"})
+                })
+                .then(response => response.json())
+                .then(response => {
+                    console.log("remove.response",response)
+
+                    if(funcs.is_error(response)) {
                         return Swal.fire({
                             icon: 'warning',
                             title: CONST.TITLE_ERROR,
-                            html: r.error,
+                            html: response.error,
                         })
                     }
 
-                    this.$toast.info(`Resource removed: ${r[0]}`)
-                    await this.load_rows()
-                }
-                catch (error) {
+                    self.rows_load()
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Post: ${id} has been removed`,
+                        html: `<b>&#128578;</b>`,
+                    })
+
+                })
+                .catch(error => {
+                    console.log("CATCH ERROR remove",error)
                     Swal.fire({
                         icon: 'error',
                         title: CONST.TITLE_SERVERROR,
                         html: error.toString(),
                     })
-                }
-                finally {
-                    this.issending = false;
-                    this.btnsend = CONST.BTN_INISTATE_REFRESH
-                }
-            }
-        },//remove_file
-
-        async upload_byurl(){
-            if(!this.upload.urlupload.trim()){
-                this.upload.urlupload = ""
-
-                if(this.upload.files.length===0)
-                    this.$toast.warning("You must fill input with a valid url")
-                this.$refs.urlupload.focus();
-                return
-            }
-
-            try {
-                this.issending = true
-                this.btnupload = CONST.BTN_IN_PROGRESS
-
-                const r = await apiupload.post_url(this.selfolder, this.upload.urlupload)
-
-                if(funcs.is_error(r)) {
-                    return Swal.fire({
-                        icon: 'warning',
-                        title: CONST.TITLE_ERROR,
-                        html: r.error,
-                    })
-                }
-                this.savelast(r.slice(-1)[0])
-                this.$toast.success(`Files "${r}" uploaded`)
-                this.upload.urlupload = ""
-                this.$refs.urlupload.focus();
-            }
-            catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: CONST.TITLE_SERVERROR,
-                    html: error.toString(),
+                })
+                .finally(() => {
+                    self.issending = false;
+                    self.btnsend = CONST.BTN_INISTATE_REFRESH
                 })
             }
-            finally {
-                this.issending = false;
-                this.btnupload = CONST.BTN_INISTATE_UPLOAD
-            }
-        }, //upload by url
-
-        async upload_files(){
-            if(this.upload.files.length===0) return
-
-            try {
-                this.issending = true
-                this.btnupload = CONST.BTN_IN_PROGRESS
-
-                const r = await apiupload.post_files(this.selfolder, this.upload.files)
-                if (funcs.is_error(r)) {
-                    return Swal.fire({
-                        icon: 'warning',
-                        title: CONST.TITLE_ERROR,
-                        html: r.error,
-                    })
-                }
-
-                this.savelast(r.url.slice(-1)[0])
-                this.$toast.success(`Files uploaded (${r.url.length}): ${r.url.join(", ")}`)
-                if(r.warning.length>0)
-                    this.$toast.warning(`Files not uploaded (${r.warning.length}): ${r.warning.join(", ")}`)
-                this.reset_filesupload()
-            }
-            catch (error) {
-                Swal.fire({
-                    icon: 'error',
-                    title: CONST.TITLE_SERVERROR,
-                    html: error.toString(),
-                })
-            }
-            finally {
-                this.issending = false;
-                this.btnupload = CONST.BTN_INISTATE_UPLOAD
-            }
-        },//upload files
-
-        async on_upload(){
-            await this.upload_byurl()
-            await this.upload_files()
-            await this.load_rows()
-        },//on_upload
-
-        copycb(i){
-            const el = document.getElementById("rawlink-"+i)
-            if(el) {
-                const url = el.innerText
-                funcs.to_clipboard(url)
-                this.savelast(url)
-                this.$toast.success(`in clipboard and last uri`)
-            }
         },
-
-        on_fileschange(){
-            this.upload.files = this.$refs.filesupload.files || []
-
-            let size = 0
-            for(const file of this.upload.files)
-                size += file.size
-
-            this.filessize = size
-            this.isoversized = (size>=this.maxuploadsize)
-            this.overbytes = (size - this.maxuploadsize)
-        },
-
-        reset_filesupload(){
-            this.$refs.filesupload.value = ""
-            this.upload.files = []
-            this.filessize = 0
-            this.isoversized = false
-            this.overbytes = 0
-        },
-
-        savelast(url){
-            if(!funcs.is_undefined(url))
-                db.save("last-upload",url)
-        }
     }
 }
 </script>
