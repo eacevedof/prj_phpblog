@@ -62,7 +62,6 @@
                 @include("open.elements.breadscrumb")
             @endisset
             @yield("container")
-            @include("common.elements.totop")
         </div>
     </div>
 </main>
@@ -71,5 +70,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 @include("common.elements.enlighterjs")
+@include("common.elements.totop")
 </body>
 </html>
