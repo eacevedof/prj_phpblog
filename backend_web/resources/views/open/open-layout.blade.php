@@ -57,10 +57,12 @@
     @endisset
     <div class="album py-5 bg-light">
         <div class="container">
+            <span id="span-top"></span>
             @isset($breadscrumb)
                 @include("open.elements.breadscrumb")
             @endisset
             @yield("container")
+            @include("common.elements.totop")
         </div>
     </div>
 </main>
