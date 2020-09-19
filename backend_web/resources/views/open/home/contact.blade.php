@@ -6,7 +6,7 @@
 
 @section("container")
 <!-- formulario de contacto -->
-<div class="card app-card">
+<div class="card opn-card">
     <div class="card-header">
         <h5 class="card-title mt-2">Formulario de contacto</h5>
     </div>

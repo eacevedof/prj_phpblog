@@ -1,4 +1,4 @@
-<footer class="text-center pt-3 pb-1 app-footer">
+<footer class="text-center pt-3 pb-1 opn-footer">
     <p class="text-white text-bold">
         <a class="text-white" href="{{ route('open.home.index') }}">
             <i class="fa fa-home" aria-hidden="true"></i>

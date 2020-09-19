@@ -5,7 +5,7 @@
 @section("pagekeywords",$seo["keywords"])
 
 @section("container")
-<div class="card app-card">
+<div class="card opn-card">
     <div class="card-header">
         <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
     </div>

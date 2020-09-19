@@ -1,5 +1,5 @@
-<div class="card app-card">
-    <div class="card-header pt-3 app-card-bb">
+<div class="card opn-card">
+    <div class="card-header pt-3 opn-card-bb">
         <h5 class="card-title">Blog de Eduardo Acevedo</h5>
     </div>
     <div class="card-body">
@@ -47,7 +47,7 @@
             <a href="/contacto" class="btn opn-btnblue opn-btnshadow">Contacta conmigo</a>
         </p>
     </div>
-    <div class="card-footer text-muted text-right app-card-bt">
+    <div class="card-footer text-muted text-right opn-card-bt">
         <b>Última actualización:</b> {{get_dmy_hi($updatedat)}}
     </div>
 </div>

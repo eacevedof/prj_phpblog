@@ -22,29 +22,29 @@
     color: #425566;
 }
 
-.breadcrumb-item+.breadcrumb-item::before {
+.opn-breadcrumb-item+.opn-breadcrumb-item::before {
     display: inline-block;
     padding-right: .5rem;
     color: #425466;
     content: "/";
 }
 
-.app-footer {
+.opn-footer {
     background: #425466 !important;
     font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 }
-.app-footer a {
+.opn-footer a {
     text-decoration: none;
 }
 
-.app-card {
+.opn-card {
     border: 1px solid #8eddf9;
 }
 
-.app-card-bb {
+.opn-card-bb {
     border-bottom: 1px solid #8eddf9;
 }
-.app-card-bt {
+.opn-card-bt {
     border-top: 1px solid #8eddf9;
 }
 
@@ -54,23 +54,9 @@
     text-decoration: none;
 }
 
-.app-center {
+.opn-center {
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-}
-
-.app-btncircle {
-    width: 30px;
-    height: 30px;
-    padding: 6px 0px;
-    border-radius: 15px;
-    font-size: 8px;
-    text-align: center;
-}
-.app-divfloat {
-    position: fixed;
-    bottom: 45px;
-    right: 15px;
 }

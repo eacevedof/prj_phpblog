@@ -21,7 +21,7 @@
 @endauth
 @endif
 
-<div class="card lg-12 app-card mb-2">
+<div class="card lg-12 opn-card mb-2">
     <div class="row g-0">
         <div class="col-md-12">
             <div class="card-body">
