@@ -5,21 +5,15 @@
 </div>
 <script type="application/javascript">
 (function() {
-    const $divtop = document.getElementById("div-totop")
-    //const $span = document.getElementById("span-top")
-
-    window.addEventListener("scroll",function() {
-        console.log(`
-          document.documentElement.scrollTop=${document.documentElement.scrollTop},
-          window.innerHeight=${window.innerHeight}
-        `)
+    window.addEventListener("scroll", function() {
+        const $divtop = document.getElementById("div-totop")
         if(document.documentElement.scrollTop > window.innerHeight) {
             $divtop.style.display = "inherit"
-            console.log("divtop style",$divtop)
+            //console.log("divtop style",$divtop)
         }
         else {
             $divtop.style.display = "none"
-            console.log("divtop style none",$divtop)
+            //console.log("divtop style none",$divtop)
         }
     })
 })()
