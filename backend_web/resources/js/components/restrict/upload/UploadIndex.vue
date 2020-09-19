@@ -86,4 +86,4 @@
     </div>
 </template>
 
-<script type="module" src="./updateindexx.js"></script>
+<script type="module" src="./updateindex.js"></script>
