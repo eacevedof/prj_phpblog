@@ -1,19 +1,25 @@
-<div id="btnTop" class="fixed-action-btn smooth-scroll" style="bottom: 45px; right: 24px;display: none;">
-    <a href="#topSection" class="btn-floating btn-large red">
+<div id="div-totop" class="fixed-action-btn smooth-scroll" style="bottom: 45px; right: 24px; display: none;">
+    <a href="#span-top" class="btn-floating btn-large red">
         <i class="fa fa-arrow-up"></i>
     </a>
 </div>
 <script type="application/javascript">
 (function() {
-    const $btn = document.getElementById("btnTop")
-    const $home = document.getElementById("topSection")
-    const startpoint = $home.scrollTop + $home.style.height;
+    const $divtop = document.getElementById("div-totop")
+    //const $span = document.getElementById("span-top")
 
     window.addEventListener("scroll",function() {
-        if(window.pageYOffset > startpoint) {
-            $btn.style.display = "inline-block"
-        } else {
-            $btn.style.display = "none"
+        console.log(`
+          document.documentElement.scrollTop=${document.documentElement.scrollTop},
+          window.innerHeight=${window.innerHeight}
+        `)
+        if(document.documentElement.scrollTop > window.innerHeight) {
+            $divtop.style.display = "inherit"
+            console.log("divtop style",$divtop)
+        }
+        else {
+            $divtop.style.display = "none"
+            console.log("divtop style none",$divtop)
         }
     })
 })()
