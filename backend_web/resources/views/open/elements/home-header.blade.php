@@ -44,7 +44,7 @@
             en el uso de dichas herramientas.
         </p>
         <p class="text-right">
-            <a href="/contacto" class="btn opn-btnblue app-btnshadow">Contacta conmigo</a>
+            <a href="/contacto" class="btn opn-btnblue opn-btnshadow">Contacta conmigo</a>
         </p>
     </div>
     <div class="card-footer text-muted text-right app-card-bt">
