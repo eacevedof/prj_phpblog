@@ -54188,11 +54188,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_restrict_post_PostInsert_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/restrict/post/PostInsert.vue */ "./resources/js/components/restrict/post/PostInsert.vue");
 /* harmony import */ var _components_restrict_post_PostUpdate_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/restrict/post/PostUpdate.vue */ "./resources/js/components/restrict/post/PostUpdate.vue");
 /* harmony import */ var _components_restrict_upload_UploadIndex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/restrict/upload/UploadIndex */ "./resources/js/components/restrict/upload/UploadIndex.js");
-/* harmony import */ var _components_restrict_upload_UploadInsert__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/restrict/upload/UploadInsert */ "./resources/js/components/restrict/upload/UploadInsert.js");
-/* harmony import */ var vue_bootstrap_toasts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-bootstrap-toasts */ "./node_modules/vue-bootstrap-toasts/src/index.js");
+/* harmony import */ var vue_bootstrap_toasts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-bootstrap-toasts */ "./node_modules/vue-bootstrap-toasts/src/index.js");
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
-window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); //import Vue from "vue"
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -54206,17 +54206,20 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 
+ //import UploadInsert from "./components/restrict/upload/UploadInsert";
 
 
-
-Vue.use(vue_bootstrap_toasts__WEBPACK_IMPORTED_MODULE_5__["default"]);
+Vue.use(vue_bootstrap_toasts__WEBPACK_IMPORTED_MODULE_4__["default"]);
 Vue.component('postindex', _components_restrict_post_PostIndex_vue__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.component('postinsert', _components_restrict_post_PostInsert_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 Vue.component('postupdate', _components_restrict_post_PostUpdate_vue__WEBPACK_IMPORTED_MODULE_2__["default"]);
-Vue.component('uploadindex', _components_restrict_upload_UploadIndex__WEBPACK_IMPORTED_MODULE_3__["default"]);
-Vue.component('uploadinsert', _components_restrict_upload_UploadInsert__WEBPACK_IMPORTED_MODULE_4__["default"]);
+Vue.component('uploadindex', _components_restrict_upload_UploadIndex__WEBPACK_IMPORTED_MODULE_3__["default"]); //Vue.component('uploadinsert', UploadInsert);
+
 var app = new Vue({
-  el: '#app'
+  el: '#app',
+  components: {
+    UploadIndex: _components_restrict_upload_UploadIndex__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }
 });
 
 /***/ }),
@@ -55499,112 +55502,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     savelast: function savelast(url) {
       if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_undefined(url)) _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("last-upload", url);
     }
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/components/restrict/upload/UploadInsert.js":
-/*!*****************************************************************!*\
-  !*** ./resources/js/components/restrict/upload/UploadInsert.js ***!
-  \*****************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../app/funcs */ "./resources/js/app/funcs.js");
-/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../app/constants */ "./resources/js/app/constants.js");
-
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-//uploadinsert.js
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD,
-      issending: false,
-      upload: {
-        content: "",
-        url_img1: "",
-        url_img2: "",
-        url_img3: ""
-      }
-    };
-  },
-  methods: {
-    on_change: function on_change() {
-      alert("X");
-    },
-    insert: function insert() {
-      var _this = this;
-
-      var self = this;
-      self.issending = true;
-      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-      var url = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadomain().concat("/upload/by-url");
-      var form = new FormData();
-      form.append("resource-usertoken", _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
-      form.append("folderdomain", "eduardoaf.com");
-      form.append("files", self.upload.content);
-      fetch(url, {
-        method: 'post',
-        body: form
-      }).then(function (response) {
-        return response.json();
-      }).then(function (response) {
-        console.log("reponse", response);
-
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
-          return Swal.fire({
-            icon: 'warning',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
-            text: response.error
-          });
-        }
-
-        _this.$toast.success("Files \"".concat(url, "\" uploaded"));
-      })["catch"](function (error) {
-        console.log("CATCH ERROR insert", error);
-        Swal.fire({
-          icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
-          text: error.toString()
-        });
-      })["finally"](function () {
-        self.issending = false;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-      });
-    },
-    //insert
-    handleSubmit: function handleSubmit(e) {
-      e.preventDefault();
-      this.insert();
-    } //handleSubmit(e)
-
-  },
-  mounted: function mounted() {
-    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              ;
-
-            case 1:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee);
-    }))();
   }
 });
 

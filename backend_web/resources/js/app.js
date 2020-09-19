@@ -1,6 +1,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+//import Vue from "vue"
 
 /**
  * The following block of code may be used to automatically register your
@@ -17,7 +18,7 @@ import PostInsert from "./components/restrict/post/PostInsert.vue";
 import PostUpdate from "./components/restrict/post/PostUpdate.vue";
 
 import UploadIndex from "./components/restrict/upload/UploadIndex";
-import UploadInsert from "./components/restrict/upload/UploadInsert";
+//import UploadInsert from "./components/restrict/upload/UploadInsert";
 
 import VueBootstrapToasts from "vue-bootstrap-toasts";
 
@@ -28,7 +29,7 @@ Vue.component('postinsert', PostInsert);
 Vue.component('postupdate', PostUpdate);
 
 Vue.component('uploadindex', UploadIndex);
-Vue.component('uploadinsert', UploadInsert);
+//Vue.component('uploadinsert', UploadInsert);
 
 const app = new Vue({
     el: '#app',
