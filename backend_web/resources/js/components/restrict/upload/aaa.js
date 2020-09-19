@@ -1,152 +1,232 @@
-//uploadindex.js
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
-import db from "../../../app/db"
-
-const csrftoken = funcs.get_csrftoken()
+import apiupload from "../../../app/apiupload";
+import db from "../../../app/db";
 
 export default {
+
     data(){
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            columns: ["id","title","url_final","description"],
+            btnupload: CONST.BTN_INISTATE_UPLOAD,
 
+            selfolder: "eduardoaf.com",
+
+            maxuploadsize: 0,
+            isoversized: false,
+            overbytes: 0,
+            filessize: 0,
+
+            folders: [],
             rows: [],
 
-            filter:{
-                original: [],
-                search: "",
+            upload:{
+                urlupload: "",
+                files: [],
             }
         }
     },
 
-    mounted() {
-        this.rows_load()
+    async mounted() {
+        console.log("upload.async mounted()")
+        this.maxuploadsize = await apiupload.get_maxsize()
+        this.maxuploadsize = parseInt(this.maxuploadsize)
+        await this.load_folders()
+        await this.load_rows()
+        this.load_lastslug()
+        this.$refs.urlupload.focus();
+        //this.$refs.urlupload.setSelectionRange(0, 3);
+        setTimeout(() => this.$refs.urlupload.setSelectionRange(0, 3))
     },
 
     methods: {
-        rows_load(){
-            console.log("rows_load")
-            const self = this
-            self.issending = true
-            self.btnsend = CONST.BTN_IN_PROGRESS
-            const url = `/api/post`
-            fetch(url, {
-                method: 'get',
-            })
-                .then(response => response.json())
-                .then(response => {
-                    //console.log("load.reponse",response)
+        load_lastslug(){
+            const slug = db.select("last-slug")
+            if(slug){
+                this.upload.urlupload = `xxx::${slug};`
+                db.delete("last-slug")
+            }
+        },
 
-                    if(funcs.is_error(response)) {
+        async load_folders() {this.folders = await apiupload.get_folders() },
+
+        async load_rows() {
+            this.issending = true
+            this.btnsend = CONST.BTN_IN_PROGRESS
+
+            try{
+                const r = await apiupload.get_files(this.selfolder)
+                //funcs.pr(r,"load_rows")
+                if(funcs.is_error(r)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        html: r.error,
+                    })
+                }
+                this.rows = r
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    html: error.toString(),
+                })
+            }
+            finally {
+                this.issending = false;
+                this.btnsend = CONST.BTN_INISTATE_REFRESH
+            }
+        },//load_rows
+
+        async remove_file(urlfile){
+            if(confirm(CONST.CONFIRM)) {
+                this.issending = true
+                this.btnsend = CONST.BTN_IN_PROGRESS
+
+                try {
+                    const r = await apiupload.remove_file(urlfile)
+                    if (funcs.is_error(r)) {
                         return Swal.fire({
                             icon: 'warning',
                             title: CONST.TITLE_ERROR,
-                            html: response.error,
+                            html: r.error,
                         })
                     }
 
-                    self.rows = response.data
-                    //console.log("rows_load.rows"); console.table(self.rows)
-                    self.filter.original = response.data
-                    self.filter.search = db.select("post-search")
-                    self.on_search()
-
-                })
-                .catch(error => {
-                    console.log("CATCH ERROR insert",error)
+                    this.$toast.info(`Resource removed: ${r[0]}`)
+                    await this.load_rows()
+                }
+                catch (error) {
                     Swal.fire({
                         icon: 'error',
                         title: CONST.TITLE_SERVERROR,
                         html: error.toString(),
                     })
-                })
-                .finally(() => {
-                    self.issending = false;
-                    self.btnsend = CONST.BTN_INISTATE_REFRESH
-                })
-        },//load
+                }
+                finally {
+                    this.issending = false;
+                    this.btnsend = CONST.BTN_INISTATE_REFRESH
+                }
+            }
+        },//remove_file
 
-        on_search(){
-            if(!this.filter.search){
-                db.delete("post-search")
-                this.rows = [...this.filter.original]
+        async upload_byurl(){
+            if(!this.upload.urlupload.trim()){
+                this.upload.urlupload = ""
+
+                if(this.upload.files.length===0)
+                    this.$toast.warning("You must fill input with a valid url")
+                this.$refs.urlupload.focus();
                 return
             }
-            if(this.filter.original.length === 0) return
-            const fields = Object.keys(this.filter.original[0])
-            if(!fields) return
 
-            const search = this.filter.search.toString().trim()
-            db.save("post-search",search)
-            const rows = this.filter.original.filter(obj => {
-                const exist = fields.some(field => {
-                    if(obj[field]===null) return false
-                    const str = obj[field].toString()
-                    return str.indexOf(search) !== -1
+            try {
+                this.issending = true
+                this.btnupload = CONST.BTN_IN_PROGRESS
+
+                const r = await apiupload.post_url(this.selfolder, this.upload.urlupload)
+
+                if(funcs.is_error(r)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        html: r.error,
+                    })
+                }
+                this.savelast(r.slice(-1)[0])
+                this.$toast.success(`Files "${r}" uploaded`)
+                this.upload.urlupload = ""
+                this.$refs.urlupload.focus();
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    html: error.toString(),
                 })
-                return exist
-            })
+            }
+            finally {
+                this.issending = false;
+                this.btnupload = CONST.BTN_INISTATE_UPLOAD
+            }
+        }, //upload by url
 
-            this.rows = [...rows]
-            //console.log("rows filtered"); console.table(this.rows)
-        },
+        async upload_files(){
+            if(this.upload.files.length===0) return
 
-        edit(id){
-            const url = "/adm/post/update/"+id
-            document.location = url
-            //window.open(url, "_blank")
-        },
+            try {
+                this.issending = true
+                this.btnupload = CONST.BTN_IN_PROGRESS
 
-        remove(id){
-            if(confirm(CONST.CONFIRM)){
-                console.log("fetching")
-                const self = this
-                self.issending = true
-                self.btnsend = CONST.BTN_IN_PROGRESS
-                const url = `/api/post/${id}`
-                fetch(url, {
-                    method: 'delete',
-                    headers:{
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({_token:csrftoken,_action:"post.delete"})
+                const r = await apiupload.post_files(this.selfolder, this.upload.files)
+                if (funcs.is_error(r)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        html: r.error,
+                    })
+                }
+
+                this.savelast(r.url.slice(-1)[0])
+                this.$toast.success(`Files uploaded (${r.url.length}): ${r.url.join(", ")}`)
+                if(r.warning.length>0)
+                    this.$toast.warning(`Files not uploaded (${r.warning.length}): ${r.warning.join(", ")}`)
+                this.reset_filesupload()
+            }
+            catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    html: error.toString(),
                 })
-                    .then(response => response.json())
-                    .then(response => {
-                        console.log("remove.response",response)
+            }
+            finally {
+                this.issending = false;
+                this.btnupload = CONST.BTN_INISTATE_UPLOAD
+            }
+        },//upload files
 
-                        if(funcs.is_error(response)) {
-                            return Swal.fire({
-                                icon: 'warning',
-                                title: CONST.TITLE_ERROR,
-                                html: response.error,
-                            })
-                        }
+        async on_upload(){
+            await this.upload_byurl()
+            await this.upload_files()
+            await this.load_rows()
+        },//on_upload
 
-                        self.rows_load()
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: `Post: ${id} has been removed`,
-                            html: `<b>&#128578;</b>`,
-                        })
-
-                    })
-                    .catch(error => {
-                        console.log("CATCH ERROR remove",error)
-                        Swal.fire({
-                            icon: 'error',
-                            title: CONST.TITLE_SERVERROR,
-                            html: error.toString(),
-                        })
-                    })
-                    .finally(() => {
-                        self.issending = false;
-                        self.btnsend = CONST.BTN_INISTATE_REFRESH
-                    })
+        copycb(i){
+            const el = document.getElementById("rawlink-"+i)
+            if(el) {
+                const url = el.innerText
+                funcs.to_clipboard(url)
+                this.savelast(url)
+                this.$toast.success(`in clipboard and last uri`)
             }
         },
+
+        on_fileschange(){
+            this.upload.files = this.$refs.filesupload.files || []
+
+            let size = 0
+            for(const file of this.upload.files)
+                size += file.size
+
+            this.filessize = size
+            this.isoversized = (size>=this.maxuploadsize)
+            this.overbytes = (size - this.maxuploadsize)
+        },
+
+        reset_filesupload(){
+            this.$refs.filesupload.value = ""
+            this.upload.files = []
+            this.filessize = 0
+            this.isoversized = false
+            this.overbytes = 0
+        },
+
+        savelast(url){
+            if(!funcs.is_undefined(url))
+                db.save("last-upload",url)
+        }
     }
 }

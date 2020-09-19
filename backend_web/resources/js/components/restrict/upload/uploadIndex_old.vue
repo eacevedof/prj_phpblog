@@ -86,4 +86,4 @@
 </div>
 </template>
 
-<script type="module" src="./uploadindex.js"></script>
+<script type="module" src="./aaa.js"></script>
