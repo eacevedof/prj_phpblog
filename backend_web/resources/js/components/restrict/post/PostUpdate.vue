@@ -168,4 +168,4 @@
     ></Toasts>
 </div>
 </template>
-<script type="module" src="postindex.js"></script>
+<script type="module" src="./postupdate.js"></script>
