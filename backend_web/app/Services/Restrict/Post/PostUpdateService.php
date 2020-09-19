@@ -41,7 +41,7 @@ class PostUpdateService extends BaseService
             $data["seo_title"] = substr(strip_tags($this->data["title"]),0,64);
 
         if(!$this->dbentity->seo_description & !$this->data["seo_description"])
-            $data["seo_description"] = substr(strip_tags($this->data["content"]),0,159);
+            $data["seo_description"] = substr(strip_tags($this->data["excerpt"]),0,159);
     }
 
     public function save()
