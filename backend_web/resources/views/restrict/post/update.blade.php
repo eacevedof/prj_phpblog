@@ -2,8 +2,10 @@
 
 @section('content')
 <div class="container">
-    @section("pagetitle", "Update post")
+    @section("pagetitle", "update post")
+
     @include("restrict/elements/breadscrumb")
-    <postupdate/>
+    <postupdate></postupdate>
+    @include("restrict/elements/breadscrumb")
 </div>
 @endsection

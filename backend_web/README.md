@@ -164,3 +164,9 @@ isset($data["code_cache"]); //me devuelve false cuando existe
 //este metodo devuelve true con key code_cache
 private function _has_key(array $data, $key){ return in_array($key,array_keys($data));}
 ```
+- **error en componente sin cierre explicito**
+```php
+//teniendo una vista del tipo
+<micomponente /> en blade. No se  "compila igual" a <micomponente></micomponente>
+con la segunda opcion se renderiza el scrumb en el pie con la primera no
+```
