@@ -1,5 +1,5 @@
-<div id="div-totop" style="">
-    <a href="#span-top" class="btn btn-primary btn-circle">
+<div id="div-totop" class="cmn-divfloat">
+    <a href="#span-top" class="btn btn-primary cmn-btncircle">
         <i class="fa fa-arrow-up"></i>
     </a>
 </div>
