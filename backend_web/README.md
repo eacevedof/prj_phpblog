@@ -5,6 +5,7 @@
     - docker logs lv-eduardoaf-be --tail 10
 
 ### To-Do:
+- Replace de codelan por data-enlighter-language
 - Crear contador de palabras en PostUpdate.vue
 - Crear buscador de imágenes en UploadIndex.vue
 - Buscador en web
