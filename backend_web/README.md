@@ -5,8 +5,12 @@
     - docker logs lv-eduardoaf-be --tail 10
 
 ### To-Do:
+- Crear contador de palabras en PostUpdate.vue
+- Crear buscador de imágenes en UploadIndex.vue
+- Buscador en web
 - Cambiar make be-logs ya que no exist var/log/dev.log
-- crear gestor de imagenes, permitir subida por url
+
+
 
 ### Errores:
 - Me da `500 Server Error` en docker
