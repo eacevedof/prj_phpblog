@@ -48,6 +48,7 @@
     <link href="{{ asset('css/open.css') }}" rel="stylesheet">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+@include("common.elements.gtag")
 </head>
 <body>
 @include("open.elements.navbar")
