@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <title>@yield("pagetitle")</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta id="meta-csrf-token" name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="description" content="@yield("pagedescription")">
-    <meta name="keywords" content="@yield("pagekeywords")">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta id="meta-csrf-token" name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="description" content="@yield("pagedescription")" />
+    <meta name="keywords" content="@yield("pagekeywords")" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- tpas -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta http-equiv="Content-Language" content="es_ES">
@@ -19,7 +19,7 @@
     <meta http-equiv="Cache-Control" content="s-maxage = 3600, max-age = 60, private" />
 
 
-    <link rel="icon" type="image/png" href="https://resources.theframework.es/eduardoaf.com/20200917/161342-favicon.ico"/>
+    <link rel="icon" type="image/png" href="https://resources.theframework.es/eduardoaf.com/20200917/161342-favicon.ico" />
 <!--
     open graph protocol
     <meta property="og:title" content=" same as title" />
