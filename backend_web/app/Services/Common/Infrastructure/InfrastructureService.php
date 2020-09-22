@@ -2,6 +2,7 @@
 namespace App\Services\Common\Infrastructure;
 
 use App\Services\BaseService;
+use Illuminate\Support\Facades\DB;
 
 class InfrastructureService extends BaseService
 {
@@ -21,6 +22,17 @@ class InfrastructureService extends BaseService
     public static function get_maxsize_bytes(){
         $size = self::get_maxsize()."MB";
         return \get_in_bytes($size);
+    }
+
+    public static function is_ipuntracked(){
+        $remoteip = \Request::ip();
+        $r = DB::table("app_ip_untracked")
+            ->select(["id"])
+            ->where("remote_ip","=",$remoteip)
+            ->where("is_enabled","=","1")
+            ->get();
+        if($r->isEmpty()) return false;
+        return true;
     }
 
     public static function get_platform(){
