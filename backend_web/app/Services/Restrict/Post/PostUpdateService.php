@@ -14,16 +14,16 @@ class PostUpdateService extends BaseService
         $this->dbentity = AppPost::find($data["id"]);
     }
 
-    private function _check_data($data)
-    {
-
-    }
+    private function _check_data($data){}
 
     private function _set_publishdate(&$data)
     {
         if(!$this->dbentity->publish_date && !$this->dbentity->id_status && $this->data["id_status"]){
             $data["publish_date"] = date("YmdHis");
         }
+        else
+            //evita que se rescriba la fecha con lo que viene de js
+            unset($data["publish_date"]);
     }
 
     private function _set_lastupdate(&$data)
@@ -57,7 +57,7 @@ class PostUpdateService extends BaseService
         $this->_set_lastupdate($data);
         $this->_set_seo($data);
 
-        $this->logd($data,"post.update.update");
+        $this->logd($data,"post.update.data");
         $id = $this->data["id"];
         return AppPost::where("id", "=", $id)->update($data);
     }
