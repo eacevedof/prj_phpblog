@@ -25,7 +25,8 @@ class InfrastructureService extends BaseService
     }
 
     public static function is_ipuntracked(){
-        $remoteip = \Request::ip();
+        //$remoteip = \Request::ip();
+        $remoteip = $_SERVER["REMOTE_ADDR"] ?? "";
         $r = DB::table("app_ip_untracked")
             ->select(["id"])
             ->where("remote_ip","=",$remoteip)
