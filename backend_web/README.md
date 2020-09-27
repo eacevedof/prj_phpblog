@@ -4,9 +4,12 @@
 - Logs:
     - docker logs lv-eduardoaf-be --tail 10
 - integracion:
-    - `cd ~/projects/prj_python37/integrator; py main.py`
+    - **`cd ~/projects/prj_python37/integrator; py main.py`**
+    
 ### To-Do:
-- Replace de codelan por data-enlighter-language
+- ~publish_date sin 00:00~
+- ~Mejora de hashtags~
+- ~Replace de codelan por data-enlighter-language~
 - Crear contador de palabras en PostUpdate.vue
 - Crear buscador de imágenes en UploadIndex.vue
 - Buscador en web
