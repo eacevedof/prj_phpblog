@@ -27,7 +27,9 @@
             <div class="card-body">
                 <h1 class="card-title mb-3">{{$result->title}}</h1>
                 @if($result->url_img2)
-                    <img src="{{$result->url_img2}}" alt="{{$result->title}}" width="450" class="pull-left mr-3 img-fluid">
+                    <a href="{{$result->url_img2}}" target="_blank">
+                        <img src="{{$result->url_img2}}" alt="{{$result->title}}" width="450" class="pull-left mr-3 img-fluid">
+                    </a>
                 @endif
                 <p class="card-text">{!!$result->content!!}</p>
                 <p class="card-text text-right">
