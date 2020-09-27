@@ -14,7 +14,7 @@ class EnlighterjsComponent
         $this->replaced = $data;
     }
 
-    private function _get_codes()
+    private function _get_tags_code()
     {
         //data-enlighter-language="less"
         $result = [];
@@ -25,9 +25,15 @@ class EnlighterjsComponent
         ];
     }
 
-    private function _add_replaced()
+    private function _replace_devlan()
     {
-        $this->codes = $this->_get_codes();
+        $this->data = str_replace(" devlan=\""," data-enlighter-language=\"",$this->data);
+        $this->replaced = str_replace(" devlan=\""," data-enlighter-language=\"",$this->replaced);
+    }
+
+    private function _html_entities()
+    {
+        $this->codes = $this->_get_tags_code();
         foreach ($this->codes["elements"] as $i => $element)
         {
             $innerhtml = $this->codes["innerhtml"][$i];
@@ -48,9 +54,10 @@ class EnlighterjsComponent
 
     public function get_cleaned()
     {
-        $this->_add_replaced();
+        $this->_replace_devlan();
+        $this->_html_entities();
         $this->_replace_data();
-
+        //print_r($this->replaced);die;
         return $this->replaced;
     }
 }

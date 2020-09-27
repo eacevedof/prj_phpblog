@@ -6,9 +6,8 @@
 // - use javascript as default language
 // - use theme "enlighter" as default theme
 // - replace tabs with 2 spaces
-EnlighterJS.init('pre', 'code', {
-    language : 'javascript',
-    theme: 'enlighter',
+EnlighterJS.init('','code', {
+    theme: 'dracula',
     indent : 2
 });
 </script>
