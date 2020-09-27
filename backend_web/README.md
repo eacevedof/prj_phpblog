@@ -3,7 +3,8 @@
     - [http://localhost:400/](http://localhost:400/)
 - Logs:
     - docker logs lv-eduardoaf-be --tail 10
-
+- integracion:
+    - `cd ~/projects/prj_python37/integrator; py main.py`
 ### To-Do:
 - Replace de codelan por data-enlighter-language
 - Crear contador de palabras en PostUpdate.vue
