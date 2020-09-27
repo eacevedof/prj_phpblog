@@ -1,13 +1,10 @@
 <script type="text/javascript" src="{{ asset('assets/enlighter/enlighterjs.min.js') }}"></script>
 <script type="text/javascript">
+//https://github.com/EnlighterJS/EnlighterJS#languages
 //ejemplo: <pre data-enlighter-language="less">
-// INIT CODE - simple page-wide initialization based on css selectors
-// - highlight all pre + code tags (CSS3 selectors)
-// - use javascript as default language
-// - use theme "enlighter" as default theme
-// - replace tabs with 2 spaces
-EnlighterJS.init('','code', {
-    theme: 'dracula',
+EnlighterJS.init('code','code', {
+    language: "javascript",
+    theme: 'bootstrap4',
     indent : 2
 });
 </script>

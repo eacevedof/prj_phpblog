@@ -1,6 +1,7 @@
 <?php
 namespace App\Component;
 
+//https://github.com/EnlighterJS/EnlighterJS#languages
 class EnlighterjsComponent
 {
     private const PATTERN = "#<code[\s]+data-enlighter-language=\"[a-z]+\">(.*?)</code>#s";
