@@ -1,9 +1,16 @@
 <div id="div-totop" class="cmn-divfloat">
-    <a href="#span-top" class="btn btn-primary cmn-btncircle">
+    <button onclick="fn_goup()" class="btn btn-primary cmn-btncircle">
         <i class="fa fa-arrow-up"></i>
-    </a>
+    </button>
 </div>
-<script type="application/javascript">
+<script>
+const TOUP_Y = 110
+const MAX_SCROLL = 115
+
+function fn_goup(){
+    window.scrollTo(0, TOUP_Y)
+}
+
 (function() {
     const $divtop = document.getElementById("div-totop")
     //window.scrollY + document.querySelector('#elementId').getBoundingClientRect().top // Y
@@ -15,7 +22,7 @@
         //console.log("scrolltop:", document.documentElement.scrollTop, "scrolly", window.scrollY)
         //console.log("divtop.y:",$divtop.getBoundingClientRect().top,"scrolltop",document.documentElement.scrollTop)
         //if(document.documentElement.scrollTop > window.innerHeight){
-        if(document.documentElement.scrollTop > 115){
+        if(document.documentElement.scrollTop > MAX_SCROLL){
             $divtop.style.display = "inherit"
         }
         else {
