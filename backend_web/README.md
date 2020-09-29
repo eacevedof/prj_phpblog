@@ -191,3 +191,5 @@ finalmente copié un componente que funcionaba PostIndex.vue
 fui separandolo y cuando use el archivo uploadindex.js en <script src=... saltó el error
 es muy raro que no compile con ese nombre pero al cambiarlo a updateindex.js volvio a funcioanr
 ```
+- **error al descargar el zip generado con imagenes da 404 en prod**
+-
