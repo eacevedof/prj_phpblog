@@ -34,7 +34,7 @@ RUN apt-get update \
     # && yes | apt-get install npm
 
 # opcional
-# RUN apt-get install ghostscript
+RUN apt-get install -y ghostscript
 
 # RUN wget https://cs.symfony.com/download/php-cs-fixer-v2.phar -O php-cs-fixer
 # RUN chmod a+x php-cs-fixer

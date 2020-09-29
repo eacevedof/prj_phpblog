@@ -6,6 +6,10 @@
 - integracion:
     - **`cd ~/projects/prj_python37/integrator; py main.py`**
     
+### Dependencias:
+- Instalación en dockerfile de Ghostscript (comando gs)
+- `RUN apt-get install -y ghostscript`    
+
 ### To-Do:
 - ~publish_date sin 00:00~
 - ~Mejora de hashtags~
