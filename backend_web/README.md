@@ -192,4 +192,4 @@ fui separandolo y cuando use el archivo uploadindex.js en <script src=... saltó
 es muy raro que no compile con ese nombre pero al cambiarlo a updateindex.js volvio a funcioanr
 ```
 - **error al descargar el zip generado con imagenes da 404 en prod**
--
+- Parece que es un tema de windows o el tipo del pdf porque lo he probado en test y prod con mi cv y se convierte bien
