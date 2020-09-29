@@ -19,15 +19,6 @@
 - Buscador en web
 - Cambiar make be-logs ya que no exist var/log/dev.log
 
-
-
-### Errores:
-- Me da `500 Server Error` en docker
-    - He probado composer self-update. Nada
-    - Faltaba archivo .env
-- Class 'Reliese\Coders\CodersServiceProvider' not found
-    - Faltaba sincronizar, ejecutar composer update en el contenedor    
-
 ### Comandos:
 ```js
 composer require laravel/ui
@@ -75,6 +66,14 @@ php artisan db:seed --class=UsersTableSeeder
     - Error 419 status unknown
     - No llegaban los datos con PUT porque los enviaba como formulario y deben ser como JSON    
 - No me cargaba el id de usuario en el constructor del controlador. Los middlewares de autenticación se ejecutan despues de los constructores
+
+## Errores:
+- Me da `500 Server Error` en docker
+    - He probado composer self-update. Nada
+    - Faltaba archivo .env
+- Class 'Reliese\Coders\CodersServiceProvider' not found
+    - Faltaba sincronizar, ejecutar composer update en el contenedor    
+
 - **error**
     ```
     php artisan db:seed --class=AppPostSeeder
