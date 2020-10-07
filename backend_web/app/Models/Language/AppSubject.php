@@ -69,6 +69,7 @@ class AppSubject extends Model
 		'i',
 		'code_erp',
 		'description',
+        'excerpt',
 		'source',
 		'url_resource',
 		'id_type_source',
