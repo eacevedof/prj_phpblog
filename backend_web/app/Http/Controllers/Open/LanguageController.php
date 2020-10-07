@@ -9,13 +9,25 @@ class LanguageController extends BaseController
 
     public function __invoke()
     {
-        return view('open.home.contact', [
+        return view('open.language.index', [
             "result"      => [],
-            "seo"         => SeoComponent::get_meta("open.home.contact"),
-            "breadscrumb" => $this->_get_scrumb("open.home.contact"),
+            "seo"         => SeoComponent::get_meta("open.language.index"),
+            "breadscrumb" => $this->_get_scrumb("open.language.index"),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
-            "catslug"     => "contact",
+            "catslug"     => "language",
+        ]);
+    }
+
+    public function practice()
+    {
+        return view('open.language.practice', [
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.language.practice"),
+            "breadscrumb" => $this->_get_scrumb("open.language.practice"),
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "language",
         ]);
     }
 }
