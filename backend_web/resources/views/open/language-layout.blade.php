@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,11 +8,9 @@
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="{{asset("bulma-templates/css/cards.css")}}">
+    <link rel="stylesheet" href="{{asset("assets/bulma-templates/css/cards.css")}}">
 </head>
-
 <body>
-
 <!-- START NAV -->
 <nav class="navbar">
     <div class="container">
@@ -113,13 +110,9 @@
         </div>
     </div>
 </footer>
-
-<script src="../js/cardsData.js"></script>
-
+<script src="{{asset("assets/bulma-templates/js/cardsData.js")}}"></script>
 <!-- Using Vue to populate cards to reduce redundant code -->
 <script>
-
 </script>
 </body>
-
 </html>
