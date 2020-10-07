@@ -31,6 +31,12 @@ php artisan db:seed --class=UsersTableSeeder
     - /vendor/laravel/ui/src/AuthRouteMethods.php
 - Crear migraciones a partir de la bd
     - `php artisan migrate:generate app_language,app_subject,app_sentence,app_sentence_images,app_sentence_tags,app_sentence_tr`
+- Generar modelos:
+```sys
+# crea los modelos con un comentario en la cabecera "reliese models"
+php artisan vendor:publish --tag=reliese-models
+php artisan code:models
+```
 
 ### Videografía:
 - [App Laravel + Vue CRUD Completo](https://www.youtube.com/watch?v=UzegdHgNEF4&t=1785s)
