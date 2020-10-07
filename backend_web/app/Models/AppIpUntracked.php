@@ -4,7 +4,7 @@
  * Created by Reliese Model.
  */
 
-namespace App\Models\Language;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
