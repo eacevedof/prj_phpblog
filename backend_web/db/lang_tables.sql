@@ -1,4 +1,6 @@
-/*Table structure for table `app_sentence` */
+/*
+php artisan migrate:generate app_language,app_subject,app_sentence,app_sentence_images,app_sentence_tags,app_sentence_tr
+*/
 
 DROP TABLE IF EXISTS `app_language`;
 
@@ -51,7 +53,6 @@ CREATE TABLE `app_subject` (
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
-
 DROP TABLE IF EXISTS `app_sentence`;
 
 CREATE TABLE `app_sentence` (
@@ -79,10 +80,7 @@ CREATE TABLE `app_sentence` (
 `id_type` int(11) DEFAULT NULL COMMENT 'si estan en algún grupo',
 `code_cache` varchar(50) DEFAULT NULL,
 PRIMARY KEY (`id`)
-)
-ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
-
-/*Table structure for table `app_sentence_images` */
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
 DROP TABLE IF EXISTS `app_sentence_images`;
 
@@ -111,8 +109,6 @@ CREATE TABLE `app_sentence_images` (
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
 
-/*Table structure for table `app_sentence_tags` */
-
 DROP TABLE IF EXISTS `app_sentence_tags`;
 
 CREATE TABLE `app_sentence_tags` (
@@ -136,8 +132,6 @@ CREATE TABLE `app_sentence_tags` (
 `code_cache` varchar(50) DEFAULT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC;
-
-/*Table structure for table `app_sentence_tr` */
 
 DROP TABLE IF EXISTS `app_sentence_tr`;
 
