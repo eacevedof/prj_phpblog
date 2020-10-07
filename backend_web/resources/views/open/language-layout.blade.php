@@ -55,6 +55,8 @@
 
 <div class="container">
     @yield("container")
+
+    @verbatim
     <div class="section">
         <div class="columns">
             <div class="column has-text-centered">
@@ -93,6 +95,7 @@
             </div>
         </div>
     </div>
+    @endverbatim
 </div>
 <footer class="footer">
     <div class="container">
@@ -115,12 +118,6 @@
 
 <!-- Using Vue to populate cards to reduce redundant code -->
 <script>
-    var app = new Vue({
-        el: '#app',
-        data: {
-            cardData: cardsData
-        }
-    })
 
 </script>
 </body>
