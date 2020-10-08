@@ -45,7 +45,8 @@ class AppSentence extends Model
         'id_context' => 'int',
         'id_language' => 'int',
         'is_notificable' => 'int',
-        'id_type' => 'int'
+        'id_type' => 'int',
+        'id_status' => 'int'
     ];
 
     protected $dates = [
@@ -77,6 +78,7 @@ class AppSentence extends Model
         'id_language',
         'is_notificable',
         'id_type',
+        'id_status',
         'code_cache'
     ];
 }
