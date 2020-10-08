@@ -13,8 +13,8 @@ class LanguageController extends BaseController
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.language.index"),
             "breadscrumb" => $this->_get_scrumb("open.language.index"),
-            "submenublog" => $this->_get_submenu_blog(),
-            "submenuservice" => $this->_get_submenu_service(),
+            //"submenublog" => $this->_get_submenu_blog(),
+            //"submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "language",
         ]);
     }
@@ -25,8 +25,8 @@ class LanguageController extends BaseController
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.language.practice"),
             "breadscrumb" => $this->_get_scrumb("open.language.practice"),
-            "submenublog" => $this->_get_submenu_blog(),
-            "submenuservice" => $this->_get_submenu_service(),
+            //"submenublog" => $this->_get_submenu_blog(),
+            //"submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "language",
         ]);
     }
