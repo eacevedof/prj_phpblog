@@ -11,33 +11,36 @@
     </div>
 </div>
 <div class="row columns is-multiline">
-    @foreach ($result as $subject)
     <div class="column is-4">
-        <div class="card large" subject="{{$subject["id"]}}">
+        @foreach ($result as $post)
+        <div class="card large">
             <div class="card-image">
                 <figure class="image is-16by9">
-                    <img src="{{$subject["url_resource"]}}" alt="{{$subject["desription"]}}">
+                    <img :src="card.image" alt="Image">
                 </figure>
             </div>
             <div class="card-content">
                 <div class="media">
+                    <div class="media-left">
+                        <figure class="image is-48x48">
+                            <img :src="card.avatar" alt="Image">
+                        </figure>
+                    </div>
                     <div class="media-content">
-                        <p class="title is-4 no-padding">{{$subject["desription"]}}</p>
+                        <p class="title is-4 no-padding">card.user.title</p>
                         <p>
-                            <span class="title is-6">
-                                <a href="/idiomas/{{$subject["slug"]}}">Practica!</a>
-                            </span>
-                        </p>
-                        <p class="subtitle is-6">{{$subject["slug"]}}</p>
+                  <span class="title is-6">
+                    <a :href=`http://twitter.com/${card.user.handle}`> card.user.handle </a> </span> </p>
+                        <p class="subtitle is-6">card.user.title</p>
                     </div>
                 </div>
                 <div class="content">
-                    {{$subject["source"]}}
+                    card.content
                     <div class="background-icon"><span class="icon-twitter"></span></div>
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
-    @endforeach
 </div>
 @endsection
