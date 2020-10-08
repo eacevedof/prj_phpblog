@@ -64,13 +64,19 @@ class SeoComponent
             "keywords" => "conversor, pdf, jpg",
             "h1" => "Servicio online. Convierte pdf a jpg"
         ],
-
-        "xxxx"=>[
-            "title"=>"",
-            "description"=>"",
-            "keywords" => "",
+        "open.language.index"=>[
+            "title"=>"Idiomas temario",
+            "description"=>"Aplicación para aprender idiomas. Temario de prácticas online. Traducir palabras y frases",
+            "keywords" => "Practíca un idioma, inglés, frances, español, neerlandes, etc",
             "h1" => ""
         ],
+        "open.language.practice"=>[
+            "title"=>"Práctica el tema s%",
+            "description"=>"Configura y comienza a practicar traduciendo al idioma que elijas",
+            "keywords" => "Traduce, español, ingles, frances, neerlandes, etc",
+            "h1" => ""
+        ],
+
     ];
 
     private const EMPTY = [
