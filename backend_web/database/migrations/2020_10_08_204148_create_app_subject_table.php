@@ -32,9 +32,15 @@ class CreateAppSubjectTable extends Migration {
 			$table->integer(''id'', true);
 			$table->string(''code_erp'', 25)->nullable();
 			$table->string(''description'', 250)->nullable();
-			$table->string(''source'', 500)->nullable()->comment('fuente bibliografica link o texto');
+			$table->string(''slug'', 150)->nullable();
+			$table->string(''url_final'', 300)->nullable();
+			$table->string(''url_img1'', 300)->nullable();
+			$table->string(''url_img2'', 300)->nullable();
+			$table->string(''title'', 350)->nullable();
+			$table->string(''excerpt'', 500)->nullable();
 			$table->string(''url_resource'', 500)->nullable()->comment('url para el audio que no esta en el servidor');
 			$table->integer('id_type_source')->nullable()->comment('tipo de recurso, video, audio, imagen texto');
+			$table->boolean('id_status')->nullable()->default(0);
 			$table->string(''seo_title'', 65)->nullable();
 			$table->string(''seo_description'', 160)->nullable();
 			$table->string(''seo_keywords'', 160)->nullable();
