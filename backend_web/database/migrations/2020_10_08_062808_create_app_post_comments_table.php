@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppLanguageTable extends Migration {
+class CreateAppPostCommentsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAppLanguageTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('app_language', function(Blueprint $table)
+		Schema::create('app_post_comments', function(Blueprint $table)
 		{
 			$table->string(''processflag'', 5)->nullable();
 			$table->string(''insert_platform'', 3)->nullable()->default('1');
@@ -31,7 +31,16 @@ class CreateAppLanguageTable extends Migration {
 			$table->integer('i')->nullable();
 			$table->integer(''id'', true);
 			$table->string(''code_erp'', 25)->nullable();
-			$table->string(''description'', 250)->nullable();
+			$table->string(''description'', 250)->nullable()->comment('para seo: 160 cjars');
+			$table->integer('id_post')->nullable();
+			$table->integer('id_parent')->nullable()->comment('respuesta a uno anterior');
+			$table->string(''name'', 25)->nullable();
+			$table->string(''email'', 100)->nullable();
+			$table->string(''site'', 150)->nullable();
+			$table->string(''content'', 3000)->nullable();
+			$table->integer('num_likes')->nullable();
+			$table->integer('num_dislikes')->nullable();
+			$table->boolean('is_active')->nullable()->default(0)->comment('si se ha aprobado');
 			$table->string(''code_cache'', 50)->nullable();
 		});
 	}
@@ -44,7 +53,7 @@ class CreateAppLanguageTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('app_language');
+		Schema::drop('app_post_comments');
 	}
 
 }

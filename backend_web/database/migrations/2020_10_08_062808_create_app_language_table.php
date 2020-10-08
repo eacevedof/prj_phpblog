@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAppSentenceTable extends Migration {
+class CreateAppLanguageTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAppSentenceTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('app_sentence', function(Blueprint $table)
+		Schema::create('app_language', function(Blueprint $table)
 		{
 			$table->string(''processflag'', 5)->nullable();
 			$table->string(''insert_platform'', 3)->nullable()->default('1');
@@ -32,11 +32,9 @@ class CreateAppSentenceTable extends Migration {
 			$table->integer(''id'', true);
 			$table->string(''code_erp'', 25)->nullable();
 			$table->string(''description'', 250)->nullable();
-			$table->integer('id_subject')->comment('app_subject.id');
-			$table->string(''translatable'', 2000)->nullable()->comment('texto principal');
-			$table->integer('id_language')->nullable()->comment('app_language.id');
-			$table->boolean('is_notificable')->nullable()->comment('indica si se tomará en cuenta para examen');
-			$table->integer('id_type')->nullable()->comment('si estan en algún grupo');
+			$table->string(''translated'', 250)->nullable();
+			$table->string(''language'', 100)->nullable()->comment('en-Uk,es-Sp,es-Lat,en-Usa');
+			$table->integer('id_parent')->nullable()->comment('app_language.id');
 			$table->string(''code_cache'', 50)->nullable();
 		});
 	}
@@ -49,7 +47,7 @@ class CreateAppSentenceTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('app_sentence');
+		Schema::drop('app_language');
 	}
 
 }
