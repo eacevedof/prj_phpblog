@@ -16,13 +16,13 @@
         <div class="card large" subject="{{$subject->id}}">
             <div class="card-image">
                 <figure class="image is-16by9">
-                    <img src="{{$subject->url_resource}}" alt="{{$subject->description}}">
+                    <img src="{{$subject->url_img1}}" alt="{{$subject->title}}">
                 </figure>
             </div>
             <div class="card-content">
                 <div class="media">
                     <div class="media-content">
-                        <p class="title is-4 no-padding">{{$subject->description}}</p>
+                        <p class="title is-4 no-padding">{{$subject->title}}</p>
                         <p>
                             <span class="title is-6">
                                 <a href="/idiomas/{{$subject->slug}}">Practica!</a>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="content">
-                    {{$subject->source}}
+                    {{$subject->excerpt}}
                     <div class="background-icon"><span class="icon-twitter"></span></div>
                 </div>
             </div>

@@ -7,14 +7,12 @@ use Illuminate\Support\Facades\DB;
 class SubjectDetailService extends BaseService
 {
     private $id;
-    private $iduser;
     private $db;
 
-    public function __construct($id=null, $iduser=null)
+    public function __construct($id=null)
     {
         $this->id = $id;
-        $this->iduser = $iduser;
-        $this->qb = DB::table("app_subject");
+        $this->db = DB::table("app_subject");
     }
 
     private function _check_data()
@@ -30,7 +28,7 @@ class SubjectDetailService extends BaseService
 
     public function get_by_slug($slug)
     {
-        $r = $this->qb->whereNull("delete_date")
+        $r = $this->db->whereNull("delete_date")
             ->where("is_enabled","=","1")
             ->where("id_status","=","1")
             ->where("slug","=",$slug)
@@ -42,7 +40,7 @@ class SubjectDetailService extends BaseService
 
     public function get_by_id($id)
     {
-        $r = $this->qb
+        $r = $this->db
             ->whereNull("delete_date")
             ->where("id","=",$id)
             ->get();

@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Open;
 
 use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
+use App\Services\Restrict\Language\Subject\SubjectDetailService;
 use App\Services\Restrict\Language\Subject\SubjectIndexService;
 
 class LanguageController extends BaseController
@@ -21,10 +22,11 @@ class LanguageController extends BaseController
         ]);
     }
 
-    public function practice()
+    public function practice($subjslug)
     {
+        $r = (new SubjectDetailService)->get_by_slug($subjslug);
         return view('open.language.practice', [
-            "result"      => [],
+            "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.language.practice"),
             "breadscrumb" => $this->_get_scrumb("open.language.practice"),
             //"submenublog" => $this->_get_submenu_blog(),

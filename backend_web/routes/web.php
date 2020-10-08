@@ -29,7 +29,7 @@ Route::get("/servicios/convertir-pdf-a-jpg","Open\ServiceController@pdftojpg")->
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");
 
 //language
-Route::get("/idiomas/practica","Open\LanguageController@practice")->name("open.language.practice");
+Route::get("/idiomas/{subjslug}","Open\LanguageController@practice")->name("open.language.practice");
 Route::get("/idiomas","Open\LanguageController")->name("open.language.index");
 
 //vendor/laravel/ui/src/AuthRouteMethods.php donde están las rutas
