@@ -8,7 +8,7 @@ class SubjectDetailService extends BaseService
 {
     private $id;
     private $iduser;
-    private $qb;
+    private $db;
 
     public function __construct($id=null, $iduser=null)
     {
