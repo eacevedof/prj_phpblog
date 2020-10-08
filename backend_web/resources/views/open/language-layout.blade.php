@@ -1,118 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cards List - Bulma Templates</title>
+    <title>@yield("pagetitle")</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta id="meta-csrf-token" name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="description" content="@yield("pagedescription")" />
+    <meta name="keywords" content="@yield("pagekeywords")" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- tpas -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Content-Language" content="es_ES">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="author" content="Eduardo Acevedo F"/>
+    <meta name="Distribution" content="Global"/>
+    <meta name="Rating" content="General"/>
+    <meta name="security" content="public" />
+    <meta http-equiv="Cache-Control" content="s-maxage = 3600, max-age = 60, private" />
+
+    <link rel="icon" type="image/png" href="https://resources.theframework.es/eduardoaf.com/20200917/161342-favicon.ico" />
     <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
     <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="{{asset("assets/bulma-templates/css/cards.css")}}">
 </head>
 <body>
-<!-- START NAV -->
-<nav class="navbar">
-    <div class="container">
-        <div class="navbar-brand">
-            <a class="navbar-item" href="#">
-                <img src="https://cdn.emk.dev/templates/bulma-logo-light.png" alt="Logo">
-            </a>
-            <span class="navbar-burger burger" data-target="navbarMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-        <div id="navbarMenu" class="navbar-menu">
-            <div class="navbar-end">
-                <a class="navbar-item is-active">
-                    Home
-                </a>
-                <a class="navbar-item">
-                    Examples
-                </a>
-                <a class="navbar-item">
-                    Features
-                </a>
-                <a class="navbar-item">
-                    Team
-                </a>
-                <a class="navbar-item">
-                    Archives
-                </a>
-                <a class="navbar-item">
-                    Help
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
-<!-- END NAV -->
+@include("open.elements.bulma.navbar")
 
 <div class="container">
-    @yield("container")
-
-    @verbatim
     <div class="section">
-        <div class="columns">
-            <div class="column has-text-centered">
-                <h1 class="title" style="color: ghostwhite;">Bulma Card Layout Template</h1><br>
-            </div>
-        </div>
-        <div id="app" class="row columns is-multiline">
-            <div v-for="card in cardData" key="card.id" class="column is-4">
-                <div class="card large">
-                    <div class="card-image">
-                        <figure class="image is-16by9">
-                            <img :src="card.image" alt="Image">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-left">
-                                <figure class="image is-48x48">
-                                    <img :src="card.avatar" alt="Image">
-                                </figure>
-                            </div>
-                            <div class="media-content">
-                                <p class="title is-4 no-padding">{{card.user.title}}</p>
-                                <p>
-                      <span class="title is-6">
-                        <a :href=`http://twitter.com/${card.user.handle}`> {{card.user.handle}} </a> </span> </p>
-                                <p class="subtitle is-6">{{card.user.title}}</p>
-                            </div>
-                        </div>
-                        <div class="content">
-                            {{card.content}}
-                            <div class="background-icon"><span class="icon-twitter"></span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @yield("container")
     </div>
-    @endverbatim
 </div>
-<footer class="footer">
-    <div class="container">
-        <div class="content has-text-centered">
-            <div class="soc">
-                <a href="#"><i class="fa fa-github-alt fa-lg" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-youtube fa-lg" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
-            </div>
-            <p>
-                <strong>Bulma</strong> by <a href="http://jgthms.com">Jeremy Thomas</a>.
-                The source code is licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. <br>
-            </p>
-        </div>
-    </div>
-</footer>
+
+@include("open.elements.bulma.footer")
 <script src="{{asset("assets/bulma-templates/js/cardsData.js")}}"></script>
-<!-- Using Vue to populate cards to reduce redundant code -->
-<script>
-</script>
 </body>
 </html>
