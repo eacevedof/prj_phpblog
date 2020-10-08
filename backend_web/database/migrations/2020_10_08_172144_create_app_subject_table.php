@@ -35,6 +35,9 @@ class CreateAppSubjectTable extends Migration {
 			$table->string(''source'', 500)->nullable()->comment('fuente bibliografica link o texto');
 			$table->string(''url_resource'', 500)->nullable()->comment('url para el audio que no esta en el servidor');
 			$table->integer('id_type_source')->nullable()->comment('tipo de recurso, video, audio, imagen texto');
+			$table->string(''seo_title'', 65)->nullable();
+			$table->string(''seo_description'', 160)->nullable();
+			$table->string(''seo_keywords'', 160)->nullable();
 			$table->string(''code_cache'', 50)->nullable();
 		});
 	}
