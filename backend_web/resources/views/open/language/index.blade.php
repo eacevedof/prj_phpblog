@@ -13,26 +13,26 @@
 <div class="row columns is-multiline">
     @foreach ($result as $subject)
     <div class="column is-4">
-        <div class="card large" subject="{{$subject["id"]}}">
+        <div class="card large" subject="{{$subject->id}}">
             <div class="card-image">
                 <figure class="image is-16by9">
-                    <img src="{{$subject["url_resource"]}}" alt="{{$subject["desription"]}}">
+                    <img src="{{$subject->url_resource}}" alt="{{$subject->description}}">
                 </figure>
             </div>
             <div class="card-content">
                 <div class="media">
                     <div class="media-content">
-                        <p class="title is-4 no-padding">{{$subject["desription"]}}</p>
+                        <p class="title is-4 no-padding">{{$subject->description}}</p>
                         <p>
                             <span class="title is-6">
-                                <a href="/idiomas/{{$subject["slug"]}}">Practica!</a>
+                                <a href="/idiomas/{{$subject->slug}}">Practica!</a>
                             </span>
                         </p>
-                        <p class="subtitle is-6">{{$subject["slug"]}}</p>
+                        <p class="subtitle is-6">{{$subject->slug}}</p>
                     </div>
                 </div>
                 <div class="content">
-                    {{$subject["source"]}}
+                    {{$subject->source}}
                     <div class="background-icon"><span class="icon-twitter"></span></div>
                 </div>
             </div>

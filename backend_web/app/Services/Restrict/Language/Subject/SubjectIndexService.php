@@ -18,7 +18,6 @@ class SubjectIndexService extends BaseService
         $r = $this->db
             ->whereNull("delete_date")
             ->where("is_enabled","=","1")
-            ->where("id_status","=","1")
             ->orderBy("id","desc")
             ->get();
         return $r;
