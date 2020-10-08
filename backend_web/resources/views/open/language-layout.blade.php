@@ -23,17 +23,16 @@
     <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link rel="stylesheet" href="{{asset("assets/bulma-templates/css/cards.css")}}">
+    <link href="{{ asset('css/common.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/language.css') }}" rel="stylesheet" />
 </head>
 <body>
 @include("open.elements.bulma.navbar")
-
 <div class="container">
     <div class="section">
         @yield("container")
     </div>
 </div>
-
 @include("open.elements.bulma.footer")
-<script src="{{asset("assets/bulma-templates/js/cardsData.js")}}"></script>
 </body>
 </html>

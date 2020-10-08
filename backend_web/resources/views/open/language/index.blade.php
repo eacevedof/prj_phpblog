@@ -7,11 +7,12 @@
 @section("container")
 <div class="columns">
     <div class="column has-text-centered">
-        <h1 class="title" style="color: ghostwhite;">Bulma Card Layout Template</h1><br>
+        <h1 class="title" style="color: ghostwhite;">{{$seo["title"]}}</h1><br>
     </div>
 </div>
-<div id="app" class="row columns is-multiline">
-    <div v-for="card in cardData" key="card.id" class="column is-4">
+<div class="row columns is-multiline">
+    <div class="column is-4">
+        @foreach ($result as $post)
         <div class="card large">
             <div class="card-image">
                 <figure class="image is-16by9">
@@ -39,6 +40,7 @@
                 </div>
             </div>
         </div>
+        @endforeach
     </div>
 </div>
 @endsection
