@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_type_source
  * @property string|null $code_cache
  *
- * @package App\Models
+ * @package App\Models\Language
  */
 class AppSubject extends Model
 {

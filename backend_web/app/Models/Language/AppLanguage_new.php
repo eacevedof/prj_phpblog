@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class AppLanguage
- * 
+ *
  * @property string|null $processflag
  * @property string|null $insert_platform
  * @property string|null $insert_user
@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_parent
  * @property string|null $code_cache
  *
- * @package App\Models
+ * @package App\Models\Language
  */
 class AppLanguage extends Model
 {

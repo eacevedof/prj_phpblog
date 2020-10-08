@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_sentence
  * @property string|null $code_cache
  *
- * @package App\Models
+ * @package App\Models\Language
  */
 class AppSentenceTr extends Model
 {

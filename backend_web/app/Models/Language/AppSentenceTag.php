@@ -31,7 +31,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id_tag
  * @property string|null $code_cache
  *
- * @package App\Models
+ * @package App\Models\Language
  */
 class AppSentenceTag extends Model
 {

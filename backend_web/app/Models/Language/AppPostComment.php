@@ -40,7 +40,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $is_active
  * @property string|null $code_cache
  *
- * @package App\Models
+ * @package App\Models\Language
  */
 class AppPostComment extends Model
 {

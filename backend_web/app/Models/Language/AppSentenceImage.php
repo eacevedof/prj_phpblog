@@ -34,7 +34,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string|null $url_resource
  * @property string|null $code_cache
  *
- * @package App\Models
+ * @package App\Models\Language
  */
 class AppSentenceImage extends Model
 {

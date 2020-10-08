@@ -29,9 +29,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string|null $code_erp
  * @property string|null $description
+ * @property string|null $translated
+ * @property string|null $language
+ * @property int|null $id_parent
  * @property string|null $code_cache
  *
- * @package App\Models
+ * @package App\Models\Language
  */
 class AppLanguage extends Model
 {
