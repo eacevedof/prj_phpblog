@@ -24,9 +24,15 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string|null $code_erp
  * @property string|null $description
- * @property string|null $source
+ * @property string|null $slug
+ * @property string|null $url_final
+ * @property string|null $url_img1
+ * @property string|null $url_img2
+ * @property string|null $title
+ * @property string|null $excerpt
  * @property string|null $url_resource
  * @property int|null $id_type_source
+ * @property int|null $id_status
  * @property string|null $seo_title
  * @property string|null $seo_description
  * @property string|null $seo_keywords
@@ -41,7 +47,8 @@ class AppSubject extends Model
 
     protected $casts = [
         'i' => 'int',
-        'id_type_source' => 'int'
+        'id_type_source' => 'int',
+        'id_status' => 'int'
     ];
 
     protected $dates = [
@@ -67,9 +74,15 @@ class AppSubject extends Model
         'i',
         'code_erp',
         'description',
-        'source',
+        'slug',
+        'url_final',
+        'url_img1',
+        'url_img2',
+        'title',
+        'excerpt',
         'url_resource',
         'id_type_source',
+        'id_status',
         'seo_title',
         'seo_description',
         'seo_keywords',
