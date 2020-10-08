@@ -1,9 +1,4 @@
 <?php
-
-/**
- * Created by Reliese Model.
- */
-
 namespace App\Models\Language;
 
 use Carbon\Carbon;
@@ -38,36 +33,40 @@ use Illuminate\Database\Eloquent\Model;
  */
 class AppLanguage extends Model
 {
-	protected $table = 'app_language';
-	public $timestamps = false;
+    protected $table = 'app_language';
+    public $timestamps = false;
 
-	protected $casts = [
-		'i' => 'int'
-	];
+    protected $casts = [
+        'i' => 'int',
+        'id_parent' => 'int'
+    ];
 
-	protected $dates = [
-		'insert_date',
-		'update_date',
-		'delete_date'
-	];
+    protected $dates = [
+        'insert_date',
+        'update_date',
+        'delete_date'
+    ];
 
-	protected $fillable = [
-		'processflag',
-		'insert_platform',
-		'insert_user',
-		'insert_date',
-		'update_platform',
-		'update_user',
-		'update_date',
-		'delete_platform',
-		'delete_user',
-		'delete_date',
-		'cru_csvnote',
-		'is_erpsent',
-		'is_enabled',
-		'i',
-		'code_erp',
-		'description',
-		'code_cache'
-	];
+    protected $fillable = [
+        'processflag',
+        'insert_platform',
+        'insert_user',
+        'insert_date',
+        'update_platform',
+        'update_user',
+        'update_date',
+        'delete_platform',
+        'delete_user',
+        'delete_date',
+        'cru_csvnote',
+        'is_erpsent',
+        'is_enabled',
+        'i',
+        'code_erp',
+        'description',
+        'translated',
+        'language',
+        'id_parent',
+        'code_cache'
+    ];
 }
