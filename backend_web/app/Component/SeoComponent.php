@@ -65,7 +65,7 @@ class SeoComponent
             "h1" => "Servicio online. Convierte pdf a jpg"
         ],
         "open.language.index"=>[
-            "title"=>"Idiomas temario",
+            "title"=>"Aplicación Idiomas - Temario",
             "description"=>"Aplicación para aprender idiomas. Temario de prácticas online. Traducir palabras y frases",
             "keywords" => "Practíca un idioma, inglés, frances, español, neerlandes, etc",
             "h1" => ""
