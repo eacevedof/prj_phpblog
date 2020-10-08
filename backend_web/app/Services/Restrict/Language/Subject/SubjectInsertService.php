@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Restrict\Subject;
+namespace App\Services\Restrict\Language\Subject;
 use App\Component\Formatter;
 use App\Models\AppSubject;
 use App\Services\BaseService;
