@@ -21,23 +21,16 @@ $subject = $result["subject"];
         <div class="columns">
             <div class="column is-12">
                 <div class="container content">
-                    <i class="is-large fab fa-discord"></i>
-                    <i class="is-large fas fa-code"></i>
                     <h1 class="title">{{$subject->title}}</h1>
                     <h3 class="subtitle">
                         {{$subject->excerpt}}
                     </h3>
-                    <a href="https://github.com/eacevedof" target="_blank" class="button is-primary is-large" rel="nofollow">
-                        <span class="icon">
-                          <i class="fab fa-github"></i>
-                        </span>
-                        <span>Github</span>
-                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
 <section class="section">
     <div class="container">
         <div class="columns">
