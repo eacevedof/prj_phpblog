@@ -22,8 +22,8 @@ class PracticeDetailService extends BaseService
         //dd($slug);
         $table = $this->get_table("app_subject");
         $r = $table->whereNull("delete_date")
-            ->where("is_enabled","=","1")
-            ->where("id_status","=","1")
+            ->where("is_enabled","=",1)
+            ->where("id_status","=",1)
             ->where("slug","=","$this->slug")
             ->limit(1)
             ->get();
@@ -57,11 +57,37 @@ class PracticeDetailService extends BaseService
         return $r;
     }
 
-
-    public function get()
+    private function _get_sentence_tags()
     {
-        $this->_check_data();
+        $sentences = $this->data["sentences"];
+        $ids = array_map(function($item){
+            return $item->id;
+        },$sentences);
+        $table = $this->get_table("app_sentence_tags");
+        $r = $table->whereNull("delete_date")
+            ->where("is_enabled","=",1)
+            ->whereIn("id_sentence", $ids)
+            ->get();
+        return $r;
+    }
 
+    private function _get_sentence_trs()
+    {
+        $sentences = $this->data["sentences"];
+        $ids = array_map(function($item){
+            return $item->id;
+        },$sentences);
+
+        $table = $this->get_table("app_sentence_tr");
+        $r = $table->whereNull("delete_date")
+            ->where("is_enabled","=",1)
+            ->whereIn("id_sentence", $ids)
+            ->get();
+        return $r;
+    }
+
+    private function _load_data()
+    {
         $r = $this->_get_subject();
         if(!$r->id) throw new \Exception("No subject found");
         $this->idsubject = $r->id;
@@ -73,8 +99,17 @@ class PracticeDetailService extends BaseService
         $r = $this->_get_sentence_images();
         $this->data["sentence_images"] = $r;
 
+        $r = $this->_get_sentence_tags();
+        $this->data["sentence_tags"] = $r;
 
+        $r = $this->_get_sentence_trs();
+        $this->data["sentence_tr"] = $r;
+    }
 
-
+    public function get()
+    {
+        $this->_check_data();
+        $this->_load_data();
+        return $this->data;
     }
 }
