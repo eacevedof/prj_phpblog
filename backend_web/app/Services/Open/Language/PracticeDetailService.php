@@ -9,12 +9,15 @@ class PracticeDetailService extends BaseService
 {
     private $subjslug;
     private $idsubject;
-
+    private $sentenceids;
     private $data;
 
     public function __construct(string $subjslug)
     {
         $this->subjslug = $subjslug;
+        $this->data = [
+            ""=>[], ""=>[], ""=>[], ""=>[]
+        ];
     }
 
     private function _get_subject()
@@ -42,46 +45,41 @@ class PracticeDetailService extends BaseService
         return $r;
     }
 
-    private function _get_sentence_images()
+    private function _load_sentenceids()
     {
         $sentences = $this->data["sentences"];
-        $ids = array_map(function($item){
+        $this->sentenceids = array_map(function($item){
             return $item->id;
         },$sentences);
+    }
+
+    private function _get_sentence_images()
+    {
         $table = $this->get_table("app_sentence_images");
         $r = $table->whereNull("delete_date")
             ->where("is_enabled","=",1)
             ->where("id_status","=",1)
-            ->whereIn("id_sentence", $ids)
+            ->whereIn("id_sentence", $this->sentenceids)
             ->get();
         return $r;
     }
 
     private function _get_sentence_tags()
     {
-        $sentences = $this->data["sentences"];
-        $ids = array_map(function($item){
-            return $item->id;
-        },$sentences);
         $table = $this->get_table("app_sentence_tags");
         $r = $table->whereNull("delete_date")
             ->where("is_enabled","=",1)
-            ->whereIn("id_sentence", $ids)
+            ->whereIn("id_sentence", $this->sentenceids)
             ->get();
         return $r;
     }
 
     private function _get_sentence_trs()
     {
-        $sentences = $this->data["sentences"];
-        $ids = array_map(function($item){
-            return $item->id;
-        },$sentences);
-
         $table = $this->get_table("app_sentence_tr");
         $r = $table->whereNull("delete_date")
             ->where("is_enabled","=",1)
-            ->whereIn("id_sentence", $ids)
+            ->whereIn("id_sentence", $this->sentenceids)
             ->get();
         return $r;
     }
@@ -95,6 +93,9 @@ class PracticeDetailService extends BaseService
 
         $r = $this->_get_sentences();
         $this->data["sentences"] = $r;
+
+        $this->_load_sentenceids();
+        if(!$this->sentenceids) return;
 
         $r = $this->_get_sentence_images();
         $this->data["sentence_images"] = $r;
