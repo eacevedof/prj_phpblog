@@ -28,6 +28,7 @@ class SubjectDetailService extends BaseService
 
     public function get_by_slug($slug)
     {
+        //dd($slug);
         $r = $this->db->whereNull("delete_date")
             ->where("is_enabled","=","1")
             ->where("id_status","=","1")

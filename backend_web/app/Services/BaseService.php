@@ -5,6 +5,7 @@ use App\Traits\Log;
 use App\Traits\UidTrait;
 use App\Traits\EnvTrait;
 use App\Traits\SysfieldsTrait;
+use Illuminate\Support\Facades\DB;
 
 class BaseService
 {
@@ -22,4 +23,6 @@ class BaseService
     protected function get_get($key){return $this->request->query($key);}
 
     protected function get_userid($codCache=""){}
+
+    protected function get_db($table){return DB::table($table);}
   }
