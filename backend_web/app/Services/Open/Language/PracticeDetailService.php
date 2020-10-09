@@ -28,15 +28,15 @@ class PracticeDetailService extends BaseService
         $r = $table->whereNull("delete_date")
             ->where("is_enabled","=",1)
             ->where("id_status","=",1)
-            ->where("slug","=","$this->slug")
+            ->where("slug","=","$this->subjslug")
             ->limit(1)
             ->get();
+        $r = $r->first();
         return $r;
     }
 
     private function _get_sentences()
     {
-        //dd($slug);
         $table = $this->get_table("app_sentence");
         $r = $table->whereNull("delete_date")
             ->where("is_enabled","=",1)
@@ -48,10 +48,14 @@ class PracticeDetailService extends BaseService
 
     private function _load_sentenceids()
     {
-        $sentences = $this->data["sentences"];
+        $sentences = [];
+        array_push($sentences, ...$this->data["sentences"]);
+
         $this->sentenceids = array_map(function($item){
             return $item->id;
         },$sentences);
+
+        //dd($this->sentenceids);
     }
 
     private function _get_sentence_images()
@@ -59,7 +63,6 @@ class PracticeDetailService extends BaseService
         $table = $this->get_table("app_sentence_images");
         $r = $table->whereNull("delete_date")
             ->where("is_enabled","=",1)
-            ->where("id_status","=",1)
             ->whereIn("id_sentence", $this->sentenceids)
             ->get();
         return $r;
@@ -110,7 +113,6 @@ class PracticeDetailService extends BaseService
 
     public function get()
     {
-        $this->_check_data();
         $this->_load_data();
         return $this->data;
     }
