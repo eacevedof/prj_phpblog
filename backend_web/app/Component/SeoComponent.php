@@ -71,7 +71,7 @@ class SeoComponent
             "h1" => ""
         ],
         "open.language.practice"=>[
-            "title"=>"Práctica el tema s%",
+            "title"=>"Práctica del tema \"%s\"",
             "description"=>"Configura y comienza a practicar traduciendo al idioma que elijas",
             "keywords" => "Traduce, español, ingles, frances, neerlandes, etc",
             "h1" => ""

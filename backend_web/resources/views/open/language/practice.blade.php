@@ -1,13 +1,16 @@
 @extends("open.language-layout")
 
-@section("pagetitle",$seo["title"])
+@php $title = sprintf($seo["title"],$result["subject"]->title) ?? "" @endphp
+
+@section("pagetitle",$title)
 @section("pagedescription",$seo["description"])
 @section("pagekeywords",$seo["keywords"])
 
 @section("container")
+
 <div class="columns">
     <div class="column has-text-centered">
-        <h1 class="title" style="color: ghostwhite;">{{$seo["title"]}}</h1><br>
+        <h1 class="title" style="color: ghostwhite;">{{$title}}</h1><br>
     </div>
 </div>
 <div class="row columns is-multiline">

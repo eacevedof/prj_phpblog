@@ -26,7 +26,6 @@ class LanguageController extends BaseController
     public function practice($subjslug)
     {
         $r = (new PracticeDetailService($subjslug))->get();
-        dd($r);
         return view('open.language.practice', [
             "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.language.practice"),
