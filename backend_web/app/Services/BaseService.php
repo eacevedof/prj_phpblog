@@ -24,5 +24,5 @@ class BaseService
 
     protected function get_userid($codCache=""){}
 
-    protected function get_db($table){return DB::table($table);}
+    protected function get_table($table){return DB::table($table);}
   }
