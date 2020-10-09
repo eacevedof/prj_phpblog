@@ -28,11 +28,7 @@
 </head>
 <body>
 @include("open.elements.bulma.navbar")
-<div class="container">
-    <div class="section">
-        @yield("container")
-    </div>
-</div>
+@yield("container")
 @include("open.elements.bulma.footer")
 </body>
 </html>
