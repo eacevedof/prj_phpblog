@@ -16,7 +16,8 @@ class PracticeDetailService extends BaseService
     {
         $this->subjslug = $subjslug;
         $this->data = [
-            ""=>[], ""=>[], ""=>[], ""=>[]
+            "subject"=>[], "sentences"=>[], "sentence_images"=>[],
+            "sentence_tags"=>[], "sentence_tr"=>[]
         ];
     }
 
