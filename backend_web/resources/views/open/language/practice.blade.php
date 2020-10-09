@@ -1,6 +1,11 @@
 @extends("open.language-layout")
 
-@php $title = sprintf($seo["title"],$result["subject"]->title) ?? "" @endphp
+@php
+
+$title = sprintf($seo["title"],$result["subject"]->title) ?? "";
+$subject = $result["subject"];
+
+@endphp
 
 @section("pagetitle",$title)
 @section("pagedescription",$seo["description"])
@@ -8,18 +13,31 @@
 
 @section("container")
 
-<div class="columns">
-    <div class="column has-text-centered">
-        <h1 class="title" style="color: ghostwhite;">{{$title}}</h1><br>
+<link rel="stylesheet" href="{{asset("assets/bulma-templates/css/prima.css")}}">
+<link rel="stylesheet" href="{{asset("assets/bulma-templates/css/cheatsheet.css")}}">
+
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="columns">
+            <div class="column is-12">
+                <div class="container content">
+                    <i class="is-large fab fa-discord"></i>
+                    <i class="is-large fas fa-code"></i>
+                    <h1 class="title">{{$subject->title}}</h1>
+                    <h3 class="subtitle">
+                        {{$subject->excerpt}}
+                    </h3>
+                    <a href="https://github.com/eacevedof" target="_blank" class="button is-primary is-large" rel="nofollow">
+                        <span class="icon">
+                          <i class="fab fa-github"></i>
+                        </span>
+                        <span>Github</span>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="row">
-    @php $subject = $result["subject"] @endphp
-    <h2>{{$subject->title}}</h2>
-    <p>
-    {{$subject->excerpt}}
-    </p>
-</div>
+</section>
 <section class="section">
     <div class="container">
         <div class="columns">
@@ -100,38 +118,4 @@
         </div>
     </div>
 </section>
-<div class="row columns is-multiline">
-    <div class="column is-4">
-
-        @foreach ($result as $post)
-        <div class="card large">
-            <div class="card-image">
-                <figure class="image is-16by9">
-                    <img :src="card.image" alt="Image">
-                </figure>
-            </div>
-            <div class="card-content">
-                <div class="media">
-                    <div class="media-left">
-                        <figure class="image is-48x48">
-                            <img :src="card.avatar" alt="Image">
-                        </figure>
-                    </div>
-                    <div class="media-content">
-                        <p class="title is-4 no-padding">card.user.title</p>
-                        <p>
-                  <span class="title is-6">
-                    <a :href=`http://twitter.com/${card.user.handle}`> card.user.handle </a> </span> </p>
-                        <p class="subtitle is-6">card.user.title</p>
-                    </div>
-                </div>
-                <div class="content">
-                    card.content
-                    <div class="background-icon"><span class="icon-twitter"></span></div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-</div>
 @endsection
