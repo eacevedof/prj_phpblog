@@ -1,8 +1,8 @@
 @extends("open.language-layout")
 
 @php
-$title = sprintf($seo["title"],$result["subject"]->title) ?? "";
 $subject = $result["subject"];
+$title = sprintf($seo["title"], $subject->title) ?? "";
 $jsonresult = json_encode($result);
 @endphp
 
@@ -15,21 +15,7 @@ $jsonresult = json_encode($result);
 <link rel="stylesheet" href="{{asset("assets/bulma-templates/css/prism.css")}}">
 <link rel="stylesheet" href="{{asset("assets/bulma-templates/css/cheatsheet.css")}}">
 
-<section class="hero is-primary">
-    <div class="hero-body">
-        <div class="columns">
-            <div class="column is-12">
-                <div class="container content">
-                    <h1 class="title">{{$subject->title}}</h1>
-                    <h3 class="subtitle">
-                        {{$subject->excerpt}}
-                    </h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
+@include("open.elements.bulma.practice-header")
 <section class="section">
     <div class="container">
         <div class="columns">
