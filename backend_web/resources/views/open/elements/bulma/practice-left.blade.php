@@ -1,8 +1,8 @@
-<div id="div-practice-left" class="column is-2">
+<div id="div-practice-left" class="column is-1">
     <aside class="is-medium menu">
         <ul class="menu-list">
             <li class="is-right">
-                <button href="#const" class="is-active"><i class="fab fa-css3-alt"></i> CSS</button>
+                <button v-on:click="on_config()" class="is-active"><i class="fas fa-cogs"></i> Config</button>
             </li>
         </ul>
 

@@ -1,4 +1,4 @@
-<div id="div-practice-main" class="column is-10">
+<div id="div-practice-main" class="column is-11">
     <div class="content is-medium">
         <h3 class="title is-3">Snippets ¯\_(ツ)_/¯</h3>
         <div class="box">

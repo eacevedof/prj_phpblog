@@ -4,7 +4,12 @@ import openapi from "/js/open/helpers/openapi.js"
 const vueleft = new Vue({
     el: "#div-practice-left",
     data: {
-
+        language:{
+            source: "es",
+            targets: ["en"],
+        },
+        time: 0,
+        level: 1,
     },//data
 
     async mounted(){
@@ -12,6 +17,8 @@ const vueleft = new Vue({
     },//mounted
 
     methods:{
-
+        on_config(){
+            alert("on config")
+        }
     },//methods
 })
