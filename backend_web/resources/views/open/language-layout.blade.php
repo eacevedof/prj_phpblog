@@ -19,8 +19,10 @@
     <meta http-equiv="Cache-Control" content="s-maxage = 3600, max-age = 60, private" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- fa -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/2f657e8f16.js" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.7/css/all.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link href="{{ asset('css/common.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/language.css') }}" rel="stylesheet" />
