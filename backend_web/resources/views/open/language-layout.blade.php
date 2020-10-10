@@ -18,11 +18,8 @@
     <meta name="security" content="public" />
     <meta http-equiv="Cache-Control" content="s-maxage = 3600, max-age = 60, private" />
 
-    <link rel="icon" type="image/png" href="https://resources.theframework.es/eduardoaf.com/20200917/161342-favicon.ico" />
-    <link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
-    <script src="https://kit.fontawesome.com/7dc3015a44.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-    <link rel="stylesheet" href="{{asset("assets/bulma-templates/css/cards.css")}}">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/language.css') }}" rel="stylesheet" />
 </head>
