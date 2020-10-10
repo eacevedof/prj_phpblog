@@ -12,8 +12,8 @@ $subject = $result["subject"];
 @section("pagekeywords",$seo["keywords"])
 
 @section("container")
-
-<link rel="stylesheet" href="{{asset("assets/bulma-templates/css/prima.css")}}">
+<link rel="stylesheet" href="https://kingsora.github.io/OverlayScrollbars/etc/os-theme-thin-dark.css">
+<link rel="stylesheet" href="{{asset("assets/bulma-templates/css/prism.css")}}">
 <link rel="stylesheet" href="{{asset("assets/bulma-templates/css/cheatsheet.css")}}">
 
 <section class="hero is-primary">
@@ -35,27 +35,28 @@ $subject = $result["subject"];
     <div class="container">
         <div class="columns">
             @include("open.elements.bulma.practice-left")
-            <div class="column is-9">
+
+            <div class="column is-10">
                 <div class="content is-medium">
                     <h3 class="title is-3">Snippets ¯\_(ツ)_/¯</h3>
                     <div class="box">
                         <h4 id="const" class="title is-3">const</h4>
                         <article class="message is-primary">
-                  <span class="icon has-text-primary">
-                  <i class="fab fa-js"></i>
-                  </span>
+                            <span class="icon has-text-primary">
+                            <i class="fab fa-js"></i>
+                            </span>
                             <div class="message-body">
                                 Block-scoped. Cannot be re-assigned. Not immutable.
                             </div>
                         </article>
-                        <pre><code class="language-javascript">const test = 'test';</code></pre>
+                        <pre><code class="language-javascript">const test = "test";</code></pre>
                     </div>
                     <div class="box">
                         <h4 id="let" class="title is-3">let</h4>
                         <article class="message is-primary">
-                <span class="icon has-text-primary">
-                  <i class="fas fa-info-circle"></i>
-                </span>
+                            <span class="icon has-text-primary">
+                              <i class="fas fa-info-circle"></i>
+                            </span>
                             <div class="message-body">
                                 Block-scoped. Can be re-assigned.
                             </div>
