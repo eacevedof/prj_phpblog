@@ -10,6 +10,7 @@ const vueleft = new Vue({
         },
         time: 0,
         level: 1,
+        ismodal: false,
     },//data
 
     async mounted(){
@@ -17,8 +18,25 @@ const vueleft = new Vue({
     },//mounted
 
     methods:{
+        modal: function(){
+            const self = this
+            return {
+                closeit: function(){
+                    self.ismodal = false;
+                    document.getElementById("div-modal").classList.remove("is-active")
+                }
+            }
+        },
+
         on_config(){
-            alert("on config")
-        }
+            //alert("on config")
+            this.ismodal = !this.ismodal;
+            const $modal = document.getElementById("div-modal")
+            if(this.ismodal)
+                $modal.classList.add("is-active")
+            else
+                $modal.classList.remove("is-active")
+        },
+
     },//methods
 })

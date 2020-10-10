@@ -5,26 +5,20 @@
                 <button v-on:click="on_config()" class="is-active"><i class="fas fa-cogs"></i> Config</button>
             </li>
         </ul>
-
-<!--
-        <p class="menu-label">Tags</p>
-        <ul class="menu-list">
-            <li><span class="tag is-white is-medium">Lorem</span></li>
-            <li><span class="tag is-white is-medium">Ipsum</span></li>
-            <li><span class="tag is-white is-medium">Dolor</span></li>
-            <li><span class="tag is-white is-medium">Animi</span></li>
-            <li><span class="tag is-white is-medium">Eximi</span></li>
-            <li><span class="tag is-white is-medium">Nullius</span></li>
-            <li><span class="tag is-white is-medium">Oxipi</span></li>
-            <li><span class="tag is-white is-medium">Vultus</span></li>
-            <li><span class="tag is-white is-medium">Voluptatis</span></li>
-            <li><span class="tag is-white is-medium">Exomarphis</span></li>
-            <li><span class="tag is-white is-medium">Finimi</span></li>
-            <li><span class="tag is-white is-medium">Aenigma</span></li>
-            <li><span class="tag is-white is-medium">Arkham</span></li>
-            <li><span class="tag is-white is-medium">Blue</span></li>
-            <li><span class="tag is-white is-medium">Medium</span></li>
-        </ul>
--->
     </aside>
+    <div id="div-modal" class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Configuración</p>
+                <button class="delete" aria-label="close" v-on:click="modal().closeit()"></button>
+            </header>
+            <section class="modal-card-body">
+            </section>
+            <footer class="modal-card-foot">
+                <button class="button is-success">Save changes</button>
+                <button class="button">Cancel</button>
+            </footer>
+        </div>
+    </div>
 </div>
