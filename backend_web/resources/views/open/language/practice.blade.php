@@ -1,10 +1,9 @@
 @extends("open.language-layout")
 
 @php
-
 $title = sprintf($seo["title"],$result["subject"]->title) ?? "";
 $subject = $result["subject"];
-
+$jsonresult = json_encode($result);
 @endphp
 
 @section("pagetitle",$title)
@@ -81,4 +80,8 @@ $subject = $result["subject"];
         </div>
     </div>
 </section>
+<script>
+const practice = "{{$jsonresult}}"
+//document.body.innerHTML = `<pre>${practice}</pre>`
+</script>
 @endsection
