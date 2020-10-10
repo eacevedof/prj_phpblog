@@ -66,9 +66,9 @@ $jsonresult = json_encode($result);
                     <div class="box">
                         <h4 id="lorem" class="title is-4">More to come...</h4>
                         <article class="message is-primary">
-              <span class="icon has-text-primary">
-                <i class="fas fa-info-circle"></i>
-              </span>
+                            <span class="icon has-text-primary">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
                             <div class="message-body">
                                 Lorem ipsum dolor sit amet, mea ne viderer veritus menandri, id scaevola gloriatur instructior sit.
                             </div>
