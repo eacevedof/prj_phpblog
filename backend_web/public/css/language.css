@@ -5,7 +5,11 @@
 --grey-front-color: #ccc;
 }
 
-.lang-txt-black  {
+.lang-text-white {
+    color: var(--white-front-color);
+}
+
+.lang-text-black  {
     color: #363636;
 }
 
@@ -20,4 +24,12 @@
 .lang-nav-bg > a:hover {
     background: var(--dark-background-color2);
     color: var(--white-front-color);
+}
+
+.lang-footer{
+    background: var(--dark-background-color);
+}
+
+.lang-footer a{
+    color: var(--grey-front-color);
 }

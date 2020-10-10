@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer is-dark lang-footer">
     <div class="container">
         <div class="content has-text-centered">
             <a class="lang-text-black" href="{{ route('open.home.index') }}">
@@ -9,7 +9,7 @@
             <a href="https://github.com/eacevedof" target="_blank" rel="nofollow"><i class="fa fa-github" aria-hidden="true"></i> Github</a> /
             <a href="https://twitter.com/eacevedof" target="_blank" rel="nofollow"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
             <p>
-                <strong>eduardoaf.com</strong> by <a href="/">Eduardo Acevedo</a>.<br/>
+                <strong class="lang-text-white">eduardoaf.com</strong> by <a href="/">Eduardo Acevedo</a>.<br/>
             </p>
         </div>
     </div>
