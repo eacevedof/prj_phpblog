@@ -1,4 +1,16 @@
-.lang-txt-white  {
-    color: #fff !important;
-    text-decoration: none;
+.lang-txt-#A3A6A9  {
+    color: #343A40;
+}
+
+.lang-nav{
+    background: #343A40;
+    color:#A3A6A9 !important;
+}
+a.lang-nav {
+    background: #343A40;
+    color: #A3A6A9;
+}
+.lang-nav > a:hover {
+    background: #565555;
+    color: #A3A6A9;
 }

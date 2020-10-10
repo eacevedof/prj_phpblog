@@ -19,6 +19,7 @@
     <meta http-equiv="Cache-Control" content="s-maxage = 3600, max-age = 60, private" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <link href="{{ asset('css/common.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/language.css') }}" rel="stylesheet" />
