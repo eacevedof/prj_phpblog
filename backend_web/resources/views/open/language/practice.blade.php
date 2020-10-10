@@ -21,7 +21,7 @@ $jsonresult = json_encode($result);
         <div class="columns">
             @include("open.elements.bulma.practice-left")
 
-            <div class="column is-10">
+            <div id="div-practice" class="column is-10">
                 <div class="content is-medium">
                     <h3 class="title is-3">Snippets ¯\_(ツ)_/¯</h3>
                     <div class="box">
@@ -69,5 +69,6 @@ $jsonresult = json_encode($result);
 <script>
 const objpractice = {!! $jsonresult !!};
 </script>
+<script type="module" src="/js/open/service/vue-language-menu.js"></script>
 <script type="module" src="/js/open/service/vue-language-practice.js"></script>
 @endsection
