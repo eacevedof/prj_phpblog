@@ -1,8 +1,8 @@
 :root{
 --dark-background-color: #343A40;
 --dark-background-color2: #565555;
---footer-background-color:   #ccc;
 --white-front-color: white;
+--grey-front-color: #ccc;
 }
 
 .lang-txt-black  {
@@ -14,7 +14,7 @@
 }
 
 .lang-nav-bg > a{
-    color: var(--white-front-color);
+    color: var(--grey-front-color);
 }
 
 .lang-nav-bg > a:hover {
