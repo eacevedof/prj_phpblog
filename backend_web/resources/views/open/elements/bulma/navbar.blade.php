@@ -12,12 +12,12 @@
         </a>
     </div>
 
-    <div id="navbar-items" class="navbar-menu lang-nav">
-        <div class="navbar-end lang-nav">
-            <a class="navbar-item lang-nav" href="{{ route('open.home.index') }}">
+    <div id="navbar-items" class="navbar-menu lang-nav-bg">
+        <div class="navbar-end lang-nav-bg">
+            <a class="navbar-item lang-nav-bg" href="{{ route('open.home.index') }}">
                 <i class="fa fa-home"></i> /
             </a>
-            <a href="/blog" class="navbar-item lang-nav">Blog</a>
+            <a href="/blog" class="navbar-item lang-nav-bg">Blog</a>
         </div>
     </div>
 </nav>

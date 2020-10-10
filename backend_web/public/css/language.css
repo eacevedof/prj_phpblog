@@ -1,16 +1,23 @@
+:root{
+--dark-background-color: #343A40;
+--dark-background-color2: #565555;
+--footer-background-color:   #ccc;
+--white-front-color: white;
+}
+
 .lang-txt-black  {
     color: #363636;
 }
 
-.lang-nav{
-    background: #343A40;
-    color:#A3A6A9 !important;
+.lang-nav-bg{
+    background: var(--dark-background-color);
 }
-a.lang-nav {
-    background: #343A40;
-    color: #A3A6A9;
+
+.lang-nav-bg > a{
+    color: var(--white-front-color);
 }
-.lang-nav > a:hover {
-    background: #565555;
-    color: #A3A6A9;
+
+.lang-nav-bg > a:hover {
+    background: var(--dark-background-color2);
+    color: var(--white-front-color);
 }
