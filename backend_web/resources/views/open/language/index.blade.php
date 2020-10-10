@@ -9,16 +9,18 @@
     <div class="section">
         <div class="columns">
             <div class="column has-text-centered">
-                <h1 class="title" style="color: ghostwhite;">{{$seo["title"]}}</h1><br>
+                <h1 class="title is-4">{{$seo["title"]}}</h1><br>
             </div>
         </div>
         <div class="row columns is-multiline">
             @foreach ($result as $subject)
-                <div class="column is-4">
+                <div class="column is-3">
                     <div class="card large" subject="{{$subject->id}}">
                         <div class="card-image">
                             <figure class="image is-16by9">
-                                <img src="{{$subject->url_img1}}" alt="{{$subject->title}}">
+                                <a href="/idiomas/{{$subject->slug}}">
+                                    <img src="{{$subject->url_img1}}" alt="{{$subject->title}}">
+                                </a>
                             </figure>
                         </div>
                         <div class="card-content">
@@ -26,16 +28,16 @@
                                 <div class="media-content">
                                     <p class="title is-4 no-padding">{{$subject->title}}</p>
                                     <p>
-                            <span class="title is-6">
-                                <a href="/idiomas/{{$subject->slug}}">Practica!</a>
-                            </span>
+                                        <span class="title is-6">
+                                            <a href="/idiomas/{{$subject->slug}}" class="button is-success">Practica!</a>
+                                        </span>
                                     </p>
-                                    <p class="subtitle is-6">{{$subject->slug}}</p>
                                 </div>
                             </div>
                             <div class="content">
+                                <p>
                                 {{$subject->excerpt}}
-                                <div class="background-icon"><span class="icon-twitter"></span></div>
+                                </p>
                             </div>
                         </div>
                     </div>
