@@ -1,4 +1,4 @@
-<div id="div-menu" class="column is-2">
+<div id="div-practice-left" class="column is-2">
     <aside class="is-medium menu">
         <ul class="menu-list">
             <li class="is-right">
