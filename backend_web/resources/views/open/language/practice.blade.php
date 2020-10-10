@@ -81,7 +81,7 @@ $jsonresult = json_encode($result);
     </div>
 </section>
 <script>
-const practice = {!! $jsonresult !!};
+const objpractice = {!! $jsonresult !!};
 </script>
 <script type="module" src="/js/open/service/vue-language-practice.js"></script>
 @endsection

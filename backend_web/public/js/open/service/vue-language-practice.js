@@ -18,8 +18,7 @@ const app = new Vue({
     },
 
     async mounted(){
-        //alert(practice)
-        console.log(practice);
+        console.log("vue-language-practice:",objpractice);
     },
 
     methods:{
