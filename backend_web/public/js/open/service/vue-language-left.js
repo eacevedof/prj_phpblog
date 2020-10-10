@@ -18,7 +18,7 @@ const vueleft = new Vue({
     },//mounted
 
     methods:{
-        modal: function(){
+        modal(){
             const self = this
             return {
                 closeit: function(){

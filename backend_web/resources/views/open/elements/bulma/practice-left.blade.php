@@ -2,7 +2,7 @@
     <aside class="is-medium menu">
         <ul class="menu-list">
             <li class="is-right">
-                <button v-on:click="on_config()" class="is-active"><i class="fas fa-cogs"></i> Config</button>
+                <button v-on:click="on_config" class="is-active"><i class="fas fa-cogs"></i> Config</button>
             </li>
         </ul>
     </aside>
@@ -16,8 +16,8 @@
             <section class="modal-card-body">
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
-                <button class="button">Cancel</button>
+                <button class="button is-success">Guardar</button>
+                <button class="button" v-on:click="modal().closeit()">Cancel</button>
             </footer>
         </div>
     </div>
