@@ -2,13 +2,15 @@
 <div id="div-practice-main" class="column is-11">
     <div class="content is-medium">
         <h3 class="title is-3 has-text-centered">
-            ¯\_(ツ)_/¯
-            <button v-if="ianswered>0" class="button is-success" v-on:click="restart">Reiniciar</button>
+            <button v-if="ianswered>0 && iquestions>0" class="button is-success" v-on:click="restart">Reiniciar</button>
         </h3>
-        <div v-if="isfinished" class="box has-text-centered">
+        <div v-if="isfinished && iquestions>0" class="box has-text-centered">
             <div class="control">
-                <button class="button is-link" v-on:click="start">Empezar exámen</button>
+                <button class="button is-link" v-on:click="start">Empezar</button>
             </div>
+        </div>
+        <div v-if="!iquestions" class="has-text-centered">
+            ¯\_(ツ)_/¯
         </div>
         <div v-if="!isfinished" class="box">
             <h4 class="title is-6">Q: {{iquestion}}/ {{iquestions}}</h4>
@@ -23,7 +25,7 @@
                 </div>
             </article>
             <div class="control has-text-right">
-                <button class="button is-success" v-on:click="save">Siguiente</button>
+                <button class="button is-success" v-on:click="save">{{btnnext}}</button>
             </div>
         </div>
 

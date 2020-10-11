@@ -15,10 +15,6 @@ new Vue({
         config:{},
         isfinished: true,
 
-        question:{
-
-        },
-
         iquestions: 0,
         questions:[],
         answers:[],
@@ -29,16 +25,19 @@ new Vue({
         stranswer: "",
         langsource: "",
         langtarget: "",
+        btnnext: "Siguiente"
 
     },//data
 
     mounted(){
+        console.log("main mounted")
         const config = db.select(LANG_CONFIG)
         if(config) {
             this.load_questions()
             this.config = {...config}
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
+            return
         }
 
         //funcs.pr(objpractice,"vue-language-practice")
@@ -66,6 +65,7 @@ new Vue({
                 })
                 this.answers.push({"q": this.iquestion, "lang": this.langsource, "r": this.stranswer, "gr": ""})
                 this.iquestion++
+                //if(this.iquestion)
                 this.load_question()
                 return
             }
@@ -84,6 +84,8 @@ new Vue({
             this.strquestion = this.questions[iq].translatable
             this.langsource = LANGUAGES[this.questions[iq].id_language]
             this.langtarget = this.config.seltargets[0]
+            if(this.iquestion === this.iquestions)
+                this.btnnext = "Finalizar"
             //alert(this.langtarget)
         },
 

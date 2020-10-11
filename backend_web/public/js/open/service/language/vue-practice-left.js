@@ -25,11 +25,17 @@ new Vue({
     },//data
 
     mounted(){
+        console.log("left mounted")
         //console.log("vue-language-left:",objpractice);
         const config = db.select(LANG_CONFIG)
-        if(config)
+        if(Object.keys(config).length>0) {
             this.config = {...config}
-
+        }
+        else{
+            db.save(LANG_CONFIG,{
+                ...this.config
+            })
+        }
     },//mounted
 
     methods:{
