@@ -5,7 +5,7 @@ import db from "/js/open/helpers/opendb.js"
 
 const LANG_CONFIG = "lang-config"
 
-const vueleft = new Vue({
+new Vue({
     el: "#div-practice-left",
     data: {
         ismodal: false,

@@ -35,6 +35,6 @@ https://buefy.org/documentation/start
 const objpractice = {!! $jsonresult !!};
 const toast = window.Toast.ToastProgrammatic
 </script>
-<script type="module" src="/js/open/service/vue-language-left.js"></script>
-<script type="module" src="/js/open/service/vue-language-main.js"></script>
+<script type="module" src="/js/open/service/language/vue-practice-left.js"></script>
+<script type="module" src="/js/open/service/language/vue-practice-main.js"></script>
 @endsection
