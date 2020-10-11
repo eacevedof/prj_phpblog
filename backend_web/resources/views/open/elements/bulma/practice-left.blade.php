@@ -48,26 +48,25 @@
                         <label class="label">Dificultad</label>
                         <div class="control">
                             <div class="select is-multiple">
-                                <select id="sel-folders" v-model="config.selsource" class="form-control" required>
-                                    <option v-for="(lang, i) in config.sources" :value="lang" :key="i">{{lang}}</option>
-                                </select>
+                                <input type="range" class="input is-primary" v-model="config.level" min="1" max="2" placeholder="1 - 2">
                             </div>
                         </div>
                     </div>
                     <div class="column is-4 field">
                         <label class="label">Aleatorio</label>
                         <div class="control">
-                            <div class="select is-multiple">
-                                <select id="sel-folders" multiple size="2" v-model="config.seltargets" class="form-control" required>
-                                    <option v-for="(lang, i) in config.targets" :value="lang" :key="i">{{lang}}</option>
-                                </select>
-                            </div>
+                            <label class="radio">
+                                <input type="radio" v-model="config.israndom" value="true"/>Yes
+                            </label>
+                            <label class="radio">
+                                <input type="radio" v-model="config.israndom" value="false"/>No
+                            </label>
                         </div>
                     </div>
                     <div class="column is-4 field">
                         <label class="label">Tot. preguntas</label>
                         <div class="control">
-                            <input  type="number" class="input is-primary" v-model="config.time" max="30" placeholder="0 - 30 seg">
+                            <input  type="number" class="input is-primary" v-model="config.questions" min="1" max="100" placeholder="1 - 100">
                         </div>
                     </div>
                 </div>
