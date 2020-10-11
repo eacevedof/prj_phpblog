@@ -59,6 +59,10 @@ new Vue({
         save(){
             const isok = this.is_good()
             if(isok) {
+                toast.open({
+                    message: "Respuesta correcta",
+                    type:"is-success",
+                })
                 this.answers.push({"q": this.iquestion, "lang": this.langsource, "r": this.stranswer, "gr": ""})
                 this.iquestion++
                 this.load_question()
