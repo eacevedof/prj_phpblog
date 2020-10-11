@@ -36,6 +36,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="column is-one-third field">
+                        <label class="label">Tiempo/preg</label>
+                        <div class="control">
+                            <input  type="number" class="input is-primary" v-model="config.time" max="30" placeholder="0 - 30 seg">
+                        </div>
+                    </div>
                 </div>
             </section>
             <footer class="modal-card-foot">
