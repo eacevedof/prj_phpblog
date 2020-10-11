@@ -1,11 +1,12 @@
 import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
 import db from "/js/open/helpers/opendb.js"
+//https://devhints.io/bulma
 
 const LANG_CONFIG = "lang-config"
 
 const LANGUAGES = {
-    "1":"sp","2":"nl","3":"en"
+    "1":"en","2":"sp","3":"nl"
 }
 
 new Vue({
@@ -26,7 +27,8 @@ new Vue({
         ianswered:0,
         strquestion: "",
         stranswer: "",
-        strlang: "",
+        langsource: "",
+        langtarget: "",
 
     },//data
 
@@ -53,15 +55,44 @@ new Vue({
             this.iquestion = 1
             this.load_question()
         },
+
         save(){
-            this.answers.push({"q":this.iquestion,"lang":this.strlang,"r":this.stranswer,"gr":""})
+            const isok = this.is_good()
+            if(isok) {
+                this.answers.push({"q": this.iquestion, "lang": this.langsource, "r": this.stranswer, "gr": ""})
+                this.iquestion++
+                this.load_question()
+                return
+            }
+            toast.open({
+                message: "Respuesta incorrecta",
+                type:"is-danger",
+            })
         },
+
         load_questions(){
             this.questions = objpractice.sentences
         },
+
         load_question(){
-            this.strquestion = this.questions[this.iquestion-1].translatable
-            this.strlang = LANGUAGES[this.questions[this.iquestion-1].id_language]
+            const iq = this.iquestion - 1;
+            this.strquestion = this.questions[iq].translatable
+            this.langsource = LANGUAGES[this.questions[iq].id_language]
+            this.langtarget = this.config.seltargets[0]
+            //alert(this.langtarget)
+        },
+
+        is_good(){
+            //const iq = this.iquestion - 1;
+            const idlang = Object.keys(LANGUAGES).find(key => LANGUAGES[key]==this.langtarget)
+            const answer = objpractice.sentence_tr
+                                .filter(obj => parseInt(obj.id_language) == parseInt(idlang))
+                                .map(obj => obj.translated)
+                                .join()
+                                .toLowerCase()
+                                .trim()
+            return (this.stranswer.toLowerCase().trim() === answer)
         }
+
     },//methods
 })

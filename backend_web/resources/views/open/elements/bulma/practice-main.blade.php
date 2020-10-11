@@ -14,15 +14,16 @@
             <h4 class="title is-6">Q: {{iquestion}}/ {{iquestions}}</h4>
             <article class="message is-primary mb-2">
                 <span class="icon has-text-primary">
-                    {{strlang}}
+                    {{langsource}}
                 </span>
                 <div class="message-body p-3">
                     <p><b>{{strquestion}}</b></p>
+                    <label>{{langtarget}}</label>
                     <input  type="text" class="input is-primary" v-model="stranswer" placeholder="tu respuesta">
                 </div>
             </article>
             <div class="control has-text-right">
-                <button class="button is-success" v-on:click="save">Guardar</button>
+                <button class="button is-success" v-on:click="save">Siguiente</button>
             </div>
         </div>
 
