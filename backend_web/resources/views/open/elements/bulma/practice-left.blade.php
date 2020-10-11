@@ -1,3 +1,4 @@
+@verbatim
 <div id="div-practice-left" class="column is-1">
     <aside class="is-medium menu">
         <ul class="menu-list">
@@ -16,9 +17,19 @@
             <section class="modal-card-body">
                 <div class="columns">
                     <div class="column field">
-                        <label class="label">source</label>
+                        <label class="label">Idioma a traducir</label>
                         <div class="control">
                             <input type="text" v-model="config.source" class="input" placeholder="es|en|nl" readonly />
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">Idiomas a examinar</label>
+                        <div class="control">
+                            <div class="select is-multiple">
+                                <select id="sel-folders" v-model="config.seltargets" class="form-control" required>
+                                    <option v-for="(lang, i) in config.targets" :value="lang" :key="i">{{lang}}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div class="column field">
@@ -36,4 +47,4 @@
         </div>
     </div>
 </div>
-
+@endverbatim

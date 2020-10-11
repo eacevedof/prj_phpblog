@@ -9,8 +9,13 @@ const vueleft = new Vue({
 
         },
         config: {
-            source: "es",
-            targets: ["en"],
+            targets: ["nl","en"],
+            seltargets: ["nl"],
+
+
+            sources: ["es","nl","en"],
+            selsource: "es",
+
             time: 0,
             level: 1,
             israndom:false,
