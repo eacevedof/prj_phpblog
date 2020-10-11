@@ -31,6 +31,9 @@ new Vue({
     methods:{
         start(){
 
+        },
+        save(){
+
         }
     },//methods
 })

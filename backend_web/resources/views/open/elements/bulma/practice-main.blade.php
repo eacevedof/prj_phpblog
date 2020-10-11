@@ -1,8 +1,13 @@
 @verbatim
 <div id="div-practice-main" class="column is-11">
     <div class="content is-medium">
-        <h3 class="title is-3">¯\_(ツ)_/¯</h3>
-        <div class="box">
+        <h3 class="title is-3 has-text-centered">¯\_(ツ)_/¯</h3>
+        <div v-if="isfinished" class="box has-text-centered">
+            <div class="control">
+                <button class="button is-link">Empezar exámen</button>
+            </div>
+        </div>
+        <div v-if="!isfinished" class="box">
             <h4 class="title is-3">const</h4>
             <article class="message is-primary">
                 <span class="icon has-text-primary">
@@ -11,11 +16,11 @@
                 <div class="message-body">
                     Block-scoped. Cannot be re-assigned. Not immutable.
                     <input  type="text" class="input is-primary" v-model="question.q" placeholder="tu respuesta">
-                    <pre><code class="language-javascript">const test = "test";</code></pre>
+                    <br/><br/>
+                    <pre><code>text</code></pre>
                 </div>
                 <footer class="modal-card-foot">
-                    <button class="button is-success" v-on:click="modal().save()">Guardar</button>
-                    <button class="button" v-on:click="modal().close()">Cancel</button>
+                    <button class="button is-success" v-on:click="save()">Guardar</button>
                 </footer>
             </article>
         </div>
