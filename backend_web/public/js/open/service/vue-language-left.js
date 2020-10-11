@@ -6,10 +6,11 @@ const vueleft = new Vue({
     data: {
         ismodal: false,
         language:{
-            source: "es",
-            targets: ["en"],
+
         },
         config: {
+            source: "es",
+            targets: ["en"],
             time: 0,
             level: 1,
             israndom:false,

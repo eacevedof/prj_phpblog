@@ -14,6 +14,20 @@
                 <button class="delete" aria-label="close" v-on:click="modal().closeit()"></button>
             </header>
             <section class="modal-card-body">
+                <div class="columns">
+                    <div class="column field">
+                        <label class="label">source</label>
+                        <div class="control">
+                            <input type="text" v-model="config.source" class="input" placeholder="es|en|nl" readonly />
+                        </div>
+                    </div>
+                    <div class="column field">
+                        <label class="label">source</label>
+                        <div class="control">
+                            <input type="text" v-model="config.source" class="input" placeholder="es|en|nl" readonly />
+                        </div>
+                    </div>
+                </div>
             </section>
             <footer class="modal-card-foot">
                 <button class="button is-success">Guardar</button>
@@ -22,3 +36,4 @@
         </div>
     </div>
 </div>
+
