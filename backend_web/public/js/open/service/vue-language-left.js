@@ -4,13 +4,17 @@ import openapi from "/js/open/helpers/openapi.js"
 const vueleft = new Vue({
     el: "#div-practice-left",
     data: {
+        ismodal: false,
         language:{
             source: "es",
             targets: ["en"],
         },
-        time: 0,
-        level: 1,
-        ismodal: false,
+        config: {
+            time: 0,
+            level: 1,
+            israndom:false,
+            questions:20,
+        }
     },//data
 
     async mounted(){
