@@ -21,9 +21,6 @@ $jsonresult = json_encode($result);
         </div>
     </div>
 </section>
-<script>
-const objpractice = {!! $jsonresult !!};
-</script>
 <!--
 https://buefy.org/documentation/start
 -->
@@ -34,6 +31,10 @@ https://buefy.org/documentation/start
 <script src="https://unpkg.com/buefy/dist/components/toast"></script>
 <script src="https://unpkg.com/buefy/dist/components/input"></script>
 
+<script>
+const objpractice = {!! $jsonresult !!};
+const toast = window.Toast.ToastProgrammatic
+</script>
 <script type="module" src="/js/open/service/vue-language-left.js"></script>
 <script type="module" src="/js/open/service/vue-language-main.js"></script>
 @endsection

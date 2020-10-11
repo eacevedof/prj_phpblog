@@ -16,7 +16,7 @@
             </header>
             <section class="modal-card-body">
                 <div class="columns is-mobile">
-                    <div class="column is-one-third">
+                    <div class="column is-4">
                         <label class="label">Idioma origen</label>
                         <div class="control">
                             <div class="select is-multiple">
@@ -26,7 +26,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-one-third field">
+                    <div class="column is-4 field">
                         <label class="label">Idiomas destino</label>
                         <div class="control">
                             <div class="select is-multiple">
@@ -36,8 +36,36 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column is-one-third field">
+                    <div class="column is-4 field">
                         <label class="label">Tiempo/preg</label>
+                        <div class="control">
+                            <input  type="number" class="input is-primary" v-model="config.time" max="30" placeholder="0 - 30 seg">
+                        </div>
+                    </div>
+                </div>
+                <div class="columns is-mobile">
+                    <div class="column is-4">
+                        <label class="label">Dificultad</label>
+                        <div class="control">
+                            <div class="select is-multiple">
+                                <select id="sel-folders" v-model="config.selsource" class="form-control" required>
+                                    <option v-for="(lang, i) in config.sources" :value="lang" :key="i">{{lang}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4 field">
+                        <label class="label">Aleatorio</label>
+                        <div class="control">
+                            <div class="select is-multiple">
+                                <select id="sel-folders" multiple size="2" v-model="config.seltargets" class="form-control" required>
+                                    <option v-for="(lang, i) in config.targets" :value="lang" :key="i">{{lang}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-4 field">
+                        <label class="label">Tot. preguntas</label>
                         <div class="control">
                             <input  type="number" class="input is-primary" v-model="config.time" max="30" placeholder="0 - 30 seg">
                         </div>
