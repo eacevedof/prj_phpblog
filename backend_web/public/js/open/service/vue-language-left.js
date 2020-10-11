@@ -10,13 +10,12 @@ const vueleft = new Vue({
 
         },
         config: {
-            targets: ["nl","en"],
-            seltargets: ["nl"],
-
-
             sources: ["es","nl","en"],
-            selsource: "es",
+            targets: ["nl","en"],
 
+
+            selsource: "es",
+            seltargets: ["nl"],
             time: 0,
             level: 1,
             israndom:false,
@@ -38,8 +37,7 @@ const vueleft = new Vue({
                 },
                 save(){
                     db.save("lang-config",{
-                        seltargets: self.config.seltargets,
-                        time: self.config.time
+                        ...self.config
                     })
                     toast.open({
                         message: "Configuración guardada",
