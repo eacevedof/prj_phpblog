@@ -18,7 +18,7 @@ new Vue({
         },
 
         questions:[],
-
+        ianswered:0,
     },//data
 
     mounted(){
@@ -30,7 +30,7 @@ new Vue({
 
     methods:{
         start(){
-
+            this.isfinished = false
         },
         save(){
 
