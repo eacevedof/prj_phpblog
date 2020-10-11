@@ -12,7 +12,7 @@
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Configuración</p>
-                <button class="delete" aria-label="close" v-on:click="modal().closeit()"></button>
+                <button class="delete" aria-label="close" v-on:click="modal().close()"></button>
             </header>
             <section class="modal-card-body">
                 <div class="columns is-mobile">
@@ -45,8 +45,8 @@
                 </div>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success">Guardar</button>
-                <button class="button" v-on:click="modal().closeit()">Cancel</button>
+                <button class="button is-success" v-on:click="modal().save()">Guardar</button>
+                <button class="button" v-on:click="modal().close()">Cancel</button>
             </footer>
         </div>
     </div>

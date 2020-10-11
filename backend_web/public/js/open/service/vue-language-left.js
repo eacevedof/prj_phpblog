@@ -1,5 +1,6 @@
 import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
+import db from "/js/open/helpers/opendb.js"
 
 const vueleft = new Vue({
     el: "#div-practice-left",
@@ -31,9 +32,16 @@ const vueleft = new Vue({
         modal(){
             const self = this
             return {
-                closeit: function(){
+                close(){
                     self.ismodal = false;
                     document.getElementById("div-modal").classList.remove("is-active")
+                },
+                save(){
+                    alert("saving")
+                    db.save("lang-config",{
+                        seltargets: self.config.seltargets,
+                        time: self.config.time
+                    })
                 }
             }
         },
