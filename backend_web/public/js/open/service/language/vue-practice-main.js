@@ -35,11 +35,12 @@ new Vue({
     mounted(){
         const config = db.select(LANG_CONFIG)
         if(config) {
+            this.load_questions()
             this.config = {...config}
             if(this.config.questions>0)
-                this.iquestions = this.config.questions
+                this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
         }
-        this.load_questions()
+
         //funcs.pr(objpractice,"vue-language-practice")
         //console.log(JSON.stringify(objpractice))
     },//mounted
