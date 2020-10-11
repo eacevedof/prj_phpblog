@@ -15,27 +15,25 @@
                 <button class="delete" aria-label="close" v-on:click="modal().closeit()"></button>
             </header>
             <section class="modal-card-body">
-                <div class="columns">
-                    <div class="column field">
-                        <label class="label">Idioma a traducir</label>
-                        <div class="control">
-                            <input type="text" v-model="config.source" class="input" placeholder="es|en|nl" readonly />
-                        </div>
-                    </div>
-                    <div class="column field">
-                        <label class="label">Idiomas a examinar</label>
+                <div class="columns is-mobile">
+                    <div class="column is-one-third">
+                        <label class="label">Idioma origen</label>
                         <div class="control">
                             <div class="select is-multiple">
-                                <select id="sel-folders" v-model="config.seltargets" class="form-control" required>
-                                    <option v-for="(lang, i) in config.targets" :value="lang" :key="i">{{lang}}</option>
+                                <select id="sel-folders" v-model="config.selsource" class="form-control" required>
+                                    <option v-for="(lang, i) in config.sources" :value="lang" :key="i">{{lang}}</option>
                                 </select>
                             </div>
                         </div>
                     </div>
-                    <div class="column field">
-                        <label class="label">source</label>
+                    <div class="column is-one-third field">
+                        <label class="label">Idiomas destino</label>
                         <div class="control">
-                            <input type="text" v-model="config.source" class="input" placeholder="es|en|nl" readonly />
+                            <div class="select is-multiple">
+                                <select id="sel-folders" multiple size="2" v-model="config.seltargets" class="form-control" required>
+                                    <option v-for="(lang, i) in config.targets" :value="lang" :key="i">{{lang}}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
