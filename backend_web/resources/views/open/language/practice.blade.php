@@ -11,6 +11,7 @@ $jsonresult = json_encode($result);
 @section("pagekeywords",$seo["keywords"])
 
 @section("container")
+<link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
 @include("open.elements.bulma.practice-header")
 <section class="section">
     <div class="container">

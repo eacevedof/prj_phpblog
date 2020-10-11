@@ -5,6 +5,7 @@
 @section("pagekeywords",$seo["keywords"])
 
 @section("container")
+    <link rel="stylesheet" href="https://unpkg.com/buefy/dist/buefy.min.css">
 <div class="container">
     <div class="section">
         <div class="columns">

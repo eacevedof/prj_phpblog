@@ -2,6 +2,7 @@ import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
 import db from "/js/open/helpers/opendb.js"
 
+
 const vueleft = new Vue({
     el: "#div-practice-left",
     data: {
@@ -25,6 +26,7 @@ const vueleft = new Vue({
     },//data
 
     async mounted(){
+        //Toast.open('Toasty!')
         console.log("vue-language-left:",objpractice);
     },//mounted
 
