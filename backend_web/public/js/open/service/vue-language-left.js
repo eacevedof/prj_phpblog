@@ -43,6 +43,7 @@ const vueleft = new Vue({
                     db.save(LANG_CONFIG,{
                         ...self.config
                     })
+                    self.modal().close()
                     toast.open({
                         message: "Configuración guardada",
                         type:"is-success",
