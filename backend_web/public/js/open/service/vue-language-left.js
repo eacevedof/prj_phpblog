@@ -37,7 +37,6 @@ const vueleft = new Vue({
                     document.getElementById("div-modal").classList.remove("is-active")
                 },
                 save(){
-                    alert("saving")
                     db.save("lang-config",{
                         seltargets: self.config.seltargets,
                         time: self.config.time
