@@ -1,5 +1,6 @@
-import funcs from "/js/open/helpers/openfuncs.js"
-import openapi from "/js/open/helpers/openapi.js"
+//vue-language-left.js
+//import funcs from "/js/open/helpers/openfuncs.js"
+//import openapi from "/js/open/helpers/openapi.js"
 import db from "/js/open/helpers/opendb.js"
 
 const LANG_CONFIG = "lang-config"
