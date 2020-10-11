@@ -60,7 +60,8 @@ new Vue({
             this.questions = objpractice.sentences
         },
         load_question(){
-            this.strquestion = this.questions[this.iquestion-1]["translatable"]
+            this.strquestion = this.questions[this.iquestion-1].translatable
+            this.strlang = LANGUAGES[this.questions[this.iquestion-1].id_language]
         }
     },//methods
 })

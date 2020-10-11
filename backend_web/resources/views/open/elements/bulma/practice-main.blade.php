@@ -11,13 +11,13 @@
             </div>
         </div>
         <div v-if="!isfinished" class="box">
-            <h4 class="title is-4">Q: 1/ {{iquestions}}</h4>
+            <h4 class="title is-6">Q: {{iquestion}}/ {{iquestions}}</h4>
             <article class="message is-primary mb-2">
                 <span class="icon has-text-primary">
                     {{strlang}}
                 </span>
-                <div class="message-body">
-                    {{strquestion}}
+                <div class="message-body p-3">
+                    <p><b>{{strquestion}}</b></p>
                     <input  type="text" class="input is-primary" v-model="stranswer" placeholder="tu respuesta">
                 </div>
             </article>
