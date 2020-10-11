@@ -31,7 +31,7 @@ https://buefy.org/documentation/start
 <!-- Full bundle -->
 <script src="https://unpkg.com/buefy/dist/buefy.min.js"></script>
 <!-- Individual components -->
-<script src="https://unpkg.com/buefy/dist/components/table"></script>
+<script src="https://unpkg.com/buefy/dist/components/toast"></script>
 <script src="https://unpkg.com/buefy/dist/components/input"></script>
 
 <script type="module" src="/js/open/service/vue-language-left.js"></script>

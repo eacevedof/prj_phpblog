@@ -1,7 +1,9 @@
 import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
 import db from "/js/open/helpers/opendb.js"
-
+//import { ToastProgrammatic as Toast } from 'https://unpkg.com/buefy@0.9.3/dist/components/toast/index.js'
+//console.log("window:",window.Toast.ToastProgrammatic)
+const toast = window.Toast.ToastProgrammatic
 
 const vueleft = new Vue({
     el: "#div-practice-left",
@@ -25,8 +27,8 @@ const vueleft = new Vue({
         }
     },//data
 
-    async mounted(){
-        //Toast.open('Toasty!')
+    mounted(){
+        toast.open('Toasty!')
         console.log("vue-language-left:",objpractice);
     },//mounted
 
