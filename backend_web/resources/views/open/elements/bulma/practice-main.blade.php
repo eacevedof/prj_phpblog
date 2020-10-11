@@ -11,21 +11,19 @@
             </div>
         </div>
         <div v-if="!isfinished" class="box">
-            <h4 class="title is-3">const</h4>
-            <article class="message is-primary">
+            <h4 class="title is-4">Q: 1/ {{iquestions}}</h4>
+            <article class="message is-primary mb-2">
                 <span class="icon has-text-primary">
-                    <i class="fab fa-js"></i>
+                    {{strlang}}
                 </span>
                 <div class="message-body">
-                    Block-scoped. Cannot be re-assigned. Not immutable.
-                    <input  type="text" class="input is-primary" v-model="question.q" placeholder="tu respuesta">
-                    <br/><br/>
-                    <pre><code>text</code></pre>
+                    {{strquestion}}
+                    <input  type="text" class="input is-primary" v-model="stranswer" placeholder="tu respuesta">
                 </div>
-                <footer class="modal-card-foot">
-                    <button class="button is-success" v-on:click="save()">Guardar</button>
-                </footer>
             </article>
+            <div class="control has-text-right">
+                <button class="button is-success" v-on:click="save">Guardar</button>
+            </div>
         </div>
 
         <div v-if="isfinished && ianswered>0" class="box">
