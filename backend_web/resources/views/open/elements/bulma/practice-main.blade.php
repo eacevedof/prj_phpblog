@@ -1,10 +1,13 @@
 @verbatim
 <div id="div-practice-main" class="column is-11">
     <div class="content is-medium">
-        <h3 class="title is-3 has-text-centered">¯\_(ツ)_/¯</h3>
+        <h3 class="title is-3 has-text-centered">
+            ¯\_(ツ)_/¯
+            <button v-if="ianswered>0" class="button is-success" v-on:click="restart">Reiniciar</button>
+        </h3>
         <div v-if="isfinished" class="box has-text-centered">
             <div class="control">
-                <button class="button is-link" v-on:click="start()">Empezar exámen</button>
+                <button class="button is-link" v-on:click="start">Empezar exámen</button>
             </div>
         </div>
         <div v-if="!isfinished" class="box">

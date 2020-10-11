@@ -29,6 +29,9 @@ new Vue({
     },//mounted
 
     methods:{
+        restart(){
+            this.isfinished = false
+        },
         start(){
             this.isfinished = false
         },
