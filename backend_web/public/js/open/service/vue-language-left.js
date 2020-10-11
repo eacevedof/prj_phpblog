@@ -6,9 +6,7 @@ const vueleft = new Vue({
     el: "#div-practice-left",
     data: {
         ismodal: false,
-        language:{
 
-        },
         config: {
             sources: ["es","nl","en"],
             targets: ["nl","en"],
@@ -48,13 +46,10 @@ const vueleft = new Vue({
         },
 
         on_config(){
-            //alert("on config")
-            this.ismodal = !this.ismodal;
+            this.ismodal = true;
             const $modal = document.getElementById("div-modal")
             if(this.ismodal)
                 $modal.classList.add("is-active")
-            else
-                $modal.classList.remove("is-active")
         },
 
     },//methods
