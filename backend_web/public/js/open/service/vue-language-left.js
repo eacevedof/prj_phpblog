@@ -2,6 +2,8 @@ import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
 import db from "/js/open/helpers/opendb.js"
 
+const LANG_CONFIG = "lang-config"
+
 const vueleft = new Vue({
     el: "#div-practice-left",
     data: {
@@ -22,7 +24,11 @@ const vueleft = new Vue({
     },//data
 
     mounted(){
-        console.log("vue-language-left:",objpractice);
+        //console.log("vue-language-left:",objpractice);
+        const config = db.select(LANG_CONFIG)
+        if(config)
+            this.config = {...config}
+
     },//mounted
 
     methods:{
@@ -34,7 +40,7 @@ const vueleft = new Vue({
                     document.getElementById("div-modal").classList.remove("is-active")
                 },
                 save(){
-                    db.save("lang-config",{
+                    db.save(LANG_CONFIG,{
                         ...self.config
                     })
                     toast.open({
