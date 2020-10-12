@@ -48,8 +48,8 @@ correctas: 0, incorrectas: 0
             <article class="notification is-warning">
                 <p>
                     <b>q: {{answer.question}}</b><br/>
-                    La pregunta: {{answer.answer}}<br/>
-                    Tu resp: {{answer.expected}}<br/>
+                    <b>La pregunta:</b><br/> {{answer.answer}}<br/>
+                    <b>Tu respuesta:</b><br/> {{answer.expected}}<br/>
                 </p>
             </article>
         </div>
