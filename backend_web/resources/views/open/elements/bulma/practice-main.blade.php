@@ -2,7 +2,7 @@
 <div id="div-practice-main" class="column is-11">
     <div class="content is-medium">
         <h3 class="title is-3 has-text-centered">
-            <button v-if="iquestion>1 && iquestions>0" class="button is-success" v-on:click="restart">Reiniciar</button>
+            <button v-if="!isfinished && iquestion>1 && iquestions>0" class="button is-success" v-on:click="restart">Reiniciar</button>
         </h3>
         <div v-if="isfinished && iquestions>0" class="box has-text-centered">
             <div class="control">
@@ -25,9 +25,9 @@
                 <div class="message-body p-3 mb-2">
                     <p><b>{{strquestion}}</b></p>
                     <label>Translate into: <b>{{langtarget}}</b></label>
-                    <input  type="text" class="input is-primary" v-model="stranswer" placeholder="tu respuesta">
+                    <input  type="text" ref="answer" class="input is-primary" v-model="stranswer" placeholder="tu respuesta">
                 </div>
-                <p class="p-3"><i class="fas fa-comment" aria-hidden="true"></i> {{stranswer}}</p>
+                <p class="p-3"><i class="fab fa-comment"></i> {{stranswer}}</p>
                 <p v-if="expanswer" class="p-3">{{expanswer}}</p>
             </article>
             <div class="control has-text-right">
@@ -36,20 +36,15 @@
         </div>
 
         <div v-if="isfinished && iquestion>0" class="box">
-            <h4 class="title is-3">const</h4>
-            <article class="message is-primary">
-                <span class="icon has-text-primary">
+            <h4 class="title is-3">Resultado:</h4>
+            <article class="message is-secondary">
+                <span class="icon has-text-secondary">
                     <i class="fab fa-js"></i>
                 </span>
                 <div class="message-body">
-                    Block-scoped. Cannot be re-assigned. Not immutable.
-
                     <br/><br/>
                     <pre><code>text</code></pre>
                 </div>
-                <footer class="modal-card-foot">
-                    <button class="button is-success" v-on:click="save()">Guardar</button>
-                </footer>
             </article>
         </div>
     </div>

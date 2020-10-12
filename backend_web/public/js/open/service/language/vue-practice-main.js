@@ -53,16 +53,20 @@ new Vue({
             this.isfinished = false
             this.iquestion = 1
             this.load_question()
+            this.$refs.answer.focus()
         },
+
         start(){
             this.answers = []
             this.isfinished = false
             this.iquestion = 1
             this.load_question()
+            this.$refs.answer.focus()
         },
 
         save(){
             const isok = this.is_good()
+            this.$refs.answer.focus()
             if(isok) {
                 toast.open({
                     message: "Respuesta correcta",
@@ -78,6 +82,7 @@ new Vue({
                 message: "Respuesta incorrecta",
                 type:"is-danger",
             })
+            this.$refs.answer.select()
         },
 
         load_questions(){
