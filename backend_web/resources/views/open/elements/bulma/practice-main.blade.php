@@ -38,18 +38,19 @@
 
         <!-- resumen -->
         <div v-if="isfinished && answers.length>0">
-            <h4 class="title is-3">Resumen:</h4>
-            <pre class="is-size-7">
-            Total: {{iquestions}}
-            correct: 0
-            incorrect: 0
+            <h4 class="title is-5">Resumen:</h4>
+            <pre class="is-size-7 p-1">
+Total: {{iquestions}}
+correctas: 0, incorrectas: 0
             </pre>
         </div>
         <div v-if="isfinished" v-for="answer in answers" class="box">
             <article class="notification is-warning">
-                <p><b>q: {{answer.question}}</b></p>
-                <p>{{answer.answer}}</p>
-                <p>{{answer.expected}}</p>
+                <p>
+                    <b>q: {{answer.question}}</b><br/>
+                    La pregunta: {{answer.answer}}<br/>
+                    Tu resp: {{answer.expected}}<br/>
+                </p>
             </article>
         </div>
     </div>
