@@ -37,16 +37,19 @@
         </div>
 
         <!-- resumen -->
-        <div v-if="isfinished && iquestion>0" class="box">
-            <h4 class="title is-3">Resultado:</h4>
-            <article class="message is-secondary">
-                <span class="icon has-text-secondary">
-                    <i class="fab fa-js"></i>
-                </span>
-                <div class="message-body">
-                    <br/><br/>
-                    <pre><code>text</code></pre>
-                </div>
+        <div v-if="isfinished && answers.length>0">
+            <h4 class="title is-3">Resumen:</h4>
+<pre class="is-size-7">
+Total: {{iquestions}}
+correct: 0
+incorrect: 0
+</pre>
+        </div>
+        <div v-if="isfinished" v-for="answer in answers" class="box">
+            <article class="notification is-warning">
+                <p><b>q: {{answer.question}}</b></p>
+                <p>{{answer.answer}}</p>
+                <p>{{answer.expected}}</p>
             </article>
         </div>
     </div>

@@ -63,9 +63,8 @@ new Vue({
             this.load_question()
             //this.$refs.answer.focus()
             console.log("refs",this.$refs,"refs.answer",this.$refs["answer"])
-            this.focusanswer()
-        },
-
+            this.$nextTick(()=> this.focusanswer())
+     },
         save(){
             const isok = this.is_good()
             this.focusanswer()
@@ -74,7 +73,7 @@ new Vue({
                     message: "Respuesta correcta",
                     type:"is-success",
                 })
-                this.answers.push({"q": this.iquestion, "lang": this.langsource, "r": this.stranswer, "gr": ""})
+                this.answers.push({"question": this.iquestion, "lang": this.langsource, "answer": this.stranswer, "expected": this.expanswer})
                 this.iquestion++
                 //if(this.iquestion)
                 this.load_question()
