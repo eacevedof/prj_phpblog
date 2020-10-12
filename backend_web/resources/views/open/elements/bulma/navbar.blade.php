@@ -17,6 +17,7 @@
             <a class="navbar-item lang-nav-bg" href="{{ route('open.home.index') }}">
                 <i class="fa fa-home"></i> /
             </a>
+            <a href="/idiomas" class="navbar-item lang-nav-bg">Idiomas</a>
             <a href="/blog" class="navbar-item lang-nav-bg">Blog</a>
         </div>
     </div>

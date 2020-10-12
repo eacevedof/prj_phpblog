@@ -10,7 +10,11 @@
             </div>
         </div>
         <div v-if="!iquestions" class="has-text-centered">
-            ¯\_(ツ)_/¯
+            <div class="notification is-warning">
+                ¯\_(ツ)_/¯<br/><br/>
+                Este tema no tiene configurada ninguna pregunta<br/><br/>
+                <a href="/idiomas" class="button is-black">Volver al temario</a>
+            </div>
         </div>
         <div v-if="!isfinished" class="box">
             <h4 class="title is-6">Q: {{iquestion}}/ {{iquestions}}</h4>
