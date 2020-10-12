@@ -21,7 +21,6 @@ new Vue({
 
         idquestion: -1,
         iquestion:0,
-        ianswered:0,
         strquestion: "",
         stranswer: "",
         expanswer: "",
@@ -50,11 +49,13 @@ new Vue({
 
     methods:{
         restart(){
+            this.answers = []
             this.isfinished = false
             this.iquestion = 1
             this.load_question()
         },
         start(){
+            this.answers = []
             this.isfinished = false
             this.iquestion = 1
             this.load_question()

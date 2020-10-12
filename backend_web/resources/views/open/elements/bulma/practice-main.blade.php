@@ -2,7 +2,7 @@
 <div id="div-practice-main" class="column is-11">
     <div class="content is-medium">
         <h3 class="title is-3 has-text-centered">
-            <button v-if="ianswered>0 && iquestions>0" class="button is-success" v-on:click="restart">Reiniciar</button>
+            <button v-if="iquestion>1 && iquestions>0" class="button is-success" v-on:click="restart">Reiniciar</button>
         </h3>
         <div v-if="isfinished && iquestions>0" class="box has-text-centered">
             <div class="control">
@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <div v-if="isfinished && ianswered>0" class="box">
+        <div v-if="isfinished && iquestion>0" class="box">
             <h4 class="title is-3">const</h4>
             <article class="message is-primary">
                 <span class="icon has-text-primary">
@@ -43,7 +43,7 @@
                 </span>
                 <div class="message-body">
                     Block-scoped. Cannot be re-assigned. Not immutable.
-                    <input  type="text" class="input is-primary" v-model="question.q" placeholder="tu respuesta">
+
                     <br/><br/>
                     <pre><code>text</code></pre>
                 </div>
