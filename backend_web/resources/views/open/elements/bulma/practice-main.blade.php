@@ -44,15 +44,17 @@ Total: {{iquestions}}
 correctas: 0, incorrectas: 0
             </pre>
         </div>
-        <div v-if="isfinished" v-for="answer in answers" class="box">
-            <article class="notification is-warning">
-                <p>
-                    <b>q: {{answer.id}}</b><br/>
-                    <b>La pregunta:</b><br/> {{answer.question}}<br/>
-                    <b>Tu respuesta:</b><br/> {{answer.answer}}<br/>
-                    <b>La respuesta correcta:</b><br/> {{answer.expected}}<br/>
+        <div v-if="isfinished"  v-for="answer in answers" class="box">
+            <div class="notification is-warning">
+                <p class="is-size-6">
+                    <b>Pregunta {{answer.id}}:</b> {{answer.question}}<br/>
+                    <b>Tu respuesta:</b><br/>&nbsp;&nbsp;{{answer.answer}}<br/>
+                    <b>La respuesta correcta:</b><br/>&nbsp;&nbsp;{{answer.expected}}
                 </p>
-            </article>
+                <p class="has-text-right is-size-6">
+                    <b>{{answer.status}}</b>
+                </p>
+            </div>
         </div>
     </div>
 </div>
