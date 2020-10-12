@@ -47,9 +47,10 @@ correctas: 0, incorrectas: 0
         <div v-if="isfinished" v-for="answer in answers" class="box">
             <article class="notification is-warning">
                 <p>
-                    <b>q: {{answer.question}}</b><br/>
-                    <b>La pregunta:</b><br/> {{answer.answer}}<br/>
-                    <b>Tu respuesta:</b><br/> {{answer.expected}}<br/>
+                    <b>q: {{answer.id}}</b><br/>
+                    <b>La pregunta:</b><br/> {{answer.question}}<br/>
+                    <b>Tu respuesta:</b><br/> {{answer.answer}}<br/>
+                    <b>La respuesta correcta:</b><br/> {{answer.expected}}<br/>
                 </p>
             </article>
         </div>
