@@ -83,7 +83,11 @@ new Vue({
         },
 
         load_question(){
+            this.stranswer = ""
+            this.expanswer = ""
+
             const iq = this.iquestion - 1;
+
             this.idquestion = this.questions[iq].id
             this.strquestion = this.questions[iq].translatable
             this.langsource = LANGUAGES[this.questions[iq].id_language]
