@@ -40,7 +40,8 @@ new Vue({
             this.config = {...config}
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
-            return
+            console.log("mounted iquestions",this.iquestions)
+            //return
         }
 
         //funcs.pr(objpractice,"vue-language-practice")
@@ -83,11 +84,17 @@ new Vue({
         },
 
         load_question(){
+            console.log("idquestion",this.idquestion,"translate iquestions", this.iquestions)
+            if(this.iquestion > this.iquestions) {
+                this.isfinished = true
+                return
+            }
+
             this.stranswer = ""
             this.expanswer = ""
 
             const iq = this.iquestion - 1;
-
+            console.log("iq",iq)
             this.idquestion = this.questions[iq].id
             this.strquestion = this.questions[iq].translatable
             this.langsource = LANGUAGES[this.questions[iq].id_language]
