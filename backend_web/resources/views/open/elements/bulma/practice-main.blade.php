@@ -39,11 +39,11 @@
         <!-- resumen -->
         <div v-if="isfinished && answers.length>0">
             <h4 class="title is-3">Resumen:</h4>
-<pre class="is-size-7">
-Total: {{iquestions}}
-correct: 0
-incorrect: 0
-</pre>
+            <pre class="is-size-7">
+            Total: {{iquestions}}
+            correct: 0
+            incorrect: 0
+            </pre>
         </div>
         <div v-if="isfinished" v-for="answer in answers" class="box">
             <article class="notification is-warning">
