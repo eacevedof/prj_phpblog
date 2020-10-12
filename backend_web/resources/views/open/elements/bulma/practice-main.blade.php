@@ -16,7 +16,8 @@
                 <a href="/idiomas" class="button is-black">Volver al temario</a>
             </div>
         </div>
-        <div v-if="!isfinished" class="box">
+
+        <div v-show="!isfinished" class="box">
             <h4 class="title is-6">Q: {{iquestion}}/ {{iquestions}}</h4>
             <article class="message is-primary mb-2">
                 <span class="icon has-text-primary">
@@ -35,6 +36,7 @@
             </div>
         </div>
 
+        <!-- resumen -->
         <div v-if="isfinished && iquestion>0" class="box">
             <h4 class="title is-3">Resultado:</h4>
             <article class="message is-secondary">
