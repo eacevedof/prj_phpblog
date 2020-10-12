@@ -25,7 +25,7 @@
                 <div class="message-body p-3 mb-2">
                     <p><b>{{strquestion}}</b></p>
                     <label>Translate into: <b>{{langtarget}}</b></label>
-                    <input  type="text" ref="answer" class="input is-primary" v-model="stranswer" placeholder="tu respuesta">
+                    <input  type="text" ref="answer" class="input is-primary" v-model="stranswer" placeholder="tu respuesta" autofocus />
                 </div>
                 <p class="p-3"><i class="fab fa-comment"></i> {{stranswer}}</p>
                 <p v-if="expanswer" class="p-3">{{expanswer}}</p>
