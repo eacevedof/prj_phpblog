@@ -22,11 +22,13 @@
                 <span class="icon has-text-primary">
                     {{langsource}}
                 </span>
-                <div class="message-body p-3">
+                <div class="message-body p-3 mb-2">
                     <p><b>{{strquestion}}</b></p>
-                    <label>{{langtarget}}</label>
+                    <label>Translate into: <b>{{langtarget}}</b></label>
                     <input  type="text" class="input is-primary" v-model="stranswer" placeholder="tu respuesta">
                 </div>
+                <p class="p-3"><i class="fas fa-comment" aria-hidden="true"></i> {{stranswer}}</p>
+                <p v-if="expanswer" class="p-3">{{expanswer}}</p>
             </article>
             <div class="control has-text-right">
                 <button class="button is-success" v-on:click="save">{{btnnext}}</button>

@@ -19,10 +19,13 @@ new Vue({
         questions:[],
         answers:[],
 
+        idquestion: -1,
         iquestion:0,
         ianswered:0,
         strquestion: "",
         stranswer: "",
+        expanswer: "",
+
         langsource: "",
         langtarget: "",
         btnnext: "Siguiente"
@@ -81,6 +84,7 @@ new Vue({
 
         load_question(){
             const iq = this.iquestion - 1;
+            this.idquestion = this.questions[iq].id
             this.strquestion = this.questions[iq].translatable
             this.langsource = LANGUAGES[this.questions[iq].id_language]
             this.langtarget = this.config.seltargets[0]
@@ -93,11 +97,13 @@ new Vue({
             //const iq = this.iquestion - 1;
             const idlang = Object.keys(LANGUAGES).find(key => LANGUAGES[key]==this.langtarget)
             const answer = objpractice.sentence_tr
-                                .filter(obj => parseInt(obj.id_language) == parseInt(idlang))
+                                .filter(obj => parseInt(obj.id_language) === parseInt(idlang))
+                                .filter(obj => obj.id_sentence === this.idquestion)
                                 .map(obj => obj.translated)
                                 .join()
                                 .toLowerCase()
                                 .trim()
+            if(debug)  this.expanswer = answer
             return (this.stranswer.toLowerCase().trim() === answer)
         }
 

@@ -32,6 +32,7 @@ https://buefy.org/documentation/start
 <script src="https://unpkg.com/buefy/dist/components/input"></script>
 
 <script>
+const debug = true
 const toast = window.Toast.ToastProgrammatic
 const objpractice = {!! $jsonresult !!};
 console.log("practice.blade.php objpractice",objpractice)
