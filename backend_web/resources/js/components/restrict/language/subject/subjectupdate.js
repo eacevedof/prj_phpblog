@@ -1,4 +1,4 @@
-//postupdate.js
+//subjectupdate.js
 import funcs from "../../../app/funcs"
 import CONST from "../../../app/constants"
 import apifetch from "../../../app/apifetch"
@@ -11,7 +11,7 @@ export default {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
             categories: [],
-            post: {
+            subject: {
                 id: -1,
                 description: "",
                 id_type: 0,
@@ -46,8 +46,8 @@ export default {
         load_lastupload(){
             const lastupload = db.select("last-upload")
             if(lastupload) {
-                this.post.url_img1 = lastupload
-                this.post.url_img2 = lastupload
+                this.subject.url_img1 = lastupload
+                this.subject.url_img2 = lastupload
             }
         },
 
@@ -56,7 +56,7 @@ export default {
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
 
-            const url = `/api/post/${id}`
+            const url = `/api/subject/${id}`
             fetch(url, {
                 method: 'get',
             })
@@ -72,9 +72,9 @@ export default {
                         })
                     }
 
-                    this.post = response.data
-                    this.post.publish_date = funcs.get_date(this.post.publish_date)
-                    this.post.last_update = funcs.get_date(this.post.last_update)
+                    this.subject = response.data
+                    this.subject.publish_date = funcs.get_date(this.subject.publish_date)
+                    this.subject.last_update = funcs.get_date(this.subject.last_update)
                 })
                 .catch(error => {
                     console.log("CATCH ERROR get_row",error)
@@ -94,14 +94,14 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
-            const url = `/api/post/${this.post.id}`
+            const url = `/api/subject/${this.subject.id}`
 
             fetch(url, {
                 method: 'put',
                 headers:{
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({_token:csrftoken,_action:"post.update", ...this.post})
+                body: JSON.stringify({_token:csrftoken,_action:"subject.update", ...this.subject})
             })
                 .then(response => response.json())
                 .then(response => {
@@ -115,8 +115,8 @@ export default {
                             text: response.error,
                         })
                     }
-                    this.$toast.success(`Post saved. Nº ${self.post.id} | ${self.post.title}`)
-                    this.load_register(self.post.id)
+                    this.$toast.success(`Subject saved. Nº ${self.subject.id} | ${self.subject.title}`)
+                    this.load_register(self.subject.id)
 
                 })
                 .catch(error => {
@@ -138,13 +138,13 @@ export default {
                 const self = this
                 self.issending = true
                 self.btnsend = CONST.BTN_IN_PROGRESS
-                const url = `/api/post/${id}`
+                const url = `/api/subject/${id}`
                 fetch(url, {
                     method: 'delete',
                     headers:{
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({_token:csrftoken,_action:"post.delete"})
+                    body: JSON.stringify({_token:csrftoken,_action:"subject.delete"})
                 })
                     .then(response => response.json())
                     .then(response => {
@@ -160,11 +160,11 @@ export default {
 
                         Swal.fire({
                             icon: 'success',
-                            title: `Post: ${id} has been removed`,
+                            title: `Subject: ${id} has been removed`,
                             html: `<b>&#128578;</b>`,
                         })
 
-                        document.location = "/adm/posts"
+                        document.location = "/adm/subjects"
                     })
                     .catch(error => {
                         console.log("CATCH ERROR remove",error)
@@ -182,27 +182,27 @@ export default {
         },
 
         get_idtype_slug(){
-            const idtype = this.post.id_type
+            const idtype = this.subject.id_type
             const category = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.slug)
             return category
         },
 
         get_idtype_urlfinal(){
-            const idtype = this.post.id_type
+            const idtype = this.subject.id_type
             const url = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.url_final)
             return url
         },
 
         onchange_title(){
-            this.post.slug = funcs.get_slug(this.post.title).concat(`-${this.post.id}`)
+            this.subject.slug = funcs.get_slug(this.subject.title).concat(`-${this.subject.id}`)
             const url = this.get_idtype_urlfinal()
             //alert(url)
-            //this.post.url_final = url.concat("/").concat(this.post.slug)
-            this.post.url_final = `${url}/${this.post.slug}`
+            //this.subject.url_final = url.concat("/").concat(this.subject.slug)
+            this.subject.url_final = `${url}/${this.subject.slug}`
         },
 
         on_btnalbum(){
-            db.save("last-slug",this.post.slug)
+            db.save("last-slug",this.subject.slug)
             window.open("/adm/upload", "_blank").focus()
         },
 

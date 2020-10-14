@@ -15,7 +15,7 @@
     <div class="card-body mt-0">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
-                <h1>Posts <sub>({{rows.length}})</sub></h1>
+                <h1>Subjects <sub>({{rows.length}})</sub></h1>
             </div>
             <div class="col-md-3">
                 <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load()">
@@ -100,7 +100,7 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
-            const url = `/api/post`
+            const url = `/api/subject`
             fetch(url, {
                 method: 'get',
             })
@@ -119,7 +119,7 @@ export default {
                 self.rows = response.data
                 //console.log("rows_load.rows"); console.table(self.rows)
                 self.filter.original = response.data
-                self.filter.search = db.select("post-search")
+                self.filter.search = db.select("subject-search")
                 self.on_search()
 
             })
@@ -139,7 +139,7 @@ export default {
 
         on_search(){
             if(!this.filter.search){
-                db.delete("post-search")
+                db.delete("subject-search")
                 this.rows = [...this.filter.original]
                 return
             }
@@ -148,7 +148,7 @@ export default {
             if(!fields) return
 
             const search = this.filter.search.toString().trim()
-            db.save("post-search",search)
+            db.save("subject-search",search)
             const rows = this.filter.original.filter(obj => {
                 const exist = fields.some(field => {
                     if(obj[field]===null) return false
@@ -163,7 +163,7 @@ export default {
         },
 
         edit(id){
-            const url = "/adm/post/update/"+id
+            const url = "/adm/subject/update/"+id
             document.location = url
             //window.open(url, "_blank")
         },
@@ -174,13 +174,13 @@ export default {
                 const self = this
                 self.issending = true
                 self.btnsend = CONST.BTN_IN_PROGRESS
-                const url = `/api/post/${id}`
+                const url = `/api/subject/${id}`
                 fetch(url, {
                     method: 'delete',
                     headers:{
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({_token:csrftoken,_action:"post.delete"})
+                    body: JSON.stringify({_token:csrftoken,_action:"subject.delete"})
                 })
                 .then(response => response.json())
                 .then(response => {
@@ -198,7 +198,7 @@ export default {
 
                     Swal.fire({
                         icon: 'success',
-                        title: `Post: ${id} has been removed`,
+                        title: `Subject: ${id} has been removed`,
                         html: `<b>&#128578;</b>`,
                     })
 
