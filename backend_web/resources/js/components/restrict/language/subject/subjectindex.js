@@ -94,7 +94,7 @@ export default {
         },
 
         edit(id){
-            const url = "/adm/subject/update/"+id
+            const url = "/adm/language/subject/update/"+id
             document.location = url
             //window.open(url, "_blank")
         },

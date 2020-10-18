@@ -2018,7 +2018,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       this.rows = _toConsumableArray(rows); //console.log("rows filtered"); console.table(this.rows)
     },
     edit: function edit(id) {
-      var url = "/adm/subject/update/" + id;
+      var url = "/adm/language/subject/update/" + id;
       document.location = url; //window.open(url, "_blank")
     },
     remove: function remove(id) {
