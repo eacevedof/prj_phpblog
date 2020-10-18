@@ -56,7 +56,7 @@ export default {
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
 
-            const url = `/api/subject/${id}`
+            const url = `/api/language/subject/${id}`
             fetch(url, {
                 method: 'get',
             })
@@ -94,7 +94,7 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
-            const url = `/api/subject/${this.subject.id}`
+            const url = `/api/language/subject/${this.subject.id}`
 
             fetch(url, {
                 method: 'put',
@@ -138,7 +138,7 @@ export default {
                 const self = this
                 self.issending = true
                 self.btnsend = CONST.BTN_IN_PROGRESS
-                const url = `/api/subject/${id}`
+                const url = `/api/language/subject/${id}`
                 fetch(url, {
                     method: 'delete',
                     headers:{
