@@ -15,33 +15,33 @@ class CreateAppPostCommentsTable extends Migration {
 	{
 		Schema::create('app_post_comments', function(Blueprint $table)
 		{
-			$table->string(''processflag'', 5)->nullable();
-			$table->string(''insert_platform'', 3)->nullable()->default('1');
-			$table->string(''insert_user'', 15)->nullable();
+			$table->string("processflag", 5)->nullable();
+			$table->string("insert_platform", 3)->nullable()->default('1');
+			$table->string("insert_user", 15)->nullable();
 			$table->timestamp('insert_date')->default(DB::raw('CURRENT_TIMESTAMP'));
-			$table->string(''update_platform'', 3)->nullable();
-			$table->string(''update_user'', 15)->nullable();
+			$table->string("update_platform", 3)->nullable();
+			$table->string("update_user", 15)->nullable();
 			$table->timestamp('update_date')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
-			$table->string(''delete_platform'', 3)->nullable();
-			$table->string(''delete_user'', 15)->nullable();
+			$table->string("delete_platform", 3)->nullable();
+			$table->string("delete_user", 15)->nullable();
 			$table->dateTime('delete_date')->nullable();
-			$table->string(''cru_csvnote'', 500)->nullable();
-			$table->string(''is_erpsent'', 3)->nullable()->default('0');
-			$table->string(''is_enabled'', 3)->nullable()->default('1');
+			$table->string("cru_csvnote", 500)->nullable();
+			$table->string("is_erpsent", 3)->nullable()->default('0');
+			$table->string("is_enabled", 3)->nullable()->default('1');
 			$table->integer('i')->nullable();
-			$table->integer(''id'', true);
-			$table->string(''code_erp'', 25)->nullable();
-			$table->string(''description'', 250)->nullable()->comment('para seo: 160 cjars');
+			$table->integer("id", true);
+			$table->string("code_erp", 25)->nullable();
+			$table->string("description", 250)->nullable()->comment('para seo: 160 cjars');
 			$table->integer('id_post')->nullable();
 			$table->integer('id_parent')->nullable()->comment('respuesta a uno anterior');
-			$table->string(''name'', 25)->nullable();
-			$table->string(''email'', 100)->nullable();
-			$table->string(''site'', 150)->nullable();
-			$table->string(''content'', 3000)->nullable();
+			$table->string("name", 25)->nullable();
+			$table->string("email", 100)->nullable();
+			$table->string("site", 150)->nullable();
+			$table->string("content", 3000)->nullable();
 			$table->integer('num_likes')->nullable();
 			$table->integer('num_dislikes')->nullable();
 			$table->boolean('is_active')->nullable()->default(0)->comment('si se ha aprobado');
-			$table->string(''code_cache'', 50)->nullable();
+			$table->string("code_cache", 50)->nullable();
 		});
 	}
 
