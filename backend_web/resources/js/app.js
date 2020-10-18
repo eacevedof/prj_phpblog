@@ -20,6 +20,10 @@ import PostUpdate from "./components/restrict/post/PostUpdate.vue";
 import UploadIndex from "./components/restrict/upload/UploadIndex";
 //import UploadInsert from "./components/restrict/upload/UploadInsert";
 
+import SubjectIndex from "./components/restrict/language/subject/SubjectIndex.vue";
+import SubjectInsert from "./components/restrict/language/subject/SubjectInsert.vue";
+import SubjectUpdate from "./components/restrict/language/subject/SubjectUpdate.vue";
+
 import VueBootstrapToasts from "vue-bootstrap-toasts";
 
 Vue.use(VueBootstrapToasts);
@@ -30,6 +34,10 @@ Vue.component('postupdate', PostUpdate);
 
 Vue.component('uploadindex', UploadIndex);
 //Vue.component('uploadinsert', UploadInsert);
+
+Vue.component('subjectindex', SubjectIndex);
+Vue.component('subjectinsert', SubjectInsert);
+Vue.component('subjectupdate', SubjectUpdate);
 
 const app = new Vue({
     el: '#app',

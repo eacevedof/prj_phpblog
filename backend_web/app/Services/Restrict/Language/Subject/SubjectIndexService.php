@@ -6,16 +6,16 @@ use Illuminate\Support\Facades\DB;
 
 class SubjectIndexService extends BaseService
 {
-    private $db;
+    private $table;
 
     public function __construct()
     {
-        $this->db = DB::table("app_subject");
+        $this->table = $this->get_table("app_subject");
     }
 
     public function get_all()
     {
-        $r = $this->db
+        $r = $this->table
             ->whereNull("delete_date")
             ->where("id_status","=","1")
             ->where("is_enabled","=","1")

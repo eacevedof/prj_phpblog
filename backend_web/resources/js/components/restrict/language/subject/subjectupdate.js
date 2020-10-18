@@ -1,8 +1,8 @@
 //subjectupdate.js
-import funcs from "../../../app/funcs"
-import CONST from "../../../app/constants"
-import apifetch from "../../../app/apifetch"
-import db from "../../../app/db"
+import funcs from "../../../../app/funcs"
+import CONST from "../../../../app/constants"
+import apifetch from "../../../../app/apifetch"
+import db from "../../../../app/db"
 const csrftoken = funcs.get_csrftoken()
 
 export default {
