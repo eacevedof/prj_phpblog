@@ -56,4 +56,4 @@ Route::get('/adm/language/subject/detail/{idpost}', 'Restrict\Language\SubjectCo
 
 Route::apiResource("api/post/category","Api\CategoryController");
 Route::apiResource("api/post","Api\PostController");
-Route::apiResource("api/language/subject","Api\Language\PostController");
+Route::apiResource("api/language/subject","Api\Language\SubjectController");

@@ -1962,7 +1962,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-      var url = "/api/subject";
+      var url = "/api/language/subject";
       fetch(url, {
         method: 'get'
       }).then(function (response) {
@@ -2027,7 +2027,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
         var self = this;
         self.issending = true;
         self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-        var url = "/api/subject/".concat(id);
+        var url = "/api/language/subject/".concat(id);
         fetch(url, {
           method: 'delete',
           headers: {
@@ -2152,7 +2152,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-      var url = "/api/subject";
+      var url = "/api/language/subject";
       fetch(url, {
         method: 'subject',
         headers: {
@@ -2343,7 +2343,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-      var url = "/api/subject/".concat(id);
+      var url = "/api/language/subject/".concat(id);
       fetch(url, {
         method: 'get'
       }).then(function (response) {
@@ -2381,7 +2381,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-      var url = "/api/subject/".concat(this.subject.id);
+      var url = "/api/language/subject/".concat(this.subject.id);
       fetch(url, {
         method: 'put',
         headers: {
@@ -2425,7 +2425,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
         var self = this;
         self.issending = true;
         self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-        var url = "/api/subject/".concat(id);
+        var url = "/api/language/subject/".concat(id);
         fetch(url, {
           method: 'delete',
           headers: {
