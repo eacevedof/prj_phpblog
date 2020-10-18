@@ -27,7 +27,8 @@
         <div class="col-sm-3">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Subject</h5>
+                    <h5 class="card-title">Lang. Subject</h5>
+                    <p class="card-text">Language Subject</p>
                     <a href="/adm/language/subjects" class="btn btn-primary">List</a>
                     <a href="/adm/language/subject/insert" class="btn btn-dark">Create</a>
                 </div>
