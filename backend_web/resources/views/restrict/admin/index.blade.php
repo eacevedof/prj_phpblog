@@ -24,6 +24,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Subject</h5>
+                    <a href="/adm/language/subjects" class="btn btn-primary">List</a>
+                    <a href="/adm/language/subject/insert" class="btn btn-dark">Create</a>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
