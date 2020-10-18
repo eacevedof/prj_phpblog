@@ -27,7 +27,7 @@ class SubjectController extends BaseController
     {
         $this->_load_authid();
         try {
-            $r = (new SubjectIndexService($this->authid))->get_list_by_user();
+            $r = (new SubjectIndexService($this->authid))->get_all();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
