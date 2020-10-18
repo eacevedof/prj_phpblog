@@ -11,12 +11,10 @@ export default {
         return {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
-            categories: [],
+            sources: [],
 
             subject: {
                 description: "",
-                id_type: 0,
-                is_page: [],
                 slug: "",
                 url_final: "",
                 title: "",
@@ -25,11 +23,9 @@ export default {
                 excerpt: "",
                 url_img1: "",
                 url_img2: "",
-                url_img3: "",
-                id_user: 1,
+                url_resource: "",
+                id_type_source: "",
                 id_status: 0,
-                publish_date: "",
-                last_update: "",
                 seo_title: "",
                 seo_description: "",
                 order_by:100,
@@ -63,37 +59,36 @@ export default {
                 },
                 body: JSON.stringify({_token:csrftoken, _action:"subject.insert",...this.subject})
             })
-                //.then(response => console.log(response,"RESPONSE"))
-                .then(response => response.json())
-                .then(response => {
+            //.then(response => console.log(response,"RESPONSE"))
+            .then(response => response.json())
+            .then(response => {
 
-                    console.log("reponse",response)
+                console.log("reponse",response)
 
-                    if(funcs.is_error(response)) {
-                        return Swal.fire({
-                            icon: 'warning',
-                            title: CONST.TITLE_ERROR,
-                            text: response.error,
-                        })
-                    }
-
-                    self.$toast.success(`Subject saved. Nº ${response.data.id} | ${self.subject.title}`)
-                    //self.save_slug()
-                    window.location = "/adm/subject/update/"+response.data.id
-
-                })
-                .catch(error => {
-                    console.log("CATCH ERROR insert",error)
-                    Swal.fire({
-                        icon: 'error',
-                        title: CONST.TITLE_SERVERROR,
-                        text: error.toString(),
+                if(funcs.is_error(response)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        text: response.error,
                     })
+                }
+
+                self.$toast.success(`Subject saved. Nº ${response.data.id} | ${self.subject.title}`)
+                window.location = "/adm/subject/update/"+response.data.id
+
+            })
+            .catch(error => {
+                console.log("CATCH ERROR insert",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    text: error.toString(),
                 })
-                .finally(() => {
-                    self.issending = false;
-                    self.btnsend = CONST.BTN_INISTATE
-                })
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend = CONST.BTN_INISTATE
+            })
         },//insert
 
         get_idtype_slug(){
