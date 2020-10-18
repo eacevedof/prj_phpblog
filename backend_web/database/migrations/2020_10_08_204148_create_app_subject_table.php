@@ -7,44 +7,43 @@ use Illuminate\Support\Facades\Schema;
 class CreateAppSubjectTable extends Migration {
 
 	/**
-	 * Run the migrations.
-	 *
+	 * Run the migrations
 	 * @return void
 	 */
 	public function up()
 	{
 		Schema::create('app_subject', function(Blueprint $table)
 		{
-			$table->string(''processflag'', 5)->nullable();
-			$table->string(''insert_platform'', 3)->nullable()->default('1');
-			$table->string(''insert_user'', 15)->nullable();
+			$table->string("processflag", 5)->nullable();
+			$table->string("insert_platform", 3)->nullable()->default('1');
+			$table->string("insert_user", 15)->nullable();
 			$table->timestamp('insert_date')->default(DB::raw('CURRENT_TIMESTAMP'));
-			$table->string(''update_platform'', 3)->nullable();
-			$table->string(''update_user'', 15)->nullable();
+			$table->string("update_platform", 3)->nullable();
+			$table->string("update_user", 15)->nullable();
 			$table->timestamp('update_date')->nullable()->default(DB::raw('CURRENT_TIMESTAMP'));
-			$table->string(''delete_platform'', 3)->nullable();
-			$table->string(''delete_user'', 15)->nullable();
+			$table->string("delete_platform", 3)->nullable();
+			$table->string("delete_user", 15)->nullable();
 			$table->dateTime('delete_date')->nullable();
-			$table->string(''cru_csvnote'', 500)->nullable();
-			$table->string(''is_erpsent'', 3)->nullable()->default('0');
-			$table->string(''is_enabled'', 3)->nullable()->default('1');
+			$table->string("cru_csvnote", 500)->nullable();
+			$table->string("is_erpsent", 3)->nullable()->default('0');
+			$table->string("is_enabled", 3)->nullable()->default('1');
 			$table->integer('i')->nullable();
-			$table->integer(''id'', true);
-			$table->string(''code_erp'', 25)->nullable();
-			$table->string(''description'', 250)->nullable();
-			$table->string(''slug'', 150)->nullable();
-			$table->string(''url_final'', 300)->nullable();
-			$table->string(''url_img1'', 300)->nullable();
-			$table->string(''url_img2'', 300)->nullable();
-			$table->string(''title'', 350)->nullable();
-			$table->string(''excerpt'', 500)->nullable();
-			$table->string(''url_resource'', 500)->nullable()->comment('url para el audio que no esta en el servidor');
+			$table->integer("id", true);
+			$table->string("code_erp", 25)->nullable();
+			$table->string("description", 250)->nullable();
+			$table->string("slug", 150)->nullable();
+			$table->string("url_final", 300)->nullable();
+			$table->string("url_img1", 300)->nullable();
+			$table->string("url_img2", 300)->nullable();
+			$table->string("title", 350)->nullable();
+			$table->string("excerpt", 500)->nullable();
+			$table->string("url_resource", 500)->nullable()->comment('url para el audio que no esta en el servidor');
 			$table->integer('id_type_source')->nullable()->comment('tipo de recurso, video, audio, imagen texto');
 			$table->boolean('id_status')->nullable()->default(0);
-			$table->string(''seo_title'', 65)->nullable();
-			$table->string(''seo_description'', 160)->nullable();
-			$table->string(''seo_keywords'', 160)->nullable();
-			$table->string(''code_cache'', 50)->nullable();
+			$table->string("seo_title", 65)->nullable();
+			$table->string("seo_description", 160)->nullable();
+			$table->string("seo_keywords", 160)->nullable();
+			$table->string("code_cache", 50)->nullable();
 		});
 	}
 
