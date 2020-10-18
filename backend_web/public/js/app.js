@@ -2217,10 +2217,10 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_categories();
+              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_sources();
 
             case 2:
-              _this.categories = _context.sent;
+              _this.sources = _context.sent;
 
             case 3:
             case "end":
@@ -57334,6 +57334,54 @@ var apifetch = {
     }
 
     return get_categories;
+  }(),
+  get_sources: function () {
+    var _get_sources = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+      var url, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              url = "/api/app-array/source";
+              r = null;
+              _context2.prev = 2;
+              _context2.next = 5;
+              return fetch(url);
+
+            case 5:
+              _context2.next = 7;
+              return _context2.sent.json();
+
+            case 7:
+              r = _context2.sent;
+              return _context2.abrupt("return", r.data);
+
+            case 11:
+              _context2.prev = 11;
+              _context2.t0 = _context2["catch"](2);
+              r = _context2.t0;
+              return _context2.abrupt("return", {
+                error: _context2.t0
+              });
+
+            case 15:
+              _context2.prev = 15;
+              console.log("get_sources.r", r);
+              return _context2.finish(15);
+
+            case 18:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2, null, [[2, 11, 15, 18]]);
+    }));
+
+    function get_sources() {
+      return _get_sources.apply(this, arguments);
+    }
+
+    return get_sources;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apifetch);

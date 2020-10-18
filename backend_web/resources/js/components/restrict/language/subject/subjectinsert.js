@@ -111,7 +111,6 @@ export default {
     },
 
     async mounted() {
-        this.categories = await apifetch.get_categories()
-        //funcs.pr(this.categories)
+        this.sources = await apifetch.get_sources()
     }
 }

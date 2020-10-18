@@ -18,7 +18,7 @@ const apifetch = {
         }
     },
     get_sources: async ()=>{
-        const url = "/api/language/subject/source"
+        const url = "/api/app-array/source"
         let r = null
         try {
             r = await (await fetch(url)).json()
