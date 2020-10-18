@@ -32,6 +32,15 @@
                         <a class="dropdown-item" href="/adm/upload">Uploads</a>
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a id="module-posts" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Subjects
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="module-posts">
+                        <a class="dropdown-item" href="/adm/language/subjects">Subjects</a>
+                        <a class="dropdown-item" href="/adm/language/subject/insert">Insert subject</a>
+                    </div>
+                </li>
             </ul>
             @endauth
 
