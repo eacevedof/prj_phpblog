@@ -13,12 +13,13 @@ class ApparrayService extends BaseService
 
     public function get_source()
     {
-        $r = $this->table->whereNull("delete_date")
-            ->where("is_enabled","=","1")
-            ->where("type","=","source")
-            ->orderBy("order_by")
-            ->orderBy("description")
-            ->get();
+        $r = $this->table
+                ->whereNull("delete_date")
+                ->where("is_enabled","=","1")
+                ->where("type","=","lang-source")
+                ->orderBy("order_by")
+                ->orderBy("description")
+                ->get(["id","description"]);
         return $r;
     }
 

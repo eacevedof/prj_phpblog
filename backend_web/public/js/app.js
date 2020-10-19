@@ -2150,7 +2150,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
       var url = "/api/language/subject";
       fetch(url, {
-        method: 'subject',
+        method: 'post',
         headers: {
           'Content-Type': 'application/json'
         },

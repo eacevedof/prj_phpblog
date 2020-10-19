@@ -5,12 +5,10 @@ use App\Services\BaseService;
 
 class SubjectInsertService extends BaseService
 {
-    private $iduser;
     private $data;
 
-    public function __construct($data, $iduser=null)
+    public function __construct($data)
     {
-        $this->iduser = $iduser;
         $this->data = $data;
     }
 

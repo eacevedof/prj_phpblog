@@ -53,7 +53,7 @@ export default {
             const url = `/api/language/subject`
 
             fetch(url, {
-                method: 'subject',
+                method: 'post',
                 headers:{
                     'Content-Type': 'application/json'
                 },
