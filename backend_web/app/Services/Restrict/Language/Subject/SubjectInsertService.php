@@ -17,10 +17,11 @@ class SubjectInsertService extends BaseService
     public function save()
     {
         $data = $this->data;
-        $this->logd($data,"subject.insert");
         $this->_check_data($data);
         $this->_handle_sysfields($data);
         $this->logd($data,"subject.insert.create");
-        return AppSubject::create($data);
+        $r = AppSubject::create($data);
+        $this->_logquery("subject.insert.save");
+        return $r;
     }
 }
