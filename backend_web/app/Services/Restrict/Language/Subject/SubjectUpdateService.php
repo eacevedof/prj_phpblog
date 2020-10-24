@@ -16,16 +16,6 @@ class SubjectUpdateService extends BaseService
 
     private function _check_data($data){}
 
-    private function _set_publishdate(&$data)
-    {
-        if(!$this->dbentity->publish_date && !$this->dbentity->id_status && $this->data["id_status"]){
-            $data["publish_date"] = date("YmdHis");
-        }
-        else
-            //evita que se rescriba la fecha con lo que viene de js
-            unset($data["publish_date"]);
-    }
-
     private function _set_lastupdate(&$data)
     {
         if($this->dbentity->publish_date &&
@@ -47,18 +37,17 @@ class SubjectUpdateService extends BaseService
     public function save()
     {
         $data = $this->data;
-        $this->logd($data,"post.update");
+        $this->logd($data,"subjectupdateservice.save.data");
+        $this->logd($data,"subject.update");
         $this->_check_data($data);
-        //$this->logd($this->request->input("description"),"input.description");
-        //$this->logd($this->request->all(),"updateservice.save.req-all");
-        //$this->logd($this->request->getContent(),"updateservice.save.req-getcontent");
         $this->_handle_sysfields($data,"u");
-        $this->_set_publishdate($data);
         $this->_set_lastupdate($data);
         $this->_set_seo($data);
 
-        $this->logd($data,"post.update.data");
+        $this->logd($data,"subject.update.data");
         $id = $this->data["id"];
-        return AppSubject::where("id", "=", $id)->update($data);
+        $r = AppSubject::where("id", "=", $id)->update($data);
+        $this->_logquery("update");
+        return $r;
     }
 }

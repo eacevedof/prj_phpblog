@@ -10,7 +10,8 @@ export default {
         return {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
-            categories: [],
+            sources: [],
+
             subject: {
                 id: -1,
                 description: "",
@@ -31,7 +32,7 @@ export default {
 
     async mounted() {
         const id = funcs.get_lastparam()
-        this.categories = await apifetch.get_categories()
+        this.sources = await apifetch.get_sources()
         this.load_register(id)
     },
 
@@ -53,34 +54,32 @@ export default {
             fetch(url, {
                 method: 'get',
             })
-                .then(response => response.json())
-                .then(response => {
-                    console.log("reponse",response)
+            .then(response => response.json())
+            .then(response => {
+                console.log("reponse",response)
 
-                    if(funcs.is_error(response)) {
-                        return Swal.fire({
-                            icon: 'warning',
-                            title: CONST.TITLE_ERROR,
-                            text: response.error,
-                        })
-                    }
-
-                    this.subject = response.data
-                    this.subject.publish_date = funcs.get_date(this.subject.publish_date)
-                    this.subject.last_update = funcs.get_date(this.subject.last_update)
-                })
-                .catch(error => {
-                    console.log("CATCH ERROR get_row",error)
-                    Swal.fire({
-                        icon: 'error',
-                        title: CONST.TITLE_SERVERROR,
-                        text: error.toString()
+                if(funcs.is_error(response)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        text: response.error,
                     })
+                }
+
+                this.subject = response.data
+            })
+            .catch(error => {
+                console.log("CATCH ERROR get_row",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    text: error.toString()
                 })
-                .finally(() => {
-                    self.issending = false;
-                    self.btnsend = CONST.BTN_INISTATE
-                })
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend = CONST.BTN_INISTATE
+            })
         },//get_row
 
         update(){
@@ -176,13 +175,13 @@ export default {
 
         get_idtype_slug(){
             const idtype = this.subject.id_type
-            const category = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.slug)
+            const category = this.sources.filter(obj => obj.id == idtype ).map(obj => obj.slug)
             return category
         },
 
         get_idtype_urlfinal(){
             const idtype = this.subject.id_type
-            const url = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.url_final)
+            const url = this.sources.filter(obj => obj.id == idtype ).map(obj => obj.url_final)
             return url
         },
 
@@ -202,6 +201,6 @@ export default {
         handleSubmit: function(e) {
             e.preventDefault()
             this.update()
-        }//handleSubmit(e)
+        },//handleSubmit(e)
     },
 }
