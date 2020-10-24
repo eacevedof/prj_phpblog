@@ -14,7 +14,13 @@ class SubjectController extends BaseController
 
     public function insert(){return view('restrict.language.subject.insert',["module"=>"subject"]);}
 
-    public function update(){return view('restrict.language.subject.update',["module"=>"subject"]);}
+    public function update($idsubject){
+
+        return view('restrict.language.subject.update',[
+            "module"=>"subject",
+            "idsubject"=>$idsubject
+        ]);
+    }
 
     public function detail(){return view('restrict.language.subject.detail',["module"=>"subject"]);}
 }
