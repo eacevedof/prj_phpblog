@@ -44,8 +44,8 @@
                 <div class="form-group col-md-3">
                     <label for="sel-id_status">Status</label>
                     <select id="sel-id_status" v-model="subject.id_status" class="form-control">
-                        <option value="0">Enable</option>
-                        <option value="1">Disable</option>
+                        <option value="0">Disable</option>
+                        <option value="1">Enable</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">

@@ -33,10 +33,10 @@ const funcs = {
         str = str.toLowerCase();
 
         // remove accents, swap ñ for n, etc
-        var from = "àáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
-        var to   = "aaaaaeeeeiiiioooouuuunc------";
+        const from = "àáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        const to   = "aaaaaeeeeiiiioooouuuunc------";
 
-        for (var i=0, l=from.length ; i<l ; i++) {
+        for (let i=0, l=from.length ; i<l ; i++) {
             str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
         }
 

@@ -2184,19 +2184,9 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       });
     },
     //insert
-    get_idtype_slug: function get_idtype_slug() {
-      var idtype = this.subject.id_type;
-      var category = this.categories.filter(function (obj) {
-        return obj.id == idtype;
-      }).map(function (obj) {
-        return obj.slug;
-      });
-      return category;
-    },
     onchange_title: function onchange_title() {
       this.subject.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.subject.title);
-      var catslug = this.get_idtype_slug();
-      this.subject.url_final = "/blog/".concat(catslug).concat("/").concat(this.subject.slug);
+      this.subject.url_final = "/idiomas/".concat(this.subject.slug);
       this.save_slug();
     },
     handleSubmit: function handleSubmit(e) {
@@ -2450,22 +2440,9 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
         });
       }
     },
-    get_idtype_slug: function get_idtype_slug() {
-      var idtype = this.subject.id_type;
-      var category = this.sources.filter(function (obj) {
-        return obj.id == idtype;
-      }).map(function (obj) {
-        return obj.slug;
-      });
-      return category;
-    },
-    get_idtype_urlfinal: function get_idtype_urlfinal() {
-      return "/idiomas";
-    },
     onchange_title: function onchange_title() {
       this.subject.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.subject.title).concat("-".concat(this.subject.id));
-      var url = this.get_idtype_urlfinal();
-      this.subject.url_final = "".concat(url, "/").concat(this.subject.slug);
+      this.subject.url_final = "/idiomas/".concat(this.subject.slug);
     },
     on_btnalbum: function on_btnalbum() {
       _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("last-slug", this.subject.slug);
@@ -41674,9 +41651,11 @@ var render = function() {
                     }
                   },
                   [
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("Enable")]),
+                    _c("option", { attrs: { value: "0" } }, [
+                      _vm._v("Disable")
+                    ]),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("Disable")])
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("Enable")])
                   ]
                 )
               ]),

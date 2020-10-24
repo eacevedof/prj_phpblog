@@ -173,20 +173,9 @@ export default {
             }
         },
 
-        get_idtype_slug(){
-            const idtype = this.subject.id_type
-            const category = this.sources.filter(obj => obj.id == idtype ).map(obj => obj.slug)
-            return category
-        },
-
-        get_source_urlfinal(){
-            return "/idiomas"
-        },
-
         onchange_title(){
             this.subject.slug = funcs.get_slug(this.subject.title).concat(`-${this.subject.id}`)
-            const url = this.get_source_urlfinal()
-            this.subject.url_final = `${url}/${this.subject.slug}`
+            this.subject.url_final = `/idiomas/${this.subject.slug}`
         },
 
         on_btnalbum(){
