@@ -12,7 +12,7 @@ class LanguageController extends BaseController
 
     public function __invoke()
     {
-        $r = (new SubjectIndexService())->get_all();
+        $r = (new SubjectIndexService())->get_active();
         return view('open.language.index', [
             "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.language.index"),

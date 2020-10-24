@@ -13,12 +13,24 @@ class SubjectIndexService extends BaseService
         $this->table = $this->get_table("app_subject");
     }
 
-    public function get_all()
+    public function get_active()
     {
         $r = $this->table
             ->whereNull("delete_date")
             ->where("id_status","=","1")
             ->where("is_enabled","=","1")
+            ->orderBy("id","desc")
+            ->get();
+        $this->_logquery();
+        return $r;
+    }
+
+    public function get_all()
+    {
+        $r = $this->table
+            ->whereNull("delete_date")
+            //->where("id_status","=","1")
+            //->where("is_enabled","=","1")
             ->orderBy("id","desc")
             ->get();
         $this->_logquery();
