@@ -1,4 +1,4 @@
-FROM php:7.4.0-fpm
+FROM php:7.4.1-fpm
 
 ARG UID
 EXPOSE $UID
@@ -44,6 +44,7 @@ RUN mkdir -p /appdata/www
 
 USER appuser
 RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative \
-	&& composer clear-cache
+	&& composer clear-cache \
+	&& composer self-update
 
 WORKDIR /appdata/www

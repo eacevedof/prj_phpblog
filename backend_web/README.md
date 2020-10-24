@@ -201,3 +201,9 @@ es muy raro que no compile con ese nombre pero al cambiarlo a updateindex.js vol
 ```
 - **error al descargar el zip generado con imagenes da 404 en prod**
 - Parece que es un tema de windows o el tipo del pdf porque lo he probado en test y prod con mi cv y se convierte bien
+- **error conexion sql**
+```js
+Cuando re-construyo los contenedores no conecta
+Si hago un composer-update en el contenedor funciona, esto se debe al fichero .env
+no debería construir los contenedores con bd:127 sino con bd: mariadb
+```
