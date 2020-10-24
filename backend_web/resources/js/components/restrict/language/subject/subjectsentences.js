@@ -95,7 +95,7 @@ export default {
         },
 
         insert(){
-            const url = `/adm/language/subject/${idsubject}/sentences/insert`
+            const url = `/adm/language/subject/${idsubject}/sentence/insert`
             document.location = url
         },
 

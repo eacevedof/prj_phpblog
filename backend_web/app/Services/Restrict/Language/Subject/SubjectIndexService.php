@@ -1,16 +1,16 @@
 <?php
-namespace App\Services\Restrict\Language\Subject;
+namespace App\Services\Restrict\Language\Sentence;
 
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
 
-class SubjectIndexService extends BaseService
+class SentenceIndexService extends BaseService
 {
     private $table;
 
     public function __construct()
     {
-        $this->table = $this->get_table("app_subject");
+        $this->table = $this->get_table("app_sentence");
     }
 
     public function get_active()
@@ -21,7 +21,7 @@ class SubjectIndexService extends BaseService
             ->where("is_enabled","=","1")
             ->orderBy("id","desc")
             ->get();
-        $this->_logquery("subjectindexservice.get_active");
+        $this->_logquery("sentenceindexservice.get_active");
         return $r;
     }
 
@@ -33,7 +33,7 @@ class SubjectIndexService extends BaseService
             //->where("is_enabled","=","1")
             ->orderBy("id","desc")
             ->get();
-        $this->_logquery("subjectindexservice.get_all");
+        $this->_logquery("sentenceindexservice.get_all");
         return $r;
     }
 }

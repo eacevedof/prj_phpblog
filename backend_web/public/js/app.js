@@ -2328,17 +2328,20 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
       });
       this.rows = _toConsumableArray(rows); //console.log("rows filtered"); console.table(this.rows)
     },
+    insert: function insert() {
+      var url = "/adm/language/subject/".concat(idsubject, "/sentences/insert");
+      document.location = url;
+    },
     edit: function edit(id) {
-      var url = "/adm/language/subject/update/" + id;
-      document.location = url; //window.open(url, "_blank")
+      var url = "/adm/language/sentence/update/".concat(id);
+      document.location = url;
     },
     remove: function remove(id) {
       if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].CONFIRM)) {
-        console.log("fetching");
         var self = this;
         self.issending = true;
         self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-        var url = "/api/language/subject/".concat(id);
+        var url = "/api/language/sentence/".concat(id);
         fetch(url, {
           method: 'delete',
           headers: {
@@ -42058,11 +42061,8 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card-body mt-0" }, [
       _c("div", { staticClass: "row card-header res-formheader" }, [
-        _c("div", { staticClass: "col-md-9" }, [
-          _c("h1", [
-            _vm._v("Subjects "),
-            _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
-          ])
+        _c("div", { staticClass: "col-md-6" }, [
+          _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "col-md-3" }, [
@@ -42071,11 +42071,30 @@ var render = function() {
             {
               staticClass: "btn btn-primary res-btnformheader",
               attrs: { disabled: _vm.issending },
-              on: {
-                click: function($event) {
-                  return _vm.rows_load()
-                }
-              }
+              on: { click: _vm.insert }
+            },
+            [
+              _vm._v("\n                    Insert\n                    "),
+              _vm.issending
+                ? _c("img", {
+                    attrs: {
+                      src: "/assets/images/loading-bw.gif",
+                      width: "25",
+                      height: "25"
+                    }
+                  })
+                : _vm._e()
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary res-btnformheader",
+              attrs: { disabled: _vm.issending },
+              on: { click: _vm.rows_load }
             },
             [
               _vm._v(

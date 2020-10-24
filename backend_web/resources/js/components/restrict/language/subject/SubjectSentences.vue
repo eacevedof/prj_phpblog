@@ -14,10 +14,12 @@
     </div>
     <div class="card-body mt-0">
         <div class="row card-header res-formheader">
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <sub>({{rows.length}})</sub>
-                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="inser">
-                    {{btnsend}}
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="insert">
+                    Insert
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>

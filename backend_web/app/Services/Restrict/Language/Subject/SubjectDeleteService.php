@@ -1,9 +1,9 @@
 <?php
-namespace App\Services\Restrict\Language\Subject;
-use App\Models\Language\AppSubject;
+namespace App\Services\Restrict\Language\Sentence;
+use App\Models\Language\AppSentence;
 use App\Services\BaseService;
 
-class SubjectDeleteService extends BaseService
+class SentenceDeleteService extends BaseService
 {
     private $id;
 
@@ -16,17 +16,17 @@ class SubjectDeleteService extends BaseService
 
     private function _soft_delete()
     {
-        $subject = AppSubject::find($this->id);
-        $update = ["update_date"=>$subject->update_date];
+        $sentence = AppSentence::find($this->id);
+        $update = ["update_date"=>$sentence->update_date];
         $this->_handle_sysfields($update,"d");
-        $r = AppSubject::where("id", "=", $this->id)->update($update);
+        $r = AppSentence::where("id", "=", $this->id)->update($update);
         $this->_logquery("soft_delete");
         return $r;
     }
 
     private function _hard_delete()
     {
-        return AppSubject::where("id", "=", $this->id)->delete();
+        return AppSentence::where("id", "=", $this->id)->delete();
     }
 
     public function save()
