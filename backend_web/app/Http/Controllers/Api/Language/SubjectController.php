@@ -25,7 +25,6 @@ class SubjectController extends BaseController
      */
     public function index()
     {
-        $this->_load_authid();
         try {
             $r = (new SubjectIndexService($this->authid))->get_all();
             return Response()->json(["data"=>$r],200);
@@ -78,9 +77,9 @@ class SubjectController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $post)
+    public function update(Request $request, $subjid)
     {
-        $this->logd($post,"update.postid");
+        $this->logd($subjid,"update.postid");
         try {
             $data = $request->all();
             $r = (new SubjectUpdateService($data))->save();
@@ -94,15 +93,15 @@ class SubjectController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     * @param  int  $post
+     * @param  int  $subjid
      * @return \Illuminate\Http\Response
      */
-    public function destroy($post)
+    public function destroy($subjid)
     {
         $this->_load_authid();
-        $this->logd($post,"delete.postid");
+        $this->logd($subjid,"delete.postid");
         try {
-            $r = (new SubjectDeleteService($post, $this->authid))->save();
+            $r = (new SubjectDeleteService($subjid, $this->authid))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
