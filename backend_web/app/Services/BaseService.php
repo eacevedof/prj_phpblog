@@ -40,6 +40,8 @@ class BaseService
             //update
             $query = str_replace("` = ?","` = '%s'",$query);
 
+            $query = str_replace("select `","\nSELECT `",$query);
+            $query = str_replace("select * ","\nSELECT * ",$query);
             $query = str_replace("update `","\nUPDATE `",$query);
             $query = str_replace(" from `","\nFROM `",$query);
             $query = str_replace(" where `","\nWHERE `",$query);
