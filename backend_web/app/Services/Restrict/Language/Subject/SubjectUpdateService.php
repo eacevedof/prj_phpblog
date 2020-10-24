@@ -1,6 +1,6 @@
 <?php
 namespace App\Services\Restrict\Language\Subject;
-use App\Models\AppSubject;
+use App\Models\Language\AppSubject;
 use App\Services\BaseService;
 
 class SubjectUpdateService extends BaseService

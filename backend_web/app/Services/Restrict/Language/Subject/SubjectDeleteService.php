@@ -1,17 +1,15 @@
 <?php
 namespace App\Services\Restrict\Language\Subject;
-use App\Models\AppSubject;
+use App\Models\Language\AppSubject;
 use App\Services\BaseService;
-use Illuminate\Http\Request;
 
 class SubjectDeleteService extends BaseService
 {
     private $id;
 
-    public function __construct($id, $iduser=-1)
+    public function __construct($id)
     {
         $this->id = $id;
-        $this->sysuser = $iduser;
     }
 
     private function _check_data()
