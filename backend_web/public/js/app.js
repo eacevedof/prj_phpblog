@@ -42046,39 +42046,6 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-12" }, [
-              _c("label", { attrs: { for: "txt-url_resource" } }, [
-                _vm._v("Url resource *")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.subject.url_resource,
-                    expression: "subject.url_resource"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  id: "txt-url_resource",
-                  maxlength: "300",
-                  required: ""
-                },
-                domProps: { value: _vm.subject.url_resource },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.subject, "url_resource", $event.target.value)
-                  }
-                }
-              })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-12" }, [
               _c("label", { attrs: { for: "txt-title" } }, [_vm._v("Title *")]),
               _vm._v(" "),
               _c("input", {
@@ -42107,6 +42074,39 @@ var render = function() {
                       return
                     }
                     _vm.$set(_vm.subject, "title", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-md-12" }, [
+              _c("label", { attrs: { for: "txt-url_resource" } }, [
+                _vm._v("Url resource *")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.subject.url_resource,
+                    expression: "subject.url_resource"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "txt-url_resource",
+                  maxlength: "300",
+                  required: ""
+                },
+                domProps: { value: _vm.subject.url_resource },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.subject, "url_resource", $event.target.value)
                   }
                 }
               })

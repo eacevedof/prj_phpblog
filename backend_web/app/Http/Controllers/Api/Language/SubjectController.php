@@ -11,11 +11,13 @@ use App\Services\Restrict\Language\Subject\SubjectInsertService;
 use App\Services\Restrict\Language\Subject\SubjectIndexService;
 use App\Services\Restrict\Language\Subject\SubjectUpdateService;
 use App\Services\Restrict\Language\Subject\SubjectDetailService;
+use Illuminate\Support\Facades\DB;
 
 class SubjectController extends BaseController
 {
     public function __construct()
     {
+        DB::enableQueryLog();
         $this->middleware("auth");
     }
 

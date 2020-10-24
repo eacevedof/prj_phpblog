@@ -27,15 +27,16 @@ class SubjectUpdateService extends BaseService
     public function save()
     {
         $data = $this->data;
-        $this->logd($data,"subjectupdateservice.save.data");
-        $this->logd($data,"subject.update");
         $this->_check_data($data);
         $this->_handle_sysfields($data,"u");
         $this->_set_seo($data);
 
         $this->logd($data,"subject.update.data");
         $id = $this->data["id"];
+
+        $this->logd($data,"before update");
         $r = AppSubject::where("id", "=", $id)->update($data);
+
         $this->_logquery("update");
         return $r;
     }

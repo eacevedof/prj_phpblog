@@ -47,12 +47,12 @@
                     </select>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="txt-url_resource">Url resource *</label>
-                    <input type="text" id="txt-url_resource" v-model="subject.url_resource" maxlength="300" class="form-control" required/>
-                </div>
-                <div class="form-group col-md-12">
                     <label for="txt-title">Title *</label>
                     <input type="text" id="txt-title" v-model="subject.title" @change="onchange_title()" maxlength="350" class="form-control" required>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="txt-url_resource">Url resource *</label>
+                    <input type="text" id="txt-url_resource" v-model="subject.url_resource" maxlength="300" class="form-control" required/>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="txa-excerpt">excerpt</label>

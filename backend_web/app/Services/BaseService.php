@@ -25,16 +25,21 @@ class BaseService
     protected function get_userid($codCache=""){}
 
     protected function get_table($table){
-        DB::enableQueryLog();
         return DB::table($table);
     }
     protected function _logquery($tile="")
     {
         $r = DB::getQueryLog();
+        //$this->log($r,$tile);
+
         foreach ($r as $i=>$arparts){
             $query = $arparts["query"];
 
+            //select
             $query = str_replace("` = ? ","` = %s ",$query);
+            //update
+            $query = str_replace("` = ?","` = %s",$query);
+
             $query = str_replace(" from `","\nFROM `",$query);
             $query = str_replace(" where `","\nWHERE `",$query);
             $query = str_replace(" and `","\nAND `",$query);
