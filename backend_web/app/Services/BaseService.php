@@ -39,6 +39,11 @@ class BaseService
             $query = str_replace("` = ? ","` = %s ",$query);
             //update
             $query = str_replace("` = ?","` = '%s'",$query);
+            //insert
+            $query = str_replace("?","'%s'",$query);
+
+            $query = str_replace("insert into ","\nINSERT INTO ",$query);
+            $query = str_replace("`) values (","\n)\nVALUES\n(\n",$query);
 
             $query = str_replace("select `","\nSELECT `",$query);
             $query = str_replace("select * ","\nSELECT * ",$query);
