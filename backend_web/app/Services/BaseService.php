@@ -44,7 +44,7 @@ class BaseService
 
             $query = str_replace("insert into ","\nINSERT INTO ",$query);
             $query = str_replace("`) values (","\n)\nVALUES\n(\n",$query);
-            $query = str_replace("` (`","`\n(`",$query);
+            $query = str_replace("` (`","`\n(\n`",$query);
 
             $query = str_replace("select `","\nSELECT `",$query);
             $query = str_replace("select * ","\nSELECT * ",$query);
