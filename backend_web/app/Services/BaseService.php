@@ -40,14 +40,19 @@ class BaseService
             //update
             $query = str_replace("` = ?","` = '%s'",$query);
 
+            $query = str_replace("update `","\nUPDATE `",$query);
             $query = str_replace(" from `","\nFROM `",$query);
             $query = str_replace(" where `","\nWHERE `",$query);
             $query = str_replace(" and `","\nAND `",$query);
+            $query = str_replace("` set `","`\nSET\n`",$query);
+            $query = str_replace(", `",",\n`",$query);
+
             $query = str_replace(" order by `","\nORDER BY `",$query);
 
             $params = $arparts["bindings"];
             $query .= "\n-- time({$arparts["time"]})";
             $finalq = vsprintf($query,$params);
+            if($tile) $tile = "-- $tile";
             $this->log($finalq,$tile);
             //$this->log($arparts,$tile);
         }
