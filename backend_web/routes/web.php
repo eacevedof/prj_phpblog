@@ -53,6 +53,7 @@ Route::get('/adm/language/subjects', 'Restrict\Language\SubjectController')->nam
 Route::get('/adm/language/subject/insert', 'Restrict\Language\SubjectController@insert')->name('restrict.language.subject.insert');
 Route::get('/adm/language/subject/update/{idsubject}', 'Restrict\Language\SubjectController@update')->name('restrict.language.subject.update');
 Route::get('/adm/language/subject/detail/{idsubject}', 'Restrict\Language\SubjectController@detail')->name('restrict.language.subject.detail');
+Route::get("/adm/language/subject/{idsubject}/sentences",'Restrict\Language\SubjectController@sentences')->name('restrict.language.subject.sentences');
 
 //API
 Route::apiResource("api/post/category","Api\CategoryController");

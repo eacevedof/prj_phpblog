@@ -23,4 +23,11 @@ class SubjectController extends BaseController
     }
 
     public function detail(){return view('restrict.language.subject.detail',["module"=>"subject"]);}
+
+    public function sentences($idsubject){
+        return view('restrict.language.subject.sentences',[
+            "module"=>"subject",
+            "idsubject"=>$idsubject,
+        ]);
+    }
 }
