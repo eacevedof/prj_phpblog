@@ -1,8 +1,8 @@
 @php
 $requrl = Request::url();
 $arurls = [
-    ["href"=>"/adm/language/subject/update/$idsubject","text"=>"Update","isactive"=>true],
-    ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Sentences","isactive"=>false]
+    ["href"=>"/adm/language/subject/update/$idsubject","text"=>"Update","isactive"=>strstr($requrl,"/update/")],
+    ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Sentences","isactive"=>strstr($requrl,"/sentences")]
 ];
 @endphp
 <ul class="nav nav-tabs">
