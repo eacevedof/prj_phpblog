@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS `app_language`;
 
 CREATE TABLE `app_language` (
@@ -7,7 +8,7 @@ CREATE TABLE `app_language` (
 `insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
 `update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-`update_date` timestamp NULL DEFAULT current_timestamp(),
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 `delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_date` datetime DEFAULT NULL,
@@ -25,6 +26,7 @@ CREATE TABLE `app_language` (
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+/*Table structure for table `app_sentence` */
 DROP TABLE IF EXISTS `app_sentence`;
 
 CREATE TABLE `app_sentence` (
@@ -34,7 +36,7 @@ CREATE TABLE `app_sentence` (
 `insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
 `update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-`update_date` timestamp NULL DEFAULT current_timestamp(),
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 `delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_date` datetime DEFAULT NULL,
@@ -51,9 +53,12 @@ CREATE TABLE `app_sentence` (
 `id_language` int(11) DEFAULT NULL COMMENT 'app_language.id',
 `is_notificable` tinyint(1) DEFAULT NULL COMMENT 'indica si se tomará en cuenta para examen',
 `id_type` int(11) DEFAULT NULL COMMENT 'si estan en algún grupo',
+`id_status` int(1) DEFAULT NULL COMMENT 'activo o inactivo',
 `code_cache` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Table structure for table `app_sentence_images` */
 
 DROP TABLE IF EXISTS `app_sentence_images`;
 
@@ -64,7 +69,7 @@ CREATE TABLE `app_sentence_images` (
 `insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
 `update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-`update_date` timestamp NULL DEFAULT current_timestamp(),
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 `delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_date` datetime DEFAULT NULL,
@@ -82,6 +87,8 @@ CREATE TABLE `app_sentence_images` (
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+/*Table structure for table `app_sentence_tags` */
+
 DROP TABLE IF EXISTS `app_sentence_tags`;
 
 CREATE TABLE `app_sentence_tags` (
@@ -91,7 +98,7 @@ CREATE TABLE `app_sentence_tags` (
 `insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
 `update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-`update_date` timestamp NULL DEFAULT current_timestamp(),
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 `delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_date` datetime DEFAULT NULL,
@@ -117,7 +124,7 @@ CREATE TABLE `app_sentence_tr` (
 `insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
 `update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-`update_date` timestamp NULL DEFAULT current_timestamp(),
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 `delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_date` datetime DEFAULT NULL,
@@ -146,7 +153,7 @@ CREATE TABLE `app_subject` (
 `insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
 `update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-`update_date` timestamp NULL DEFAULT current_timestamp(),
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
 `delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 `delete_date` datetime DEFAULT NULL,
