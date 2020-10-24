@@ -2,9 +2,12 @@
 @php
 $requrl = Request::url();
 $arurls = [
-    ["href"=>"/adm/language/subject/update/$idsubject","text"=>"Update","isactive"=>strstr($requrl,"/update/")],
-    ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Sentences","isactive"=>strstr($requrl,"/sentences")]
+    ["href"=>"/adm/language/subject/update/$idsubject","text"=>"Subject","isactive"=>strstr($requrl,"/update/")],
+    ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Subject/Sentences","isactive"=>strstr($requrl,"/sentences")],
 ];
+if(strstr($requrl,"/insert"))
+  $arurls[] =["href"=>"#","text"=>"Subject/Insert sentence","isactive"=>true]
+
 @endphp
 <ul class="nav nav-tabs">
     @foreach($arurls as $url)
