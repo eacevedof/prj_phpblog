@@ -5,7 +5,13 @@
     @section("pagetitle", "update subject")
     @include("restrict/elements/breadscrumb")
     @include("restrict/elements/subject-tabs")
-    <subjectsentences></subjectsentences>
+<script>
+const idsubject = {!! $idsubject !!};
+//alert(idsubject)
+</script>
+<!-- subjectsentences.vue -->
+<subjectsentences></subjectsentences>
+<!-- /subjectsentences.vue -->
     @include("restrict/elements/breadscrumb")
 </div>
 @endsection
