@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $id_language
  * @property int|null $is_notificable
  * @property int|null $id_type
+ * @property int|null $id_status
  * @property string|null $code_cache
  *
  * @package App\Models\Language
