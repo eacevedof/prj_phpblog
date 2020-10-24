@@ -21,7 +21,7 @@ class SubjectIndexService extends BaseService
             ->where("is_enabled","=","1")
             ->orderBy("id","desc")
             ->get();
-        $this->_logquery();
+        $this->_logquery("subjectindexservice.get_active");
         return $r;
     }
 
@@ -33,7 +33,7 @@ class SubjectIndexService extends BaseService
             //->where("is_enabled","=","1")
             ->orderBy("id","desc")
             ->get();
-        $this->_logquery();
+        $this->_logquery("subjectindexservice.get_all");
         return $r;
     }
 }
