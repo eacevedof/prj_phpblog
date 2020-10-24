@@ -26,7 +26,7 @@ class SubjectController extends BaseController
     public function index()
     {
         try {
-            $r = (new SubjectIndexService($this->authid))->get_all();
+            $r = (new SubjectIndexService())->get_all();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -44,7 +44,7 @@ class SubjectController extends BaseController
     {
         try {
             $data = $request->all();
-            $r = (new SubjectInsertService($data, $this->authid))->save();
+            $r = (new SubjectInsertService($data))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -55,14 +55,13 @@ class SubjectController extends BaseController
 
     /**
      * Display the specified resource.
-     * @param  int  $id
+     * @param  int  $subjid
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($subjid)
     {
-        //$this->logd("api.post.show",$id);
         try {
-            $r = (new SubjectDetailService($id, $this->authid))->get();
+            $r = (new SubjectDetailService($subjid))->get();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -74,7 +73,7 @@ class SubjectController extends BaseController
     /**
      * Update the specified resource in storage.
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $subjid
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $subjid)
@@ -101,7 +100,7 @@ class SubjectController extends BaseController
         $this->_load_authid();
         $this->logd($subjid,"delete.postid");
         try {
-            $r = (new SubjectDeleteService($subjid, $this->authid))->save();
+            $r = (new SubjectDeleteService($subjid))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
