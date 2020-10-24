@@ -16,16 +16,6 @@ class SubjectUpdateService extends BaseService
 
     private function _check_data($data){}
 
-    private function _set_lastupdate(&$data)
-    {
-        if($this->dbentity->publish_date &&
-            $this->data["id_status"] &&
-            $this->dbentity->content != $this->data["content"]){
-
-            $data["last_update"] = date("YmdHis");
-        }
-    }
-
     private function _set_seo(&$data){
         if(!$this->dbentity->seo_title & !$this->data["seo_title"])
             $data["seo_title"] = substr(strip_tags($this->data["title"]),0,64);
@@ -41,7 +31,6 @@ class SubjectUpdateService extends BaseService
         $this->logd($data,"subject.update");
         $this->_check_data($data);
         $this->_handle_sysfields($data,"u");
-        $this->_set_lastupdate($data);
         $this->_set_seo($data);
 
         $this->logd($data,"subject.update.data");

@@ -6,16 +6,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateAppSentenceTable extends Migration {
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('app_sentence', function(Blueprint $table)
-		{
-			$table->string("processflag", 5)->nullable();
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('app_sentence', function(Blueprint $table)
+        {
+            $table->string("processflag", 5)->nullable();
 			$table->string("insert_platform", 3)->nullable()->default('1');
 			$table->string("insert_user", 15)->nullable();
 			$table->timestamp('insert_date')->default(DB::raw('CURRENT_TIMESTAMP'));
@@ -38,19 +38,20 @@ class CreateAppSentenceTable extends Migration {
 			$table->integer('id_language')->nullable()->comment('app_language.id');
 			$table->boolean('is_notificable')->nullable()->comment('indica si se tomará en cuenta para examen');
 			$table->integer('id_type')->nullable()->comment('si estan en algún grupo');
+			$table->integer('id_status')->nullable()->comment('activo o inactivo');
 			$table->string("code_cache", 50)->nullable();
 		});
-	}
+    }
 
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('app_sentence');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('app_sentence');
+    }
 
 }

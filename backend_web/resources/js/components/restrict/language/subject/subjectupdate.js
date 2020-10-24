@@ -95,34 +95,34 @@ export default {
                 },
                 body: JSON.stringify({_token:csrftoken,_action:"subject.update", ...this.subject})
             })
-                .then(response => response.json())
-                .then(response => {
+            .then(response => response.json())
+            .then(response => {
 
-                    console.log("reponse",response)
+                console.log("reponse",response)
 
-                    if(funcs.is_error(response)) {
-                        return Swal.fire({
-                            icon: 'warning',
-                            title: CONST.TITLE_ERROR,
-                            text: response.error,
-                        })
-                    }
-                    this.$toast.success(`Subject saved. Nº ${self.subject.id} | ${self.subject.title}`)
-                    this.load_register(self.subject.id)
-
-                })
-                .catch(error => {
-                    console.log("CATCH ERROR update",error)
-                    Swal.fire({
-                        icon: 'error',
-                        title: CONST.TITLE_SERVERROR,
-                        text: error.toString(),
+                if(funcs.is_error(response)) {
+                    return Swal.fire({
+                        icon: 'warning',
+                        title: CONST.TITLE_ERROR,
+                        text: response.error,
                     })
+                }
+                this.$toast.success(`Subject saved. Nº ${self.subject.id} | ${self.subject.title}`)
+                this.load_register(self.subject.id)
+
+            })
+            .catch(error => {
+                console.log("CATCH ERROR update",error)
+                Swal.fire({
+                    icon: 'error',
+                    title: CONST.TITLE_SERVERROR,
+                    text: error.toString(),
                 })
-                .finally(() => {
-                    self.issending = false;
-                    self.btnsend = CONST.BTN_INISTATE
-                })
+            })
+            .finally(() => {
+                self.issending = false;
+                self.btnsend = CONST.BTN_INISTATE
+            })
         },//update
 
         remove(id){
@@ -138,38 +138,38 @@ export default {
                     },
                     body: JSON.stringify({_token:csrftoken,_action:"subject.delete"})
                 })
-                    .then(response => response.json())
-                    .then(response => {
-                        console.log("remove.response",response)
+                .then(response => response.json())
+                .then(response => {
+                    console.log("remove.response",response)
 
-                        if(funcs.is_error(response)) {
-                            return Swal.fire({
-                                icon: 'warning',
-                                title: CONST.TITLE_ERROR,
-                                text: response.error,
-                            })
-                        }
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: `Subject: ${id} has been removed`,
-                            html: `<b>&#128578;</b>`,
+                    if(funcs.is_error(response)) {
+                        return Swal.fire({
+                            icon: 'warning',
+                            title: CONST.TITLE_ERROR,
+                            text: response.error,
                         })
+                    }
 
-                        document.location = "/adm/language/subjects"
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Subject: ${id} has been removed`,
+                        html: `<b>&#128578;</b>`,
                     })
-                    .catch(error => {
-                        console.log("CATCH ERROR remove",error)
-                        Swal.fire({
-                            icon: 'error',
-                            title: CONST.TITLE_SERVERROR,
-                            text: error.toString(),
-                        })
+
+                    document.location = "/adm/language/subjects"
+                })
+                .catch(error => {
+                    console.log("CATCH ERROR remove",error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: CONST.TITLE_SERVERROR,
+                        text: error.toString(),
                     })
-                    .finally(() => {
-                        self.issending = false;
-                        self.btnsend = CONST.BTN_INISTATE_REFRESH
-                    })
+                })
+                .finally(() => {
+                    self.issending = false;
+                    self.btnsend = CONST.BTN_INISTATE_REFRESH
+                })
             }
         },
 

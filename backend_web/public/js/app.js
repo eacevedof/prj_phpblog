@@ -42154,6 +42154,130 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-12" }, [
+              _c("label", { attrs: { for: "txt-url_img1" } }, [
+                _vm._v("Url img1 (list)*")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.subject.url_img1,
+                    expression: "subject.url_img1"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  id: "txt-url_img1",
+                  maxlength: "300",
+                  required: ""
+                },
+                domProps: { value: _vm.subject.url_img1 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.subject, "url_img1", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-dark",
+                  attrs: { type: "button" },
+                  on: { click: _vm.on_btnalbum }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-picture-o",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" Album")
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-warning",
+                  attrs: { type: "button", disabled: _vm.issending },
+                  on: {
+                    click: function($event) {
+                      return _vm.load_lastupload()
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-clipboard",
+                    attrs: { "aria-hidden": "true" }
+                  }),
+                  _vm._v(" Get img\n                        "),
+                  _vm.issending
+                    ? _c("img", {
+                        attrs: {
+                          src: "/assets/images/loading-bw.gif",
+                          width: "25",
+                          height: "25"
+                        }
+                      })
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _vm.subject.url_img1
+              ? _c("div", { staticClass: "col-6" }, [
+                  _c(
+                    "a",
+                    { attrs: { href: _vm.subject.url_img1, target: "_blank" } },
+                    [
+                      _c("img", {
+                        staticClass: "img-thumbnail",
+                        attrs: {
+                          src: _vm.subject.url_img1,
+                          alt: _vm.subject.url_img1
+                        }
+                      })
+                    ]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-md-6" }, [
+              _c("label", { attrs: { for: "txt-url_img2" } }, [
+                _vm._v("Url img2 (detail)")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.subject.url_img2,
+                    expression: "subject.url_img2"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "text", id: "txt-url_img2", maxlength: "300" },
+                domProps: { value: _vm.subject.url_img2 },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.subject, "url_img2", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group col-md-12" }, [
               _c("label", { attrs: { for: "txt-slug" } }, [_vm._v("Slug *")]),
               _vm._v(" "),
               _c("input", {
@@ -42407,7 +42531,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-6 col-sm-6 pt-2" }, [
-      _c("h1", [_vm._v("Update post")])
+      _c("h1", [_vm._v("Update subject")])
     ])
   }
 ]

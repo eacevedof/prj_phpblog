@@ -6,7 +6,7 @@
                  v-bind:class="{ 'res-cardtitle': subject.id_status == 1 }"
             >
                 <div class="col-md-6 col-sm-6 pt-2">
-                    <h1>Update post</h1>
+                    <h1>Update subject</h1>
                 </div>
                 <div class="col-md-1">
                     <button type="button" class="btn btn-secondary mt-2 text-white" :disabled="issending" v-on:click="load_register(subject.id)">
@@ -57,6 +57,29 @@
                 <div class="form-group col-md-12">
                     <label for="txa-excerpt">excerpt</label>
                     <textarea id="txa-excerpt" v-model="subject.excerpt" maxlength="1000" rows="3" cols="5" class="form-control"></textarea>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="txt-url_img1">Url img1 (list)*</label>
+                    <input type="text" id="txt-url_img1" v-model="subject.url_img1" maxlength="300" class="form-control" required/>
+                    <button type="button" class="btn btn-dark"
+                            v-on:click="on_btnalbum"
+                    ><i class="fa fa-picture-o" aria-hidden="true"></i> Album</button>
+                    <button type="button" class="btn btn-warning"
+                            :disabled="issending"
+                            v-on:click="load_lastupload()"
+                    >
+                        <i class="fa fa-clipboard" aria-hidden="true"></i> Get img
+                        <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                    </button>
+                </div>
+                <div v-if="subject.url_img1" class="col-6">
+                    <a :href="subject.url_img1" target="_blank">
+                        <img :src="subject.url_img1" class="img-thumbnail" :alt="subject.url_img1" />
+                    </a>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="txt-url_img2">Url img2 (detail)</label>
+                    <input type="text" id="txt-url_img2" v-model="subject.url_img2" maxlength="300" class="form-control"/>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="txt-slug">Slug *</label>
