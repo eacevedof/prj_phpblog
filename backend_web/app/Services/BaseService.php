@@ -52,8 +52,7 @@ class BaseService
             $params = $arparts["bindings"];
             $query .= "\n-- time({$arparts["time"]})";
             $finalq = vsprintf($query,$params);
-            if($tile) $tile = "-- $tile";
-            $this->log($finalq,$tile);
+            $this->log($finalq,"-- $tile");
             //$this->log($arparts,$tile);
         }
 
