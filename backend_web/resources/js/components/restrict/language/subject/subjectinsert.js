@@ -74,7 +74,7 @@ export default {
                 }
 
                 self.$toast.success(`Subject saved. Nº ${response.data.id} | ${self.subject.title}`)
-                window.location = "/adm/subject/update/"+response.data.id
+                window.location = "/adm/language/subject/update/"+response.data.id
 
             })
             .catch(error => {

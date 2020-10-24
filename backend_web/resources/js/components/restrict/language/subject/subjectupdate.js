@@ -164,7 +164,7 @@ export default {
                             html: `<b>&#128578;</b>`,
                         })
 
-                        document.location = "/adm/subjects"
+                        document.location = "/adm/language/subjects"
                     })
                     .catch(error => {
                         console.log("CATCH ERROR remove",error)

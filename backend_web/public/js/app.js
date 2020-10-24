@@ -2173,7 +2173,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
         }
 
         self.$toast.success("Subject saved. N\xBA ".concat(response.data.id, " | ").concat(self.subject.title));
-        window.location = "/adm/subject/update/" + response.data.id;
+        window.location = "/adm/language/subject/update/" + response.data.id;
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -2448,7 +2448,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
             title: "Subject: ".concat(id, " has been removed"),
             html: "<b>&#128578;</b>"
           });
-          document.location = "/adm/subjects";
+          document.location = "/adm/language/subjects";
         })["catch"](function (error) {
           console.log("CATCH ERROR remove", error);
           Swal.fire({
