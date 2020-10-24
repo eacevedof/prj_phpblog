@@ -67,6 +67,11 @@ const funcs = {
         txa.setSelectionRange(0, 99999)
         document.execCommand("copy")
         document.body.removeChild(txa);
+    },
+
+    get_urlpiece: iposition => {
+        const url =  window.location.pathname
+        return url.split("/").filter((v,k) => k === iposition).join("")
     }
 }
 

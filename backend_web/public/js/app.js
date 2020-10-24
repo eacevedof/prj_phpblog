@@ -2250,6 +2250,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
+var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(4);
+alert("id subjec:" + idsubject);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2272,7 +2274,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-      var url = "/api/language/subject";
+      var url = "/api/language/subject/";
       fetch(url, {
         method: 'get'
       }).then(function (response) {
@@ -57942,6 +57944,12 @@ var funcs = {
     txa.setSelectionRange(0, 99999);
     document.execCommand("copy");
     document.body.removeChild(txa);
+  },
+  get_urlpiece: function get_urlpiece(iposition) {
+    var url = window.location.pathname;
+    return url.split("/").filter(function (v, k) {
+      return k === iposition;
+    }).join("");
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (funcs);

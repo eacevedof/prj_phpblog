@@ -1457,6 +1457,12 @@ var funcs = {
     txa.setSelectionRange(0, 99999);
     document.execCommand("copy");
     document.body.removeChild(txa);
+  },
+  get_urlpiece: function get_urlpiece(iposition) {
+    var url = window.location.pathname;
+    return url.split("/").filter(function (v, k) {
+      return k === iposition;
+    }).join("");
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (funcs);

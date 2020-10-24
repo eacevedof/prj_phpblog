@@ -59,6 +59,7 @@ Route::get("/adm/language/subject/{idsubject}/sentences",'Restrict\Language\Subj
 Route::apiResource("api/post/category","Api\CategoryController");
 Route::apiResource("api/post","Api\PostController");
 Route::apiResource("api/language/subject","Api\Language\SubjectController");
+Route::apiResource("api/language/subject/{idsubject}/sentences","Api\Language\SentenceController");
 
 //array
 Route::get("/api/app-array/source","Api\ApparrayController@get_source");
