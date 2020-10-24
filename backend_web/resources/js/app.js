@@ -23,6 +23,7 @@ import UploadIndex from "./components/restrict/upload/UploadIndex";
 import SubjectIndex from "./components/restrict/language/subject/SubjectIndex.vue";
 import SubjectInsert from "./components/restrict/language/subject/SubjectInsert.vue";
 import SubjectUpdate from "./components/restrict/language/subject/SubjectUpdate.vue";
+import SubjectSentences from "./components/restrict/language/subject/SubjectSentences.vue";
 
 import VueBootstrapToasts from "vue-bootstrap-toasts";
 
@@ -38,6 +39,7 @@ Vue.component('uploadindex', UploadIndex);
 Vue.component('subjectindex', SubjectIndex);
 Vue.component('subjectinsert', SubjectInsert);
 Vue.component('subjectupdate', SubjectUpdate);
+Vue.component('subjectsentences', SubjectSentences);
 
 const app = new Vue({
     el: '#app',
