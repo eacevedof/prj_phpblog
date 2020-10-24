@@ -12,17 +12,16 @@ class SubjectDeleteService extends BaseService
         $this->id = $id;
     }
 
-    private function _check_data()
-    {
-
-    }
+    private function _check_data(){}
 
     private function _soft_delete()
     {
-        $post = AppSubject::find($this->id);
-        $update = ["update_date"=>$post->update_date];
+        $subject = AppSubject::find($this->id);
+        $update = ["update_date"=>$subject->update_date];
         $this->_handle_sysfields($update,"d");
-        return AppSubject::where("id", "=", $this->id)->update($update);
+        $r = AppSubject::where("id", "=", $this->id)->update($update);
+        $this->_logquery("soft_delete");
+        return $r;
     }
 
     private function _hard_delete()
