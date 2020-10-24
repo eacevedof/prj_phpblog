@@ -180,7 +180,7 @@ export default {
         },
 
         get_idtype_urlfinal(){
-            return "idiomas"
+            return "/idiomas"
         },
 
         onchange_title(){

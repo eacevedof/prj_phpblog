@@ -2460,7 +2460,7 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       return category;
     },
     get_idtype_urlfinal: function get_idtype_urlfinal() {
-      return "idiomas";
+      return "/idiomas";
     },
     onchange_title: function onchange_title() {
       this.subject.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.subject.title).concat("-".concat(this.subject.id));
