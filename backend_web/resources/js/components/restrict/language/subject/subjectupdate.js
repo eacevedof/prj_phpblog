@@ -179,13 +179,13 @@ export default {
             return category
         },
 
-        get_idtype_urlfinal(){
+        get_source_urlfinal(){
             return "/idiomas"
         },
 
         onchange_title(){
             this.subject.slug = funcs.get_slug(this.subject.title).concat(`-${this.subject.id}`)
-            const url = this.get_idtype_urlfinal()
+            const url = this.get_source_urlfinal()
             this.subject.url_final = `${url}/${this.subject.slug}`
         },
 

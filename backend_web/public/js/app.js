@@ -41605,7 +41605,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-12" }, [
                 _c("label", { attrs: { for: "txt-url_final" } }, [
-                  _vm._v("Permalink *")
+                  _vm._v("Permalink")
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -41621,8 +41621,7 @@ var render = function() {
                   attrs: {
                     type: "text",
                     id: "txt-url_final",
-                    maxlength: "300",
-                    required: ""
+                    maxlength: "300"
                   },
                   domProps: { value: _vm.subject.url_final },
                   on: {

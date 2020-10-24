@@ -88,15 +88,15 @@ export default {
             })
         },//insert
 
-        get_idtype_slug(){
+        get_source_slug(){
             const idtype = this.subject.id_type
-            const category = this.categories.filter(obj => obj.id == idtype ).map(obj => obj.slug)
-            return category
+            const source = this.sources.filter(obj => obj.id == idtype ).map(obj => obj.slug)
+            return source
         },
 
         onchange_title(){
             this.subject.slug = funcs.get_slug(this.subject.title)
-            const catslug = this.get_idtype_slug()
+            const catslug = this.get_source_slug()
             this.subject.url_final = "/blog/".concat(catslug).concat("/").concat(this.subject.slug)
             this.save_slug()
         },
