@@ -21,6 +21,7 @@ class SubjectIndexService extends BaseService
             ->where("is_enabled","=","1")
             ->orderBy("id","desc")
             ->get();
+        $this->_logquery();
         return $r;
     }
 }
