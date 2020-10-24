@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm" style="position: sticky !important; top:0; z-index: 1;">
     <div class="container">
         <a class="navbar-brand" href="/" target="_blank">Home</a>
         @auth
