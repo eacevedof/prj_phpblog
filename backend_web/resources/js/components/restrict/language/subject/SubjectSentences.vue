@@ -15,10 +15,14 @@
     <div class="card-body mt-0">
         <div class="row card-header res-formheader">
             <div class="col-md-9">
-                <h1>Subjects <sub>({{rows.length}})</sub></h1>
+                <sub>({{rows.length}})</sub>
+                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="inser">
+                    {{btnsend}}
+                    <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                </button>
             </div>
             <div class="col-md-3">
-                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load()">
+                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>

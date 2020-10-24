@@ -94,19 +94,22 @@ export default {
             //console.log("rows filtered"); console.table(this.rows)
         },
 
-        edit(id){
-            const url = "/adm/language/subject/update/"+id
+        insert(){
+            const url = `/adm/language/subject/${idsubject}/sentences/insert`
             document.location = url
-            //window.open(url, "_blank")
+        },
+
+        edit(id){
+            const url = `/adm/language/sentence/update/${id}`
+            document.location = url
         },
 
         remove(id){
             if(confirm(CONST.CONFIRM)){
-                console.log("fetching")
                 const self = this
                 self.issending = true
                 self.btnsend = CONST.BTN_IN_PROGRESS
-                const url = `/api/language/subject/${id}`
+                const url = `/api/language/sentence/${id}`
                 fetch(url, {
                     method: 'delete',
                     headers:{
@@ -114,39 +117,39 @@ export default {
                     },
                     body: JSON.stringify({_token:csrftoken,_action:"subject.delete"})
                 })
-                    .then(response => response.json())
-                    .then(response => {
-                        console.log("remove.response",response)
+                .then(response => response.json())
+                .then(response => {
+                    console.log("remove.response",response)
 
-                        if(funcs.is_error(response)) {
-                            return Swal.fire({
-                                icon: 'warning',
-                                title: CONST.TITLE_ERROR,
-                                html: response.error,
-                            })
-                        }
-
-                        self.rows_load()
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: `Subject: ${id} has been removed`,
-                            html: `<b>&#128578;</b>`,
+                    if(funcs.is_error(response)) {
+                        return Swal.fire({
+                            icon: 'warning',
+                            title: CONST.TITLE_ERROR,
+                            html: response.error,
                         })
+                    }
 
+                    self.rows_load()
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: `Subject: ${id} has been removed`,
+                        html: `<b>&#128578;</b>`,
                     })
-                    .catch(error => {
-                        console.log("CATCH ERROR remove",error)
-                        Swal.fire({
-                            icon: 'error',
-                            title: CONST.TITLE_SERVERROR,
-                            html: error.toString(),
-                        })
+
+                })
+                .catch(error => {
+                    console.log("CATCH ERROR remove",error)
+                    Swal.fire({
+                        icon: 'error',
+                        title: CONST.TITLE_SERVERROR,
+                        html: error.toString(),
                     })
-                    .finally(() => {
-                        self.issending = false;
-                        self.btnsend = CONST.BTN_INISTATE_REFRESH
-                    })
+                })
+                .finally(() => {
+                    self.issending = false;
+                    self.btnsend = CONST.BTN_INISTATE_REFRESH
+                })
             }
         },
     }
