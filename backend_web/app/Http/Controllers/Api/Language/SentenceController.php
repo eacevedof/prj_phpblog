@@ -57,13 +57,13 @@ class SentenceController extends BaseController
 
     /**
      * Display the specified resource.
-     * @param  int  $subjid
+     * @param  int  $idsubject
      * @return \Illuminate\Http\Response
      */
-    public function show($subjid)
+    public function show($idsubject)
     {
         try {
-            $r = (new SentenceDetailService($subjid))->get();
+            $r = (new SentenceDetailService($idsubject))->get();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -75,12 +75,12 @@ class SentenceController extends BaseController
     /**
      * Update the specified resource in storage.
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $subjid
+     * @param  int  $idsubject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $subjid)
+    public function update(Request $request, $idsubject)
     {
-        $this->logd($subjid,"update.postid");
+        $this->logd($idsubject,"update.postid");
         try {
             $data = $request->all();
             $r = (new SentenceUpdateService($data))->save();
@@ -94,15 +94,15 @@ class SentenceController extends BaseController
 
     /**
      * Remove the specified resource from storage.
-     * @param  int  $subjid
+     * @param  int  $idsubject
      * @return \Illuminate\Http\Response
      */
-    public function destroy($subjid)
+    public function destroy($idsubject)
     {
         $this->_load_authid();
-        $this->logd($subjid,"delete.postid");
+        $this->logd($idsubject,"delete.postid");
         try {
-            $r = (new SentenceDeleteService($subjid))->save();
+            $r = (new SentenceDeleteService($idsubject))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
