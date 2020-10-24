@@ -38,7 +38,7 @@ class BaseService
             //select
             $query = str_replace("` = ? ","` = %s ",$query);
             //update
-            $query = str_replace("` = ?","` = %s",$query);
+            $query = str_replace("` = ?","` = '%s'",$query);
 
             $query = str_replace(" from `","\nFROM `",$query);
             $query = str_replace(" where `","\nWHERE `",$query);
