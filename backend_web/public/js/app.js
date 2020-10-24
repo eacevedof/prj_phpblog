@@ -2251,7 +2251,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
 var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(4);
-alert("id subjec:" + idsubject);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2274,7 +2273,7 @@ alert("id subjec:" + idsubject);
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-      var url = "/api/language/subject/";
+      var url = "/api/language/subject/".concat(idsubject, "/sentences");
       fetch(url, {
         method: 'get'
       }).then(function (response) {

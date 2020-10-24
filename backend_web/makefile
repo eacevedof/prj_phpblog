@@ -81,8 +81,11 @@ ssh-be: ## ssh's into the be container
 # code-style: ## Runs php-cs to fix code styling following Symfony rules
 	#U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} php-cs-fixer fix src --rules=@Symfony
 
-remlogs:
+remlogs: ## remove logs
 	rm -fr ./logs/*
+
+rundev: ## npm run dev
+	npm run dev
 
 rebuild: ## rebuild containers
 	docker-compose -f docker-compose.macos.yml down
