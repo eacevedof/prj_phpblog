@@ -38,8 +38,8 @@
                     <input type="text" id="txt-slug" v-model="subject.slug" maxlength="150" class="form-control" required/>
                 </div>
                 <div class="form-group col-md-12">
-                    <label for="txt-url_final">Permalink *</label>
-                    <input type="text" id="txt-url_final" v-model="subject.url_final" maxlength="300" class="form-control" required/>
+                    <label for="txt-url_final">Permalink</label>
+                    <input type="text" id="txt-url_final" v-model="subject.url_final" maxlength="300" class="form-control"/>
                 </div>
                 <div class="form-group col-md-3">
                     <label for="sel-id_status">Status</label>
