@@ -1,3 +1,4 @@
+@isset($idsubject)
 @php
 $requrl = Request::url();
 $arurls = [
@@ -12,3 +13,4 @@ $arurls = [
     </li>
     @endforeach
 </ul>
+@endisset

@@ -1,9 +1,9 @@
 <?php
-namespace App\Services\Restrict\Language\Sentence;
-use App\Models\Language\AppSentence;
+namespace App\Services\Restrict\Language\Subject;
+use App\Models\Language\AppSubject;
 use App\Services\BaseService;
 
-class SentenceInsertService extends BaseService
+class SubjectInsertService extends BaseService
 {
     private $data;
 
@@ -19,9 +19,9 @@ class SentenceInsertService extends BaseService
         $data = $this->data;
         $this->_check_data($data);
         $this->_handle_sysfields($data);
-        $this->logd($data,"sentence.insert.create");
-        $r = AppSentence::create($data);
-        $this->_logquery("sentence.insert.save");
+        $this->logd($data,"subject.insert.create");
+        $r = AppSubject::create($data);
+        $this->_logquery("subject.insert.save");
         return $r;
     }
 }

@@ -1,9 +1,9 @@
 <?php
-namespace App\Services\Restrict\Language\Sentence;
-use App\Models\Language\AppSentence;
+namespace App\Services\Restrict\Language\Subject;
+use App\Models\Language\AppSubject;
 use App\Services\BaseService;
 
-class SentenceUpdateService extends BaseService
+class SubjectUpdateService extends BaseService
 {
     private $dbentity;
     private $data;
@@ -11,7 +11,7 @@ class SentenceUpdateService extends BaseService
     public function __construct($data)
     {
         $this->data = $data;
-        $this->dbentity = AppSentence::find($data["id"]);
+        $this->dbentity = AppSubject::find($data["id"]);
     }
 
     private function _check_data($data){}
@@ -31,11 +31,11 @@ class SentenceUpdateService extends BaseService
         $this->_handle_sysfields($data,"u");
         $this->_set_seo($data);
 
-        $this->logd($data,"sentence.update.data");
+        $this->logd($data,"subject.update.data");
         $id = $this->data["id"];
 
         $this->logd($data,"before update");
-        $r = AppSentence::where("id", "=", $id)->update($data);
+        $r = AppSubject::where("id", "=", $id)->update($data);
 
         $this->_logquery("update");
         return $r;

@@ -1,10 +1,10 @@
 <?php
-namespace App\Services\Restrict\Language\Sentence;
-use App\Models\Language\AppSentence;
+namespace App\Services\Restrict\Language\Subject;
+use App\Models\Language\AppSubject;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
 
-class SentenceDetailService extends BaseService
+class SubjectDetailService extends BaseService
 {
     private $id;
     private $db;
@@ -12,7 +12,7 @@ class SentenceDetailService extends BaseService
     public function __construct($id=null)
     {
         $this->id = $id;
-        $this->db = DB::table("app_sentence");
+        $this->db = DB::table("app_subject");
     }
 
     private function _check_data()
@@ -23,7 +23,7 @@ class SentenceDetailService extends BaseService
     public function get()
     {
         $this->_check_data();
-        return AppSentence::find($this->id);
+        return AppSubject::find($this->id);
     }
 
     public function get_by_slug($slug)
