@@ -2460,19 +2460,11 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       return category;
     },
     get_idtype_urlfinal: function get_idtype_urlfinal() {
-      var idtype = this.subject.id_type;
-      var url = this.sources.filter(function (obj) {
-        return obj.id == idtype;
-      }).map(function (obj) {
-        return obj.url_final;
-      });
-      return url;
+      return "idiomas";
     },
     onchange_title: function onchange_title() {
       this.subject.slug = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(this.subject.title).concat("-".concat(this.subject.id));
-      var url = this.get_idtype_urlfinal(); //alert(url)
-      //this.subject.url_final = url.concat("/").concat(this.subject.slug)
-
+      var url = this.get_idtype_urlfinal();
       this.subject.url_final = "".concat(url, "/").concat(this.subject.slug);
     },
     on_btnalbum: function on_btnalbum() {

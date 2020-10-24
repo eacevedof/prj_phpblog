@@ -180,16 +180,12 @@ export default {
         },
 
         get_idtype_urlfinal(){
-            const idtype = this.subject.id_type
-            const url = this.sources.filter(obj => obj.id == idtype ).map(obj => obj.url_final)
-            return url
+            return "idiomas"
         },
 
         onchange_title(){
             this.subject.slug = funcs.get_slug(this.subject.title).concat(`-${this.subject.id}`)
             const url = this.get_idtype_urlfinal()
-            //alert(url)
-            //this.subject.url_final = url.concat("/").concat(this.subject.slug)
             this.subject.url_final = `${url}/${this.subject.slug}`
         },
 
