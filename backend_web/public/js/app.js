@@ -2117,18 +2117,15 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
         description: "",
         slug: "",
         url_final: "",
-        title: "",
-        subtitle: "",
-        content: "",
-        excerpt: "",
         url_img1: "",
         url_img2: "",
+        title: "",
+        excerpt: "",
         url_resource: "",
         id_type_source: "",
         id_status: 0,
         seo_title: "",
-        seo_description: "",
-        order_by: 100
+        seo_description: ""
       }
     };
   },
@@ -2276,24 +2273,17 @@ var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken
       subject: {
         id: -1,
         description: "",
-        id_type: 0,
-        is_page: [],
         slug: "",
         url_final: "",
-        title: "",
-        subtitle: "",
-        content: "",
-        excerpt: "",
         url_img1: "",
         url_img2: "",
-        url_img3: "",
-        id_user: 1,
+        title: "",
+        excerpt: "",
+        url_resource: "",
+        id_type_source: "",
         id_status: 0,
-        publish_date: "",
-        last_update: "",
         seo_title: "",
-        seo_description: "",
-        order_by: 100
+        seo_description: ""
       }
     };
   },
