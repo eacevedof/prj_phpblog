@@ -11,7 +11,7 @@ export default {
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            columns: ["id","title","url_final","description"],
+            columns: ["id","id_language","id_type","translatable","description"],
 
             rows: [],
 

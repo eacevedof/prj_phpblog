@@ -34,8 +34,9 @@
             <thead>
             <tr>
                 <th>id</th>
-                <th>Title</th>
-                <th>Permalink</th>
+                <th>Language</th>
+                <th>Type</th>
+                <th>Translatable</th>
                 <th>Description</th>
                 <th>Draft</th>
                 <th>Edit</th>
