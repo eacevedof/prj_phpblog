@@ -2876,7 +2876,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
       document.location = url;
     },
     edit: function edit(id) {
-      var url = "/adm/language/sentence/update/".concat(id);
+      var url = "/adm/language/subject/".concat(idsubject, "/sentence/update/").concat(id);
       document.location = url;
     },
     remove: function remove(id) {
@@ -2892,7 +2892,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
           },
           body: JSON.stringify({
             _token: csrftoken,
-            _action: "subject.delete"
+            _action: "sentence.delete"
           })
         }).then(function (response) {
           return response.json();
@@ -2910,7 +2910,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
           self.rows_load();
           Swal.fire({
             icon: 'success',
-            title: "Subject: ".concat(id, " has been removed"),
+            title: "Sentence: ".concat(id, " has been removed"),
             html: "<b>&#128578;</b>"
           });
         })["catch"](function (error) {
@@ -2925,8 +2925,10 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
           self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
         });
       }
-    }
-  }
+    } //emove
+
+  } //methods
+
 });
 
 /***/ }),

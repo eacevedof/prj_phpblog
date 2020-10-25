@@ -100,7 +100,7 @@ export default {
         },
 
         edit(id){
-            const url = `/adm/language/sentence/update/${id}`
+            const url = `/adm/language/subject/${idsubject}/sentence/update/${id}`
             document.location = url
         },
 
@@ -115,7 +115,7 @@ export default {
                     headers:{
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({_token:csrftoken,_action:"subject.delete"})
+                    body: JSON.stringify({_token:csrftoken,_action:"sentence.delete"})
                 })
                 .then(response => response.json())
                 .then(response => {
@@ -133,7 +133,7 @@ export default {
 
                     Swal.fire({
                         icon: 'success',
-                        title: `Subject: ${id} has been removed`,
+                        title: `Sentence: ${id} has been removed`,
                         html: `<b>&#128578;</b>`,
                     })
 
@@ -151,6 +151,6 @@ export default {
                     self.btnsend = CONST.BTN_INISTATE_REFRESH
                 })
             }
-        },
-    }
+        },//emove
+    }//methods
 }
