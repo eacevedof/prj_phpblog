@@ -973,6 +973,148 @@ var apifetch = {
     }
 
     return get_sources;
+  }(),
+  get_languages: function () {
+    var _get_languages = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee3() {
+      var url, r, _r;
+
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee3$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              url = "/api/picklist/language";
+              r = null;
+              _context3.prev = 2;
+              _context3.next = 5;
+              return fetch(url);
+
+            case 5:
+              _context3.next = 7;
+              return _context3.sent.json();
+
+            case 7:
+              _r = _context3.sent;
+              return _context3.abrupt("return", _r.data);
+
+            case 11:
+              _context3.prev = 11;
+              _context3.t0 = _context3["catch"](2);
+              return _context3.abrupt("return", {
+                error: _context3.t0
+              });
+
+            case 14:
+              _context3.prev = 14;
+              console.log("get_languages.r", r);
+              return _context3.finish(14);
+
+            case 17:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      }, _callee3, null, [[2, 11, 14, 17]]);
+    }));
+
+    function get_languages() {
+      return _get_languages.apply(this, arguments);
+    }
+
+    return get_languages;
+  }(),
+  get_contexts: function () {
+    var _get_contexts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee4() {
+      var url, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              url = "/api/app-array/lang-context";
+              r = null;
+              _context4.prev = 2;
+              _context4.next = 5;
+              return fetch(url);
+
+            case 5:
+              _context4.next = 7;
+              return _context4.sent.json();
+
+            case 7:
+              r = _context4.sent;
+              return _context4.abrupt("return", r.data);
+
+            case 11:
+              _context4.prev = 11;
+              _context4.t0 = _context4["catch"](2);
+              return _context4.abrupt("return", {
+                error: _context4.t0
+              });
+
+            case 14:
+              _context4.prev = 14;
+              console.log("get_langcontexts.r", r);
+              return _context4.finish(14);
+
+            case 17:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[2, 11, 14, 17]]);
+    }));
+
+    function get_contexts() {
+      return _get_contexts.apply(this, arguments);
+    }
+
+    return get_contexts;
+  }(),
+  get_types: function () {
+    var _get_types = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+      var url, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              url = "/api/app-array/lang-type";
+              r = null;
+              _context5.prev = 2;
+              _context5.next = 5;
+              return fetch(url);
+
+            case 5:
+              _context5.next = 7;
+              return _context5.sent.json();
+
+            case 7:
+              r = _context5.sent;
+              return _context5.abrupt("return", r.data);
+
+            case 11:
+              _context5.prev = 11;
+              _context5.t0 = _context5["catch"](2);
+              return _context5.abrupt("return", {
+                error: _context5.t0
+              });
+
+            case 14:
+              _context5.prev = 14;
+              console.log("get_langtypes.r", r);
+              return _context5.finish(14);
+
+            case 17:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5, null, [[2, 11, 14, 17]]);
+    }));
+
+    function get_types() {
+      return _get_types.apply(this, arguments);
+    }
+
+    return get_types;
   }()
 };
 /* harmony default export */ __webpack_exports__["default"] = (apifetch);
