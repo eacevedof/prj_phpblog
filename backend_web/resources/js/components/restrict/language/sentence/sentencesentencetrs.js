@@ -1,10 +1,10 @@
-//subject index
+//sentence index
 import funcs from "../../../../app/funcs"
 import CONST from "../../../../app/constants"
 import db from "../../../../app/db"
 
 const csrftoken = funcs.get_csrftoken()
-const idsubject = funcs.get_urlpiece(4)
+const idsentence = funcs.get_urlpiece(6)
 
 export default {
     data(){
@@ -32,7 +32,7 @@ export default {
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
-            const url = `/api/language/subject/${idsubject}/sentences`
+            const url = `/api/language/sentence/${idsentence}/sentencetrs`
             fetch(url, {
                 method: 'get',
             })
@@ -49,9 +49,8 @@ export default {
                 }
 
                 self.rows = response.data
-                //console.log("rows_load.rows"); console.table(self.rows)
                 self.filter.original = response.data
-                self.filter.search = db.select("subject-search")
+                self.filter.search = db.select("sentencetr-search")
                 self.on_search()
 
             })
@@ -71,7 +70,7 @@ export default {
 
         on_search(){
             if(!this.filter.search){
-                db.delete("subject-search")
+                db.delete("sentencetr-search")
                 this.rows = [...this.filter.original]
                 return
             }
@@ -80,7 +79,7 @@ export default {
             if(!fields) return
 
             const search = this.filter.search.toString().trim()
-            db.save("subject-search",search)
+            db.save("sentencetr-search",search)
             const rows = this.filter.original.filter(obj => {
                 const exist = fields.some(field => {
                     if(obj[field]===null) return false
@@ -91,16 +90,15 @@ export default {
             })
 
             this.rows = [...rows]
-            //console.log("rows filtered"); console.table(this.rows)
         },
 
         insert(){
-            const url = `/adm/language/subject/${idsubject}/sentence/insert`
+            const url = `/adm/language/sentence/${idsentence}/sentencetr/insert`
             document.location = url
         },
 
         edit(id){
-            const url = `/adm/language/subject/${idsubject}/sentence/update/${id}`
+            const url = `/adm/language/sentence/${idsentence}/sentencetr/update/${id}`
             document.location = url
         },
 
@@ -109,7 +107,7 @@ export default {
                 const self = this
                 self.issending = true
                 self.btnsend = CONST.BTN_IN_PROGRESS
-                const url = `/api/language/sentence/${id}`
+                const url = `/api/language/sentencetr/${id}`
                 fetch(url, {
                     method: 'delete',
                     headers:{
@@ -120,7 +118,6 @@ export default {
                 .then(response => response.json())
                 .then(response => {
                     console.log("remove.response",response)
-
                     if(funcs.is_error(response)) {
                         return Swal.fire({
                             icon: 'warning',

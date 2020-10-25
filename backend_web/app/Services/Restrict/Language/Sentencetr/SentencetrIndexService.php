@@ -36,4 +36,28 @@ class SentencetrIndexService extends BaseService
         $this->_logquery("sentencetrindexservice.get_all");
         return $r;
     }
+
+    public function get_by_sentence($idsentence)
+    {
+        $idsentence = (int) $idsentence;
+        $q = "
+        SELECT
+        tr.delete_date, tr.is_enabled,
+        tr.id, tr.description, tr.translated, tr.id_language, tr.id_sentence,
+        s.translatable as ff_sentence, l.code_erp as ff_language
+
+        FROM app_sentence_tr tr
+        LEFT JOIN app_sentence s
+        ON tr.id_sentence = s.id
+        LEFT JOIN app_language l
+        ON tr.id_language = l.id
+
+        WHERE 1
+        AND tr.is_enabled='1'
+        AND tr.delete_date IS NULL
+        AND tr.id_sentence=$idsentence
+        ";
+        $r = DB::select($q);
+        return $r;
+    }
 }

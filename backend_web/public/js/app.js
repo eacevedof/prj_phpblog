@@ -59577,7 +59577,7 @@ Vue.component('sentenceindex', _components_restrict_language_sentence_SentenceIn
 Vue.component('sentenceinsert', _components_restrict_language_sentence_SentenceInsert_vue__WEBPACK_IMPORTED_MODULE_9__["default"]);
 Vue.component('sentenceupdate', _components_restrict_language_sentence_SentenceUpdate_vue__WEBPACK_IMPORTED_MODULE_10__["default"]);
 Vue.component('sentencesentencetrs', _components_restrict_language_sentence_SentenceSentencetrs_vue__WEBPACK_IMPORTED_MODULE_11__["default"]);
-var app = new Vue({
+new Vue({
   el: '#app'
 });
 

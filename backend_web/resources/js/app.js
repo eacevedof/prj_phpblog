@@ -52,6 +52,6 @@ Vue.component('sentenceinsert', SentenceInsert);
 Vue.component('sentenceupdate', SentenceUpdate);
 Vue.component('sentencesentencetrs', SentenceSentencetrs);
 
-const app = new Vue({
+new Vue({
     el: '#app',
 });
