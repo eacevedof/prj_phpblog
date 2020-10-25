@@ -3,10 +3,17 @@
 $requrl = Request::url();
 $arurls = [
     ["href"=>"/adm/language/subject/update/$idsubject","text"=>"Subject","isactive"=>strstr($requrl,"/subject/update/")],
-    ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Subject/Sentences","isactive"=>strstr($requrl,"/sentences")],
+    ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Sentences","isactive"=>strstr($requrl,"/sentences")],
 ];
-if(strstr($requrl,"/insert")) $arurls[] =["href"=>"#","text"=>"Subject/Insert sentence","isactive"=>true];
-if(strstr($requrl,"/sentence/update")) $arurls[] =["href"=>"#","text"=>"Subject/Update sentence","isactive"=>true];
+
+if(strstr($requrl,"/sentence/insert"))
+    $arurls[] =["href"=>"/adm/language/subject/$idsubject/sentence/insert","text"=>"Insert sentence","isactive"=>true];
+
+if(isset($idsentence)) {
+    $arurls[] =["href"=>"/adm/language/subject/$idsubject/sentence/update/$idsentence","text"=>"Update sentence","isactive"=>strstr($requrl,"/sentence/update/")];
+    $arurls[] =["href"=>"/adm/language/subject/$idsubject/sentence/$idsentence/sentencetrs","text"=>"Sentence TRS","isactive"=>strstr($requrl,"$idsentence/sentencetrs")];
+}
+
 
 @endphp
 <ul class="nav nav-tabs">

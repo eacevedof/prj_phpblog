@@ -30,9 +30,10 @@ class SentenceController extends BaseController
 
     public function detail(){return view('restrict.language.sentence.detail',["module"=>"sentence"]);}
 
-    public function sentences($idsentence){
-        return view('restrict.language.sentence.sentences',[
+    public function sentencetrs($idsubject, $idsentence){
+        return view('restrict.language.sentence.sentencetrs',[
             "module"=>"sentence",
+            "idsubject"=>$idsubject,
             "idsentence"=>$idsentence,
         ]);
     }
