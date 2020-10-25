@@ -1,6 +1,6 @@
 <?php
 namespace App\Services\Restrict\Language\Sentencetr;
-use App\Models\Language\AppSentencetr;
+use App\Models\Language\AppSentenceTr;
 use App\Services\BaseService;
 use Illuminate\Support\Facades\DB;
 
@@ -23,7 +23,7 @@ class SentencetrDetailService extends BaseService
     public function get()
     {
         $this->_check_data();
-        return AppSentencetr::find($this->id);
+        return AppSentenceTr::find($this->id);
     }
 
     public function get_by_slug($slug)

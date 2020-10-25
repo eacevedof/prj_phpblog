@@ -1,6 +1,6 @@
 <?php
 namespace App\Services\Restrict\Language\Sentencetr;
-use App\Models\Language\AppSentencetr;
+use App\Models\Language\AppSentenceTr;
 use App\Services\BaseService;
 
 class SentencetrUpdateService extends BaseService
@@ -11,7 +11,7 @@ class SentencetrUpdateService extends BaseService
     public function __construct($data)
     {
         $this->data = $data;
-        $this->dbentity = AppSentencetr::find($data["id"]);
+        $this->dbentity = AppSentenceTr::find($data["id"]);
     }
 
     private function _check_data($data){}
@@ -35,7 +35,7 @@ class SentencetrUpdateService extends BaseService
         $id = $this->data["id"];
 
         $this->logd($data,"before update");
-        $r = AppSentencetr::where("id", "=", $id)->update($data);
+        $r = AppSentenceTr::where("id", "=", $id)->update($data);
 
         $this->_logquery("update");
         return $r;

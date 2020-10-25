@@ -1,6 +1,6 @@
 <?php
 namespace App\Services\Restrict\Language\Sentencetr;
-use App\Models\Language\AppSentencetr;
+use App\Models\Language\AppSentenceTr;
 use App\Services\BaseService;
 
 
@@ -17,17 +17,17 @@ class SentencetrDeleteService extends BaseService
 
     private function _soft_delete()
     {
-        $sentencetr = AppSentencetr::find($this->id);
+        $sentencetr = AppSentenceTr::find($this->id);
         $update = ["update_date"=>$sentencetr->update_date];
         $this->_handle_sysfields($update,"d");
-        $r = AppSentencetr::where("id", "=", $this->id)->update($update);
+        $r = AppSentenceTr::where("id", "=", $this->id)->update($update);
         $this->_logquery("soft_delete");
         return $r;
     }
 
     private function _hard_delete()
     {
-        return AppSentencetr::where("id", "=", $this->id)->delete();
+        return AppSentenceTr::where("id", "=", $this->id)->delete();
     }
 
     public function save()

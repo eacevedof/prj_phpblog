@@ -6,7 +6,7 @@ import db from "../../../../app/db"
 
 const csrftoken = funcs.get_csrftoken()
 const idsentence = funcs.get_urlpiece(4)
-
+alert(idsentence)
 export default {
     data(){
         return {
@@ -20,14 +20,14 @@ export default {
                 description: "",
                 translated: "",
                 id_language: "",
-                id_setence: "",
+                id_sentence: "",
             }
         }
     },
 
     async mounted() {
         this.languages = await apifetch.get_languages()
-        this.sentencetr.id_setence = idsentence
+        this.sentencetr.id_sentence = idsentence
     },
 
     methods:{

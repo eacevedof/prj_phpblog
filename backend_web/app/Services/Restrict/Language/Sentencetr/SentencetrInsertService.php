@@ -1,6 +1,6 @@
 <?php
 namespace App\Services\Restrict\Language\Sentencetr;
-use App\Models\Language\AppSentencetr;
+use App\Models\Language\AppSentenceTr;
 use App\Services\BaseService;
 
 class SentencetrInsertService extends BaseService
@@ -20,7 +20,7 @@ class SentencetrInsertService extends BaseService
         $this->_check_data($data);
         $this->_handle_sysfields($data);
         $this->logd($data,"sentencetr.insert.create");
-        $r = AppSentencetr::create($data);
+        $r = AppSentenceTr::create($data);
         $this->_logquery("sentencetr.insert.save");
         return $r;
     }

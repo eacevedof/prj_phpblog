@@ -2816,24 +2816,19 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken();
-var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(4);
+var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(4);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE,
       issending: false,
-      contexts: [],
       languages: [],
-      types: [],
+      sentence: {},
       sentencetr: {
         description: "",
-        id_subject: "",
-        id_context: "",
-        translatable: "",
+        translated: "",
         id_language: "",
-        is_notificable: "0",
-        id_type: "",
-        id_status: "0"
+        id_setence: ""
       }
     };
   },
@@ -2846,23 +2841,13 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
           switch (_context.prev = _context.next) {
             case 0:
               _context.next = 2;
-              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_contexts();
-
-            case 2:
-              _this.contexts = _context.sent;
-              _context.next = 5;
               return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_languages();
 
-            case 5:
+            case 2:
               _this.languages = _context.sent;
-              _context.next = 8;
-              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_types();
+              _this.sentencetr.id_setence = idsentence;
 
-            case 8:
-              _this.types = _context.sent;
-              _this.sentencetr.id_subject = idsubject;
-
-            case 10:
+            case 4:
             case "end":
               return _context.stop();
           }
@@ -2872,7 +2857,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
   },
   methods: {
     redirect: function redirect(idsentencetr) {
-      if (idsubject) window.location = "/adm/language/subject/".concat(idsubject, "/sentencetrs");else window.location = "/adm/language/sentencetr/update/".concat(idsentencetr);
+      if (idsentence) window.location = "/adm/language/subject/".concat(idsentence, "/sentencetrs");else window.location = "/adm/language/sentencetr/update/".concat(idsentencetr);
     },
     insert: function insert() {
       var self = this;
@@ -2923,7 +2908,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
 
   } //methods
 
-});
+}); //export
 
 /***/ }),
 
@@ -44363,62 +44348,9 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-4" }, [
-                _c("label", { attrs: { for: "sel-id_type" } }, [
-                  _vm._v("Type *")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.sentencetr.id_type,
-                        expression: "sentencetr.id_type"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "sel-id_type", required: "" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.sentencetr,
-                          "id_type",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { disabled: "", value: "" } }, [
-                      _vm._v("Choose one")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.types, function(type) {
-                      return _c("option", { domProps: { value: type.id } }, [
-                        _vm._v(_vm._s(type.description))
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-12" }, [
-                _c("label", { attrs: { for: "txa-translatable" } }, [
-                  _vm._v("Translatable *")
+                _c("label", { attrs: { for: "txa-translated" } }, [
+                  _vm._v("Translated *")
                 ]),
                 _vm._v(" "),
                 _c("textarea", {
@@ -44426,19 +44358,19 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.sentencetr.translatable,
-                      expression: "sentencetr.translatable"
+                      value: _vm.sentencetr.translated,
+                      expression: "sentencetr.translated"
                     }
                   ],
                   staticClass: "form-control",
                   attrs: {
-                    id: "txa-translatable",
+                    id: "txa-translated",
                     maxlength: "1000",
                     rows: "3",
                     cols: "5",
                     required: ""
                   },
-                  domProps: { value: _vm.sentencetr.translatable },
+                  domProps: { value: _vm.sentencetr.translated },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
@@ -44446,159 +44378,12 @@ var render = function() {
                       }
                       _vm.$set(
                         _vm.sentencetr,
-                        "translatable",
+                        "translated",
                         $event.target.value
                       )
                     }
                   }
                 })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-4" }, [
-                _c("label", { attrs: { for: "sel-id_context" } }, [
-                  _vm._v("Context")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.sentencetr.id_context,
-                        expression: "sentencetr.id_context"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "sel-id_context" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.sentencetr,
-                          "id_context",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { disabled: "", value: "" } }, [
-                      _vm._v("Choose one")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.contexts, function(context) {
-                      return _c("option", { domProps: { value: context.id } }, [
-                        _vm._v(_vm._s(context.description))
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-3" }, [
-                _c("label", { attrs: { for: "sel-is_notificable" } }, [
-                  _vm._v("Notificable")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.sentencetr.is_notificable,
-                        expression: "sentencetr.is_notificable"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "sel-is_notificable" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.sentencetr,
-                          "is_notificable",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("No")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-3" }, [
-                _c("label", { attrs: { for: "sel-id_status" } }, [
-                  _vm._v("Status")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.sentencetr.id_status,
-                        expression: "sentencetr.id_status"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "sel-id_status" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.sentencetr,
-                          "id_status",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "0" } }, [
-                      _vm._v("Disable")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("Enable")])
-                  ]
-                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-4" }, [
@@ -44686,7 +44471,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-9" }, [
-      _c("h1", [_vm._v("Insert sentencetr")])
+      _c("p", [_vm._v("TR for: ")])
     ])
   }
 ]
