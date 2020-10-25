@@ -34,7 +34,7 @@
             <thead>
             <tr>
                 <th>id</th>
-                <th>Language</th>
+                <th>Lang</th>
                 <th>Type</th>
                 <th>Translatable</th>
                 <th>Description</th>

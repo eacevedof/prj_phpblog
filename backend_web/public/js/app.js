@@ -2796,7 +2796,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      columns: ["id", "id_language", "id_type", "translatable", "description"],
+      columns: ["id", "as_language", "as_type", "translatable", "description"],
       rows: [],
       filter: {
         original: [],
@@ -44162,7 +44162,7 @@ var staticRenderFns = [
       _c("tr", [
         _c("th", [_vm._v("id")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Language")]),
+        _c("th", [_vm._v("Lang")]),
         _vm._v(" "),
         _c("th", [_vm._v("Type")]),
         _vm._v(" "),
