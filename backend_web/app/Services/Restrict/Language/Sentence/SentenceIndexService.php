@@ -69,10 +69,12 @@ class SentenceIndexService extends BaseService
         SELECT
         s.delete_date, s.is_enabled,
         s.id, s.id_context, s.id_language, s.id_status, s.id_subject, s.id_type, s.translatable, s.description,
-        l.code_erp as ff_language,
+        sub.title ff_subject, l.code_erp as ff_language,
         ar1.description as ff_context,
         ar2.description as ff_type
         FROM app_sentence s
+        LEFT JOIN app_subject sub
+        ON s.id_subject = sub.id
         LEFT JOIN app_language l
         ON s.id_language = l.id
         LEFT JOIN app_array ar1

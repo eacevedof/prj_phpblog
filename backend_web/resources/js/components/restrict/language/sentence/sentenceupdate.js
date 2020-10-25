@@ -4,45 +4,43 @@ import CONST from "../../../../app/constants"
 import apifetch from "../../../../app/apifetch"
 import db from "../../../../app/db"
 const csrftoken = funcs.get_csrftoken()
+const idsubject = funcs.get_urlpiece(4)
 
 export default {
     data(){
         return {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
-            sources: [],
+
+            contexts: [],
+            languages: [],
+            types: [],
 
             sentence: {
-                id: -1,
+                id: "",
                 description: "",
-                slug: "",
-                url_final: "",
-                url_img1: "",
-                url_img2: "",
-                title: "",
-                excerpt: "",
-                url_resource: "",
-                id_type_source: "",
-                id_status: 0,
-                seo_title: "",
-                seo_description: "",
+                id_subject: "",
+                id_context: "",
+                translatable: "",
+                id_language: "",
+                is_notificable: "",
+                id_type: "",
+                id_status: "",
             }
         }
     },
 
     async mounted() {
         const id = funcs.get_lastparam()
-        this.sources = await apifetch.get_sources()
+        this.contexts = await apifetch.get_contexts()
+        this.languages = await apifetch.get_languages()
+        this.types = await apifetch.get_types()
         this.load_register(id)
     },
 
     methods:{
-        load_lastupload(){
-            const lastupload = db.select("last-upload")
-            if(lastupload) {
-                this.sentence.url_img1 = lastupload
-                this.sentence.url_img2 = lastupload
-            }
+        redirect(idsentence) {
+            if(!idsubject) window.location = `/adm/language/sentence/update/${idsentence}`
         },
 
         load_register(id){
@@ -97,7 +95,6 @@ export default {
             })
             .then(response => response.json())
             .then(response => {
-
                 console.log("reponse",response)
 
                 if(funcs.is_error(response)) {
@@ -107,9 +104,8 @@ export default {
                         text: response.error,
                     })
                 }
-                this.$toast.success(`Sentence saved. Nº ${self.sentence.id} | ${self.sentence.title}`)
+                this.$toast.success(`Sentence saved. Nº ${self.sentence.id} | ${self.sentence.description}`)
                 this.load_register(self.sentence.id)
-
             })
             .catch(error => {
                 console.log("CATCH ERROR update",error)
@@ -171,17 +167,7 @@ export default {
                     self.btnsend = CONST.BTN_INISTATE_REFRESH
                 })
             }
-        },
-
-        onchange_title(){
-            this.sentence.slug = funcs.get_slug(this.sentence.title).concat(`-${this.sentence.id}`)
-            this.sentence.url_final = `/idiomas/${this.sentence.slug}`
-        },
-
-        on_btnalbum(){
-            db.save("last-slug",this.sentence.slug)
-            window.open("/adm/upload", "_blank").focus()
-        },
+        },//remove
 
         handleSubmit: function(e) {
             e.preventDefault()

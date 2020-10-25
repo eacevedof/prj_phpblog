@@ -30,6 +30,13 @@ export default {
         }
     },
 
+    async mounted() {
+        this.contexts = await apifetch.get_contexts()
+        this.languages = await apifetch.get_languages()
+        this.types = await apifetch.get_types()
+        this.sentence.id_subject = idsubject
+    },
+
     methods:{
         redirect(idsentence) {
             if(idsubject) window.location = `/adm/language/subject/${idsubject}/sentences`
@@ -84,12 +91,7 @@ export default {
             e.preventDefault()
             this.insert()
         }//handleSubmit(e)
-    },
 
-    async mounted() {
-        this.contexts = await apifetch.get_contexts()
-        this.languages = await apifetch.get_languages()
-        this.types = await apifetch.get_types()
-        this.sentence.id_subject = idsubject
-    }
+    },//methods
+
 }

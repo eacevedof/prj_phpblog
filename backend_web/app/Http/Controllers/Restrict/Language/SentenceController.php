@@ -20,10 +20,11 @@ class SentenceController extends BaseController
         ]);
     }
 
-    public function update($idsentence){
+    public function update($idsubject,$idsentence){
         return view('restrict.language.sentence.update',[
             "module"=>"sentence",
-            "idsentence"=>$idsentence
+            "idsubject"=>$idsubject,
+            "idsentence"=>$idsentence,
         ]);
     }
 
