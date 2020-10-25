@@ -14,16 +14,16 @@
     </div>
     <div class="card-body mt-0">
         <div class="row card-header res-formheader">
-            <div class="col-md-6">
-                <sub>({{rows.length}})</sub>
+            <div class="col-md-8">
+                <sub>({{rows.length}})</sub><p><b>{{sentence.translatable}}</b></p>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="insert">
                     Insert
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
@@ -35,8 +35,7 @@
             <tr>
                 <th>id</th>
                 <th>Lang</th>
-                <th>Type</th>
-                <th>Translatable</th>
+                <th>Translated</th>
                 <th>Description</th>
                 <th>Draft</th>
                 <th>Edit</th>

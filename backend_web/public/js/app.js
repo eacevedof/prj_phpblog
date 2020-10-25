@@ -2227,9 +2227,14 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../app/funcs */ "./resources/js/app/funcs.js");
-/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../app/constants */ "./resources/js/app/constants.js");
-/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../app/db */ "./resources/js/app/db.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../app/funcs */ "./resources/js/app/funcs.js");
+/* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../app/constants */ "./resources/js/app/constants.js");
+/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../app/db */ "./resources/js/app/db.js");
+/* harmony import */ var _models_sentence__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../models/sentence */ "./resources/js/models/sentence.js");
+
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2242,18 +2247,24 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //sentence index
 
 
 
-var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
-var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(6);
+
+var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken();
+var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(6);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       issending: false,
-      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      columns: ["id", "ff_language", "ff_type", "translatable", "description"],
+      btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
+      sentence: {},
+      columns: ["id", "ff_language", "translated", "description"],
       rows: [],
       filter: {
         original: [],
@@ -2262,14 +2273,35 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece
     };
   },
   mounted: function mounted() {
-    this.rows_load();
+    var _this = this;
+
+    return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _models_sentence__WEBPACK_IMPORTED_MODULE_4__["default"].get_by_id(idsentence);
+
+            case 2:
+              _this.sentence = _context.sent;
+
+              _this.rows_load();
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }))();
   },
   methods: {
     rows_load: function rows_load() {
       console.log("rows_load");
       var self = this;
       self.issending = true;
-      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
+      self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
       var url = "/api/language/sentence/".concat(idsentence, "/sentencetrs");
       fetch(url, {
         method: 'get'
@@ -2277,34 +2309,34 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece
         return response.json();
       }).then(function (response) {
         //console.log("load.reponse",response)
-        if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+        if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
           return Swal.fire({
             icon: 'warning',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
             html: response.error
           });
         }
 
         self.rows = response.data;
         self.filter.original = response.data;
-        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("sentencetr-search");
+        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_3__["default"].select("sentencetr-search");
         self.on_search();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
           icon: 'error',
-          title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+          title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
           html: error.toString()
         });
       })["finally"](function () {
         self.issending = false;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
       });
     },
     //load
     on_search: function on_search() {
       if (!this.filter.search) {
-        _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("sentencetr-search");
+        _app_db__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("sentencetr-search");
         this.rows = _toConsumableArray(this.filter.original);
         return;
       }
@@ -2313,7 +2345,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece
       var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
       var search = this.filter.search.toString().trim();
-      _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].save("sentencetr-search", search);
+      _app_db__WEBPACK_IMPORTED_MODULE_3__["default"].save("sentencetr-search", search);
       var rows = this.filter.original.filter(function (obj) {
         var exist = fields.some(function (field) {
           if (obj[field] === null) return false;
@@ -2333,10 +2365,10 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece
       document.location = url;
     },
     remove: function remove(id) {
-      if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].CONFIRM)) {
+      if (confirm(_app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].CONFIRM)) {
         var self = this;
         self.issending = true;
-        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
+        self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
         var url = "/api/language/sentencetr/".concat(id);
         fetch(url, {
           method: 'delete',
@@ -2352,10 +2384,10 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece
         }).then(function (response) {
           console.log("remove.response", response);
 
-          if (_app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].is_error(response)) {
+          if (_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(response)) {
             return Swal.fire({
               icon: 'warning',
-              title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_ERROR,
+              title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_ERROR,
               html: response.error
             });
           }
@@ -2370,12 +2402,12 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece
           console.log("CATCH ERROR remove", error);
           Swal.fire({
             icon: 'error',
-            title: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].TITLE_SERVERROR,
+            title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
             html: error.toString()
           });
         })["finally"](function () {
           self.issending = false;
-          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH;
+          self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH;
         });
       }
     } //emove
@@ -43267,11 +43299,12 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "card-body mt-0" }, [
       _c("div", { staticClass: "row card-header res-formheader" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
+        _c("div", { staticClass: "col-md-8" }, [
+          _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")]),
+          _c("p", [_c("b", [_vm._v(_vm._s(_vm.sentence.translatable))])])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-2" }, [
           _c(
             "button",
             {
@@ -43294,7 +43327,7 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-2" }, [
           _c(
             "button",
             {
@@ -43439,9 +43472,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Lang")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Type")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Translatable")]),
+        _c("th", [_vm._v("Translated")]),
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
         _vm._v(" "),

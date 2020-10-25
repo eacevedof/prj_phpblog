@@ -2,6 +2,7 @@
 import funcs from "../../../../app/funcs"
 import CONST from "../../../../app/constants"
 import db from "../../../../app/db"
+import sentence from "../../../../models/sentence";
 
 const csrftoken = funcs.get_csrftoken()
 const idsentence = funcs.get_urlpiece(6)
@@ -11,8 +12,10 @@ export default {
         return {
             issending: false,
             btnsend: CONST.BTN_INISTATE_REFRESH,
-            columns: ["id","ff_language","ff_type","translatable","description"],
 
+            sentence:{},
+
+            columns: ["id","ff_language","translated","description"],
             rows: [],
 
             filter:{
@@ -22,7 +25,8 @@ export default {
         }
     },
 
-    mounted() {
+    async mounted() {
+        this.sentence = await sentence.get_by_id(idsentence)
         this.rows_load()
     },
 
