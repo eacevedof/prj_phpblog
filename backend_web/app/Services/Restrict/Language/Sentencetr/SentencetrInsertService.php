@@ -12,7 +12,16 @@ class SentencetrInsertService extends BaseService
         $this->data = $data;
     }
 
-    private function _check_data($data) {}
+    private function _exists()
+    {
+        return AppSentenceTr::where("id_sentence","=",$this->data["id_sentence"]??"")
+            ->where("id_language","=",$this->data["id_language"]??"")
+            ->exists();
+    }
+
+    private function _check_data() {
+        if($this->_exists()) throw new \Exception("This language already exists");
+    }
 
     public function save()
     {

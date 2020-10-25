@@ -2797,7 +2797,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../app/constants */ "./resources/js/app/constants.js");
 /* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../app/apifetch */ "./resources/js/app/apifetch.js");
-/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../app/db */ "./resources/js/app/db.js");
+/* harmony import */ var _models_sentence__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../models/sentence */ "./resources/js/models/sentence.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2828,7 +2828,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
         description: "",
         translated: "",
         id_language: "",
-        id_setence: ""
+        id_sentence: ""
       }
     };
   },
@@ -2840,14 +2840,19 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              _context.next = 2;
+              _this.sentencetr.id_sentence = idsentence;
+              _context.next = 3;
               return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_languages();
 
-            case 2:
+            case 3:
               _this.languages = _context.sent;
-              _this.sentencetr.id_setence = idsentence;
+              _context.next = 6;
+              return _models_sentence__WEBPACK_IMPORTED_MODULE_4__["default"].get_by_id(idsentence);
 
-            case 4:
+            case 6:
+              _this.sentence = _context.sent;
+
+            case 7:
             case "end":
               return _context.stop();
           }
@@ -2857,7 +2862,8 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
   },
   methods: {
     redirect: function redirect(idsentencetr) {
-      if (idsentence) window.location = "/adm/language/subject/".concat(idsentence, "/sentencetrs");else window.location = "/adm/language/sentencetr/update/".concat(idsentencetr);
+      var idsubject = this.sentence.id_subject;
+      if (idsentence) window.location = "/adm/language/subject/".concat(idsubject, "/sentence/").concat(idsentence, "/sentencetrs");else window.location = "/adm/language/sentencetr/update/".concat(idsentencetr);
     },
     insert: function insert() {
       var self = this;
@@ -44263,7 +44269,11 @@ var render = function() {
           { attrs: { id: "form-insert" }, on: { submit: _vm.handleSubmit } },
           [
             _c("div", { staticClass: "row card-header res-formheader" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "col-md-9" }, [
+                _c("p", [
+                  _vm._v("TR for: " + _vm._s(_vm.sentence.translatable))
+                ])
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-3" }, [
                 _c(
@@ -44465,16 +44475,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-9" }, [
-      _c("p", [_vm._v("TR for: ")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -62979,6 +62980,77 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_updateindex_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!./updateindex.js?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./resources/js/components/restrict/upload/updateindex.js?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_updateindex_js_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/models/sentence.js":
+/*!*****************************************!*\
+  !*** ./resources/js/models/sentence.js ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var sentence = {
+  get_by_id: function () {
+    var _get_by_id = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(idsentence) {
+      var url, r;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              url = "/api/language/sentence/".concat(idsentence);
+              r = null;
+              _context.prev = 2;
+              _context.next = 5;
+              return fetch(url);
+
+            case 5:
+              _context.next = 7;
+              return _context.sent.json();
+
+            case 7:
+              r = _context.sent;
+              return _context.abrupt("return", r.data);
+
+            case 11:
+              _context.prev = 11;
+              _context.t0 = _context["catch"](2);
+              r = _context.t0;
+              return _context.abrupt("return", {
+                error: _context.t0
+              });
+
+            case 15:
+              _context.prev = 15;
+              console.log("sentence.r", r);
+              return _context.finish(15);
+
+            case 18:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, null, [[2, 11, 15, 18]]);
+    }));
+
+    function get_by_id(_x) {
+      return _get_by_id.apply(this, arguments);
+    }
+
+    return get_by_id;
+  }()
+};
+/* harmony default export */ __webpack_exports__["default"] = (sentence);
 
 /***/ }),
 
