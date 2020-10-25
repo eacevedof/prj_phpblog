@@ -2122,7 +2122,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
         id_context: "",
         translatable: "",
         id_language: "",
-        is_notificable: "",
+        is_notificable: "0",
         id_type: "",
         id_status: "0"
       }
@@ -2201,9 +2201,8 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
             case 8:
               _this.types = _context.sent;
               _this.sentence.id_subject = idsubject;
-              alert(idsubject);
 
-            case 11:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -42103,98 +42102,8 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "form-row mt-1" }, [
               _c("div", { staticClass: "form-group col-md-4" }, [
-                _c("label", { attrs: { for: "sel-id_context" } }, [
-                  _vm._v("Context *")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.sentence.id_context,
-                        expression: "sentence.id_context"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "sel-id_context", required: "" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.sentence,
-                          "id_context",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { disabled: "", value: "" } }, [
-                      _vm._v("Choose one")
-                    ]),
-                    _vm._v(" "),
-                    _vm._l(_vm.contexts, function(context) {
-                      return _c("option", { domProps: { value: context.id } }, [
-                        _vm._v(_vm._s(context.description))
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-12" }, [
-                _c("label", { attrs: { for: "txa-translatable" } }, [
-                  _vm._v("Translatable")
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.sentence.translatable,
-                      expression: "sentence.translatable"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "txa-translatable",
-                    maxlength: "1000",
-                    rows: "3",
-                    cols: "5"
-                  },
-                  domProps: { value: _vm.sentence.translatable },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(
-                        _vm.sentence,
-                        "translatable",
-                        $event.target.value
-                      )
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-4" }, [
                 _c("label", { attrs: { for: "sel-id_language" } }, [
-                  _vm._v("language *")
+                  _vm._v("Language *")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -42247,55 +42156,9 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-3" }, [
-                _c("label", { attrs: { for: "sel-is_notificable" } }, [
-                  _vm._v("Notificable")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.sentence.is_notificable,
-                        expression: "sentence.is_notificable"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { id: "sel-is_notificable" },
-                    on: {
-                      change: function($event) {
-                        var $$selectedVal = Array.prototype.filter
-                          .call($event.target.options, function(o) {
-                            return o.selected
-                          })
-                          .map(function(o) {
-                            var val = "_value" in o ? o._value : o.value
-                            return val
-                          })
-                        _vm.$set(
-                          _vm.sentence,
-                          "is_notificable",
-                          $event.target.multiple
-                            ? $$selectedVal
-                            : $$selectedVal[0]
-                        )
-                      }
-                    }
-                  },
-                  [
-                    _c("option", { attrs: { value: "0" } }, [_vm._v("No")]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-4" }, [
                 _c("label", { attrs: { for: "sel-id_type" } }, [
-                  _vm._v("type *")
+                  _vm._v("Type *")
                 ]),
                 _vm._v(" "),
                 _c(
@@ -42343,6 +42206,143 @@ var render = function() {
                     })
                   ],
                   2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-12" }, [
+                _c("label", { attrs: { for: "txa-translatable" } }, [
+                  _vm._v("Translatable *")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.sentence.translatable,
+                      expression: "sentence.translatable"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "txa-translatable",
+                    maxlength: "1000",
+                    rows: "3",
+                    cols: "5",
+                    required: ""
+                  },
+                  domProps: { value: _vm.sentence.translatable },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.sentence,
+                        "translatable",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-4" }, [
+                _c("label", { attrs: { for: "sel-id_context" } }, [
+                  _vm._v("Context")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sentence.id_context,
+                        expression: "sentence.id_context"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "sel-id_context" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.sentence,
+                          "id_context",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { disabled: "", value: "" } }, [
+                      _vm._v("Choose one")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.contexts, function(context) {
+                      return _c("option", { domProps: { value: context.id } }, [
+                        _vm._v(_vm._s(context.description))
+                      ])
+                    })
+                  ],
+                  2
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-3" }, [
+                _c("label", { attrs: { for: "sel-is_notificable" } }, [
+                  _vm._v("Notificable")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.sentence.is_notificable,
+                        expression: "sentence.is_notificable"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { id: "sel-is_notificable" },
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.sentence,
+                          "is_notificable",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { value: "0" } }, [_vm._v("No")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")])
+                  ]
                 )
               ]),
               _vm._v(" "),

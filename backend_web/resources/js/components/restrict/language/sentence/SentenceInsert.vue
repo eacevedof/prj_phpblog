@@ -22,6 +22,14 @@
                     </select>
                 </div>
 
+                <div class="form-group col-md-4">
+                    <label for="sel-id_type">Type *</label>
+                    <select id="sel-id_type" v-model="sentence.id_type" class="form-control" required>
+                        <option disabled value="">Choose one</option>
+                        <option v-for="type in types" :value="type.id">{{type.description}}</option>
+                    </select>
+                </div>
+
                 <div class="form-group col-md-12">
                     <label for="txa-translatable">Translatable *</label>
                     <textarea id="txa-translatable" v-model="sentence.translatable" maxlength="1000" rows="3" cols="5" class="form-control" required></textarea>
@@ -40,14 +48,6 @@
                     <select id="sel-is_notificable" v-model="sentence.is_notificable" class="form-control">
                         <option value="0">No</option>
                         <option value="1">Yes</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="sel-id_type">Type</label>
-                    <select id="sel-id_type" v-model="sentence.id_type" class="form-control">
-                        <option disabled value="">Choose one</option>
-                        <option v-for="type in types" :value="type.id">{{type.description}}</option>
                     </select>
                 </div>
 

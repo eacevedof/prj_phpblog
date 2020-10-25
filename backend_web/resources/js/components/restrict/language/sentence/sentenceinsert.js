@@ -87,6 +87,5 @@ export default {
         this.languages = await apifetch.get_languages()
         this.types = await apifetch.get_types()
         this.sentence.id_subject = idsubject
-        alert(idsubject)
     }
 }
