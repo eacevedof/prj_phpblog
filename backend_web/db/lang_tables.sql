@@ -1,4 +1,3 @@
-
 DROP TABLE IF EXISTS `app_language`;
 
 CREATE TABLE `app_language` (
@@ -25,6 +24,9 @@ CREATE TABLE `app_language` (
 `code_cache` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+/*Data for the table `app_language` */
+insert  into `app_language`(`processflag`,`insert_platform`,`insert_user`,`insert_date`,`update_platform`,`update_user`,`update_date`,`delete_platform`,`delete_user`,`delete_date`,`cru_csvnote`,`is_erpsent`,`is_enabled`,`i`,`id`,`code_erp`,`description`,`translated`,`language`,`id_parent`,`code_cache`) values (NULL,'1',NULL,'2020-10-25 10:58:47',NULL,NULL,'2020-10-25 10:58:47',NULL,NULL,NULL,NULL,'0','1',NULL,1,'en','English',NULL,'english',NULL,NULL),(NULL,'1',NULL,'2020-10-25 10:59:10',NULL,NULL,'2020-10-25 10:59:10',NULL,NULL,NULL,NULL,'0','1',NULL,2,'es','Spanish',NULL,'english',NULL,NULL),(NULL,'1',NULL,'2020-10-25 10:59:31',NULL,NULL,'2020-10-25 10:59:31',NULL,NULL,NULL,NULL,'0','1',NULL,3,'nl','Dutch',NULL,'english',NULL,NULL),(NULL,'1',NULL,'2020-10-25 11:00:42',NULL,NULL,'2020-10-25 11:00:42',NULL,NULL,NULL,NULL,'0','1',NULL,4,'fr','French',NULL,'english',NULL,NULL);
 
 /*Table structure for table `app_sentence` */
 DROP TABLE IF EXISTS `app_sentence`;
