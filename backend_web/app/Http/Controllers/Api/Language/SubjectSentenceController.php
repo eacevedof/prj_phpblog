@@ -25,10 +25,10 @@ class SubjectSentenceController extends BaseController
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idsubject)
     {
         try {
-            $r = (new SentenceIndexService())->get_all();
+            $r = (new SentenceIndexService())->get_by_subject($idsubject);
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
