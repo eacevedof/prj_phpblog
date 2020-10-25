@@ -2242,12 +2242,12 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-//subject index
+//sentence index
 
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_csrftoken();
-var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(4);
+var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(6);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2270,7 +2270,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-      var url = "/api/language/subject/".concat(idsubject, "/sentences");
+      var url = "/api/language/sentence/".concat(idsentence, "/sentencetrs");
       fetch(url, {
         method: 'get'
       }).then(function (response) {
@@ -2285,10 +2285,9 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
           });
         }
 
-        self.rows = response.data; //console.log("rows_load.rows"); console.table(self.rows)
-
+        self.rows = response.data;
         self.filter.original = response.data;
-        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("subject-search");
+        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("sentencetr-search");
         self.on_search();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
@@ -2305,7 +2304,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
     //load
     on_search: function on_search() {
       if (!this.filter.search) {
-        _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("subject-search");
+        _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("sentencetr-search");
         this.rows = _toConsumableArray(this.filter.original);
         return;
       }
@@ -2314,7 +2313,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
       var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
       var search = this.filter.search.toString().trim();
-      _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].save("subject-search", search);
+      _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].save("sentencetr-search", search);
       var rows = this.filter.original.filter(function (obj) {
         var exist = fields.some(function (field) {
           if (obj[field] === null) return false;
@@ -2323,14 +2322,14 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
         });
         return exist;
       });
-      this.rows = _toConsumableArray(rows); //console.log("rows filtered"); console.table(this.rows)
+      this.rows = _toConsumableArray(rows);
     },
     insert: function insert() {
-      var url = "/adm/language/subject/".concat(idsubject, "/sentence/insert");
+      var url = "/adm/language/sentence/".concat(idsentence, "/sentencetr/insert");
       document.location = url;
     },
     edit: function edit(id) {
-      var url = "/adm/language/subject/".concat(idsubject, "/sentence/update/").concat(id);
+      var url = "/adm/language/sentence/".concat(idsentence, "/sentencetr/update/").concat(id);
       document.location = url;
     },
     remove: function remove(id) {
@@ -2338,7 +2337,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
         var self = this;
         self.issending = true;
         self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_IN_PROGRESS;
-        var url = "/api/language/sentence/".concat(id);
+        var url = "/api/language/sentencetr/".concat(id);
         fetch(url, {
           method: 'delete',
           headers: {
