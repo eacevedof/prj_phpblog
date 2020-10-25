@@ -23,7 +23,7 @@ export default {
                 id_context: "",
                 translatable: "",
                 id_language: "",
-                is_notificable: "",
+                is_notificable: "0",
                 id_type: "",
                 id_status: "0",
             }
