@@ -5,43 +5,33 @@ import apifetch from "../../../../app/apifetch"
 import db from "../../../../app/db"
 
 const csrftoken = funcs.get_csrftoken()
+const idsubject = funcs.get_urlpiece(4)
 
 export default {
     data(){
         return {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
-            sources: [],
+
+            contexts: [],
+            languages: [],
+            types: [],
 
             sentence: {
                 description: "",
-                slug: "",
-                url_final: "",
-                url_img1: "",
-                url_img2: "",
-                title: "",
-                excerpt: "",
-                url_resource: "",
-                id_type_source: "",
-                id_status: 0,
-                seo_title: "",
-                seo_description: "",
+                id_subject: "",
+                id_context: "",
+                translatable: "",
+                id_language: "",
+                is_notificable: "",
+                id_type: "",
+                id_status: "0",
             }
         }
     },
 
     methods:{
-        save_slug(){
-            db.save("last-slug",this.sentence.slug)
-        },
 
-        load_lastupload(){
-            const lastupload = db.select("last-upload")
-            if(lastupload) {
-                this.sentence.url_img1 = lastupload
-                this.sentence.url_img2 = lastupload
-            }
-        },
 
         insert(){
             const self = this
@@ -101,6 +91,6 @@ export default {
     },
 
     async mounted() {
-        this.sources = await apifetch.get_sources()
+        this.contexts = await apifetch.get_sources()
     }
 }

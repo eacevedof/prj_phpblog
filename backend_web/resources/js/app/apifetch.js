@@ -31,6 +31,21 @@ const apifetch = {
         finally {
             console.log("get_sources.r",r)
         }
+    },
+    get_languages: async ()=>{
+        const url = "/api/language"
+        let r = null
+        try {
+            r = await (await fetch(url)).json()
+            return r.data
+        }
+        catch (e) {
+            r = e
+            return {error:e}
+        }
+        finally {
+            console.log("get_sources.r",r)
+        }
     }
 }
 
