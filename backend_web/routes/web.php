@@ -64,10 +64,10 @@ Route::apiResource("/api/post/category","Api\CategoryController");
 Route::apiResource("/api/post","Api\PostController");
 Route::apiResource("/api/language/subject","Api\Language\SubjectController");
 Route::apiResource("/api/language/subject/{idsubject}/sentences","Api\Language\SubjectSentenceController");
+Route::apiResource("/api/language/language","Api\Language\LanguageController");
 Route::apiResource("/api/language/sentence","Api\Language\SentenceController");
 Route::apiResource("/api/language/sentencetr","Api\Language\SentencetrController");
 
 //picklists (solo lectura)
 Route::get("/api/app-array/source","Api\ApparrayController@get_source");
-Route::get("/api/language","Api\Language\LanguageController");
-Route::get("/api/language","Api\Language\LanguageController");
+Route::get("/api/picklist/language","Api\Language\LanguageController@get_picklist");
