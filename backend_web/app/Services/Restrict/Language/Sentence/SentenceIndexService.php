@@ -25,7 +25,7 @@ class SentenceIndexService extends BaseService
         return $r;
     }
 
-    public function get_all()
+    public function get_all2()
     {
         $r = $this->table
             ->whereNull("delete_date")
@@ -34,6 +34,30 @@ class SentenceIndexService extends BaseService
             ->orderBy("id","desc")
             ->get();
         $this->_logquery("sentenceindexservice.get_all");
+        return $r;
+    }
+
+    public function get_all()
+    {
+        $q = "
+        SELECT
+        s.delete_date, s.is_enabled,
+        s.id, s.id_context, s.id_language, s.id_status, s.id_subject, s.id_type, s.translatable, s.description,
+        l.code_erp as as_language,
+        ar1.description as as_context,
+        ar2.description as as_type
+        FROM app_sentence s
+        LEFT JOIN app_language l
+        ON s.id_language = l.id
+        LEFT JOIN app_array ar1
+        ON s.id_context = ar1.id AND ar1.type = 'lang-context'
+        LEFT JOIN app_array ar2
+        ON s.id_type = ar2.id AND ar2.type = 'lang-type'
+        WHERE 1
+        AND s.is_enabled='1'
+        AND s.delete_date IS NULL
+        ";
+        $r = DB::select($q);
         return $r;
     }
 }
