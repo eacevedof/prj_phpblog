@@ -7,18 +7,15 @@ use Illuminate\Support\Facades\DB;
 class SentenceDetailService extends BaseService
 {
     private $id;
-    private $db;
+    private $table;
 
     public function __construct($id=null)
     {
         $this->id = $id;
-        $this->db = DB::table("app_sentence");
+        $this->table = $this->get_table("app_sentence");
     }
 
-    private function _check_data()
-    {
-
-    }
+    private function _check_data(){}
 
     public function get()
     {
@@ -29,7 +26,7 @@ class SentenceDetailService extends BaseService
     public function get_by_slug($slug)
     {
         //dd($slug);
-        $r = $this->db->whereNull("delete_date")
+        $r = $this->table->whereNull("delete_date")
             ->where("is_enabled","=","1")
             ->where("id_status","=","1")
             ->where("slug","=",$slug)
@@ -41,11 +38,21 @@ class SentenceDetailService extends BaseService
 
     public function get_by_id($id)
     {
-        $r = $this->db
+        $r = $this->table
             ->whereNull("delete_date")
             ->where("id","=",$id)
             ->get();
         //dd($r);
         return $r;
+    }
+
+    public function get_id_subject()
+    {
+        $r = $this->table
+                ->where("id","=",$this->id)
+                ->get(["id_subject"]);
+        $r = $r->first();
+        //dd($r->id_subject);
+        return $r->id_subject;
     }
 }

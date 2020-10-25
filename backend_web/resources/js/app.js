@@ -25,11 +25,14 @@ import SubjectInsert from "./components/restrict/language/subject/SubjectInsert.
 import SubjectUpdate from "./components/restrict/language/subject/SubjectUpdate.vue";
 import SubjectSentences from "./components/restrict/language/subject/SubjectSentences.vue";
 
-
 import SentenceIndex from "./components/restrict/language/sentence/SentenceIndex.vue";
 import SentenceInsert from "./components/restrict/language/sentence/SentenceInsert.vue";
 import SentenceUpdate from "./components/restrict/language/sentence/SentenceUpdate.vue";
 import SentenceSentencetrs from "./components/restrict/language/sentence/SentenceSentencetrs.vue";
+
+import SentencetrIndex from "./components/restrict/language/sentencetr/SentencetrIndex.vue";
+import SentencetrInsert from "./components/restrict/language/sentencetr/SentencetrInsert.vue";
+import SentencetrUpdate from "./components/restrict/language/sentencetr/SentencetrUpdate.vue";
 
 import VueBootstrapToasts from "vue-bootstrap-toasts";
 
@@ -51,6 +54,10 @@ Vue.component('sentenceindex', SentenceIndex);
 Vue.component('sentenceinsert', SentenceInsert);
 Vue.component('sentenceupdate', SentenceUpdate);
 Vue.component('sentencesentencetrs', SentenceSentencetrs);
+
+Vue.component('sentencetrindex', SentencetrIndex);
+Vue.component('sentencetrinsert', SentencetrInsert);
+Vue.component('sentencetrupdate', SentencetrUpdate);
 
 new Vue({
     el: '#app',

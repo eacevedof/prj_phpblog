@@ -12,6 +12,8 @@ if(strstr($requrl,"/sentence/insert"))
 if(isset($idsentence)) {
     $arurls[] =["href"=>"/adm/language/subject/$idsubject/sentence/update/$idsentence","text"=>"Update sentence","isactive"=>strstr($requrl,"/sentence/update/")];
     $arurls[] =["href"=>"/adm/language/subject/$idsubject/sentence/$idsentence/sentencetrs","text"=>"Sentence TRS","isactive"=>strstr($requrl,"$idsentence/sentencetrs")];
+    if(strstr($requrl,"/sentencetr/insert"))
+        $arurls[] =["href"=>"/adm/language/sentence/$idsentence/sentencetr/insert","text"=>"Insert TR","isactive"=>true];
 }
 
 
