@@ -2129,6 +2129,9 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
     };
   },
   methods: {
+    redirect: function redirect(idsentence) {
+      if (idsubject) window.location = "/adm/language/subject/".concat(idsubject, "/sentences");else window.location = "/adm/language/sentence/update/".concat(idsentence);
+    },
     insert: function insert() {
       var self = this;
       self.issending = true;
@@ -2157,7 +2160,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
         }
 
         self.$toast.success("Sentence saved. N\xBA ".concat(response.data.id, " | ").concat(self.sentence.title));
-        window.location = "/adm/language/sentence/update/" + response.data.id;
+        self.redirect();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -2796,7 +2799,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
     return {
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_1__["default"].BTN_INISTATE_REFRESH,
-      columns: ["id", "as_language", "as_type", "translatable", "description"],
+      columns: ["id", "ff_language", "ff_type", "translatable", "description"],
       rows: [],
       filter: {
         original: [],

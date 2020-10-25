@@ -31,6 +31,10 @@ export default {
     },
 
     methods:{
+        redirect(idsentence) {
+            if(idsubject) window.location = `/adm/language/subject/${idsubject}/sentences`
+            else window.location = `/adm/language/sentence/update/${idsentence}`
+        },
 
         insert(){
             const self = this
@@ -59,7 +63,7 @@ export default {
                 }
 
                 self.$toast.success(`Sentence saved. Nº ${response.data.id} | ${self.sentence.title}`)
-                window.location = "/adm/language/sentence/update/"+response.data.id
+                self.redirect()
 
             })
             .catch(error => {
