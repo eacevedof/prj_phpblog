@@ -110,4 +110,16 @@ class LanguageController extends BaseController
             return Response()->json(["error"=>$e->getMessage()],500);
         }
     }
+
+    public function get_picklist()
+    {
+        try {
+            $r = (new LanguageIndexService())->get_picklist();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
+    }
 }

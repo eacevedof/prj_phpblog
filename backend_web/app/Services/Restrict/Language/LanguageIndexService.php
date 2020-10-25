@@ -20,4 +20,15 @@ class LanguageIndexService extends BaseService
         $this->_logquery("languageindexservice.getall");
         return $r;
     }
+
+    public function get_picklist()
+    {
+        $r = $this->table
+            ->where("is_enabled","=","1")
+            ->orderBy("language","asc")
+            ->orderBy("id","asc")
+            ->get(["delete_date","is_enabled","id","code_erp","description","translated","language","id_parent"]);
+        $this->_logquery("languageindexservice.getpicklist");
+        return $r;
+    }
 }

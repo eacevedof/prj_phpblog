@@ -32,7 +32,6 @@ export default {
 
     methods:{
 
-
         insert(){
             const self = this
             self.issending = true
@@ -46,7 +45,6 @@ export default {
                 },
                 body: JSON.stringify({_token:csrftoken, _action:"sentence.insert",...this.sentence})
             })
-            //.then(response => console.log(response,"RESPONSE"))
             .then(response => response.json())
             .then(response => {
 
@@ -78,12 +76,6 @@ export default {
             })
         },//insert
 
-        onchange_title(){
-            this.sentence.slug = funcs.get_slug(this.sentence.title)
-            this.sentence.url_final = "/idiomas/".concat(this.sentence.slug)
-            this.save_slug()
-        },
-
         handleSubmit: function(e) {
             e.preventDefault()
             this.insert()
@@ -91,6 +83,8 @@ export default {
     },
 
     async mounted() {
-        this.contexts = await apifetch.get_sources()
+        this.contexts = await apifetch.get_contexts()
+        this.languages = await apifetch.get_languages()
+        this.types = await apifetch.get_types()
     }
 }
