@@ -5,7 +5,7 @@ import apifetch from "../../../../app/apifetch"
 import db from "../../../../app/db"
 
 const csrftoken = funcs.get_csrftoken()
-const idsubject = funcs.get_urlpiece(4)
+const idsentence = funcs.get_urlpiece(4)
 
 export default {
     data(){
@@ -13,33 +13,26 @@ export default {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
 
-            contexts: [],
             languages: [],
-            types: [],
+            sentence: {},
 
             sentencetr: {
                 description: "",
-                id_subject: "",
-                id_context: "",
-                translatable: "",
+                translated: "",
                 id_language: "",
-                is_notificable: "0",
-                id_type: "",
-                id_status: "0",
+                id_setence: "",
             }
         }
     },
 
     async mounted() {
-        this.contexts = await apifetch.get_contexts()
         this.languages = await apifetch.get_languages()
-        this.types = await apifetch.get_types()
-        this.sentencetr.id_subject = idsubject
+        this.sentencetr.id_setence = idsentence
     },
 
     methods:{
         redirect(idsentencetr) {
-            if(idsubject) window.location = `/adm/language/subject/${idsubject}/sentencetrs`
+            if(idsentence) window.location = `/adm/language/subject/${idsentence}/sentencetrs`
             else window.location = `/adm/language/sentencetr/update/${idsentencetr}`
         },
 
@@ -94,4 +87,4 @@ export default {
 
     },//methods
 
-}
+}//export

@@ -4,7 +4,7 @@
         <form id="form-insert" @submit="handleSubmit">
             <div class="row card-header res-formheader">
                 <div class="col-md-9">
-                    <h1>Insert sentencetr</h1>
+                    <p>TR for: </p>
                 </div>
                 <div class="col-md-3">
                     <button class="btn btn-primary res-btnformheader" :disabled="issending">
@@ -22,41 +22,9 @@
                     </select>
                 </div>
 
-                <div class="form-group col-md-4">
-                    <label for="sel-id_type">Type *</label>
-                    <select id="sel-id_type" v-model="sentencetr.id_type" class="form-control" required>
-                        <option disabled value="">Choose one</option>
-                        <option v-for="type in types" :value="type.id">{{type.description}}</option>
-                    </select>
-                </div>
-
                 <div class="form-group col-md-12">
-                    <label for="txa-translatable">Translatable *</label>
-                    <textarea id="txa-translatable" v-model="sentencetr.translatable" maxlength="1000" rows="3" cols="5" class="form-control" required></textarea>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label for="sel-id_context">Context</label>
-                    <select id="sel-id_context" v-model="sentencetr.id_context" class="form-control">
-                        <option disabled value="">Choose one</option>
-                        <option v-for="context in contexts" :value="context.id">{{context.description}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label for="sel-is_notificable">Notificable</label>
-                    <select id="sel-is_notificable" v-model="sentencetr.is_notificable" class="form-control">
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
-                    </select>
-                </div>
-
-                <div class="form-group col-md-3">
-                    <label for="sel-id_status">Status</label>
-                    <select id="sel-id_status" v-model="sentencetr.id_status" class="form-control">
-                        <option value="0">Disable</option>
-                        <option value="1">Enable</option>
-                    </select>
+                    <label for="txa-translated">Translated *</label>
+                    <textarea id="txa-translated" v-model="sentencetr.translated" maxlength="1000" rows="3" cols="5" class="form-control" required></textarea>
                 </div>
 
                 <div class="form-group col-md-4">
