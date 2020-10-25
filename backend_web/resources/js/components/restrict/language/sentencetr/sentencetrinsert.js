@@ -13,8 +13,8 @@ export default {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
 
-            languages: [],
             sentence: {},
+            languages: [],
 
             sentencetr: {
                 description: "",

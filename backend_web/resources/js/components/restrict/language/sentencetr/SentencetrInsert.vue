@@ -4,7 +4,7 @@
         <form id="form-insert" @submit="handleSubmit">
             <div class="row card-header res-formheader">
                 <div class="col-md-9">
-                    <p>TR for: {{sentence.translatable}}</p>
+                    <p><b>{{sentence.translatable}}</b></p>
                 </div>
                 <div class="col-md-3">
                     <button class="btn btn-primary res-btnformheader" :disabled="issending">

@@ -44301,9 +44301,7 @@ var render = function() {
           [
             _c("div", { staticClass: "row card-header res-formheader" }, [
               _c("div", { staticClass: "col-md-9" }, [
-                _c("p", [
-                  _vm._v("TR for: " + _vm._s(_vm.sentence.translatable))
-                ])
+                _c("p", [_c("b", [_vm._v(_vm._s(_vm.sentence.translatable))])])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-3" }, [
