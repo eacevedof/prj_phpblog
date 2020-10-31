@@ -2157,9 +2157,9 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
               console.log("sentence", sentence);
 
               if (sentence) {
-                _this.sentence.id_language = sentence.language;
-                _this.id_type = sentence.id_type;
-                _this.id_coontext = sentence.id_context;
+                _this.sentence.id_language = sentence.id_language;
+                _this.sentence.id_type = sentence.id_type;
+                _this.sentence.id_context = sentence.id_context;
                 _this.sentence.id_status = sentence.id_status;
               }
 

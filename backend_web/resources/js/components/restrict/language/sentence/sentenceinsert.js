@@ -38,9 +38,9 @@ export default {
         const sentence = db.select("sentence.insert")
         console.log("sentence",sentence)
         if(sentence){
-            this.sentence.id_language = sentence.language
-            this.id_type = sentence.id_type
-            this.id_coontext = sentence.id_context
+            this.sentence.id_language = sentence.id_language
+            this.sentence.id_type = sentence.id_type
+            this.sentence.id_context = sentence.id_context
             this.sentence.id_status = sentence.id_status
         }
     },
