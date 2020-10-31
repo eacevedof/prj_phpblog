@@ -90,6 +90,9 @@ rundev: ## npm run dev
 dumpdb: ## dumpdb
 	py.sh dump eduardoaf
 
+deploy: ## deploy test
+	py.sh deploy.codeonly eduardoaf
+
 rebuild: ## rebuild containers
 	docker-compose -f docker-compose.macos.yml down
 	docker-compose -f docker-compose.macos.yml up -d --build --remove-orphans
