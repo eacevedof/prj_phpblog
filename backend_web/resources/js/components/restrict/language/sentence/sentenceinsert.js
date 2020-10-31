@@ -47,7 +47,9 @@ export default {
 
     methods:{
         redirect(idsentence) {
-            if(idsubject) window.location = `/adm/language/subject/${idsubject}/sentences`
+            if(idsubject)
+                //window.location = `/adm/language/subject/${idsubject}/sentences`
+                window.location = `/adm/language/sentence/${idsentence}/sentencetr/insert`
             else window.location = `/adm/language/sentence/update/${idsentence}`
         },
 
