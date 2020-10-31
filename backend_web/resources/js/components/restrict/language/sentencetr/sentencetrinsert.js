@@ -3,6 +3,7 @@ import funcs from "../../../../app/funcs"
 import CONST from "../../../../app/constants"
 import apifetch from "../../../../app/apifetch"
 import sentence from "../../../../models/sentence";
+import db from "../../../../app/db"
 
 const csrftoken = funcs.get_csrftoken()
 const idsentence = funcs.get_urlpiece(4)
@@ -29,14 +30,21 @@ export default {
         this.sentencetr.id_sentence = idsentence
         this.languages = await apifetch.get_languages()
         this.sentence = await sentence.get_by_id(idsentence)
+        const sentencetr = db.select("sentencetr.insert")
+        if(sentencetr){
+            this.sentencetr.id_language = sentencetr.id_language
+            //this.sentencetr.id_sentence = sentencetr.id_sentence
+        }
+        this.$refs.txatranslated.focus()
     },
 
     methods:{
         redirect(idsentencetr) {
-            const idsubject = this.sentence.id_subject
-
-            if(idsentence) window.location = `/adm/language/subject/${idsubject}/sentence/${idsentence}/sentencetrs`
-            else window.location = `/adm/language/sentencetr/update/${idsentencetr}`
+            //const idsubject = this.sentence.id_subject
+            //window.location = `/adm/language/sentence/${idsentence}/sentencetr/insert`
+            //if(idsentence) window.location = `/adm/language/subject/${idsubject}/sentence/${idsentence}/sentencetrs`
+            //else window.location = `/adm/language/sentencetr/update/${idsentencetr}`
+            window.location = `/adm/language/subject/${this.sentence.id_subject}/sentence/insert`
         },
 
         insert(){
@@ -66,6 +74,7 @@ export default {
                 }
 
                 self.$toast.success(`Sentencetr saved. Nº ${response.data.id} | ${self.sentencetr.title}`)
+                db.save("sentencetr.insert", {...response.data})
                 self.redirect()
 
             })

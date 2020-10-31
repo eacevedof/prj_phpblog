@@ -24,7 +24,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="txa-translated">Translated *</label>
-                    <textarea id="txa-translated" v-model="sentencetr.translated" maxlength="1000" rows="3" cols="5" class="form-control" required></textarea>
+                    <textarea id="txa-translated" ref="txatranslated" v-model="sentencetr.translated" maxlength="1000" rows="3" cols="5" class="form-control" required></textarea>
                 </div>
 
                 <div class="form-group col-md-4">

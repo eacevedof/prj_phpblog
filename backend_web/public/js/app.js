@@ -2845,6 +2845,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../app/constants */ "./resources/js/app/constants.js");
 /* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../app/apifetch */ "./resources/js/app/apifetch.js");
 /* harmony import */ var _models_sentence__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../models/sentence */ "./resources/js/models/sentence.js");
+/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../app/db */ "./resources/js/app/db.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2858,6 +2859,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 //sentencetrinsert.js
+
 
 
 
@@ -2883,6 +2885,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var sentencetr;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2898,8 +2901,15 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
 
             case 6:
               _this.sentence = _context.sent;
+              sentencetr = _app_db__WEBPACK_IMPORTED_MODULE_5__["default"].select("sentencetr.insert");
 
-            case 7:
+              if (sentencetr) {
+                _this.sentencetr.id_language = sentencetr.id_language; //this.sentencetr.id_sentence = sentencetr.id_sentence
+              }
+
+              _this.$refs.txatranslated.focus();
+
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -2909,8 +2919,11 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
   },
   methods: {
     redirect: function redirect(idsentencetr) {
-      var idsubject = this.sentence.id_subject;
-      if (idsentence) window.location = "/adm/language/subject/".concat(idsubject, "/sentence/").concat(idsentence, "/sentencetrs");else window.location = "/adm/language/sentencetr/update/".concat(idsentencetr);
+      //const idsubject = this.sentence.id_subject
+      //window.location = `/adm/language/sentence/${idsentence}/sentencetr/insert`
+      //if(idsentence) window.location = `/adm/language/subject/${idsubject}/sentence/${idsentence}/sentencetrs`
+      //else window.location = `/adm/language/sentencetr/update/${idsentencetr}`
+      window.location = "/adm/language/subject/".concat(this.sentence.id_subject, "/sentence/insert");
     },
     insert: function insert() {
       var self = this;
@@ -2940,6 +2953,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
         }
 
         self.$toast.success("Sentencetr saved. N\xBA ".concat(response.data.id, " | ").concat(self.sentencetr.title));
+        _app_db__WEBPACK_IMPORTED_MODULE_5__["default"].save("sentencetr.insert", _objectSpread({}, response.data));
         self.redirect();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
@@ -44417,6 +44431,7 @@ var render = function() {
                       expression: "sentencetr.translated"
                     }
                   ],
+                  ref: "txatranslated",
                   staticClass: "form-control",
                   attrs: {
                     id: "txa-translated",

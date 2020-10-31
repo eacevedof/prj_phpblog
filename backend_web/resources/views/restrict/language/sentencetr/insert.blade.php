@@ -8,4 +8,7 @@
     <sentencetrinsert></sentencetrinsert>
     @include("restrict/elements/breadscrumb")
 </div>
+<script type="application/javascript">
+//const idsubject = "{{$idsubject}}"
+</script>
 @endsection
