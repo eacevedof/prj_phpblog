@@ -57,6 +57,7 @@ class SentenceIndexService extends BaseService
         WHERE 1
         AND s.is_enabled='1'
         AND s.delete_date IS NULL
+        ORDER BY s.id DESC
         ";
         $r = DB::select($q);
         return $r;
@@ -85,6 +86,7 @@ class SentenceIndexService extends BaseService
         AND s.is_enabled='1'
         AND s.delete_date IS NULL
         AND s.id_subject=$idsubject
+        ORDER BY s.id DESC
         ";
         $r = DB::select($q);
         return $r;

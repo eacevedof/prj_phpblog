@@ -2132,6 +2132,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var sentence;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -2152,8 +2153,10 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
             case 8:
               _this.types = _context.sent;
               _this.sentence.id_subject = idsubject;
+              sentence = _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].select("sentence.insert");
+              console.log("sentence", sentence);
 
-            case 10:
+            case 12:
             case "end":
               return _context.stop();
           }
@@ -2192,6 +2195,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
           });
         }
 
+        _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("sentence.insert", _objectSpread({}, self.sentence));
         self.$toast.success("Sentence saved. N\xBA ".concat(response.data.id, " | ").concat(self.sentence.title));
         self.redirect();
       })["catch"](function (error) {
@@ -2854,8 +2858,8 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
     return {
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE,
       issending: false,
-      languages: [],
       sentence: {},
+      languages: [],
       sentencetr: {
         description: "",
         translated: "",

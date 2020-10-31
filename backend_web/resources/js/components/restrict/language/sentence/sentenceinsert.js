@@ -35,6 +35,14 @@ export default {
         this.languages = await apifetch.get_languages()
         this.types = await apifetch.get_types()
         this.sentence.id_subject = idsubject
+        const sentence = db.select("sentence.insert")
+        console.log("sentence",sentence)
+        if(sentence){
+            this.sentence.id_language = sentence.language
+            this.sentence.id_status = sentence.id_status
+            this.id_type = sentence.id_type
+
+        }
     },
 
     methods:{
@@ -68,6 +76,10 @@ export default {
                         text: response.error,
                     })
                 }
+
+                db.save("sentence.insert",{
+                    ...self.sentence
+                })
 
                 self.$toast.success(`Sentence saved. Nº ${response.data.id} | ${self.sentence.title}`)
                 self.redirect()
