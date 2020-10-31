@@ -1,5 +1,6 @@
 import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
+import openapifetch from "/js/open/helpers/openapifetch.js";
 import db from "/js/open/helpers/opendb.js"
 //https://devhints.io/bulma
 
@@ -13,6 +14,8 @@ new Vue({
     el: "#div-practice-main",
     data: {
         config:{},
+        languages: [],
+
         isfinished: true,
 
         iquestions: 0,
@@ -27,13 +30,15 @@ new Vue({
 
         langsource: "",
         langtarget: "",
+        btnskip: "Saltar",
         btnnext: "Siguiente"
 
     },//data
 
-    mounted(){
+    async mounted(){
         console.log("main mounted")
         const config = db.select(LANG_CONFIG)
+        if(!config) throw "vue-practice-main.js: Mising config"
         if(config) {
             this.load_questions()
             this.config = {...config}
@@ -42,12 +47,16 @@ new Vue({
             console.log("mounted iquestions",this.iquestions)
             //return
         }
-
-        //funcs.pr(objpractice,"vue-language-practice")
-        //console.log(JSON.stringify(objpractice))
+        await this.load_languages()
     },//mounted
 
     methods:{
+        load_languages: async function () {
+            const languages = await openapifetch.get_languages()
+            //this.languages = languages.map(obj => Object.entries(obj).map( obj => console.log(obj)))
+            //funcs.pr(this.languages)
+        },
+
         restart(){
             this.answers = []
             this.isfinished = false
@@ -89,6 +98,10 @@ new Vue({
                 message: "Respuesta incorrecta",
                 type:"is-danger",
             })
+        },
+
+        skip(){
+            alert("xxx")
         },
 
         focusanswer(){

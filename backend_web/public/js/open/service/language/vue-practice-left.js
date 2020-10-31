@@ -14,7 +14,6 @@ new Vue({
             sources: ["es","nl","en"],
             targets: ["nl","en"],
 
-
             selsource: "es",
             seltargets: ["nl"],
             time: 0,
