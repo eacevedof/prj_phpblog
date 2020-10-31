@@ -84,7 +84,7 @@ ssh-be: ## ssh's into the be container
 remlogs: ## remove logs
 	rm -fr ./logs/*
 
-rundev: ## npm run dev
+compile: ## npm run dev
 	npm run dev
 
 dumpdb: ## dumpdb

@@ -39,9 +39,9 @@ export default {
         console.log("sentence",sentence)
         if(sentence){
             this.sentence.id_language = sentence.language
-            this.sentence.id_status = sentence.id_status
             this.id_type = sentence.id_type
-
+            this.id_coontext = sentence.id_context
+            this.sentence.id_status = sentence.id_status
         }
     },
 

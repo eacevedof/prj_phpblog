@@ -2156,7 +2156,14 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
               sentence = _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].select("sentence.insert");
               console.log("sentence", sentence);
 
-            case 12:
+              if (sentence) {
+                _this.sentence.id_language = sentence.language;
+                _this.id_type = sentence.id_type;
+                _this.id_coontext = sentence.id_context;
+                _this.sentence.id_status = sentence.id_status;
+              }
+
+            case 13:
             case "end":
               return _context.stop();
           }
