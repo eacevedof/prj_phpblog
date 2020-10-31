@@ -2163,7 +2163,9 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
                 _this.sentence.id_status = sentence.id_status;
               }
 
-            case 13:
+              _this.$refs.txatranslatable.focus();
+
+            case 14:
             case "end":
               return _context.stop();
           }
@@ -2173,7 +2175,9 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
   },
   methods: {
     redirect: function redirect(idsentence) {
-      if (idsubject) window.location = "/adm/language/subject/".concat(idsubject, "/sentences");else window.location = "/adm/language/sentence/update/".concat(idsentence);
+      window.location = "/adm/language/sentence/".concat(idsentence, "/sentencetr/insert"); //if(idsubject)
+      //window.location = `/adm/language/subject/${idsubject}/sentences`
+      //else window.location = `/adm/language/sentence/update/${idsentence}`
     },
     insert: function insert() {
       var self = this;
@@ -2204,7 +2208,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
 
         _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].save("sentence.insert", _objectSpread({}, self.sentence));
         self.$toast.success("Sentence saved. N\xBA ".concat(response.data.id, " | ").concat(self.sentence.title));
-        self.redirect();
+        self.redirect(response.data.id);
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
         Swal.fire({
@@ -42969,6 +42973,7 @@ var render = function() {
                       expression: "sentence.translatable"
                     }
                   ],
+                  ref: "txatranslatable",
                   staticClass: "form-control",
                   attrs: {
                     id: "txa-translatable",

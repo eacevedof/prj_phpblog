@@ -32,7 +32,7 @@
 
                 <div class="form-group col-md-12">
                     <label for="txa-translatable">Translatable *</label>
-                    <textarea id="txa-translatable" v-model="sentence.translatable" maxlength="1000" rows="3" cols="5" class="form-control" required></textarea>
+                    <textarea id="txa-translatable" ref="txatranslatable" v-model="sentence.translatable" maxlength="1000" rows="3" cols="5" class="form-control" required></textarea>
                 </div>
 
                 <div class="form-group col-md-4">

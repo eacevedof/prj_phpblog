@@ -43,14 +43,16 @@ export default {
             this.sentence.id_context = sentence.id_context
             this.sentence.id_status = sentence.id_status
         }
+        this.$refs.txatranslatable.focus();
     },
 
     methods:{
         redirect(idsentence) {
-            if(idsubject)
+            window.location = `/adm/language/sentence/${idsentence}/sentencetr/insert`
+            //if(idsubject)
                 //window.location = `/adm/language/subject/${idsubject}/sentences`
-                window.location = `/adm/language/sentence/${idsentence}/sentencetr/insert`
-            else window.location = `/adm/language/sentence/update/${idsentence}`
+
+            //else window.location = `/adm/language/sentence/update/${idsentence}`
         },
 
         insert(){
@@ -84,7 +86,7 @@ export default {
                 })
 
                 self.$toast.success(`Sentence saved. Nº ${response.data.id} | ${self.sentence.title}`)
-                self.redirect()
+                self.redirect(response.data.id)
 
             })
             .catch(error => {
