@@ -32,7 +32,6 @@ export default {
 
     methods: {
         rows_load(){
-            console.log("rows_load")
             const self = this
             self.issending = true
             self.btnsend = CONST.BTN_IN_PROGRESS
@@ -54,7 +53,7 @@ export default {
 
                 self.rows = response.data
                 self.filter.original = response.data
-                self.filter.search = db.select("sentencetr-search")
+                self.filter.search = db.select("sentencetr.search")
                 self.on_search()
 
             })
@@ -74,7 +73,7 @@ export default {
 
         on_search(){
             if(!this.filter.search){
-                db.delete("sentencetr-search")
+                db.delete("sentencetr.search")
                 this.rows = [...this.filter.original]
                 return
             }
@@ -83,7 +82,7 @@ export default {
             if(!fields) return
 
             const search = this.filter.search.toString().trim()
-            db.save("sentencetr-search",search)
+            db.save("sentencetr.search",search)
             const rows = this.filter.original.filter(obj => {
                 const exist = fields.some(field => {
                     if(obj[field]===null) return false

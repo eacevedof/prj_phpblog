@@ -1,10 +1,13 @@
-@isset($idsubject)
 @php
 $requrl = Request::url();
 $arurls = [
-    ["href"=>"/adm/language/subject/update/$idsubject","text"=>"Subject","isactive"=>strstr($requrl,"/subject/update/")],
-    ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Sentences","isactive"=>strstr($requrl,"/sentences")],
-];
+    ["href"=>"/adm/language/subjects","text"=>"Subjects","isactive"=>strstr($requrl,"/language/subjects")],
+]
+@endphp
+@isset($idsubject)
+@php
+$arurls[] = ["href"=>"/adm/language/subject/update/$idsubject","text"=>"Subject","isactive"=>strstr($requrl,"/subject/update/")];
+$arurls[] = ["href"=>"/adm/language/subject/$idsubject/sentences","text"=>"Sentences","isactive"=>strstr($requrl,"/sentences")];
 
 if(strstr($requrl,"/sentence/insert"))
     $arurls[] =["href"=>"/adm/language/subject/$idsubject/sentence/insert","text"=>"Insert sentence","isactive"=>true];

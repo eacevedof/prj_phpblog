@@ -70,8 +70,6 @@ new Vue({
             this.isfinished = false
             this.iquestion = 1
             this.load_question()
-            //this.$refs.answer.focus()
-            console.log("refs",this.$refs,"refs.answer",this.$refs["answer"])
             this.$nextTick(()=> this.focusanswer())
         },
         save(){

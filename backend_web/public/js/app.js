@@ -2313,7 +2313,6 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
   },
   methods: {
     rows_load: function rows_load() {
-      console.log("rows_load");
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
@@ -2334,7 +2333,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
 
         self.rows = response.data;
         self.filter.original = response.data;
-        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_3__["default"].select("sentencetr-search");
+        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_3__["default"].select("sentencetr.search");
         self.on_search();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
@@ -2351,7 +2350,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
     //load
     on_search: function on_search() {
       if (!this.filter.search) {
-        _app_db__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("sentencetr-search");
+        _app_db__WEBPACK_IMPORTED_MODULE_3__["default"]["delete"]("sentencetr.search");
         this.rows = _toConsumableArray(this.filter.original);
         return;
       }
@@ -2360,7 +2359,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
       var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
       var search = this.filter.search.toString().trim();
-      _app_db__WEBPACK_IMPORTED_MODULE_3__["default"].save("sentencetr-search", search);
+      _app_db__WEBPACK_IMPORTED_MODULE_3__["default"].save("sentencetr.search", search);
       var rows = this.filter.original.filter(function (obj) {
         var exist = fields.some(function (field) {
           if (obj[field] === null) return false;
@@ -43322,7 +43321,7 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "card-body mt-0" }, [
-      _c("div", { staticClass: "row card-header res-formheader" }, [
+      _c("div", { staticClass: "row card-header p-0" }, [
         _c("div", { staticClass: "col-md-8" }, [
           _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")]),
           _c("p", [_c("b", [_vm._v(_vm._s(_vm.sentence.translatable))])])
@@ -43332,7 +43331,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-primary res-btnformheader",
+              staticClass: "btn btn-primary",
               attrs: { disabled: _vm.issending },
               on: { click: _vm.insert }
             },
@@ -43355,7 +43354,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-primary res-btnformheader",
+              staticClass: "btn btn-primary",
               attrs: { disabled: _vm.issending },
               on: { click: _vm.rows_load }
             },
@@ -43396,43 +43395,6 @@ var render = function() {
                     [_vm._v(_vm._s(item[column]))]
                   )
                 }),
-                _vm._v(" "),
-                _c("td", [
-                  item.id_status == 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-dark",
-                          attrs: {
-                            target: "_blank",
-                            href: "/blog/draft/" + item.id
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  item.id_status != 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-info",
-                          attrs: { target: "_blank", href: item.url_final }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e()
-                ]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -43497,10 +43459,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Lang")]),
         _vm._v(" "),
         _c("th", [_vm._v("Translated")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Draft")]),
         _vm._v(" "),
         _c("th", [_vm._v("Edit")]),
         _vm._v(" "),
@@ -45609,16 +45567,16 @@ var render = function() {
     ),
     _vm._v(" "),
     _c("div", { staticClass: "card-body mt-0" }, [
-      _c("div", { staticClass: "row card-header res-formheader" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+      _c("div", { staticClass: "row card-header" }, [
+        _c("div", { staticClass: "col-md-8" }, [
           _c("sub", [_vm._v("(" + _vm._s(_vm.rows.length) + ")")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-2" }, [
           _c(
             "button",
             {
-              staticClass: "btn btn-primary res-btnformheader",
+              staticClass: "btn btn-primary",
               attrs: { disabled: _vm.issending },
               on: { click: _vm.insert }
             },
@@ -45637,11 +45595,11 @@ var render = function() {
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "col-md-2" }, [
           _c(
             "button",
             {
-              staticClass: "btn btn-primary res-btnformheader",
+              staticClass: "btn btn-primary",
               attrs: { disabled: _vm.issending },
               on: { click: _vm.rows_load }
             },
@@ -45682,43 +45640,6 @@ var render = function() {
                     [_vm._v(_vm._s(item[column]))]
                   )
                 }),
-                _vm._v(" "),
-                _c("td", [
-                  item.id_status == 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-dark",
-                          attrs: {
-                            target: "_blank",
-                            href: "/blog/draft/" + item.id
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  item.id_status != 0
-                    ? _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-info",
-                          attrs: { target: "_blank", href: item.url_final }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-window-maximize",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      )
-                    : _vm._e()
-                ]),
                 _vm._v(" "),
                 _c("td", [
                   _c(
@@ -45787,8 +45708,6 @@ var staticRenderFns = [
         _c("th", [_vm._v("Translatable")]),
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Draft")]),
         _vm._v(" "),
         _c("th", [_vm._v("Edit")]),
         _vm._v(" "),

@@ -13,18 +13,18 @@
         ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
     </div>
     <div class="card-body mt-0">
-        <div class="row card-header res-formheader">
+        <div class="row card-header p-0">
             <div class="col-md-8">
                 <sub>({{rows.length}})</sub><p><b>{{sentence.translatable}}</b></p>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="insert">
+                <button class="btn btn-primary" :disabled="issending" v-on:click="insert">
                     Insert
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
             <div class="col-md-2">
-                <button class="btn btn-primary res-btnformheader" :disabled="issending" v-on:click="rows_load">
+                <button class="btn btn-primary" :disabled="issending" v-on:click="rows_load">
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
@@ -36,8 +36,6 @@
                 <th>id</th>
                 <th>Lang</th>
                 <th>Translated</th>
-                <th>Description</th>
-                <th>Draft</th>
                 <th>Edit</th>
                 <th>Remove</th>
             </tr>
@@ -48,14 +46,6 @@
                         v-for="(column, idx) in columns" :key="idx"
                         v-bind:class="{ 'res-tddel': item.delete_date }"
                     >{{item[column]}}</td>
-                    <td>
-                        <a v-if="item.id_status==0" class="btn btn-dark" target="_blank" :href="'/blog/draft/'+item.id">
-                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
-                        </a>
-                        <a v-if="item.id_status!=0" class="btn btn-info" target="_blank" :href="item.url_final">
-                            <i class="fa fa-window-maximize" aria-hidden="true"></i>
-                        </a>
-                    </td>
                     <td>
                         <button class="btn btn-primary" :disabled="issending"  v-on:click="edit(item.id)">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
