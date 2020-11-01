@@ -51,7 +51,7 @@ export default {
                 self.rows = response.data
                 //console.log("rows_load.rows"); console.table(self.rows)
                 self.filter.original = response.data
-                self.filter.search = db.select("subject-search")
+                self.filter.search = db.select("subjectsentences.search")
                 self.on_search()
 
             })
@@ -71,7 +71,7 @@ export default {
 
         on_search(){
             if(!this.filter.search){
-                db.delete("subject-search")
+                db.delete("subjectsentences.search")
                 this.rows = [...this.filter.original]
                 return
             }
@@ -80,7 +80,7 @@ export default {
             if(!fields) return
 
             const search = this.filter.search.toString().trim()
-            db.save("subject-search",search)
+            db.save("subjectsentences.search",search)
             const rows = this.filter.original.filter(obj => {
                 const exist = fields.some(field => {
                     if(obj[field]===null) return false
@@ -101,6 +101,11 @@ export default {
 
         edit(id){
             const url = `/adm/language/subject/${idsubject}/sentence/update/${id}`
+            document.location = url
+        },
+
+        gotrs(id){
+            const url = `/adm/language/subject/${idsubject}/sentence/${id}/sentencetrs`
             document.location = url
         },
 

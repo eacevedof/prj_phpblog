@@ -15,7 +15,7 @@ export default {
 
             sentence:{},
 
-            columns: ["id","ff_language","translated","description"],
+            columns: ["id","ff_language","translated"],
             rows: [],
 
             filter:{

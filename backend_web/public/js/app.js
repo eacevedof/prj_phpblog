@@ -2279,7 +2279,7 @@ var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece
       issending: false,
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_REFRESH,
       sentence: {},
-      columns: ["id", "ff_language", "translated", "description"],
+      columns: ["id", "ff_language", "translated"],
       rows: [],
       filter: {
         original: [],
@@ -3586,7 +3586,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
         self.rows = response.data; //console.log("rows_load.rows"); console.table(self.rows)
 
         self.filter.original = response.data;
-        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("subject-search");
+        self.filter.search = _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].select("subjectsentences.search");
         self.on_search();
       })["catch"](function (error) {
         console.log("CATCH ERROR insert", error);
@@ -3603,7 +3603,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
     //load
     on_search: function on_search() {
       if (!this.filter.search) {
-        _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("subject-search");
+        _app_db__WEBPACK_IMPORTED_MODULE_2__["default"]["delete"]("subjectsentences.search");
         this.rows = _toConsumableArray(this.filter.original);
         return;
       }
@@ -3612,7 +3612,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
       var fields = Object.keys(this.filter.original[0]);
       if (!fields) return;
       var search = this.filter.search.toString().trim();
-      _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].save("subject-search", search);
+      _app_db__WEBPACK_IMPORTED_MODULE_2__["default"].save("subjectsentences.search", search);
       var rows = this.filter.original.filter(function (obj) {
         var exist = fields.some(function (field) {
           if (obj[field] === null) return false;
@@ -3629,6 +3629,10 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_0__["default"].get_urlpiece(
     },
     edit: function edit(id) {
       var url = "/adm/language/subject/".concat(idsubject, "/sentence/update/").concat(id);
+      document.location = url;
+    },
+    gotrs: function gotrs(id) {
+      var url = "/adm/language/subject/".concat(idsubject, "/sentence/").concat(id, "/sentencetrs");
       document.location = url;
     },
     remove: function remove(id) {
@@ -45649,6 +45653,26 @@ var render = function() {
                       attrs: { disabled: _vm.issending },
                       on: {
                         click: function($event) {
+                          return _vm.gotrs(item.id)
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            TR's\n                        "
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("td", [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { disabled: _vm.issending },
+                      on: {
+                        click: function($event) {
                           return _vm.edit(item.id)
                         }
                       }
@@ -45708,6 +45732,8 @@ var staticRenderFns = [
         _c("th", [_vm._v("Translatable")]),
         _vm._v(" "),
         _c("th", [_vm._v("Description")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("TRs")]),
         _vm._v(" "),
         _c("th", [_vm._v("Edit")]),
         _vm._v(" "),

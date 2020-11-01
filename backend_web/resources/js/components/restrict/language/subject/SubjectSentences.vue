@@ -38,6 +38,9 @@
                 <th>Type</th>
                 <th>Translatable</th>
                 <th>Description</th>
+
+                <!-- buttons -->
+                <th>TRs</th>
                 <th>Edit</th>
                 <th>Remove</th>
             </tr>
@@ -48,6 +51,11 @@
                         v-for="(column, idx) in columns" :key="idx"
                         v-bind:class="{ 'res-tddel': item.delete_date }"
                     >{{item[column]}}</td>
+                    <td>
+                        <button class="btn btn-primary" :disabled="issending"  v-on:click="gotrs(item.id)">
+                            TR's
+                        </button>
+                    </td>
                     <td>
                         <button class="btn btn-primary" :disabled="issending"  v-on:click="edit(item.id)">
                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
