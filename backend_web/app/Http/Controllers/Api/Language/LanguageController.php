@@ -15,12 +15,6 @@ use Illuminate\Support\Facades\DB;
 
 class LanguageController extends BaseController
 {
-    public function __construct()
-    {
-        DB::enableQueryLog();
-        $this->middleware("auth");
-    }
-
     /**
      * Display a listing of the resource.
      * @return \Illuminate\Http\Response
@@ -44,6 +38,7 @@ class LanguageController extends BaseController
      */
     public function store(Request $request)
     {
+        $this->middleware("auth");
         try {
             $data = $request->all();
             $r = (new LanguageInsertService($data))->save();
@@ -80,6 +75,7 @@ class LanguageController extends BaseController
      */
     public function update(Request $request, $idsubject)
     {
+        $this->middleware("auth");
         $this->logd($idsubject,"update.postid");
         try {
             $data = $request->all();
@@ -99,7 +95,7 @@ class LanguageController extends BaseController
      */
     public function destroy($idsubject)
     {
-        $this->_load_authid();
+        $this->middleware("auth");
         $this->logd($idsubject,"delete.postid");
         try {
             $r = (new LanguageDeleteService($idsubject))->save();

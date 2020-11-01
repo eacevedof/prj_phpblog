@@ -38,7 +38,6 @@ new Vue({
     async mounted(){
         console.log("main mounted")
         const config = db.select(LANG_CONFIG)
-        if(!config) throw "vue-practice-main.js: Mising config"
         if(config) {
             this.load_questions()
             this.config = {...config}
@@ -54,7 +53,7 @@ new Vue({
         load_languages: async function () {
             const languages = await openapifetch.get_languages()
             //this.languages = languages.map(obj => Object.entries(obj).map( obj => console.log(obj)))
-            //funcs.pr(this.languages)
+            funcs.pr(languages)
         },
 
         restart(){

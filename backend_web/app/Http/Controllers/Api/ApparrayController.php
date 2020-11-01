@@ -6,11 +6,6 @@ use App\Services\Common\Apparray\ApparrayService;
 
 class ApparrayController extends BaseController
 {
-    public function __construct()
-    {
-        $this->middleware("auth");
-    }
-
     public function get_source()
     {
         try {
