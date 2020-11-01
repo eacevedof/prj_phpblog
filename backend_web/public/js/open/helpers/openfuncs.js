@@ -56,6 +56,14 @@ const funcs = {
         txa.setSelectionRange(0, 99999)
         document.execCommand("copy")
         document.body.removeChild(txa);
+    },
+
+    get_shuffled(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
     }
 }
 

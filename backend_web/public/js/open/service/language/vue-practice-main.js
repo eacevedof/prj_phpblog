@@ -27,6 +27,10 @@ new Vue({
         langsource: "",
         langtarget: "",
 
+        iok: 0,
+        inok: 0,
+        iskipped: 0,
+
         btnskip: "Saltar",
         btnnext: "Siguiente"
 
@@ -35,20 +39,62 @@ new Vue({
     async mounted(){
         console.log("main mounted")
         const config = db.select(LANG_CONFIG)
-        if(config) {
-            this.load_questions()
+
+        if(!config) return alert("No config found")
+
+        if(config && Object.keys(config).length>0) {
             this.config = {...config}
+            await this.load_languages()
+            this.load_questions()
+
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
             console.log("mounted iquestions",this.iquestions)
         }
-        await this.load_languages()
+
     },//mounted
 
     methods:{
+
         load_languages: async function () {
             const languages = await openapifetch.get_languages()
             this.languages = languages
+        },
+
+        load_questions(){
+            this.questions = [...objpractice.sentences]
+            if(this.config.israndom==="true") {
+                //alert(this.config.israndom)
+                this.questions = funcs.get_shuffled(this.questions)
+            }
+            console.log("questions:",this.questions)
+        },
+
+        load_question(){
+            console.log("idquestion",this.idquestion,"translate iquestions", this.iquestions)
+            if(this.iquestion > this.iquestions) {
+                this.isfinished = true
+                this.load_result()
+                return
+            }
+
+            this.stranswer = ""
+            this.expanswer = ""
+
+            const iq = this.iquestion - 1;
+            console.log("iq",iq)
+            this.idquestion = this.questions[iq].id
+            this.strquestion = this.questions[iq].translatable
+            this.langsource = this.get_langcode(this.questions[iq].id_language) //es,
+            this.langtarget = this.get_langcode(parseInt(this.config.seltargets[0]))
+            if(this.iquestion === this.iquestions)
+                this.btnnext = "Finalizar"
+        },
+
+        load_result(){
+            this.iok = this.answers.filter(obj => obj.status === "ok").length
+            this.inok = this.answers.filter(obj => obj.status === "nok").length
+            this.iskipped = this.answers.filter(obj => obj.status === "skipped").length
         },
 
         get_langcode(idlanguage){
@@ -101,7 +147,16 @@ new Vue({
         },
 
         skip(){
-            alert("xxx")
+            this.answers.push({
+                id:this.iquestion,
+                question: this.strquestion,
+                lang: this.langsource,
+                answer: this.stranswer,
+                expected: this.expanswer,
+                status: "skipped"
+            })
+            this.iquestion++
+            this.load_question()
         },
 
         focusanswer(){
@@ -110,30 +165,6 @@ new Vue({
                 answer.focus()
                 answer.select()
             }
-        },
-
-        load_questions(){
-            this.questions = objpractice.sentences
-        },
-
-        load_question(){
-            console.log("idquestion",this.idquestion,"translate iquestions", this.iquestions)
-            if(this.iquestion > this.iquestions) {
-                this.isfinished = true
-                return
-            }
-
-            this.stranswer = ""
-            this.expanswer = ""
-
-            const iq = this.iquestion - 1;
-            console.log("iq",iq)
-            this.idquestion = this.questions[iq].id
-            this.strquestion = this.questions[iq].translatable
-            this.langsource = this.get_langcode(this.questions[iq].id_language) //es,
-            this.langtarget = this.get_langcode(parseInt(this.config.seltargets[0]))
-            if(this.iquestion === this.iquestions)
-                this.btnnext = "Finalizar"
         },
 
         is_good(){

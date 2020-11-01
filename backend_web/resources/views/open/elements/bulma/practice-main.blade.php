@@ -46,7 +46,7 @@
             <h4 class="title is-5">Resumen:</h4>
             <pre class="is-size-7 p-1">
 Total: {{iquestions}}
-correctas: 0, incorrectas: 0
+correctas: {{iok}}, incorrectas: {{inok}}, saltadas: {{iskipped}}
             </pre>
         </div>
         <div v-if="isfinished"  v-for="answer in answers" class="box">

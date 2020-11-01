@@ -64,6 +64,7 @@ new Vue({
                         message: "Configuración guardada",
                         type:"is-success",
                     })
+                    location.reload()
                 }
             }
         },
