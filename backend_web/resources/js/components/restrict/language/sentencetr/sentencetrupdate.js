@@ -2,9 +2,10 @@
 import funcs from "../../../../app/funcs"
 import CONST from "../../../../app/constants"
 import apifetch from "../../../../app/apifetch"
-import db from "../../../../app/db"
+import sentence from "../../../../models/sentence";
+
 const csrftoken = funcs.get_csrftoken()
-const idsubject = funcs.get_urlpiece(4)
+const idsentence = funcs.get_urlpiece(4)
 
 export default {
     data(){
@@ -12,29 +13,26 @@ export default {
             btnsend: CONST.BTN_INISTATE,
             issending: false,
 
-            contexts: [],
+            sentence: {},
             languages: [],
-            types: [],
 
             sentencetr: {
                 id: "",
                 description: "",
-                id_subject: "",
-                id_context: "",
-                translatable: "",
+                translated: "",
                 id_language: "",
-                is_notificable: "",
-                id_type: "",
-                id_status: "",
+                id_sentence: "",
             }
         }
     },
 
     async mounted() {
         const id = funcs.get_lastparam()
-        this.contexts = await apifetch.get_contexts()
+        this.sentencetr.id_sentence = idsentence
         this.languages = await apifetch.get_languages()
-        this.types = await apifetch.get_types()
+        this.sentence = await sentence.get_by_id(idsentence)
+
+        this.$refs.txatranslated.focus()
         this.load_register(id)
     },
 
@@ -49,13 +47,13 @@ export default {
             self.btnsend = CONST.BTN_IN_PROGRESS
 
             const url = `/api/language/sentencetr/${id}`
+            //alert(url)
             fetch(url, {
                 method: 'get',
             })
             .then(response => response.json())
             .then(response => {
                 console.log("reponse",response)
-
                 if(funcs.is_error(response)) {
                     return Swal.fire({
                         icon: 'warning',
@@ -104,7 +102,7 @@ export default {
                         text: response.error,
                     })
                 }
-                this.$toast.success(`Sentencetr saved. Nº ${self.sentencetr.id} | ${self.sentencetr.description}`)
+                this.$toast.success(`Sentencetr saved. Nº ${self.sentencetr.id} | ${self.sentencetr.translated}`)
                 this.load_register(self.sentencetr.id)
             })
             .catch(error => {

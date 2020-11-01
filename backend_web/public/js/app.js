@@ -2993,7 +2993,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_funcs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../app/funcs */ "./resources/js/app/funcs.js");
 /* harmony import */ var _app_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../app/constants */ "./resources/js/app/constants.js");
 /* harmony import */ var _app_apifetch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../app/apifetch */ "./resources/js/app/apifetch.js");
-/* harmony import */ var _app_db__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../app/db */ "./resources/js/app/db.js");
+/* harmony import */ var _models_sentence__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../models/sentence */ "./resources/js/models/sentence.js");
 
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -3012,25 +3012,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 var csrftoken = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_csrftoken();
-var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(4);
+var idsentence = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(4);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       btnsend: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE,
       issending: false,
-      contexts: [],
+      sentence: {},
       languages: [],
-      types: [],
       sentencetr: {
         id: "",
         description: "",
-        id_subject: "",
-        id_context: "",
-        translatable: "",
+        translated: "",
         id_language: "",
-        is_notificable: "",
-        id_type: "",
-        id_status: ""
+        id_sentence: ""
       }
     };
   },
@@ -3044,25 +3039,23 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
           switch (_context.prev = _context.next) {
             case 0:
               id = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_lastparam();
-              _context.next = 3;
-              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_contexts();
-
-            case 3:
-              _this.contexts = _context.sent;
-              _context.next = 6;
+              _this.sentencetr.id_sentence = idsentence;
+              _context.next = 4;
               return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_languages();
 
-            case 6:
+            case 4:
               _this.languages = _context.sent;
-              _context.next = 9;
-              return _app_apifetch__WEBPACK_IMPORTED_MODULE_3__["default"].get_types();
+              _context.next = 7;
+              return _models_sentence__WEBPACK_IMPORTED_MODULE_4__["default"].get_by_id(idsentence);
 
-            case 9:
-              _this.types = _context.sent;
+            case 7:
+              _this.sentence = _context.sent;
+
+              _this.$refs.txatranslated.focus();
 
               _this.load_register(id);
 
-            case 11:
+            case 10:
             case "end":
               return _context.stop();
           }
@@ -3080,7 +3073,8 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
       var self = this;
       self.issending = true;
       self.btnsend = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-      var url = "/api/language/sentencetr/".concat(id);
+      var url = "/api/language/sentencetr/".concat(id); //alert(url)
+
       fetch(url, {
         method: 'get'
       }).then(function (response) {
@@ -3139,7 +3133,7 @@ var idsubject = _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_urlpiece(
           });
         }
 
-        _this3.$toast.success("Sentencetr saved. N\xBA ".concat(self.sentencetr.id, " | ").concat(self.sentencetr.description));
+        _this3.$toast.success("Sentencetr saved. N\xBA ".concat(self.sentencetr.id, " | ").concat(self.sentencetr.translated));
 
         _this3.load_register(self.sentencetr.id);
       })["catch"](function (error) {
@@ -44563,140 +44557,81 @@ var render = function() {
     [
       _c("div", { staticClass: "card-body" }, [
         _c("form", { on: { submit: _vm.handleSubmit } }, [
-          _c(
-            "div",
-            {
-              staticClass: "row card-header res-formheader",
-              class: { "res-cardtitle": _vm.sentencetr.id_status == 1 }
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-1" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary mt-2 text-white",
-                    attrs: { type: "button", disabled: _vm.issending },
-                    on: {
-                      click: function($event) {
-                        return _vm.load_register(_vm.sentencetr.id)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-refresh",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _vm.sentencetr.id_status == 0
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-dark mt-2",
-                        attrs: {
-                          disabled: _vm.issending,
-                          target: "_blank",
-                          href: "/blog/draft/" + _vm.sentencetr.id
-                        }
-                      },
-                      [
-                        _vm._v("\n                        Draft  "),
-                        _c("i", {
-                          staticClass: "fa fa-window-maximize",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm.sentencetr.id_status != 0
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-info text-white mt-2",
-                        attrs: {
-                          disabled: _vm.issending,
-                          target: "_blank",
-                          href: _vm.sentencetr.url_final
-                        }
-                      },
-                      [
-                        _vm._v(
-                          "\n                        View  \n                        "
-                        ),
-                        _c("i", {
-                          staticClass: "fa fa-window-maximize",
-                          attrs: { "aria-hidden": "true" }
-                        })
-                      ]
-                    )
-                  : _vm._e()
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary mt-2",
-                    attrs: { disabled: _vm.issending }
-                  },
-                  [
-                    _vm._v(
-                      "\n                        " +
-                        _vm._s(_vm.btnsend) +
-                        "\n                        "
-                    ),
-                    _vm.issending
-                      ? _c("img", {
-                          attrs: {
-                            src: "/assets/images/loading-bw.gif",
-                            width: "25",
-                            height: "25"
-                          }
-                        })
-                      : _vm._e()
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-1" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger res-btnformheader",
-                    attrs: { type: "button", disabled: _vm.issending },
-                    on: {
-                      click: function($event) {
-                        return _vm.remove(_vm.sentencetr.id)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-trash-o",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                )
-              ])
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-row mt-1" }, [
-            _c("div", { staticClass: "form-group col-md-2" }, [
-              _c("label", [_vm._v("Id")]),
-              _vm._v(" "),
-              _c("span", { staticClass: "form-control" }, [
-                _vm._v(_vm._s(_vm.sentencetr.id))
-              ])
+          _c("div", { staticClass: "row card-header res-formheader" }, [
+            _c("div", { staticClass: "col-md-6 col-sm-6 pt-2" }, [
+              _c("p", [_c("b", [_vm._v(_vm._s(_vm.sentence.translatable))])])
             ]),
             _vm._v(" "),
+            _c("div", { staticClass: "col-md-1" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary mt-2 text-white",
+                  attrs: { type: "button", disabled: _vm.issending },
+                  on: {
+                    click: function($event) {
+                      return _vm.load_register(_vm.sentencetr.id)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-refresh",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-2" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary mt-2",
+                  attrs: { disabled: _vm.issending }
+                },
+                [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.btnsend) +
+                      "\n                        "
+                  ),
+                  _vm.issending
+                    ? _c("img", {
+                        attrs: {
+                          src: "/assets/images/loading-bw.gif",
+                          width: "25",
+                          height: "25"
+                        }
+                      })
+                    : _vm._e()
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-1" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger res-btnformheader",
+                  attrs: { type: "button", disabled: _vm.issending },
+                  on: {
+                    click: function($event) {
+                      return _vm.remove(_vm.sentencetr.id)
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-trash-o",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-row mt-1" }, [
             _c("div", { staticClass: "form-group col-md-4" }, [
               _c("label", { attrs: { for: "sel-id_language" } }, [
                 _vm._v("Language *")
@@ -44750,62 +44685,9 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-4" }, [
-              _c("label", { attrs: { for: "sel-id_type" } }, [
-                _vm._v("Type *")
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.sentencetr.id_type,
-                      expression: "sentencetr.id_type"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "sel-id_type", required: "" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.sentencetr,
-                        "id_type",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { disabled: "", value: "" } }, [
-                    _vm._v("Choose one")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.types, function(type) {
-                    return _c("option", { domProps: { value: type.id } }, [
-                      _vm._v(_vm._s(type.description))
-                    ])
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-12" }, [
-              _c("label", { attrs: { for: "txa-translatable" } }, [
-                _vm._v("Translatable *")
+              _c("label", { attrs: { for: "txa-translated" } }, [
+                _vm._v("Translated *")
               ]),
               _vm._v(" "),
               _c("textarea", {
@@ -44813,177 +44695,29 @@ var render = function() {
                   {
                     name: "model",
                     rawName: "v-model",
-                    value: _vm.sentencetr.translatable,
-                    expression: "sentencetr.translatable"
+                    value: _vm.sentencetr.translated,
+                    expression: "sentencetr.translated"
                   }
                 ],
+                ref: "txatranslated",
                 staticClass: "form-control",
                 attrs: {
-                  id: "txa-translatable",
+                  id: "txa-translated",
                   maxlength: "1000",
                   rows: "3",
                   cols: "5",
                   required: ""
                 },
-                domProps: { value: _vm.sentencetr.translatable },
+                domProps: { value: _vm.sentencetr.translated },
                 on: {
                   input: function($event) {
                     if ($event.target.composing) {
                       return
                     }
-                    _vm.$set(
-                      _vm.sentencetr,
-                      "translatable",
-                      $event.target.value
-                    )
+                    _vm.$set(_vm.sentencetr, "translated", $event.target.value)
                   }
                 }
               })
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-4" }, [
-              _c("label", { attrs: { for: "sel-id_context" } }, [
-                _vm._v("Context")
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.sentencetr.id_context,
-                      expression: "sentencetr.id_context"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "sel-id_context" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.sentencetr,
-                        "id_context",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { disabled: "", value: "" } }, [
-                    _vm._v("Choose one")
-                  ]),
-                  _vm._v(" "),
-                  _vm._l(_vm.contexts, function(context) {
-                    return _c("option", { domProps: { value: context.id } }, [
-                      _vm._v(_vm._s(context.description))
-                    ])
-                  })
-                ],
-                2
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-3" }, [
-              _c("label", { attrs: { for: "sel-is_notificable" } }, [
-                _vm._v("Notificable")
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.sentencetr.is_notificable,
-                      expression: "sentencetr.is_notificable"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "sel-is_notificable" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.sentencetr,
-                        "is_notificable",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "0" } }, [_vm._v("No")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Yes")])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group col-md-3" }, [
-              _c("label", { attrs: { for: "sel-id_status" } }, [
-                _vm._v("Status")
-              ]),
-              _vm._v(" "),
-              _c(
-                "select",
-                {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.sentencetr.id_status,
-                      expression: "sentencetr.id_status"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: { id: "sel-id_status" },
-                  on: {
-                    change: function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.sentencetr,
-                        "id_status",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    }
-                  }
-                },
-                [
-                  _c("option", { attrs: { value: "0" } }, [_vm._v("Disable")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Enable")])
-                ]
-              )
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group col-md-4" }, [
@@ -45060,16 +44794,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6 col-sm-6 pt-2" }, [
-      _c("h1", [_vm._v("Update sentencetr")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
