@@ -59,6 +59,7 @@ Route::get("/adm/language/subject/{idsubject}/sentence/update/{idsentence}",'Res
 
 Route::get("/adm/language/subject/{idsubject}/sentence/{idsentence}/sentencetrs",'Restrict\Language\SentenceController@sentencetrs')->name('restrict.language.sentence.sentencetrs');
 Route::get("/adm/language/sentence/{idsentence}/sentencetr/insert",'Restrict\Language\SentencetrController@insert')->name('restrict.language.sentence.sentencetr.insert');
+Route::get("/adm/language/sentence/{idsentence}/sentencetr/update/{idsentencetr}",'Restrict\Language\SentencetrController@update')->name('restrict.language.sentence.sentencetr.update');
 
 //language sentence
 

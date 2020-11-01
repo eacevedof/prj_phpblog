@@ -23,10 +23,13 @@ class SentencetrController extends BaseController
         ]);
     }
 
-    public function update($idsentence,$idsentencetr){
+    public function update($idsentence, $idsentencetr){
+        //dd($idsentence);
+        $idsubject = (new SentenceDetailService($idsentence))->get_id_subject();
         return view('restrict.language.sentencetr.update',[
             "module"=>"sentencetr",
-            "idsubject"=>$idsentence,
+            "idsubject"=>$idsubject,
+            "idsentence"=>$idsentence,
             "idsentencetr"=>$idsentencetr,
         ]);
     }
