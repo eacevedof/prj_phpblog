@@ -14,8 +14,9 @@ if(isset($idsentence)) {
     $arurls[] =["href"=>"/adm/language/subject/$idsubject/sentence/$idsentence/sentencetrs","text"=>"Sentence TRS","isactive"=>strstr($requrl,"$idsentence/sentencetrs")];
     if(strstr($requrl,"/sentencetr/insert"))
         $arurls[] =["href"=>"/adm/language/sentence/$idsentence/sentencetr/insert","text"=>"Insert TR","isactive"=>true];
+    if(isset($idsentencetr) && strstr($requrl,"/sentencetr/update"))
+        $arurls[] =["href"=>"/adm/language/sentence/$idsentence/sentencetr/update/$idsentencetr","text"=>"Update TR","isactive"=>true];
 }
-
 
 @endphp
 <ul class="nav nav-tabs">
