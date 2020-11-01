@@ -1,14 +1,10 @@
 import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
-import openapifetch from "/js/open/helpers/openapifetch.js";
+import openapifetch from "/js/open/helpers/openapifetch.js"
 import db from "/js/open/helpers/opendb.js"
 //https://devhints.io/bulma
 
 const LANG_CONFIG = "lang-config"
-
-const LANGUAGES = {
-    "1":"en","2":"sp","3":"nl"
-}
 
 new Vue({
     el: "#div-practice-main",
@@ -30,6 +26,7 @@ new Vue({
 
         langsource: "",
         langtarget: "",
+
         btnskip: "Saltar",
         btnnext: "Siguiente"
 
@@ -44,7 +41,6 @@ new Vue({
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
             console.log("mounted iquestions",this.iquestions)
-            //return
         }
         await this.load_languages()
     },//mounted
@@ -52,8 +48,15 @@ new Vue({
     methods:{
         load_languages: async function () {
             const languages = await openapifetch.get_languages()
-            //this.languages = languages.map(obj => Object.entries(obj).map( obj => console.log(obj)))
-            funcs.pr(languages)
+            this.languages = languages
+        },
+
+        get_langcode(idlanguage){
+            return this.languages.filter(obj => obj.id === idlanguage).map(obj => obj.code_erp).join("")
+        },
+
+        get_idlanguage(langcode){
+            return this.languages.filter(obj => obj.code_erp === langcode).map(obj => obj.id).join("")
         },
 
         restart(){
@@ -127,16 +130,14 @@ new Vue({
             console.log("iq",iq)
             this.idquestion = this.questions[iq].id
             this.strquestion = this.questions[iq].translatable
-            this.langsource = LANGUAGES[this.questions[iq].id_language]
-            this.langtarget = this.config.seltargets[0]
+            this.langsource = this.get_langcode(this.questions[iq].id_language) //es,
+            this.langtarget = this.get_langcode(parseInt(this.config.seltargets[0]))
             if(this.iquestion === this.iquestions)
                 this.btnnext = "Finalizar"
-            //alert(this.langtarget)
         },
 
         is_good(){
-            //const iq = this.iquestion - 1;
-            const idlang = Object.keys(LANGUAGES).find(key => LANGUAGES[key]==this.langtarget)
+            const idlang = this.get_idlanguage(this.langtarget)
             const answer = objpractice.sentence_tr
                                 .filter(obj => parseInt(obj.id_language) === parseInt(idlang))
                                 .filter(obj => obj.id_sentence === this.idquestion)

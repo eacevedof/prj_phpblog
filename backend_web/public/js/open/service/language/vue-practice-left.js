@@ -1,7 +1,6 @@
-//vue-language-left.js
-//import funcs from "/js/open/helpers/openfuncs.js"
-//import openapi from "/js/open/helpers/openapi.js"
+import openapifetch from "/js/open/helpers/openapifetch.js"
 import db from "/js/open/helpers/opendb.js"
+import openvendorapi from "/js/open/helpers/openvendorapi.js"
 
 const LANG_CONFIG = "lang-config"
 
@@ -11,23 +10,24 @@ new Vue({
         ismodal: false,
 
         config: {
-            sources: ["es","nl","en"],
-            targets: ["nl","en"],
+            sourcelangs: [],
+            targetlangs: [],
 
-            selsource: "es",
-            seltargets: ["nl"],
+            selsource: "2", //es
+            seltargets: ["3"], //nl
+
             time: 0,
             level: 1,
+
             israndom:false,
             questions:20,
         }
     },//data
 
-    mounted(){
-        console.log("left mounted")
-        //console.log("vue-language-left:",objpractice);
+    async mounted(){
+        await this.load_languages()
         const config = db.select(LANG_CONFIG)
-        if(Object.keys(config).length>0) {
+        if(config && Object.keys(config).length>0) {
             this.config = {...config}
         }
         else{
@@ -38,6 +38,16 @@ new Vue({
     },//mounted
 
     methods:{
+
+        load_languages: async function () {
+
+            const languages = await openapifetch.get_languages()
+            console.log("load_languages",languages)
+            this.config.sourcelangs = languages.map(obj => ({id:obj.id, code_erp:obj.code_erp, urlflag: openvendorapi.get_urlflag(obj.code_erp)}))
+            this.config.targetlangs = [...this.config.sourcelangs]
+            console.log("LANGUAGES:",this.config.targetlangs)
+        },
+
         modal(){
             const self = this
             return {
@@ -61,8 +71,7 @@ new Vue({
         on_config(){
             this.ismodal = true;
             const $modal = document.getElementById("div-modal")
-            if(this.ismodal)
-                $modal.classList.add("is-active")
+            $modal.classList.add("is-active")
         },
 
     },//methods

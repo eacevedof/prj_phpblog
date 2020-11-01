@@ -20,8 +20,10 @@
                         <label class="label">Idioma origen</label>
                         <div class="control">
                             <div class="select is-multiple">
-                                <select id="sel-folders" v-model="config.selsource" class="form-control" required>
-                                    <option v-for="(lang, i) in config.sources" :value="lang" :key="i">{{lang}}</option>
+                                <select id="sel-source" v-model="config.selsource" class="form-control" required>
+                                    <option v-for="(lang, i) in config.sourcelangs" :value="lang.id" :key="i">
+                                        {{lang.code_erp}}
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -30,8 +32,8 @@
                         <label class="label">Idiomas destino</label>
                         <div class="control">
                             <div class="select is-multiple">
-                                <select id="sel-folders" multiple size="2" v-model="config.seltargets" class="form-control" required>
-                                    <option v-for="(lang, i) in config.targets" :value="lang" :key="i">{{lang}}</option>
+                                <select id="sel-seltargets" multiple size="2" v-model="config.seltargets" class="form-control" required>
+                                    <option v-for="(lang, i) in config.targetlangs" :value="lang.id" :key="i">{{lang.code_erp}}</option>
                                 </select>
                             </div>
                         </div>
