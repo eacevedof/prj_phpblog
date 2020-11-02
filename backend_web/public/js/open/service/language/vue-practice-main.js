@@ -30,6 +30,7 @@ new Vue({
         iok: 0,
         inok: 0,
         iskipped: 0,
+        errorword: "",
 
         btnskip: "Saltar",
         btnnext: "Siguiente"
@@ -120,10 +121,12 @@ new Vue({
             this.load_question()
             this.$nextTick(()=> this.focusanswer())
         },
+
         save(){
             const isok = this.is_good()
             this.focusanswer()
             if(isok) {
+                this.errorword = ""
                 toast.open({
                     message: "Respuesta correcta",
                     type:"is-success",
@@ -140,6 +143,8 @@ new Vue({
                 this.load_question()
                 return
             }
+
+            this.errorword = funcs.get_wrongword(this.stranswer, this.expanswer)
             toast.open({
                 message: "Respuesta incorrecta",
                 type:"is-danger",

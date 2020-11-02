@@ -32,7 +32,8 @@
                             v-on:keyup.enter="save"
                             />
                 </div>
-                <p class="p-3 tag is-warning is-medium"><i class="fab fa-comment"></i><b>TR:</b>&nbsp;{{stranswer}}</p><br/>
+                <p v-if="errorword" class="p-3 tag is-danger is-medium">{{errorword}}</p>
+                <p class="p-3 tag is-warning is-medium"><b>TR:</b>&nbsp;{{stranswer}}</p><br/>
                 <p v-if="expanswer" class="p-3 tag is-info is-medium"><b>RC:</b>&nbsp;{{expanswer}}</p>
             </article>
             <div class="control has-text-right">

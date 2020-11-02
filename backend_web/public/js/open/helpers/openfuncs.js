@@ -64,6 +64,18 @@ const funcs = {
             [a[i], a[j]] = [a[j], a[i]];
         }
         return a;
+    },
+
+    get_wrongword(str1, str2){
+        const ars1 = str1.trim().
+                    toLowerCase().
+                    split(" ").
+                    map(str => str.replace(/[\,\.\?\;\+\!]/gi,"").trim())
+        const ars2 = str2.trim().
+                    toLowerCase().
+                    split(" ").
+                    map(str => str.replace(/[\,\.\?\;\+\!]/gi,"").trim())
+        return ars1.filter(str => !ars2.includes(str))[0]
     }
 }
 
