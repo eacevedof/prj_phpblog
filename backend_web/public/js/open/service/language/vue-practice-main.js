@@ -160,6 +160,7 @@ new Vue({
                 expected: this.expanswer,
                 status: "skipped"
             })
+            this.errorword = ""
             this.iquestion++
             this.load_question()
         },
