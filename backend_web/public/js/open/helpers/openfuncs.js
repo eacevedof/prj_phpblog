@@ -75,7 +75,7 @@ const funcs = {
                     toLowerCase().
                     split(" ").
                     map(str => str.replace(/[\,\.\?\;\+\!]/gi,"").trim())
-        const r = ars1.filter(str => !ars2.includes(str))[0]
+        const r = ars1.filter((str,i) => i !== ars2.indexOf(str,i))[0]
         console.log("get_wrongword ars1",ars1,"ars2",ars2,"r:",r)
         return r
     }
