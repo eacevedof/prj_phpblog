@@ -11,7 +11,7 @@ use App\Services\Restrict\Language\Sentencetr\SentencetrInsertService;
 use App\Services\Restrict\Language\Sentencetr\SentencetrIndexService;
 use Illuminate\Support\Facades\DB;
 
-class SentenceSentenceattemptController extends BaseController
+class SentencetopController extends BaseController
 {
     public function __construct()
     {
