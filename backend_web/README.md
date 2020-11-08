@@ -15,6 +15,7 @@
 - ~Mejora de hashtags~
 - ~Replace de codelan por data-enlighter-language~
 - marcar como importante
+- botón marcar para revision
 - permitir cuestionario a la inversa
 - Crear contador de palabras en PostUpdate.vue
 - Crear buscador de imágenes en UploadIndex.vue
