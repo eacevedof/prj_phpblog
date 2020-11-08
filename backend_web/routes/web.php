@@ -73,6 +73,8 @@ Route::apiResource("/api/language/sentence/{idsentence}/sentencetrs","Api\Langua
 Route::apiResource("/api/language/language","Api\Language\LanguageController");
 Route::apiResource("/api/language/sentence","Api\Language\SentenceController");
 Route::apiResource("/api/language/sentencetr","Api\Language\SentencetrController");
+Route::apiResource("/api/language/sentenceattempt","Api\Language\SentenceattemptController");
+Route::apiResource("/api/language/sentencetop","Api\Language\SentencetopController");
 
 //picklists (solo lectura)
 Route::get("/api/app-array/source","Api\ApparrayController@get_source");
