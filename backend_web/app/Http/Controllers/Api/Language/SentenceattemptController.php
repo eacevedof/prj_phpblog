@@ -6,8 +6,8 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 //use Auth;
 
-use App\Services\Restrict\Language\Sentencetr\SentencetrInsertService;
-use App\Services\Restrict\Language\Sentencetr\SentencetrIndexService;
+use App\Services\Restrict\Language\Sentenceattempt\SentenceattemptInsertService;
+use App\Services\Restrict\Language\Sentenceattempt\SentenceattemptIndexService;
 use Illuminate\Support\Facades\DB;
 
 class SentenceattemptController extends BaseController
@@ -24,7 +24,7 @@ class SentenceattemptController extends BaseController
     public function index($idsentencetr)
     {
         try {
-            $r = (new SentencetrIndexService())->get_by_sentence($idsentencetr);
+            $r = (new SentenceattemptIndexService())->get_by_sentence($idsentencetr);
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -42,7 +42,7 @@ class SentenceattemptController extends BaseController
     {
         try {
             $data = $request->all();
-            $r = (new SentencetrInsertService($data))->save();
+            $r = (new SentenceattemptInsertService($data))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)

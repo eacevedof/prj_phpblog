@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Api\Language;
 
 use App\Http\Controllers\BaseController;
-use App\Services\Restrict\Language\Sentencetr\SentencetrDeleteService;
+use App\Services\Restrict\Language\Sentencetop\SentencetopDeleteService;
 use Illuminate\Http\Request;
 //use Auth;
 
-use App\Services\Restrict\Language\Sentencetr\SentencetrInsertService;
-use App\Services\Restrict\Language\Sentencetr\SentencetrIndexService;
+use App\Services\Restrict\Language\Sentencetop\SentencetopInsertService;
+use App\Services\Restrict\Language\Sentencetop\SentencetopIndexService;
 use Illuminate\Support\Facades\DB;
 
 class SentencetopController extends BaseController
@@ -25,7 +25,7 @@ class SentencetopController extends BaseController
     public function index($idsentencetr)
     {
         try {
-            $r = (new SentencetrIndexService())->get_by_sentence($idsentencetr);
+            $r = (new SentencetopIndexService())->get_by_sentence($idsentencetr);
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -43,7 +43,7 @@ class SentencetopController extends BaseController
     {
         try {
             $data = $request->all();
-            $r = (new SentencetrInsertService($data))->save();
+            $r = (new SentencetopInsertService($data))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -62,7 +62,7 @@ class SentencetopController extends BaseController
         $this->_load_authid();
         $this->logd($idsubject,"delete.postid");
         try {
-            $r = (new SentencetrDeleteService($idsubject))->save();
+            $r = (new SentencetopDeleteService($idsubject))->save();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
