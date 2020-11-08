@@ -84,9 +84,9 @@ const funcs = {
     },
 
     is_good(str1, strexp) {
-        const s1 = str1.toLowerCase().replace(regexp,"").trim()
-        const s2 = strexp.toLowerCase().replace(regexp, "").trim()
-        return s1===s2
+        const answeer = str1.toLowerCase().split(" ").map(str => str.replace(regexp,"").trim()).join(" ")
+        const expected = strexp.toLowerCase().split(" ").map(str => str.replace(regexp,"").trim()).join(" ")
+        return answeer===expected
     }
 }
 
