@@ -1,3 +1,52 @@
+CREATE TABLE `app_sentence_tops` (
+`processflag` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`insert_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT '1',
+`insert_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
+`update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+`delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`delete_date` datetime DEFAULT NULL,
+`cru_csvnote` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`is_erpsent` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT '0',
+`is_enabled` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT '1',
+`i` int(11) DEFAULT NULL,
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`code_erp` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`description` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`id_user` int(11) DEFAULT NULL COMMENT 'texto traducido',
+`id_sentence` int(11) DEFAULT NULL COMMENT 'app_sentence.id',
+`code_cache` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE `app_sentence_attempts` (
+`processflag` varchar(5) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`insert_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT '1',
+`insert_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`insert_date` timestamp NOT NULL DEFAULT current_timestamp(),
+`update_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`update_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`update_date` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+`delete_platform` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`delete_user` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`delete_date` datetime DEFAULT NULL,
+`cru_csvnote` varchar(500) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`is_erpsent` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT '0',
+`is_enabled` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT '1',
+`i` int(11) DEFAULT NULL,
+`id` int(11) NOT NULL AUTO_INCREMENT,
+`code_erp` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`description` varchar(250) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+`id_user` int(11) DEFAULT NULL COMMENT 'texto traducido',
+`id_sentence_tr` int(11) DEFAULT NULL COMMENT 'app_sentence_tr.id',
+`iresult` tinyint(4) NOT NULL COMMENT '0: error, 1:ok, 2:skip',
+`code_cache` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 DROP TABLE IF EXISTS `app_language`;
 
 CREATE TABLE `app_language` (
