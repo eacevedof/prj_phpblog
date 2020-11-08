@@ -81,3 +81,5 @@ Route::get("/api/app-array/source","Api\ApparrayController@get_source");
 Route::get("/api/app-array/lang-context","Api\ApparrayController@get_langcontext");
 Route::get("/api/app-array/lang-type","Api\ApparrayController@get_langtype");
 Route::get("/api/picklist/language","Api\Language\LanguageController@get_picklist");
+Route::get("/api/language/sentenceattempts/{idsubject}","Api\Language\SentenceattemptController@by_subject");
+Route::get("/api/language/sentencetops/{idsubject}","Api\Language\SentencetopController@by_subject");
