@@ -14,10 +14,20 @@
 - ~publish_date sin 00:00~
 - ~Mejora de hashtags~
 - ~Replace de codelan por data-enlighter-language~
+- marcar como importante
+- permitir cuestionario a la inversa
 - Crear contador de palabras en PostUpdate.vue
 - Crear buscador de imágenes en UploadIndex.vue
 - Buscador en web
 - Cambiar make be-logs ya que no exist var/log/dev.log
+- crear listado de preguntas en culumna lateral
+- permitir seleccionar rango de preguntas, para que se repitan en random
+- guardar historico de resultados para poder seleccionar preguntas más dificiles
+- permitir marcar revision de preguntas mal formadas o respuestas incorrectas
+- en back permitir en el buscador de subjects que lo haga tambien en todos sus contendidos
+- crear buscador general para personalizar cuestionario
+- mostrar un loading... cuando se carga la app
+
 
 ### Comandos:
 ```js
