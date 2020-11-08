@@ -27,6 +27,7 @@
 - en back permitir en el buscador de subjects que lo haga tambien en todos sus contendidos
 - crear buscador general para personalizar cuestionario
 - mostrar un loading... cuando se carga la app
+- agregar tipo "expresion"
 
 
 ### Comandos:

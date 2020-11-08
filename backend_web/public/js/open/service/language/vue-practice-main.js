@@ -175,15 +175,15 @@ new Vue({
 
         is_good(){
             const idlang = this.get_idlanguage(this.langtarget)
-            const answer = objpractice.sentence_tr
+            //clean string
+            const answertr = objpractice.sentence_tr
                                 .filter(obj => parseInt(obj.id_language) === parseInt(idlang))
                                 .filter(obj => obj.id_sentence === this.idquestion)
                                 .map(obj => obj.translated)
                                 .join()
-                                .toLowerCase()
-                                .trim()
-            if(debug)  this.expanswer = answer
-            return (this.stranswer.toLowerCase().trim() === answer)
+
+            this.expanswer = answertr
+            return funcs.is_good(this.stranswer, this.expanswer)
         }
 
     },//methods

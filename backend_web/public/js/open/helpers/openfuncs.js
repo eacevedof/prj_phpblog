@@ -1,4 +1,7 @@
 //openfuncs
+
+const regexp = new RegExp(/[\'\"\:\,\.\?\;\+\!\(\)\?]/gi)
+
 const funcs = {
 
     get_csrftoken: () => document.querySelector('#meta-csrf-token').getAttribute('content'),
@@ -34,8 +37,8 @@ const funcs = {
         str = str.toLowerCase();
 
         // remove accents, swap ñ for n, etc
-        var from = "àáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
-        var to   = "aaaaaeeeeiiiioooouuuunc------";
+        const from = "àáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        const to   = "aaaaaeeeeiiiioooouuuunc------";
 
         for (var i=0, l=from.length ; i<l ; i++) {
             str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
@@ -70,14 +73,20 @@ const funcs = {
         const ars1 = str1.trim().
                     toLowerCase().
                     split(" ").
-                    map(str => str.replace(/[\'\"\:\,\.\?\;\+\!]/gi,"").trim())
+                    map(str => str.replace(regexp,"").trim())
         const ars2 = str2.trim().
                     toLowerCase().
                     split(" ").
-                    map(str => str.replace(/[\'\"\:\,\.\?\;\+\!]/gi,"").trim())
+                    map(str => str.replace(regexp,"").trim())
         const r = ars1.filter((str,i) => i !== ars2.indexOf(str,i))[0]
-        console.log("get_wrongword ars1",ars1,"ars2",ars2,"r:",r)
-        return r
+        //console.log("get_wrongword ars1",ars1,"ars2",ars2,"r:",r)
+        return r.length >0 ? r[0] : ""
+    },
+
+    is_good(str1, strexp) {
+        const s1 = str1.toLowerCase().replace(regexp,"").trim()
+        const s2 = strexp.toLowerCase().replace(regexp, "").trim()
+        return s1===s2
     }
 }
 
