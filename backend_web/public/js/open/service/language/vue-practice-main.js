@@ -118,6 +118,10 @@ new Vue({
             return this.languages.filter(obj => obj.code_erp === langcode).map(obj => obj.id).join("")
         },
 
+        save_attempt: async function (obj){
+            const r = openapilanguage.save_attempt(obj)
+        },
+
         restart(){
             this.answers = []
             this.isfinished = false
@@ -138,6 +142,7 @@ new Vue({
             const isok = this.is_good()
             this.focusanswer()
             if(isok) {
+                this.save_attempt({id_sentence_tr:1,iresult:1})
                 this.errorword = ""
                 toast.open({
                     message: "Respuesta correcta",
@@ -156,6 +161,7 @@ new Vue({
                 return
             }
 
+            this.save_attempt({id_sentence_tr:1,iresult:0})
             this.errorword = funcs.get_wrongword(this.stranswer, this.expanswer)
             toast.open({
                 message: "Respuesta incorrecta",
@@ -164,6 +170,7 @@ new Vue({
         },
 
         skip(){
+            this.save_attempt({id_sentence_tr:1,iresult:2})
             this.answers.push({
                 id:this.iquestion,
                 question: this.strquestion,
@@ -186,6 +193,9 @@ new Vue({
         },
 
         is_good(){
+
+            if(!this.stranswer.trim()) return false
+
             const idlang = this.get_idlanguage(this.langtarget)
             //clean string
             const answertr = objpractice.sentence_tr

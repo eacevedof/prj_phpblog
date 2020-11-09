@@ -26,6 +26,25 @@ const openapilanguage = {
         const url = `/api/language/subject/${idsubject}/sentencetops`
         return await get(url)
     },
+
+    save_attempt: async obj => {
+        const url = `/api/language/sentenceattempt`
+        try {
+            const form = new FormData()
+            form.append("_token", funcs.get_csrftoken())
+            form.append("action","sentenceattempt-insert")
+            form.append("id_sentence_tr", obj.id_sentence_tr)
+            form.append("iresult", obj.iresult)
+
+            const attempts = await fetch(url,{method: 'post', body: form})
+            const r = (await attempts.json()).data
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
+    },
+
 }
 
 export default openapilanguage
