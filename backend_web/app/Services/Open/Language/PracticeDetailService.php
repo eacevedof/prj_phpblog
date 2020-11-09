@@ -20,6 +20,17 @@ class PracticeDetailService extends BaseService
             "sentence_tags"=>[], "sentence_tr"=>[]
         ];
     }
+    private function _load_sentenceids()
+    {
+        $sentences = [];
+        array_push($sentences, ...$this->data["sentences"]);
+
+        $this->sentenceids = array_map(function($item){
+            return $item->id;
+        },$sentences);
+
+        //dd($this->sentenceids);
+    }
 
     private function _get_subject()
     {
@@ -30,7 +41,8 @@ class PracticeDetailService extends BaseService
             ->where("id_status","=",1)
             ->where("slug","=","$this->subjslug")
             ->limit(1)
-            ->get();
+            ->get(["insert_date","update_date","delete_date","id","description","slug","url_final","url_img1",
+                "title","excerpt","url_resource","id_type_source"]);
         $r = $r->first();
         return $r;
     }
@@ -42,20 +54,18 @@ class PracticeDetailService extends BaseService
             ->where("is_enabled","=",1)
             ->where("id_status","=",1)
             ->where("id_subject","=",$this->idsubject)
-            ->get();
+            ->get(["insert_date","update_date","delete_date","id","description","id_subject","id_context","translatable","id_language","id_type","id_status"]);
         return $r;
     }
 
-    private function _load_sentenceids()
+    private function _get_sentence_trs()
     {
-        $sentences = [];
-        array_push($sentences, ...$this->data["sentences"]);
-
-        $this->sentenceids = array_map(function($item){
-            return $item->id;
-        },$sentences);
-
-        //dd($this->sentenceids);
+        $table = $this->get_table("app_sentence_tr");
+        $r = $table->whereNull("delete_date")
+            ->where("is_enabled","=",1)
+            ->whereIn("id_sentence", $this->sentenceids)
+            ->get(["insert_date","update_date","delete_date","id","description","translated","id_language","id_sentence"]);
+        return $r;
     }
 
     private function _get_sentence_images()
@@ -71,16 +81,6 @@ class PracticeDetailService extends BaseService
     private function _get_sentence_tags()
     {
         $table = $this->get_table("app_sentence_tags");
-        $r = $table->whereNull("delete_date")
-            ->where("is_enabled","=",1)
-            ->whereIn("id_sentence", $this->sentenceids)
-            ->get();
-        return $r;
-    }
-
-    private function _get_sentence_trs()
-    {
-        $table = $this->get_table("app_sentence_tr");
         $r = $table->whereNull("delete_date")
             ->where("is_enabled","=",1)
             ->whereIn("id_sentence", $this->sentenceids)

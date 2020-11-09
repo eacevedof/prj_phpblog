@@ -1,3 +1,4 @@
+import openglobal from "/js/open/helpers/openglobal.js"
 import funcs from "/js/open/helpers/openfuncs.js"
 import openapilanguage from "/js/open/helpers/openapilanguage.js"
 import openapifetch from "/js/open/helpers/openapifetch.js"
@@ -40,7 +41,6 @@ new Vue({
     },//data
 
     async mounted(){
-        console.log("main mounted")
         const config = db.select(LANG_CONFIG)
 
         if(!config) return alert("No config found")
@@ -55,9 +55,8 @@ new Vue({
 
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
-            console.log("mounted iquestions",this.iquestions)
         }
-
+        console.log("MAIN MOUNTED","questions",this.iquestions,"attempts",this.attempts,"tops",this.tops)
     },//mounted
 
     methods:{
@@ -75,16 +74,14 @@ new Vue({
         },
 
         load_questions(){
-            this.questions = [...objpractice.sentences]
+            this.questions = openglobal.get_sentences()
+            //console.table(this.questions)
             if(this.config.israndom==="true") {
-                //alert(this.config.israndom)
                 this.questions = funcs.get_shuffled(this.questions)
             }
-            console.log("questions:",this.questions)
         },
 
         load_question(){
-            console.log("idquestion",this.idquestion,"translate iquestions", this.iquestions)
             if(this.iquestion > this.iquestions) {
                 this.isfinished = true
                 this.load_result()
@@ -95,11 +92,11 @@ new Vue({
             this.expanswer = ""
 
             const iq = this.iquestion - 1;
-            console.log("iq",iq)
             this.idquestion = this.questions[iq].id
             this.strquestion = this.questions[iq].translatable
             this.langsource = this.get_langcode(this.questions[iq].id_language) //es,
             this.langtarget = this.get_langcode(parseInt(this.config.seltargets[0]))
+
             if(this.iquestion === this.iquestions)
                 this.btnnext = "Finalizar"
         },
@@ -161,7 +158,8 @@ new Vue({
                 return
             }
 
-            this.save_attempt({id_sentence_tr:1,iresult:0})
+            if(this.stranswer.trim())
+                this.save_attempt({id_sentence_tr:1,iresult:0})
             this.errorword = funcs.get_wrongword(this.stranswer, this.expanswer)
             toast.open({
                 message: "Respuesta incorrecta",
@@ -193,18 +191,10 @@ new Vue({
         },
 
         is_good(){
-
             if(!this.stranswer.trim()) return false
 
             const idlang = this.get_idlanguage(this.langtarget)
-            //clean string
-            const answertr = objpractice.sentence_tr
-                                .filter(obj => parseInt(obj.id_language) === parseInt(idlang))
-                                .filter(obj => obj.id_sentence === this.idquestion)
-                                .map(obj => obj.translated)
-                                .join()
-
-            this.expanswer = answertr
+            this.expanswer = openglobal.get_stranswer(idlang, this.idquestion)
             return funcs.is_good(this.stranswer, this.expanswer)
         }
 
