@@ -8,7 +8,7 @@ const openglobal = {
             .filter(obj => parseInt(obj.id_language) === parseInt(idlanguage))
             .map(obj => obj.translated)
             .join()
-        console.log("global.sentcetr",idlanguage,idsentence,"get_stranswer",r)
+        //console.log("global.sentcetr",idlanguage,idsentence,"get_stranswer",r)
         return r;
     },
 

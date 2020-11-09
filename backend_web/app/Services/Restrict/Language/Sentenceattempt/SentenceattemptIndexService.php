@@ -52,6 +52,7 @@ class SentenceattemptIndexService extends BaseService
         -- AND mt.id_user = 1
         AND s.id_subject = $idsubject
         GROUP BY id_sentence, iresult
+        ORDER BY iresult, m_id DESC, id_sentence
         ";
         $r = DB::select($q);
         return $r;
