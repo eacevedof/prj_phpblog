@@ -40,10 +40,12 @@ new Vue({
     methods:{
 
         load_languages: async function () {
+            //console.log("load_languages ini")
             const languages = await openapifetch.get_languages()
-            console.table(languages)
+            //console.table(languages)
             this.config.sourcelangs = languages.map(obj => ({id:obj.id, code_erp:obj.code_erp, urlflag: openvendorapi.get_urlflag(obj.code_erp)}))
             this.config.targetlangs = [...this.config.sourcelangs]
+            //console.log("load_languages end")
         },
 
         modal(){
