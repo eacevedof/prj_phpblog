@@ -37,25 +37,17 @@ class SentencetopIndexService extends BaseService
         return $r;
     }
 
-    public function get_by_sentence($idsentence)
+    public function get_by_subject($idsubject)
     {
-        $idsentence = (int) $idsentence;
+        $idsubject = (int) $idsubject;
         $q = "
-        SELECT
-        tr.delete_date, tr.is_enabled,
-        tr.id, tr.description, tr.translated, tr.id_language, tr.id_sentence,
-        s.translatable as ff_sentence, l.code_erp as ff_language
-
-        FROM app_sentence_tr tr
-        LEFT JOIN app_sentence s
-        ON tr.id_sentence = s.id
-        LEFT JOIN app_language l
-        ON tr.id_language = l.id
-
+        SELECT id_sentence
+        FROM app_sentence_tops mt
+        INNER JOIN app_sentence `s`
+        ON mt.id_sentence = `s`.id
         WHERE 1
-        AND tr.is_enabled='1'
-        AND tr.delete_date IS NULL
-        AND tr.id_sentence=$idsentence
+        -- AND id_user = 1
+        AND s.id_subject = $idsubject
         ";
         $r = DB::select($q);
         return $r;

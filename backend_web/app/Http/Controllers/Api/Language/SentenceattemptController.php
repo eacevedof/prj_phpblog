@@ -50,4 +50,17 @@ class SentenceattemptController extends BaseController
             return Response()->json(["error"=>$e->getMessage()],500);
         }
     }
+
+    public function bysubject($idsubject)
+    {
+        try {
+            $r = (new SentenceattemptIndexService())->get_by_subject($idsubject);
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
+    }
+
 }

@@ -16,10 +16,14 @@ async function get (url){
     }
 }
 
-
 const openapilanguage = {
-    get_attempts_by_subject: async (idsubject)=>{
-        const url = `/api/language/sentenceattempt`
+    get_attempts_by_subject: async idsubject => {
+        const url = `/api/language/subject/${idsubject}/sentenceattempts`
+        return await get(url)
+    },
+
+    get_tops_by_subject: async idsubject => {
+        const url = `/api/language/subject/${idsubject}/sentencetops`
         return await get(url)
     },
 }

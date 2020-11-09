@@ -1,5 +1,5 @@
 import funcs from "/js/open/helpers/openfuncs.js"
-import openapi from "/js/open/helpers/openapi.js"
+import openapilanguage from "/js/open/helpers/openapilanguage.js"
 import openapifetch from "/js/open/helpers/openapifetch.js"
 import db from "/js/open/helpers/opendb.js"
 //https://devhints.io/bulma
@@ -11,6 +11,8 @@ new Vue({
     data: {
         config:{},
         languages: [],
+        attempts: [],
+        tops: [],
 
         isfinished: true,
 
@@ -46,6 +48,9 @@ new Vue({
         if(config && Object.keys(config).length>0) {
             this.config = {...config}
             await this.load_languages()
+            await this.load_attempts()
+            await this.load_tops()
+
             this.load_questions()
 
             if(this.config.questions>0)
@@ -56,6 +61,13 @@ new Vue({
     },//mounted
 
     methods:{
+        load_attempts: async function(){
+            this.attempts = await openapilanguage.get_tops_by_subject(idsubject)
+        },
+
+        load_tops: async function(){
+            this.tops = await openapilanguage.get_attempts_by_subject(idsubject)
+        },
 
         load_languages: async function () {
             const languages = await openapifetch.get_languages()

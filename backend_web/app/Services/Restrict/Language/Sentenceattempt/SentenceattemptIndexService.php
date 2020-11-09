@@ -37,25 +37,21 @@ class SentenceattemptIndexService extends BaseService
         return $r;
     }
 
-    public function get_by_sentence($idsentence)
+    public function get_by_subject($idsubject)
     {
-        $idsentence = (int) $idsentence;
+        $idsubject = (int) $idsubject;
         $q = "
-        SELECT
-        tr.delete_date, tr.is_enabled,
-        tr.id, tr.description, tr.translated, tr.id_language, tr.id_sentence,
-        s.translatable as ff_sentence, l.code_erp as ff_language
-
-        FROM app_sentence_tr tr
-        LEFT JOIN app_sentence s
-        ON tr.id_sentence = s.id
-        LEFT JOIN app_language l
-        ON tr.id_language = l.id
-
+        -- iresult: 0:nok, 1:ok, 2:skip
+        SELECT id_sentence, iresult, count(mt.id) as m_id
+        FROM app_sentence_attempts mt
+        INNER JOIN app_sentence_tr str
+        ON mt.id_sentence_tr = str.id
+        INNER JOIN app_sentence `s`
+        ON str.id_sentence = `s`.id
         WHERE 1
-        AND tr.is_enabled='1'
-        AND tr.delete_date IS NULL
-        AND tr.id_sentence=$idsentence
+        -- AND mt.id_user = 1
+        AND s.id_subject = $idsubject
+        GROUP BY id_sentence, iresult
         ";
         $r = DB::select($q);
         return $r;
