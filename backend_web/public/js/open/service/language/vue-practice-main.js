@@ -57,11 +57,12 @@ new Vue({
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
         }
-        console.log("MAIN MOUNTED","questions",this.iquestions,"attempts",this.attempts,"tops",this.tops)
+        //console.log("MAIN MOUNTED","questions",this.iquestions,"attempts",this.attempts,"tops",this.tops)
     },//mounted
 
     methods:{
         load_attempts: async function(){
+            const idsubject = objpractice.subject.id
             this.attempts = await openapilanguage.get_tops_by_subject(idsubject)
         },
 
@@ -75,7 +76,10 @@ new Vue({
         },
 
         load_questions(){
-            this.questions = openglobal.get_sentences()
+            const questions = openglobal.get_sentences()
+            alert(this.attempts)
+            this.questions = funcs.get_questions(questions, this.attempts, 25)
+
             if(this.config.israndom==="true") {
                 this.questions = funcs.get_shuffled(this.questions)
             }

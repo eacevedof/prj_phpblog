@@ -72,7 +72,7 @@ const funcs = {
     is_good(str1, strexp) {
         const answeer = str1.toLowerCase().split(" ").map(str => str.replace(regexp,"").trim()).filter(str => str!=="").join(" ")
         const expected = strexp.toLowerCase().split(" ").map(str => str.replace(regexp,"").trim()).join(" ")
-        console.log("answer:",answeer,"expected:",expected)
+        //console.log("answer:",answeer,"expected:",expected)
         return answeer===expected
     },
 
@@ -88,8 +88,18 @@ const funcs = {
                     split(" ").
                     map(str => str.replace(regexp,"").trim())
         const r = aranswer.filter((str,i) => i !== arexpect.indexOf(str,i))[0]
-        console.log("get_wrongword aranswer",aranswer,"arexpect",arexpect,"r:",r)
+        //console.log("get_wrongword aranswer",aranswer,"arexpect",arexpect,"r:",r)
         return r ? r : aranswer[0]
+    },
+
+    get_questions(quests, attempts, ishow){
+        ishow = ishow || 20
+        const wrongnok = attempts.filter(obj => parseInt(obj.iresult)===0 || parseInt(obj.iresult)===2).map(obj => obj.id_sentence)
+        const inwrong = quests.filter(quest => wrongnok.includes(quest.id)).map(obj => obj.id)
+        const notin = quests.filter(quest => !wrongnok.includes(quest.id)).map(obj => obj.id)
+        const final = quests.filter(quest => inwrong.includes(quest.id))
+                            .concat(quests.filter(quest => notin.includes(quest.id)))
+        return final.filter((quest, i)=> i< ishow)
     },
 
 }
