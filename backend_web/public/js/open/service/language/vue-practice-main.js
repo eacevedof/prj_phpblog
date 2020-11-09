@@ -26,6 +26,7 @@ new Vue({
         strquestion: "",
         stranswer: "",
         expanswer: "",
+        objanswer: {},
 
         langsource: "",
         langtarget: "",
@@ -75,7 +76,6 @@ new Vue({
 
         load_questions(){
             this.questions = openglobal.get_sentences()
-            //console.table(this.questions)
             if(this.config.israndom==="true") {
                 this.questions = funcs.get_shuffled(this.questions)
             }
@@ -90,6 +90,7 @@ new Vue({
 
             this.stranswer = ""
             this.expanswer = ""
+            this.objanswer = {}
 
             const iq = this.iquestion - 1;
             this.idquestion = this.questions[iq].id
@@ -115,8 +116,10 @@ new Vue({
             return this.languages.filter(obj => obj.code_erp === langcode).map(obj => obj.id).join("")
         },
 
-        save_attempt: async function (obj){
-            const r = openapilanguage.save_attempt(obj)
+        save_attempt: async function (iresult){
+            const idlang = this.get_idlanguage(this.langtarget)
+            const expanswer = openglobal.get_answer(idlang, this.idquestion)
+            const r = openapilanguage.save_attempt({id_sentence_tr:expanswer.id, iresult})
         },
 
         restart(){
@@ -132,14 +135,23 @@ new Vue({
             this.isfinished = false
             this.iquestion = 1
             this.load_question()
+
             this.$nextTick(()=> this.focusanswer())
+        },
+
+        is_good(){
+            if(!this.stranswer.trim()) return false
+
+            const idlang = this.get_idlanguage(this.langtarget)
+            this.expanswer = openglobal.get_stranswer(idlang, this.idquestion)
+            return funcs.is_good(this.stranswer, this.expanswer)
         },
 
         save(){
             const isok = this.is_good()
             this.focusanswer()
             if(isok) {
-                this.save_attempt({id_sentence_tr:1,iresult:1})
+                this.save_attempt(1)
                 this.errorword = ""
                 toast.open({
                     message: "Respuesta correcta",
@@ -159,7 +171,7 @@ new Vue({
             }
 
             if(this.stranswer.trim())
-                this.save_attempt({id_sentence_tr:1,iresult:0})
+                this.save_attempt(0)
             this.errorword = funcs.get_wrongword(this.stranswer, this.expanswer)
             toast.open({
                 message: "Respuesta incorrecta",
@@ -168,7 +180,8 @@ new Vue({
         },
 
         skip(){
-            this.save_attempt({id_sentence_tr:1,iresult:2})
+            this.save_attempt(2)
+
             this.answers.push({
                 id:this.iquestion,
                 question: this.strquestion,
@@ -189,14 +202,5 @@ new Vue({
                 answer.select()
             }
         },
-
-        is_good(){
-            if(!this.stranswer.trim()) return false
-
-            const idlang = this.get_idlanguage(this.langtarget)
-            this.expanswer = openglobal.get_stranswer(idlang, this.idquestion)
-            return funcs.is_good(this.stranswer, this.expanswer)
-        }
-
     },//methods
 })
