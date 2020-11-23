@@ -22,7 +22,7 @@ class PasswordService extends BaseService
             $ar[] = $str[$i];
         $key = array_rand($ar,1);
         $r = $ar[$key];
-        echo "k:$key, r:$r - ";
+        //echo "k:$key, r:$r - ";
         return $r;
     }
 
@@ -51,8 +51,7 @@ class PasswordService extends BaseService
 
     private function _get_wierd()
     {
-        $str = "!.\"|@#$%&()=?'¿¡º[*]+{ç}<>,;:.-_";
-        //$str = utf8_decode($str);
+        $str = "!.|@#$%&=?'+*()[]{}<>,;:.-_";
         $cons = $this->_get_random($str);
         return $cons;
     }
@@ -75,8 +74,8 @@ class PasswordService extends BaseService
 
         $r = implode("",$password);
         //dump($r);
-        echo "<br/>";
-        print_r($r);die;
+        //echo "<br/>";
+        //print_r($r);die;
         return $r;
     }
 }
