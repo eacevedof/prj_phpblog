@@ -21,7 +21,7 @@ class PasswordService extends BaseService
         for($i=0; $i<$len; $i++)
             $ar[] = $str[$i];
         $key = array_rand($ar,1);
-        dump($ar);
+        //dump($ar);
         return $ar[$key];
     }
 
