@@ -21,8 +21,9 @@ class PasswordService extends BaseService
         for($i=0; $i<$len; $i++)
             $ar[] = $str[$i];
         $key = array_rand($ar,1);
-        //dump($ar);
-        return $ar[$key];
+        $r = $ar[$key];
+        echo "k:$key, r:$r - ";
+        return $r;
     }
 
     private function _get_vowel($islower=true)
@@ -42,17 +43,17 @@ class PasswordService extends BaseService
 
     private function _get_consonant($islower=true)
     {
-        $str = "bcdfghjklmnñpqrstvwxyz";
+        $str = "bcdfghjklmnpqrstvwxyz";
         $cons = $this->_get_random($str);
         if(!$islower) return strtoupper($cons);
         return $cons;
     }
 
-    private function _get_wierd($islower=true)
+    private function _get_wierd()
     {
-        $str = "!.\"|@#$%&()=?'¿¡º[*+]{ç}<>,;:.-_";
+        $str = "!.\"|@#$%&()=?'¿¡º[*]+{ç}<>,;:.-_";
+        //$str = utf8_decode($str);
         $cons = $this->_get_random($str);
-        if(!$islower) return strtoupper($cons);
         return $cons;
     }
 
@@ -63,7 +64,7 @@ class PasswordService extends BaseService
         $password = [];
         for($i=0; $i<$ilen; $i++){
             $islower = $this->_get_boolean();
-            if($i==0 || $i==($ilen-1)) $password[] = $this->_get_wierd($islower);
+            if($i==0 || $i==($ilen-1)) $password[] = $this->_get_wierd();
             elseif($i%2==0)
                 $password[] = $this->_get_consonant($islower);
             elseif($i%3==0)
@@ -73,6 +74,8 @@ class PasswordService extends BaseService
         }
 
         $r = implode("",$password);
+        //dump($r);
+        echo "<br/>";
         print_r($r);die;
         return $r;
     }
