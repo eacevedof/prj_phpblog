@@ -44,6 +44,6 @@ class ServiceController extends BaseController
     public function generatepassword()
     {
         $r = (new PasswordService())->get(10);
-        return Response()->json($r);
+        return Response()->json(["data"=>$r]);
     }
 }

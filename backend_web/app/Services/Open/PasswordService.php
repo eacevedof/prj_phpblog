@@ -17,9 +17,8 @@ class PasswordService extends BaseService
     private function _get_random($str)
     {
         $ar = str_split($str);
-        dd($ar);
-        $ar = array_rand($ar,1);
-        return $ar[0];
+        $key = array_rand($ar,1);
+        return $ar[$key];
     }
 
     private function _get_vowel($islower=true)
@@ -57,7 +56,7 @@ class PasswordService extends BaseService
             $password[] = $this->_get_vowel($islower);
             $password[] = $this->_get_wierd($islower);
         }
-
-        return implode("",$password);
+        //dd($password);
+        return implode("=",$password);
     }
 }
