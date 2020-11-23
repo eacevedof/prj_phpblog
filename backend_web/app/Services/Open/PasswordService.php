@@ -33,6 +33,13 @@ class PasswordService extends BaseService
         return $vowel;
     }
 
+    private function _get_number()
+    {
+        $str = "0123456789";
+        $number = $this->_get_random($str);
+        return $number;
+    }
+
     private function _get_consonant($islower=true)
     {
         $str = "bcdfghjklmnñpqrstvwxyz";
@@ -43,7 +50,7 @@ class PasswordService extends BaseService
 
     private function _get_wierd($islower=true)
     {
-        $str = "!.\"|@#$%&()=?'¿¡º[*+]{ç}<>;,:.-_";
+        $str = "!.\"|@#$%&()=?'¿¡º[*+]{ç}<>,;:.-_";
         $cons = $this->_get_random($str);
         if(!$islower) return strtoupper($cons);
         return $cons;
@@ -56,13 +63,17 @@ class PasswordService extends BaseService
         $password = [];
         for($i=0; $i<$ilen; $i++){
             $islower = $this->_get_boolean();
-            $password[] = $this->_get_consonant($islower);
-            $password[] = $this->_get_vowel($islower);
-            $password[] = $this->_get_wierd($islower);
+            if($i==0 || $i==($ilen-1)) $password[] = $this->_get_wierd($islower);
+            elseif($i%2==0)
+                $password[] = $this->_get_consonant($islower);
+            elseif($i%3==0)
+                $password[] = $this->_get_vowel($islower);
+            else
+                $password[] = $this->_get_number();
         }
 
-        $r = implode("=",$password);
-        //dd($r);
+        $r = implode("",$password);
+        print_r($r);die;
         return $r;
     }
 }
