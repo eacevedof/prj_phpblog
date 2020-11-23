@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Open;
 
 use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
+use App\Services\Open\PasswordService;
 use App\Services\Open\PdftojpgService;
 use Illuminate\Http\Request;
 
@@ -39,4 +40,10 @@ class ServiceController extends BaseController
         return Response()->json($r);
     }
 
+    //servicios/generar-password
+    public function generatepassword()
+    {
+        $r = (new PasswordService())->get(10);
+        return Response()->json($r);
+    }
 }
