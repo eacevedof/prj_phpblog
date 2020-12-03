@@ -52,6 +52,25 @@ class SentenceattemptIndexService extends BaseService
         -- AND mt.id_user = 1
         AND s.id_subject = $idsubject
         GROUP BY id_sentence, iresult
+
+        UNION
+
+        -- las que nunca han aparecido
+        SELECT DISTINCT none.id_sentence, 0 iresult, 9999 as m_id
+        FROM app_sentence s
+        INNER JOIN
+        (
+            -- las que no tienen ningún intento
+            SELECT tr.id_sentence, 0 iresult, 9999 as m_id
+            FROM app_sentence_tr tr
+            LEFT JOIN app_sentence_attempts a
+            ON tr.id = a.id_sentence_tr
+            WHERE 1
+            AND a.id IS NULL
+        ) AS none
+        ON s.id = none.id_sentence
+        AND s.id_subject = $idsubject
+
         ORDER BY iresult, m_id DESC, id_sentence
         ";
         $r = DB::select($q);
