@@ -71,7 +71,7 @@ const funcs = {
 
     is_good(str1, strexp) {
         const answeer = str1.toLowerCase().split(" ").map(str => str.replace(regexp,"").trim()).filter(str => str!=="").join(" ")
-        const expected = strexp.toLowerCase().split(" ").map(str => str.replace(regexp,"").trim()).join(" ")
+        const expected = strexp.toLowerCase().split(" ").map(str => str.replace(regexp,"").trim()).filter(str => str!=="").join(" ")
         console.log("answer:",answeer,"expected:",expected)
         return answeer===expected
     },
@@ -86,7 +86,9 @@ const funcs = {
         const arexpect = str2.trim().
                     toLowerCase().
                     split(" ").
-                    map(str => str.replace(regexp,"").trim())
+                    map(str => str.replace(regexp,"").trim()).
+                    filter(str => str!=="")
+
         const r = aranswer.filter((str,i) => i !== arexpect.indexOf(str,i))[0]
         console.log("get_wrongword aranswer",aranswer,"arexpect",arexpect,"r:",r)
         return r ? r : aranswer[0]
