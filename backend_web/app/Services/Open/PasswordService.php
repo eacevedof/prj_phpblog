@@ -58,19 +58,58 @@ class PasswordService extends BaseService
 
     private function _get_boolean(){return (rand(0,1)==1);}
 
+    private function _get_word($ilen=4, $consonant=true)
+    {
+        $r = [];
+        for($i=0; $i<$ilen; $i++)
+        {
+            if($i%2===0) {
+                if ($consonant) {
+                    $islower = $this->_get_boolean();
+                    $r[] = $this->_get_consonant($islower);
+                }
+                //vouwel
+                else {
+                    $islower = $this->_get_boolean();
+                    $r[] = $this->_get_vowel($islower);
+                }
+            }
+            //pos impar
+            else {
+                if ($consonant) {
+                    $islower = $this->_get_boolean();
+                    $r[] = $this->_get_vowel($islower);
+                }
+                //vowel
+                else {
+                    $islower = $this->_get_boolean();
+                    $r[] = $this->_get_consonant($islower);
+                }
+            }
+        }//for
+
+        return implode("",$r);
+    }//get_word
+
+    private function _get_figure($ilen=2)
+    {
+        $r = [];
+        for($i=0; $i<$ilen; $i++)
+            $r[] = $this->_get_number();
+        return implode(",",$r);
+    }
+
     public function get($ilen=8)
     {
         $password = [];
-        for($i=0; $i<$ilen; $i++){
-            $islower = $this->_get_boolean();
-            if($i==0 || $i==($ilen-1)) $password[] = $this->_get_wierd();
-            elseif($i%2==0)
-                $password[] = $this->_get_consonant($islower);
-            elseif($i%3==0)
-                $password[] = $this->_get_vowel($islower);
-            else
-                $password[] = $this->_get_number();
-        }
+        $half = floor($ilen/2);
+        $rest = $ilen - $half - 2;
+        if($rest<0) $rest = 0;
+
+        $startcons = $this->_get_boolean();
+        $password[] = $this->_get_word($half, $startcons);
+
+        if($rest)
 
         $r = implode("",$password);
         //dump($r);
