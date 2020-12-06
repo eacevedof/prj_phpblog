@@ -96,7 +96,7 @@ class PasswordService extends BaseService
         $r = [];
         for($i=0; $i<$ilen; $i++)
             $r[] = $this->_get_number();
-        return implode(",",$r);
+        return implode("",$r);
     }
 
     public function get($ilen=8)
@@ -108,13 +108,11 @@ class PasswordService extends BaseService
 
         $startcons = $this->_get_boolean();
         $password[] = $this->_get_word($half, $startcons);
-
-        if($rest)
+        $password[] = $this->_get_wierd();
+        $password[] = $this->_get_figure($rest);
+        $password[] = $this->_get_wierd();
 
         $r = implode("",$password);
-        //dump($r);
-        //echo "<br/>";
-        //print_r($r);die;
-        return $r;
+        return trim($r);
     }
 }

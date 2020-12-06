@@ -76,6 +76,12 @@ class SeoComponent
             "keywords" => "Traduce, español, ingles, frances, neerlandes, etc",
             "h1" => ""
         ],
+        "open.service.generatepassword"=>[
+            "title"=>"Generador de contraseñas seguras \"%s\"",
+            "description"=>"Crea una contraseña segura combinando letras, números y carácteres especiales",
+            "keywords" => "Contraseña, clave, password, acceso seguro, letras, números y caráctreres especiales",
+            "h1" => ""
+        ],
 
     ];
 

@@ -40,10 +40,27 @@ class ServiceController extends BaseController
         return Response()->json($r);
     }
 
-    //servicios/generar-password
-    public function generatepassword()
+    //api
+    public function get_password(Request $request)
     {
+
         $r = (new PasswordService())->get(10);
         return Response()->json(["data"=>$r]);
     }
+
+
+    //servicios/generar-contrasena
+    public function generate_password(Request $request)
+    {
+        return view('open.service.pdftojpg',[
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.service.generatepassword"),
+            "breadscrumb" => $this->_get_scrumb("open.service.generatepassword",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "service"
+        ]);
+    }
+
+
 }
