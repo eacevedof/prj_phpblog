@@ -14,7 +14,7 @@
     <div class="card-body">
         <form @submit="on_submit" id="form-generate" class="row g-3">
             <div v-if="password" class="col-12">
-                <pre class="alert-info p-3"><b>{{password}}</b></pre>
+                <pre class="alert-info p-3"><b>{{password}}</b>    <sub>tamaño:{{password.length}}</sub></pre>
             </div>
             <div class="col-sm-2">
                 <label>
@@ -39,7 +39,7 @@
             <div class="col-sm-2">
                 <label>
                     Excluir letras:
-                    <sub>separadas por coma de: a,A - z,Z</sub>
+                    <sub>separadas por coma de: a,b,c..,z</sub>
                 </label>
                 <input type="text" class="form-control" maxlength="26"
                        :disabled="issending"

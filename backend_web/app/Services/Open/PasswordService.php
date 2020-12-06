@@ -11,9 +11,46 @@
 namespace App\Services\Open;
 
 use App\Services\BaseService;
+use Illuminate\Http\Request;
 
 class PasswordService extends BaseService
 {
+    private $input;
+    private $clean;
+
+    public function __construct($input=[])
+    {
+        $this->input = $input;
+        $this->_load_clean();
+    }
+
+    private function _load_clean()
+    {
+        $this->clean = [
+            "length"   => $this->input["length"] ?? 8,
+            "chars"    => $this->_get_cleaned_csv($this->input["nochars"]),
+            "numbers"  => $this->_get_cleaned_csv($this->input["nonumbers"]),
+            "letters"  => $this->_get_cleaned_csv($this->input["noletters"]),
+        ];
+    }
+
+    private function _get_cleaned_csv($str)
+    {
+        if(!$str) return [];
+        $r = explode(",",$str);
+        $r = array_map(function($str){return trim($str);},$r);
+        $r = array_filter($r, function($str){return $str!=="";});
+        $r = array_unique($r);
+        return $r;
+    }
+
+    private function _get_exclude_applied($str,$exclude)
+    {
+        if($exclude)
+            return str_replace($exclude,"",$str);
+        return $str;
+    }
+
     private function _get_random($str)
     {
         $len = strlen($str);
@@ -29,6 +66,7 @@ class PasswordService extends BaseService
     private function _get_vowel($islower=true)
     {
         $str = "aeiou";
+        $str = $this->_get_exclude_applied($str,$this->clean["letters"]);
         $vowel = $this->_get_random($str);
         if(!$islower) return strtoupper($vowel);
         return $vowel;
@@ -37,6 +75,7 @@ class PasswordService extends BaseService
     private function _get_number()
     {
         $str = "0123456789";
+        $str = $this->_get_exclude_applied($str,$this->clean["numbers"]);
         $number = $this->_get_random($str);
         return $number;
     }
@@ -44,6 +83,7 @@ class PasswordService extends BaseService
     private function _get_consonant($islower=true)
     {
         $str = "bcdfghjklmnpqrstvwxyz";
+        $str = $this->_get_exclude_applied($str,$this->clean["letters"]);
         $cons = $this->_get_random($str);
         if(!$islower) return strtoupper($cons);
         return $cons;
@@ -52,6 +92,7 @@ class PasswordService extends BaseService
     private function _get_wierd()
     {
         $str = "!.|@#$%&=?'+*()[]{}<>,;:.-_";
+        $str = $this->_get_exclude_applied($str,$this->clean["chars"]);
         $cons = $this->_get_random($str);
         return $cons;
     }
@@ -99,8 +140,10 @@ class PasswordService extends BaseService
         return implode("",$r);
     }
 
-    public function get($ilen=8)
+    public function get()
     {
+        $ilen = $this->clean["length"];
+
         $password = [];
         $half = floor($ilen/2);
         $rest = $ilen - $half - 2;
