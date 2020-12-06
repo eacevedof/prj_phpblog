@@ -53,6 +53,7 @@ class PasswordService extends BaseService
 
     private function _get_random($str)
     {
+        if(!$str) return "";
         $len = strlen($str);
         $ar = [];
         for($i=0; $i<$len; $i++)

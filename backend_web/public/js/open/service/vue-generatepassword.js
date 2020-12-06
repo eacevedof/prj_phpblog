@@ -1,4 +1,9 @@
 import openapi from "/js/open/helpers/openapi.js"
+//import VueBootstrapToasts from "vue-bootstrap-toasts"
+//console.log(window.Toast.ToastProgrammatic)
+
+//Vue.use(window['vue-bootstrap-toasts'].default)
+//Vue.use(window.Toast)
 
 const app = new Vue({
     el: "#form-generate",
@@ -21,6 +26,11 @@ const app = new Vue({
             this.nochars = ""
             this.noletters = ""
             this.password = ""
+        },
+
+        to_clipboard(){
+            alert(this.password)
+            window.Toast.ToastProgrammatic.open(`Subject saved. Nº ${this.password}`)
         },
 
         on_submit: async function(e) {

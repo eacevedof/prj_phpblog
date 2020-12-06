@@ -14,7 +14,8 @@
     <div class="card-body">
         <form @submit="on_submit" id="form-generate" class="row g-3">
             <div v-if="password" class="col-12">
-                <pre class="alert-info p-3"><b>{{password}}</b>    <sub>tamaño:{{password.length}}</sub></pre>
+                <pre class="alert-info p-3"><b>{{password}}</b>     <i class="fa fa-clipboard" v-on:click="to_clipboard"></i></pre>
+                <sub class="alert-info">tamaño:{{password.length}}</sub>
             </div>
             <div class="col-sm-2">
                 <label>
