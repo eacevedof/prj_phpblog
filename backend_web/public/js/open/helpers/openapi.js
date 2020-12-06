@@ -33,5 +33,25 @@ const openapi = {
             return {error:e}
         }
     },
+
+    post_passwconfig: async (obj) => {
+        try {
+            const url = "/services/generate/password"
+            const form = new FormData()
+            form.append("_token",funcs.get_uploadtoken())
+            form.append("action","generate.password")
+            form.append("length",obj.length);
+            form.append("noletters",obj.noletters);
+            form.append("nonumbers",obj.nonumbers);
+            form.append("nochars",obj.nochars);
+
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json()).data
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
+    }
 }
 export default openapi

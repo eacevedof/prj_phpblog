@@ -78,8 +78,8 @@ class SeoComponent
         ],
         "open.service.generatepassword"=>[
             "title"=>"Generador de contraseñas seguras \"%s\"",
-            "description"=>"Crea una contraseña segura combinando letras, números y carácteres especiales",
-            "keywords" => "Contraseña, clave, password, acceso seguro, letras, números y caráctreres especiales",
+            "description"=>"Crea una contraseña segura combinando letras, números y caracteres especiales",
+            "keywords" => "Contraseña, clave, password, acceso seguro, letras, números y caractreres especiales",
             "h1" => ""
         ],
 

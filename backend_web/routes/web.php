@@ -28,8 +28,8 @@ Route::post('/email/contact', "Common\Email\EmailController@contact")->name("com
 Route::post("/services/conversion/pdf-to-jpg","Open\ServiceController@pdftojpg_convert")->name("open.service.pdftojpgconvert");
 Route::get("/servicios/convertir-pdf-a-jpg","Open\ServiceController@pdftojpg")->name("open.service.pdftojpg");
 
-Route::post("/services/get-password","Open\ServiceController@get_password")->name("open.service.getpassword");
-Route::get("/servicios/generar-contrasena","Open\ServiceController@generate_password")->name("open.service.generatepassword");
+Route::post("/services/generate/password","Open\ServiceController@generate_password")->name("open.service.generate_password");
+Route::get("/servicios/generar-contrasena","Open\ServiceController@generatepassword")->name("open.service.generatepassword");
 
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");
 

@@ -2,60 +2,37 @@ import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
 
 const app = new Vue({
-    el: "#form-convert",
+    el: "#form-generate",
     data: {
         csrf: funcs.get_csrftoken(),
         issending: false,
-        btnsend: "Convertir",
-        inputfile: null,
-        link: "",
+        btnsend: "Generar",
 
-        filessize: 0,
-        maxuploadsize: 0,
-        isoversized: false,
-        overbytes: 0,
-
+        length: 8,
+        nonumbers: "",
+        nochars: "",
+        noletters: "",
     },
 
     async mounted(){
-        document.getElementById("form-convert").reset()
-        this.maxuploadsize = await openapi.get_maxsize()
+
     },
 
     methods:{
         reset(){
-            this.pdfulpoad = ""
-            this.$refs.inputfile.value = ""
-        },
-
-        on_change(){
-            //alert(1)
-            this.link = ""
-            this.inputfile = this.$refs.inputfile || null
-            this.filessize = this.inputfile.files.length ? this.inputfile.files[0].size : 0
-            this.overbytes = 0
-            this.isoversized = false
-
-            const overbytes = this.filessize - this.maxuploadsize
-            if(overbytes>0){
-                this.isoversized = true
-                this.overbytes = overbytes
-            }
-
-            //console.log("files",this.inputfile.files)
+            this.length = 8
+            this.nonumbers = ""
+            this.nochars = ""
+            this.noletters = ""
         },
 
         on_submit: function(e) {
             e.preventDefault()
-            if(!this.inputfile) return
-            if(!this.inputfile.files[0]) return
-
+            if(!this.length) return
             this.issending = true
             this.btnsend = "Procesando..."
             const form = new FormData();
-            form.append("action","pathtojpg.convert")
-            form.append("_token",this.csrf)
-            form.append("pdf",this.inputfile.files[0]);
+
 
             fetch('/services/conversion/pdf-to-jpg', {
                 method: "post",
@@ -85,8 +62,8 @@ const app = new Vue({
                 this.link = response.download
 
                 //reset
-                this.$refs.inputfile.value = ""
-                this.inputfile = null
+                this.$refs.length.value = ""
+                this.length = null
                 this.filessize = 0
                 this.isoversized = false
                 this.overbytes = 0
