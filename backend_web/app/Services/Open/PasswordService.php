@@ -37,7 +37,7 @@ class PasswordService extends BaseService
     private function _get_cleaned_csv($str)
     {
         if(!$str) return [];
-        $r = explode(",",$str);
+        $r = str_split($str);
         $r = array_map(function($str){return trim($str);},$r);
         $r = array_filter($r, function($str){return $str!=="";});
         $r = array_unique($r);

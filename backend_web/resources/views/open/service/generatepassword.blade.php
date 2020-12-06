@@ -19,9 +19,9 @@
             <div class="col-sm-2">
                 <label>
                     Tamaño:
-                    <sub>min:8, max:16</sub>
+                    <sub>min:8, max:32</sub>
                 </label>
-                <input type="number" class="form-control" required="required" min="8" max="16"
+                <input type="number" class="form-control" required="required" min="8" max="32"
                     :disabled="issending"
                     v-model="length"
                 />
@@ -29,9 +29,9 @@
             <div class="col-sm-2">
                 <label>
                     Excluir números:
-                    <sub>separados por coma de 0 a 9</sub>
+                    <sub>ejemplo: 876</sub>
                 </label>
-                <input type="text" class="form-control" maxlength="17"
+                <input type="text" class="form-control" maxlength="4"
                        :disabled="issending"
                        v-model="nonumbers"
                 />
@@ -39,7 +39,7 @@
             <div class="col-sm-2">
                 <label>
                     Excluir letras:
-                    <sub>separadas por coma de: a,b,c..,z</sub>
+                    <sub>ejemplo: axdeo</sub>
                 </label>
                 <input type="text" class="form-control" maxlength="26"
                        :disabled="issending"
@@ -49,7 +49,7 @@
             <div class="col-sm-3">
                 <label>
                     Excluir caracteres especiales:
-                    <sub>csv: @,#,$,%,&,...</sub>
+                    <sub>ejemplo: @#(%</sub>
                 </label>
                 <input type="text" class="form-control" maxlength="26"
                        :disabled="issending"
