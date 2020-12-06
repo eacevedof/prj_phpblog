@@ -1,10 +1,8 @@
-import funcs from "/js/open/helpers/openfuncs.js"
 import openapi from "/js/open/helpers/openapi.js"
 
 const app = new Vue({
     el: "#form-generate",
     data: {
-        csrf: funcs.get_csrftoken(),
         issending: false,
         btnsend: "Generar",
 
@@ -12,11 +10,9 @@ const app = new Vue({
         nonumbers: "",
         nochars: "",
         noletters: "",
+        password: "",
     },
 
-    async mounted(){
-
-    },
 
     methods:{
         reset(){
@@ -24,66 +20,39 @@ const app = new Vue({
             this.nonumbers = ""
             this.nochars = ""
             this.noletters = ""
+            this.password = ""
         },
 
-        on_submit: function(e) {
+        on_submit: async function(e) {
             e.preventDefault()
             if(!this.length) return
             this.issending = true
             this.btnsend = "Procesando..."
-            const form = new FormData();
+            this.password = ""
 
-
-            fetch('/services/conversion/pdf-to-jpg', {
-                method: "post",
-                body: form
+            const response = await openapi.post_passwconfig({
+                length: this.length,
+                nonumbers: this.nonumbers,
+                nochars: this.nochars,
+                noletters: this.noletters
             })
-            .then(response => response.json())
-            .then(response => {
-                console.log("reponse ok",response)
 
-                if(typeof response.error != "undefined"){
-                    return Swal.fire({
-                        icon: 'warning',
-                        title: 'Proceso incompleto',
-                        html: `Ha ocurrido un error en el proceso.<br/> Motivo: <br/>
-                               <b>${response.error}</b>`
-                    })
-                }
+            console.log("R",response)
 
+            if(typeof response.error != "undefined"){
                 Swal.fire({
-                    icon: 'success',
-                    html: `
-                    Descarga tus imágenes aqui:
-                    <a class="link-success" target="_blank" href="${response.download}">Descargar</a>
-                    `,
+                    icon: 'warning',
+                    title: 'Proceso incompleto',
+                    html: `Ha ocurrido un error en el proceso.<br/> Motivo: <br/>
+                           <b>${response.error}</b>`
                 })
+            }
+            else{
+                this.password = response
+            }
 
-                this.link = response.download
-
-                //reset
-                this.$refs.length.value = ""
-                this.length = null
-                this.filessize = 0
-                this.isoversized = false
-                this.overbytes = 0
-
-            })
-            .catch(error => {
-                console.log("catch.error",error)
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Vaya! Algo ha ido mal',
-                    html: `
-                    No se ha podido ejecutar esta operación.<br/>
-                    Error: <b>${error}</b>
-                    `,
-                })
-            })
-            .finally(()=>{
-                this.issending = false
-                this.btnsend = "Convertir"
-            })
+            this.issending = false
+            this.btnsend = "Generar"
         }//on_submit
 
     },//methods

@@ -14,9 +14,9 @@
     <div class="card-body">
         <form @submit="on_submit" id="form-generate" class="row g-3">
             <div v-if="password" class="col-12">
-                <label>Contraseña:</label><p>{{password}}</p>
+                <pre class="alert-info align-content-center p-3"><b>{{password}}</b></pre>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <label>
                     Tamaño:
                     <sub>min:8, max:16</sub>
@@ -26,7 +26,7 @@
                     v-model="length"
                 />
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <label>
                     Excluir números:
                     <sub>separados por coma de 0 a 9</sub>
@@ -36,7 +36,7 @@
                        v-model="nonumbers"
                 />
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <label>
                     Excluir letras:
                     <sub>separadas por coma de: a,A - z,Z</sub>
@@ -57,7 +57,7 @@
                 />
             </div>
             <!-- boton -->
-            <div class="col-sm-3 m-0 p-0 pt-4">
+            <div class="col-sm-2 m-0 p-0 pt-4">
                 <button id="btn-generate" class="btn btn-dark m-0 mt-3" :disabled="issending" >
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>

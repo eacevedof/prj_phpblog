@@ -38,7 +38,8 @@ const openapi = {
         try {
             const url = "/services/generate/password"
             const form = new FormData()
-            form.append("_token",funcs.get_uploadtoken())
+            console.log(funcs)
+            form.append("_token",funcs.get_csrftoken())
             form.append("action","generate.password")
             form.append("length",obj.length);
             form.append("noletters",obj.noletters);
