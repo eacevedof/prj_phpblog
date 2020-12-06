@@ -1,4 +1,9 @@
 import openapi from "/js/open/helpers/openapi.js"
+import funcs from "/js/open/helpers/openfuncs.js"
+//console.log(window)
+Vue.use(VueToast, {position:"top"})
+
+//import { ToastProgrammatic as Toast } from 'buefy'
 //import VueBootstrapToasts from "vue-bootstrap-toasts"
 //console.log(window.Toast.ToastProgrammatic)
 
@@ -29,8 +34,8 @@ const app = new Vue({
         },
 
         to_clipboard(){
-            alert(this.password)
-            window.Toast.ToastProgrammatic.open(`Subject saved. Nº ${this.password}`)
+            funcs.to_clipboard(this.password)
+            this.$toast.open(`Password ${this.password} now in clipboard`)
         },
 
         on_submit: async function(e) {

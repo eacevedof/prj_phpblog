@@ -48,8 +48,9 @@
     <link href="{{ asset('css/open.css') }}" rel="stylesheet">
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/buefy/dist/components/toast"></script>
-@include("common.elements.gtag")
+    <script src="https://cdn.jsdelivr.net/npm/vue-toast-notification"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vue-toast-notification/dist/theme-sugar.css" rel="stylesheet">
+    @include("common.elements.gtag")
 </head>
 <body>
 @include("open.elements.navbar")
