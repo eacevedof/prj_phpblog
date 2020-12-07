@@ -62,6 +62,7 @@ const openapi = {
             form.append("action","test.pregmatchall")
             form.append("pattern",obj.pattern)
             form.append("flags",obj.flags)
+            form.append("text",obj.text)
             const prom = await fetch(url,{method: 'post', body: form})
             const r = (await prom.json())
             return r

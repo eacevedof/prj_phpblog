@@ -47,6 +47,7 @@ class PregmatchService extends BaseService
     public function get()
     {
         $r = $this->_get_matches();
+        $r = print_r($r,1);
         return $r;
     }
 }

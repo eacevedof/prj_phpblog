@@ -8,20 +8,20 @@
 <div class="card opn-card" xmlns="http://www.w3.org/1999/html">
     <div class="card-header">
         <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
-        <h6>Prueba php <b>preg_match_all</b></h6>
+        <h6>Prueba php <a class="btn-link" href="https://www.php.net/manual/es/function.preg-match-all.php" target="_blank" rel="nofollow"><b>preg_match_all</b></a></h6>
     </div>
     @verbatim
     <div class="card-body">
         <form @submit="on_submit" id="form-pregmatchall" class="row g-3">
-            <div v-if="pattern" class="col-12">
-                <pre class="alert-info p-3"><b>{{final}}</b>     <i class="fa fa-clipboard" v-on:click="to_clipboard"></i></pre>
+            <div class="col-12">
+                <pre class="alert-info p-3"><b>{{final}}</b>    <i v-if="pattern" class="fa fa-clipboard" v-on:click="to_clipboard"></i></pre>
             </div>
-            <div class="col-4">
+            <div class="col-8">
                 <label>
                     Patrón:
-                    <sub>^(hola)</sub>
                 </label>
                 <input type="text" class="form-control" required="required" max="500"
+                    ref="pattern"
                     :disabled="issending"
                     v-model="pattern"
                     v-on:keyup="update_final"
@@ -30,33 +30,31 @@
             <div class="col-4">
                 <label>
                     Flags:
-                    <sub>ejemplo: sim</sub>
+                    <sub>ejemplo: imsx</sub>
                 </label>
-                <input type="text" class="form-control" maxlength="200"
+                <input type="text" class="form-control" maxlength="4"
                        :disabled="issending"
                        v-model="flags"
                        v-on:keyup="update_final"
                 />
             </div>
-            <!-- boton -->
-            <div class="col-2 m-0 p-0 pt-4">
-                <button id="btn-pregmatchall" class="btn btn-dark m-0 mt-3" :disabled="issending" >
-                    {{btnsend}}
-                    <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
-                </button>
-            </div>
-            <div class="col-12">
+            <div class="col-10">
                 <label>Texto:</label>
                 <textarea class="form-control" maxlength="10000"
                        :disabled="issending"
                        v-model="text"
                 ></textarea>
             </div>
-            <div class="col-12">
-                <label>
-                    Resultado:
-                </label>
-                <div>{{result}}</div>
+            <!-- boton -->
+            <div class="col-2">
+                <button id="btn-pregmatchall" class="btn btn-dark m-0 mt-3" :disabled="issending" >
+                    {{btnsend}}
+                    <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                </button>
+            </div>
+            <div v-if="result" class="col-12">
+                <label><b>Resultado:</b></label><br/>
+                <pre style="font-size: 0.7rem; border: 1px solid #ccc">{{result}}</pre>
             </div>
             <div class="col-12">
             </div>

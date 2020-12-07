@@ -11,9 +11,13 @@ const app = new Vue({
 
         pattern: "",
         flags: "",
-        final: "",
+        final: "//",
         text: "",
         result: "",
+    },
+
+    mounted(){
+        this.$refs.pattern.focus()
     },
 
     methods:{
@@ -38,6 +42,8 @@ const app = new Vue({
         on_submit: async function(e) {
             e.preventDefault()
             if(!this.pattern) return
+            if(!this.text) return
+
             this.issending = true
             this.btnsend = "Procesando..."
             this.result = ""
@@ -63,6 +69,7 @@ const app = new Vue({
 
             this.issending = false
             this.btnsend = "Probar"
+            this.$nextTick(() => this.$refs.pattern.focus())
         }//on_submit
 
     },//methods
