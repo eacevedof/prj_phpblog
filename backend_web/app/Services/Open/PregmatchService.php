@@ -16,6 +16,7 @@ class PregmatchService extends BaseService
 {
     private $input;
     private $clean;
+    private $errors;
 
     public function __construct($input=[])
     {

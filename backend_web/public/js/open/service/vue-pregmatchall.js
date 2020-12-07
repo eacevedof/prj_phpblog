@@ -26,9 +26,8 @@ const app = new Vue({
         },
 
         to_clipboard(){
-
-            funcs.to_clipboard(pattern)
-            this.$toast.open(`Pattern: ${pattern} now in clipboard`)
+            funcs.to_clipboard(this.final)
+            this.$toast.open(`Pattern: ${this.final} now in clipboard`)
         },
 
         update_final(){
@@ -53,14 +52,13 @@ const app = new Vue({
 
             if(typeof response.error != "undefined"){
                 Swal.fire({
-                    icon: 'warning',
-                    title: 'Proceso incompleto',
-                    html: `Ha ocurrido un error en el proceso.<br/> Motivo: <br/>
+                    icon: 'error',
+                    html: `Ha ocurrido un error.<br/> Motivo: <br/>
                            <b>${response.error}</b>`
                 })
             }
             else{
-                this.result = response
+                this.result = response.data
             }
 
             this.issending = false

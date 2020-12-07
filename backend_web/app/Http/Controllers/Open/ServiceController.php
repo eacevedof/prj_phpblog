@@ -53,8 +53,14 @@ class ServiceController extends BaseController
     public function pregmatch_all(Request $request)
     {
         $post = $request->all();
-        $r = (new PregmatchService($post))->get();
-        return Response()->json(["data"=>$r]);
+        try {
+            $r = (new PregmatchService($post))->get();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
     }
 
 

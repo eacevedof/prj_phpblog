@@ -63,7 +63,7 @@ const openapi = {
             form.append("pattern",obj.pattern)
             form.append("flags",obj.flags)
             const prom = await fetch(url,{method: 'post', body: form})
-            const r = (await prom.json()).data
+            const r = (await prom.json())
             return r
         }
         catch (e) {
