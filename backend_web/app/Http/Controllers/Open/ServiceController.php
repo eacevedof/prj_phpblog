@@ -5,6 +5,7 @@ use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
 use App\Services\Open\PasswordService;
 use App\Services\Open\PdftojpgService;
+use App\Services\Open\PregmatchService;
 use Illuminate\Http\Request;
 
 class ServiceController extends BaseController
@@ -48,19 +49,26 @@ class ServiceController extends BaseController
         return Response()->json(["data"=>$r]);
     }
 
-
-    //servicios/generar-contrasena
-    public function generatepassword(Request $request)
+    //api
+    public function pregmatch_all(Request $request)
     {
-        return view('open.service.generatepassword',[
+        $post = $request->all();
+        $r = (new PregmatchService($post))->get();
+        return Response()->json(["data"=>$r]);
+    }
+
+
+    //servicios/probar-php-pregmatch-all
+    public function pregmatchall()
+    {
+        return view('open.service.pregmatchall',[
             "result"      => [],
-            "seo"         => SeoComponent::get_meta("open.service.generatepassword"),
-            "breadscrumb" => $this->_get_scrumb("open.service.generatepassword",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "seo"         => SeoComponent::get_meta("open.service.pregmatchall"),
+            "breadscrumb" => $this->_get_scrumb("open.service.pregmatchall",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
         ]);
     }
-
 
 }

@@ -28,12 +28,23 @@ class PregmatchService extends BaseService
         $this->clean = [
             "pattern" => "",
             "text"    => "",
-            "result"  => [],
         ];
+    }
+
+    private function _get_matches()
+    {
+        $pattern = $this->clean["pattern"];
+        $flags = $this->clean["flags"];
+        $pattern = "#$pattern#$flags";
+        $text = $this->clean["text"];
+
+        preg_match_all($pattern, $text, $result);
+        return $result;
     }
 
     public function get()
     {
-
+        $r = $this->_get_matches();
+        return $r;
     }
 }

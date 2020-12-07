@@ -1,6 +1,6 @@
 import openapi from "/js/open/helpers/openapi.js"
 import funcs from "/js/open/helpers/openfuncs.js"
-
+//console.log(window)
 Vue.use(VueToast, {position:"top"})
 
 const app = new Vue({

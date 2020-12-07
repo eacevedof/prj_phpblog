@@ -31,6 +31,9 @@ Route::get("/servicios/convertir-pdf-a-jpg","Open\ServiceController@pdftojpg")->
 Route::post("/services/generate/password","Open\ServiceController@generate_password")->name("open.service.generate_password");
 Route::get("/servicios/generar-contrasena","Open\ServiceController@generatepassword")->name("open.service.generatepassword");
 
+Route::post("/services/test/pregmatchall","Open\ServiceController@pregmatch_all")->name("open.service.pregmatch_all");
+Route::get("/servicios/probar-php-pregmatch-all","Open\ServiceController@pregmatchall")->name("open.service.pregmatchall");
+
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");
 
 //language

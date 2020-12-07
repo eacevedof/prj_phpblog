@@ -77,12 +77,17 @@ class SeoComponent
             "h1" => ""
         ],
         "open.service.generatepassword"=>[
-            "title"=>"Generador de contraseñas seguras \"%s\"",
+            "title"=>"Generador de contraseñas seguras",
             "description"=>"Crea una contraseña segura combinando letras, números y caracteres especiales",
             "keywords" => "Contraseña, clave, password, acceso seguro, letras, números y caractreres especiales",
             "h1" => ""
         ],
-
+        "open.service.pregmatchall"=>[
+            "title"         => "Probar la función de php pregmatch_all",
+            "description"   => "Configura el patrón a aplicar, los flags y el texto a tratar",
+            "keywords"      => "php, pregmatch_all, probar, resultado",
+            "h1"            => ""
+        ],
     ];
 
     private const EMPTY = [
