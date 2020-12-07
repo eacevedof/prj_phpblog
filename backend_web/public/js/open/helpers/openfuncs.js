@@ -104,6 +104,19 @@ const funcs = {
         return final.filter((quest, i)=> i< ishow)
     },
 
+    html_entities(str){
+        const r = str.replace(/[&<>'"]/g,
+            tag => ({
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                "'": '&#39;',
+                '"': '&quot;'
+            }[tag])
+        )
+        return r
+    }
+
 }
 
 export default funcs

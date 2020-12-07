@@ -31,7 +31,8 @@ const app = new Vue({
 
         to_clipboard(){
             funcs.to_clipboard(this.final)
-            this.$toast.open(`Pattern: ${this.final} now in clipboard`)
+            const html = funcs.html_entities(this.final)
+            this.$toast.open(`Pattern: <b>${html}</b> now in clipboard`)
         },
 
         update_final(){
