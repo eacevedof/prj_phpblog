@@ -1,48 +1,52 @@
 import openapi from "/js/open/helpers/openapi.js"
 import funcs from "/js/open/helpers/openfuncs.js"
-//console.log(window)
+
 Vue.use(VueToast, {position:"top"})
 
 const app = new Vue({
-    el: "#form-generate",
+    el: "#form-pregmatchall",
     data: {
         issending: false,
-        btnsend: "Generar",
+        btnsend: "Probar",
 
-        length: 8,
-        nonumbers: "",
-        nochars: "",
-        noletters: "",
-        password: "",
+        pattern: "",
+        flags: "",
+        final: "",
+        text: "",
+        result: "",
     },
-
 
     methods:{
         reset(){
-            this.length = 8
-            this.nonumbers = ""
-            this.nochars = ""
-            this.noletters = ""
-            this.password = ""
+            this.pattern = ""
+            this.flags = ""
+            this.final = ""
+            this.text = ""
+            this.result = ""
         },
 
         to_clipboard(){
-            funcs.to_clipboard(this.password)
-            this.$toast.open(`Password ${this.password} now in clipboard`)
+
+            funcs.to_clipboard(pattern)
+            this.$toast.open(`Pattern: ${pattern} now in clipboard`)
+        },
+
+        update_final(){
+            const pattern = `/${this.pattern}/${this.flags}`
+            this.final = pattern
         },
 
         on_submit: async function(e) {
             e.preventDefault()
-            if(!this.length) return
+            if(!this.pattern) return
             this.issending = true
             this.btnsend = "Procesando..."
-            this.password = ""
+            this.result = ""
 
-            const response = await openapi.post_passwconfig({
-                length: this.length,
-                nonumbers: this.nonumbers,
-                nochars: this.nochars,
-                noletters: this.noletters
+            const response = await openapi.post_pregmatchaall({
+                pattern: this.pattern,
+                flags: this.flags,
+                text: this.text
             })
 
             console.log("R",response)
@@ -56,11 +60,11 @@ const app = new Vue({
                 })
             }
             else{
-                this.password = response
+                this.result = response
             }
 
             this.issending = false
-            this.btnsend = "Generar"
+            this.btnsend = "Probar"
         }//on_submit
 
     },//methods

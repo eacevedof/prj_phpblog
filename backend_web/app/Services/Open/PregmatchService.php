@@ -26,8 +26,9 @@ class PregmatchService extends BaseService
     private function _load_clean()
     {
         $this->clean = [
-            "pattern" => "",
-            "text"    => "",
+            "pattern" => $this->input["pattern"] ?? "",
+            "flags"    => $this->input["flags"] ?? "",
+            "text"    => $this->input["text"] ?? "",
         ];
     }
 
