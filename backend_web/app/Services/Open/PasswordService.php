@@ -11,7 +11,6 @@
 namespace App\Services\Open;
 
 use App\Services\BaseService;
-use Illuminate\Http\Request;
 
 class PasswordService extends BaseService
 {
@@ -28,13 +27,13 @@ class PasswordService extends BaseService
     {
         $this->clean = [
             "length"   => $this->input["length"] ?? 8,
-            "chars"    => $this->_get_cleaned_csv($this->input["nochars"]),
-            "numbers"  => $this->_get_cleaned_csv($this->input["nonumbers"]),
-            "letters"  => $this->_get_cleaned_csv($this->input["noletters"]),
+            "chars"    => $this->_get_as_array($this->input["nochars"]),
+            "numbers"  => $this->_get_as_array($this->input["nonumbers"]),
+            "letters"  => $this->_get_as_array($this->input["noletters"]),
         ];
     }
 
-    private function _get_cleaned_csv($str)
+    private function _get_as_array($str)
     {
         if(!$str) return [];
         $r = str_split($str);
