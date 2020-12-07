@@ -5,11 +5,10 @@
         </a> /
         <a href="/blog" class="text-white">Blog</a> /
         <a href="/contacto" class="text-white">Contacto</a> /
-        <a href="/idiomas" class="text-white">App Idiomas</a> /
         @if(env("APP_ENV")=="test")
-            <a href="https://twitter.com/eacevedof" target="_blank" class="text-white" rel="nofollow">@eacevedof</a> /
+            <a href="/idiomas" class="text-white">App Idiomas</a> /
         @endif
-        {{env("APP_ENV")}}
+        <a href="https://twitter.com/eacevedof" target="_blank" class="text-white" rel="nofollow">@eacevedof</a> /
         <a href="https://github.com/eacevedof" target="_blank" class="text-white" rel="nofollow">Github</a>
     </p>
 </footer>
