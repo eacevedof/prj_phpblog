@@ -28,7 +28,8 @@ const app = new Vue({
 
         to_clipboard(){
             funcs.to_clipboard(this.password)
-            this.$toast.open(`Password ${this.password} now in clipboard`)
+            const html = funcs.html_entities(this.password)
+            this.$toast.open(`Password <b>${html}</b> now in clipboard`)
         },
 
         on_submit: async function(e) {
