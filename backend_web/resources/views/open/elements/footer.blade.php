@@ -6,7 +6,9 @@
         <a href="/blog" class="text-white">Blog</a> /
         <a href="/contacto" class="text-white">Contacto</a> /
         <a href="/idiomas" class="text-white">App Idiomas</a> /
-        <a href="https://twitter.com/eacevedof" target="_blank" class="text-white" rel="nofollow">@eacevedof</a> /
+        @if(env("APP_ENV")=="test")
+            <a href="https://twitter.com/eacevedof" target="_blank" class="text-white" rel="nofollow">@eacevedof</a> /
+        @endif
         <a href="https://github.com/eacevedof" target="_blank" class="text-white" rel="nofollow">Github</a>
     </p>
 </footer>
