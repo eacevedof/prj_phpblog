@@ -9,6 +9,7 @@
         @if(env("APP_ENV")=="test")
             <a href="https://twitter.com/eacevedof" target="_blank" class="text-white" rel="nofollow">@eacevedof</a> /
         @endif
+        {{env("APP_ENV")}}
         <a href="https://github.com/eacevedof" target="_blank" class="text-white" rel="nofollow">Github</a>
     </p>
 </footer>
