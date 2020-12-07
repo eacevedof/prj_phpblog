@@ -40,7 +40,7 @@
             </div>
             <div class="col-10">
                 <label>Texto:</label>
-                <textarea class="form-control" maxlength="10000"
+                <textarea class="form-control" maxlength="10000" rows="8"
                        :disabled="issending"
                        v-model="text"
                 ></textarea>
