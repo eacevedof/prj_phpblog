@@ -32,7 +32,7 @@ Route::post("/services/generate/password","Open\ServiceController@generate_passw
 Route::get("/servicios/generar-contrasena","Open\ServiceController@generatepassword")->name("open.service.generatepassword");
 
 Route::post("/services/test/pregmatchall","Open\ServiceController@pregmatch_all")->name("open.service.pregmatch_all");
-Route::get("/servicios/probar-php-pregmatch-all","Open\ServiceController@pregmatchall")->name("open.service.pregmatchall");
+Route::get("/servicios/probar-php-preg-match-all","Open\ServiceController@pregmatchall")->name("open.service.pregmatchall");
 
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");
 
