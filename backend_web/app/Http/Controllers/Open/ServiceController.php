@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Open;
 
 use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
+use App\Services\Open\FormatSql;
 use App\Services\Open\PasswordService;
 use App\Services\Open\PdftojpgService;
 use App\Services\Open\PregmatchService;
@@ -90,11 +91,11 @@ class ServiceController extends BaseController
     }
 
     //api
-    public function pretty_query(Request $request)
+    public function format_sql(Request $request)
     {
         $post = $request->all();
         try {
-            $r = (new PregmatchService($post))->get();
+            $r = (new FormatSql($post))->get();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
@@ -104,12 +105,12 @@ class ServiceController extends BaseController
     }
 
     //servicios/formatear-sql-query
-    public function prettyquery()
+    public function fromatsql()
     {
-        return view('open.service.prettyquery',[
+        return view('open.service.fromatsql',[
             "result"      => [],
-            "seo"         => SeoComponent::get_meta("open.service.prettyquery"),
-            "breadscrumb" => $this->_get_scrumb("open.service.prettyquery",["slug"=>"generar-contrasena","slugtext"=>""]),
+            "seo"         => SeoComponent::get_meta("open.service.fromatsql"),
+            "breadscrumb" => $this->_get_scrumb("open.service.fromatsql",["slug"=>"generar-contrasena","slugtext"=>""]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"

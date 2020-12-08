@@ -2,7 +2,7 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name PrettyQueryService
+ * @name FormatSql
  * @file PrettyQueryService.php
  * @version 1.0.0
  * @date 23-11-2020 20:46
@@ -12,7 +12,7 @@ namespace App\Services\Open;
 
 use App\Services\BaseService;
 
-class PrettyQueryService extends BaseService
+class FormatSql extends BaseService
 {
     private $input;
     private $clean;

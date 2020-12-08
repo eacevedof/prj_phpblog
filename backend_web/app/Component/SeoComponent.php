@@ -88,6 +88,12 @@ class SeoComponent
             "keywords"      => "php, pregmatch_all, probar, resultado",
             "h1"            => ""
         ],
+        "open.service.formatsql"=>[
+            "title"         => "Formatea un consulta SQL",
+            "description"   => "A partir de una consulta SQL la organiza con saltos de linea alienado joins, where, etc",
+            "keywords"      => "Formatear, sql, indentación, alinear",
+            "h1"            => ""
+        ],
     ];
 
     private const EMPTY = [

@@ -34,8 +34,8 @@ Route::get("/servicios/generar-contrasena","Open\ServiceController@generatepassw
 Route::post("/services/test/pregmatchall","Open\ServiceController@pregmatch_all")->name("open.service.pregmatch_all");
 Route::get("/servicios/probar-php-preg-match-all","Open\ServiceController@pregmatchall")->name("open.service.pregmatchall");
 
-Route::post("/services/formatter/sql-query","Open\ServiceController@pretty_query")->name("open.service.pretty_query");
-Route::get("/servicios/formatear-sql-query","Open\ServiceController@prettyquery")->name("open.service.prettyquery");
+Route::post("/services/formatter/sql-query","Open\ServiceController@format_sql")->name("open.service.format_sql");
+Route::get("/servicios/formatear-consulta-sql","Open\ServiceController@formatsql")->name("open.service.formatsql");
 
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");
 
