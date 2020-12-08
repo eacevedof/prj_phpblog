@@ -104,6 +104,19 @@ class FormatSql extends BaseService
         return $this;
     }
 
+    private function _explode_where()
+    {
+        $sql = $this->clean["query"];
+        $parts = explode(" where ",$sql);
+        $part = end($parts);
+        $part = explode("group by",$part);
+        $part = trim($part[0]);
+        $part = $this->_get_uppered(["and","or"," in "],$part);
+        $part = $this->_get_nlined(["AND","OR"],$part);
+        $this->qparts["where"] = "\nWHERE $part";
+        return $this;
+    }
+
     private function _get_query()
     {
         //dd($this->qparts);
@@ -117,6 +130,7 @@ class FormatSql extends BaseService
         $r = $this->_explode_select()
             ->_explode_from()
             ->_explode_joins()
+            ->_explode_where()
             ->_get_query();
         return $r;
     }
