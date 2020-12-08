@@ -16,7 +16,8 @@ class FormatSql extends BaseService
 {
     private $input;
     private $clean;
-    private $temp = [];
+    private $qparts = [];
+    private $temp;
 
     public function __construct($input=[])
     {
@@ -30,6 +31,7 @@ class FormatSql extends BaseService
             "query" => $this->_get_sanitized($this->input["query"] ?? ""),
         ];
     }
+
     private function _get_sanitized($sql)
     {
         if(!$sql) return "";
@@ -48,9 +50,10 @@ class FormatSql extends BaseService
         $sql = $this->clean["query"];
         $parts = explode(" from ",$sql);
         $parts = explode("select ",$parts[0]);
-        $parts = trim($parts[1] ?? "");
-
-        $this->temp["fields"] = "SELECT $parts";
+        $parts = explode(",",$parts[1]);
+        $parts = array_map(function($part){return trim($part);},$parts);
+        $parts = implode(",\n",$parts);
+        $this->qparts["fields"] = "SELECT\n$parts";
         return $this;
     }
 
@@ -59,20 +62,61 @@ class FormatSql extends BaseService
         $sql = $this->clean["query"];
         $parts = explode(" from ",$sql);
         $parts = trim($parts[1] ?? "");
-        $this->temp["from"] = "FROM $parts";
+        $this->temp = explode(" ",trim($parts))[0] ?? "";
+        $this->qparts["from"] = "FROM $this->temp";
+        return $this;
+    }
+
+    private function _get_inner_text($pattern, $text)
+    {
+        preg_match_all($pattern, $text,$matches);
+        return $matches[1][0] ?? "";
+    }
+
+    private function _get_uppered($artoup, $text)
+    {
+        $uppers = [];
+        foreach ($artoup as $up)
+            $uppers[] = strtoupper($up);
+        return str_replace($artoup, $uppers, $text);
+    }
+
+    private function _get_nlined($armark, $text)
+    {
+        $nls = [];
+        foreach ($armark as $str)
+        {
+            $str = ltrim($str);
+            $nls[] = "\n$str";
+        }
+        return str_replace($armark, $nls, $text);
+    }
+
+    private function _explode_joins()
+    {
+        $sql = $this->clean["query"];
+        $pattern = "/{$this->temp}[\s]+(.*?)where/";
+        $join = $this->_get_inner_text($pattern, $sql);
+        //dd($pattern);
+        $join = $this->_get_uppered(["inner join","left join","right join","cross join"," on "],$join);
+        $join = $this->_get_nlined(["INNER ","LEFT ","RIGHT ","CROSS "," ON "], $join);
+        $this->qparts["joins"] = $join;
         return $this;
     }
 
     private function _get_query()
     {
-        //dd($this->temp);
-        return implode("\n", $this->temp);
+        //dd($this->qparts);
+        $query = implode("\n", $this->qparts);
+        //$query = $this->_get_uppered(["inner join","left join","right join","cross join"," on "],$query);
+        return $query;
     }
 
     private function _get_formatted()
     {
         $r = $this->_explode_select()
             ->_explode_from()
+            ->_explode_joins()
             ->_get_query();
         return $r;
     }

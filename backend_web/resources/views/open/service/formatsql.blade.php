@@ -17,7 +17,7 @@
             </div>
             <div class="col-10">
                 <label>SQL:</label>
-                <textarea class="form-control" maxlength="10000" rows="8" style="font-family: 'Courier New'"
+                <textarea class="form-control" maxlength="10000" rows="8" style="font-family: 'Courier New'; font-size: smaller"
                        :disabled="issending"
                        v-model="query"
                 ></textarea>
