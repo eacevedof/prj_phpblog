@@ -128,6 +128,28 @@ class FormatSql extends BaseService
         return $this;
     }
 
+    private function _explode_having()
+    {
+        $sql = $this->clean["query"];
+        $parts = explode(" having ",$sql);
+        $part = end($parts);
+        $part = explode(" limit ",$part);
+        $part = trim($part[0]);
+        $this->qparts["limit"] = "\nLIMIT $part";
+        return $this;
+    }
+
+    private function _explode_limit()
+    {
+        $sql = $this->clean["query"];
+        $parts = explode(" having ",$sql);
+        $part = end($parts);
+        $part = explode(" limit ",$part);
+        $part = trim($part[0]);
+        $this->qparts["limit"] = "\nLIMIT $part";
+        return $this;
+    }
+
     private function _get_query()
     {
         //dd($this->qparts);
@@ -143,6 +165,8 @@ class FormatSql extends BaseService
             ->_explode_joins()
             ->_explode_where()
             ->_explode_groupby()
+            ->_explode_having()
+            ->_explode_limit()
             ->_get_query();
         return $r;
     }
