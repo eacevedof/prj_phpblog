@@ -9,7 +9,8 @@ class Formatter
         return date("YmdHis",strtotime($datetime));
     }
 
-    public static function get_datetime($datetime){
+    public static function get_datetime($datetime)
+    {
         if(!$datetime) return [];
 
         $result = [];
