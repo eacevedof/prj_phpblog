@@ -69,8 +69,14 @@ class FormatSql extends BaseService
 
     private function _get_inner_text($pattern, $text)
     {
-        preg_match_all($pattern, $text,$matches);
+        $matches = $this->_get_matches($pattern,$text);
         return $matches[1][0] ?? "";
+    }
+
+    private function _get_matches($pattern, $text)
+    {
+        preg_match_all($pattern, $text, $matches);
+        return $matches;
     }
 
     private function _get_uppered($artoup, $text)
@@ -150,6 +156,56 @@ class FormatSql extends BaseService
         return $this;
     }
 
+    private function _get_exploded($sep, $sql)
+    {
+        if(strstr($sql,$sep))
+        {
+            return explode($sep, $sql);
+        }
+        return [];
+    }
+
+    private function splitter()
+    {
+        $parts = [];
+        $sql = $this->clean["query"];
+        $tmp = $this->_get_exploded("limit ",$sql);
+        if($tmp) {
+            $sql = $tmp[0];
+            $parts["limit"] = $tmp[1];
+        }
+
+        $tmp = $this->_get_exploded("having ",$sql);
+        if($tmp) {
+            $sql = $tmp[0];
+            $parts["having"] = $tmp[1];
+        }
+
+        $tmp = $this->_get_exploded("group by ",$sql);
+        if($tmp) {
+            $sql = $tmp[0];
+            $parts["group by"] = $tmp[1];
+        }
+
+        $tmp = $this->_get_exploded("where ",$sql);
+        if($tmp) {
+            $sql = $tmp[0];
+            $parts["where"] = $tmp[1];
+        }
+
+        $tmp = $this->_get_exploded("from ",$sql);
+        if($tmp) {
+            $sql = $tmp[1];
+            $parts["fields"] = $tmp[0];
+        }
+
+        $tmp = $this->_get_matches("/((inner|left|cross|right)[\s]+join)(.*)/", $sql);
+        if($tmp) {
+            $parts["joins"] = $tmp[0][0] ?? "";
+        }
+        return $parts;
+    }
+
     private function _get_query()
     {
         //dd($this->qparts);
@@ -174,6 +230,7 @@ class FormatSql extends BaseService
     public function get()
     {
         $r = $this->_get_formatted();
+        $r = $this->splitter();
         return $r;
     }
 }
