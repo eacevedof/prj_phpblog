@@ -105,12 +105,12 @@ class ServiceController extends BaseController
     }
 
     //servicios/formatear-sql-query
-    public function fromatsql()
+    public function formatsql()
     {
-        return view('open.service.fromatsql',[
+        return view('open.service.formatsql',[
             "result"      => [],
-            "seo"         => SeoComponent::get_meta("open.service.fromatsql"),
-            "breadscrumb" => $this->_get_scrumb("open.service.fromatsql",["slug"=>"generar-contrasena","slugtext"=>""]),
+            "seo"         => SeoComponent::get_meta("open.service.formatsql"),
+            "breadscrumb" => $this->_get_scrumb("open.service.formatsql",["slug"=>"generar-contrasena","slugtext"=>""]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
