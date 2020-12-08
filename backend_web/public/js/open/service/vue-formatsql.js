@@ -27,12 +27,12 @@ const app = new Vue({
 
         on_submit: async function(e) {
             e.preventDefault()
-            if(!this.length) return
+            if(!this.query.trim()) return
             this.issending = true
             this.btnsend = "Procesando..."
             this.result = ""
 
-            const response = await openapi.post_passwconfig({
+            const response = await openapi.post_formatquery({
                 query: this.query,
             })
 

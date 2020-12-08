@@ -12,14 +12,14 @@
     @verbatim
     <div class="card-body">
         <form @submit="on_submit" id="form-formatsql" class="row g-3">
-            <div class="col-12">
-                <pre class="alert-info p-3"><b>{{final}}</b>    <i v-if="pattern" class="fa fa-clipboard" v-on:click="to_clipboard"></i></pre>
+            <div v-if="result" class="col-12">
+                <i class="fa fa-clipboard" v-on:click="to_clipboard"></i>
             </div>
             <div class="col-10">
-                <label>Texto:</label>
-                <textarea class="form-control" maxlength="10000" rows="8"
+                <label>SQL:</label>
+                <textarea class="form-control" maxlength="10000" rows="8" style="font-family: 'Courier New'"
                        :disabled="issending"
-                       v-model="text"
+                       v-model="query"
                 ></textarea>
             </div>
             <!-- boton -->
@@ -32,8 +32,6 @@
             <div v-if="result" class="col-12">
                 <label><b>Resultado:</b></label><br/>
                 <pre style="font-size: 0.7rem; border: 1px solid #ccc">{{result}}</pre>
-            </div>
-            <div class="col-12">
             </div>
         </form>
     </div>

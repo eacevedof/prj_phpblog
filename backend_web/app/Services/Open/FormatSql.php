@@ -47,91 +47,22 @@ class FormatSql extends BaseService
     {
         $sql = $this->clean["query"];
         $parts = explode(" from ",$sql);
+        $parts = explode("select ",$parts[0]);
+        $parts = trim($parts[1] ?? "");
 
-
-        $this->temp["fields"] = explode($parts[0];
-        $this->temp["post-from"] = $parts[1];
+        $this->temp["fields"] = explode(",",$parts);
         return $this;
     }
 
-    private function _explode_from()
+
+    private function _get_query()
     {
-        $sql = $this->clean["query"];
-        $parts = explode("from ",$sql);
-        $this->temp["pre-from"] = $parts[0];
-        $this->temp["post-from"] = $parts[1];
-        return $this;
-    }
-
-    private function _explode_inner()
-    {
-        $str = $this->temp[1] ?? "";
-        if(!$str) return $this;
-        $parts = explode("INNER JOIN ",$str);
-        $this->temp["pre-join"] = $parts[0];
-        $this->temp["post-join"] = $parts[1];
-        return $this;
-    }
-
-    private function _has_part($part, $sql)
-    {
-        if($part=="distinct")//ok
-            return strstr($sql,"select distinct ");
-        elseif($part=="top")
-            return strstr($sql," top ");
-        elseif($part=="where")
-            return strstr($sql," where ");
-        elseif($part=="groupby")
-            return strstr($sql," group by ");
-        elseif($part=="having")
-            return strstr($sql," having ");
-        elseif($part=="orderby")
-            return strstr($sql," order by ");
-        return false;
-    }
-
-    private function _get_select()
-    {
-
-    }
-
-    private function _get_top($sql)
-    {
-        //puede ser select top o select distinct top
-        $sTopPatern = "/select[\s]+top[\s]+[\d]+[\s]/";
-        preg_match($sTopPatern,$sql,$arMatch);
-        //si no hay coincidencias es probable que haya un distinct asi que se extrae con distinct
-        if(!$arMatch[0])
-        {
-            $sTopPatern = "/select[\s]+distinct[\s]+top[\s]+[\d]+[\s]/";
-            preg_match($sTopPatern,$sql,$arMatch);
-        }
-
-        if($arMatch[0])
-        {
-            $sTop = explode_select("top",$arMatch[0]);
-            $sTop = trim($sTop[1]);
-        }
-
-        return $sTop;
-    }
-
-    private function _explode_query()
-    {
-        $sql = $this->clean["query"];
-        $sql = $this->_get_sanitized($sql);
-
-        $didstinct = $this->_has_part("distinct", $sql);
-        $top = $this->_has_part("top", $sql);
-
-
+        return implode("\n", $this->temp);
     }
 
     private function _get_formatted()
     {
-        $r = $this->_explode_from()->_get_select();
-
-
+        $r = $this->_explode_select()->_get_query();
         return $r;
     }
 
