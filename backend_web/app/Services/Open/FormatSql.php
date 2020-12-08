@@ -50,7 +50,16 @@ class FormatSql extends BaseService
         $parts = explode("select ",$parts[0]);
         $parts = trim($parts[1] ?? "");
 
-        $this->temp["fields"] = $parts;
+        $this->temp["fields"] = "SELECT $parts";
+        return $this;
+    }
+
+    private function _explode_from()
+    {
+        $sql = $this->clean["query"];
+        $parts = explode(" from ",$sql);
+        $parts = trim($parts[1] ?? "");
+        $this->temp["from"] = "FROM $parts";
         return $this;
     }
 
@@ -62,7 +71,9 @@ class FormatSql extends BaseService
 
     private function _get_formatted()
     {
-        $r = $this->_explode_select()->_get_query();
+        $r = $this->_explode_select()
+            ->_explode_from()
+            ->_get_query();
         return $r;
     }
 
