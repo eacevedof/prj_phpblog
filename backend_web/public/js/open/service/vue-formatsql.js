@@ -4,7 +4,7 @@ import funcs from "/js/open/helpers/openfuncs.js"
 Vue.use(VueToast, {position:"top"})
 
 const app = new Vue({
-    el: "#form-fromatsql",
+    el: "#form-formatsql",
     data: {
         issending: false,
         btnsend: "Formatear",
@@ -15,7 +15,6 @@ const app = new Vue({
         noletters: "",
         password: "",
     },
-
 
     methods:{
         reset(){

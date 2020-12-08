@@ -70,6 +70,23 @@ const openapi = {
         catch (e) {
             return {error:e}
         }
+    },
+
+    post_formatquery: async (obj) => {
+        try {
+            const url = "/services/formatter/sql-query"
+            const form = new FormData()
+            form.append("_token",funcs.get_csrftoken())
+            form.append("action","format.sqlquery")
+            form.append("query",obj.query)
+
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json())
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
     }
 }
 export default openapi

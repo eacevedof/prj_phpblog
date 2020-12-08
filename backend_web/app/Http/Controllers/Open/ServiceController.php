@@ -110,7 +110,7 @@ class ServiceController extends BaseController
         return view('open.service.formatsql',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.formatsql"),
-            "breadscrumb" => $this->_get_scrumb("open.service.formatsql",["slug"=>"generar-contrasena","slugtext"=>""]),
+            "breadscrumb" => $this->_get_scrumb("open.service.formatsql",["slug"=>"formatear-consulta-sql","slugtext"=>""]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
