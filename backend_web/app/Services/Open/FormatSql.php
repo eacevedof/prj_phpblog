@@ -50,13 +50,13 @@ class FormatSql extends BaseService
         $parts = explode("select ",$parts[0]);
         $parts = trim($parts[1] ?? "");
 
-        $this->temp["fields"] = explode(",",$parts);
+        $this->temp["fields"] = $parts;
         return $this;
     }
 
-
     private function _get_query()
     {
+        //dd($this->temp);
         return implode("\n", $this->temp);
     }
 
