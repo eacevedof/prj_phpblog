@@ -9,26 +9,20 @@ const app = new Vue({
         issending: false,
         btnsend: "Formatear",
 
-        length: 8,
-        nonumbers: "",
-        nochars: "",
-        noletters: "",
-        password: "",
+        query: "",
+        result: "",
     },
 
     methods:{
         reset(){
-            this.length = 8
-            this.nonumbers = ""
-            this.nochars = ""
-            this.noletters = ""
-            this.password = ""
+            this.query = ""
+            this.result = ""
         },
 
         to_clipboard(){
-            funcs.to_clipboard(this.password)
-            const html = funcs.html_entities(this.password)
-            this.$toast.open(`Password <b>${html}</b> now in clipboard`)
+            funcs.to_clipboard(this.result)
+            const html = funcs.html_entities(this.result)
+            this.$toast.open(`result <b>${html}</b> now in clipboard`)
         },
 
         on_submit: async function(e) {
@@ -36,27 +30,21 @@ const app = new Vue({
             if(!this.length) return
             this.issending = true
             this.btnsend = "Procesando..."
-            this.password = ""
+            this.result = ""
 
             const response = await openapi.post_passwconfig({
-                length: this.length,
-                nonumbers: this.nonumbers,
-                nochars: this.nochars,
-                noletters: this.noletters
+                query: this.query,
             })
-
-            console.log("R",response)
 
             if(typeof response.error != "undefined"){
                 Swal.fire({
-                    icon: 'warning',
-                    title: 'Proceso incompleto',
-                    html: `Ha ocurrido un error en el proceso.<br/> Motivo: <br/>
+                    icon: 'error',
+                    html: `Ha ocurrido un error.<br/> Motivo: <br/>
                            <b>${response.error}</b>`
                 })
             }
             else{
-                this.password = response
+                this.result = response.data
             }
 
             this.issending = false
