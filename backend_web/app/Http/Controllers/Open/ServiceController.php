@@ -49,7 +49,6 @@ class ServiceController extends BaseController
         return Response()->json(["data"=>$r]);
     }
 
-
     //servicios/generar-contrasena
     public function generatepassword(Request $request)
     {
@@ -77,7 +76,6 @@ class ServiceController extends BaseController
         }
     }
 
-
     //servicios/probar-php-pregmatch-all
     public function pregmatchall()
     {
@@ -91,4 +89,30 @@ class ServiceController extends BaseController
         ]);
     }
 
+    //api
+    public function pretty_query(Request $request)
+    {
+        $post = $request->all();
+        try {
+            $r = (new PregmatchService($post))->get();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
+    }
+
+    //servicios/formatear-sql-query
+    public function prettyquery()
+    {
+        return view('open.service.prettyquery',[
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.service.prettyquery"),
+            "breadscrumb" => $this->_get_scrumb("open.service.prettyquery",["slug"=>"generar-contrasena","slugtext"=>""]),
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "service"
+        ]);
+    }
 }
