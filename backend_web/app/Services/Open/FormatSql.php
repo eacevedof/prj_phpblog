@@ -17,6 +17,7 @@ class FormatSql extends BaseService
     private $input;
     private $clean;
     private $qparts = [];
+    private $splitted = [];
     private $temp;
 
     public function __construct($input=[])
@@ -47,13 +48,12 @@ class FormatSql extends BaseService
 
     private function _explode_select()
     {
-        $sql = $this->clean["query"];
-        $parts = explode(" from ",$sql);
-        $parts = explode("select ",$parts[0]);
-        $parts = explode(",",$parts[1]);
-        $parts = array_map(function($part){return trim($part);},$parts);
-        $parts = implode(",\n",$parts);
-        $this->qparts["fields"] = "SELECT\n$parts";
+        if($this->splitted["fields"])
+        {
+            $tmp = $this->_get_uppered(["select"], $this->splitted["fields"]);
+            $tmp = $this->_get_nlined([","], $tmp);
+            $this->qparts["fields"] = "SELECT$tmp";
+        }
         return $this;
     }
 
@@ -165,7 +165,7 @@ class FormatSql extends BaseService
         return [];
     }
 
-    private function splitter()
+    private function _get_splitted()
     {
         $parts = [];
         $sql = $this->clean["query"];
@@ -206,6 +206,7 @@ class FormatSql extends BaseService
         return $parts;
     }
 
+
     private function _get_query()
     {
         //dd($this->qparts);
@@ -216,6 +217,7 @@ class FormatSql extends BaseService
 
     private function _get_formatted()
     {
+        $this->splitted = $this->_get_splitted();
         $r = $this->_explode_select()
             ->_explode_from()
             ->_explode_joins()
@@ -230,7 +232,6 @@ class FormatSql extends BaseService
     public function get()
     {
         $r = $this->_get_formatted();
-        $r = $this->splitter();
         return $r;
     }
 }
