@@ -117,6 +117,17 @@ class FormatSql extends BaseService
         return $this;
     }
 
+    private function _explode_groupby()
+    {
+        $sql = $this->clean["query"];
+        $parts = explode(" group by ",$sql);
+        $part = end($parts);
+        $part = explode(" having ",$part);
+        $part = trim($part[0]);
+        $this->qparts["groupby"] = "\nGROUP BY $part";
+        return $this;
+    }
+
     private function _get_query()
     {
         //dd($this->qparts);
@@ -131,6 +142,7 @@ class FormatSql extends BaseService
             ->_explode_from()
             ->_explode_joins()
             ->_explode_where()
+            ->_explode_groupby()
             ->_get_query();
         return $r;
     }
