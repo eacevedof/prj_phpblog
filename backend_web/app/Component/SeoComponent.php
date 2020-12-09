@@ -89,7 +89,7 @@ class SeoComponent
             "h1"            => ""
         ],
         "open.service.formatsql"=>[
-            "title"         => "Formatea un consulta SQL",
+            "title"         => "Formatea una consulta SQL",
             "description"   => "A partir de una consulta SQL la organiza con saltos de linea alienado joins, where, etc",
             "keywords"      => "Formatear, sql, indentación, alinear",
             "h1"            => ""
