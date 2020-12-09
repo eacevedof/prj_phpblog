@@ -18,7 +18,6 @@ class FormatSql extends BaseService
     private $clean;
     private $qparts = [];
     private $splitted = [];
-    private $temp;
 
     public function __construct($input=[])
     {
@@ -59,7 +58,7 @@ class FormatSql extends BaseService
 
     private function _explode_from()
     {
-        $val = $this->splitted["from"] ?? "";
+        $val = $this->qparts["from"] ?? "";
         if($val)
         {
             $tmp = $this->_get_uppered(["select","distinct","top"], $val);
@@ -67,12 +66,6 @@ class FormatSql extends BaseService
             $this->qparts["from"] = $tmp;
         }
         return $this;
-    }
-
-    private function _get_inner_text($pattern, $text)
-    {
-        $matches = $this->_get_matches($pattern,$text);
-        return $matches[1][0] ?? "";
     }
 
     private function _get_matches($pattern, $text)
@@ -196,6 +189,7 @@ class FormatSql extends BaseService
 
         $tmp = $this->_get_exploded("from ",$sql);
         if($tmp) {
+            //dd($tmp);
             $sql = trim($tmp[1]);
             $parts["fields"] = $tmp[0];
 
@@ -205,7 +199,6 @@ class FormatSql extends BaseService
 
         $tmp = $this->_get_matches("/((inner|left|cross|right)[\s]+join)(.*)/", $sql);
         if($tmp) {
-
             $parts["joins"] = $tmp[0][0] ?? "";
         }
         return $parts;
