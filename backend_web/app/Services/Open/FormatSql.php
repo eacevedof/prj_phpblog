@@ -50,9 +50,9 @@ class FormatSql extends BaseService
     {
         if($this->splitted["fields"])
         {
-            $tmp = $this->_get_uppered(["select"], $this->splitted["fields"]);
-            $tmp = $this->_get_nlined([","], $tmp);
-            $this->qparts["fields"] = "SELECT$tmp";
+            $tmp = $this->_get_uppered(["select","distinct","top"], $this->splitted["fields"]);
+            $tmp = $this->_get_nlined([","], $tmp,false);
+            $this->qparts["fields"] = $tmp;
         }
         return $this;
     }
@@ -87,13 +87,16 @@ class FormatSql extends BaseService
         return str_replace($artoup, $uppers, $text);
     }
 
-    private function _get_nlined($armark, $text)
+    private function _get_nlined($armark, $text, $prev=1)
     {
         $nls = [];
         foreach ($armark as $str)
         {
             $str = ltrim($str);
-            $nls[] = "\n$str";
+            if($prev)
+                $nls[] = "\n$str";
+            else
+                $nls[] = "$str\n";
         }
         return str_replace($armark, $nls, $text);
     }
@@ -195,8 +198,11 @@ class FormatSql extends BaseService
 
         $tmp = $this->_get_exploded("from ",$sql);
         if($tmp) {
-            $sql = $tmp[1];
+            $sql = trim($tmp[1]);
             $parts["fields"] = $tmp[0];
+
+            $tmp = explode(" ",$sql);
+            $parts["from"] = $tmp[0];
         }
 
         $tmp = $this->_get_matches("/((inner|left|cross|right)[\s]+join)(.*)/", $sql);
