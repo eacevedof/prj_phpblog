@@ -59,11 +59,13 @@ class FormatSql extends BaseService
 
     private function _explode_from()
     {
-        $sql = $this->clean["query"];
-        $parts = explode(" from ",$sql);
-        $parts = trim($parts[1] ?? "");
-        $this->temp = explode(" ",trim($parts))[0] ?? "";
-        $this->qparts["from"] = "FROM $this->temp";
+        $val = $this->splitted["from"] ?? "";
+        if($val)
+        {
+            $tmp = $this->_get_uppered(["select","distinct","top"], $val);
+            $tmp = $this->_get_nlined([","], $tmp,false);
+            $this->qparts["from"] = $tmp;
+        }
         return $this;
     }
 
@@ -103,59 +105,55 @@ class FormatSql extends BaseService
 
     private function _explode_joins()
     {
-        $sql = $this->clean["query"];
-        $pattern = "/{$this->temp}[\s]+(.*?)where/";
-        $join = $this->_get_inner_text($pattern, $sql);
-        //dd($pattern);
-        $join = $this->_get_uppered(["inner join","left join","right join","cross join"," on "],$join);
-        $join = $this->_get_nlined(["INNER ","LEFT ","RIGHT ","CROSS "," ON "], $join);
-        $this->qparts["joins"] = $join;
+        $val = $this->splitted["joins"] ?? "";
+        if($val)
+        {
+            $tmp = $this->_get_uppered(["inner join","left join","right join","cross join"," on "], $val);
+            $tmp = $this->_get_nlined(["INNER ","LEFT ","RIGHT ","CROSS "," ON "], $tmp);
+            $this->qparts["from"] = "\nFROM $tmp";
+        }
         return $this;
     }
 
     private function _explode_where()
     {
-        $sql = $this->clean["query"];
-        $parts = explode(" where ",$sql);
-        $part = end($parts);
-        $part = explode("group by",$part);
-        $part = trim($part[0]);
-        $part = $this->_get_uppered(["and","or"," in "],$part);
-        $part = $this->_get_nlined(["AND","OR"],$part);
-        $this->qparts["where"] = "\nWHERE $part";
+        $val = $this->splitted["where"] ?? "";
+        if($val)
+        {
+            $tmp = $this->_get_uppered(["and","or"," in "], $val);
+            $tmp = $this->_get_nlined(["AND","OR"], $tmp);
+            $this->qparts["where"] = "\nWHERE $tmp";
+        }
         return $this;
     }
 
     private function _explode_groupby()
     {
-        $sql = $this->clean["query"];
-        $parts = explode(" group by ",$sql);
-        $part = end($parts);
-        $part = explode(" having ",$part);
-        $part = trim($part[0]);
-        $this->qparts["groupby"] = "\nGROUP BY $part";
+        $val = $this->splitted["group by"] ?? "";
+        if($val)
+        {
+            $this->qparts["group by"] = "\nGROUP BY $val";
+        }
         return $this;
     }
 
     private function _explode_having()
     {
-        $sql = $this->clean["query"];
-        $parts = explode(" having ",$sql);
-        $part = end($parts);
-        $part = explode(" limit ",$part);
-        $part = trim($part[0]);
-        $this->qparts["limit"] = "\nLIMIT $part";
+        $val = $this->splitted["having"] ?? "";
+        if($val)
+        {
+            $this->qparts["having"] = "\nHAVING $val";
+        }
         return $this;
     }
 
     private function _explode_limit()
     {
-        $sql = $this->clean["query"];
-        $parts = explode(" having ",$sql);
-        $part = end($parts);
-        $part = explode(" limit ",$part);
-        $part = trim($part[0]);
-        $this->qparts["limit"] = "\nLIMIT $part";
+        $val = $this->splitted["limit"] ?? "";
+        if($val)
+        {
+            $this->qparts["limit"] = "\nLIMIT $val";
+        }
         return $this;
     }
 
@@ -207,11 +205,11 @@ class FormatSql extends BaseService
 
         $tmp = $this->_get_matches("/((inner|left|cross|right)[\s]+join)(.*)/", $sql);
         if($tmp) {
+
             $parts["joins"] = $tmp[0][0] ?? "";
         }
         return $parts;
     }
-
 
     private function _get_query()
     {
