@@ -19,6 +19,8 @@ class FormatSql extends BaseService
     private $qparts = [];
     private $splitted = [];
 
+    private const FUNC_NAMES = ["count(","max(","min(","trim(","sum(","coalesce(","concat(","char(","cast("];
+
     public function __construct($input=[])
     {
         $this->input = $input;
@@ -47,9 +49,10 @@ class FormatSql extends BaseService
 
     private function _explode_select()
     {
-        if($this->splitted["fields"])
+        if($val = ($this->splitted["fields"] ?? ""))
         {
-            $tmp = $this->_get_uppered(["select","distinct","top"], $this->splitted["fields"]);
+            $ar = array_merge(["select "," distinct "," top "," as "," case "," when "," then "," end "],self::FUNC_NAMES);
+            $tmp = $this->_get_uppered($ar, $val);
             $tmp = $this->_get_nlined([","], $tmp,false);
             $this->qparts["fields"] = $tmp;
         }
@@ -58,12 +61,10 @@ class FormatSql extends BaseService
 
     private function _explode_from()
     {
-        $val = $this->qparts["from"] ?? "";
-        if($val)
+        if($val = ($this->splitted["from"] ?? ""))
         {
-            $tmp = $this->_get_uppered(["select","distinct","top"], $val);
-            $tmp = $this->_get_nlined([","], $tmp,false);
-            $this->qparts["from"] = $tmp;
+            $tmp = $this->_get_uppered([" as "], $val);
+            $this->qparts["from"] = "\nFROM $tmp";
         }
         return $this;
     }
@@ -98,12 +99,12 @@ class FormatSql extends BaseService
 
     private function _explode_joins()
     {
-        $val = $this->splitted["joins"] ?? "";
-        if($val)
+        if($val = ($this->splitted["joins"] ?? ""))
         {
-            $tmp = $this->_get_uppered(["inner join","left join","right join","cross join"," on "], $val);
-            $tmp = $this->_get_nlined(["INNER ","LEFT ","RIGHT ","CROSS "," ON "], $tmp);
-            $this->qparts["from"] = "\nFROM $tmp";
+            //dd($val);
+            $tmp = $this->_get_uppered([" inner join "," left join "," right join "," cross join ","join "," on "," and "," like "], $val);
+            $tmp = $this->_get_nlined(["INNER JOIN ","LEFT JOIN ","RIGHT JOIN ","CROSS JOIN ","ON ","AND "], $tmp);
+            $this->qparts["joins"] = $tmp;
         }
         return $this;
     }
@@ -113,8 +114,8 @@ class FormatSql extends BaseService
         $val = $this->splitted["where"] ?? "";
         if($val)
         {
-            $tmp = $this->_get_uppered(["and","or"," in "], $val);
-            $tmp = $this->_get_nlined(["AND","OR"], $tmp);
+            $tmp = $this->_get_uppered([" and "," or "," in "], $val);
+            $tmp = $this->_get_nlined(["AND ","OR "], $tmp);
             $this->qparts["where"] = "\nWHERE $tmp";
         }
         return $this;
@@ -122,28 +123,47 @@ class FormatSql extends BaseService
 
     private function _explode_groupby()
     {
-        $val = $this->splitted["group by"] ?? "";
-        if($val)
+        if($val = ($this->splitted["group by"] ?? ""))
         {
-            $this->qparts["group by"] = "\nGROUP BY $val";
+            $ar = array_merge([" and "," or "," as "," case "," when "," then "," end "], self::FUNC_NAMES);
+            $tmp = $this->_get_uppered($ar, $val);
+            $tmp = $this->_get_nlined(["AND ","OR "], $tmp);
+            $tmp = $this->_get_nlined([","], $tmp,0);
+            $this->qparts["group by"] = "\nGROUP BY $tmp";
         }
         return $this;
     }
 
     private function _explode_having()
     {
-        $val = $this->splitted["having"] ?? "";
-        if($val)
+        if($val = ($this->splitted["having"] ?? ""))
         {
-            $this->qparts["having"] = "\nHAVING $val";
+            $ar = array_merge([" and "," or "," as "," case "," when "," then "," end "], self::FUNC_NAMES);
+            $tmp = $this->_get_uppered($ar, $val);
+            $tmp = $this->_get_nlined(["AND ","OR "], $tmp);
+            $tmp = $this->_get_nlined([","], $tmp,0);
+            $this->qparts["having"] = "\nHAVING $tmp";
+        }
+        return $this;
+    }
+
+    private function _explode_orderby()
+    {
+        if($val = ($this->splitted["order by"] ?? ""))
+        {
+            $tmp = $this->_get_uppered([" and "," or ","count(","max(","min(","trim(","sum("," as "," case "," when "," then "," end "," desc"," asc"], $val);
+            $ar = array_merge([" and "," or "," as "," case "," when "," then "," end "], self::FUNC_NAMES);
+            $tmp = $this->_get_uppered($ar, $val);
+            $tmp = $this->_get_nlined(["AND ","OR "], $tmp);
+            $tmp = $this->_get_nlined([","], $tmp,0);
+            $this->qparts["order by"] = "\nORDER BY $tmp";
         }
         return $this;
     }
 
     private function _explode_limit()
     {
-        $val = $this->splitted["limit"] ?? "";
-        if($val)
+        if($val = ($this->splitted["limit"] ?? ""))
         {
             $this->qparts["limit"] = "\nLIMIT $val";
         }
@@ -169,6 +189,12 @@ class FormatSql extends BaseService
             $parts["limit"] = $tmp[1];
         }
 
+        $tmp = $this->_get_exploded("order by ",$sql);
+        if($tmp) {
+            $sql = $tmp[0];
+            $parts["order by"] = $tmp[1];
+        }
+
         $tmp = $this->_get_exploded("having ",$sql);
         if($tmp) {
             $sql = $tmp[0];
@@ -187,7 +213,8 @@ class FormatSql extends BaseService
             $parts["where"] = $tmp[1];
         }
 
-        $tmp = $this->_get_exploded("from ",$sql);
+        $tmp = $this->_get_exploded(" from ",$sql);
+
         if($tmp) {
             //dd($tmp);
             $sql = trim($tmp[1]);
@@ -197,7 +224,8 @@ class FormatSql extends BaseService
             $parts["from"] = $tmp[0];
         }
 
-        $tmp = $this->_get_matches("/((inner|left|cross|right)[\s]+join)(.*)/", $sql);
+        //dd($parts);
+        $tmp = $this->_get_matches("/((join|inner join|left join|cross join|right join))(.*)/", $sql);
         if($tmp) {
             $parts["joins"] = $tmp[0][0] ?? "";
         }
@@ -206,21 +234,21 @@ class FormatSql extends BaseService
 
     private function _get_query()
     {
-        //dd($this->qparts);
         $query = implode("\n", $this->qparts);
-        //$query = $this->_get_uppered(["inner join","left join","right join","cross join"," on "],$query);
         return $query;
     }
 
     private function _get_formatted()
     {
         $this->splitted = $this->_get_splitted();
+        //dd($this->splitted);
         $r = $this->_explode_select()
             ->_explode_from()
             ->_explode_joins()
             ->_explode_where()
             ->_explode_groupby()
             ->_explode_having()
+            ->_explode_orderby()
             ->_explode_limit()
             ->_get_query();
         return $r;
