@@ -19,7 +19,7 @@ class FormatSql extends BaseService
     private $qparts = [];
     private $splitted = [];
 
-    private const FUNC_NAMES = ["count(","max(","min(","trim(","sum(","coalesce(","concat(","char(","cast("];
+    private const FUNC_NAMES = ["count(","max(","min(","trim(","sum(","coalesce(","concat(","char(","cast(","abs("];
 
     public function __construct($input=[])
     {
@@ -51,7 +51,7 @@ class FormatSql extends BaseService
     {
         if($val = ($this->splitted["fields"] ?? ""))
         {
-            $ar = array_merge(["select "," distinct "," top "," as "," case "," when "," then "," end "],self::FUNC_NAMES);
+            $ar = array_merge(["select "," distinct "," top "," as ","case when"," then "," else "," end "],self::FUNC_NAMES);
             $tmp = $this->_get_uppered($ar, $val);
             $tmp = $this->_get_nlined([","], $tmp,false);
             $this->qparts["fields"] = $tmp;
@@ -102,7 +102,8 @@ class FormatSql extends BaseService
         if($val = ($this->splitted["joins"] ?? ""))
         {
             //dd($val);
-            $tmp = $this->_get_uppered([" inner join "," left join "," right join "," cross join ","join "," on "," and "," like "], $val);
+            $tmp = $this->_get_uppered(["inner join"," left join "," right join "," cross join "," on "," and "," like "], $val);
+            $tmp = $this->_get_uppered(["join "], $tmp);
             $tmp = $this->_get_nlined(["INNER JOIN ","LEFT JOIN ","RIGHT JOIN ","CROSS JOIN ","ON ","AND "], $tmp);
             $this->qparts["joins"] = $tmp;
         }
@@ -125,7 +126,7 @@ class FormatSql extends BaseService
     {
         if($val = ($this->splitted["group by"] ?? ""))
         {
-            $ar = array_merge([" and "," or "," as "," case "," when "," then "," end "], self::FUNC_NAMES);
+            $ar = array_merge([" and "," or "," as ","case when"," then "," else "," end "], self::FUNC_NAMES);
             $tmp = $this->_get_uppered($ar, $val);
             $tmp = $this->_get_nlined(["AND ","OR "], $tmp);
             $tmp = $this->_get_nlined([","], $tmp,0);
@@ -138,7 +139,7 @@ class FormatSql extends BaseService
     {
         if($val = ($this->splitted["having"] ?? ""))
         {
-            $ar = array_merge([" and "," or "," as "," case "," when "," then "," end "], self::FUNC_NAMES);
+            $ar = array_merge([" and "," or "," as ","case when"," then "," end "], self::FUNC_NAMES);
             $tmp = $this->_get_uppered($ar, $val);
             $tmp = $this->_get_nlined(["AND ","OR "], $tmp);
             $tmp = $this->_get_nlined([","], $tmp,0);
@@ -151,8 +152,7 @@ class FormatSql extends BaseService
     {
         if($val = ($this->splitted["order by"] ?? ""))
         {
-            $tmp = $this->_get_uppered([" and "," or ","count(","max(","min(","trim(","sum("," as "," case "," when "," then "," end "," desc"," asc"], $val);
-            $ar = array_merge([" and "," or "," as "," case "," when "," then "," end "], self::FUNC_NAMES);
+            $ar = array_merge([" and "," or "," as ","case when"," then "," end "," desc"," asc"], self::FUNC_NAMES);
             $tmp = $this->_get_uppered($ar, $val);
             $tmp = $this->_get_nlined(["AND ","OR "], $tmp);
             $tmp = $this->_get_nlined([","], $tmp,0);
@@ -170,6 +170,16 @@ class FormatSql extends BaseService
         return $this;
     }
 
+    private function _explode_offset()
+    {
+        $val = ($this->splitted["offset"] ?? "");
+        if($val!=="")
+        {
+            $this->qparts["offset"] = "\nOFFSET $val";
+        }
+        return $this;
+    }
+
     private function _get_exploded($sep, $sql)
     {
         if(strstr($sql,$sep))
@@ -183,6 +193,13 @@ class FormatSql extends BaseService
     {
         $parts = [];
         $sql = $this->clean["query"];
+
+        $tmp = $this->_get_exploded(" offset ",$sql);
+        if($tmp) {
+            $sql = $tmp[0];
+            $parts["offset"] = $tmp[1];
+        }
+
         $tmp = $this->_get_exploded("limit ",$sql);
         if($tmp) {
             $sql = $tmp[0];
@@ -250,6 +267,7 @@ class FormatSql extends BaseService
             ->_explode_having()
             ->_explode_orderby()
             ->_explode_limit()
+            ->_explode_offset()
             ->_get_query();
         return $r;
     }
