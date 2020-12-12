@@ -13,7 +13,7 @@
     <div class="card-body">
         <form id="form-alarmclock" class="row g-3">
             <div class="col-12">
-                <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b></pre>
+                <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b> {{seconds}}</pre>
             </div>
             <div class="col-1">
                 <label>Horas:</label>

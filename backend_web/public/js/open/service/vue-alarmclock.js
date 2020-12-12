@@ -10,13 +10,13 @@ const app = new Vue({
         btnstop: "Detener",
         btnreset: "Resetaar",
 
-        hh: 1,
-        mm: 0,
-        ss: 0,
+        hh: "0",
+        mm: "0",
+        ss: "20",
 
-        strhh: "01",
-        strmm: "00",
-        strss: "00",
+        strhh: "",
+        strmm: "",
+        strss: "",
 
         remain:{
             hh:0,
@@ -24,33 +24,53 @@ const app = new Vue({
             ss:0,
         },
 
-        audio: null
+        audio: null,
+        seconds: 0,
+
+        intevalid: 0,
     },
 
     mounted(){
+        this.strhh = this.hh.padStart(2,"0")
+        this.strmm = this.mm.padStart(2,"0")
+        this.strss = this.ss.padStart(2,"0")
         this.$refs.hh.focus()
         //this.$nextTick(() => this.audio = this.refs.audio)
     },
 
     methods:{
-        reset(){
-            this.stop()
-            this.hh = "01"
-            this.mm = "00"
-            this.ss = "00"
-            this.start()
-        },
 
         discount(){
+            const self = this
+            this.intevalid = setInterval(function(){
+                self.seconds = self.seconds - 1
+                if(self.seconds === 0)
+                    clearInterval(self.intevalid)
+            },
+            1000)
+            console.log("interval-id",self.intevalid)
+        },
 
+        get_seconds() {
+            return (parseInt(this.hh)*60*60) + (parseInt(this.mm)*60) + parseInt(this.ss)
         },
 
         start(){
             this.isstarted = true
+            this.seconds = this.get_seconds()
+            this.discount()
         },
 
         stop(){
             this.isstarted = false
+        },
+
+        reset(){
+            this.stop()
+            this.hh = 0
+            this.mm = 0
+            this.ss = 20
+            this.start()
         },
 
         hh_onchange(){
