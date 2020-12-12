@@ -43,7 +43,6 @@ const app = new Vue({
 
         sound(){
             this.audio.play()
-            //document.getElementById("audio").play()
         },
 
         discount(){
