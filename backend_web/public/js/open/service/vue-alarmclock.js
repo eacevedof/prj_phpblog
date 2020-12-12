@@ -89,7 +89,6 @@ const app = new Vue({
 
         start(){
             this.sanitize_input()
-            this.btnstart = "Iniciado..."
             this.isstarted = true
             this.seconds = this.get_seconds()
             if(this.seconds)

@@ -80,7 +80,7 @@
                     </button>
                 </div>
 
-                <div v-if="isstarted" class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1 ml-lg-3">
+                <div v-if="isstarted" class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1">
                     <button type="button" class="btn btn-warning mt-4"
                             v-on:click="stop"
                     >
