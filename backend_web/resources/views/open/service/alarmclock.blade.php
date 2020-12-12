@@ -67,7 +67,7 @@
                     >
                         {{btnstart}}
                         <i v-if="!isstarted" class="fa fa-play-circle"></i>
-                        <img v-if="isstarted" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                        <span v-if="isstarted" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                     </button>
                 </div>
 

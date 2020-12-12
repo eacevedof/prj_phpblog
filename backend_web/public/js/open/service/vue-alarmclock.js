@@ -16,9 +16,9 @@ const app = new Vue({
     data: {
         isstarted: false,
 
-        btnstart: "Inicio",
+        btnstart: "Iniciar",
         btnstop: "Detener",
-        btnrestart: "Reinicio",
+        btnrestart: "Reiniciar",
 
         hh: DEFAULT.HH,
         mm: DEFAULT.MM,
@@ -97,7 +97,7 @@ const app = new Vue({
         },
 
         stop(){
-            this.btnstart = "Inicio"
+            this.btnstart = "Iniciar"
             this.percent = 0
             this.stop_sound()
 
