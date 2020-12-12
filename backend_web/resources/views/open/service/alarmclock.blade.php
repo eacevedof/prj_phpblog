@@ -28,6 +28,7 @@
                         </div>
                     </div>
                 </div>
+<!-- inputs -->
                 <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Horas:</label>
                     <input type="number" class="form-control" min="0" max="300" maxlength="3"
@@ -35,6 +36,7 @@
                            :disabled="isstarted"
                            v-model="hh"
                            v-on:change="hh_onchange"
+                           v-on:focus="$event.target.select()"
                     />
                 </div>
                 <div class="col-4 col-sm-3 col-md-2 col-xl-1">
@@ -43,6 +45,7 @@
                            :disabled="isstarted"
                            v-model="mm"
                            v-on:change="mm_onchange"
+                           v-on:focus="$event.target.select()"
                     />
                 </div>
                 <div class="col-4 col-sm-3 col-md-2 col-xl-1">
@@ -51,6 +54,7 @@
                            :disabled="isstarted"
                            v-model="ss"
                            v-on:change="ss_onchange"
+                           v-on:focus="$event.target.select()"
                     />
                 </div>
             </div>
