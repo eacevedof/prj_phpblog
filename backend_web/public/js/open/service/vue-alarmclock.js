@@ -4,28 +4,25 @@ Vue.use(VueToast, {position:"top"})
 
 let intervalid = 0
 
+const DEFAULT = {
+    HH: "00",
+    MM: "00",
+    SS: "10",
+}
+
 const app = new Vue({
     el: "#form-alarmclock",
+
     data: {
         isstarted: false,
+
         btnstart: "Inicio",
         btnstop: "Detener",
-        btnreset: "Resetaar",
+        btnreset: "Reinicio",
 
-        hh: "0",
-        mm: "0",
-        ss: "10",
-
-
-        strhh: "",
-        strmm: "",
-        strss: "",
-
-        remain:{
-            hh:0,
-            mm:0,
-            ss:0,
-        },
+        hh: DEFAULT.HH,
+        mm: DEFAULT.MM,
+        ss: DEFAULT.SS,
 
         audio: null,
         seconds: 0,
@@ -74,11 +71,8 @@ const app = new Vue({
             clearInterval(intervalid)
         },
 
-        reset(){
+        restart(){
             this.stop()
-            this.hh = 0
-            this.mm = 0
-            this.ss = 20
             this.start()
         },
 

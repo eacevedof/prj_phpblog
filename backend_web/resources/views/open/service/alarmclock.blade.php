@@ -62,9 +62,9 @@
                 </button>
             </div>
 
-            <div class="col-2">
+            <div v-if="isstarted" class="col-2">
                 <button type="button" class="btn btn-dark mt-4"
-                        v-on:click="reset"
+                        v-on:click="restart"
                 >
                     {{btnreset}}
                     <i class="fa fa-stop-circle"></i>
