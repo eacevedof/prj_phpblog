@@ -48,7 +48,7 @@
                         v-on:click="start"
                 >
                     {{btnstart}}
-                    <i class="fa fa-play-circle"></i>
+                    <i v-if="!isstarted" class="fa fa-play-circle"></i>
                     <img v-if="isstarted" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
@@ -66,13 +66,13 @@
                 <button type="button" class="btn btn-dark mt-4"
                         v-on:click="restart"
                 >
-                    {{btnreset}}
-                    <i class="fa fa-stop-circle"></i>
+                    {{btnrestart}}
+                    <i class="fa fa-repeat"></i>
                 </button>
             </div>
 
             <!-- /botones-->
-            <audio id="audio" ref="audio" controls>
+            <audio ref="audio" controls class="d-none">
                 <source type="audio/mp3" src="https://resources.theframework.es/eduardoaf.com/20201212/124331-alarm-sound-001.mp3" />
             </audio>
 

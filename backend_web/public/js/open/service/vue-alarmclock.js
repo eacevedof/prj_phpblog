@@ -18,7 +18,7 @@ const app = new Vue({
 
         btnstart: "Inicio",
         btnstop: "Detener",
-        btnreset: "Reinicio",
+        btnrestart: "Reinicio",
 
         hh: DEFAULT.HH,
         mm: DEFAULT.MM,
@@ -62,12 +62,17 @@ const app = new Vue({
         },
 
         start(){
+            this.btnstart = "Iniciado..."
             this.isstarted = true
             this.seconds = this.get_seconds()
             this.discount()
         },
 
         stop(){
+            this.btnstart = "Inicio"
+            this.audio.pause()
+            this.audio.currentTime=0
+
             this.isstarted = false
             this.seconds = this.get_seconds()
             clearInterval(intervalid)
