@@ -7,7 +7,8 @@ const app = new Vue({
     data: {
         isstarted: false,
         btnstart: "Inicio",
-        btnend: "Finalizar",
+        btnstop: "Detener",
+        btnreset: "Resetaar",
 
         hh: 0,
         mm: 0,
@@ -39,7 +40,7 @@ const app = new Vue({
             this.isstarted = true
         },
 
-        end(){
+        stop(){
             this.isstarted = false
         },
 

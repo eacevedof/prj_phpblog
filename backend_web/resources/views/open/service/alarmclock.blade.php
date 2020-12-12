@@ -40,22 +40,37 @@
                        v-on:change="ss_onchange"
                 />
             </div>
+
             <!-- botones -->
-            <div class="col-1">
+            <div class="col-2">
                 <button type="button"  class="btn btn-info mt-4"
                         :disabled="isstarted"
                         v-on:click="start"
                 >
                     {{btnstart}}
+                    <i class="fa fa-play-circle"></i>
                     <img v-if="isstarted" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
-            <div v-if="isstarted" class="col-1 pl-4">
+
+            <div class="col-2">
                 <button type="button" class="btn btn-dark mt-4"
                         :disabled="isstarted"
                         v-on:click="reset"
                 >
-                    <i class="fa fa-clock"></i>
+                    {{btnreset}}
+                    <i class="fa fa-stop-circle"></i>
+                    <img v-if="isstarted" src="/assets/images/loading-bw.gif" width="25" height="25"/>
+                </button>
+            </div>
+
+            <div class="col-2">
+                <button type="button" class="btn btn-warning mt-4"
+                        :disabled="isstarted"
+                        v-on:click="stop"
+                >
+                    {{btnstop}}
+                    <i class="fa fa-power-off"></i>
                     <img v-if="isstarted" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
