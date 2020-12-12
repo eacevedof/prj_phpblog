@@ -12,7 +12,7 @@ const app = new Vue({
 
         hh: "0",
         mm: "0",
-        ss: "20",
+        ss: "10",
 
 
         strhh: "",
@@ -36,13 +36,14 @@ const app = new Vue({
         this.strmm = this.mm.padStart(2,"0")
         this.strss = this.ss.padStart(2,"0")
         this.$refs.hh.focus()
-        //this.$nextTick(() => this.audio = this.refs.audio)
+        this.audio = this.$refs.audio
     },
 
     methods:{
 
         sound(){
-            this.refs.audio.play()
+            this.audio.play()
+            //document.getElementById("audio").play()
         },
 
         discount(){

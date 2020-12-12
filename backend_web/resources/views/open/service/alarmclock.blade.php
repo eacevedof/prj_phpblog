@@ -72,7 +72,7 @@
             </div>
 
             <!-- /botones-->
-            <audio ref="audio" controls>
+            <audio id="audio" ref="audio" controls>
                 <source type="audio/mp3" src="https://resources.theframework.es/eduardoaf.com/20201212/124331-alarm-sound-001.mp3" />
             </audio>
 
