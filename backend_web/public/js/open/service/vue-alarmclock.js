@@ -14,6 +14,7 @@ const app = new Vue({
         mm: "0",
         ss: "20",
 
+
         strhh: "",
         strmm: "",
         strss: "",
@@ -40,12 +41,19 @@ const app = new Vue({
 
     methods:{
 
+        sound(){
+            this.refs.audio.play()
+        },
+
         discount(){
             const self = this
             this.intevalid = setInterval(function(){
                 self.seconds = self.seconds - 1
-                if(self.seconds === 0)
+                if(self.seconds === 0) {
                     clearInterval(self.intevalid)
+                    self.sound()
+                    self.isstarted = false
+                }
             },
             1000)
             console.log("interval-id",self.intevalid)
