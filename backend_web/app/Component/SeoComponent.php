@@ -94,6 +94,12 @@ class SeoComponent
             "keywords"      => "Formatear, sql, indentación, alinear",
             "h1"            => ""
         ],
+        "open.service.alarmclock"=>[
+            "title"         => "Configura una alarma en tu navegador",
+            "description"   => "Permite configurar una alarma en una pestaña del navegador que emitirá un sonido",
+            "keywords"      => "alarma, reloj, js, sonido, reproducir sonido",
+            "h1"            => ""
+        ],
     ];
 
     private const EMPTY = [

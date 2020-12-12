@@ -116,4 +116,17 @@ class ServiceController extends BaseController
             "catslug"     => "service"
         ]);
     }
+
+    //servicios/reloj-alarma
+    public function alarmclock()
+    {
+        return view('open.service.alarmclock',[
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.service.alarmclock"),
+            "breadscrumb" => $this->_get_scrumb("open.service.alarmclock",["slug"=>"reloj-alarma","slugtext"=>""]),
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "service"
+        ]);
+    }
 }
