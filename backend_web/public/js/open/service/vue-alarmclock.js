@@ -16,6 +16,12 @@ const app = new Vue({
         strhh: "00",
         strmm: "00",
         strss: "00",
+
+        remain:{
+            hh:0,
+            mm:0,
+            ss:0,
+        }
     },
 
     mounted(){
@@ -30,11 +36,11 @@ const app = new Vue({
         },
 
         start(){
-
+            this.isstarted = true
         },
 
         end(){
-
+            this.isstarted = false
         },
 
         hh_onchange(){
