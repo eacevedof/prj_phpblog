@@ -22,11 +22,14 @@ const app = new Vue({
             hh:0,
             mm:0,
             ss:0,
-        }
+        },
+
+        audio: null
     },
 
     mounted(){
         this.$refs.hh.focus()
+        this.audio = this.refs.audio
     },
 
     methods:{
