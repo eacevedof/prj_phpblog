@@ -96,7 +96,7 @@ class SeoComponent
         ],
         "open.service.alarmclock"=>[
             "title"         => "Configura una alarma en tu navegador",
-            "description"   => "Permite configurar una alarma en una pestaña del navegador que emitirá un sonido",
+            "description"   => "Configura una alarma que emitirá un sonido según el intervalo configurado",
             "keywords"      => "alarma, reloj, js, sonido, reproducir sonido",
             "h1"            => ""
         ],

@@ -15,7 +15,7 @@
             <div class="col-12">
                 <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b> {{seconds}}</pre>
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <label>Horas:</label>
                 <input type="number" class="form-control" min="0" max="300" maxlength="3"
                        ref="hh"
@@ -24,7 +24,7 @@
                        v-on:change="hh_onchange"
                 />
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <label>Minutos:</label>
                 <input type="number" class="form-control" min="0" max="59" maxlength="2"
                        :disabled="isstarted"
@@ -32,7 +32,7 @@
                        v-on:change="mm_onchange"
                 />
             </div>
-            <div class="col-1">
+            <div class="col-2">
                 <label>Segundos:</label>
                 <input type="number" class="form-control" min="0" max="59" maxlength="2"
                        :disabled="isstarted"

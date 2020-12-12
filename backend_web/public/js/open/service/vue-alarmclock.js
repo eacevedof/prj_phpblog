@@ -69,6 +69,7 @@ const app = new Vue({
 
         stop(){
             this.isstarted = false
+            this.seconds = this.get_seconds()
             clearInterval(intervalid)
         },
 
