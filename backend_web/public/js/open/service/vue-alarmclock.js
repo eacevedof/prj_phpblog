@@ -31,6 +31,7 @@ const app = new Vue({
         audio: null,
         seconds: 0,
         percent: "0",
+        hhmmss: "",
     },
 
     mounted(){
@@ -40,18 +41,22 @@ const app = new Vue({
 
     methods:{
 
-        sound(){
-            this.audio.play()
+        play_sound(){this.audio.play()},
+
+        stop_sound(){
+            this.audio.pause()
+            this.audio.currentTime = 0
         },
 
         discount(){
             const self = this
             intervalid = setInterval(function(){
                 self.seconds = self.seconds - 1
+                self.hhmmss = self.get_hhmmss()
                 self.percent = self.get_percent()
                 console.log(self.percent)
                 if(self.seconds === 0) {
-                    self.sound()
+                    self.play_sound()
                     clearInterval(intervalid)
                     self.start()
                 }
@@ -65,9 +70,15 @@ const app = new Vue({
         },
 
         get_percent(){
-          const total = this.get_seconds()
-          if(!total) return 0
-          return (Math.floor((this.seconds * 100) / total)).toString().concat("%")
+            const total = this.get_seconds()
+            if(!total) return 0
+            return (Math.floor((this.seconds * 100) / total)).toString().concat("%")
+        },
+
+        get_hhmmss(){
+            const objdate = new Date(null);
+            objdate.setSeconds(this.seconds)
+            return objdate.toISOString().substr(11,8)
         },
 
         start(){
@@ -81,8 +92,7 @@ const app = new Vue({
         stop(){
             this.btnstart = "Inicio"
             this.percent = 0
-            this.audio.pause()
-            this.audio.currentTime=0
+            this.stop_sound()
 
             this.isstarted = false
             this.seconds = this.get_seconds()
@@ -102,6 +112,7 @@ const app = new Vue({
             this.strmm = DEFAULT.MM.toString().padStart(2,"0")
             this.strss = DEFAULT.SS.toString().padStart(2,"0")
             this.seconds = this.get_seconds()
+            this.hhmmss = this.get_hhmmss()
             this.$refs.hh.focus()
         },
 

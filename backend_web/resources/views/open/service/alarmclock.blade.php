@@ -18,12 +18,12 @@
     <div class="card-body">
         <form id="form-alarmclock" class="row g-3">
             <div class="col-12">
-                <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b>  {{seconds}} seg.</pre>
+                <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b> <span v-if="seconds && !isstarted">{{seconds}}</span> <span v-if="isstarted">{{hhmmss}}</span></pre>
                 <div v-if="isstarted" class="progress">
                     <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
                          :style="{width: percent}"
                          >
-                        tiempo restante {{seconds}} seg.
+                        <span style="color:black; font-weight: bolder">Tiempo restante {{seconds}} seg.</span>
                     </div>
                 </div>
             </div>
