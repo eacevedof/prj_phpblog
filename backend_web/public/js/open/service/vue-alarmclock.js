@@ -10,11 +10,11 @@ const app = new Vue({
         btnstop: "Detener",
         btnreset: "Resetaar",
 
-        hh: 0,
+        hh: 1,
         mm: 0,
         ss: 0,
 
-        strhh: "00",
+        strhh: "01",
         strmm: "00",
         strss: "00",
 
@@ -29,14 +29,20 @@ const app = new Vue({
 
     mounted(){
         this.$refs.hh.focus()
-        this.audio = this.refs.audio
+        //this.$nextTick(() => this.audio = this.refs.audio)
     },
 
     methods:{
         reset(){
-            this.hh = ""
-            this.mm = ""
-            this.ss = ""
+            this.stop()
+            this.hh = "01"
+            this.mm = "00"
+            this.ss = "00"
+            this.start()
+        },
+
+        discount(){
+
         },
 
         start(){

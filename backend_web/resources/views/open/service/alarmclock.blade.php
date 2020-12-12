@@ -53,27 +53,24 @@
                 </button>
             </div>
 
-            <div class="col-2">
-                <button type="button" class="btn btn-dark mt-4"
-                        :disabled="isstarted"
-                        v-on:click="reset"
-                >
-                    {{btnreset}}
-                    <i class="fa fa-stop-circle"></i>
-                    <img v-if="isstarted" src="/assets/images/loading-bw.gif" width="25" height="25"/>
-                </button>
-            </div>
-
-            <div class="col-2">
+            <div v-if="isstarted" class="col-2">
                 <button type="button" class="btn btn-warning mt-4"
-                        :disabled="isstarted"
                         v-on:click="stop"
                 >
                     {{btnstop}}
                     <i class="fa fa-power-off"></i>
-                    <img v-if="isstarted" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
             </div>
+
+            <div class="col-2">
+                <button type="button" class="btn btn-dark mt-4"
+                        v-on:click="reset"
+                >
+                    {{btnreset}}
+                    <i class="fa fa-stop-circle"></i>
+                </button>
+            </div>
+
             <!-- /botones-->
             <audio ref="audio" controls>
                 <source type="audio/mp3" src="https://resources.theframework.es/eduardoaf.com/20201212/124331-alarm-sound-001.mp3" />
