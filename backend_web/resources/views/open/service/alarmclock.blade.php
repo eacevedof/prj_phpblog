@@ -12,26 +12,32 @@
     @verbatim
     <div class="card-body">
         <form id="form-alarmclock" class="row g-3">
+            <div class="col-12">
+                <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b></pre>
+            </div>
             <div class="col-1">
                 <label>Horas:</label>
-                <input type="number" class="form-control" min="0" max="300"
+                <input type="number" class="form-control" min="0" max="300" maxlength="3"
                        ref="hh"
                        :disabled="isstarted"
                        v-model="hh"
+                       v-on:change="hh_onchange"
                 />
             </div>
             <div class="col-1">
                 <label>Minutos:</label>
-                <input type="number" class="form-control" min="0" max="59"
+                <input type="number" class="form-control" min="0" max="59" maxlength="2"
                        :disabled="isstarted"
                        v-model="mm"
+                       v-on:change="mm_onchange"
                 />
             </div>
             <div class="col-1">
                 <label>Segundos:</label>
-                <input type="number" class="form-control" min="0" max="59"
+                <input type="number" class="form-control" min="0" max="59" maxlength="2"
                        :disabled="isstarted"
                        v-model="ss"
+                       v-on:change="ss_onchange"
                 />
             </div>
             <!-- botones -->
