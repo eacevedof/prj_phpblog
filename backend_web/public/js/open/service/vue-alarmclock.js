@@ -1,4 +1,4 @@
-import openapi from "/js/open/helpers/openapi.js"
+import db from "/js/open/helpers/opendb.js"
 
 Vue.use(VueToast, {position:"top"})
 
@@ -7,7 +7,7 @@ let intervalid = 0
 const DEFAULT = {
     HH: 0,
     MM: 0,
-    SS: 10,
+    SS: 0,
 }
 
 const app = new Vue({
@@ -30,6 +30,7 @@ const app = new Vue({
 
         audio: null,
         seconds: 0,
+        percent: "0",
     },
 
     mounted(){
@@ -47,6 +48,8 @@ const app = new Vue({
             const self = this
             intervalid = setInterval(function(){
                 self.seconds = self.seconds - 1
+                self.percent = self.get_percent()
+                console.log(self.percent)
                 if(self.seconds === 0) {
                     self.sound()
                     clearInterval(intervalid)
@@ -61,15 +64,23 @@ const app = new Vue({
             return (parseInt(this.hh)*60*60) + (parseInt(this.mm)*60) + parseInt(this.ss)
         },
 
+        get_percent(){
+          const total = this.get_seconds()
+          if(!total) return 0
+          return (Math.floor((this.seconds * 100) / total)).toString().concat("%")
+        },
+
         start(){
             this.btnstart = "Iniciado..."
             this.isstarted = true
             this.seconds = this.get_seconds()
-            this.discount()
+            if(this.seconds)
+                this.discount()
         },
 
         stop(){
             this.btnstart = "Inicio"
+            this.percent = 0
             this.audio.pause()
             this.audio.currentTime=0
 
@@ -81,6 +92,17 @@ const app = new Vue({
         restart(){
             this.stop()
             this.start()
+        },
+
+        clear(){
+            this.hh = DEFAULT.HH
+            this.mm = DEFAULT.MM
+            this.ss = DEFAULT.SS
+            this.strhh = DEFAULT.HH.toString().padStart(2,"0")
+            this.strmm = DEFAULT.MM.toString().padStart(2,"0")
+            this.strss = DEFAULT.SS.toString().padStart(2,"0")
+            this.seconds = this.get_seconds()
+            this.$refs.hh.focus()
         },
 
         hh_onchange(){
