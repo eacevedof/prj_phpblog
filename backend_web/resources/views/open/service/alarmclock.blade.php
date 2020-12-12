@@ -16,8 +16,8 @@
     </div>
     @verbatim
     <div class="card-body">
-        <form id="form-alarmclock" class="g-3">
-            <div class="row">
+        <form id="form-alarmclock">
+            <div class="row d-flex justify-content-xl-center">
                 <div class="col-12">
                     <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b> <span v-if="seconds && !isstarted">{{seconds}} seg.</span> <span v-if="isstarted">{{hhmmss}}</span></pre>
                     <div v-if="isstarted" class="progress">
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-4 col-sm-3 col-md-2">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Horas:</label>
                     <input type="number" class="form-control" min="0" max="300" maxlength="3"
                            ref="hh"
@@ -37,7 +37,7 @@
                            v-on:change="hh_onchange"
                     />
                 </div>
-                <div class="col-4 col-sm-3 col-md-2">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Minutos:</label>
                     <input type="number" class="form-control" min="0" max="59" maxlength="2"
                            :disabled="isstarted"
@@ -45,7 +45,7 @@
                            v-on:change="mm_onchange"
                     />
                 </div>
-                <div class="col-4 col-sm-3 col-md-2">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Segundos:</label>
                     <input type="number" class="form-control" min="0" max="59" maxlength="2"
                            :disabled="isstarted"
@@ -54,9 +54,9 @@
                     />
                 </div>
             </div>
-            <div class="row">
-                <!-- botones -->
-                <div class="col-4 col-sm-3 col-md-2 col-lg-2">
+<!-- botones -->
+            <div class="row d-flex justify-content-xl-center">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <button type="button"  class="btn btn-info mt-4"
                             :disabled="isstarted || seconds<1"
                             v-on:click="start"
@@ -67,7 +67,7 @@
                     </button>
                 </div>
 
-                <div v-if="!isstarted && (hh>0 || mm>0 || ss>0)" class="col-4 col-sm-2 col-md-2 col-lg-2">
+                <div v-if="!isstarted && (hh>0 || mm>0 || ss>0)" class="col-4 col-sm-2 col-md-2 col-lg-2 col-xl-1">
                     <button type="button" class="btn btn-danger mt-4"
                             v-on:click="clear"
                     >
@@ -76,7 +76,7 @@
                     </button>
                 </div>
 
-                <div v-if="isstarted" class="col-4 col-sm-3 col-md-2 col-lg-2">
+                <div v-if="isstarted" class="col-4 col-sm-3 col-md-2 col-lg-2 col-xl-1 ml-lg-3">
                     <button type="button" class="btn btn-warning mt-4"
                             v-on:click="stop"
                     >
@@ -85,7 +85,7 @@
                     </button>
                 </div>
 
-                <div v-if="isstarted" class="col-4 col-sm-2 col-md-2 col-lg-2">
+                <div v-if="isstarted" class="col-4 col-sm-2 col-md-2 col-lg-2 col-xl-1">
                     <button type="button" class="btn btn-dark mt-4"
                             v-on:click="restart"
                     >
@@ -93,7 +93,6 @@
                         <i class="fa fa-repeat"></i>
                     </button>
                 </div>
-                <!-- /botones-->
             </div>
 
             <audio ref="audio" controls class="d-none">
