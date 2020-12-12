@@ -16,46 +16,47 @@
     </div>
     @verbatim
     <div class="card-body">
-        <form id="form-alarmclock" class="row g-3">
-            <div class="col-12">
-                <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b> <span v-if="seconds && !isstarted">{{seconds}} seg.</span> <span v-if="isstarted">{{hhmmss}}</span></pre>
-                <div v-if="isstarted" class="progress">
-                    <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
-                         :style="{width: percent}"
-                         >
-                        <span style="color:black; font-weight: bolder">Tiempo restante {{seconds}} seg.</span>
+        <form id="form-alarmclock" class="g-3">
+            <div class="row">
+                <div class="col-12">
+                    <pre class="alert-info p-3"><b>{{strhh}}</b>:<b>{{strmm}}</b>:<b>{{strss}}</b> <span v-if="seconds && !isstarted">{{seconds}} seg.</span> <span v-if="isstarted">{{hhmmss}}</span></pre>
+                    <div v-if="isstarted" class="progress">
+                        <div class="progress-bar progress-bar-striped bg-warning progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                             :style="{width: percent}"
+                             >
+                            <span style="color:black; font-weight: bolder">Tiempo restante {{seconds}} seg.</span>
+                        </div>
                     </div>
                 </div>
+                <div class="col-4 col-sm-3 col-md-2">
+                    <label>Horas:</label>
+                    <input type="number" class="form-control" min="0" max="300" maxlength="3"
+                           ref="hh"
+                           :disabled="isstarted"
+                           v-model="hh"
+                           v-on:change="hh_onchange"
+                    />
+                </div>
+                <div class="col-4 col-sm-3 col-md-2">
+                    <label>Minutos:</label>
+                    <input type="number" class="form-control" min="0" max="59" maxlength="2"
+                           :disabled="isstarted"
+                           v-model="mm"
+                           v-on:change="mm_onchange"
+                    />
+                </div>
+                <div class="col-4 col-sm-3 col-md-2">
+                    <label>Segundos:</label>
+                    <input type="number" class="form-control" min="0" max="59" maxlength="2"
+                           :disabled="isstarted"
+                           v-model="ss"
+                           v-on:change="ss_onchange"
+                    />
+                </div>
             </div>
-            <div class="col-2">
-                <label>Horas:</label>
-                <input type="number" class="form-control" min="0" max="300" maxlength="3"
-                       ref="hh"
-                       :disabled="isstarted"
-                       v-model="hh"
-                       v-on:change="hh_onchange"
-                />
-            </div>
-            <div class="col-2">
-                <label>Minutos:</label>
-                <input type="number" class="form-control" min="0" max="59" maxlength="2"
-                       :disabled="isstarted"
-                       v-model="mm"
-                       v-on:change="mm_onchange"
-                />
-            </div>
-            <div class="col-2">
-                <label>Segundos:</label>
-                <input type="number" class="form-control" min="0" max="59" maxlength="2"
-                       :disabled="isstarted"
-                       v-model="ss"
-                       v-on:change="ss_onchange"
-                />
-            </div>
-
             <div class="row">
                 <!-- botones -->
-                <div class="col-3">
+                <div class="col-4 col-sm-3 col-md-2 col-lg-2">
                     <button type="button"  class="btn btn-info mt-4"
                             :disabled="isstarted || seconds<1"
                             v-on:click="start"
@@ -66,7 +67,7 @@
                     </button>
                 </div>
 
-                <div v-if="!isstarted && (hh>0 || mm>0 || ss>0)" class="col-3">
+                <div v-if="!isstarted && (hh>0 || mm>0 || ss>0)" class="col-4 col-sm-2 col-md-2 col-lg-2">
                     <button type="button" class="btn btn-danger mt-4"
                             v-on:click="clear"
                     >
@@ -75,7 +76,7 @@
                     </button>
                 </div>
 
-                <div v-if="isstarted" class="col-3">
+                <div v-if="isstarted" class="col-4 col-sm-3 col-md-2 col-lg-2">
                     <button type="button" class="btn btn-warning mt-4"
                             v-on:click="stop"
                     >
@@ -84,7 +85,7 @@
                     </button>
                 </div>
 
-                <div v-if="isstarted" class="col-3">
+                <div v-if="isstarted" class="col-4 col-sm-2 col-md-2 col-lg-2">
                     <button type="button" class="btn btn-dark mt-4"
                             v-on:click="restart"
                     >
