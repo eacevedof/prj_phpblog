@@ -48,6 +48,12 @@ const app = new Vue({
             this.audio.currentTime = 0
         },
 
+        sanitize_input(){
+            if(!this.hh) this.hh = 0
+            if(!this.mm) this.mm = 0
+            if(!this.ss) this.ss = 0
+        },
+
         discount(){
             const self = this
             intervalid = setInterval(function(){
@@ -82,6 +88,7 @@ const app = new Vue({
         },
 
         start(){
+            this.sanitize_input()
             this.btnstart = "Iniciado..."
             this.isstarted = true
             this.seconds = this.get_seconds()
