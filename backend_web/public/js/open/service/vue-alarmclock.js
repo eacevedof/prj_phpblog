@@ -5,9 +5,9 @@ Vue.use(VueToast, {position:"top"})
 let intervalid = 0
 
 const DEFAULT = {
-    HH: "00",
-    MM: "00",
-    SS: "10",
+    HH: 0,
+    MM: 0,
+    SS: 10,
 }
 
 const app = new Vue({
@@ -24,14 +24,15 @@ const app = new Vue({
         mm: DEFAULT.MM,
         ss: DEFAULT.SS,
 
+        strhh: DEFAULT.HH.toString().padStart(2,"0"),
+        strmm: DEFAULT.MM.toString().padStart(2,"0"),
+        strss: DEFAULT.SS.toString().padStart(2,"0"),
+
         audio: null,
         seconds: 0,
     },
 
     mounted(){
-        this.strhh = this.hh.padStart(2,"0")
-        this.strmm = this.mm.padStart(2,"0")
-        this.strss = this.ss.padStart(2,"0")
         this.$refs.hh.focus()
         this.audio = this.$refs.audio
     },
@@ -79,16 +80,19 @@ const app = new Vue({
         hh_onchange(){
             if(parseInt(this.hh) >300) this.hh = "300"
             this.strhh = this.hh.padStart(2,"0")
+            this.seconds = this.get_seconds()
         },
 
         mm_onchange(){
             if(parseInt(this.mm) > 59) this.mm = "59"
             this.strmm = this.mm.padStart(2,"0")
+            this.seconds = this.get_seconds()
         },
 
         ss_onchange(){
             if(parseInt(this.ss) > 59) this.ss = "59"
             this.strss = this.ss.padStart(2,"0")
+            this.seconds = this.get_seconds()
         },
 
     },//methods
