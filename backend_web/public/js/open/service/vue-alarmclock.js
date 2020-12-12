@@ -7,7 +7,7 @@ const app = new Vue({
     el: "#form-alarmclock",
     data: {
         issending: false,
-        btnsend: "Guardar",
+        btnsend: "Inicio",
 
         query: "",
         result: "",
@@ -48,7 +48,7 @@ const app = new Vue({
             }
 
             this.issending = false
-            this.btnsend = "Guardar"
+            this.btnsend = "Inicio"
         }//on_submit
 
     },//methods
