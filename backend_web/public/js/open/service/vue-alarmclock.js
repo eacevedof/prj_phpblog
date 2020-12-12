@@ -2,6 +2,8 @@ import openapi from "/js/open/helpers/openapi.js"
 
 Vue.use(VueToast, {position:"top"})
 
+let intervalid = 0
+
 const app = new Vue({
     el: "#form-alarmclock",
     data: {
@@ -27,8 +29,6 @@ const app = new Vue({
 
         audio: null,
         seconds: 0,
-
-        intevalid: 0,
     },
 
     mounted(){
@@ -47,16 +47,16 @@ const app = new Vue({
 
         discount(){
             const self = this
-            this.intevalid = setInterval(function(){
+            intervalid = setInterval(function(){
                 self.seconds = self.seconds - 1
                 if(self.seconds === 0) {
-                    clearInterval(self.intevalid)
                     self.sound()
-                    self.isstarted = false
+                    clearInterval(intervalid)
+                    self.start()
                 }
             },
             1000)
-            console.log("interval-id",self.intevalid)
+            console.log("interval-id",intervalid)
         },
 
         get_seconds() {
@@ -71,6 +71,7 @@ const app = new Vue({
 
         stop(){
             this.isstarted = false
+            clearInterval(intervalid)
         },
 
         reset(){
