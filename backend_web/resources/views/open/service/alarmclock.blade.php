@@ -11,7 +11,7 @@
     </div>
     @verbatim
     <div class="card-body">
-        <form @submit="on_submit" id="form-formatsql" class="row g-3">
+        <form @submit="on_submit" id="form-alarmclock" class="row g-3">
             <div class="col-10">
                 <label>SQL:</label>
                 <textarea class="form-control" maxlength="100000" rows="10"
@@ -22,7 +22,7 @@
             </div>
             <!-- boton -->
             <div class="col-1">
-                <button id="btn-formatsql" class="btn btn-dark mt-4" :disabled="issending" >
+                <button id="btn-alarmclock" class="btn btn-dark mt-4" :disabled="issending" >
                     {{btnsend}}
                     <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                 </button>
@@ -43,5 +43,5 @@
     </div>
 </div>
 @endverbatim
-<script type="module" src="/js/open/service/vue-formatsql.js"></script>
+<script type="module" src="/js/open/service/vue-alarmclock.js"></script>
 @endsection
