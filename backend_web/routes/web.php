@@ -37,6 +37,9 @@ Route::get("/servicios/probar-php-preg-match-all","Open\ServiceController@pregma
 Route::post("/services/formatter/sql-query","Open\ServiceController@format_sql")->name("open.service.format_sql");
 Route::get("/servicios/formatear-consulta-sql","Open\ServiceController@formatsql")->name("open.service.formatsql");
 
+Route::post("/services/test/sslencrypt","Open\ServiceController@ssl_encrypt")->name("open.service.ssl_encrypt");
+Route::get("/servicios/probar-ssl-encrypt","Open\ServiceController@sslencrypt")->name("open.service.sslencrypt");
+
 Route::get("/servicios/reloj-alarma-online","Open\ServiceController@alarmclock")->name("open.service.alarmclock");
 
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");

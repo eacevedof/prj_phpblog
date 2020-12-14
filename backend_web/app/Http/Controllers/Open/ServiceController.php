@@ -129,4 +129,31 @@ class ServiceController extends BaseController
             "catslug"     => "service"
         ]);
     }
+
+    //api
+    public function ssl_encrypt(Request $request)
+    {
+        $post = $request->all();
+        try {
+            $r = (new PregmatchService($post))->get();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
+    }
+
+    //servicios/probar-php-pregmatch-all
+    public function sslencrypt()
+    {
+        return view('open.service.pregmatchall',[
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.service.pregmatchall"),
+            "breadscrumb" => $this->_get_scrumb("open.service.pregmatchall",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "service"
+        ]);
+    }
 }
