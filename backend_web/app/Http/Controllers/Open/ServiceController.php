@@ -131,7 +131,7 @@ class ServiceController extends BaseController
     }
 
     //api
-    public function ssl_encrypt(Request $request)
+    public function openssl_encrypt(Request $request)
     {
         $post = $request->all();
         try {
@@ -144,13 +144,13 @@ class ServiceController extends BaseController
         }
     }
 
-    //servicios/probar-php-pregmatch-all
-    public function sslencrypt()
+    //servicios/probar-openssl-encrypt
+    public function opensslencrypt()
     {
-        return view('open.service.pregmatchall',[
+        return view('open.service.opensslencrypt',[
             "result"      => [],
-            "seo"         => SeoComponent::get_meta("open.service.pregmatchall"),
-            "breadscrumb" => $this->_get_scrumb("open.service.pregmatchall",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "seo"         => SeoComponent::get_meta("open.service.opensslencrypt"),
+            "breadscrumb" => $this->_get_scrumb("open.service.opensslencrypt",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
