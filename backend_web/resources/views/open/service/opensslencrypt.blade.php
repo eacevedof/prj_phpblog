@@ -14,6 +14,7 @@
     <div class="card-body">
         <form @submit="on_submit" id="form-opensslencrypt">
             <div class="row">
+                openssl_encrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string
                 <pre class="alert-info p-3"><b>{{final}}</b>    <i v-if="pattern" class="fa fa-clipboard" v-on:click="to_clipboard"></i></pre>
             </div>
             <div class="row">
