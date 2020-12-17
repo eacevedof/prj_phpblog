@@ -87,6 +87,41 @@ const openapi = {
         catch (e) {
             return {error:e}
         }
+    },
+
+    post_sslencrypt: async (obj) => {
+        try {
+            const url = "/services/test/opensslencrypt"
+            const form = new FormData()
+            form.append("_token",funcs.get_csrftoken())
+            form.append("action","test.sslencrypt")
+            form.append("method",obj.method)
+            form.append("function",obj.func)
+            form.append("password",obj.password)
+            form.append("salt",obj.salt)
+            form.append("option",obj.option)
+            form.append("iv",obj.iv)
+            form.append("data",obj.data)
+
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json())
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
+    },
+
+    get_sslmethods: async () => {
+        try {
+            const url = "/api/app-array/sll-methods"
+            const prom = await fetch(url)
+            const r = (await prom.json())
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
     }
 }
 export default openapi

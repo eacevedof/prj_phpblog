@@ -8,95 +8,96 @@
 <div class="card opn-card" xmlns="http://www.w3.org/1999/html">
     <div class="card-header">
         <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
-        <h6>Prueba php <a class="btn-link" href="https://www.php.net/manual/es/function.preg-match-all.php" target="_blank" rel="nofollow"><b>preg_match_all</b></a></h6>
+        <h6>
+            Prueba php
+            <a class="btn-link" href="https://www.php.net/manual/es/function.openssl-encrypt.php" target="_blank" rel="nofollow"><b>openssl_encrypt</b></a> y
+            <a class="btn-link" href="https://www.php.net/manual/es/function.openssl-decrypt.php" target="_blank" rel="nofollow"><b>openssl_decrypt</b></a>
+        </h6>
     </div>
     @verbatim
     <div class="card-body">
         <form @submit="on_submit" id="form-opensslencrypt">
             <div class="row">
-                openssl_encrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string
+<pre>
+openssl_encrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string
+openssl_decrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string
+</pre>
                 <pre class="alert-info p-3"><b>{{final}}</b>    <i v-if="pattern" class="fa fa-clipboard" v-on:click="to_clipboard"></i></pre>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-2">
                     <label>Función:</label>
                     <select v-model="func" class="form-control" required>
-                        <option disabled value="">Seleccione un elemento</option>
                         <option value="openssl_encrypt">openssl_encrypt</option>
                         <option value="openssl_decrypt">openssl_decrypt</option>
                     </select>
                 </div>
-                <div class="col-3">
+                <div class="col-2">
                     <label>Methods:</label>
-                    <select v-model="methods" class="form-control" required>
+                    <select v-model="method" class="form-control" required>
                         <option disabled value="">Seleccione un elemento</option>
-                        <option v-for="(method, i) in methods" :value="method" :key="i">{{method}}</option>
+                        <option v-for="(meth, i) in methods" :value="meth" :key="i">{{meth}}</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <label>Password:</label>
+                    <input type="text" class="form-control" required="required" max="500"
+                           :disabled="issending"
+                           v-model="password"
+                           v-on:keyup="update_final"
+                    />
+                </div>
+                <div class="col-2">
+                    <label>Sal:</label>
+                    <input type="text" class="form-control" required="required" max="500"
+                           :disabled="issending"
+                           v-model="salt"
+                           v-on:keyup="update_final"
+                    />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <label>Option </label>
+                    <select v-model="option" class="form-control" required>
+                        <option value="OPENSSL_RAW_DATA">OPENSSL_RAW_DATA</option>
+                        <option value="OPENSSL_ZERO_PADDING">OPENSSL_ZERO_PADDING</option>
                     </select>
                 </div>
                 <div class="col-3">
-                    <label>Datos:</label>
-                    <textarea class="form-control" maxlength="10000" rows="8"
-                              :disabled="issending"
-                              v-model="text"
-                    ></textarea>
-                </div>
-                <div class="col-3">
                     <label>
-                        Method: AES-256-CBC
-                    </label>
-                    <input type="text" class="form-control" required="required" max="500"
-                           ref="pattern"
-                           :disabled="issending"
-                           v-model="pattern"
-                           v-on:keyup="update_final"
-                    />
-                </div>
-                <div class="col-3">
-                    <label>Password</label>
-                    <input type="text" class="form-control" required="required" max="500"
-                           :disabled="issending"
-                           v-model="password"
-                           v-on:keyup="update_final"
-                    />
-                </div>
-
-                <div class="col-3">
-                    <label>Options  OPENSSL_RAW_DATA, OPENSSL_ZERO_PADDING</label>
-                    <input type="text" class="form-control" required="required" max="500"
-                           :disabled="issending"
-                           v-model="password"
-                           v-on:keyup="update_final"
-                    />
-                </div>
-                <div class="col-3">
-                    <label>
-                        https://www.php.net/manual/es/function.openssl-get-cipher-methods.php
                         iv <small>Vector de inicialización</small>
                     </label>
                     <input type="text" class="form-control" required="required" max="500"
                            ref="pattern"
                            :disabled="issending"
-                           v-model="pattern"
+                           v-model="iv"
                            v-on:keyup="update_final"
                     />
                 </div>
 
-                <!-- boton -->
+<!-- boton -->
                 <div class="col-2">
                     <button id="btn-opensslencrypt" class="btn btn-dark m-0 mt-3" :disabled="issending" >
                         {{btnsend}}
                         <img v-if="issending" src="/assets/images/loading-bw.gif" width="25" height="25"/>
                     </button>
                 </div>
-                <div v-if="result" class="col-12">
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <label>Datos:</label>
+                    <textarea class="form-control" maxlength="10000" rows="8"
+                              :disabled="issending"
+                              v-model="data"
+                    ></textarea>
+                </div>
+                <div v-if="result" class="col-6">
                     <label><b>Resultado:</b></label><br/>
                     <pre style="font-size: 0.7rem; border: 1px solid #ccc">{{result}}</pre>
                 </div>
             </div>
-            <div class="row">
-
-            </div>
-
         </form>
     </div>
 </div>

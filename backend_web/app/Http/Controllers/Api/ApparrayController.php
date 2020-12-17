@@ -41,4 +41,16 @@ class ApparrayController extends BaseController
             return Response()->json(["error"=>$e->getMessage()],500);
         }
     }
+
+    public function get_sslmethods()
+    {
+        try {
+            $r = (new ApparrayService())->get_sslmethods();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
+    }
 }

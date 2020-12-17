@@ -9,50 +9,61 @@ const app = new Vue({
         issending: false,
         btnsend: "Probar",
 
-        pattern: "",
-        flags: "",
-        final: "//",
-        text: "",
+        methods: [],
+        method: "",
+        func: "",
+
+        password: "",
+        salt: "",
+        option: "",
+        iv: "",
+        data: "",
+
         result: "",
     },
 
-    mounted(){
-        this.$refs.pattern.focus()
+    async mounted(){
+        //this.$refs.func.focus()
+        this.methods = await openapi.get_sslmethods()
     },
 
     methods:{
         reset(){
-            this.pattern = ""
-            this.flags = ""
-            this.final = ""
-            this.text = ""
+            this.func = ""
+            this.methods = ""
+            this.password = ""
+            this.data = ""
             this.result = ""
         },
 
         to_clipboard(){
-            funcs.to_clipboard(this.final)
-            const html = funcs.html_entities(this.final)
-            this.$toast.open(`Pattern: <b>${html}</b> now in clipboard`)
+            funcs.to_clipboard(this.password)
+            const html = funcs.html_entities(this.password)
+            this.$toast.open(`func: <b>${html}</b> now in clipboard`)
         },
 
-        update_final(){
-            const pattern = `/${this.pattern}/${this.flags}`
-            this.final = pattern
+        update_password(){
+            const func = `/${this.func}/${this.methods}`
+            this.password = func
         },
 
         on_submit: async function(e) {
             e.preventDefault()
-            if(!this.pattern) return
-            if(!this.text) return
+            if(!this.func) return
+            if(!this.data) return
 
             this.issending = true
             this.btnsend = "Procesando..."
             this.result = ""
 
-            const response = await openapi.post_pregmatchaall({
-                pattern: this.pattern,
-                flags: this.flags,
-                text: this.text
+            const response = await openapi.post_sslencrypt({
+                method: this.method,
+                func: this.func,
+                password: this.password,
+                salt: this.salt,
+                option: this.option,
+                iv: this.iv,
+                data: this.data
             })
 
             console.log("R",response)
@@ -70,7 +81,7 @@ const app = new Vue({
 
             this.issending = false
             this.btnsend = "Probar"
-            this.$nextTick(() => this.$refs.pattern.focus())
+            this.$nextTick(() => this.$refs.func.focus())
         }//on_submit
 
     },//methods

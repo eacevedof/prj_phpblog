@@ -95,6 +95,7 @@ Route::apiResource("/api/language/sentencetop","Api\Language\SentencetopControll
 
 //picklists (solo lectura)
 Route::get("/api/app-array/source","Api\ApparrayController@get_source");
+Route::get("/api/app-array/sll-methods","Api\ApparrayController@get_sslmethods");
 Route::get("/api/app-array/lang-context","Api\ApparrayController@get_langcontext");
 Route::get("/api/app-array/lang-type","Api\ApparrayController@get_langtype");
 Route::get("/api/picklist/language","Api\Language\LanguageController@get_picklist");
