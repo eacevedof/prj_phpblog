@@ -19,13 +19,52 @@
             </div>
             <div class="row">
                 <div class="col-3">
+                    <label>Función:</label>
+                    <select v-model="func" class="form-control" required>
+                        <option disabled value="">Seleccione un elemento</option>
+                        <option value="openssl_encrypt">openssl_encrypt</option>
+                        <option value="openssl_decrypt">openssl_decrypt</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label>Methods:</label>
+                    <select v-model="methods" class="form-control" required>
+                        <option disabled value="">Seleccione un elemento</option>
+                        <option v-for="(method, i) in methods" :value="method" :key="i">{{method}}</option>
+                    </select>
+                </div>
+                <div class="col-3">
+                    <label>Datos:</label>
+                    <textarea class="form-control" maxlength="10000" rows="8"
+                              :disabled="issending"
+                              v-model="text"
+                    ></textarea>
+                </div>
+                <div class="col-3">
                     <label>
-                        Metod: AES-256-CBC
+                        Method: AES-256-CBC
                     </label>
                     <input type="text" class="form-control" required="required" max="500"
                            ref="pattern"
                            :disabled="issending"
                            v-model="pattern"
+                           v-on:keyup="update_final"
+                    />
+                </div>
+                <div class="col-3">
+                    <label>Password</label>
+                    <input type="text" class="form-control" required="required" max="500"
+                           :disabled="issending"
+                           v-model="password"
+                           v-on:keyup="update_final"
+                    />
+                </div>
+
+                <div class="col-3">
+                    <label>Options  OPENSSL_RAW_DATA, OPENSSL_ZERO_PADDING</label>
+                    <input type="text" class="form-control" required="required" max="500"
+                           :disabled="issending"
+                           v-model="password"
                            v-on:keyup="update_final"
                     />
                 </div>
@@ -41,24 +80,7 @@
                            v-on:keyup="update_final"
                     />
                 </div>
-                <div class="col-4">
-                    <label>
-                        Flags:
-                        <sub>ejemplo: imsx</sub>
-                    </label>
-                    <input type="text" class="form-control" maxlength="4"
-                           :disabled="issending"
-                           v-model="flags"
-                           v-on:keyup="update_final"
-                    />
-                </div>
-                <div class="col-10">
-                    <label>Texto:</label>
-                    <textarea class="form-control" maxlength="10000" rows="8"
-                              :disabled="issending"
-                              v-model="text"
-                    ></textarea>
-                </div>
+
                 <!-- boton -->
                 <div class="col-2">
                     <button id="btn-opensslencrypt" class="btn btn-dark m-0 mt-3" :disabled="issending" >

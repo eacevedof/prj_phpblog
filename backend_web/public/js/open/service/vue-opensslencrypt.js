@@ -4,7 +4,7 @@ import funcs from "/js/open/helpers/openfuncs.js"
 Vue.use(VueToast, {position:"top"})
 
 const app = new Vue({
-    el: "#form-pregmatchall",
+    el: "#form-opensslencrypt",
     data: {
         issending: false,
         btnsend: "Probar",
