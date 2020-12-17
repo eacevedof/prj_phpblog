@@ -50,9 +50,6 @@ class ApparrayService extends BaseService
     public function get_sslmethods()
     {
         $r = openssl_get_cipher_methods();
-        $r = array_map(function($item){
-            return [$item => $item];
-        },$r);
         return $r;
     }
 }

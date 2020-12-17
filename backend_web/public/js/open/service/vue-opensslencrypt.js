@@ -9,13 +9,14 @@ const app = new Vue({
         issending: false,
         btnsend: "Probar",
 
+        func: "openssl_encrypt",
         methods: [],
-        method: "",
-        func: "",
+        method: "aes-128-cbc",
+
 
         password: "",
         salt: "",
-        option: "",
+        option: "OPENSSL_RAW_DATA",
         iv: "",
         data: "",
 
@@ -24,7 +25,8 @@ const app = new Vue({
 
     async mounted(){
         //this.$refs.func.focus()
-        this.methods = await openapi.get_sslmethods()
+        const r = await openapi.get_sslmethods()
+        this.methods = r.data
     },
 
     methods:{
