@@ -1,14 +1,15 @@
 <?php
 namespace App\Http\Controllers\Open;
 
-use App\Component\SeoComponent;
 use App\Http\Controllers\BaseController;
+use Illuminate\Http\Request;
+use App\Component\SeoComponent;
+
 use App\Services\Open\FormatSql;
 use App\Services\Open\PasswordService;
 use App\Services\Open\PdftojpgService;
 use App\Services\Open\PregmatchService;
 use App\Services\Open\SslencryptService;
-use Illuminate\Http\Request;
 
 class ServiceController extends BaseController
 {
