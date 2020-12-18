@@ -29,7 +29,7 @@ class SslencryptService extends BaseService
             "salt"        => $this->input["salt"] ?? "",
             "option"      => $this->input["option"] ?? "",
             "iv"          => $this->input["iv"] ?? "",
-            "data"        => $this->input["data"] ?? "",
+            "data"        => utf8_encode($this->input["data"] ?? ""),
         ];
     }
 
@@ -46,7 +46,7 @@ class SslencryptService extends BaseService
         if(!$this->clean["method"]) throw new \Exception("No method configured");
         if(!$this->_is_method()) throw new \Exception("Invalid method");
         if(!in_array($this->clean["option"],["OPENSSL_RAW_DATA","OPENSSL_ZERO_PADDING"])) throw new \Exception("Wrong option selected");
-        if(!$this->clean["iv"]) throw new \Exception("Wrong Iv");
+        //if(!$this->clean["iv"]) throw new \Exception("Wrong Iv");
     }
 
     private function _get_iv()

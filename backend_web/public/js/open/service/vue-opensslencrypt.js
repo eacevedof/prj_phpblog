@@ -13,7 +13,7 @@ const app = new Vue({
         methods: [],
         method: "aes-128-cbc",
 
-        password: "",
+        password: "1234",
         salt: "",
         option: "OPENSSL_RAW_DATA",
         iv: "",
@@ -26,6 +26,7 @@ const app = new Vue({
         //this.$refs.func.focus()
         const r = await openapi.get_sslmethods()
         this.methods = r.data
+        this.$refs.password.focus()
     },
 
     methods:{
@@ -77,7 +78,7 @@ const app = new Vue({
 
             this.issending = false
             this.btnsend = "Probar"
-            this.$nextTick(() => this.$refs.func.focus())
+            this.$nextTick(() => this.$refs.password.focus())
         }//on_submit
 
     },//methods

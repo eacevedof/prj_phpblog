@@ -42,8 +42,10 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                 <div class="col-2">
                     <label>Password:</label>
                     <input type="text" class="form-control" required="required" max="500"
+                           ref="password"
                            :disabled="issending"
                            v-model="password"
+                           @focus="$event.target.select()"
                     />
                 </div>
                 <div class="col-2">
