@@ -22,7 +22,6 @@
 openssl_encrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string
 openssl_decrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string
 </pre>
-                <pre class="alert-info p-3"><b>{{final}}</b>    <i v-if="func" class="fa fa-clipboard" v-on:click="to_clipboard"></i></pre>
             </div>
             <div class="row">
                 <div class="col-2">
@@ -45,7 +44,6 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                     <input type="text" class="form-control" required="required" max="500"
                            :disabled="issending"
                            v-model="password"
-                           v-on:keyup="update_final"
                     />
                 </div>
                 <div class="col-2">
@@ -53,7 +51,6 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                     <input type="text" class="form-control" required="required" max="500"
                            :disabled="issending"
                            v-model="salt"
-                           v-on:keyup="update_final"
                     />
                 </div>
             </div>
@@ -73,7 +70,6 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                            ref="iv"
                            :disabled="issending"
                            v-model="iv"
-                           v-on:keyup="update_final"
                     />
                 </div>
 

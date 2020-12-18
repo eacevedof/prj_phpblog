@@ -44,11 +44,6 @@ const app = new Vue({
             this.$toast.open(`func: <b>${html}</b> now in clipboard`)
         },
 
-        update_password(){
-            const func = `/${this.func}/${this.methods}`
-            this.password = func
-        },
-
         on_submit: async function(e) {
             e.preventDefault()
             if(!this.func) return
