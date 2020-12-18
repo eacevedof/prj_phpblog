@@ -13,7 +13,6 @@ const app = new Vue({
         methods: [],
         method: "aes-128-cbc",
 
-
         password: "",
         salt: "",
         option: "OPENSSL_RAW_DATA",

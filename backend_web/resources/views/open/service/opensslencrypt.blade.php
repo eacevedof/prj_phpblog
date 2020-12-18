@@ -48,7 +48,7 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                 </div>
                 <div class="col-2">
                     <label>Sal:</label>
-                    <input type="text" class="form-control" required="required" max="500"
+                    <input type="text" class="form-control" max="500"
                            :disabled="issending"
                            v-model="salt"
                     />
@@ -66,7 +66,7 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                     <label>
                         iv <small>Vector de inicialización</small>
                     </label>
-                    <input type="text" class="form-control" required="required" max="500"
+                    <input type="text" class="form-control" max="500"
                            ref="iv"
                            :disabled="issending"
                            v-model="iv"
@@ -84,14 +84,15 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
             <div class="row">
                 <div class="col-3">
                     <label>Datos:</label>
-                    <textarea class="form-control" maxlength="10000" rows="8"
+                    <textarea class="form-control" maxlength="10000" rows="8" required
                               :disabled="issending"
                               v-model="data"
                     ></textarea>
                 </div>
                 <div v-if="result" class="col-6">
                     <label><b>Resultado:</b></label><br/>
-                    <pre style="font-size: 0.7rem; border: 1px solid #ccc">{{result}}</pre>
+                    <p style="font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;"
+                    >{{result}}<p>
                 </div>
             </div>
         </form>

@@ -49,13 +49,23 @@ class SslencryptService extends BaseService
         if(!$this->clean["iv"]) throw new \Exception("Wrong Iv");
     }
 
+    private function _get_iv()
+    {
+        if($this->clean["method"]==="aes-256-cbc")
+            return substr(hash("sha256",$this->input["iv"]),0,16);
+
+        $ivlen = openssl_cipher_iv_length($this->clean["method"]);
+        $iv = openssl_random_pseudo_bytes($ivlen);
+        return $iv;
+    }
+
     private function _get_encrypted()
     {
         $password = $this->clean["password"];
         if($this->clean["salt"]) $password .= $this->clean["salt"];
 
         $hashpasswd = hash("sha256", $password);
-        $hashiv = substr(hash("sha256",$this->input["iv"]),0,16);
+        $hashiv = $this->_get_iv();
         $encrypted = openssl_encrypt(
                         $this->clean["data"],
                         $this->clean["method"],
@@ -73,7 +83,7 @@ class SslencryptService extends BaseService
         if($this->clean["salt"]) $password .= $this->clean["salt"];
 
         $hashpasswd = hash("sha256", $password);
-        $hashiv = substr(hash("sha256",$this->input["iv"]),0,16);
+        $hashiv = $this->_get_iv();
         $base64 = base64_decode($this->clean["data"]);
 
         $decrypted = openssl_decrypt(
