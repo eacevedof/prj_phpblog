@@ -94,7 +94,7 @@ class SslencryptService extends BaseService
             $hashiv
         );
 
-        return $decrypted;
+        return utf8_encode($decrypted);
     }
 
     public function get()

@@ -23,7 +23,6 @@ const app = new Vue({
     },
 
     async mounted(){
-        //this.$refs.func.focus()
         const r = await openapi.get_sslmethods()
         this.methods = r.data
         this.$refs.password.focus()
