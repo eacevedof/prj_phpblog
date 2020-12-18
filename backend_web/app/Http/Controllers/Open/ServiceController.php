@@ -7,6 +7,7 @@ use App\Services\Open\FormatSql;
 use App\Services\Open\PasswordService;
 use App\Services\Open\PdftojpgService;
 use App\Services\Open\PregmatchService;
+use App\Services\Open\SslencryptService;
 use Illuminate\Http\Request;
 
 class ServiceController extends BaseController
@@ -135,7 +136,7 @@ class ServiceController extends BaseController
     {
         $post = $request->all();
         try {
-            $r = (new PregmatchService($post))->get();
+            $r = (new SslencryptService($post))->get();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)
