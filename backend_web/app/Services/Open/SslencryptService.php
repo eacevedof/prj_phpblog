@@ -74,7 +74,7 @@ class SslencryptService extends BaseService
 
         $hashpasswd = hash("sha256", $password);
         $hashiv = substr(hash("sha256",$this->input["iv"]),0,16);
-        $base64 = base64_encode($this->clean["data"]);
+        $base64 = base64_decode($this->clean["data"]);
 
         $decrypted = openssl_decrypt(
             $base64,
