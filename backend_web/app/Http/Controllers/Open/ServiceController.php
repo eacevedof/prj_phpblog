@@ -138,7 +138,10 @@ class ServiceController extends BaseController
         $post = $request->all();
         try {
             $r = (new SslencryptService($post))->get();
-            return Response()->json(["data"=>$r],200);
+            return Response()->json(["data"=>$r],200,[
+                'Content-Type' => 'application/json; charset=UTF-8',
+                'charset' => 'utf-8'
+            ],JSON_UNESCAPED_UNICODE);
         }
         catch (\Exception $e)
         {
