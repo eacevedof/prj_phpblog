@@ -51,12 +51,10 @@ class SslencryptService extends BaseService
 
     private function _get_iv()
     {
-        if($this->clean["method"]==="aes-256-cbc")
-            return substr(hash("sha256",$this->input["iv"]),0,16);
-
+        $iv = $this->input["iv"];
         $ivlen = openssl_cipher_iv_length($this->clean["method"]);
-        $iv = openssl_random_pseudo_bytes($ivlen);
-        return $iv;
+        return substr(hash("sha256",$iv),0,$ivlen);
+        //$iv = openssl_random_pseudo_bytes($ivlen);
     }
 
     private function _get_encrypted()
