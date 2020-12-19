@@ -60,6 +60,7 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                 <div class="col-2">
                     <label>Option </label>
                     <select v-model="option" class="form-control" required>
+                        <option value="OPENSSL_NONE">NONE</option>
                         <option value="OPENSSL_RAW_DATA">OPENSSL_RAW_DATA</option>
                         <option value="OPENSSL_ZERO_PADDING">OPENSSL_ZERO_PADDING</option>
                     </select>

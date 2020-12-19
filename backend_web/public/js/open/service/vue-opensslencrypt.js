@@ -15,7 +15,7 @@ const app = new Vue({
 
         password: "1234",
         salt: "",
-        option: "OPENSSL_RAW_DATA",
+        option: "OPENSSL_NONE",
         iv: "",
         data: "",
 

@@ -10,14 +10,16 @@ class SslencryptService extends BaseService
     private $errors;
 
     private const TYPES = [
-        "OPENSSL_RAW_DATA" => OPENSSL_RAW_DATA,
-        "OPENSSL_ZERO_PADDING" => OPENSSL_ZERO_PADDING,
+        "OPENSSL_NONE" => 0,
+        "OPENSSL_RAW_DATA" => OPENSSL_RAW_DATA, //1
+        "OPENSSL_ZERO_PADDING" => OPENSSL_ZERO_PADDING, //2
     ];
 
     public function __construct($input=[])
     {
         $this->input = $input;
         $this->_load_clean();
+        //dd(self::TYPES);
     }
 
     private function _load_clean()
@@ -29,8 +31,9 @@ class SslencryptService extends BaseService
             "salt"        => $this->input["salt"] ?? "",
             "option"      => $this->input["option"] ?? "",
             "iv"          => $this->input["iv"] ?? "",
-            "data"        => utf8_encode($this->input["data"] ?? ""),
+            "data"        => $this->input["data"] ?? "",
         ];
+        //dd($this->clean);
     }
 
     private function _is_method()
@@ -45,7 +48,7 @@ class SslencryptService extends BaseService
         if(!in_array($this->clean["function"],["openssl_encrypt","openssl_decrypt"])) throw new \Exception("No function selected");
         if(!$this->clean["method"]) throw new \Exception("No method configured");
         if(!$this->_is_method()) throw new \Exception("Invalid method");
-        if(!in_array($this->clean["option"],["OPENSSL_RAW_DATA","OPENSSL_ZERO_PADDING"])) throw new \Exception("Wrong option selected");
+        if(!in_array($this->clean["option"],["OPENSSL_NONE","OPENSSL_RAW_DATA","OPENSSL_ZERO_PADDING"])) throw new \Exception("Wrong option selected");
         //if(!$this->clean["iv"]) throw new \Exception("Wrong Iv");
     }
 
@@ -53,6 +56,7 @@ class SslencryptService extends BaseService
     {
         $iv = $this->input["iv"];
         $ivlen = openssl_cipher_iv_length($this->clean["method"]);
+        //dd($ivlen);
         return substr(hash("sha256",$iv),0,$ivlen);
         //$iv = openssl_random_pseudo_bytes($ivlen);
     }
@@ -60,7 +64,7 @@ class SslencryptService extends BaseService
     private function _get_encrypted()
     {
         $password = $this->clean["password"];
-        $this->_saltit($password);
+        $this->_salt_it($password);
 
         $hashpasswd = hash("sha256", $password);
         $hashiv = $this->_get_iv();
@@ -75,7 +79,7 @@ class SslencryptService extends BaseService
         return $base64;
     }
 
-    private function _saltit(&$password, $salt=NULL)
+    private function _salt_it(&$password, $salt=NULL)
     {
         if($salt===NULL) $salt = $this->clean["salt"];
         $password = "$salt.$password";
@@ -84,7 +88,7 @@ class SslencryptService extends BaseService
     private function _get_decrypted()
     {
         $password = $this->clean["password"];
-        $this->_saltit($password);
+        $this->_salt_it($password);
 
         $hashpasswd = hash("sha256", $password);
         $hashiv = $this->_get_iv();
