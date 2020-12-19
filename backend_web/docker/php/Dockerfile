@@ -1,3 +1,4 @@
+#docker/php/Dcokerfile
 FROM php:7.4.1-fpm
 
 ARG UID
@@ -28,7 +29,7 @@ RUN curl --insecure https://getcomposer.org/composer.phar -o /usr/bin/composer &
 # lo voy a comentar
 RUN apt-get update \
     && apt-get -y install sudo \
-    && apt-get install curl
+    && apt-get -y install curl
     # && curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash - \
     # && sudo apt-get install -y nodejs \
     # && yes | apt-get install npm
@@ -43,8 +44,13 @@ RUN apt-get install -y ghostscript
 RUN mkdir -p /appdata/www
 
 USER appuser
-RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative \
-	&& composer clear-cache \
-	&& composer self-update
+
+# Esto da error, este paquete sirve para instalar en paralelo con composer pero no funciona con composer 2.0
+# da el siguiente error:
+#  [InvalidArgumentException]
+#  Package hirak/prestissimo has a PHP requirement incompatible with your PHP version, PHP extensions and Composer version
+#RUN composer global require "hirak/prestissimo:^0.3" --prefer-dist --no-progress --no-suggest --optimize-autoloader --classmap-authoritative \
+#	&& composer clear-cache \
+#	&& composer self-update
 
 WORKDIR /appdata/www

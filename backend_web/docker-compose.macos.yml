@@ -32,16 +32,17 @@ services:
       XDEBUG_CONFIG: remote_host=host.docker.internal remote_port=9005
     volumes:
       # nocopy evita hacer la copia del contenedor al host (nuestra maquina)
-      - lv-eduardoaf-be-sync:/appdata/www:nocopy
+      # - lv-eduardoaf-be-sync:/appdata/www:nocopy
+      - .:/appdata/www
       - ./docker/php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
       - ~/.ssh/id_rsa:/home/appuser/.ssh/id_rsa
 
     networks:
       - lv-eduardoaf-net
       - mariadb-univ_net
-volumes:
-  lv-eduardoaf-be-sync:
-    external: true
+#volumes:
+  #lv-eduardoaf-be-sync:
+    #external: true
 
 networks:
   lv-eduardoaf-net:

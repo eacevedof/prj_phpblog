@@ -20,30 +20,34 @@ help: ## Show this help message
 	@echo
 	@echo "targets:"
 	@egrep "^(.+)\:\ ##\ (.+)" ${MAKEFILE_LIST} | column -t -c 2 -s ":#"
+	@echo ${UID}
 
 run: ## Start the containers
 ifeq ($(OS),Darwin)
-	docker volume create --name=lv-eduardoaf-be-sync
+	# docker volume create --name=lv-eduardoaf-be-sync
 	# levantará: la bd, el backend y el servicio web
 	# servicios en cascada
-	U_ID=${UID} docker-compose -f docker-compose.macos.yml up -d
 	# docker-sync ayuda en al optimizacion del funcionamiento en mac
-	U_ID=${UID} docker-sync start
+	# U_ID=${UID} docker-sync start
+	U_ID=${UID} docker-compose -f docker-compose.macos.yml up -d
 else
 	U_ID=${UID} docker-compose -f docker-compose.linux.yml up -d
 endif
 
 stop: ## Stop the containers
 ifeq ($(OS),Darwin)
+
+	# U_ID=${UID} docker-sync stop
 	U_ID=${UID} docker-compose -f docker-compose.macos.yml stop
-	U_ID=${UID} docker-sync stop
 else
 	U_ID=${UID} docker-compose -f docker-compose.linux.yml stop
 endif
 
 docker-sync-restart: ## Rebuild docker-sync stack and prepare environment
-	U_ID=${UID} docker-sync-stack clean
+	# U_ID=${UID} docker-sync-stack clean
+	# start containers
 	$(MAKE) run
+	# permissions y composer install
 	$(MAKE) prepare
 
 restart: ## Restart the containers
@@ -94,7 +98,7 @@ deploy: ## deploy test
 	py.sh deploy.codeonly eduardoaf
 
 rebuild: ## rebuild containers
-	docker-compose -f docker-compose.macos.yml down
-	docker-compose -f docker-compose.macos.yml up -d --build --remove-orphans
+	U_ID=${UID} docker-compose -f docker-compose.macos.yml down
+	U_ID=${UID} docker-compose -f docker-compose.macos.yml up -d --build --remove-orphans
 
 # --remove-orphans
