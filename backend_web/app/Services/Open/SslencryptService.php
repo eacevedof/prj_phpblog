@@ -48,7 +48,7 @@ class SslencryptService extends BaseService
         if(!in_array($this->clean["function"],["openssl_encrypt","openssl_decrypt"])) throw new \Exception("No function selected");
         if(!$this->clean["method"]) throw new \Exception("No method configured");
         if(!$this->_is_method()) throw new \Exception("Invalid method");
-        if(!in_array($this->clean["option"],["OPENSSL_NONE","OPENSSL_RAW_DATA","OPENSSL_ZERO_PADDING"])) throw new \Exception("Wrong option selected");
+        if(!in_array($this->clean["option"],array_keys(self::TYPES))) throw new \Exception("Wrong option selected");
         //if(!$this->clean["iv"]) throw new \Exception("Wrong Iv");
     }
 
