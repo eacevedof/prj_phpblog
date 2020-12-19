@@ -60,7 +60,7 @@ class SslencryptService extends BaseService
     private function _get_encrypted()
     {
         $password = $this->clean["password"];
-        if($this->clean["salt"]) $password .= $this->clean["salt"];
+        $this->_saltit($password);
 
         $hashpasswd = hash("sha256", $password);
         $hashiv = $this->_get_iv();
@@ -75,10 +75,16 @@ class SslencryptService extends BaseService
         return $base64;
     }
 
+    private function _saltit(&$password, $salt=NULL)
+    {
+        if($salt===NULL) $salt = $this->clean["salt"];
+        $password = "$salt.$password";
+    }
+
     private function _get_decrypted()
     {
         $password = $this->clean["password"];
-        if($this->clean["salt"]) $password .= $this->clean["salt"];
+        $this->_saltit($password);
 
         $hashpasswd = hash("sha256", $password);
         $hashiv = $this->_get_iv();
@@ -92,7 +98,7 @@ class SslencryptService extends BaseService
             $hashiv
         );
 
-        return $decrypted;
+        //return $decrypted;
         return utf8_encode($decrypted);
     }
 
