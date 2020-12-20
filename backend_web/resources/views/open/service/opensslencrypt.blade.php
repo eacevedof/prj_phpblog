@@ -22,19 +22,19 @@
         <form @submit="on_submit" id="form-opensslencrypt">
             <div class="row">
                 <p class="text-monospace font-weight-light alert-info p-2">
-                    <b>openssl_encrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string </b><br/>
-                    <b>openssl_decrypt ( string $data , string $method , string $password [, int $options = 0 [, string $iv = "" ]] ) : string</b>
+                    <b>openssl_encrypt ( string $data, string $method, string $password [, int $options = 0 [, string $iv = "" ]] ) : string </b><br/>
+                    <b>openssl_decrypt ( string $data, string $method, string $password [, int $options = 0 [, string $iv = "" ]] ) : string</b>
                 </p>
             </div>
             <div class="row">
-                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                <div class="col-4 col-sm-3 col-md-3 col-xl-2">
                     <label><b>Función:*</b></label>
                     <select v-model="func" class="form-control" required>
                         <option value="openssl_encrypt">openssl_encrypt</option>
                         <option value="openssl_decrypt">openssl_decrypt</option>
                     </select>
                 </div>
-                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                <div class="col-4 col-sm-3 col-md-3 col-xl-2">
                     <label title="Parámetro 2 $method"><b>Method:*</b></label>
                     <select v-model="method" class="form-control" required>
                         <option disabled value="">Seleccione un elemento</option>
@@ -42,7 +42,7 @@
                     </select>
                 </div>
 
-                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                <div class="col-4 col-sm-3 col-md-3 col-xl-2">
                     <label title="Parámetro 3 $password"><b>Password:</b></label>
                     <input type="text" class="form-control" max="500" placeholder="opcional"
                            ref="password"
@@ -51,7 +51,7 @@
                            @focus="$event.target.select()"
                     />
                 </div>
-                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                <div class="col-4 col-sm-3 col-md-3 col-xl-2">
                     <label title="Se agrega al principio del password"><b>Sal:</b></label>
                     <input type="text" class="form-control" max="500" placeholder="opcional"
                            :disabled="issending"
@@ -85,6 +85,7 @@
                     </button>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6 col-xl-6">
                     <label title="Parámetro 1 $data"><b>Datos:*</b></label>
