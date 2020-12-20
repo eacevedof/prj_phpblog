@@ -24,14 +24,14 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
 </pre>
             </div>
             <div class="row">
-                <div class="col-2">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Función:</label>
                     <select v-model="func" class="form-control" required>
                         <option value="openssl_encrypt">openssl_encrypt</option>
                         <option value="openssl_decrypt">openssl_decrypt</option>
                     </select>
                 </div>
-                <div class="col-2">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Methods:</label>
                     <select v-model="method" class="form-control" required>
                         <option disabled value="">Seleccione un elemento</option>
@@ -39,7 +39,7 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                     </select>
                 </div>
 
-                <div class="col-2">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Password:</label>
                     <input type="text" class="form-control" required="required" max="500"
                            ref="password"
@@ -48,7 +48,7 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                            @focus="$event.target.select()"
                     />
                 </div>
-                <div class="col-2">
+                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
                     <label>Sal:</label>
                     <input type="text" class="form-control" max="500"
                            :disabled="issending"
@@ -56,7 +56,7 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                     />
                 </div>
             </div>
-            <div class="row">
+            <div class="row ">
                 <div class="col-2">
                     <label>Option </label>
                     <select v-model="option" class="form-control" required>
@@ -85,7 +85,7 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-6">
                     <label>Datos:</label>
                     <textarea class="form-control" maxlength="10000" rows="8" required
                               :disabled="issending"
