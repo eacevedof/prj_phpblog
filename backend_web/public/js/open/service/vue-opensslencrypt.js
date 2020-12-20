@@ -13,7 +13,7 @@ const app = new Vue({
         methods: [],
         method: "aes-128-cbc",
 
-        password: "1234",
+        password: "",
         salt: "",
         option: "OPENSSL_NONE",
         iv: "",
@@ -38,8 +38,8 @@ const app = new Vue({
         },
 
         to_clipboard(){
-            funcs.to_clipboard(this.password)
-            const html = funcs.html_entities(this.password)
+            funcs.to_clipboard(this.result)
+            const html = funcs.html_entities(this.result)
             this.$toast.open(`func: <b>${html}</b> now in clipboard`)
         },
 

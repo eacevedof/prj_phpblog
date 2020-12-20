@@ -13,6 +13,9 @@
             <a class="btn-link" href="https://www.php.net/manual/es/function.openssl-encrypt.php" target="_blank" rel="nofollow"><b>openssl_encrypt</b></a> y
             <a class="btn-link" href="https://www.php.net/manual/es/function.openssl-decrypt.php" target="_blank" rel="nofollow"><b>openssl_decrypt</b></a>
         </h6>
+        <p>
+            <b>Nota:</b> Por seguridad no se guarda ningún tipo de dato y/o configuración ni en ficheros de logs ni en base de datos
+        </p>
     </div>
     @verbatim
     <div class="card-body">
@@ -24,33 +27,33 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
 </pre>
             </div>
             <div class="row">
-                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
-                    <label>Función:</label>
+                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                    <label><b>Función:*</b></label>
                     <select v-model="func" class="form-control" required>
                         <option value="openssl_encrypt">openssl_encrypt</option>
                         <option value="openssl_decrypt">openssl_decrypt</option>
                     </select>
                 </div>
-                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
-                    <label>Methods:</label>
+                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                    <label><b>Method:*</b></label>
                     <select v-model="method" class="form-control" required>
                         <option disabled value="">Seleccione un elemento</option>
                         <option v-for="(meth, i) in methods" :value="meth" :key="i">{{meth}}</option>
                     </select>
                 </div>
 
-                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
-                    <label>Password:</label>
-                    <input type="text" class="form-control" required="required" max="500"
+                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                    <label><b>Password:</b></label>
+                    <input type="text" class="form-control" max="500" placeholder="opcional"
                            ref="password"
                            :disabled="issending"
                            v-model="password"
                            @focus="$event.target.select()"
                     />
                 </div>
-                <div class="col-4 col-sm-3 col-md-2 col-xl-1">
-                    <label>Sal:</label>
-                    <input type="text" class="form-control" max="500"
+                <div class="col-4 col-sm-3 col-md-2 col-xl-2">
+                    <label title="Se agrega al principio del passwor"><b>Sal:</b></label>
+                    <input type="text" class="form-control" max="500" placeholder="opcional"
                            :disabled="issending"
                            v-model="salt"
                     />
@@ -60,9 +63,9 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                 <div class="col-2">
                     <label>Option </label>
                     <select v-model="option" class="form-control" required>
-                        <option value="OPENSSL_NONE">NONE</option>
-                        <option value="OPENSSL_RAW_DATA">OPENSSL_RAW_DATA</option>
-                        <option value="OPENSSL_ZERO_PADDING">OPENSSL_ZERO_PADDING</option>
+                        <option value="OPENSSL_NONE">NONE (0)</option>
+                        <option value="OPENSSL_RAW_DATA">OPENSSL_RAW_DATA (1)</option>
+                        <option value="OPENSSL_ZERO_PADDING">OPENSSL_ZERO_PADDING (2)</option>
                     </select>
                 </div>
                 <div class="col-3">
@@ -93,8 +96,9 @@ openssl_decrypt ( string $data , string $method , string $password [, int $optio
                     ></textarea>
                 </div>
                 <div v-if="result" class="col-6">
-                    <label><b>Resultado:</b></label><br/>
-                    <p style="font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;"
+                    <label><b>Resultado:</b> <span style="color: #00B7FF; cursor: pointer;"><i class="fa fa-clipboard" v-on:click="to_clipboard"></i></span></label>
+                    <p class="alert-info"
+                        style="font-family:'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;"
                     >{{result}}<p>
                 </div>
             </div>
