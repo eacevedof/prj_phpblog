@@ -29,7 +29,7 @@
 - crear buscador general para personalizar cuestionario
 - mostrar un loading... cuando se carga la app
 - agregar tipo "expresion"
-
+- corregir error: `openssl_encrypt(): A tag should be provided when using AEAD mode` para method aes-128-gcm
 
 ### Comandos:
 ```js
