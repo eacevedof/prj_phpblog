@@ -2,7 +2,7 @@
 
 namespace App\Component;
 
-class Formatter
+class FormatterComponent
 {
     public static function get_ymdhis($datetime)
     {

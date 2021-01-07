@@ -1,9 +1,8 @@
 <?php
 namespace App\Services\Restrict\Language;
-use App\Component\Formatter;
+
 use App\Models\AppLanguage;
 use App\Services\BaseService;
-use Illuminate\Http\Request;
 
 class LanguageInsertService extends BaseService
 {
@@ -16,10 +15,7 @@ class LanguageInsertService extends BaseService
         $this->data = $data;
     }
 
-    private function _check_data($data)
-    {
-
-    }
+    private function _check_data($data) {}
 
     private function _remove_dates(&$data)
     {

@@ -1,7 +1,7 @@
 <?php
 namespace App\Component;
 
-class Log
+class LogComponent
 {
     const DS = DIRECTORY_SEPARATOR;
 

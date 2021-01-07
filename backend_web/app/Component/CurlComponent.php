@@ -3,7 +3,7 @@ namespace App\Component;
 
 use \App\Traits\Log;
 
-class Curl
+class CurlComponent
 {
     use Log;
 
@@ -87,7 +87,7 @@ class Curl
         $this->sResponse = curl_exec($oCurl);
         curl_close($oCurl);
         if($this->sResponse===FALSE)
-            $this->add_error("$sMethod.Error Curl.request()");
+            $this->add_error("$sMethod.Error CurlComponent.request()");
     }//curl_execute
 
     public function request()
@@ -362,7 +362,7 @@ class Curl
     public function set_get($mxValue){$this->set_array($this->arGet,$mxValue);}
 
     protected function add_error($sMessage){$this->isError=TRUE;$this->arErrors[]=$sMessage;
-        $this->log($sMessage,"Curl.error");}
+        $this->log($sMessage,"CurlComponent.error");}
     protected function add_status($sResponse,$sMessage){$this->sResponse=$sResponse;$this->sMessage=$sMessage;}
 
     public function set_urlget_single($sUrl){$this->sUrlGet=$sUrl;}

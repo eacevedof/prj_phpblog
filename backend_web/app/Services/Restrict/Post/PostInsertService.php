@@ -1,9 +1,7 @@
 <?php
 namespace App\Services\Restrict\Post;
-use App\Component\Formatter;
 use App\Models\AppPost;
 use App\Services\BaseService;
-use Illuminate\Http\Request;
 
 class PostInsertService extends BaseService
 {
@@ -16,10 +14,7 @@ class PostInsertService extends BaseService
         $this->data = $data;
     }
 
-    private function _check_data($data)
-    {
-
-    }
+    private function _check_data($data) {}
 
     private function _remove_dates(&$data)
     {

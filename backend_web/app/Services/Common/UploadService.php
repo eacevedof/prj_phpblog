@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\Common;
 
-use App\Component\Curl;
+use App\Component\CurlComponent as Curl;
 use App\Services\BaseService;
 
 class UploadService extends BaseService

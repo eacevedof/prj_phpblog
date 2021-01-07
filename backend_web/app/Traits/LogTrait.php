@@ -1,8 +1,8 @@
 <?php
 namespace App\Traits;
-use App\Component\Log As L;
+use App\Component\LogComponent As L;
 
-trait Log
+trait LogTrait
 {
     protected function log($mxVar,$sTitle=NULL)
     {
