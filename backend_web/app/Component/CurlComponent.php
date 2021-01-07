@@ -1,7 +1,7 @@
 <?php
 namespace App\Component;
 
-use \App\Traits\Log;
+use \App\Traits\LogTrait as Log;
 
 class CurlComponent
 {

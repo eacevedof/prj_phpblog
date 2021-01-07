@@ -5,7 +5,7 @@ use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use App\Component\SeoComponent;
 
-use App\Services\Open\FormatSql;
+use App\Services\Open\FormatSqlService;
 use App\Services\Open\PasswordService;
 use App\Services\Open\PdftojpgService;
 use App\Services\Open\PregmatchService;
@@ -97,7 +97,7 @@ class ServiceController extends BaseController
     {
         $post = $request->all();
         try {
-            $r = (new FormatSql($post))->get();
+            $r = (new FormatSqlService($post))->get();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)

@@ -12,7 +12,7 @@ namespace App\Services\Open;
 
 use App\Services\BaseService;
 
-class FormatSql extends BaseService
+class FormatSqlService extends BaseService
 {
     private $input;
     private $clean;
