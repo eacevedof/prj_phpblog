@@ -39,5 +39,12 @@ class FetchComponent
 
     public function reset_post(){$this->posts=[]; return $this;}
 
-
+    public function get()
+    {
+        curl_init();      // initializes a cURL session
+        curl_setopt();    // changes the cURL session behavior with options
+        $r = curl_exec();      // executes the started cURL session
+        curl_close();     // closes the cURL session and deletes the variable made by curl_init();
+        return $r;
+    }
 }
