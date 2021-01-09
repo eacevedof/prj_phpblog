@@ -36,6 +36,8 @@ class FetchComponent
 
     private function _curl_setopts()
     {
+
+        curl_setopt($this->objresource, CURLOPT_ENCODING, "UTF-8");
         curl_setopt($this->objresource, CURLOPT_RETURNTRANSFER, true);
         foreach ($this->options as $opt => $value)
             curl_setopt($this->objresource, $opt, $value);
