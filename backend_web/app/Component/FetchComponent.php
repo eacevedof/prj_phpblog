@@ -42,38 +42,53 @@ class FetchComponent
 
     private function _curl_setopts()
     {
-        //curl_setopt(): changes the cURL session behavior with options
-        foreach ($this->headers as $opt => $value)
+        if($this->headers)
+            $this->_header_opts();
+
+        foreach ($this->options as $opt => $value)
             curl_setopt($this->urlinit, $opt, $value);
+
+        if($this->gets)
+            $this->_get_opts();
+
         if($this->posts)
-            curl_setopt($this->urlinit, CURLOPT_POSTFIELDS, $this->posts);
+            $this->_post_opts();
+
         return $this;
     }
+
+    private function _header_opts()
+    {
+        $headers = array_walk($this->headers, function (&$k,$v) {
+            $k="$k: $v";
+        });
+
+        curl_setopt($this->urlinit, CURLOPT_HTTPHEADER, $headers);
+    }
+
+    private function _get_opts()
+    {
+        curl_setopt($this->urlinit, CURLOPT_URL, $this->request_url);
+        curl_setopt($this->urlinit, CURLOPT_RETURNTRANSFER, true);
+    }
+
+    private function _post_opts(){curl_setopt($this->urlinit, CURLOPT_POSTFIELDS, $this->posts);}
 
     private function _load_urlinit()
     {
-        $this->urlinit = curl_init($this->request_url);
-        return $this;
-    }
-
-    private function _handle_post()
-    {
-        if($this->posts)
-        {
-
-        }
+        $this->urlinit = $this->posts ? curl_init($this->request_url): curl_init();
         return $this;
     }
 
     public function get()
     {
+        //configura urlinit
+        $this->_load_urlinit()
+            //si hay posts crea la opción para este fin
+            ->_curl_setopts();
 
-        $this->_load_urlinit();
-
-                   // initializes a cURL session
-        $this->_curl_setopts();
-        $r = curl_exec($url);       // executes the started cURL session
-        curl_close($url);               // closes the cURL session and deletes the variable made by curl_init();
+        $r = curl_exec($this->urlinit);
+        curl_close($this->urlinit);
         return $r;
     }
 }
