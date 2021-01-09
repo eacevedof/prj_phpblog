@@ -96,10 +96,10 @@ class FetchComponent
 
     public function reset_post(){$this->posts=[]; return $this;}
 
-    public function set_headers($headers){$this->headers = $headers; return $this;}
+    public function set_headers(array $headers){$this->headers = $headers; return $this;}
 
-    public function set_post($post){$this->posts = $post; return $this;}
+    public function set_post(array $post){$this->posts = $post; return $this;}
 
-    public function set_get($get){$this->gets = $get; return $this;}
+    public function set_get(array $get){$this->gets = $get; return $this;}
 
 }
