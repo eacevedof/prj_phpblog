@@ -17,7 +17,7 @@ class FetchComponent
     private $posts   = [];
 
     private $request_url;
-    private $urlinit = null;
+    private $objresource = null;
 
     public function __construct($request_url="")
     {
@@ -32,7 +32,7 @@ class FetchComponent
             $this->_header_opts();
 
         foreach ($this->options as $opt => $value)
-            curl_setopt($this->urlinit, $opt, $value);
+            curl_setopt($this->objresource, $opt, $value);
 
         if($this->gets)
             $this->_get_opts();
@@ -49,33 +49,35 @@ class FetchComponent
             $k="$k: $v";
         });
 
-        curl_setopt($this->urlinit, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($this->objresource, CURLOPT_HTTPHEADER, $headers);
     }
 
     private function _get_opts()
     {
         $geturl = $this->request_url . "?" . http_build_query($this->gets);
-        curl_setopt($this->urlinit, CURLOPT_URL, $geturl);
-        curl_setopt($this->urlinit, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($this->objresource, CURLOPT_URL, $geturl);
+        curl_setopt($this->objresource, CURLOPT_RETURNTRANSFER, true);
     }
 
-    private function _post_opts(){curl_setopt($this->urlinit, CURLOPT_POSTFIELDS, $this->posts);}
+    private function _post_opts(){curl_setopt($this->objresource, CURLOPT_POSTFIELDS, $this->posts);}
 
-    private function _load_urlinit()
+    private function _load_objresource()
     {
-        $this->urlinit = $this->posts ? curl_init($this->request_url): curl_init();
+        $this->objresource = $this->posts ? curl_init($this->request_url): curl_init();
         return $this;
     }
 
     public function get()
     {
-        //configura urlinit
-        $this->_load_urlinit()
+        //configura objresource
+        $this->_load_objresource()
             //si hay posts crea la opción para este fin
             ->_curl_setopts();
 
-        $r = curl_exec($this->urlinit);
-        curl_close($this->urlinit);
+        $r = curl_exec($this->objresource);
+        dd($r);
+        //dd($this->objresource);
+        curl_close($this->objresource);
         return $r;
     }
 
@@ -94,6 +96,9 @@ class FetchComponent
     public function reset_post(){$this->posts=[]; return $this;}
 
     public function set_headers($headers){$this->headers = $headers; return $this;}
+
     public function set_post($post){$this->posts = $post; return $this;}
+
     public function set_get($get){$this->gets = $get; return $this;}
+
 }
