@@ -187,8 +187,8 @@ class ServiceController extends BaseController
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.sitevulnerability"),
             "breadscrumb" => $this->_get_scrumb("open.service.sitevulnerability",[
-                "slug"=>"comprueba-la-vulnerabilidad-de-tu-sitio-web",
-                "slugtext"=>"Comprueba la vulnerabilidad de tu sitio web"
+                "slug"      => "comprueba-la-vulnerabilidad-de-tu-sitio-web",
+                "slugtext"  => "Comprueba la vulnerabilidad de tu sitio web"
             ]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
