@@ -19,11 +19,19 @@ class FetchComponent
     private $request_uri;
     private $objresource = null;
 
+    private $isdebug = false;
+
     public function __construct($request_uri="")
     {
         if(!in_array("curl",get_loaded_extensions()))
             throw new \Exception("Curl extension not installed",503);
         $this->request_uri = $request_uri;
+    }
+
+    public function is_debug($on=true)
+    {
+        $this->isdebug = $on;
+        return $this;
     }
 
     private function _curl_setopts()
@@ -67,6 +75,17 @@ class FetchComponent
     private function _init_resource()
     {
         $this->objresource = $this->posts ? curl_init($this->request_uri): curl_init();
+        return $this;
+    }
+
+    private function _debug()
+    {
+        if($this->isdebug) {
+            $logfile = "curl.log";
+            $fp = fopen(dirname(__FILE__)."/$logfile","w");
+            curl_setopt($this->objresource, CURLOPT_VERBOSE, 1);
+            curl_setopt($this->objresource, CURLOPT_STDERR, $fp);
+        }
         return $this;
     }
 
