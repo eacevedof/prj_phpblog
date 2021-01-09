@@ -70,7 +70,7 @@ class FetchComponent
     {
         if(!$this->request_uri) throw new \Exception("Missing request_uri");
         if($this->gets) $this->request_uri = $this->request_uri . "?" . http_build_query($this->gets);
-        print_r($this->request_uri);
+        //print_r($this->request_uri);
         return $this;
     }
 
