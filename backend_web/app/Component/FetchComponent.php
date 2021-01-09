@@ -91,6 +91,19 @@ class FetchComponent
         return $this;
     }
 
+    public function get_array()
+    {
+        $r = $this->get();
+        try {
+            $r = \json_decode($r,1);
+        }
+        catch (\Exception $e)
+        {
+            $r = [];
+        }
+        return $r;
+    }
+
     public function get()
     {
         //configura objresource
