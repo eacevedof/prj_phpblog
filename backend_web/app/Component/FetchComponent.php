@@ -36,7 +36,6 @@ class FetchComponent
 
     private function _curl_setopts()
     {
-
         curl_setopt($this->objresource, CURLOPT_ENCODING, "UTF-8");
         curl_setopt($this->objresource, CURLOPT_RETURNTRANSFER, true);
         foreach ($this->options as $opt => $value)
@@ -71,6 +70,7 @@ class FetchComponent
     {
         if(!$this->request_uri) throw new \Exception("Missing request_uri");
         if($this->gets) $this->request_uri = $this->request_uri . "?" . http_build_query($this->gets);
+        print_r($this->request_uri);
         return $this;
     }
 
@@ -118,7 +118,7 @@ class FetchComponent
         return $r;
     }
 
-    public function set_request_uri($url){$this->request_uri = $url; return $this;}
+    public function set_request_uri($uri){$this->request_uri = $uri; return $this;}
 
     public function add_header($k,$v){$this->headers[$k]=$v; return $this;}
 
