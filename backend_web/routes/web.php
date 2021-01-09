@@ -41,6 +41,9 @@ Route::get("/servicios/formatear-consulta-sql","Open\ServiceController@formatsql
 Route::post("/services/test/opensslencrypt","Open\ServiceController@openssl_encrypt")->name("open.service.openssl_encrypt");
 Route::get("/servicios/probar-openssl-encrypt","Open\ServiceController@opensslencrypt")->name("open.service.opensslencrypt");
 
+Route::post("/services/test/site-vulnerability","Open\ServiceController@site_vulnerability")->name("open.service.site_vulnerability");
+Route::get("/servicios/comprueba-la-vulnerabilidad-de-tu-sitio-web","Open\ServiceController@sitevulnerability")->name("open.service.sitevulnerability");
+
 Route::get("/servicios/reloj-alarma-online","Open\ServiceController@alarmclock")->name("open.service.alarmclock");
 
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");

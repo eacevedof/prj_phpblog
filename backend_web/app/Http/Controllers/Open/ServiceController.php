@@ -10,6 +10,7 @@ use App\Services\Open\PasswordService;
 use App\Services\Open\PdftojpgService;
 use App\Services\Open\PregmatchService;
 use App\Services\Open\SslencryptService;
+use App\Services\Open\SiteVulnerabilityService;
 
 class ServiceController extends BaseController
 {
@@ -156,6 +157,39 @@ class ServiceController extends BaseController
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.opensslencrypt"),
             "breadscrumb" => $this->_get_scrumb("open.service.opensslencrypt",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "service"
+        ]);
+    }
+
+    //api
+    public function site_vulnerability(Request $request)
+    {
+        $post = $request->all();
+        try {
+            $r = (new SiteVulnerabilityService($post))->get();
+            return Response()->json(["data"=>$r],200,[
+                'Content-Type' => 'application/json; charset=UTF-8',
+                'charset' => 'utf-8'
+            ],JSON_UNESCAPED_UNICODE);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
+    }
+
+    //servicios/comprueba-la-vulnerabilidad-de-tu-sitio-web
+    public function sitevulnerability()
+    {
+        return view('open.service.sitevulnerability',[
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.service.sitevulnerability"),
+            "breadscrumb" => $this->_get_scrumb("open.service.sitevulnerability",[
+                "slug"=>"comprueba-la-vulnerabilidad-de-tu-sitio-web",
+                "slugtext"=>"Comprueba la vulnerabilidad de tu sitio web"
+            ]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"

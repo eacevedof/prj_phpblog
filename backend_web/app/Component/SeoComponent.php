@@ -100,6 +100,12 @@ class SeoComponent
             "keywords"      => "php, opnessl_encrypt, probar, resultado",
             "h1"            => ""
         ],
+        "open.service.sitevulnerability"=>[
+            "title"         => "Comprueba que tan vulnerable es tu sitio",
+            "description"   => "A partir de una lista de ataques de seguridad se prueba tu dominio",
+            "keywords"      => "Vulnerabilidad, seguridad, dominios, wordpress, ataques",
+            "h1"            => ""
+        ]
     ];
 
     private const EMPTY = [
