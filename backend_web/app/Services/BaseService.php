@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 use Illuminate\Http\Request;
-use App\Traits\Log;
+use App\Traits\LogTrait as Log;
 use App\Traits\UidTrait;
 use App\Traits\EnvTrait;
 use App\Traits\SysfieldsTrait;

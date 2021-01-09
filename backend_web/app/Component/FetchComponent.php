@@ -54,7 +54,8 @@ class FetchComponent
 
     private function _get_opts()
     {
-        curl_setopt($this->urlinit, CURLOPT_URL, $this->request_url);
+        $geturl = $this->request_url . "?" . http_build_query($this->gets);
+        curl_setopt($this->urlinit, CURLOPT_URL, $geturl);
         curl_setopt($this->urlinit, CURLOPT_RETURNTRANSFER, true);
     }
 
@@ -92,5 +93,7 @@ class FetchComponent
 
     public function reset_post(){$this->posts=[]; return $this;}
 
-    public function set_headers(){}
+    public function set_headers($headers){$this->headers = $headers; return $this;}
+    public function set_post($post){$this->posts = $post; return $this;}
+    public function set_get($get){$this->gets = $get; return $this;}
 }

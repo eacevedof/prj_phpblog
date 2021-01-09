@@ -9,7 +9,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as RoutingController;
 
-use App\Traits\Log;
+use App\Traits\LogTrait as Log;
 use App\Traits\EnvTrait as Env;
 
 class BaseController extends RoutingController

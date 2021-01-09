@@ -10,7 +10,7 @@
  */
 namespace App\Services\Open;
 
-use App\Component\CurlComponent as Curl;
+use App\Component\FetchComponent as Fetch;
 use App\Services\BaseService;
 
 class WpHacksService extends BaseService
@@ -38,7 +38,7 @@ class WpHacksService extends BaseService
     {
         $url = $this->get_env("API_IPBLOCKER_URL")."/read?context=c3&schemainfo=db-security";
         $data = [];
-        $curl = new Curl();
+        //$curl = new Curl();
         //refactor de Curl
     }
 
@@ -56,7 +56,12 @@ class WpHacksService extends BaseService
         //llamada a ipblocker
     }
 
-    public function get(){}
+    public function get()
+    {
+        $url = $this->get_env("API_CURL_TEST");
+        $fetch = (new Fetch($url))->get();
+        print_r($fetch);
+    }
 }
 
 /*
