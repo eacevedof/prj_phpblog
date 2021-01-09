@@ -93,6 +93,7 @@ class FetchComponent
     {
         //configura objresource
         $this->_init_uri()      //inicia req_uri con query string si procede
+            ->is_debug()
             ->_init_resource()  //a partir de req_uri y post crea un recurso vacio o con url
             ->_curl_setopts();
 
