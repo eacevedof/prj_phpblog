@@ -31,6 +31,7 @@ class UploadService extends BaseService
 
         $fetch = new Fetch($url);
         $fetch
+            //->is_debug()
             ->add_post("user", $this->get_env("API_UPLOAD_USERNAME"))
             ->add_post("password", $this->get_env("API_UPLOAD_PASSWORD"))
             ->add_post("remoteip", $_SERVER["REMOTE_ADDR"])
@@ -38,7 +39,6 @@ class UploadService extends BaseService
         ;
 
         $r = $fetch->get_array();
-        dd($r);
         $this->logd($r,"curl.upload.r");
         return $r["data"]["token"] ?? "";
     }

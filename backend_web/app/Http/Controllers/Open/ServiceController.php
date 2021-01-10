@@ -166,7 +166,7 @@ class ServiceController extends BaseController
     //api
     public function site_vulnerability(Request $request)
     {
-        $post = $request->all();
+        //$post = $request->all();
         try {
             $r = (new SiteVulnerabilityService())->get_top500();
             return Response()->json(["data"=>$r],200,[
@@ -184,9 +184,9 @@ class ServiceController extends BaseController
     public function sitevulnerability()
     {
         $r = (new SiteVulnerabilityService())->get_top500();
-        //dd($r);
+
         return view('open.service.sitevulnerability',[
-            "result"      => [],
+            "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.service.sitevulnerability"),
             "breadscrumb" => $this->_get_scrumb("open.service.sitevulnerability",[
                 "slug"      => "comprueba-la-vulnerabilidad-de-tu-sitio-web",
