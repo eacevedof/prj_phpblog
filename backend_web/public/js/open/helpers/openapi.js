@@ -122,6 +122,21 @@ const openapi = {
         catch (e) {
             return {error:e}
         }
+    },
+
+    get_status_hacks: async ({domain, hacks}) => {
+        try {
+            const fetchs = hacks.map(hack => fetch(`${domain}${hack.request_uri}`))
+            const r = await Promise.all(fetchs).then(results => {
+                console.log(results)
+            })
+            return r
+        }
+        catch (e) {
+            return {error:e}
+        }
     }
+
+
 }
 export default openapi
