@@ -29,13 +29,14 @@ class FetchComponent
         $this->request_uri = $request_uri;
     }
 
-    public function is_debug($on=true)
+    public function is_debug($on=true, $mode="w")
     {
         $this->isdebug = $on;
         if(!$this->objdebug)
         {
             $logfile = "curl.log";
-            $this->objdebug = fopen(dirname(__FILE__) . "/$logfile", "w");
+            $pathfile = dirname(__FILE__) . "/$logfile";
+            $this->objdebug = fopen($pathfile, $mode);
         }
         return $this;
     }
@@ -123,6 +124,7 @@ class FetchComponent
         }
         catch (\Exception $e)
         {
+            $this->_add_debug($e->getMessage(),"exception");
             $r = [];
         }
         return $r;
