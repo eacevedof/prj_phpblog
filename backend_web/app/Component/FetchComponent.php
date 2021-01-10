@@ -47,7 +47,7 @@ class FetchComponent
             if($title) $title = " $title:\n";
             $now = date("Ymd-H:i:s");
             $content = var_export($var,1);
-            $content = "\n[$now]$title$content";
+            $content = "\n\n[$now]$title$content";
             fwrite($this->objdebug, $content);
         }
         return $this;
@@ -66,7 +66,7 @@ class FetchComponent
             curl_setopt($this->objresource, $opt, $value);
 
         if($this->headers) $this->_header_opts();
-        $this->_get_opts();  //
+        $this->_get_opts();
         if($this->posts) $this->_post_opts();
 
         return $this;
@@ -78,6 +78,7 @@ class FetchComponent
         foreach ($this->headers as $k => $v)
             $headers[] = "$k: $v";
 
+        $this->_add_debug($headers,"CURLOPT_HTTPHEADER");
         curl_setopt($this->objresource, CURLOPT_HTTPHEADER, $headers);
     }
 
@@ -87,6 +88,7 @@ class FetchComponent
     {
         curl_setopt($this->objresource, CURLOPT_POST, 1);
         $urlpost = http_build_query($this->posts);
+        $this->_add_debug($urlpost,"CURLOPT_POSTFIELDS");
         curl_setopt($this->objresource, CURLOPT_POSTFIELDS, $urlpost);
     }
 
@@ -100,7 +102,6 @@ class FetchComponent
 
     private function _init_resource()
     {
-        //$this->objresource = $this->posts ? curl_init($this->request_uri): curl_init();
         $this->objresource = curl_init();
         return $this;
     }
