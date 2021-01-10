@@ -183,10 +183,8 @@ class ServiceController extends BaseController
     //servicios/comprueba-la-vulnerabilidad-de-tu-sitio-web
     public function sitevulnerability()
     {
-        $r = (new SiteVulnerabilityService())->get_top500();
-
         return view('open.service.sitevulnerability',[
-            "result"      => $r,
+            "result"      => (new SiteVulnerabilityService())->get_top500(),
             "seo"         => SeoComponent::get_meta("open.service.sitevulnerability"),
             "breadscrumb" => $this->_get_scrumb("open.service.sitevulnerability",[
                 "slug"      => "comprueba-la-vulnerabilidad-de-tu-sitio-web",
