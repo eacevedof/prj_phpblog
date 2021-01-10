@@ -68,6 +68,7 @@ class FetchComponent
 
         if($this->headers) $this->_header_opts();
         $this->_get_opts();
+        //dd($this->request_uri);
         if($this->posts) $this->_post_opts();
 
         return $this;
@@ -152,6 +153,8 @@ class FetchComponent
     public function add_get($k,$v){$this->gets[$k]=$v; return $this;}
 
     public function add_post($k,$v){$this->posts[$k]=$v; return $this;}
+
+    public function add_option($k,$v){$this->options[$k]=$v; return $this;}
 
     public function reset_header(){$this->headers=[]; return $this;}
 
