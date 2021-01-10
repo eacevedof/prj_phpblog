@@ -166,9 +166,9 @@ class ServiceController extends BaseController
     //api
     public function site_vulnerability(Request $request)
     {
-        //$post = $request->all();
+        $post = $request->all();
         try {
-            $r = (new SiteVulnerabilityService())->get_top500();
+            $r = (new SiteVulnerabilityService($post))->get_test_result();
             return Response()->json(["data"=>$r],200,[
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'

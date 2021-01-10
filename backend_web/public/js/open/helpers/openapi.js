@@ -144,17 +144,15 @@ const openapi = {
 
     },
 
-    get_status_hacks: async ({domain, hacks}) => {
+    get_status_hacks: async domain => {
         try {
-            const hacksmini = hacks.filter((hack,i) => i<2)
-            const r = []
-            hacksmini.forEach(async  obj => {
-                const url = `${domain}${obj.request_uri}`
-                const a = await openapi.get_async(url)
-                r.push(a)
-            })
-
-            console.log("r",r)
+            const url = "/services/test/site-vulnerability"
+            const form = new FormData()
+            form.append("_token",funcs.get_csrftoken())
+            form.append("action","test.sitevulnerability")
+            form.append("domain", domain)
+            const prom = await fetch(url,{method: 'post', body: form})
+            const r = (await prom.json())
             return r
         }
         catch (e) {
