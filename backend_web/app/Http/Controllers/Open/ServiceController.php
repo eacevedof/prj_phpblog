@@ -168,7 +168,7 @@ class ServiceController extends BaseController
     {
         $post = $request->all();
         try {
-            $r = (new SiteVulnerabilityService($post))->get_top500();
+            $r = (new SiteVulnerabilityService())->get_top500();
             return Response()->json(["data"=>$r],200,[
                 'Content-Type' => 'application/json; charset=UTF-8',
                 'charset' => 'utf-8'
@@ -183,6 +183,8 @@ class ServiceController extends BaseController
     //servicios/comprueba-la-vulnerabilidad-de-tu-sitio-web
     public function sitevulnerability()
     {
+        $r = (new SiteVulnerabilityService())->get_top500();
+        //dd($r);
         return view('open.service.sitevulnerability',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.sitevulnerability"),

@@ -38,6 +38,7 @@ class UploadService extends BaseService
         ;
 
         $r = $fetch->get_array();
+        dd($r);
         $this->logd($r,"curl.upload.r");
         return $r["data"]["token"] ?? "";
     }

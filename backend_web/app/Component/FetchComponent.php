@@ -20,6 +20,7 @@ class FetchComponent
     private $objresource = null;
 
     private $isdebug = false;
+    private $objdebug = null;
 
     public function __construct($request_uri="")
     {
@@ -31,18 +32,41 @@ class FetchComponent
     public function is_debug($on=true)
     {
         $this->isdebug = $on;
+        if(!$this->objdebug)
+        {
+            $logfile = "curl.log";
+            $this->objdebug = fopen(dirname(__FILE__) . "/$logfile", "w");
+        }
+        return $this;
+    }
+
+    private function _add_debug($var,$title="")
+    {
+        if($this->isdebug && $this->objdebug)
+        {
+            if($title) $title = " $title:\n";
+            $now = date("Ymd-H:i:s");
+            $content = var_export($var,1);
+            $content = "\n[$now]$title$content";
+            fwrite($this->objdebug, $content);
+        }
         return $this;
     }
 
     private function _curl_setopts()
     {
+        $this->_add_debug($this->options, "options")
+            ->_add_debug($this->headers, "headers")
+            ->_add_debug($this->gets, "gets")
+            ->_add_debug($this->posts, "posts");
+
         curl_setopt($this->objresource, CURLOPT_ENCODING, "UTF-8");
         curl_setopt($this->objresource, CURLOPT_RETURNTRANSFER, true);
         foreach ($this->options as $opt => $value)
             curl_setopt($this->objresource, $opt, $value);
 
         if($this->headers) $this->_header_opts();
-        if(!$this->posts) $this->_get_opts();
+        $this->_get_opts();  //
         if($this->posts) $this->_post_opts();
 
         return $this;
@@ -70,23 +94,22 @@ class FetchComponent
     {
         if(!$this->request_uri) throw new \Exception("Missing request_uri");
         if($this->gets) $this->request_uri = $this->request_uri . "?" . http_build_query($this->gets);
-        //print_r($this->request_uri);
+        $this->_add_debug($this->request_uri,"requesturi");
         return $this;
     }
 
     private function _init_resource()
     {
-        $this->objresource = $this->posts ? curl_init($this->request_uri): curl_init();
+        //$this->objresource = $this->posts ? curl_init($this->request_uri): curl_init();
+        $this->objresource = curl_init();
         return $this;
     }
 
     private function _debug()
     {
         if($this->isdebug) {
-            $logfile = "curl.log";
-            $fp = fopen(dirname(__FILE__)."/$logfile","w");
             curl_setopt($this->objresource, CURLOPT_VERBOSE, 1);
-            curl_setopt($this->objresource, CURLOPT_STDERR, $fp);
+            curl_setopt($this->objresource, CURLOPT_STDERR, $this->objdebug);
         }
         return $this;
     }
@@ -114,6 +137,7 @@ class FetchComponent
         ;
 
         $r = curl_exec($this->objresource);
+        $this->_add_debug($r,"result");
         curl_close($this->objresource);
         return $r;
     }
