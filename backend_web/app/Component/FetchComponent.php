@@ -156,6 +156,7 @@ class FetchComponent
 
     public function add_option($k,$v){$this->options[$k]=$v; return $this;}
 
+
     public function reset_header(){$this->headers=[]; return $this;}
 
     public function reset_get(){$this->gets=[]; return $this;}
