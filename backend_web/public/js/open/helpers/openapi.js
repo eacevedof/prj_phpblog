@@ -128,11 +128,15 @@ const openapi = {
         try {
             return await  fetch(
                 url,
+                //https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch
+                //https://stackoverflow.com/questions/43262121/trying-to-use-fetch-and-pass-in-mode-no-cors/43268098#43268098
+                /*
                 {
                     mode:'no-cors',
+                    credentials: "omit",
                     cache: 'default',
                     headers: {'Content-Type': 'application/json'}
-                })
+                }*/)
         }
         catch (e){
             return {error:e}
@@ -142,7 +146,6 @@ const openapi = {
 
     get_status_hacks: async ({domain, hacks}) => {
         try {
-            //no-cors: https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch
             const hacksmini = hacks.filter((hack,i) => i<2)
             const r = []
             hacksmini.forEach(async  obj => {
