@@ -127,16 +127,18 @@ const openapi = {
     get_status_hacks: async ({domain, hacks}) => {
         try {
             //no-cors: https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch
-            const fetchs = hacks.filter((hack,i) => i<5).map(hack => fetch(
+            const promises = hacks.filter((hack,i) => i<2).map( hack => fetch(
                 `${domain}${hack.request_uri}`,
                 {mode:'no-cors'}
             ))
 
-            console.log(fetchs[0])
-            //const r = await Promise.all(fetchs[1]).then(results => {console.log(results) })
-            //return r
+            const r = await Promise.all(promises)
+
+            console.log("rrrrrr",r)
+            return r
         }
         catch (e) {
+            console.log("error:",e)
             return {error:e}
         }
     }
