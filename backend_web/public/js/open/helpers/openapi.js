@@ -124,21 +124,38 @@ const openapi = {
         }
     },
 
+    get_async: async (url) =>{
+        try {
+            return await  fetch(
+                url,
+                {
+                    mode:'no-cors',
+                    cache: 'default',
+                    headers: {'Content-Type': 'application/json'}
+                })
+        }
+        catch (e){
+            return {error:e}
+        }
+
+    },
+
     get_status_hacks: async ({domain, hacks}) => {
         try {
             //no-cors: https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Utilizando_Fetch
-            const promises = hacks.filter((hack,i) => i<2).map( hack => fetch(
-                `${domain}${hack.request_uri}`,
-                {mode:'no-cors'}
-            ))
+            const hacksmini = hacks.filter((hack,i) => i<2)
+            const r = []
+            hacksmini.forEach(async  obj => {
+                const url = `${domain}${obj.request_uri}`
+                const a = await openapi.get_async(url)
+                r.push(a)
+            })
 
-            const r = await Promise.all(promises)
-
-            console.log("rrrrrr",r)
+            console.log("r",r)
             return r
         }
         catch (e) {
-            console.log("error:",e)
+            console.log("prom error:",e)
             return {error:e}
         }
     }
