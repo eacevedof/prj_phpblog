@@ -102,7 +102,7 @@ class SeoComponent
         ],
         "open.service.sitevulnerability"=>[
             "title"         => "Comprueba que tan vulnerable es tu sitio",
-            "description"   => "A partir de una lista de ataques de seguridad se prueba tu dominio",
+            "description"   => "Utilizando una colección de exploits recurrentes se escanea tu dominio",
             "keywords"      => "Vulnerabilidad, seguridad, dominios, wordpress, ataques",
             "h1"            => ""
         ]
