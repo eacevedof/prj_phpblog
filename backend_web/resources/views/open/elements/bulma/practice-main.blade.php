@@ -1,7 +1,7 @@
 @verbatim
 <div id="div-practice-main" class="column is-11">
     <div v-if="isloading" class="has-text-centered is-warning">
-        <div class="button is-warning is-loading">Loading</div>
+        <div class="box button is-warning is-loading">Loading</div>
     </div>
     <div v-if="!isloading" class="content is-medium">
         <h3 class="title is-3 has-text-centered">
