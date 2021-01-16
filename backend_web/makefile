@@ -91,6 +91,12 @@ cp-db: ## copy into database container
 # code-style: ## Runs php-cs to fix code styling following Symfony rules
 	#U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} php-cs-fixer fix src --rules=@Symfony
 
+deploy-test: ## deploy codeonly in test
+	py.sh deploy.codeonly eduardoaf
+
+deploy-prod: ## deploy codeonly in prod
+	py.sh deploy.codeonly eduardoaf-prod
+
 remlogs: ## remove logs
 	rm -fr ./logs/*
 
