@@ -3,7 +3,7 @@ import funcs from "/js/open/helpers/openfuncs.js"
 import openapilanguage from "/js/open/helpers/openapilanguage.js"
 import openapifetch from "/js/open/helpers/openapifetch.js"
 import db from "/js/open/helpers/opendb.js"
-import quest from "/js/open/service/language/vue-practice-questions.js"
+import quest from "/js/open/service/language/vue-practice-data.js"
 //https://devhints.io/bulma
 
 const LANG_CONFIG = "lang-config"

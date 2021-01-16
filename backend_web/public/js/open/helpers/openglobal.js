@@ -21,6 +21,19 @@ const openglobal = {
             .filter(obj => parseInt(obj.id_language) === parseInt(idlanguage))[0] || {}
     },
 
-    get_sentences(){ return objglobal.sentences }
+    get_question(idsentence){
+        return objglobal.sentences
+            .filter(obj => parseInt(obj.id) === parseInt(idsentence))[0] || {}
+    },
+
+    get_sentences(){ return objglobal.sentences },
+
+    get_sentences_by_lang(idlanguage){
+        return objglobal.sentences.filter(obj => obj.id_language === parseInt(idlanguage))
+    },
+
+    get_answers_by_lang(idlanguage){
+        return objglobal.sentence_tr.filter(obj =>obj.id_language === parseInt(idlanguage))
+    }
 }
 export default openglobal

@@ -105,8 +105,25 @@ const funcs = {
             }[tag])
         )
         return r
-    }
+    },
 
+    get_rnd: (min, max) => Math.floor(Math.random() * (max - min + 1) + min),
+
+    get_uuid: (length=14) => {
+        const ar = [
+            "abcdefghijklmnopqrstuvxyz", //0: letras
+            "0123456789"                 //1: números
+        ]
+        const r = new Array(length).fill(0).map(()=>{
+            let i = funcs.get_rnd(0,1)
+            let str = ar[i]
+            str = funcs.get_rnd(0,1) ? str.toUpperCase() : str
+            const max = str.length - 1
+            i = funcs.get_rnd(0, max)
+            return str.split("")[i]
+        }).join("")
+        return r
+    }
 }
 
 export default funcs
