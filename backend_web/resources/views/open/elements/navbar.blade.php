@@ -25,7 +25,13 @@
                 <li class="nav-item">
                     <a class="nav-link {{ $catslug=="contact" ? "active" : "" }}" href="{{ route('open.home.contact') }}">Contacto</a>
                 </li>
-
+                @if(env("APP_ENV")==="test" || env("APP_ENV")==="local")
+                    <li class="nav-item">
+                        <a class="nav-link" href="/idiomas">
+                            App Idiomas
+                        </a>
+                    </li>
+                @endif
                 @auth
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="nav-admin" role="button" data-toggle="dropdown" aria-expanded="false">

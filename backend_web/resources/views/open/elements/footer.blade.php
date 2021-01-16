@@ -5,7 +5,7 @@
         </a> /
         <a href="/blog" class="text-white">Blog</a> /
         <a href="/contacto" class="text-white">Contacto</a> /
-        @if(env("APP_ENV")=="test")
+        @if(env("APP_ENV")==="test" || env("APP_ENV")==="local")
             <a href="/idiomas" class="text-white">App Idiomas</a> /
         @endif
         <a href="https://twitter.com/eacevedof" target="_blank" class="text-white" rel="nofollow">@eacevedof</a> /
