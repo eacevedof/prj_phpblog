@@ -44,6 +44,7 @@ new Vue({
     },//data
 
     async mounted(){
+        console.log("starting...")
         const config = db.select(LANG_CONFIG)
 
         if(!config) return alert("No config found")
@@ -59,6 +60,7 @@ new Vue({
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
         }
+        console.log("loaded")
     },//mounted
 
     methods:{

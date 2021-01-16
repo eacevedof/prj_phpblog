@@ -1,5 +1,6 @@
 @verbatim
 <div id="div-practice-main" class="column is-11">
+    <progress class="progress is-large is-info" max="100">60%</progress>
     <div class="content is-medium">
         <h3 class="title is-3 has-text-centered">
             <button v-if="!isfinished && iquestion>1 && iquestions>0" class="button is-success" v-on:click="restart">Reiniciar</button>
