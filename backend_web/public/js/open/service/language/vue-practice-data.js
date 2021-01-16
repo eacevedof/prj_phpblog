@@ -49,6 +49,8 @@ const questions = {
     }
 }
 
+const regexp = new RegExp(/[\'\"\:\,\.\?\;\+\!\(\)\?]/gi)
+
 export const answers = {
 
 

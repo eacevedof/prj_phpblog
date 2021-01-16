@@ -5,23 +5,26 @@ use App\Services\BaseService;
 
 class SentenceattemptInsertService extends BaseService
 {
-    private $data;
+    private $input;
 
-    public function __construct($data)
+    public function __construct($input)
     {
-        $this->data = $data;
+        $this->input = $input;
     }
 
-    private function _check_data() {
-
+    private function _check_input()
+    {
+        $id = (integer) $this->input["id_sentence_tr"];
+        if(!is_integer($id))
+            throw new \Exception("Wrong sentence id provided: '{$this->input["id_sentence_tr"]}'");
     }
 
     public function save()
     {
-        $data = $this->data;
-        $this->_check_data($data);
-        $this->_handle_sysfields($data);
-        $r = AppSentenceAttempt::create($data);
+        $input = $this->input;
+        $this->_check_input();
+        $this->_handle_sysfields($input);
+        $r = AppSentenceAttempt::create($input);
         $this->_logquery("sentenceattempt.insert.save");
         return $r;
     }

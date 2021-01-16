@@ -127,9 +127,8 @@ new Vue({
         },
 
         save_attempt: async function (iresult){
-            const expanswer = this.questions.filter(quest => quest.uuid === this.uuid )
-            if(expanswer.type==="question")
-                openapilanguage.save_attempt({id_sentence_tr:expanswer.id, iresult})
+            const expanswer = this.questions.filter(quest => quest.uuid === this.uuid )[0]
+            openapilanguage.save_attempt({id_sentence_tr:expanswer.id_answer, iresult})
         },
 
         restart(){
@@ -151,9 +150,7 @@ new Vue({
 
         is_good(){
             if(!this.stranswer.trim()) return false
-
-            const idlang = this.get_idlanguage(this.langtarget)
-            this.expanswer = phpdata.get_stranswer(idlang, this.uuid)
+            this.expanswer = this.questions.filter(quest => quest.uuid === this.uuid)[0].answer
             return answ.is_good(this.stranswer, this.expanswer)
         },
 

@@ -1,7 +1,5 @@
 //openfuncs
 
-const regexp = new RegExp(/[\'\"\:\,\.\?\;\+\!\(\)\?]/gi)
-
 const funcs = {
 
     get_csrftoken: () => document.querySelector('#meta-csrf-token').getAttribute('content'),
