@@ -3,7 +3,7 @@ import funcs from "/js/open/helpers/openfuncs.js"
 import openapilanguage from "/js/open/helpers/openapilanguage.js"
 import openapifetch from "/js/open/helpers/openapifetch.js"
 import db from "/js/open/helpers/opendb.js"
-import quest from "/js/open/service/language/vue-practice-data.js"
+import quest, {answers as answ} from "/js/open/service/language/vue-practice-data.js"
 //https://devhints.io/bulma
 
 const LANG_CONFIG = "lang-config"
@@ -22,8 +22,8 @@ new Vue({
         questions:[],
         answers:[],
 
-        idquestion: -1,
-        iquestion:0,
+        uuid: "",
+        iquestion: 0,
         strquestion: "",
         stranswer: "",
         expanswer: "",
@@ -78,17 +78,13 @@ new Vue({
         },
 
         load_questions(){
-            const questions = openglobal.get_sentences()
-            this.itotal = questions.length
-            //this.questions = funcs.get_questions(questions, this.attempts, this.config)
-            this.questions = quest.get_test({
-                quests: questions,
-                attempts:this.attempts,
-                iquestions:this.iquestions,
+
+            this.questions = quest.get_final({
+                attempts: this.attempts,
                 config: this.config
             })
-            //console.log("final questions")
-            //console.table(this.questions)
+
+            this.itotal = quest.get_all(this.config).length
 
             if(this.config.israndom==="true") {
                 this.questions = funcs.get_shuffled(this.questions)
@@ -107,9 +103,9 @@ new Vue({
             this.objanswer = {}
 
             const iq = this.iquestion - 1;
-            this.idquestion = this.questions[iq].id
+            this.uuid = this.questions[iq].uuid
             this.strquestion = this.questions[iq].translatable
-            this.langsource = this.get_langcode(this.questions[iq].id_language) //es,
+            this.langsource = this.get_langcode(parseInt(this.config.selsource)) //es,
             this.langtarget = this.get_langcode(parseInt(this.config.seltargets[0]))
 
             if(this.iquestion === this.iquestions)
@@ -131,9 +127,9 @@ new Vue({
         },
 
         save_attempt: async function (iresult){
-            const idlang = this.get_idlanguage(this.langtarget)
-            const expanswer = openglobal.get_answer(idlang, this.idquestion)
-            const r = openapilanguage.save_attempt({id_sentence_tr:expanswer.id, iresult})
+            const expanswer = this.questions.filter(quest => quest.uuid === this.uuid )
+            if(expanswer.type==="question")
+                openapilanguage.save_attempt({id_sentence_tr:expanswer.id, iresult})
         },
 
         restart(){
@@ -157,8 +153,8 @@ new Vue({
             if(!this.stranswer.trim()) return false
 
             const idlang = this.get_idlanguage(this.langtarget)
-            this.expanswer = openglobal.get_stranswer(idlang, this.idquestion)
-            return funcs.is_good(this.stranswer, this.expanswer)
+            this.expanswer = openglobal.get_stranswer(idlang, this.uuid)
+            return answ.is_good(this.stranswer, this.expanswer)
         },
 
         save(){
@@ -186,7 +182,7 @@ new Vue({
 
             if(this.stranswer.trim())
                 this.save_attempt(0)
-            this.errorword = funcs.get_wrongword(this.stranswer, this.expanswer)
+            this.errorword = answ.get_wrongword(this.stranswer, this.expanswer)
             toast.open({
                 message: "Respuesta incorrecta",
                 type:"is-danger",
