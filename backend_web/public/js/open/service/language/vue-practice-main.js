@@ -1,4 +1,4 @@
-import openglobal from "/js/open/helpers/openglobal.js"
+import phpdata from "/js/open/service/language/phpdata.js"
 import funcs from "/js/open/helpers/openfuncs.js"
 import openapilanguage from "/js/open/helpers/openapilanguage.js"
 import openapifetch from "/js/open/helpers/openapifetch.js"
@@ -153,7 +153,7 @@ new Vue({
             if(!this.stranswer.trim()) return false
 
             const idlang = this.get_idlanguage(this.langtarget)
-            this.expanswer = openglobal.get_stranswer(idlang, this.uuid)
+            this.expanswer = phpdata.get_stranswer(idlang, this.uuid)
             return answ.is_good(this.stranswer, this.expanswer)
         },
 

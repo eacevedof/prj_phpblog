@@ -1,10 +1,11 @@
+//objpractice variable definida en blade
 const objglobal = objpractice || {}
-console.log("global.sentences")
+console.log("phpdata objglobal.sentences")
 console.table(objglobal.sentences);
-console.log("global.stence_tr")
+console.log("phpdata objglobal.stence_tr")
 console.table(objglobal.sentence_tr)
 
-const openglobal = {
+const phpdata = {
     get_stranswer(idlanguage, idsentence){
         const r = objglobal.sentence_tr
             .filter(obj => parseInt(obj.id_sentence) === parseInt(idsentence))
@@ -16,14 +17,17 @@ const openglobal = {
     },
 
     get_answer(idlanguage, idsentence){
+        //alert(idlanguage)
+        //console.log("answ.idlang",idlanguage)
         return objglobal.sentence_tr
             .filter(obj => parseInt(obj.id_sentence) === parseInt(idsentence))
             .filter(obj => parseInt(obj.id_language) === parseInt(idlanguage))[0] || {}
     },
 
-    get_question(idsentence){
+    get_question(idlanguage, idsentence){
         return objglobal.sentences
-            .filter(obj => parseInt(obj.id) === parseInt(idsentence))[0] || {}
+            .filter(obj => parseInt(obj.id) === parseInt(idsentence))
+            .filter(obj => parseInt(obj.id_language) === parseInt(idlanguage))[0] || {}
     },
 
     get_sentences(){ return objglobal.sentences },
@@ -36,4 +40,6 @@ const openglobal = {
         return objglobal.sentence_tr.filter(obj =>obj.id_language === parseInt(idlanguage))
     }
 }
-export default openglobal
+
+export default phpdata
+

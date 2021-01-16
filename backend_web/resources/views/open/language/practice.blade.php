@@ -39,7 +39,7 @@ https://buefy.org/documentation/start
 const debug = true
 const toast = window.Toast.ToastProgrammatic
 const objpractice = {!! $jsonresult !!};
-console.log("practice.blade.php objpractice",objpractice)
+//console.log("practice.blade.php objpractice",objpractice)
 //console.log("practice.blade.php objpractice in string",JSON.stringify(objpractice))
 </script>
 <script type="module" src="/js/open/service/language/vue-practice-left.js"></script>

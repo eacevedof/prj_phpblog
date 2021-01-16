@@ -1,26 +1,26 @@
-import openglobal from "/js/open/helpers/openglobal.js"
+import phpdata from "/js/open/service/language/phpdata.js"
 import openfuncs from "/js/open/helpers/openfuncs.js"
 
 const get_questions = (id_langfrom, id_langto) => {
     console.log("langs from:",id_langfrom, "to:",id_langto)
-    const questions = openglobal.get_sentences_by_lang(id_langfrom)
-    const answers = openglobal.get_answers_by_lang(id_langfrom)
+    const questions = phpdata.get_sentences_by_lang(id_langfrom)
+    const answers = phpdata.get_answers_by_lang(id_langfrom)
 
     const all = [].concat(questions.map(quest => ({
        uuid: openfuncs.get_uuid(5),
        type: "question",
        id: quest.id,
        translatable: quest.translatable,
-       id_answer: openglobal.get_answer(id_langto, quest.id).id,
-       answer: openglobal.get_answer(id_langto, quest.id).translated
+       id_answer: phpdata.get_answer(id_langto, quest.id).id,
+       answer: phpdata.get_answer(id_langto, quest.id).translated || ""
     }))).concat(answers.map(answ => ({
         uuid: openfuncs.get_uuid(5),
         type: "answer",
         id: answ.id_sentence,
         id_answer: answ.id,
         translatable: answ.translated,
-        answer: openglobal.get_question(answ.id_sentence).translatable
-    })))
+        answer: phpdata.get_question(id_langto, answ.id_sentence).translatable || ""
+    }))).filter(quest => quest.answer !== ""  )
 
     return all
 }
