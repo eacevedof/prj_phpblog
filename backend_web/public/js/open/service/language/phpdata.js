@@ -1,9 +1,9 @@
 //objpractice variable definida en blade
 const objglobal = objpractice || {}
-console.log("phpdata objglobal.sentences")
-console.table(objglobal.sentences);
-console.log("phpdata objglobal.stence_tr")
-console.table(objglobal.sentence_tr)
+//console.log("phpdata objglobal.sentences")
+//console.table(objglobal.sentences);
+//console.log("phpdata objglobal.stence_tr")
+//console.table(objglobal.sentence_tr)
 
 const phpdata = {
     get_stranswer(idlanguage, idsentence){
