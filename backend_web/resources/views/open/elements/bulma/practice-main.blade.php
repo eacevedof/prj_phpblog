@@ -1,19 +1,28 @@
 @verbatim
 <div id="div-practice-main" class="column is-11">
-    <progress class="progress is-large is-info" max="100">60%</progress>
-    <div class="content is-medium">
+    <div v-if="isloading" class="has-text-centered is-warning">
+        <div class="button is-warning is-loading">Loading</div>
+    </div>
+    <div v-if="!isloading" class="content is-medium">
         <h3 class="title is-3 has-text-centered">
             <button v-if="!isfinished && iquestion>1 && iquestions>0" class="button is-success" v-on:click="restart">Reiniciar</button>
         </h3>
         <div v-if="isfinished && iquestions>0" class="box has-text-centered">
             <div class="control">
+                <p>
+                    You have configured: <b>{{iquestions}}</b> questions out of a total of <b>{{itotal}}</b><br/>
+                    <b>{{config.israndom?"In random mode":""}}</b><br/>
+                    Source language: <b>{{get_source_lang}}</b><br/>
+                    Target language: <b>{{get_target_lang}}</b>
+                </p>
                 <button class="button is-link" v-on:click="start">Empezar</button>
             </div>
         </div>
         <div v-if="!iquestions" class="has-text-centered">
             <div class="notification is-warning">
                 ¯\_(ツ)_/¯<br/><br/>
-                Este tema no tiene configurada ninguna pregunta<br/><br/>
+                No se han encontrado preguntas para esta configuración<br/>
+                Traducir de: <b>{{get_source_lang}}</b> a: <b>{{get_target_lang}}</b><br/><br/>
                 <a href="/idiomas" class="button is-black">Volver al temario</a>
             </div>
         </div>

@@ -11,6 +11,7 @@ const LANG_CONFIG = "lang-config"
 new Vue({
     el: "#div-practice-main",
     data: {
+        isloading: true,
         config:{},
         languages: [],
         attempts: [],
@@ -27,7 +28,6 @@ new Vue({
         strquestion: "",
         stranswer: "",
         expanswer: "",
-        objanswer: {},
         itotal: 0,
 
         langsource: "",
@@ -44,7 +44,6 @@ new Vue({
     },//data
 
     async mounted(){
-        console.log("starting...")
         const config = db.select(LANG_CONFIG)
 
         if(!config) return alert("No config found")
@@ -60,8 +59,19 @@ new Vue({
             if(this.config.questions>0)
                 this.iquestions = this.config.questions < this.questions.length ? this.config.questions: this.questions.length
         }
-        console.log("loaded")
+        this.isloading = false
     },//mounted
+
+    computed:{
+        get_source_lang(){
+            return this.get_langcode(parseInt(this.config.selsource)) //es,
+        },
+
+        get_target_lang()
+        {
+            return this.get_langcode(parseInt(this.config.seltargets[0]))
+        }
+    },
 
     methods:{
         load_attempts: async function(){
@@ -102,7 +112,6 @@ new Vue({
 
             this.stranswer = ""
             this.expanswer = ""
-            this.objanswer = {}
 
             const iq = this.iquestion - 1;
             this.uuid = this.questions[iq].uuid
