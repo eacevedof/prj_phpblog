@@ -1,5 +1,8 @@
 const objglobal = objpractice || {}
-console.table(objglobal.sentences); console.table(objglobal.sentence_tr)
+console.log("global.sentences")
+console.table(objglobal.sentences);
+console.log("global.stence_tr")
+console.table(objglobal.sentence_tr)
 
 const openglobal = {
     get_stranswer(idlanguage, idsentence){

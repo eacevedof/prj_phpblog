@@ -18,7 +18,7 @@
         </div>
 
         <div v-show="!isfinished" class="box">
-            <h4 class="title is-6">Q: {{iquestion}}/ {{iquestions}}</h4>
+            <h4 class="title is-6">Q: {{iquestion}}/ {{iquestions}} of {{itotal}}</h4>
             <article class="message is-primary mb-2">
                 <span class="icon has-text-primary">
                     {{langsource}}

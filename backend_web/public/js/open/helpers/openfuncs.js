@@ -94,16 +94,6 @@ const funcs = {
         return r ? r : aranswer[0]
     },
 
-    get_questions(quests, attempts, ishow){
-        ishow = ishow || 20
-        const wrongnok = attempts.filter(obj => parseInt(obj.iresult)===0 || parseInt(obj.iresult)===2).map(obj => obj.id_sentence)
-        const inwrong = quests.filter(quest => wrongnok.includes(quest.id)).map(obj => obj.id)
-        const notin = quests.filter(quest => !wrongnok.includes(quest.id)).map(obj => obj.id)
-        const final = quests.filter(quest => inwrong.includes(quest.id))
-                            .concat(quests.filter(quest => notin.includes(quest.id)))
-        return final.filter((quest, i)=> i< ishow)
-    },
-
     html_entities(str){
         const r = str.replace(/[&<>'"]/g,
             tag => ({

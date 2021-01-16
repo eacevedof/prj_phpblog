@@ -3,6 +3,7 @@ import funcs from "/js/open/helpers/openfuncs.js"
 import openapilanguage from "/js/open/helpers/openapilanguage.js"
 import openapifetch from "/js/open/helpers/openapifetch.js"
 import db from "/js/open/helpers/opendb.js"
+import quest from "/js/open/service/language/vue-practice-questions.js"
 //https://devhints.io/bulma
 
 const LANG_CONFIG = "lang-config"
@@ -27,6 +28,7 @@ new Vue({
         stranswer: "",
         expanswer: "",
         objanswer: {},
+        itotal: 0,
 
         langsource: "",
         langtarget: "",
@@ -77,8 +79,17 @@ new Vue({
 
         load_questions(){
             const questions = openglobal.get_sentences()
-            this.questions = funcs.get_questions(questions, this.attempts, 25)
+            this.itotal = questions.length
+            //this.questions = funcs.get_questions(questions, this.attempts, this.config)
+            this.questions = quest.get_test({
+                quests: questions,
+                attempts:this.attempts,
+                iquestions:this.iquestions,
+                config: this.config
+            })
+            //console.log("final questions")
             //console.table(this.questions)
+
             if(this.config.israndom==="true") {
                 this.questions = funcs.get_shuffled(this.questions)
             }
