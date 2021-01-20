@@ -220,3 +220,6 @@ Cuando re-construyo los contenedores no conecta
 Si hago un composer-update en el contenedor funciona, esto se debe al fichero .env
 no debería construir los contenedores con bd:127 sino con bd: mariadb
 ```
+
+#### Parches
+- 20-01-2021 Voy a actualizr laravel de ^7.24 a 7.30
