@@ -11,6 +11,7 @@
 - `RUN apt-get install -y ghostscript`    
 
 ### To-Do:
+- historial de horas con alarma
 - ~publish_date sin 00:00~
 - ~Mejora de hashtags~
 - ~Replace de codelan por data-enlighter-language~
