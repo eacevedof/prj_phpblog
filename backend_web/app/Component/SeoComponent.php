@@ -105,6 +105,12 @@ class SeoComponent
             "description"   => "Utilizando una colección de exploits recurrentes se escanea tu dominio",
             "keywords"      => "Vulnerabilidad, seguridad, dominios, wordpress, ataques",
             "h1"            => ""
+        ],
+        "open.service.electronic.ohmslaw"=>[
+            "title"         => "Electrónica. Calculadora ley de Ohm V = I x R",
+            "description"   => "Calcula el Voltaje, Intensidad o Resistencia usando la fórmula de Ohm",
+            "keywords"      => "Ohm, física, calculadora, fórmula, Ohm, voltaje, resistencia, corriente",
+            "h1"            => ""
         ]
     ];
 

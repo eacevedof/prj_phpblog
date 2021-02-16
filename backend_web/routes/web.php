@@ -45,6 +45,7 @@ Route::post("/services/test/site-vulnerability","Open\ServiceController@site_vul
 Route::get("/servicios/comprueba-la-vulnerabilidad-de-tu-sitio-web","Open\ServiceController@sitevulnerability")->name("open.service.sitevulnerability");
 
 Route::get("/servicios/reloj-alarma-online","Open\ServiceController@alarmclock")->name("open.service.alarmclock");
+Route::get("/servicios/electronica/calculadora-ley-de-ohm","Open\ServiceController@ohmslaw")->name("open.service.electronic.ohmslaw");
 
 Route::get("/infrastructure/get-max-upload-size","Common\InfrastructureController@get_maxuploadsize")->name("open.service.getmaxuploadsize");
 

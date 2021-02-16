@@ -156,7 +156,7 @@ class ServiceController extends BaseController
         return view('open.service.opensslencrypt',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.opensslencrypt"),
-            "breadscrumb" => $this->_get_scrumb("open.service.opensslencrypt",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "breadscrumb" => $this->_get_scrumb("open.service.opensslencrypt",["slug"=>"probar-openssl-encrypt","slugtext"=>"Prueba la función php openssl_encrypt"]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -192,6 +192,19 @@ class ServiceController extends BaseController
                 "slug"      => "comprueba-la-vulnerabilidad-de-tu-sitio-web",
                 "slugtext"  => "Comprueba la vulnerabilidad de tu sitio web"
             ]),
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "service"
+        ]);
+    }
+
+    //servicios/electronica/calculadora-ley-de-ohm
+    public function ohmslaw()
+    {
+        return view('open.service.electronic.ohmslaw',[
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.service.electronic.ohmslaw"),
+            "breadscrumb" => $this->_get_scrumb("open.service.electronic.ohmslaw", ["slug"=>"calculadora-ley-de-ohm", "slugtext"=>"Calculadora Ley de Ohm"]),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
