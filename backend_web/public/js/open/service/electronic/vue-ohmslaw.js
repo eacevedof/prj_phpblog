@@ -1,5 +1,3 @@
-import db from "/js/open/helpers/opendb.js"
-
 Vue.use(VueToast, {position:"top"})
 
 const app = new Vue({
@@ -16,12 +14,6 @@ const app = new Vue({
     },
 
     methods:{
-        sanitize_input(){
-            if(!this.v) this.v = 0
-            if(!this.i) this.i = 0
-            if(!this.r) this.r = 0
-        },
-
         clear(){
             this.v = 0
             this.i = 0
@@ -30,21 +22,28 @@ const app = new Vue({
         },
 
         v_onchange(){
-            if(parseInt(this.hh) >300) this.hh = "300"
-            this.strhh = this.hh.padStart(2,"0")
-            this.seconds = this.get_seconds()
+            if(this.i!=0 || this.r!=0){
+
+            }
         },
 
         i_onchange(){
-            if(parseInt(this.mm) > 59) this.mm = "59"
-            this.strmm = this.mm.padStart(2,"0")
-            this.seconds = this.get_seconds()
+            if(this.v!=0 || this.r!=0){
+                if(this.v===0){
+                    this.v = this.i * this.r
+                }
+            }
         },
 
         r_onchange(){
-            if(parseInt(this.ss) > 59) this.ss = "59"
-            this.strss = this.ss.padStart(2,"0")
-            this.seconds = this.get_seconds()
+            if(this.v!==0 || this.i!==0){
+                if(this.v===0){
+                    this.v = this.i * this.r
+                }
+                else if(this.r!==0) {
+                    this.i = this.v / this.r
+                }
+            }
         },
 
     },//methods
