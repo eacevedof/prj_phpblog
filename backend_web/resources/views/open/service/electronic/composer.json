@@ -1,0 +1,14 @@
+{
+    "name": "vendor_name/electronic",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "ioedu",
+            "email": "email@example.com"
+        }
+    ],
+    "require": {
+    }
+}
