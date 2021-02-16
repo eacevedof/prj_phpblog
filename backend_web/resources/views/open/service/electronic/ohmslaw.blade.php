@@ -9,7 +9,7 @@
         <div class="card-header">
             <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
             <p>
-                <b>Nota:</b>
+                <img src="https://resources.theframework.es/eduardoaf.com/20210216/calculadora-ley-de-ohm.png" title="{{ $seo["description"] }}" alt="{{ $seo["description"] }}" class="img-fluid" />
             </p>
         </div>
         @verbatim
