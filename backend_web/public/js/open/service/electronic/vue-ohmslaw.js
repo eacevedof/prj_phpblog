@@ -22,20 +22,11 @@ const app = new Vue({
         },
 
         v_onchange(){
-            if(this.v!==0) {
-                if(this.i!==0) {
-                    this.r = this.v / this.i
-                }
-                else {
-                    this.i = this.v / this.r
-                }
-            }
+
         },
 
         i_onchange(){
-            if(this.i!==0) {
-                this.v = this.i / this.r
-            }
+
         },
 
         r_onchange(){
