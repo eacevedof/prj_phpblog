@@ -23,6 +23,7 @@ const app = new Vue({
 
         v_onchange(){
 
+
         },
 
         i_onchange(){
