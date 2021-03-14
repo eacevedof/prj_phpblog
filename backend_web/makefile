@@ -34,9 +34,15 @@ else
 	U_ID=${UID} docker-compose -f docker-compose.linux.yml up -d
 endif
 
+start: ## Start the containers
+ifeq ($(OS),Darwin)
+	U_ID=${UID} docker-compose -f docker-compose.macos.yml up -d
+else
+	U_ID=${UID} docker-compose -f docker-compose.linux.yml up -d
+endif
+
 stop: ## Stop the containers
 ifeq ($(OS),Darwin)
-
 	# U_ID=${UID} docker-sync stop
 	U_ID=${UID} docker-compose -f docker-compose.macos.yml stop
 else
