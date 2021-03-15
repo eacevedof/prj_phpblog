@@ -3,6 +3,8 @@
 @section("pagetitle",$seo["title"])
 @section("pagedescription",$seo["description"])
 @section("pagekeywords",$seo["keywords"])
+@section("canonical",$canonical ?? "")
+
 
 @section("container")
 @include("open.elements.home-header")
