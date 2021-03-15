@@ -3,6 +3,7 @@
 @section("pagetitle",$seo["title"] ?? "")
 @section("pagedescription",$seo["description"] ?? "")
 @section("pagekeywords",$seo["keywords"] ?? "")
+@section("canonical",$canonical ?? "")
 
 @section("container")
 <h1 class="display-6 mt-4 mb-3"> Artículos de {{$category}}:</h1>

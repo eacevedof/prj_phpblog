@@ -21,6 +21,11 @@ class BaseController extends RoutingController
 
     protected function _load_authid(){$this->authid = auth()->id();}
 
+    protected function _get_canonical(string $permalink=""): string
+    {
+        return $this->get_env("APP_URL")."/".$permalink;
+    }
+
     protected function _get_scrumb($route, $replace=[]){
         return  (new BreadComponent())->get_items($route)->replace($replace)->get();
     }

@@ -9,15 +9,18 @@ use App\Services\Restrict\Post\PostDetailService;
 use App\Services\Restrict\Post\PostIndexService;
 use Illuminate\Support\Facades\Auth;
 
-class BlogController extends BaseController
+final class BlogController extends BaseController
 {
     public function __invoke()
     {
         $r = (new PostIndexService())->get_all();
+        $breadscrumb = $this->_get_scrumb("open.blog.index");
+        $canonical = $this->_get_canonical($breadscrumb["url"] ?? "");
         return view('open.blog.index', [
             "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.blog.index"),
-            "breadscrumb" => $this->_get_scrumb("open.blog.index"),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "blog",
@@ -30,10 +33,14 @@ class BlogController extends BaseController
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description];
 
         $r = (new PostIndexService())->get_list_by_category($category->id);
+        $breadscrumb = $this->_get_scrumb("open.blog.category", $repconfig);
+        $canonical = $this->_get_canonical($breadscrumb["url"] ?? "");
+
         return view('open.blog.category', [
             "result"      => $r,
             "seo"         => SeoComponent::get_meta("open.blog.category.{$catslug}"),
-            "breadscrumb" => $this->_get_scrumb("open.blog.category", $repconfig),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "blog",
@@ -57,12 +64,14 @@ class BlogController extends BaseController
         ];
 
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description,"slug"=>$postslug,"slugtext"=>$post->title];
+        $breadscrumb = $this->_get_scrumb("open.blog.detail", $repconfig);
+        $canonical = $breadscrumb["url"] ?? "";
 
         return view('open.blog.detail', [
             "result"      => $post,
-            //"post"        => ,
             "seo"         => $seo,
-            "breadscrumb" => $this->_get_scrumb("open.blog.detail", $repconfig),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "blog",
