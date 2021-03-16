@@ -45,9 +45,9 @@ Route::get('/blog/','Open\BlogController')->name("open.blog.index");
             ["url"=>"/blog/%category%/%slug%", "text"=>"%slugtext%"],
         ],
 
-        "open.service.pdftojpg"=>[
+        "open.service.generic"=>[
             ["url"=>"/servicios/%slug%", "text"=>"%slugtext%"],
-        ],
+        ]
     ];
 
     private $found = [];

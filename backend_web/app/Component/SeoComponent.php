@@ -128,7 +128,7 @@ class SeoComponent
             "keywords"      => "alarma, reloj, js, sonido, reproducir sonido",
             "h1"            => ""
         ],
-        "open.service.oensslencrypt"=>[
+        "open.service.opensslencrypt"=>[
             "title"         => "Probar la función de php openssl_encrypt para cifrar y descifrar un contenido",
             "description"   => "Define un hash y el método de cifrado",
             "keywords"      => "php, opnessl_encrypt, probar, resultado",
