@@ -17,6 +17,8 @@ class ServiceController extends BaseController
     //servicios/convertir-pdf-a-jpg
     public function pdftojpg()
     {
+        $breadscrumb = $this->_get_scrumb("open.service.pdftojpg",["slug"=>"convertir-pdf-a-jpg","slugtext"=>"Convertir PDF a JPG"]);
+
         //vista vue
         return view('open.service.pdftojpg',[
             "result"      => [],
