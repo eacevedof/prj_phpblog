@@ -11,7 +11,7 @@ class HomeController extends BaseController
     {
         $serv = new PostIndexService();
         $breadscrumb = $this->_get_scrumb("open.home.index");
-        $canonical = $this->_get_canonical($breadscrumb["url"] ?? "");
+        $canonical = $this->_get_canonical($breadscrumb ?? []);
 
         return view('open.home.index',[
             "result"      => $serv->get_top09(),

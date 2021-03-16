@@ -76,5 +76,5 @@ Route::get('/blog/','Open\BlogController')->name("open.blog.index");
         return $this;
     }
 
-    public function get(){return $this->found;}
+    public function get():array {return $this->found;}
 }

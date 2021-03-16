@@ -20,14 +20,16 @@ class BaseController extends RoutingController
 
     protected function _load_authid(){$this->authid = auth()->id();}
 
-    protected function _get_canonical(string $permalink=""): string
+    protected function _get_canonical(array $breadscrumb=[]): string
     {
-        return (strstr($permalink,"://")
-                ? ""
-                : $this->get_env("APP_URL")).$permalink;
+        $end = end($breadscrumb);
+        $permalink = $end["url"] ?? "";
+        if(strlen($permalink)>1 && substr($permalink,-1)==="/")
+            $permalink = substr($permalink, 0,-1);
+        return $this->get_env("APP_URL").$permalink;
     }
 
-    protected function _get_scrumb($route, $replace=[]){
+    protected function _get_scrumb($route, $replace=[]): array {
         return  (new BreadComponent())->get_items($route)->replace($replace)->get();
     }
 

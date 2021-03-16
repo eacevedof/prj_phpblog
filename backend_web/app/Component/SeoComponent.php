@@ -34,6 +34,12 @@ class SeoComponent
             "keywords" => "Python, Django, Flask, scripting, .py",
             "h1" => ""
         ],
+        "open.blog.category.c-sharp"=>[
+            "title"=>"Eduardo A. F. Blog sobre C#",
+            "description"=>"Todo sobre el desarrollo en C-Sharp. Snippets, .Net core",
+            "keywords" => "c-sharp, .net, c#",
+            "h1" => ""
+        ],
         "open.blog.category.javascript"=>[
             "title"=>"Eduardo A. F. Blog sobre Javascript",
             "description"=>"Todo sobre el desarrollo en Javascript. Javascript frameworks, snippets, Vue, React, Svelte, programación funcional",
@@ -48,10 +54,38 @@ class SeoComponent
         ],
         "open.blog.category.docker"=>[
             "title"=>"Eduardo A. F. Blog sobre Docker",
-            "description"=>"Todo sobre el lenguaje de consultas SQL en distintos motores de bases de datos relacionales, snippets, SQL Server, Mysql, Sqlite, programación T-SQL",
-            "keywords" => "Procedimientos almacenados, vistas, indices, Mysql, SQL Server, Integration Services, stored procedures, triggers",
+            "description"=>"Todo sobre contenedores Docker. Uso de docker y docker-compose. Solución a problemas comunes",
+            "keywords" => "Docker ps, docker-compose, build, entrypoint, CMD",
             "h1" => ""
         ],
+        "open.blog.category.cloud"=>[
+            "title"=>"Eduardo A. F. Blog sobre Cloud Computing",
+            "description"=>"Todo AWS, Azure y Gcloud. Uso de APIs y servicios en nube",
+            "keywords" => "Firebase, Tennats, Boto3, SAM",
+            "h1" => ""
+        ],
+        "open.blog.category.css"=>[
+            "title"=>"Eduardo A. F. Blog sobre CSS",
+            "description"=>"Todo sobre maquetación en CSS o utilización de frameworks como Bootstrap, Foundation, Bulma y Tailwind",
+            "keywords" => "CSS, Bootstrap, Foundation, Bulma y Tailwind",
+            "h1" => ""
+        ],
+        "open.blog.category.git"=>[
+            "title"=>"Eduardo A. F. Blog sobre el gestor de control de versiones GIT",
+            "description"=>"Ejemplos de merge, resolución de conflictos, uso de stash, rebase, cherry pick etc",
+            "keywords" => "Git, git bash, git push, git commit, git stash, git checkout",
+            "h1" => ""
+        ],
+        "open.blog.category.linux"=>[
+            "title"=>"Eduardo A. F. Blog sobre Linux y sistemas unix",
+            "description"=>"Todo sobre comandos, programación bash, vim y otras peculiaridades de los sistemas unix",
+            "keywords" => "Bash, sh, ssh, vim, shell",
+            "h1" => ""
+        ],
+
+
+
+
         "open.service.pdftojpg" => [
             "title"=>"Servicio online para convertir pdf a jpg",
             "description"=>"Convierte las páginas de un documento PDF en imágenes separadas .jpg",
