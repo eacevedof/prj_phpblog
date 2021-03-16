@@ -18,12 +18,14 @@ class ServiceController extends BaseController
     public function pdftojpg()
     {
         $breadscrumb = $this->_get_scrumb("open.service.pdftojpg",["slug"=>"convertir-pdf-a-jpg","slugtext"=>"Convertir PDF a JPG"]);
+        $canonical = $this->_get_canonical($breadscrumb);
 
         //vista vue
         return view('open.service.pdftojpg',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.pdftojpg"),
-            "breadscrumb" => $this->_get_scrumb("open.service.pdftojpg",["slug"=>"convertir-pdf-a-jpg","slugtext"=>"Convertir PDF a JPG"]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -58,10 +60,14 @@ class ServiceController extends BaseController
     //servicios/generar-contrasena
     public function generatepassword(Request $request)
     {
+        $breadscrumb = $this->_get_scrumb("open.service.generatepassword",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]);
+        $canonical = $this->_get_canonical($breadscrumb);
+
         return view('open.service.generatepassword',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.generatepassword"),
-            "breadscrumb" => $this->_get_scrumb("open.service.generatepassword",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -85,10 +91,14 @@ class ServiceController extends BaseController
     //servicios/probar-php-pregmatch-all
     public function pregmatchall()
     {
+        $breadscrumb = $this->_get_scrumb("open.service.pregmatchall",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]);
+        $canonical = $this->_get_canonical($breadscrumb);
+
         return view('open.service.pregmatchall',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.pregmatchall"),
-            "breadscrumb" => $this->_get_scrumb("open.service.pregmatchall",["slug"=>"generar-contrasena","slugtext"=>"Genera una contraseña segura facil de recordar"]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -112,10 +122,14 @@ class ServiceController extends BaseController
     //servicios/formatear-sql-query
     public function formatsql()
     {
+        $breadscrumb = $this->_get_scrumb("open.service.formatsql",["slug"=>"formatear-consulta-sql","slugtext"=>""]);
+        $canonical = $this->_get_canonical($breadscrumb);
+
         return view('open.service.formatsql',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.formatsql"),
-            "breadscrumb" => $this->_get_scrumb("open.service.formatsql",["slug"=>"formatear-consulta-sql","slugtext"=>""]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -125,10 +139,14 @@ class ServiceController extends BaseController
     //servicios/reloj-alarma
     public function alarmclock()
     {
+        $breadscrumb = $this->_get_scrumb("open.service.alarmclock",["slug"=>"reloj-alarma","slugtext"=>""]);
+        $canonical = $this->_get_canonical($breadscrumb);
+
         return view('open.service.alarmclock',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.alarmclock"),
-            "breadscrumb" => $this->_get_scrumb("open.service.alarmclock",["slug"=>"reloj-alarma","slugtext"=>""]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -155,10 +173,14 @@ class ServiceController extends BaseController
     //servicios/probar-openssl-encrypt
     public function opensslencrypt()
     {
+        $breadscrumb = $this->_get_scrumb("open.service.opensslencrypt",["slug"=>"probar-openssl-encrypt","slugtext"=>"Prueba la función php openssl_encrypt"]);
+        $canonical = $this->_get_canonical($breadscrumb);
+
         return view('open.service.opensslencrypt',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.opensslencrypt"),
-            "breadscrumb" => $this->_get_scrumb("open.service.opensslencrypt",["slug"=>"probar-openssl-encrypt","slugtext"=>"Prueba la función php openssl_encrypt"]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -185,15 +207,18 @@ class ServiceController extends BaseController
     //servicios/comprueba-la-vulnerabilidad-de-tu-sitio-web
     public function sitevulnerability()
     {
+        $breadscrumb = $this->_get_scrumb("open.service.sitevulnerability",[
+            "slug"      => "comprueba-la-vulnerabilidad-de-tu-sitio-web",
+            "slugtext"  => "Comprueba la vulnerabilidad de tu sitio web"
+        ]);
+        $canonical = $this->_get_canonical($breadscrumb);
         //$r = (new SiteVulnerabilityService())->get_top500();
         //echo "<pre>";print_r($r);
         return view('open.service.sitevulnerability',[
             "result"      => (new SiteVulnerabilityService())->get_top500(),
             "seo"         => SeoComponent::get_meta("open.service.sitevulnerability"),
-            "breadscrumb" => $this->_get_scrumb("open.service.sitevulnerability",[
-                "slug"      => "comprueba-la-vulnerabilidad-de-tu-sitio-web",
-                "slugtext"  => "Comprueba la vulnerabilidad de tu sitio web"
-            ]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
@@ -203,10 +228,14 @@ class ServiceController extends BaseController
     //servicios/electronica/calculadora-ley-de-ohm
     public function ohmslaw()
     {
+        $breadscrumb = $this->_get_scrumb("open.service.electronic.ohmslaw", ["slug"=>"calculadora-ley-de-ohm", "slugtext"=>"Calculadora Ley de Ohm"]);
+        $canonical = $this->_get_canonical($breadscrumb);
+
         return view('open.service.electronic.ohmslaw',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.electronic.ohmslaw"),
-            "breadscrumb" => $this->_get_scrumb("open.service.electronic.ohmslaw", ["slug"=>"calculadora-ley-de-ohm", "slugtext"=>"Calculadora Ley de Ohm"]),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
             "catslug"     => "service"
