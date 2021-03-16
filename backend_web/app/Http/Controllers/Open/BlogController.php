@@ -50,7 +50,6 @@ final class BlogController extends BaseController
 
     public function detail($catslug, $postslug)
     {
-        //dd($postslug);
         $category = $this->_get_category($catslug);
         $r = (new PostDetailService())->get_by_slug($postslug);
         $this->_error_404($r);
@@ -65,7 +64,7 @@ final class BlogController extends BaseController
 
         $repconfig = ["category"=>$catslug,"categorytext"=>$category->description,"slug"=>$postslug,"slugtext"=>$post->title];
         $breadscrumb = $this->_get_scrumb("open.blog.detail", $repconfig);
-        $canonical = $breadscrumb["url"] ?? "";
+        $canonical = $this->_get_canonical($breadscrumb);
 
         return view('open.blog.detail', [
             "result"      => $post,
