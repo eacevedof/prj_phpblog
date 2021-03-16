@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Component\BreadComponent;
@@ -23,7 +22,9 @@ class BaseController extends RoutingController
 
     protected function _get_canonical(string $permalink=""): string
     {
-        return $this->get_env("APP_URL")."/".$permalink;
+        return (strstr($permalink,"://")
+                ? ""
+                : $this->get_env("APP_URL")).$permalink;
     }
 
     protected function _get_scrumb($route, $replace=[]){

@@ -17,7 +17,7 @@ class HomeController extends BaseController
             "result"      => $serv->get_top09(),
             "seo"         => SeoComponent::get_meta("open.home.index"),
             "breadscrumb" => $breadscrumb,
-            "canonical"   => $this->_get_canonical($canonical),
+            "canonical"   => $canonical,
             "updatedat"   => $serv->get_maxdate(),
             "submenublog" => $this->_get_submenu_blog(),
             "submenuservice" => $this->_get_submenu_service(),
