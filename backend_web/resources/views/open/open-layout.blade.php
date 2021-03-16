@@ -18,8 +18,8 @@
     <meta name="security" content="public" />
     <meta http-equiv="Cache-Control" content="s-maxage = 3600, max-age = 60, private" />
 
-
     <link rel="icon" type="image/png" href="https://resources.theframework.es/eduardoaf.com/20200917/161342-favicon.ico" />
+    <link rel="canonical" href="@yield("canonical")" />
 <!--
     open graph protocol
     <meta property="og:title" content=" same as title" />
@@ -40,7 +40,6 @@
     Robots:
     <meta name="robots" content="noindex,follow"/>
 -->
-    <link rel="canonical" href="@yield("canonical")" />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
