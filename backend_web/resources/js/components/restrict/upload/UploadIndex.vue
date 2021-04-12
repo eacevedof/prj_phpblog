@@ -1,3 +1,5 @@
+<link href="{{ asset('assets/enlighter/enlighterjs.min.css') }}" rel="stylesheet" />
+<script src="{{ asset('assets/cropper-js/cropper.js') }}"></script>
 <template>
     <div class="card">
         <div class="row m-0 p-0 mt-4">

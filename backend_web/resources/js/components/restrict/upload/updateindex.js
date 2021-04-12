@@ -38,6 +38,16 @@ export default {
         this.$refs.urlupload.focus();
         //this.$refs.urlupload.setSelectionRange(0, 3);
         setTimeout(() => this.$refs.urlupload.setSelectionRange(0, 3))
+
+        window.addEventListener("paste", function(e) {
+            const files = e.clipboardData.files
+            if (!files) return
+
+            this.upload.files = files
+            const url = URL.createObjectURL(files[0])
+
+            //$txtname.focus()
+        });//window.on-paste
     },
 
     methods: {
