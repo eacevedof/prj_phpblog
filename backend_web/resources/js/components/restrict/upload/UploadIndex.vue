@@ -31,7 +31,7 @@
                 <small v-for="(file, i) in upload.files" :key="i">{{i+1}} - {{file.name}} ({{ file.size.toLocaleString("en") }})&nbsp;&nbsp;</small>
             </div>
         </div>
-        <div class="row m-0 p-0">
+        <div class="row m-0 p-3">
             <img v-if="upload.urlimage" :src="upload.urlimage" ref="imgpreview"
                  class="border border-info rounded-0" />
         </div>
