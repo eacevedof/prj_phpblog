@@ -50,6 +50,9 @@ export default {
             this.upload.urlimage = URL.createObjectURL(files[0])
             this.$refs.filesupload.files = files
             console.log("pasted:", files)
+            const event = document.createEvent("UIEvents");
+            event.initUIEvent("change", true, true);
+            this.$refs.filesupload.dispatchEvent(event);
         },
 
         load_lastslug(){

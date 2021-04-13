@@ -48527,7 +48527,7 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row m-0 p-5" }, [
+      _c("div", { staticClass: "row m-0 p-3" }, [
         _vm.upload.urlimage
           ? _c("img", {
               ref: "imgpreview",
