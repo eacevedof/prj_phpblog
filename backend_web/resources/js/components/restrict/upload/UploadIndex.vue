@@ -33,7 +33,7 @@
         </div>
         <div class="row m-0 p-3">
             <img v-if="upload.urlimage" :src="upload.urlimage" ref="imgpreview"
-                 class="border border-info rounded-0" />
+                 class="img-fluid border-info rounded-0" />
         </div>
         <!-- card start -->
         <div class="card-body">
