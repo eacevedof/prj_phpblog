@@ -45,7 +45,8 @@ export default {
     methods: {
         on_paste(e){
             const files = e.clipboardData.files
-            if (!files) return
+            console.log("on_paste.files",files)
+            if (files.length===0) return
 
             this.upload.urlimage = URL.createObjectURL(files[0])
             this.$refs.filesupload.files = files
@@ -53,6 +54,7 @@ export default {
             const event = document.createEvent("UIEvents");
             event.initUIEvent("change", true, true);
             this.$refs.filesupload.dispatchEvent(event);
+            this.$refs.urlupload.focus();
         },
 
         load_lastslug(){
@@ -176,11 +178,12 @@ export default {
                 this.issending = true
                 this.btnupload = CONST.BTN_IN_PROGRESS
 
-                console.log("files:",this.upload.files)
-                if(this.upload.urlupload.trim() && this.upload.files.length === 1){
-                    this.upload.files[0].name = funcs.get_slug(this.upload.urlupload)
+                console.log("files:",this.upload.files[0],"name",this.upload.files[0].name,"urlupload",this.upload.urlupload)
+                if(this.upload.files.length === 1){
+                    this.upload.files[0].name = "xxx"//funcs.get_slug(this.upload.urlupload)
                 }
 
+                console.log("files:",this.upload.files)
                 const r = await apiupload.post_files(
                     this.selfolder,
                     this.upload.files

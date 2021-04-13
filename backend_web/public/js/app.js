@@ -4663,13 +4663,15 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   methods: {
     on_paste: function on_paste(e) {
       var files = e.clipboardData.files;
-      if (!files) return;
+      console.log("on_paste.files", files);
+      if (files.length === 0) return;
       this.upload.urlimage = URL.createObjectURL(files[0]);
       this.$refs.filesupload.files = files;
       console.log("pasted:", files, this.$refs.filesupload);
       var event = document.createEvent("UIEvents");
       event.initUIEvent("change", true, true);
       this.$refs.filesupload.dispatchEvent(event);
+      this.$refs.urlupload.focus();
     },
     load_lastslug: function load_lastslug() {
       var slug = _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].select("last-slug");
@@ -4929,15 +4931,21 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context6.prev = 3;
                 _this6.issending = true;
                 _this6.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
+                console.log("files:", _this6.upload.files[0], "name", _this6.upload.files[0].name, "urlupload", _this6.upload.urlupload);
+
+                if (_this6.upload.files.length === 1) {
+                  _this6.upload.files[0].name = "xxx"; //funcs.get_slug(this.upload.urlupload)
+                }
+
                 console.log("files:", _this6.upload.files);
-                _context6.next = 9;
+                _context6.next = 11;
                 return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_files(_this6.selfolder, _this6.upload.files);
 
-              case 9:
+              case 11:
                 r = _context6.sent;
 
                 if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
-                  _context6.next = 12;
+                  _context6.next = 14;
                   break;
                 }
 
@@ -4947,7 +4955,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: r.error
                 }));
 
-              case 12:
+              case 14:
                 _this6.savelast(r.url.slice(-1)[0]);
 
                 _this6.$toast.success("Files uploaded (".concat(r.url.length, "): ").concat(r.url.join(", ")));
@@ -4956,11 +4964,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this6.reset_filesupload();
 
-                _context6.next = 21;
+                _context6.next = 23;
                 break;
 
-              case 18:
-                _context6.prev = 18;
+              case 20:
+                _context6.prev = 20;
                 _context6.t0 = _context6["catch"](3);
                 Swal.fire({
                   icon: 'error',
@@ -4968,18 +4976,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: _context6.t0.toString()
                 });
 
-              case 21:
-                _context6.prev = 21;
+              case 23:
+                _context6.prev = 23;
                 _this6.issending = false;
                 _this6.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-                return _context6.finish(21);
+                return _context6.finish(23);
 
-              case 25:
+              case 27:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[3, 18, 21, 25]]);
+        }, _callee6, null, [[3, 20, 23, 27]]);
       }))();
     },
     //upload files
