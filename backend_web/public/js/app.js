@@ -4937,15 +4937,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this6.upload.files[0].name = "xxx"; //funcs.get_slug(this.upload.urlupload)
                 }
 
+                _this6.upload.files[0].name = "agua-de-pipa.png";
                 console.log("files:", _this6.upload.files);
-                _context6.next = 11;
+                _context6.next = 12;
                 return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_files(_this6.selfolder, _this6.upload.files);
 
-              case 11:
+              case 12:
                 r = _context6.sent;
 
                 if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
-                  _context6.next = 14;
+                  _context6.next = 15;
                   break;
                 }
 
@@ -4955,7 +4956,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: r.error
                 }));
 
-              case 14:
+              case 15:
                 _this6.savelast(r.url.slice(-1)[0]);
 
                 _this6.$toast.success("Files uploaded (".concat(r.url.length, "): ").concat(r.url.join(", ")));
@@ -4964,11 +4965,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this6.reset_filesupload();
 
-                _context6.next = 23;
+                _context6.next = 24;
                 break;
 
-              case 20:
-                _context6.prev = 20;
+              case 21:
+                _context6.prev = 21;
                 _context6.t0 = _context6["catch"](3);
                 Swal.fire({
                   icon: 'error',
@@ -4976,18 +4977,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: _context6.t0.toString()
                 });
 
-              case 23:
-                _context6.prev = 23;
+              case 24:
+                _context6.prev = 24;
                 _this6.issending = false;
                 _this6.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-                return _context6.finish(23);
+                return _context6.finish(24);
 
-              case 27:
+              case 28:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[3, 20, 23, 27]]);
+        }, _callee6, null, [[3, 21, 24, 28]]);
       }))();
     },
     //upload files

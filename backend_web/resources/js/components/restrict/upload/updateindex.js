@@ -170,6 +170,7 @@ export default {
             }
         }, //upload by url
 
+
         async upload_files(){
             console.log("upload_files")
             if(this.upload.files.length===0) return
@@ -183,6 +184,7 @@ export default {
                     this.upload.files[0].name = "xxx"//funcs.get_slug(this.upload.urlupload)
                 }
 
+                //https://stackoverflow.com/questions/21720390/how-to-change-name-of-file-in-javascript-from-input-file
                 this.upload.files[0].name = "agua-de-pipa.png"
                 console.log("files:",this.upload.files)
                 const r = await apiupload.post_files(
