@@ -4836,8 +4836,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
+                console.log("upload_byurl");
+
                 if (_this5.upload.urlupload.trim()) {
-                  _context5.next = 5;
+                  _context5.next = 6;
                   break;
                 }
 
@@ -4848,18 +4850,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 return _context5.abrupt("return");
 
-              case 5:
-                _context5.prev = 5;
+              case 6:
+                _context5.prev = 6;
                 _this5.issending = true;
                 _this5.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-                _context5.next = 10;
+                _context5.next = 11;
                 return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_url(_this5.selfolder, _this5.upload.urlupload);
 
-              case 10:
+              case 11:
                 r = _context5.sent;
 
                 if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
-                  _context5.next = 13;
+                  _context5.next = 14;
                   break;
                 }
 
@@ -4869,7 +4871,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: r.error
                 }));
 
-              case 13:
+              case 14:
                 _this5.savelast(r.slice(-1)[0]);
 
                 _this5.$toast.success("Files \"".concat(r, "\" uploaded"));
@@ -4878,30 +4880,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this5.$refs.urlupload.focus();
 
-                _context5.next = 22;
+                _context5.next = 23;
                 break;
 
-              case 19:
-                _context5.prev = 19;
-                _context5.t0 = _context5["catch"](5);
+              case 20:
+                _context5.prev = 20;
+                _context5.t0 = _context5["catch"](6);
                 Swal.fire({
                   icon: 'error',
                   title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
                   html: _context5.t0.toString()
                 });
 
-              case 22:
-                _context5.prev = 22;
+              case 23:
+                _context5.prev = 23;
                 _this5.issending = false;
                 _this5.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-                return _context5.finish(22);
+                return _context5.finish(23);
 
-              case 26:
+              case 27:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[5, 19, 22, 26]]);
+        }, _callee5, null, [[6, 20, 23, 27]]);
       }))();
     },
     //upload by url
@@ -4914,25 +4916,28 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
+                console.log("upload_files");
+
                 if (!(_this6.upload.files.length === 0)) {
-                  _context6.next = 2;
+                  _context6.next = 3;
                   break;
                 }
 
                 return _context6.abrupt("return");
 
-              case 2:
-                _context6.prev = 2;
+              case 3:
+                _context6.prev = 3;
                 _this6.issending = true;
                 _this6.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-                _context6.next = 7;
-                return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_files(_this6.selfolder, _this6.upload.files, _this6.upload.urlupload);
+                console.log("files:", _this6.upload.files);
+                _context6.next = 9;
+                return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_files(_this6.selfolder, _this6.upload.files);
 
-              case 7:
+              case 9:
                 r = _context6.sent;
 
                 if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
-                  _context6.next = 10;
+                  _context6.next = 12;
                   break;
                 }
 
@@ -4942,7 +4947,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: r.error
                 }));
 
-              case 10:
+              case 12:
                 _this6.savelast(r.url.slice(-1)[0]);
 
                 _this6.$toast.success("Files uploaded (".concat(r.url.length, "): ").concat(r.url.join(", ")));
@@ -4951,30 +4956,30 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this6.reset_filesupload();
 
-                _context6.next = 19;
+                _context6.next = 21;
                 break;
 
-              case 16:
-                _context6.prev = 16;
-                _context6.t0 = _context6["catch"](2);
+              case 18:
+                _context6.prev = 18;
+                _context6.t0 = _context6["catch"](3);
                 Swal.fire({
                   icon: 'error',
                   title: _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].TITLE_SERVERROR,
                   html: _context6.t0.toString()
                 });
 
-              case 19:
-                _context6.prev = 19;
+              case 21:
+                _context6.prev = 21;
                 _this6.issending = false;
                 _this6.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-                return _context6.finish(19);
+                return _context6.finish(21);
 
-              case 23:
+              case 25:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[2, 16, 19, 23]]);
+        }, _callee6, null, [[3, 18, 21, 25]]);
       }))();
     },
     //upload files
@@ -61429,7 +61434,7 @@ var apiupload = {
     return remove_file;
   }(),
   post_files: function () {
-    var _post_files = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(folder, files, name) {
+    var _post_files = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(folder, files) {
       var url, form, _iterator, _step, file, prom, r;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
@@ -61441,7 +61446,6 @@ var apiupload = {
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
               form.append("folderdomain", folder);
-              form.append("name", name);
               _iterator = _createForOfIteratorHelper(files);
 
               try {
@@ -61455,37 +61459,37 @@ var apiupload = {
                 _iterator.f();
               }
 
-              _context5.next = 10;
+              _context5.next = 9;
               return fetch(url, {
                 method: 'post',
                 body: form
               });
 
-            case 10:
+            case 9:
               prom = _context5.sent;
-              _context5.next = 13;
+              _context5.next = 12;
               return prom.json();
 
-            case 13:
+            case 12:
               r = _context5.sent.data;
               return _context5.abrupt("return", r);
 
-            case 17:
-              _context5.prev = 17;
+            case 16:
+              _context5.prev = 16;
               _context5.t0 = _context5["catch"](0);
               return _context5.abrupt("return", {
                 error: _context5.t0
               });
 
-            case 20:
+            case 19:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[0, 17]]);
+      }, _callee5, null, [[0, 16]]);
     }));
 
-    function post_files(_x3, _x4, _x5) {
+    function post_files(_x3, _x4) {
       return _post_files.apply(this, arguments);
     }
 
@@ -61534,7 +61538,7 @@ var apiupload = {
       }, _callee6, null, [[0, 15]]);
     }));
 
-    function post_url(_x6, _x7) {
+    function post_url(_x5, _x6) {
       return _post_url.apply(this, arguments);
     }
 

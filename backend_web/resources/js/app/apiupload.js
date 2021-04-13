@@ -61,13 +61,12 @@ const apiupload = {
         }
     },
 
-    post_files: async (folder,files, name) => {
+    post_files: async (folder,files) => {
         try {
             const url = funcs.get_uploadomain().concat("/upload/multiple")
             const form = new FormData()
             form.append("resource-usertoken",funcs.get_uploadtoken())
             form.append("folderdomain",folder)
-            form.append("name", name)
 
             for(const file of files)
                 form.append("files[]", file, file.name);

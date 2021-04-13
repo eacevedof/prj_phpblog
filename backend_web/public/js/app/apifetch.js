@@ -1338,7 +1338,7 @@ var apiupload = {
     return remove_file;
   }(),
   post_files: function () {
-    var _post_files = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(folder, files, name) {
+    var _post_files = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5(folder, files) {
       var url, form, _iterator, _step, file, prom, r;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
@@ -1350,7 +1350,6 @@ var apiupload = {
               form = new FormData();
               form.append("resource-usertoken", _funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_uploadtoken());
               form.append("folderdomain", folder);
-              form.append("name", name);
               _iterator = _createForOfIteratorHelper(files);
 
               try {
@@ -1364,37 +1363,37 @@ var apiupload = {
                 _iterator.f();
               }
 
-              _context5.next = 10;
+              _context5.next = 9;
               return fetch(url, {
                 method: 'post',
                 body: form
               });
 
-            case 10:
+            case 9:
               prom = _context5.sent;
-              _context5.next = 13;
+              _context5.next = 12;
               return prom.json();
 
-            case 13:
+            case 12:
               r = _context5.sent.data;
               return _context5.abrupt("return", r);
 
-            case 17:
-              _context5.prev = 17;
+            case 16:
+              _context5.prev = 16;
               _context5.t0 = _context5["catch"](0);
               return _context5.abrupt("return", {
                 error: _context5.t0
               });
 
-            case 20:
+            case 19:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[0, 17]]);
+      }, _callee5, null, [[0, 16]]);
     }));
 
-    function post_files(_x3, _x4, _x5) {
+    function post_files(_x3, _x4) {
       return _post_files.apply(this, arguments);
     }
 
@@ -1443,7 +1442,7 @@ var apiupload = {
       }, _callee6, null, [[0, 15]]);
     }));
 
-    function post_url(_x6, _x7) {
+    function post_url(_x5, _x6) {
       return _post_url.apply(this, arguments);
     }
 

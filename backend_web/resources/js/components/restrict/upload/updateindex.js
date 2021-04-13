@@ -176,10 +176,14 @@ export default {
                 this.issending = true
                 this.btnupload = CONST.BTN_IN_PROGRESS
 
+                console.log("files:",this.upload.files)
+                if(this.upload.urlupload.trim() && this.upload.files.length === 1){
+                    this.upload.files[0].name = funcs.get_slug(this.upload.urlupload)
+                }
+
                 const r = await apiupload.post_files(
                     this.selfolder,
-                    this.upload.files,
-                    this.upload.urlupload
+                    this.upload.files
                 )
 
                 if (funcs.is_error(r)) {
