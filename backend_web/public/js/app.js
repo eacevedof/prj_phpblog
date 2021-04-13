@@ -4623,7 +4623,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     var _this = this;
 
     return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-      var $upload, urlimage;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
@@ -4651,17 +4650,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               setTimeout(function () {
                 return _this.$refs.urlupload.setSelectionRange(0, 3);
               });
-              $upload = _this.$refs.filesupload;
-              urlimage = _this.upload.urlimage;
-              window.addEventListener("paste", function (e) {
-                var files = e.clipboardData.files;
-                if (!files) return;
-                urlimage = URL.createObjectURL(files[0]);
-                $upload.files = files;
-                console.log("pasted:", files); //$txtname.focus()
-              }); //window.on-paste
+              window.addEventListener("paste", _this.on_paste); //window.on-paste
 
-            case 15:
+            case 13:
             case "end":
               return _context.stop();
           }
@@ -4670,6 +4661,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     }))();
   },
   methods: {
+    on_paste: function on_paste(e) {
+      var files = e.clipboardData.files;
+      if (!files) return;
+      this.upload.urlimage = URL.createObjectURL(files[0]);
+      this.$refs.filesupload.files = files;
+      console.log("pasted:", files);
+    },
     load_lastslug: function load_lastslug() {
       var slug = _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].select("last-slug");
 
@@ -48446,9 +48444,7 @@ var render = function() {
                 return _vm.on_fileschange()
               }
             }
-          }),
-          _vm._v(" "),
-          _c("img", { ref: "imgpreview", attrs: { src: _vm.upload.urlimage } })
+          })
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group col-md-2 mb-0" }, [
@@ -48529,6 +48525,16 @@ var render = function() {
           ],
           2
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "row m-0 p-5" }, [
+        _vm.upload.urlimage
+          ? _c("img", {
+              ref: "imgpreview",
+              staticClass: "border border-info rounded-0",
+              attrs: { src: _vm.upload.urlimage }
+            })
+          : _vm._e()
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [

@@ -39,23 +39,19 @@ export default {
         this.$refs.urlupload.focus();
         //this.$refs.urlupload.setSelectionRange(0, 3);
         setTimeout(() => this.$refs.urlupload.setSelectionRange(0, 3))
-
-        const $upload = this.$refs.filesupload
-        let urlimage = this.upload.urlimage
-
-        window.addEventListener("paste", function(e) {
-            const files = e.clipboardData.files
-            if (!files) return
-
-            urlimage = URL.createObjectURL(files[0])
-            $upload.files = files
-            console.log("pasted:", files)
-
-            //$txtname.focus()
-        });//window.on-paste
+        window.addEventListener("paste", this.on_paste);//window.on-paste
     },
 
     methods: {
+        on_paste(e){
+            const files = e.clipboardData.files
+            if (!files) return
+
+            this.upload.urlimage = URL.createObjectURL(files[0])
+            this.$refs.filesupload.files = files
+            console.log("pasted:", files)
+        },
+
         load_lastslug(){
             const slug = db.select("last-slug")
             if(slug){

@@ -15,7 +15,6 @@
                        ref="filesupload"
                        @change="on_fileschange()"
                 />
-                <img :src="upload.urlimage" ref="imgpreview">
             </div>
             <div class="form-group col-md-2 mb-0">
                 <button type="button" class="btn btn-dark"
@@ -32,7 +31,10 @@
                 <small v-for="(file, i) in upload.files" :key="i">{{i+1}} - {{file.name}} ({{ file.size.toLocaleString("en") }})&nbsp;&nbsp;</small>
             </div>
         </div>
-
+        <div class="row m-0 p-5">
+            <img v-if="upload.urlimage" :src="upload.urlimage" ref="imgpreview"
+                 class="border border-info rounded-0" />
+        </div>
         <!-- card start -->
         <div class="card-body">
             <div class="row card-header res-formheader">
