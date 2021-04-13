@@ -24,6 +24,7 @@ export default {
             upload:{
                 urlupload: "",
                 files: [],
+                urlimage: "",
             }
         }
     },
@@ -39,12 +40,16 @@ export default {
         //this.$refs.urlupload.setSelectionRange(0, 3);
         setTimeout(() => this.$refs.urlupload.setSelectionRange(0, 3))
 
+        const $upload = this.$refs.filesupload
+        let urlimage = this.upload.urlimage
+
         window.addEventListener("paste", function(e) {
             const files = e.clipboardData.files
             if (!files) return
 
-            this.upload.files = files
-            const url = URL.createObjectURL(files[0])
+            urlimage = URL.createObjectURL(files[0])
+            $upload.files = files
+            console.log("pasted:", files)
 
             //$txtname.focus()
         });//window.on-paste

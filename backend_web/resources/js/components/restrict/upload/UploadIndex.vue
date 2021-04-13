@@ -15,6 +15,7 @@
                        ref="filesupload"
                        @change="on_fileschange()"
                 />
+                <img :src="upload.urlimage" ref="imgpreview">
             </div>
             <div class="form-group col-md-2 mb-0">
                 <button type="button" class="btn btn-dark"
