@@ -183,6 +183,7 @@ export default {
                     this.upload.files[0].name = "xxx"//funcs.get_slug(this.upload.urlupload)
                 }
 
+                this.upload.files[0].name = "agua-de-pipa.png"
                 console.log("files:",this.upload.files)
                 const r = await apiupload.post_files(
                     this.selfolder,
