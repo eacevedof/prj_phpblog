@@ -127,6 +127,7 @@ export default {
         },//remove_file
 
         async upload_byurl(){
+            console.log("upload_byurl")
             if(!this.upload.urlupload.trim()){
                 this.upload.urlupload = ""
 
@@ -168,6 +169,7 @@ export default {
         }, //upload by url
 
         async upload_files(){
+            console.log("upload_files")
             if(this.upload.files.length===0) return
 
             try {
