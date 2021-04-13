@@ -174,7 +174,12 @@ export default {
                 this.issending = true
                 this.btnupload = CONST.BTN_IN_PROGRESS
 
-                const r = await apiupload.post_files(this.selfolder, this.upload.files)
+                const r = await apiupload.post_files(
+                    this.selfolder,
+                    this.upload.files,
+                    this.upload.urlupload
+                )
+
                 if (funcs.is_error(r)) {
                     return Swal.fire({
                         icon: 'warning',

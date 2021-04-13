@@ -4666,7 +4666,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (!files) return;
       this.upload.urlimage = URL.createObjectURL(files[0]);
       this.$refs.filesupload.files = files;
-      console.log("pasted:", files);
+      console.log("pasted:", files, this.$refs.filesupload);
+      var event = document.createEvent("UIEvents");
+      event.initUIEvent("change", true, true);
+      this.$refs.filesupload.dispatchEvent(event);
     },
     load_lastslug: function load_lastslug() {
       var slug = _app_db__WEBPACK_IMPORTED_MODULE_4__["default"].select("last-slug");
@@ -48531,7 +48534,7 @@ var render = function() {
         _vm.upload.urlimage
           ? _c("img", {
               ref: "imgpreview",
-              staticClass: "border border-info rounded-0",
+              staticClass: "img-fluid border-info rounded-0",
               attrs: { src: _vm.upload.urlimage }
             })
           : _vm._e()
