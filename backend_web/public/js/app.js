@@ -4935,7 +4935,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (_this6.upload.files.length === 1) {
                   _this6.upload.files[0].name = "xxx"; //funcs.get_slug(this.upload.urlupload)
-                }
+                } //https://stackoverflow.com/questions/21720390/how-to-change-name-of-file-in-javascript-from-input-file
+
 
                 _this6.upload.files[0].name = "agua-de-pipa.png";
                 console.log("files:", _this6.upload.files);

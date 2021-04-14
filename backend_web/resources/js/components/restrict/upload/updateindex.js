@@ -130,14 +130,6 @@ export default {
 
         async upload_byurl(){
             console.log("upload_byurl")
-            if(!this.upload.urlupload.trim()){
-                this.upload.urlupload = ""
-
-                if(this.upload.files.length===0)
-                    this.$toast.warning("You must fill input with a valid url")
-                this.$refs.urlupload.focus();
-                return
-            }
 
             try {
                 this.issending = true
@@ -173,8 +165,6 @@ export default {
 
         async upload_files(){
             console.log("upload_files")
-            if(this.upload.files.length===0) return
-
             try {
                 this.issending = true
                 this.btnupload = CONST.BTN_IN_PROGRESS
@@ -220,8 +210,17 @@ export default {
         },//upload files
 
         async on_upload(){
-            await this.upload_byurl()
-            await this.upload_files()
+            if(!this.upload.urlupload.trim() && this.upload.files.length===0){
+                this.$toast.warning("You must fill input with a valid url")
+                return this.$refs.urlupload.focus();
+            }
+
+            if(this.upload.files.length===0){
+                await this.upload_files()
+            }
+            else if(this.upload.urlupload){
+                await this.upload_byurl()
+            }
             await this.load_rows()
         },//on_upload
 
