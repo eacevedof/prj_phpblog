@@ -52,7 +52,6 @@ export default {
             this.$refs.filesupload.files = files
             this.upload.files = files
 
-            console.log("pasted:", files, this.$refs.filesupload,"paste upload.files", this.upload.files)
             const event = document.createEvent("UIEvents");
             event.initUIEvent("change", true, true);
             this.$refs.filesupload.dispatchEvent(event);
@@ -170,8 +169,7 @@ export default {
                 this.issending = true
                 this.btnupload = CONST.BTN_IN_PROGRESS
 
-                console.log("files:",this.upload.files[0],"name",this.upload.files[0].name,"urlupload",this.upload.urlupload)
-                if(this.upload.files.length === 1){
+                if(this.upload.files.length === 1 && this.upload.urlupload.trim() !== ""){
                     Object.defineProperty(this.upload.files[0], 'name', {
                         writable: true,
                         value: funcs.get_slug(this.upload.urlupload).concat(".png")
@@ -250,6 +248,8 @@ export default {
         reset_filesupload(){
             this.$refs.filesupload.value = ""
             this.upload.files = []
+            this.upload.urlupload = ""
+            this.upload.urlimage = ""
             this.filessize = 0
             this.isoversized = false
             this.overbytes = 0

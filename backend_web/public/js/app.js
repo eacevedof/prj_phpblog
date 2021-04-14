@@ -4668,7 +4668,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.upload.urlimage = URL.createObjectURL(files[0]);
       this.$refs.filesupload.files = files;
       this.upload.files = files;
-      console.log("pasted:", files, this.$refs.filesupload, "paste upload.files", this.upload.files);
       var event = document.createEvent("UIEvents");
       event.initUIEvent("change", true, true);
       this.$refs.filesupload.dispatchEvent(event);
@@ -4909,23 +4908,22 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 _context6.prev = 1;
                 _this6.issending = true;
                 _this6.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_IN_PROGRESS;
-                console.log("files:", _this6.upload.files[0], "name", _this6.upload.files[0].name, "urlupload", _this6.upload.urlupload);
 
-                if (_this6.upload.files.length === 1) {
+                if (_this6.upload.files.length === 1 && _this6.upload.urlupload.trim() !== "") {
                   Object.defineProperty(_this6.upload.files[0], 'name', {
                     writable: true,
                     value: _app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].get_slug(_this6.upload.urlupload).concat(".png")
                   });
                 }
 
-                _context6.next = 8;
+                _context6.next = 7;
                 return _app_apiupload__WEBPACK_IMPORTED_MODULE_3__["default"].post_files(_this6.selfolder, _this6.upload.files);
 
-              case 8:
+              case 7:
                 r = _context6.sent;
 
                 if (!_app_funcs__WEBPACK_IMPORTED_MODULE_1__["default"].is_error(r)) {
-                  _context6.next = 11;
+                  _context6.next = 10;
                   break;
                 }
 
@@ -4935,7 +4933,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: r.error
                 }));
 
-              case 11:
+              case 10:
                 _this6.savelast(r.url.slice(-1)[0]);
 
                 _this6.$toast.success("Files uploaded (".concat(r.url.length, "): ").concat(r.url.join(", ")));
@@ -4944,11 +4942,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 _this6.reset_filesupload();
 
-                _context6.next = 20;
+                _context6.next = 19;
                 break;
 
-              case 17:
-                _context6.prev = 17;
+              case 16:
+                _context6.prev = 16;
                 _context6.t0 = _context6["catch"](1);
                 Swal.fire({
                   icon: 'error',
@@ -4956,18 +4954,18 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   html: _context6.t0.toString()
                 });
 
-              case 20:
-                _context6.prev = 20;
+              case 19:
+                _context6.prev = 19;
                 _this6.issending = false;
                 _this6.btnupload = _app_constants__WEBPACK_IMPORTED_MODULE_2__["default"].BTN_INISTATE_UPLOAD;
-                return _context6.finish(20);
+                return _context6.finish(19);
 
-              case 24:
+              case 23:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[1, 17, 20, 24]]);
+        }, _callee6, null, [[1, 16, 19, 23]]);
       }))();
     },
     //upload files
@@ -5058,6 +5056,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     reset_filesupload: function reset_filesupload() {
       this.$refs.filesupload.value = "";
       this.upload.files = [];
+      this.upload.urlupload = "";
+      this.upload.urlimage = "";
       this.filessize = 0;
       this.isoversized = false;
       this.overbytes = 0;
