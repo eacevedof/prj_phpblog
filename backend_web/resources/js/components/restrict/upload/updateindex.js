@@ -162,7 +162,6 @@ export default {
             }
         }, //upload by url
 
-
         async upload_files(){
             console.log("upload_files")
             try {
@@ -171,12 +170,12 @@ export default {
 
                 console.log("files:",this.upload.files[0],"name",this.upload.files[0].name,"urlupload",this.upload.urlupload)
                 if(this.upload.files.length === 1){
-                    this.upload.files[0].name = "xxx"//funcs.get_slug(this.upload.urlupload)
+                    Object.defineProperty(this.upload.files[0], 'name', {
+                        writable: true,
+                        value: funcs.get_slug(this.upload.urlupload).concat(".png")
+                    });
                 }
 
-                //https://stackoverflow.com/questions/21720390/how-to-change-name-of-file-in-javascript-from-input-file
-                this.upload.files[0].name = "agua-de-pipa.png"
-                console.log("files:",this.upload.files)
                 const r = await apiupload.post_files(
                     this.selfolder,
                     this.upload.files
