@@ -4667,7 +4667,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       if (files.length === 0) return;
       this.upload.urlimage = URL.createObjectURL(files[0]);
       this.$refs.filesupload.files = files;
-      console.log("pasted:", files, this.$refs.filesupload);
+      this.upload.files = files;
+      console.log("pasted:", files, this.$refs.filesupload, "paste upload.files", this.upload.files);
       var event = document.createEvent("UIEvents");
       event.initUIEvent("change", true, true);
       this.$refs.filesupload.dispatchEvent(event);
@@ -4988,7 +4989,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _context7.abrupt("return", _this7.$refs.urlupload.focus());
 
               case 3:
-                if (!(_this7.upload.files.length === 0)) {
+                if (!(_this7.upload.files.length > 0)) {
                   _context7.next = 8;
                   break;
                 }

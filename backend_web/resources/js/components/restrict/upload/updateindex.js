@@ -50,7 +50,9 @@ export default {
 
             this.upload.urlimage = URL.createObjectURL(files[0])
             this.$refs.filesupload.files = files
-            console.log("pasted:", files, this.$refs.filesupload)
+            this.upload.files = files
+
+            console.log("pasted:", files, this.$refs.filesupload,"paste upload.files", this.upload.files)
             const event = document.createEvent("UIEvents");
             event.initUIEvent("change", true, true);
             this.$refs.filesupload.dispatchEvent(event);
@@ -214,7 +216,7 @@ export default {
                 return this.$refs.urlupload.focus();
             }
 
-            if(this.upload.files.length===0){
+            if(this.upload.files.length>0){
                 await this.upload_files()
             }
             else if(this.upload.urlupload){
