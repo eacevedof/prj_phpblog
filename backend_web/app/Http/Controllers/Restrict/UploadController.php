@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Restrict;
 
 use App\Http\Controllers\BaseController;
 use App\Services\Common\UploadService;
-use Illuminate\Http\Request;
 
 class UploadController extends BaseController
 {
