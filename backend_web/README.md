@@ -40,6 +40,8 @@ php artisan ui vue --auth
 //crear usuario
 php artisan db:seed --class=UsersTableSeeder
 ```
+- Para compilar las vistas se ejecuta `npm run dev` y se debería ver algo como:
+  - ![](https://resources.theframework.es/eduardoaf.com/20211023/175945-npm-run-dev.png)
 - Rutas de --auth: 
     - /vendor/laravel/ui/src/AuthRouteMethods.php
 - Crear migraciones a partir de la bd
