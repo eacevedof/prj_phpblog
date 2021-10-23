@@ -1,5 +1,3 @@
-import db from "/js/open/helpers/opendb.js"
-
 Vue.use(VueToast, {position:"top"})
 
 let intervalid = 0
