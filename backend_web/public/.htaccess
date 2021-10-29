@@ -5,6 +5,7 @@
     </IfModule>
 
     RewriteEngine On
+    #to-do configurar redirect de www a http
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
