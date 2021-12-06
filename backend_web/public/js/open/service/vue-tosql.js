@@ -21,7 +21,7 @@ const app = new Vue({
 
     mounted() {
         //console.log("mounted :)")
-        const lastpost = db.select("tosql-post")
+        const lastpost = db.select("tosql-config")
         if (lastpost) {
             this.table = lastpost.table
             this.fields = lastpost.fields
@@ -59,10 +59,11 @@ const app = new Vue({
                 struct: this.rawdata
             }
 
-            db.save("tosql-post", post)
-
+            db.save("tosql-config", post)
             const response = await openapi.post_tosql(post)
 
+            this.issending = false
+            this.btnsend = "Convertir"
             if(response?.error){
                 return Swal.fire({
                     icon: 'error',
@@ -70,10 +71,7 @@ const app = new Vue({
                            <b>${response.error}</b>`
                 })
             }
-
-            this.result = response.data.join(";\n")
-            this.issending = false
-            this.btnsend = "Convertir"
+            this.result = response.data.join(";\n").concat(";")
         }//on_submit
 
     },//methods
