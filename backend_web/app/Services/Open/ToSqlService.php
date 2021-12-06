@@ -126,14 +126,11 @@ final class ToSqlService extends BaseService
 
     private function _get_mapped_from_json(): array
     {
-        try {
-           $json = $this->input["struct"];
-           return \json_decode($json,1);
-        }
-        catch (Exception $e)
-        {
-            throw new \Exception("Documento json incorrecto");
-        }
+        $json = $this->input["struct"];
+        $r = \json_decode($json,1);
+        if (json_last_error() === JSON_ERROR_NONE)
+            return $r;
+        throw new \Exception("Documento json incorrecto");
     }
 
     private function _get_mapped_from_phparray(): array
@@ -150,14 +147,12 @@ final class ToSqlService extends BaseService
 
     private function _get_mapped_from_python(): array
     {
-        try {
-            $json = $this->input["struct"];
-            return \json_decode($json,1);
-        }
-        catch (Exception $e)
-        {
-            throw new \Exception("Lista de diccionarios incorrecta");
-        }
+        $json = $this->input["struct"];
+        $r = \json_decode($json,1);
+        if (json_last_error() === JSON_ERROR_NONE)
+            return $r;
+
+        throw new \Exception("Lista de diccionarios incorrecta");
     }
 
     private function _get_mapped_data(): array

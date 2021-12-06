@@ -33,6 +33,17 @@
             </div>
             <div class="col-4 col-sm-3 col-md-3 col-xl-2">
                 <label
+                    title="El tipo de estructura de los datos que están en 'Datos estructurados'"
+                ><b>Origen de datos:*</b></label>
+                <select v-model="from" class="form-control" required>
+                    <option value="csv">CSV</option>
+                    <option value="json">Json</option>
+                    <option value="php-array">print_r PHP Array</option>
+                    <option value="python-list">Lista de Python</option>
+                </select>
+            </div>
+            <div class="col-4 col-sm-3 col-md-3 col-xl-2" v-if="from==='csv'">
+                <label
                     title="Es el separador una vez pegado en el campo 'Datos estructurados'. A veces la tabulación se convierte en espacios"
                 ><b>Separador de columna:*</b></label>
                 <select v-model="colsep" class="form-control" required>
@@ -44,18 +55,6 @@
                     <option value="semicolon">;</option>
                     <option value="hash">#</option>
                     <option value="pipe">|</option>
-                    <option value="other">Otro (json, php, python ...)</option>
-                </select>
-            </div>
-            <div class="col-4 col-sm-3 col-md-3 col-xl-2">
-                <label
-                    title="El tipo de estructura de los datos que están en 'Datos estructurados'"
-                ><b>Origen de datos:*</b></label>
-                <select v-model="from" class="form-control" required>
-                    <option value="csv">CSV</option>
-                    <option value="json">Json</option>
-                    <option value="php-array">print_r PHP Array</option>
-                    <option value="python-list">Lista de Python</option>
                 </select>
             </div>
             <div class="col-4 col-sm-3 col-md-3 col-xl-2">
