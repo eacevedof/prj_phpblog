@@ -22,7 +22,7 @@
                        @focus="$event.target.select()"
                 />
             </div>
-            <div class="col-4 col-sm-3 col-md-3 col-xl-2">
+            <div class="col-10">
                 <label title="Lista de campos separados por ,"><b>Campos:*</b></label>
                 <input type="text" class="form-control" max="5000" required
                        ref="fields"
@@ -54,7 +54,7 @@
                 <select v-model="from" class="form-control" required>
                     <option value="csv">CSV</option>
                     <option value="json">Json</option>
-                    <option value="php-array">Array PHP</option>
+                    <option value="php-array">print_r PHP Array</option>
                     <option value="python-list">Lista de Python</option>
                 </select>
             </div>
