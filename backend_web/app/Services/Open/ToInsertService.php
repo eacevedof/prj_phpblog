@@ -11,6 +11,7 @@
 namespace App\Services\Open;
 
 use App\Services\BaseService;
+use App\Component\CrudComponent;
 use \Exception;
 
 final class ToInsert extends BaseService
@@ -23,6 +24,7 @@ final class ToInsert extends BaseService
     private $colsep;
     private $from;
     private $to;
+    private $table;
     private $fields;
     private $lines;
 
@@ -32,6 +34,10 @@ final class ToInsert extends BaseService
         $this->colsep = $input["colsep"] ?? "\t";
         if (!in_array($this->colsep, self::COLSEPS))
             throw new Exception("Separador de columna inválido");
+
+        $this->table = trim($input["table"] ?? "");
+        if (!$this->table)
+            throw new Exception("No se ha proporcionado el nombre de la tabla");
 
         $this->from = $input["from"] ?? "csv";
         if (!in_array($this->from, self::FROM_FORMAT))
@@ -78,9 +84,32 @@ final class ToInsert extends BaseService
         return $fields;
     }
 
+    private function _get_mapped_data(): array
+    {
+        $rows = [];
+        foreach ($this->lines as $line){
+            $values = explode($this->colsep, $line);
+            $row = [];
+            foreach ($values as $i=>$value) {
+                $field = $this->fields[$i] ?? "";
+                if (!$field) continue;
+                $row[$field] = $value;
+            }
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
     private function _get_insert(): array
     {
-
+        $mapped = $this->_get_mapped_data();
+        $insert = [];
+        foreach ($mapped as $row) {
+            $crud = new CrudComponent();
+            foreach ($row as $field=>$value) {
+                $crud->set_table()
+            }
+        }
     }
 
     public function get(): array
