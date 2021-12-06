@@ -174,7 +174,7 @@ final class ToSqlService extends BaseService
     private function _get_insert(): array
     {
         $mapped = $this->_get_mapped_data();
-        //print_r($mapped);die;
+        //echo "<pre>";print_r($mapped);die;
         $insert = [];
         foreach ($mapped as $row) {
             $crud = $this->_get_crud()->set_table($this->table);
