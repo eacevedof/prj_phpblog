@@ -17,6 +17,7 @@ const app = new Vue({
         to: "insert",
         rawdata: "",
         result: "",
+        keys: "",
     },
 
     mounted() {
@@ -28,6 +29,7 @@ const app = new Vue({
             this.colsep = lastpost.colsep
             this.from = lastpost.from
             this.to = lastpost.to
+            this.keys = lastpost?.keys ?? ""
         }
     },
 
@@ -56,6 +58,7 @@ const app = new Vue({
                 fields: this.fields,
                 from: this.from,
                 to: this.to,
+                keys: this.keys,
                 struct: this.rawdata
             }
 

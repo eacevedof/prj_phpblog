@@ -49,7 +49,7 @@
             </div>
             <div class="col-4 col-sm-3 col-md-3 col-xl-2">
                 <label
-                    title=""
+                    title="El tipo de estructura de los datos que están en 'Datos estructurados'"
                 ><b>Origen de datos:*</b></label>
                 <select v-model="from" class="form-control" required>
                     <option value="csv">CSV</option>
@@ -64,6 +64,20 @@
                     <option value="insert">INSERT INTO</option>
                     <option value="update">UPDATE</option>
                 </select>
+            </div>
+
+            <div class="col-4 col-sm-3 col-md-3 col-xl-2" v-if="to==='update'">
+                <label
+                    title="Lista de campos separados por ,. De los campos anteriores incluye los que son los campos clave para asociarlos al where del update"
+                >
+                    <b>Campos clave:</b>
+                </label>
+                <input type="text" class="form-control" max="5000" placeholder="opcional"
+                       ref="keys"
+                       :disabled="issending"
+                       v-model="keys"
+                       @focus="$event.target.select()"
+                />
             </div>
 
             <div class="col-10">
