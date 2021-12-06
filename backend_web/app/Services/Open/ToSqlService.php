@@ -80,11 +80,11 @@ final class ToSqlService extends BaseService
     {
         $strfields = trim($this->input["fields"] ?? "");
         if(strstr($strfields,$this->colsep)) return explode($this->colsep, $strfields);
-        if(strstr($strfields," ")) return explode(" ", $strfields);
         if(strstr($strfields,"\t")) return explode("\t", $strfields);
         if(strstr($strfields,",")) return explode(",", $strfields);
         if(strstr($strfields,";")) return explode(";", $strfields);
         if(strstr($strfields,"#")) return explode(";", $strfields);
+        if(strstr($strfields," ")) return explode(" ", $strfields);
         return [];
     }
 
