@@ -64,7 +64,7 @@ final class ToSqlService extends BaseService
         if (!$this->lines)
             throw new Exception("No hay contenido a transformar");
 
-        $this->keys = $this->_get_fields($input["keys"]);
+        $this->keys = $this->_get_fields($input["keys"]??"");
     }
 
     private function _get_lines(): array
