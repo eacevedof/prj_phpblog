@@ -1,5 +1,6 @@
 import openapi from "/js/open/helpers/openapi.js"
 import funcs from "/js/open/helpers/openfuncs.js"
+import db from "/js/open/helpers/opendb.js"
 
 Vue.use(VueToast, {position:"top"})
 
@@ -9,13 +10,25 @@ const app = new Vue({
         issending: false,
         btnsend: "Convertir",
 
-        table: "xxxyyytt  ",
-        fields: " a, b, c,,,",
+        table: "",
+        fields: "",
         colsep: "tab",
         from: "csv",
         to: "insert",
         rawdata: "",
         result: "",
+    },
+
+    mounted() {
+        //console.log("mounted :)")
+        const lastpost = db.select("tosql-post")
+        if (lastpost) {
+            this.table = lastpost.table
+            this.fields = lastpost.fields
+            this.colsep = lastpost.colsep
+            this.from = lastpost.from
+            this.to = lastpost.to
+        }
     },
 
     methods:{
@@ -37,14 +50,18 @@ const app = new Vue({
             this.btnsend = "Procesando..."
             this.result = ""
 
-            const response = await openapi.post_tosql({
+            const post = {
                 colsep: this.colsep,
                 table: this.table,
                 fields: this.fields,
                 from: this.from,
                 to: this.to,
                 struct: this.rawdata
-            })
+            }
+
+            db.save("tosql-post", post)
+
+            const response = await openapi.post_tosql(post)
 
             if(response?.error){
                 return Swal.fire({

@@ -48,7 +48,9 @@
                 </select>
             </div>
             <div class="col-4 col-sm-3 col-md-3 col-xl-2">
-                <label><b>Origen de datos:*</b></label>
+                <label
+                    title=""
+                ><b>Origen de datos:*</b></label>
                 <select v-model="from" class="form-control" required>
                     <option value="csv">CSV</option>
                     <option value="json">Json</option>
