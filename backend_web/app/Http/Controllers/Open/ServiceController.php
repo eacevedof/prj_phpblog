@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Open;
 
 use App\Http\Controllers\BaseController;
+use App\Services\Open\ToSqlService;
 use Illuminate\Http\Request;
 use App\Component\SeoComponent;
 
@@ -141,7 +142,7 @@ final class ServiceController extends BaseController
     {
         $post = $request->all();
         try {
-            $r = (new FormatSqlService($post))->get();
+            $r = (new ToSqlService($post))->get();
             return Response()->json(["data"=>$r],200);
         }
         catch (\Exception $e)

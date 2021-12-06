@@ -9,13 +9,18 @@ const app = new Vue({
         issending: false,
         btnsend: "Convertir",
 
-        query: "",
+        table: "xxxyyytt  ",
+        fields: " a, b, c,,,",
+        colsep: "tab",
+        from: "csv",
+        to: "insert",
+        rawdata: "",
         result: "",
     },
 
     methods:{
         reset(){
-            this.query = ""
+            this.rawdata = ""
             this.result = ""
         },
 
@@ -27,26 +32,29 @@ const app = new Vue({
 
         on_submit: async function(e) {
             e.preventDefault()
-            if(!this.query.trim()) return
+            if(!this.rawdata.trim()) return
             this.issending = true
             this.btnsend = "Procesando..."
             this.result = ""
 
-            const response = await openapi.post_formatquery({
-                query: this.query,
+            const response = await openapi.post_tosql({
+                colsep: this.colsep,
+                table: this.table,
+                fields: this.fields,
+                from: this.from,
+                to: this.to,
+                struct: this.rawdata
             })
 
-            if(typeof response.error != "undefined"){
-                Swal.fire({
+            if(response?.error){
+                return Swal.fire({
                     icon: 'error',
                     html: `Ha ocurrido un error.<br/> Motivo: <br/>
                            <b>${response.error}</b>`
                 })
             }
-            else{
-                this.result = response.data
-            }
 
+            this.result = response.data
             this.issending = false
             this.btnsend = "Convertir"
         }//on_submit

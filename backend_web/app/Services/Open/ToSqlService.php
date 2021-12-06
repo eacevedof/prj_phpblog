@@ -81,8 +81,12 @@ final class ToSqlService extends BaseService
         if (!$fields) return [];
         $fields = array_map(function ($field){
             $field = str_replace(["'","`","\"",".","$","´","*"],"", trim($field));
+            if (!$field) return null;
             return $field;
         }, $fields);
+
+        $fields = array_filter($fields);
+        $fields = array_unique($fields);
         return $fields;
     }
 
