@@ -2,8 +2,8 @@
 /**
  * @author Eduardo Acevedo Farje.
  * @link www.eduardoaf.com
- * @name FormatSql
- * @file PrettyQueryService.php
+ * @name \App\Services\Open\ToSqlService
+ * @file ToSqlService.php
  * @version 1.0.0
  * @date 23-11-2020 20:46
  * @observations
@@ -14,9 +14,9 @@ use App\Services\BaseService;
 use App\Component\CrudComponent;
 use \Exception;
 
-final class ToInsert extends BaseService
+final class ToSqlService extends BaseService
 {
-    private const COLSEPS = ["\t",";",",","|","#"];
+    private const COLSEPS = ["\t",";",",","|","#"," "];
     private const TO_SQL = ["insert","update"];
     private const FROM_FORMAT = ["csv","json","php-array","python-list"];
 
@@ -66,10 +66,12 @@ final class ToInsert extends BaseService
     private function _get_exploded_fields(): array
     {
         $strfields = trim($this->input["fields"] ?? "");
+        if(strstr($strfields,$this->colsep)) return explode($this->colsep, $strfields);
         if(strstr($strfields," ")) return explode(" ", $strfields);
         if(strstr($strfields,"\t")) return explode("\t", $strfields);
         if(strstr($strfields,",")) return explode(",", $strfields);
         if(strstr($strfields,";")) return explode(";", $strfields);
+        if(strstr($strfields,"#")) return explode(";", $strfields);
         return [];
     }
 

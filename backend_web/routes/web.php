@@ -37,6 +37,9 @@ Route::get("/servicios/probar-php-preg-match-all","Open\ServiceController@pregma
 Route::post("/services/formatter/sql-query","Open\ServiceController@format_sql")->name("open.service.format_sql");
 Route::get("/servicios/formatear-consulta-sql","Open\ServiceController@formatsql")->name("open.service.formatsql");
 
+Route::post("/services/convert/tosql","Open\ServiceController@to_sql")->name("open.service.to_sql");
+Route::get("/servicios/convertir-datos-a-sql-insert-o-update","Open\ServiceController@tosql")->name("open.service.tosql");
+
 //https://github.com/eacevedof/prj_phpapify/blob/d8fb0a51416ae935998e33181435329c5c6b632d/backend/vendor/theframework/components/session/component_encdecrypt.php
 Route::post("/services/test/opensslencrypt","Open\ServiceController@openssl_encrypt")->name("open.service.openssl_encrypt");
 Route::get("/servicios/probar-openssl-encrypt","Open\ServiceController@opensslencrypt")->name("open.service.opensslencrypt");

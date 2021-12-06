@@ -12,7 +12,7 @@ use App\Services\Open\PregmatchService;
 use App\Services\Open\SslencryptService;
 use App\Services\Open\SiteVulnerabilityService;
 
-class ServiceController extends BaseController
+final class ServiceController extends BaseController
 {
     //servicios/convertir-pdf-a-jpg
     public function pdftojpg()
@@ -128,6 +128,37 @@ class ServiceController extends BaseController
         return view('open.service.formatsql',[
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.formatsql"),
+            "canonical"   => $canonical,
+            "breadscrumb" => $breadscrumb,
+            "submenublog" => $this->_get_submenu_blog(),
+            "submenuservice" => $this->_get_submenu_service(),
+            "catslug"     => "service"
+        ]);
+    }
+
+    //api
+    public function to_sql(Request $request)
+    {
+        $post = $request->all();
+        try {
+            $r = (new FormatSqlService($post))->get();
+            return Response()->json(["data"=>$r],200);
+        }
+        catch (\Exception $e)
+        {
+            return Response()->json(["error"=>$e->getMessage()],500);
+        }
+    }
+
+    //servicios/convertir-dattos-a-sql-insert-o-update
+    public function tosql()
+    {
+        $breadscrumb = $this->_get_scrumb("open.service.generic",["slug"=>"formatear-consulta-sql","slugtext"=>"Formatear consulta SQL"]);
+        $canonical = $this->_get_canonical($breadscrumb);
+
+        return view('open.service.tosql',[
+            "result"      => [],
+            "seo"         => SeoComponent::get_meta("open.service.tosql"),
             "canonical"   => $canonical,
             "breadscrumb" => $breadscrumb,
             "submenublog" => $this->_get_submenu_blog(),
