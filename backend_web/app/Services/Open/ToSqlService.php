@@ -18,7 +18,11 @@ final class ToSqlService extends BaseService
 {
     private const COLSEPS = [
         "tab"=>"\t",
-        "semicolon"=>";","comma"=>",","pipe"=>"|","hash"=>"#","blank"=>" "];
+        "semicolon"=>";","comma"=>",","pipe"=>"|","hash"=>"#",
+        "space-1"=>" ",
+        "space-2"=>"  ",
+        "space-3"=>"   "
+    ];
 
     private const TO_SQL = ["insert","update"];
     private const FROM_FORMAT = ["csv","json","php-array","python-list"];
@@ -101,9 +105,10 @@ final class ToSqlService extends BaseService
 
     private function _get_mapped_data(): array
     {
+        $colsep = $this->colsep;
         $rows = [];
         foreach ($this->lines as $line){
-            $values = explode($this->colsep, $line);
+            $values = explode($colsep, $line);
             $row = [];
             foreach ($values as $i=>$value) {
                 $field = $this->fields[$i] ?? "";

@@ -35,7 +35,9 @@
                 <label><b>Separador de columna:*</b></label>
                 <select v-model="colsep" class="form-control" required>
                     <option value="tab">Tabulación</option>
-                    <option value="blank">Espacio</option>
+                    <option value="space-1">Espacio</option>
+                    <option value="space-2">Espacios 2</option>
+                    <option value="space-3">Espacios 3</option>
                     <option value="comma">,</option>
                     <option value="semicolon">;</option>
                     <option value="hash">#</option>
