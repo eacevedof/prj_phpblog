@@ -124,7 +124,7 @@ class SeoComponent
         ],
         "open.service.tosql"=>[
             "title"         => "Convierte datos estructurados en consulta sql INSERT INTO o UPDATE",
-            "description"   => "A partir de datos estructurados, csv, ancho fijo, array php, json, python list, dictionary se crean consultas INSERT INTO o UPDATE para ejecutarlas en el motor de mysql o mariadb",
+            "description"   => "A partir de datos estructurados, csv, json, php, python list, se crean consultas INSERT INTO o UPDATE para ejecutarlas en el motor de mysql o mariadb",
             "keywords"      => "Formatear, sql, transformar datos, convertir a mysql, csv, insert into, update",
             "h1"            => ""
         ],
