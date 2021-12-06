@@ -122,6 +122,12 @@ class SeoComponent
             "keywords"      => "Formatear, sql, indentación, alinear",
             "h1"            => ""
         ],
+        "open.service.tosql"=>[
+            "title"         => "Convierte datos estructurados en consulta sql INSERT INTO o UPDATE",
+            "description"   => "A partir de datos estructurados, csv, ancho fijo, array php, json, python list, dictionary se forman consultas INSERT INTO o UPDATE para ejecutarlas en el motor",
+            "keywords"      => "Formatear, sql, transformar datos, convertir a mysql, csv, insert into, update",
+            "h1"            => ""
+        ],
         "open.service.alarmclock"=>[
             "title"         => "Alarma online",
             "description"   => "Configura una alarma que emitirá un sonido según el intervalo configurado",

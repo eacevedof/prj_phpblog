@@ -153,10 +153,13 @@ final class ServiceController extends BaseController
     //servicios/convertir-datos-a-sql-insert-o-update
     public function tosql()
     {
-        $breadscrumb = $this->_get_scrumb("open.service.generic",["slug"=>"formatear-consulta-sql","slugtext"=>"Formatear consulta SQL"]);
+        $breadscrumb = $this->_get_scrumb("open.service.generic",[
+            "slug"      => "convertir-datos-a-sql-insert-o-update",
+            "slugtext"  => "Convertir datos estructurados en consultas INSERT INTO o UPDATE"
+        ]);
         $canonical = $this->_get_canonical($breadscrumb);
 
-        return view('open.service.tosql',[
+        return view("open.service.tosql", [
             "result"      => [],
             "seo"         => SeoComponent::get_meta("open.service.tosql"),
             "canonical"   => $canonical,
