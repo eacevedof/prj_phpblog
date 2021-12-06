@@ -34,6 +34,7 @@ final class ToSqlService extends BaseService
     private $table;
     private $fields;
     private $lines;
+    private $keys;
 
     public function __construct($input=[])
     {
@@ -62,6 +63,8 @@ final class ToSqlService extends BaseService
         $this->lines = $this->_get_lines();
         if (!$this->lines)
             throw new Exception("No hay contenido a transformar");
+
+        $this->keys = $this->_get_fields($input["keys"]);
     }
 
     private function _get_lines(): array
@@ -76,21 +79,16 @@ final class ToSqlService extends BaseService
         return self::COLSEPS[$sep] ?? "";
     }
 
-    private function _get_exploded_fields(): array
+    private function _get_exploded_fields(string $fields=""): array
     {
         $strfields = trim($this->input["fields"] ?? "");
-        if(strstr($strfields,$this->colsep)) return explode($this->colsep, $strfields);
-        if(strstr($strfields,"\t")) return explode("\t", $strfields);
-        if(strstr($strfields,",")) return explode(",", $strfields);
-        if(strstr($strfields,";")) return explode(";", $strfields);
-        if(strstr($strfields,"#")) return explode(";", $strfields);
-        if(strstr($strfields," ")) return explode(" ", $strfields);
-        return [];
+        if ($fields) $strfields = $fields;
+        return explode(",", $strfields);
     }
 
-    private function _get_fields(): array
+    private function _get_fields(string $strfields=""): array
     {
-        $fields = $this->_get_exploded_fields();
+        $fields = $this->_get_exploded_fields($strfields);
         if (!$fields) return [];
         $fields = array_map(function ($field){
             $field = str_replace(["'","`","\"",".","$","´","*"],"", trim($field));
@@ -146,7 +144,10 @@ final class ToSqlService extends BaseService
         foreach ($mapped as $row) {
             $crud = $this->_get_crud()->set_table($this->table);
             foreach ($row as $field=>$value) {
-                $crud->add_update_fv($field, $value);
+                if (in_array($field, $this->keys))
+                    $crud->add_pk_fv($field, $value);
+                else
+                    $crud->add_update_fv($field, $value);
             }
             $update[] = $crud->autoupdate()->get_sql();
         }
