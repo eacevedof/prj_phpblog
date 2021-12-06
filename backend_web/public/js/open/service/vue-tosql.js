@@ -54,7 +54,7 @@ const app = new Vue({
                 })
             }
 
-            this.result = response.data
+            this.result = response.data.join(";\n")
             this.issending = false
             this.btnsend = "Convertir"
         }//on_submit

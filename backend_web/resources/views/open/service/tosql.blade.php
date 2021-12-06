@@ -62,7 +62,7 @@
 
             <div class="col-10">
                 <label>Datos estructurados:*</label>
-                <textarea class="form-control" maxlength="1000000" rows="25" required
+                <textarea class="form-control" maxlength="1000000" rows="10" required
                           style="font-family: 'Courier New'; font-size: smaller; border:1px solid #00B7FF!important;"
                        :disabled="issending"
                        v-model="rawdata"
