@@ -139,8 +139,26 @@ final class ToSqlService extends BaseService
         return $insert;
     }
 
+    private function _get_update(): array
+    {
+        $mapped = $this->_get_mapped_data();
+        $update = [];
+        foreach ($mapped as $row) {
+            $crud = $this->_get_crud()->set_table($this->table);
+            foreach ($row as $field=>$value) {
+                $crud->add_update_fv($field, $value);
+            }
+            $update[] = $crud->autoupdate()->get_sql();
+        }
+        return $update;
+    }
+
     public function get(): array
     {
-        return $this->_get_insert();
+        switch ($this->to) {
+            case "insert": return $this->_get_insert();
+            case "update": return $this->_get_update();
+        }
+        return [];
     }
 }

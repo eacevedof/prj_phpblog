@@ -32,7 +32,9 @@
                 />
             </div>
             <div class="col-4 col-sm-3 col-md-3 col-xl-2">
-                <label><b>Separador de columna:*</b></label>
+                <label
+                    title="Es el separador una vez pegado en el campo 'Datos estructurados'. A veces la tabulación se convierte en espacios"
+                ><b>Separador de columna:*</b></label>
                 <select v-model="colsep" class="form-control" required>
                     <option value="tab">Tabulación</option>
                     <option value="space-1">Espacio</option>
