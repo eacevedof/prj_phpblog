@@ -100,16 +100,23 @@ final class ToInsert extends BaseService
         return $rows;
     }
 
+    private function _get_crud(): CrudComponent
+    {
+        return new CrudComponent();
+    }
+
     private function _get_insert(): array
     {
         $mapped = $this->_get_mapped_data();
         $insert = [];
         foreach ($mapped as $row) {
-            $crud = new CrudComponent();
+            $crud = $this->_get_crud()->set_table($this->table);
             foreach ($row as $field=>$value) {
-                $crud->set_table()
+                $crud->add_insert_fv($field, $value);
             }
+            $insert[] = $crud->autoinsert()->get_sql();
         }
+        return $insert;
     }
 
     public function get(): array
