@@ -83,6 +83,8 @@ final class ToSqlService extends BaseService
     {
         $strfields = trim($this->input["fields"] ?? "");
         if ($fields) $strfields = $fields;
+        if (!strstr($strfields,",") && strstr($strfields, " ")) return explode(" ", $strfields);
+        if (!strstr($strfields,",") && strstr($strfields, $this->colsep)) return explode($this->colsep, $strfields);
         return explode(",", $strfields);
     }
 
@@ -98,6 +100,7 @@ final class ToSqlService extends BaseService
 
         $fields = array_filter($fields);
         $fields = array_unique($fields);
+        $fields = array_values($fields);
         return $fields;
     }
 
@@ -107,11 +110,14 @@ final class ToSqlService extends BaseService
         $rows = [];
         foreach ($this->lines as $line){
             $values = explode($colsep, $line);
+            //print_r($this->fields);print_r($line);dd($values);
             $row = [];
             foreach ($values as $i=>$value) {
+                if (!is_string($value)) continue;
                 $field = $this->fields[$i] ?? "";
                 if (!$field) continue;
-                $row[$field] = $value;
+
+                $row[$field] = strcmp($value,"\N")===0 ? null : $value;
             }
             $rows[] = $row;
         }
@@ -140,6 +146,7 @@ final class ToSqlService extends BaseService
     private function _get_update(): array
     {
         $mapped = $this->_get_mapped_data();
+        //dd($mapped);
         $update = [];
         foreach ($mapped as $row) {
             $crud = $this->_get_crud()->set_table($this->table);
