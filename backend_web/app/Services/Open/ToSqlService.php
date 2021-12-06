@@ -16,7 +16,10 @@ use \Exception;
 
 final class ToSqlService extends BaseService
 {
-    private const COLSEPS = ["\t",";",",","|","#"," "];
+    private const COLSEPS = [
+        "tab"=>"\t",
+        "semicolon"=>";","comma"=>",","pipe"=>"|","hash"=>"#","blank"=>" "];
+
     private const TO_SQL = ["insert","update"];
     private const FROM_FORMAT = ["csv","json","php-array","python-list"];
 
@@ -30,10 +33,11 @@ final class ToSqlService extends BaseService
 
     public function __construct($input=[])
     {
+        dd($input);
         $this->input = $input;
-        $this->colsep = $input["colsep"] ?? "\t";
-        if (!in_array($this->colsep, self::COLSEPS))
-            throw new Exception("Separador de columna inválido");
+        $this->colsep = $this->_get_separator(($input["colsep"] ?? ""));
+        if (!$this->colsep)
+            throw new Exception("Separador de columna inválido $this->colsep");
 
         $this->table = trim($input["table"] ?? "");
         if (!$this->table)
@@ -61,6 +65,11 @@ final class ToSqlService extends BaseService
         $data = trim($this->input["struct"] ?? "");
         $lines = explode("\n", $data);
         return $lines;
+    }
+
+    private function _get_separator(string $sep): string
+    {
+        return self::COLSEPS[$sep] ?? "";
     }
 
     private function _get_exploded_fields(): array
