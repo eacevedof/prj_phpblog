@@ -150,7 +150,7 @@ final class ServiceController extends BaseController
         }
     }
 
-    //servicios/convertir-dattos-a-sql-insert-o-update
+    //servicios/convertir-datos-a-sql-insert-o-update
     public function tosql()
     {
         $breadscrumb = $this->_get_scrumb("open.service.generic",["slug"=>"formatear-consulta-sql","slugtext"=>"Formatear consulta SQL"]);
