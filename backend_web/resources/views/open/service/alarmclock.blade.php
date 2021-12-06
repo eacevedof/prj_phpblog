@@ -8,7 +8,7 @@
 @section("container")
 <div class="card opn-card" xmlns="http://www.w3.org/1999/html">
     <div class="card-header">
-        <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
+        <h1 class="card-title mt-2">{{$seo["description"]}}</h1>
         <p>
             <b>Nota:</b>
             El sonido dura 7 segundos por lo tanto la alarma debería ser mayor a este tiempo de caso contrario

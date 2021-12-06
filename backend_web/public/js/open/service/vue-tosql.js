@@ -7,7 +7,7 @@ const app = new Vue({
     el: "#form-formatsql",
     data: {
         issending: false,
-        btnsend: "Formatear",
+        btnsend: "Convertir",
 
         query: "",
         result: "",
@@ -48,7 +48,7 @@ const app = new Vue({
             }
 
             this.issending = false
-            this.btnsend = "Formatear"
+            this.btnsend = "Convertir"
         }//on_submit
 
     },//methods

@@ -8,7 +8,7 @@
 @section("container")
 <div class="card opn-card">
     <div class="card-header">
-        <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
+        <h1 class="card-title mt-2">{{$seo["description"]}}</h1>
         <h6>Las contraseñas no se persisten y son totalmente aleatorias</h6>
     </div>
     @verbatim

@@ -8,7 +8,7 @@
 @section("container")
     <div class="card opn-card" xmlns="http://www.w3.org/1999/html">
         <div class="card-header">
-            <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
+            <h1 class="card-title mt-2">{{$seo["description"]}}</h1>
             <p>
                 <img src="https://resources.theframework.es/eduardoaf.com/20210216/calculadora-ley-de-ohm.png" title="{{ $seo["description"] }}" alt="{{ $seo["description"] }}" class="img-fluid" />
             </p>

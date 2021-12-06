@@ -8,7 +8,7 @@
 @section("container")
 <div class="card opn-card" xmlns="http://www.w3.org/1999/html">
     <div class="card-header">
-        <h2 class="card-title mt-2">{{$seo["description"]}}</h2>
+        <h1 class="card-title mt-2">{{$seo["description"]}}</h1>
         <h6>Prueba php <a class="btn-link" href="https://www.php.net/manual/es/function.preg-match-all.php" target="_blank" rel="nofollow"><b>preg_match_all</b></a></h6>
     </div>
     @verbatim
