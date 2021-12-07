@@ -18,13 +18,13 @@
             C# me sirvió para aplicar por primera vez el paradigma de la programación orientada a objetos (OOP en inglés).<br/>
             C# era muy parecido a Java con lo cual a nivel formativo pude crear un proyecto básico con los <b>Java Beans, Tomcat</b> y <b>JSP</b>.
             <br/><br/>
-            En esta época era muy común encontrar webs con <b>Macromedia Flash</b>, <b>Actionscript</b> y <b>PHP</b>. Trabajando en una gencia de publicidad me enfrenté
+            En esta época era muy común encontrar webs con <b>Macromedia Flash</b>, <b>Actionscript</b> y <b>PHP</b>. Trabajando en una agencia de publicidad me enfrenté
             al desarrollo en este <strong>stack</strong>. Hacía trabajos muy básicos: animación en flash, programación en AS 3.0, automatización de emails, gestionar algún bug en <b>Joomla</b> y <b>Wordpress</b>.
-            Entonces mi forma de desarrollar era el típico "código espagueti". No obstante intenté replicar el MVC pero sin clases, todo con funciones, un poco al estilo wordpress.
+            Entonces mi forma de desarrollar era el típico "código espagueti". No obstante intenté replicar el MVC pero sin clases (en PHP), todo con funciones, un poco al estilo wordpress.
             Esto me sirvió para entender mejor PHP desde cero.  El uso de include, require, php.ini, variables globales, conexión con mysql y la interactividad con js.
             <br/><br/>
             Cambio de empresa. En esta nueva experiencia es un stack más robusto y esperable: <b>Cake PHP</b>, <b>Mysql</b>, <b>Jquery</b>, <b>Wordpress</b> y <b>SVN</b> en un servidor dedicado con <b>Linux Centos</b>.
-            Mi grata sorpresa es que Cake replica MVC con POO lo cual me lleva a replantearme el proyecto anterior usando clases imitando a este framework pero sin su ORM.
+            Mi grata sorpresa es que Cake replica MVC con POO lo cual me lleva a replantearme el proyecto anterior usando clases emulando a este framework pero sin su ORM.
             Termino desarrollando la primera versión de: <a href="https://theframework.es" rel="nofollow">theframework.es</a>
             <br/><br/>
             Desde entonces hasta hoy sigo trabajando con PHP, sin dejar de hacer seguimiento a la evolución de otras técnologías. Tales como:
