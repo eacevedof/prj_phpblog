@@ -9,6 +9,10 @@
 <div class="card opn-card" xmlns="http://www.w3.org/1999/html">
     <div class="card-header">
         <h1 class="card-title mt-2">{{$seo["description"]}}</h1>
+        <a
+            href="/blog/sql/servicio-online-que-convierte-datos-csv-json-o-print_r-de-php-en-sentencias-insert-into-o-update-113"
+            target="_blank" class="btn-link">Información de este servicio
+        </a>
     </div>
     @verbatim
     <div class="card-body">
