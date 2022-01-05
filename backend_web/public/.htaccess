@@ -5,7 +5,15 @@
     </IfModule>
 
     RewriteEngine On
-    #to-do configurar redirect de www a http
+
+    # redirect http|s//www -> https//eduardoaf.com
+    RewriteBase /
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+    ## Remove trialing slash http|s//www.eduardoaf.com/ -> https//eduardoaf.com
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [R=301,L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
