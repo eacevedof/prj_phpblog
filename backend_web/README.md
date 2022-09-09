@@ -224,6 +224,18 @@ Cuando re-construyo los contenedores no conecta
 Si hago un composer-update en el contenedor funciona, esto se debe al fichero .env
 no debería construir los contenedores con bd:127 sino con bd: mariadb
 ```
+- **error localhost al ejecutar composer**
+- SQLSTATE[HY000] [2002] php_network_getaddresses: getaddrinfo for cont-mariadb-univ failed: nodename nor servname provided
+```js
+hay que cambiar estas lineas dependiendo de donde se ejecute composer
+
+# para composer en maquina host
+DB_HOST=127.0.0.1
+# para php unit
+DB_HOST=localhost
+# para composer en contenedor
+DB_HOST=cont-mariadb-univ
+```
 
 #### Parches
 - 20-01-2021 Voy a actualizr laravel de ^7.24 a 7.30

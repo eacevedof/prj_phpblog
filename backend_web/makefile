@@ -103,8 +103,9 @@ deploy-test: ## deploy codeonly in test
 deploy-prod: ## deploy codeonly in prod
 	py.sh deploy.codeonly eduardoaf-prod
 
-remlogs: ## remove logs
+rem-logs: ## remove logs
 	rm -fr ./logs/*
+	rm -f ./storage/*.log
 
 compile: ## npm run dev
 	npm run dev
@@ -114,6 +115,9 @@ dumpdb: ## dumpdb
 
 deploy: ## deploy test
 	py.sh deploy.codeonly eduardoaf
+
+down: ## remove containers
+	U_ID=${UID} docker-compose -f docker-compose.macos.yml down --remove-orphans
 
 rebuild: ## rebuild containers
 	U_ID=${UID} docker-compose -f docker-compose.macos.yml down
