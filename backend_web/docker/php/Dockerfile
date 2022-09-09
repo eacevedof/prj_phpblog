@@ -1,5 +1,5 @@
 #docker/php/Dcokerfile
-FROM php:7.4.1-fpm
+FROM php:8.1-fpm
 
 ARG UID
 EXPOSE $UID
