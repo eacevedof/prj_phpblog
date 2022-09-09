@@ -2,8 +2,8 @@
 
 namespace Tests\Unit;
 
-
 use PHPUnit\Framework\TestCase;
+//parece que esta clase ya no existe en laravel 8
 use \Mail;
 
 class ExampleTest extends TestCase

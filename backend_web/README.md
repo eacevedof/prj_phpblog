@@ -41,6 +41,13 @@ php artisan ui vue --auth
 
 //crear usuario
 php artisan db:seed --class=UsersTableSeeder
+
+//tests:
+php ./vendor/bin/phpunit
+
+//si los tests fallan por Container/container.php 879
+//hay que configurar .env apuntando a 127.. (no a localhost) y ejecutar
+php artisan config:clear
 ```
 - Para compilar las vistas se ejecuta `npm run dev` y se debería ver algo como:
   - ![](https://resources.theframework.es/eduardoaf.com/20211023/175945-npm-run-dev.png)
