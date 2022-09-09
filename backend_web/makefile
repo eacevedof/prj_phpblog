@@ -98,7 +98,7 @@ cp-db: ## copy into database container
 	#U_ID=${UID} docker exec -it --user ${UID} ${DOCKER_BE} php-cs-fixer fix src --rules=@Symfony
 
 deploy-test: ## deploy codeonly in test
-	py.sh deploy.codeonly eduardoaf
+	py.sh deploy.codeonly eduardoaf-test
 
 deploy-prod: ## deploy codeonly in prod
 	py.sh deploy.codeonly eduardoaf-prod
@@ -112,9 +112,6 @@ compile: ## npm run dev
 
 dumpdb: ## dumpdb
 	py.sh dump eduardoaf
-
-deploy: ## deploy test
-	py.sh deploy.codeonly eduardoaf
 
 down: ## remove containers
 	U_ID=${UID} docker-compose -f docker-compose.macos.yml down --remove-orphans
